@@ -1,0 +1,6 @@
+@Araponga.Api_HostAddress = http://localhost:5178
+
+GET {{Araponga.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

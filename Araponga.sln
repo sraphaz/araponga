@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{41B63377-3DEA-40A5-8273-847E18B68483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Api", "backend\Araponga.Api\Araponga.Api.csproj", "{08DA2003-1543-4F18-9A42-7D87BD6686E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Domain", "backend\Araponga.Domain\Araponga.Domain.csproj", "{66176D11-3CEE-481D-8265-5CAAFCC124E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Application", "backend\Araponga.Application\Araponga.Application.csproj", "{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Infrastructure", "backend\Araponga.Infrastructure\Araponga.Infrastructure.csproj", "{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Shared", "backend\Araponga.Shared\Araponga.Shared.csproj", "{461CFFE6-62DA-4977-9C88-F1D79ABB728D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08DA2003-1543-4F18-9A42-7D87BD6686E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DA2003-1543-4F18-9A42-7D87BD6686E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DA2003-1543-4F18-9A42-7D87BD6686E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DA2003-1543-4F18-9A42-7D87BD6686E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66176D11-3CEE-481D-8265-5CAAFCC124E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66176D11-3CEE-481D-8265-5CAAFCC124E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66176D11-3CEE-481D-8265-5CAAFCC124E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66176D11-3CEE-481D-8265-5CAAFCC124E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461CFFE6-62DA-4977-9C88-F1D79ABB728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461CFFE6-62DA-4977-9C88-F1D79ABB728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461CFFE6-62DA-4977-9C88-F1D79ABB728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461CFFE6-62DA-4977-9C88-F1D79ABB728D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{08DA2003-1543-4F18-9A42-7D87BD6686E9} = {41B63377-3DEA-40A5-8273-847E18B68483}
+		{66176D11-3CEE-481D-8265-5CAAFCC124E8} = {41B63377-3DEA-40A5-8273-847E18B68483}
+		{8DBEB0AB-071B-41FE-8ECE-1619DC9F41AC} = {41B63377-3DEA-40A5-8273-847E18B68483}
+		{CD1D0C7D-1BBC-4A50-94C7-D9BE3F4FDB7A} = {41B63377-3DEA-40A5-8273-847E18B68483}
+		{461CFFE6-62DA-4977-9C88-F1D79ABB728D} = {41B63377-3DEA-40A5-8273-847E18B68483}
+	EndGlobalSection
+EndGlobal
