@@ -1,0 +1,225 @@
+using Araponga.Api.Contracts.Map;
+using Araponga.Api.Security;
+using Araponga.Application.Services;
+using Araponga.Domain.Map;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Araponga.Api.Controllers;
+
+[ApiController]
+[Route("api/v1/map")]
+[Produces("application/json")]
+[Tags("Map")]
+public sealed class MapController : ControllerBase
+{
+    private readonly MapService _mapService;
+    private readonly CurrentUserAccessor _currentUserAccessor;
+    private readonly ActiveTerritoryService _activeTerritoryService;
+    private readonly AccessEvaluator _accessEvaluator;
+
+    public MapController(
+        MapService mapService,
+        CurrentUserAccessor currentUserAccessor,
+        ActiveTerritoryService activeTerritoryService,
+        AccessEvaluator accessEvaluator)
+    {
+        _mapService = mapService;
+        _currentUserAccessor = currentUserAccessor;
+        _activeTerritoryService = activeTerritoryService;
+        _accessEvaluator = accessEvaluator;
+    }
+
+    /// <summary>
+    /// Visualiza entidades do mapa no território ativo.
+    /// </summary>
+    /// <remarks>
+    /// Visitantes veem apenas entidades públicas; moradores veem todas.
+    /// </remarks>
+    [HttpGet("entities")]
+    [ProducesResponseType(typeof(IEnumerable<MapEntityResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<IEnumerable<MapEntityResponse>>> GetEntities(
+        [FromQuery] Guid? territoryId,
+        CancellationToken cancellationToken)
+    {
+        var resolvedTerritoryId = await ResolveTerritoryIdAsync(territoryId, cancellationToken);
+        if (resolvedTerritoryId is null)
+        {
+            return BadRequest(new { error = "territoryId (query) or X-Session-Id header is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status == TokenStatus.Invalid)
+        {
+            return Unauthorized();
+        }
+
+        var entities = await _mapService.ListEntitiesAsync(
+            resolvedTerritoryId.Value,
+            userContext.User?.Id,
+            cancellationToken);
+
+        var response = entities.Select(entity =>
+            new MapEntityResponse(
+                entity.Id,
+                entity.Name,
+                entity.Category,
+                entity.Status.ToString().ToUpperInvariant(),
+                entity.Visibility.ToString().ToUpperInvariant(),
+                entity.ConfirmationCount,
+                entity.CreatedAtUtc));
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Sugere uma nova entidade no mapa.
+    /// </summary>
+    [HttpPost("entities")]
+    [ProducesResponseType(typeof(MapEntityResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<MapEntityResponse>> SuggestEntity(
+        [FromQuery] Guid? territoryId,
+        [FromBody] SuggestMapEntityRequest request,
+        CancellationToken cancellationToken)
+    {
+        var resolvedTerritoryId = await ResolveTerritoryIdAsync(territoryId, cancellationToken);
+        if (resolvedTerritoryId is null)
+        {
+            return BadRequest(new { error = "territoryId (query) or X-Session-Id header is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var result = await _mapService.SuggestAsync(
+            resolvedTerritoryId.Value,
+            userContext.User.Id,
+            request.Name,
+            request.Category,
+            cancellationToken);
+
+        if (!result.success || result.entity is null)
+        {
+            return BadRequest(new { error = result.error ?? "Unable to suggest entity." });
+        }
+
+        var response = new MapEntityResponse(
+            result.entity.Id,
+            result.entity.Name,
+            result.entity.Category,
+            result.entity.Status.ToString().ToUpperInvariant(),
+            result.entity.Visibility.ToString().ToUpperInvariant(),
+            result.entity.ConfirmationCount,
+            result.entity.CreatedAtUtc);
+
+        return CreatedAtAction(nameof(GetEntities), new { }, response);
+    }
+
+    /// <summary>
+    /// Valida uma entidade sugerida (curadoria).
+    /// </summary>
+    [HttpPatch("entities/{entityId:guid}/validation")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> ValidateEntity(
+        [FromRoute] Guid entityId,
+        [FromQuery] Guid? territoryId,
+        [FromBody] ValidateMapEntityRequest request,
+        CancellationToken cancellationToken)
+    {
+        var resolvedTerritoryId = await ResolveTerritoryIdAsync(territoryId, cancellationToken);
+        if (resolvedTerritoryId is null)
+        {
+            return BadRequest(new { error = "territoryId (query) or X-Session-Id header is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        if (!_accessEvaluator.IsCurator(userContext.User))
+        {
+            return Unauthorized();
+        }
+
+        if (!Enum.TryParse<MapEntityStatus>(request.Status, true, out var status))
+        {
+            return BadRequest(new { error = "Invalid status." });
+        }
+
+        var success = await _mapService.ValidateAsync(
+            resolvedTerritoryId.Value,
+            entityId,
+            userContext.User.Id,
+            status,
+            cancellationToken);
+
+        return success ? NoContent() : BadRequest(new { error = "Entity not found." });
+    }
+
+    /// <summary>
+    /// Confirma uma entidade existente.
+    /// </summary>
+    [HttpPost("entities/{entityId:guid}/confirmations")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> ConfirmEntity(
+        [FromRoute] Guid entityId,
+        [FromQuery] Guid? territoryId,
+        CancellationToken cancellationToken)
+    {
+        var resolvedTerritoryId = await ResolveTerritoryIdAsync(territoryId, cancellationToken);
+        if (resolvedTerritoryId is null)
+        {
+            return BadRequest(new { error = "territoryId (query) or X-Session-Id header is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var result = await _mapService.ConfirmAsync(
+            resolvedTerritoryId.Value,
+            entityId,
+            userContext.User.Id,
+            cancellationToken);
+
+        return result.success ? NoContent() : BadRequest(new { error = result.error });
+    }
+
+    private string? GetSessionId()
+    {
+        return Request.Headers.TryGetValue(ApiHeaders.SessionId, out var header) &&
+               !string.IsNullOrWhiteSpace(header)
+            ? header.ToString()
+            : null;
+    }
+
+    private async Task<Guid?> ResolveTerritoryIdAsync(Guid? territoryId, CancellationToken cancellationToken)
+    {
+        if (territoryId is not null)
+        {
+            return territoryId;
+        }
+
+        var sessionId = GetSessionId();
+        if (sessionId is null)
+        {
+            return null;
+        }
+
+        return await _activeTerritoryService.GetActiveAsync(sessionId, cancellationToken);
+    }
+}

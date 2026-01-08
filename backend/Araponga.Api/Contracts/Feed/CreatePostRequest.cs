@@ -1,0 +1,8 @@
+namespace Araponga.Api.Contracts.Feed;
+
+public sealed record CreatePostRequest(
+    string Title,
+    string Content,
+    string Type,
+    string Visibility
+);

@@ -1,4 +1,6 @@
 using Araponga.Api.Contracts.Territories;
+using Araponga.Application.Services;
+using Araponga.Domain.Territories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Araponga.Api.Controllers;
@@ -9,19 +11,16 @@ namespace Araponga.Api.Controllers;
 [Tags("Territories")]
 public sealed class TerritoriesController : ControllerBase
 {
-    // MVP: armazenamento em memória apenas para deixar a API "apresentável" hoje.
-    // Na próxima sessão nós plugaríamos EF Core + Postgres e isso vira persistente.
-    private static readonly List<TerritoryResponse> Territories = new()
+    private readonly TerritoryService _territoryService;
+    private readonly ActiveTerritoryService _activeTerritoryService;
+
+    public TerritoriesController(
+        TerritoryService territoryService,
+        ActiveTerritoryService activeTerritoryService)
     {
-        new TerritoryResponse(
-            Id: Guid.Parse("11111111-1111-1111-1111-111111111111"),
-            Name: "Sertão do Camburi",
-            Description: "Território piloto para comunidade local, entidades do mapa e saúde do território.",
-            SensitivityLevel: "HIGH",
-            IsPilot: true,
-            CreatedAtUtc: DateTime.UtcNow
-        )
-    };
+        _territoryService = territoryService;
+        _activeTerritoryService = activeTerritoryService;
+    }
 
     /// <summary>
     /// Lista territórios disponíveis para descoberta (MVP).
@@ -34,9 +33,11 @@ public sealed class TerritoriesController : ControllerBase
     /// </remarks>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
-    public ActionResult<IEnumerable<TerritoryResponse>> List()
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> List(CancellationToken cancellationToken)
     {
-        return Ok(Territories.OrderBy(t => t.Name));
+        var territories = await _territoryService.ListAvailableAsync(cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
     }
 
     /// <summary>
@@ -45,43 +46,151 @@ public sealed class TerritoriesController : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(TerritoryResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<TerritoryResponse> GetById([FromRoute] Guid id)
+    public async Task<ActionResult<TerritoryResponse>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        var t = Territories.FirstOrDefault(x => x.Id == id);
-        return t is null ? NotFound() : Ok(t);
+        var territory = await _territoryService.GetByIdAsync(id, cancellationToken);
+        return territory is null ? NotFound() : Ok(ToResponse(territory));
     }
 
     /// <summary>
-    /// Cria um território (MVP).
+    /// Sugere um território geográfico para validação.
     /// </summary>
-    /// <remarks>
-    /// Regras mínimas hoje:
-    /// - Name obrigatório
-    /// - SensitivityLevel: LOW|MEDIUM|HIGH (aqui validamos por convenção)
-    /// </remarks>
-    [HttpPost]
+    [HttpPost("suggestions")]
     [ProducesResponseType(typeof(TerritoryResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<TerritoryResponse> Create([FromBody] CreateTerritoryRequest request)
+    public async Task<ActionResult<TerritoryResponse>> Suggest(
+        [FromBody] SuggestTerritoryRequest request,
+        CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.Name))
-            return BadRequest(new { error = "Name is required." });
+        var result = await _territoryService.CreateAsync(
+            request.Name,
+            request.Description,
+            request.City,
+            request.State,
+            request.Latitude,
+            request.Longitude,
+            cancellationToken);
 
-        var sl = (request.SensitivityLevel ?? "LOW").Trim().ToUpperInvariant();
-        if (sl is not ("LOW" or "MEDIUM" or "HIGH"))
-            return BadRequest(new { error = "SensitivityLevel must be LOW, MEDIUM, or HIGH." });
+        if (!result.Success || result.Territory is null)
+        {
+            return BadRequest(new { error = result.Error ?? "Invalid territory data." });
+        }
 
-        var created = new TerritoryResponse(
-            Id: Guid.NewGuid(),
-            Name: request.Name.Trim(),
-            Description: request.Description?.Trim(),
-            SensitivityLevel: sl,
-            IsPilot: request.IsPilot,
-            CreatedAtUtc: DateTime.UtcNow
-        );
+        var response = ToResponse(result.Territory);
+        return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+    }
 
-        Territories.Add(created);
+    /// <summary>
+    /// Busca territórios por texto e localização administrativa.
+    /// </summary>
+    [HttpGet("search")]
+    [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> Search(
+        [FromQuery] string? q,
+        [FromQuery] string? city,
+        [FromQuery] string? state,
+        CancellationToken cancellationToken)
+    {
+        var territories = await _territoryService.SearchAsync(q, city, state, cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
+    }
 
-        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    /// <summary>
+    /// Busca territórios próximos usando latitude e longitude.
+    /// </summary>
+    [HttpGet("nearby")]
+    [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> Nearby(
+        [FromQuery] double? lat,
+        [FromQuery] double? lng,
+        CancellationToken cancellationToken)
+    {
+        if (lat is null || lng is null)
+        {
+            return BadRequest(new { error = "lat and lng are required." });
+        }
+
+        var territories = await _territoryService.NearbyAsync(lat.Value, lng.Value, cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Seleciona o território ativo da sessão atual.
+    /// </summary>
+    /// <remarks>
+    /// Use o header X-Session-Id para identificar o cliente atual.
+    /// </remarks>
+    [HttpPost("selection")]
+    [ProducesResponseType(typeof(TerritorySelectionResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<TerritorySelectionResponse>> SelectTerritory(
+        [FromBody] TerritorySelectionRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!TryGetSessionId(out var sessionId))
+        {
+            return BadRequest(new { error = "X-Session-Id header is required." });
+        }
+
+        var stored = await _activeTerritoryService.SetActiveAsync(sessionId, request.TerritoryId, cancellationToken);
+        if (!stored)
+        {
+            return BadRequest(new { error = "Territory not found." });
+        }
+
+        return Ok(new TerritorySelectionResponse(sessionId, request.TerritoryId));
+    }
+
+    /// <summary>
+    /// Obtém o território ativo da sessão atual.
+    /// </summary>
+    [HttpGet("selection")]
+    [ProducesResponseType(typeof(TerritorySelectionResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<TerritorySelectionResponse>> GetSelection(CancellationToken cancellationToken)
+    {
+        if (!TryGetSessionId(out var sessionId))
+        {
+            return BadRequest(new { error = "X-Session-Id header is required." });
+        }
+
+        var territoryId = await _activeTerritoryService.GetActiveAsync(sessionId, cancellationToken);
+        if (territoryId is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new TerritorySelectionResponse(sessionId, territoryId.Value));
+    }
+
+    private static TerritoryResponse ToResponse(Territory territory)
+    {
+        return new TerritoryResponse(
+            territory.Id,
+            territory.Name,
+            territory.Description,
+            territory.Status.ToString().ToUpperInvariant(),
+            territory.City,
+            territory.State,
+            territory.Latitude,
+            territory.Longitude,
+            territory.CreatedAtUtc);
+    }
+
+    private bool TryGetSessionId(out string sessionId)
+    {
+        if (Request.Headers.TryGetValue(ApiHeaders.SessionId, out var header) &&
+            !string.IsNullOrWhiteSpace(header))
+        {
+            sessionId = header.ToString();
+            return true;
+        }
+
+        sessionId = string.Empty;
+        return false;
     }
 }

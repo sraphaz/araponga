@@ -1,13 +1,10 @@
 namespace Araponga.Api.Contracts.Territories;
 
-public sealed record TerritoryResponse(
-    Guid Id,
+public sealed record SuggestTerritoryRequest(
     string Name,
     string? Description,
-    string Status,
     string City,
     string State,
     double Latitude,
-    double Longitude,
-    DateTime CreatedAtUtc
+    double Longitude
 );
