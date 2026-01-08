@@ -8,6 +8,7 @@ public sealed class User
         string email,
         string provider,
         string externalId,
+        UserRole role,
         DateTime createdAtUtc)
     {
         if (string.IsNullOrWhiteSpace(displayName))
@@ -35,6 +36,7 @@ public sealed class User
         Email = email.Trim();
         Provider = provider.Trim();
         ExternalId = externalId.Trim();
+        Role = role;
         CreatedAtUtc = createdAtUtc;
     }
 
@@ -43,5 +45,6 @@ public sealed class User
     public string Email { get; }
     public string Provider { get; }
     public string ExternalId { get; }
+    public UserRole Role { get; }
     public DateTime CreatedAtUtc { get; }
 }

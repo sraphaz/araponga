@@ -4,7 +4,10 @@ public sealed record TerritoryResponse(
     Guid Id,
     string Name,
     string? Description,
-    string SensitivityLevel,
     string Status,
+    string City,
+    string State,
+    double Latitude,
+    double Longitude,
     DateTime CreatedAtUtc
 );

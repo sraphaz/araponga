@@ -7,7 +7,9 @@ public sealed class MapEntity
         Guid territoryId,
         string name,
         string category,
+        MapEntityStatus status,
         MapEntityVisibility visibility,
+        int confirmationCount,
         DateTime createdAtUtc)
     {
         if (territoryId == Guid.Empty)
@@ -29,7 +31,9 @@ public sealed class MapEntity
         TerritoryId = territoryId;
         Name = name.Trim();
         Category = category.Trim();
+        Status = status;
         Visibility = visibility;
+        ConfirmationCount = confirmationCount;
         CreatedAtUtc = createdAtUtc;
     }
 
@@ -37,6 +41,8 @@ public sealed class MapEntity
     public Guid TerritoryId { get; }
     public string Name { get; }
     public string Category { get; }
+    public MapEntityStatus Status { get; }
     public MapEntityVisibility Visibility { get; }
+    public int ConfirmationCount { get; }
     public DateTime CreatedAtUtc { get; }
 }

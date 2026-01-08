@@ -1,18 +1,34 @@
 using Araponga.Application.Interfaces;
+using Araponga.Domain.Social;
+using Araponga.Domain.Users;
 
 namespace Araponga.Application.Services;
 
 public sealed class AccessEvaluator
 {
-    private readonly IUserTerritoryRepository _userTerritoryRepository;
+    private readonly ITerritoryMembershipRepository _membershipRepository;
 
-    public AccessEvaluator(IUserTerritoryRepository userTerritoryRepository)
+    public AccessEvaluator(ITerritoryMembershipRepository membershipRepository)
     {
-        _userTerritoryRepository = userTerritoryRepository;
+        _membershipRepository = membershipRepository;
     }
 
-    public Task<bool> IsResidentAsync(Guid userId, Guid territoryId, CancellationToken cancellationToken)
+    public async Task<bool> IsResidentAsync(Guid userId, Guid territoryId, CancellationToken cancellationToken)
     {
-        return _userTerritoryRepository.IsValidatedAsync(userId, territoryId, cancellationToken);
+        var membership = await _membershipRepository.GetByUserAndTerritoryAsync(userId, territoryId, cancellationToken);
+        return membership is not null &&
+               membership.Role == MembershipRole.Resident &&
+               membership.VerificationStatus == VerificationStatus.Validated;
+    }
+
+    public async Task<MembershipRole?> GetRoleAsync(Guid userId, Guid territoryId, CancellationToken cancellationToken)
+    {
+        var membership = await _membershipRepository.GetByUserAndTerritoryAsync(userId, territoryId, cancellationToken);
+        return membership?.Role;
+    }
+
+    public bool IsCurator(User user)
+    {
+        return user.Role == UserRole.Curator;
     }
 }

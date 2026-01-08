@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Araponga.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ff7c6c4a353591b5a2af61bcb6f3d07063a4475")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a128396b41d33f9aed02f7962455662a054e5f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Araponga.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Araponga.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

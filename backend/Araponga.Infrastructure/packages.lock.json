@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "araponga.application": {
+        "type": "Project",
+        "dependencies": {
+          "Araponga.Domain": "[1.0.0, )",
+          "Araponga.Shared": "[1.0.0, )"
+        }
+      },
+      "araponga.domain": {
+        "type": "Project"
+      },
+      "araponga.shared": {
+        "type": "Project"
+      }
+    }
+  }
+}

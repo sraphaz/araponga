@@ -1,0 +1,93 @@
+using Araponga.Application.Interfaces;
+using Araponga.Domain.Feed;
+using Araponga.Domain.Health;
+
+namespace Araponga.Application.Services;
+
+public sealed class HealthService
+{
+    private readonly IHealthAlertRepository _alertRepository;
+    private readonly IFeedRepository _feedRepository;
+    private readonly IAuditLogger _auditLogger;
+
+    public HealthService(
+        IHealthAlertRepository alertRepository,
+        IFeedRepository feedRepository,
+        IAuditLogger auditLogger)
+    {
+        _alertRepository = alertRepository;
+        _feedRepository = feedRepository;
+        _auditLogger = auditLogger;
+    }
+
+    public Task<IReadOnlyList<HealthAlert>> ListAlertsAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return _alertRepository.ListByTerritoryAsync(territoryId, cancellationToken);
+    }
+
+    public async Task<(bool success, string? error, HealthAlert? alert)> ReportAlertAsync(
+        Guid territoryId,
+        Guid userId,
+        string title,
+        string description,
+        CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+        {
+            return (false, "Title and description are required.", null);
+        }
+
+        var alert = new HealthAlert(
+            Guid.NewGuid(),
+            territoryId,
+            userId,
+            title,
+            description,
+            HealthAlertStatus.Pending,
+            DateTime.UtcNow);
+
+        await _alertRepository.AddAsync(alert, cancellationToken);
+
+        await _auditLogger.LogAsync(
+            new Models.AuditEntry("alert.reported", userId, territoryId, alert.Id, DateTime.UtcNow),
+            cancellationToken);
+
+        return (true, null, alert);
+    }
+
+    public async Task<bool> ValidateAlertAsync(
+        Guid territoryId,
+        Guid alertId,
+        Guid curatorId,
+        HealthAlertStatus status,
+        CancellationToken cancellationToken)
+    {
+        var alert = await _alertRepository.GetByIdAsync(alertId, cancellationToken);
+        if (alert is null || alert.TerritoryId != territoryId)
+        {
+            return false;
+        }
+
+        await _alertRepository.UpdateStatusAsync(alertId, status, cancellationToken);
+
+        if (status == HealthAlertStatus.Validated)
+        {
+            var post = new CommunityPost(
+                Guid.NewGuid(),
+                territoryId,
+                alert.Title,
+                alert.Description,
+                PostType.Alert,
+                PostVisibility.Public,
+                DateTime.UtcNow);
+
+            await _feedRepository.AddPostAsync(post, cancellationToken);
+        }
+
+        await _auditLogger.LogAsync(
+            new Models.AuditEntry($"alert.{status.ToString().ToLowerInvariant()}", curatorId, territoryId, alertId, DateTime.UtcNow),
+            cancellationToken);
+
+        return true;
+    }
+}

@@ -4,6 +4,7 @@ public sealed record MembershipResponse(
     Guid Id,
     Guid UserId,
     Guid TerritoryId,
-    string Status,
+    string Role,
+    string VerificationStatus,
     DateTime CreatedAtUtc
 );

@@ -33,6 +33,7 @@ public sealed class AuthService
             email,
             provider,
             externalId,
+            UserRole.Visitor,
             DateTime.UtcNow);
 
         await _userRepository.AddAsync(user, cancellationToken);

@@ -13,7 +13,6 @@ public sealed class TerritoriesController : ControllerBase
 {
     private readonly TerritoryService _territoryService;
     private readonly ActiveTerritoryService _activeTerritoryService;
-
     public TerritoriesController(
         TerritoryService territoryService,
         ActiveTerritoryService activeTerritoryService)
@@ -53,31 +52,22 @@ public sealed class TerritoriesController : ControllerBase
     }
 
     /// <summary>
-    /// Cria um território (MVP).
+    /// Sugere um território geográfico para validação.
     /// </summary>
-    /// <remarks>
-    /// Regras mínimas hoje:
-    /// - Name obrigatório
-    /// - SensitivityLevel: LOW|MEDIUM|HIGH (aqui validamos por convenção)
-    /// </remarks>
-    [HttpPost]
+    [HttpPost("suggestions")]
     [ProducesResponseType(typeof(TerritoryResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<TerritoryResponse>> Create(
-        [FromBody] CreateTerritoryRequest request,
+    public async Task<ActionResult<TerritoryResponse>> Suggest(
+        [FromBody] SuggestTerritoryRequest request,
         CancellationToken cancellationToken)
     {
-        var sensitivityLevel = ParseSensitivity(request.SensitivityLevel);
-        if (sensitivityLevel is null)
-        {
-            return BadRequest(new { error = "SensitivityLevel must be LOW, MEDIUM, or HIGH." });
-        }
-
         var result = await _territoryService.CreateAsync(
             request.Name,
             request.Description,
-            sensitivityLevel.Value,
-            request.IsPilot,
+            request.City,
+            request.State,
+            request.Latitude,
+            request.Longitude,
             cancellationToken);
 
         if (!result.Success || result.Territory is null)
@@ -86,8 +76,44 @@ public sealed class TerritoriesController : ControllerBase
         }
 
         var response = ToResponse(result.Territory);
-
         return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+    }
+
+    /// <summary>
+    /// Busca territórios por texto e localização administrativa.
+    /// </summary>
+    [HttpGet("search")]
+    [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> Search(
+        [FromQuery] string? q,
+        [FromQuery] string? city,
+        [FromQuery] string? state,
+        CancellationToken cancellationToken)
+    {
+        var territories = await _territoryService.SearchAsync(q, city, state, cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Busca territórios próximos usando latitude e longitude.
+    /// </summary>
+    [HttpGet("nearby")]
+    [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> Nearby(
+        [FromQuery] double? lat,
+        [FromQuery] double? lng,
+        CancellationToken cancellationToken)
+    {
+        if (lat is null || lng is null)
+        {
+            return BadRequest(new { error = "lat and lng are required." });
+        }
+
+        var territories = await _territoryService.NearbyAsync(lat.Value, lng.Value, cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
     }
 
     /// <summary>
@@ -146,19 +172,12 @@ public sealed class TerritoriesController : ControllerBase
             territory.Id,
             territory.Name,
             territory.Description,
-            territory.Sensitivity.ToString().ToUpperInvariant(),
             territory.Status.ToString().ToUpperInvariant(),
+            territory.City,
+            territory.State,
+            territory.Latitude,
+            territory.Longitude,
             territory.CreatedAtUtc);
-    }
-
-    private static SensitivityLevel? ParseSensitivity(string? input)
-    {
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            return null;
-        }
-
-        return Enum.TryParse<SensitivityLevel>(input, true, out var parsed) ? parsed : null;
     }
 
     private bool TryGetSessionId(out string sessionId)

@@ -7,6 +7,7 @@ public sealed class CommunityPost
         Guid territoryId,
         string title,
         string content,
+        PostType type,
         PostVisibility visibility,
         DateTime createdAtUtc)
     {
@@ -29,6 +30,7 @@ public sealed class CommunityPost
         TerritoryId = territoryId;
         Title = title.Trim();
         Content = content.Trim();
+        Type = type;
         Visibility = visibility;
         CreatedAtUtc = createdAtUtc;
     }
@@ -37,6 +39,7 @@ public sealed class CommunityPost
     public Guid TerritoryId { get; }
     public string Title { get; }
     public string Content { get; }
+    public PostType Type { get; }
     public PostVisibility Visibility { get; }
     public DateTime CreatedAtUtc { get; }
 }
