@@ -10,6 +10,7 @@ using Araponga.Api.Contracts.Map;
 using Araponga.Api.Contracts.Memberships;
 using Araponga.Api.Contracts.Territories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
