@@ -1,6 +1,8 @@
 using Araponga.Api.Contracts.Territories;
 using Araponga.Application.Services;
 using Araponga.Domain.Territories;
+using Araponga.Application.Services;
+using Araponga.Domain.Territories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Araponga.Api.Controllers;
@@ -11,6 +13,16 @@ namespace Araponga.Api.Controllers;
 [Tags("Territories")]
 public sealed class TerritoriesController : ControllerBase
 {
+    private readonly TerritoryService _territoryService;
+    private readonly ActiveTerritoryService _activeTerritoryService;
+
+    public TerritoriesController(
+        TerritoryService territoryService,
+        ActiveTerritoryService activeTerritoryService)
+    {
+        _territoryService = territoryService;
+        _activeTerritoryService = activeTerritoryService;
+    }
     private readonly TerritoryService _territoryService;
     private readonly ActiveTerritoryService _activeTerritoryService;
 
@@ -34,7 +46,11 @@ public sealed class TerritoriesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<TerritoryResponse>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TerritoryResponse>>> List(CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<TerritoryResponse>>> List(CancellationToken cancellationToken)
     {
+        var territories = await _territoryService.ListAvailableAsync(cancellationToken);
+        var response = territories.Select(ToResponse);
+        return Ok(response);
         var territories = await _territoryService.ListAvailableAsync(cancellationToken);
         var response = territories.Select(ToResponse);
         return Ok(response);
@@ -46,6 +62,7 @@ public sealed class TerritoriesController : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(TerritoryResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<TerritoryResponse>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     public async Task<ActionResult<TerritoryResponse>> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
     {
         var territory = await _territoryService.GetByIdAsync(id, cancellationToken);

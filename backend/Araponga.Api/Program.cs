@@ -4,6 +4,12 @@ using Araponga.Application.Interfaces;
 using Araponga.Application.Services;
 using Araponga.Infrastructure.InMemory;
 using Araponga.Infrastructure.Security;
+using System.Reflection;
+using Araponga.Api.Security;
+using Araponga.Application.Interfaces;
+using Araponga.Application.Services;
+using Araponga.Infrastructure.InMemory;
+using Araponga.Infrastructure.Security;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
