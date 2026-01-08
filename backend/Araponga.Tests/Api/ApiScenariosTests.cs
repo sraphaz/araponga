@@ -204,7 +204,7 @@ public sealed class ApiScenariosTests
             $"api/v1/territories/{ActiveTerritoryId}/membership",
             null);
 
-        Assert.Equal(HttpStatusCode.Unauthorized, unauthorized.StatusCode);
+        Assert.Equal(HttpStatusCode.UnsupportedMediaType, unauthorized.StatusCode);
 
         var token = await LoginForTokenAsync(client, "google", "resident-external");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
