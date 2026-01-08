@@ -218,10 +218,12 @@ e dos limites do modelo digital atual
 Se você chegou até aqui e sentiu que isso faz sentido,
 você já faz parte da conversa.
 
-📜 Licença
+## 📜 Licença
 
-Este projeto é distribuído sob licença aberta.
-Consulte o arquivo LICENSE para mais detalhes.
+Este projeto é distribuído sob uma **licença aberta orientada à comunidade e ao território**.
+
+- Versão oficial (EN): `LICENSE`
+- Versão em português (PT-BR): `LICENSE.pt-BR`
 
 🐦 Araponga canta para avisar, proteger e comunicar.
 Que esta plataforma faça o mesmo.
