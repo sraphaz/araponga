@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Araponga API • Developer Portal</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="language-switcher" aria-label="Selecionar idioma">
@@ -33,8 +33,8 @@
       </p>
 
       <div class="hero-actions">
-        <a class="button" href="/swagger" data-i18n="hero.action.swagger">Abrir Swagger</a>
-        <a class="button secondary" href="/health" data-i18n="hero.action.health">Checar health</a>
+        <a class="button" href="swagger/" data-i18n="hero.action.swagger">Abrir Swagger</a>
+        <a class="button secondary" href="health/" data-i18n="hero.action.health">Checar health</a>
         <a class="button ghost" href="https://github.com/sraphaz/araponga" data-i18n="hero.action.github">GitHub</a>
       </div>
 
@@ -62,6 +62,7 @@
         <a href="#quickstart" data-i18n="toc.link.quickstart">Quickstart</a>
         <a href="#examples" data-i18n="toc.link.examples">Exemplos de API</a>
         <a href="#principles" data-i18n="toc.link.principles">Princípios e governança</a>
+        <a href="#support" data-i18n="toc.link.support">Apoio</a>
         <a href="#links" data-i18n="toc.link.links">Links úteis</a>
       </div>
     </section>
@@ -349,6 +350,57 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
       </p>
     </section>
 
+    <section id="support" class="section">
+      <div class="section-header">
+        <h2 data-i18n="support.title">Apoie o Araponga</h2>
+        <p data-i18n="support.lead1">
+          O Araponga é um projeto comunitário, aberto e orientado ao território.
+          Ele existe para sustentar relações locais, cuidado contínuo e autonomia,
+          sem intermediários extrativos ou captura de dados.
+        </p>
+        <p data-i18n="support.lead2">
+          Se este trabalho ressoa com você, é possível apoiar de forma voluntária,
+          consciente e direta — como quem cuida de um espaço comum para que siga vivo.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-i18n="support.pix.title">PIX (Brasil)</h3>
+          <p data-i18n="support.pix.body">
+            Contribuição direta, sem taxas e sem intermediários.
+            Ideal para apoiar a continuidade de forma simples e soberana.
+          </p>
+          <p data-i18n="support.pix.key">
+            <strong>Chave PIX:</strong><br />
+            rapha.sos@gmail.com
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="support.sponsors.title">GitHub Sponsors</h3>
+          <p data-i18n="support.sponsors.body">
+            Apoie o desenvolvimento técnico, a manutenção da API
+            e a evolução do Araponga como infraestrutura comunitária.
+          </p>
+          <a
+            class="button"
+            href="https://github.com/sponsors/sraphaz"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="support.sponsors.cta"
+          >
+            Apoiar no GitHub
+          </a>
+        </article>
+      </div>
+
+      <p class="note" data-i18n="support.note">
+        Toda contribuição sustenta infraestrutura, documentação, tempo de cuidado
+        e a evolução contínua do Araponga.
+      </p>
+    </section>
+
     <section id="links" class="section">
       <div class="section-header">
         <h2 data-i18n="links.title">Links úteis</h2>
@@ -356,9 +408,11 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
       </div>
 
       <div class="link-grid">
-        <a href="/swagger" data-i18n="links.swagger">Swagger</a>
-        <a href="/health" data-i18n="links.health">Health</a>
+        <a href="swagger/" data-i18n="links.swagger">Swagger</a>
+        <a href="health/" data-i18n="links.health">Health</a>
         <a href="https://github.com/sraphaz/araponga" data-i18n="links.github">GitHub</a>
+        <a href="#support" data-i18n="links.support">Apoiar o Araponga</a>
+        <a href="https://github.com/sponsors/sraphaz" data-i18n="links.sponsors">GitHub Sponsors</a>
         <a href="https://github.com/sraphaz/araponga/blob/main/LICENSE" data-i18n="links.license">LICENSE</a>
         <a href="https://github.com/sraphaz/araponga/blob/main/LICENSE.pt-BR" data-i18n="links.licensePt">LICENSE.pt-BR</a>
         <a href="https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md" data-i18n="links.contributing">CONTRIBUTING</a>
@@ -395,6 +449,7 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.quickstart": "Quickstart",
         "toc.link.examples": "Exemplos de API",
         "toc.link.principles": "Princípios e governança",
+        "toc.link.support": "Apoio",
         "toc.link.links": "Links úteis",
         "productBrief.title": "Product brief",
         "productBrief.p1": "O Araponga é um serviço para comunidades que querem <strong>visibilidade local</strong> sem abrir mão de <strong>autonomia</strong>. Tudo começa pelo <strong>território</strong>: um recorte geográfico real que organiza a experiência, define contexto e reduz ruído. A partir dele, emergem duas camadas humanas essenciais: <strong>visitante</strong> e <strong>morador</strong>. Esses papéis não são “detalhes de autorização”; eles são o mecanismo que sustenta convivência digital com respeito ao território e às pessoas.",
@@ -470,11 +525,23 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "principles.items.governance": "<strong>Governança comunitária:</strong> decisões locais e regras explícitas; moderação e critérios evolutivos.",
         "principles.items.evolution": "<strong>Evolutivo:</strong> MVP sólido → camadas avançadas → experiências espaciais (inclusive 3D) quando houver maturidade.",
         "principles.contribute": "Quer contribuir? Veja <a href=\"https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md\">CONTRIBUTING.md</a> ou abra uma issue no GitHub com contexto, motivação e critérios de validação.",
+        "support.title": "Apoie o Araponga",
+        "support.lead1": "O Araponga é um projeto comunitário, aberto e orientado ao território. Ele existe para sustentar relações locais, cuidado contínuo e autonomia, sem intermediários extrativos ou captura de dados.",
+        "support.lead2": "Se este trabalho ressoa com você, é possível apoiar de forma voluntária, consciente e direta — como quem cuida de um espaço comum para que siga vivo.",
+        "support.pix.title": "PIX (Brasil)",
+        "support.pix.body": "Contribuição direta, sem taxas e sem intermediários. Ideal para apoiar a continuidade de forma simples e soberana.",
+        "support.pix.key": "<strong>Chave PIX:</strong><br />rapha.sos@gmail.com",
+        "support.sponsors.title": "GitHub Sponsors",
+        "support.sponsors.body": "Apoie o desenvolvimento técnico, a manutenção da API e a evolução do Araponga como infraestrutura comunitária.",
+        "support.sponsors.cta": "Apoiar no GitHub",
+        "support.note": "Toda contribuição sustenta infraestrutura, documentação, tempo de cuidado e a evolução contínua do Araponga.",
         "links.title": "Links úteis",
         "links.intro": "Atalhos para documentação, status, contribuição e licenças.",
         "links.swagger": "Swagger",
         "links.health": "Health",
         "links.github": "GitHub",
+        "links.support": "Apoiar o Araponga",
+        "links.sponsors": "GitHub Sponsors",
         "links.license": "LICENSE",
         "links.licensePt": "LICENSE.pt-BR",
         "links.contributing": "CONTRIBUTING",
@@ -497,6 +564,7 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.quickstart": "Inicio rápido",
         "toc.link.examples": "Ejemplos de API",
         "toc.link.principles": "Principios y gobernanza",
+        "toc.link.support": "Apoyo",
         "toc.link.links": "Enlaces útiles",
         "productBrief.title": "Resumen del producto",
         "productBrief.p1": "Araponga es un servicio para comunidades que quieren <strong>visibilidad local</strong> sin renunciar a la <strong>autonomía</strong>. Todo comienza con el <strong>territory</strong>: un recorte geográfico real que organiza la experiencia, define contexto y reduce ruido. A partir de él emergen dos capas humanas esenciales: <strong>visitor</strong> (visitante) y <strong>resident</strong> (residente). Estos roles no son “detalles de autorización”; son el mecanismo que sostiene la convivencia digital con respeto al territorio y a las personas.",
@@ -572,11 +640,23 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "principles.items.governance": "<strong>Gobernanza comunitaria:</strong> decisiones locales y reglas explícitas; moderación y criterios evolutivos.",
         "principles.items.evolution": "<strong>Evolutivo:</strong> MVP sólido → capas avanzadas → experiencias espaciales (incluido 3D) cuando haya madurez.",
         "principles.contribute": "¿Quieres contribuir? Mira <a href=\"https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md\">CONTRIBUTING.md</a> o abre un issue en GitHub con contexto, motivación y criterios de validación.",
+        "support.title": "Apoya Araponga",
+        "support.lead1": "Araponga es un proyecto comunitario, abierto y orientado al territorio. Existe para sostener relaciones locales, cuidado continuo y autonomía, sin intermediarios extractivos ni captura de datos.",
+        "support.lead2": "Si este trabajo resuena contigo, puedes apoyar de manera voluntaria, consciente y directa — como quien cuida un espacio común para que siga vivo.",
+        "support.pix.title": "PIX (Brasil)",
+        "support.pix.body": "Contribución directa, sin tasas y sin intermediarios. Ideal para apoyar la continuidad de forma simple y soberana.",
+        "support.pix.key": "<strong>Clave PIX:</strong><br />rapha.sos@gmail.com",
+        "support.sponsors.title": "GitHub Sponsors",
+        "support.sponsors.body": "Apoya el desarrollo técnico, el mantenimiento de la API y la evolución de Araponga como infraestructura comunitaria.",
+        "support.sponsors.cta": "Apoyar en GitHub",
+        "support.note": "Cada contribución sostiene infraestructura, documentación, tiempo de cuidado y la evolución continua de Araponga.",
         "links.title": "Enlaces útiles",
         "links.intro": "Atajos para documentación, estado, contribución y licencias.",
         "links.swagger": "Swagger",
         "links.health": "Health",
         "links.github": "GitHub",
+        "links.support": "Apoyar Araponga",
+        "links.sponsors": "GitHub Sponsors",
         "links.license": "LICENSE",
         "links.licensePt": "LICENSE.pt-BR",
         "links.contributing": "CONTRIBUTING",
@@ -599,6 +679,7 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.quickstart": "Quickstart",
         "toc.link.examples": "API examples",
         "toc.link.principles": "Principles & governance",
+        "toc.link.support": "Support",
         "toc.link.links": "Useful links",
         "productBrief.title": "Product brief",
         "productBrief.p1": "Araponga is a service for communities that want <strong>local visibility</strong> without giving up <strong>autonomy</strong>. Everything starts with <strong>territory</strong>: a real geographic slice that organizes the experience, defines context, and reduces noise. From it emerge two essential human layers: <strong>visitor</strong> and <strong>resident</strong>. These roles are not “authorization details”; they are the mechanism that sustains digital coexistence with respect for the territory and its people.",
@@ -674,11 +755,23 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "principles.items.governance": "<strong>Community governance:</strong> local decisions and explicit rules; moderation and evolving criteria.",
         "principles.items.evolution": "<strong>Evolutive:</strong> solid MVP → advanced layers → spatial experiences (including 3D) when maturity is reached.",
         "principles.contribute": "Want to contribute? See <a href=\"https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md\">CONTRIBUTING.md</a> or open an issue on GitHub with context, motivation, and validation criteria.",
+        "support.title": "Support Araponga",
+        "support.lead1": "Araponga is a community, open, and territory-oriented project. It exists to sustain local relationships, continuous care, and autonomy, without extractive intermediaries or data capture.",
+        "support.lead2": "If this work resonates with you, you can support it in a voluntary, conscious, and direct way — like caring for a shared space so it can remain alive.",
+        "support.pix.title": "PIX (Brazil)",
+        "support.pix.body": "Direct contribution, no fees, no intermediaries. Ideal for supporting continuity in a simple and sovereign way.",
+        "support.pix.key": "<strong>PIX key:</strong><br />rapha.sos@gmail.com",
+        "support.sponsors.title": "GitHub Sponsors",
+        "support.sponsors.body": "Support the technical development, API maintenance, and Araponga’s evolution as community infrastructure.",
+        "support.sponsors.cta": "Support on GitHub",
+        "support.note": "Every contribution sustains infrastructure, documentation, care time, and the continuous evolution of Araponga.",
         "links.title": "Useful links",
         "links.intro": "Shortcuts to documentation, status, contributions, and licenses.",
         "links.swagger": "Swagger",
         "links.health": "Health",
         "links.github": "GitHub",
+        "links.support": "Support Araponga",
+        "links.sponsors": "GitHub Sponsors",
         "links.license": "LICENSE",
         "links.licensePt": "LICENSE.pt-BR",
         "links.contributing": "CONTRIBUTING",
