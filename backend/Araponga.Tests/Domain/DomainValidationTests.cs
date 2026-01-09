@@ -40,25 +40,25 @@ public sealed class DomainValidationTests
     public void User_RequiresDisplayName()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new User(Guid.NewGuid(), "", "user@araponga.com", "google", "ext", UserRole.Visitor, DateTime.UtcNow));
+            new User(Guid.NewGuid(), "", "user@araponga.com", "123.456.789-00", null, null, null, "google", "ext", UserRole.Visitor, DateTime.UtcNow));
 
         Assert.Contains("display", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
-    public void User_RequiresEmail()
+    public void User_RequiresCpfOrForeignDocument()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new User(Guid.NewGuid(), "User", "", "google", "ext", UserRole.Visitor, DateTime.UtcNow));
+            new User(Guid.NewGuid(), "User", null, null, null, null, null, "google", "ext", UserRole.Visitor, DateTime.UtcNow));
 
-        Assert.Contains("email", exception.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("cpf", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
     public void User_RequiresProvider()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new User(Guid.NewGuid(), "User", "user@araponga.com", "", "ext", UserRole.Visitor, DateTime.UtcNow));
+            new User(Guid.NewGuid(), "User", "user@araponga.com", "123.456.789-00", null, null, null, "", "ext", UserRole.Visitor, DateTime.UtcNow));
 
         Assert.Contains("provider", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
@@ -67,7 +67,7 @@ public sealed class DomainValidationTests
     public void User_RequiresExternalId()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new User(Guid.NewGuid(), "User", "user@araponga.com", "google", "", UserRole.Visitor, DateTime.UtcNow));
+            new User(Guid.NewGuid(), "User", "user@araponga.com", "123.456.789-00", null, null, null, "google", "", UserRole.Visitor, DateTime.UtcNow));
 
         Assert.Contains("external", exception.Message, StringComparison.OrdinalIgnoreCase);
     }

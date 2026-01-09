@@ -7,5 +7,9 @@ public sealed record SocialLoginRequest(
     string Provider,
     string ExternalId,
     string DisplayName,
-    string Email
+    string? Cpf,
+    string? ForeignDocument,
+    string? PhoneNumber,
+    string? Address,
+    string? Email
 );
