@@ -71,17 +71,16 @@
       <div class="section-header">
         <h2 data-i18n="productBrief.title">Product brief</h2>
         <p data-i18n="productBrief.p1">
-          O Araponga resolve o problema de comunicação local que hoje se perde em feeds globais. Comunidades ganham
-          <strong>visibilidade local</strong> sem abrir mão de <strong>autonomia</strong>; usuários recebem informação
-          relevante; e integradores têm um modelo claro para construir experiências territoriais. O
-          <strong>território</strong> é a célula territorial que organiza a experiência, define contexto e estabelece
-          prioridade. A partir dela, <strong>visitante</strong> e <strong>morador</strong> determinam regras de
-          visibilidade e acesso.
+          O Araponga organiza a comunicação local para moradores, visitantes e iniciativas comunitárias. Ele é usado
+          por pessoas, coletivos e serviços que precisam publicar avisos, eventos e atualizações com contexto
+          territorial. O <strong>território</strong> é a célula territorial que organiza a experiência, define contexto
+          e estabelece prioridade. A partir dela, <strong>visitante</strong> e <strong>morador</strong> determinam
+          regras de visibilidade e acesso.
         </p>
         <p data-i18n="productBrief.p2">
-          O Araponga entrega um feed e um mapa filtrados por território e vínculo. Isso prioriza relevância local,
-          cria confiança sobre o que é visto e sustenta memória territorial e eventos locais — com mídias ancoradas em
-          coordenadas quando fizer sentido.
+          O Araponga entrega um feed territorial com postagens e eventos, além de um mapa derivado do conteúdo e das
+          entidades locais. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta memória
+          territorial e eventos locais — com mídias ancoradas em coordenadas quando fizer sentido.
         </p>
       </div>
 
@@ -94,10 +93,10 @@
       <div class="callout" data-i18n="productBrief.example">
         <strong>Exemplo prático (Feed + Eventos + Mapa):</strong> em uma célula territorial, um morador publica um
         evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao
-        território e à visibilidade (público / restrito / residentes). O app consome o feed filtrado pela célula e pelo
-        papel do usuário (visitor/resident), priorizando relevância local. Quando há referência geográfica, o conteúdo
-        pode ser projetado no mapa como entidade territorial, gerando uma experiência situada com contexto claro e
-        regras explícitas.
+        território e à visibilidade (público / restrito / residentes). O app consome o feed territorial filtrado pela
+        célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há referência
+        geográfica, esse conteúdo também é projetado no mapa como entidade territorial, conectando feed e mapa em uma
+        experiência situada com contexto claro e regras explícitas.
       </div>
     </section>
 
@@ -158,8 +157,8 @@
           <p data-i18n="domains.feed.what"><strong>O que é:</strong> stream de postagens, alertas e eventos filtrados por território e visibilidade.</p>
           <p data-i18n="domains.feed.why">
             <strong>Por que existe:</strong> prioriza relevância local com regras claras. Eventos são um tipo de
-            conteúdo do feed, com janela temporal e impacto no mapa. Postagens são territoriais para manter contexto e
-            fortalecer a organização local.
+            conteúdo do feed, com janela temporal e impacto no mapa. O feed é territorial para manter contexto,
+            confiança e organização local.
           </p>
           <ul>
             <li data-i18n="domains.feed.fields"><strong>Campos:</strong> id, title, content, type, visibility, createdAtUtc.</li>
@@ -172,8 +171,8 @@
           <p data-i18n="domains.map.what"><strong>O que é:</strong> entidades e camadas georreferenciadas do território.</p>
           <p data-i18n="domains.map.why">
             <strong>Por que existe:</strong> transforma informação em referência espacial.
-            O mapa projeta entidades territoriais derivadas de conteúdo e cadastros, tornando o contexto local visível
-            e navegável.
+            O mapa é uma projeção territorial derivada de conteúdo e cadastros, conectando o que aparece no feed às
+            entidades locais visíveis e navegáveis.
           </p>
           <ul>
             <li data-i18n="domains.map.fields"><strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.</li>
@@ -470,10 +469,10 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.support": "Apoio",
         "toc.link.links": "Links úteis",
         "productBrief.title": "Product brief",
-        "productBrief.p1": "O Araponga resolve o problema de comunicação local que hoje se perde em feeds globais. Comunidades ganham <strong>visibilidade local</strong> sem abrir mão de <strong>autonomia</strong>; usuários recebem informação relevante; e integradores têm um modelo claro para construir experiências territoriais. O <strong>território</strong> é a célula territorial que organiza a experiência, define contexto e estabelece prioridade. A partir dela, <strong>visitante</strong> e <strong>morador</strong> determinam regras de visibilidade e acesso.",
-        "productBrief.p2": "O Araponga entrega um feed e um mapa filtrados por território e vínculo. Isso prioriza relevância local, cria confiança sobre o que é visto e sustenta memória territorial e eventos locais — com mídias ancoradas em coordenadas quando fizer sentido.",
+        "productBrief.p1": "O Araponga organiza a comunicação local para moradores, visitantes e iniciativas comunitárias. Ele é usado por pessoas, coletivos e serviços que precisam publicar avisos, eventos e atualizações com contexto territorial. O <strong>território</strong> é a célula territorial que organiza a experiência, define contexto e estabelece prioridade. A partir dela, <strong>visitante</strong> e <strong>morador</strong> determinam regras de visibilidade e acesso.",
+        "productBrief.p2": "O Araponga entrega um feed territorial com postagens e eventos, além de um mapa derivado do conteúdo e das entidades locais. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta memória territorial e eventos locais — com mídias ancoradas em coordenadas quando fizer sentido.",
         "productBrief.callout": "<strong>Foco técnico:</strong> arquitetura orientada a domínios, contratos simples e auditáveis, governança em camadas e evolução incremental (MVP → camadas avançadas → experiências espaciais ancoradas em território). O objetivo é construir um núcleo sólido antes de acelerar funcionalidades.",
-        "productBrief.example": "<strong>Exemplo prático (Feed + Eventos + Mapa):</strong> em uma célula territorial, um morador publica um evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao território e à visibilidade (público / restrito / residentes). O app consome o feed filtrado pela célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há referência geográfica, o conteúdo pode ser projetado no mapa como entidade territorial, gerando uma experiência situada com contexto claro e regras explícitas.",
+        "productBrief.example": "<strong>Exemplo prático (Feed + Eventos + Mapa):</strong> em uma célula territorial, um morador publica um evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao território e à visibilidade (público / restrito / residentes). O app consome o feed territorial filtrado pela célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há referência geográfica, esse conteúdo também é projetado no mapa como entidade territorial, conectando feed e mapa em uma experiência situada com contexto claro e regras explícitas.",
         "domains.title": "Domínios",
         "domains.intro": "Os domínios existem para manter responsabilidades claras e evitar que regras sociais se misturem com representações do território. A intenção é proteger a integridade do sistema: território como referência, pessoas como vínculo, conteúdo como expressão, e governança como camada explícita. Abaixo estão os elementos essenciais no estágio atual.",
         "domains.territory.title": "Território",
@@ -493,12 +492,12 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>O que é:</strong> stream de postagens, alertas e eventos filtrados por território e visibilidade.",
-        "domains.feed.why": "<strong>Por que existe:</strong> prioriza relevância local com regras claras. Eventos são um tipo de conteúdo do feed, com janela temporal e impacto no mapa. Postagens são territoriais para manter contexto e fortalecer a organização local.",
+        "domains.feed.why": "<strong>Por que existe:</strong> prioriza relevância local com regras claras. Eventos são um tipo de conteúdo do feed, com janela temporal e impacto no mapa. O feed é territorial para manter contexto, confiança e organização local.",
         "domains.feed.fields": "<strong>Campos:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
         "domains.map.what": "<strong>O que é:</strong> entidades e camadas georreferenciadas do território.",
-        "domains.map.why": "<strong>Por que existe:</strong> transforma informação em referência espacial. O mapa projeta entidades territoriais derivadas de conteúdo e cadastros, tornando o contexto local visível e navegável.",
+        "domains.map.why": "<strong>Por que existe:</strong> transforma informação em referência espacial. O mapa é uma projeção territorial derivada de conteúdo e cadastros, conectando o que aparece no feed às entidades locais visíveis e navegáveis.",
         "domains.map.fields": "<strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
         "domains.media.title": "Media + GeoAnchor",
@@ -588,10 +587,10 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.support": "Apoyo",
         "toc.link.links": "Enlaces útiles",
         "productBrief.title": "Resumen del producto",
-        "productBrief.p1": "Araponga resuelve el problema de comunicación local que hoy se pierde en feeds globales. Las comunidades ganan <strong>visibilidad local</strong> sin renunciar a la <strong>autonomía</strong>; los usuarios reciben información relevante; y los integradores tienen un modelo claro para construir experiencias territoriales. El <strong>territory</strong> es la célula territorial que organiza la experiencia, define contexto y establece prioridad. A partir de ella, <strong>visitor</strong> y <strong>resident</strong> determinan reglas de visibilidad y acceso.",
-        "productBrief.p2": "Araponga entrega un feed y un mapa filtrados por territory y vínculo. Esto prioriza relevancia local, crea confianza sobre lo que se ve y sostiene memoria territorial y eventos locales — con medios anclados en coordenadas cuando tenga sentido.",
+        "productBrief.p1": "Araponga organiza la comunicación local para residentes, visitantes e iniciativas comunitarias. Lo usan personas, colectivos y servicios que necesitan publicar avisos, eventos y actualizaciones con contexto territorial. El <strong>territory</strong> es la célula territorial que organiza la experiencia, define contexto y establece prioridad. A partir de ella, <strong>visitor</strong> y <strong>resident</strong> determinan reglas de visibilidad y acceso.",
+        "productBrief.p2": "Araponga ofrece un feed territorial con publicaciones y eventos, además de un mapa derivado del contenido y de las entidades locales. Esto prioriza relevancia, refuerza la confianza sobre lo que aparece y sostiene memoria territorial y eventos locales — con medios anclados en coordenadas cuando tenga sentido.",
         "productBrief.callout": "<strong>Enfoque técnico:</strong> arquitectura orientada a dominios, contratos simples y auditables, gobernanza en capas y evolución incremental (MVP → capas avanzadas → experiencias espaciales ancladas al territory). El objetivo es construir un núcleo sólido antes de acelerar funcionalidades.",
-        "productBrief.example": "<strong>Ejemplo práctico (Feed + Eventos + Mapa):</strong> en una célula territorial, un resident publica un evento comunitario (mutirão, ronda de conversación, aviso de sendero). El backend registra el contenido asociado al territory y a la visibilidad (público / restringido / residents). La app consume el feed filtrado por la célula y por el rol del usuario (visitor/resident), priorizando relevancia local. Cuando hay referencia geográfica, el contenido puede proyectarse en el mapa como entidad territorial, generando una experiencia situada con contexto claro y reglas explícitas.",
+        "productBrief.example": "<strong>Ejemplo práctico (Feed + Eventos + Mapa):</strong> en una célula territorial, un resident publica un evento comunitario (mutirão, ronda de conversación, aviso de sendero). El backend registra el contenido asociado al territory y a la visibilidad (público / restringido / residents). La app consume el feed territorial filtrado por la célula y por el rol del usuario (visitor/resident), priorizando relevancia local. Cuando hay referencia geográfica, ese contenido también se proyecta en el mapa como entidad territorial, conectando feed y mapa en una experiencia situada con contexto claro y reglas explícitas.",
         "domains.title": "Dominios",
         "domains.intro": "Los dominios existen para mantener responsabilidades claras y evitar que reglas sociales se mezclen con representaciones del territorio. La intención es proteger la integridad del sistema: territorio como referencia, personas como vínculo, contenido como expresión y gobernanza como capa explícita. A continuación están los elementos esenciales en la etapa actual.",
         "domains.territory.title": "Territory",
@@ -611,12 +610,12 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>Qué es:</strong> stream de publicaciones, alertas y eventos filtrados por territory y visibilidad.",
-        "domains.feed.why": "<strong>Por qué existe:</strong> prioriza relevancia local con reglas claras. Los eventos son un tipo de contenido del feed, con ventana temporal e impacto en el mapa. Las publicaciones son territoriales para mantener contexto y fortalecer la organización local.",
+        "domains.feed.why": "<strong>Por qué existe:</strong> prioriza relevancia local con reglas claras. Los eventos son un tipo de contenido del feed, con ventana temporal e impacto en el mapa. El feed es territorial para mantener contexto, confianza y organización local.",
         "domains.feed.fields": "<strong>Campos:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
         "domains.map.what": "<strong>Qué es:</strong> entidades y capas georreferenciadas del territory.",
-        "domains.map.why": "<strong>Por qué existe:</strong> transforma la información en referencia espacial. El mapa proyecta entidades territoriales derivadas de contenido y registros, haciendo el contexto local visible y navegable.",
+        "domains.map.why": "<strong>Por qué existe:</strong> transforma la información en referencia espacial. El mapa es una proyección territorial derivada de contenido y registros, conectando lo que aparece en el feed con las entidades locales visibles y navegables.",
         "domains.map.fields": "<strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
         "domains.media.title": "Media + GeoAnchor",
@@ -706,10 +705,10 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.support": "Support",
         "toc.link.links": "Useful links",
         "productBrief.title": "Product brief",
-        "productBrief.p1": "Araponga solves the local communication problem that gets lost in global feeds today. Communities gain <strong>local visibility</strong> without giving up <strong>autonomy</strong>; users receive relevant information; and integrators get a clear model for building territorial experiences. <strong>Territory</strong> is the territorial cell that organizes the experience, defines context, and sets priority. From it, <strong>visitor</strong> and <strong>resident</strong> determine visibility and access rules.",
-        "productBrief.p2": "Araponga delivers a feed and a map filtered by territory and membership. This prioritizes local relevance, builds confidence about what is seen, and sustains territorial memory and local events — with media anchored in coordinates when it makes sense.",
+        "productBrief.p1": "Araponga organizes local communication for residents, visitors, and community initiatives. It is used by people, collectives, and services that need to publish notices, events, and updates with territorial context. <strong>Territory</strong> is the territorial cell that organizes the experience, defines context, and sets priority. From it, <strong>visitor</strong> and <strong>resident</strong> determine visibility and access rules.",
+        "productBrief.p2": "Araponga delivers a territorial feed with posts and events, plus a map derived from content and local entities. This prioritizes relevance, reinforces trust in what appears, and sustains territorial memory and local events — with media anchored to coordinates when it makes sense.",
         "productBrief.callout": "<strong>Technical focus:</strong> domain-driven architecture, simple and auditable contracts, layered governance, and incremental evolution (MVP → advanced layers → spatial experiences anchored in territory). The goal is to build a solid core before accelerating features.",
-        "productBrief.example": "<strong>Practical example (Feed + Events + Map):</strong> in a territorial cell, a resident publishes a community event (community cleanup, conversation circle, trail notice). The backend records the content tied to the territory and visibility (public / restricted / residents). The app consumes the feed filtered by the cell and the user role (visitor/resident), prioritizing local relevance. When there is geographic reference, the content can be projected on the map as a territorial entity, producing a situated experience with clear context and explicit rules.",
+        "productBrief.example": "<strong>Practical example (Feed + Events + Map):</strong> in a territorial cell, a resident publishes a community event (community cleanup, conversation circle, trail notice). The backend records the content tied to the territory and visibility (public / restricted / residents). The app consumes the territorial feed filtered by the cell and the user role (visitor/resident), prioritizing local relevance. When there is geographic reference, that content is also projected on the map as a territorial entity, connecting feed and map in a situated experience with clear context and explicit rules.",
         "domains.title": "Domains",
         "domains.intro": "Domains exist to keep responsibilities clear and avoid mixing social rules with territory representations. The intent is to protect system integrity: territory as reference, people as linkage, content as expression, and governance as an explicit layer. Below are the essential elements in the current stage.",
         "domains.territory.title": "Territory",
@@ -729,12 +728,12 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>What it is:</strong> stream of posts, alerts, and events filtered by territory and visibility.",
-        "domains.feed.why": "<strong>Why it exists:</strong> prioritizes local relevance with clear rules. Events are a type of feed content, with a temporal window and impact on the map. Posts are territorial to keep context and strengthen local organization.",
+        "domains.feed.why": "<strong>Why it exists:</strong> prioritizes local relevance with clear rules. Events are a type of feed content, with a temporal window and impact on the map. The feed is territorial to maintain context, trust, and local organization.",
         "domains.feed.fields": "<strong>Fields:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
         "domains.map.what": "<strong>What it is:</strong> georeferenced entities and layers of the territory.",
-        "domains.map.why": "<strong>Why it exists:</strong> turns information into spatial reference. The map projects territorial entities derived from content and records, making local context visible and navigable.",
+        "domains.map.why": "<strong>Why it exists:</strong> turns information into spatial reference. The map is a territorial projection derived from content and records, connecting what appears in the feed to visible, navigable local entities.",
         "domains.map.fields": "<strong>Fields:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
         "domains.media.title": "Media + GeoAnchor",
