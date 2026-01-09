@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Araponga API • Developer Portal</title>
   <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function () {
+      var LANDING_URL = 'https://araponga-comunidade-jz6zl4f.gamma.site';
+      var RETURN_PARAM = 'fromLanding';
+      var returnFlagKey = 'landingReturnAllowed';
+      var currentUrl = new URL(window.location.href);
+      var hasReturnFlag = sessionStorage.getItem(returnFlagKey) === '1';
+      var fromLanding = document.referrer.indexOf(LANDING_URL) === 0
+        || currentUrl.searchParams.get(RETURN_PARAM) === '1'
+        || hasReturnFlag;
+
+      if (fromLanding) {
+        sessionStorage.setItem(returnFlagKey, '1');
+        return;
+      }
+
+      sessionStorage.setItem(returnFlagKey, '1');
+      window.location.replace(LANDING_URL);
+    })();
+  </script>
 </head>
 <body>
   <div class="language-switcher" aria-label="Selecionar idioma">
