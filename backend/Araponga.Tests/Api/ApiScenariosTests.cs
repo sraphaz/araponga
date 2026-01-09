@@ -189,11 +189,19 @@ public sealed class ApiScenariosTests
 
         var invalidResponse = await client.PostAsJsonAsync(
             "api/v1/auth/social",
-            new SocialLoginRequest("", "", "", ""));
+            new SocialLoginRequest("", "", "", "", "", "", "", ""));
 
         Assert.Equal(HttpStatusCode.BadRequest, invalidResponse.StatusCode);
 
-        var request = new SocialLoginRequest("google", "resident-external", "Morador Teste", "morador@araponga.com");
+        var request = new SocialLoginRequest(
+            "google",
+            "resident-external",
+            "Morador Teste",
+            "123.456.789-00",
+            null,
+            "(11) 99999-0000",
+            "Rua das Flores, 100",
+            "morador@araponga.com");
         var firstLogin = await client.PostAsJsonAsync("api/v1/auth/social", request);
         firstLogin.EnsureSuccessStatusCode();
 
@@ -644,7 +652,15 @@ public sealed class ApiScenariosTests
     {
         var response = await client.PostAsJsonAsync(
             "api/v1/auth/social",
-            new SocialLoginRequest(provider, externalId, "Tester", "tester@araponga.com"));
+            new SocialLoginRequest(
+                provider,
+                externalId,
+                "Tester",
+                "123.456.789-00",
+                null,
+                "(11) 90000-0000",
+                "Rua das Flores, 100",
+                "tester@araponga.com"));
 
         response.EnsureSuccessStatusCode();
         var payload = await response.Content.ReadFromJsonAsync<SocialLoginResponse>();
