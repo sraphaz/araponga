@@ -18,7 +18,11 @@ public sealed class AuthService
         string provider,
         string externalId,
         string displayName,
-        string email,
+        string? email,
+        string? cpf,
+        string? foreignDocument,
+        string? phoneNumber,
+        string? address,
         CancellationToken cancellationToken)
     {
         var existing = await _userRepository.GetByProviderAsync(provider, externalId, cancellationToken);
@@ -31,6 +35,10 @@ public sealed class AuthService
             Guid.NewGuid(),
             displayName,
             email,
+            cpf,
+            foreignDocument,
+            phoneNumber,
+            address,
             provider,
             externalId,
             UserRole.Visitor,

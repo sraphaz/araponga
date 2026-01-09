@@ -30,12 +30,20 @@ public sealed class AuthController : ControllerBase
         [FromBody] SocialLoginRequest request,
         CancellationToken cancellationToken)
     {
+        var hasCpf = !string.IsNullOrWhiteSpace(request.Cpf);
+        var hasForeignDocument = !string.IsNullOrWhiteSpace(request.ForeignDocument);
+
         if (string.IsNullOrWhiteSpace(request.Provider) ||
             string.IsNullOrWhiteSpace(request.ExternalId) ||
             string.IsNullOrWhiteSpace(request.DisplayName) ||
-            string.IsNullOrWhiteSpace(request.Email))
+            (!hasCpf && !hasForeignDocument))
         {
-            return BadRequest(new { error = "Provider, ExternalId, DisplayName, and Email are required." });
+            return BadRequest(new { error = "Provider, ExternalId, DisplayName, and CPF or foreign document are required." });
+        }
+
+        if (hasCpf && hasForeignDocument)
+        {
+            return BadRequest(new { error = "Provide either CPF or foreign document, not both." });
         }
 
         var (user, token) = await _authService.LoginSocialAsync(
@@ -43,6 +51,10 @@ public sealed class AuthController : ControllerBase
             request.ExternalId,
             request.DisplayName,
             request.Email,
+            request.Cpf,
+            request.ForeignDocument,
+            request.PhoneNumber,
+            request.Address,
             cancellationToken);
 
         var response = new SocialLoginResponse(
