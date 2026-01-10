@@ -26,11 +26,11 @@ export default function Support() {
                 <strong>PIX:</strong> rapha.sos@gmail.com
               </p>
             </div>
-            <div className="flex justify-center md:justify-end">
+            <div className="flex">
               <img
                 src="/app_banner.png"
                 alt=""
-                className="w-full max-w-md rounded-2xl object-cover shadow-lg"
+                className="w-full rounded-2xl object-contain"
               />
             </div>
           </div>

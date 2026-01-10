@@ -8,7 +8,7 @@ export default function Hero() {
       <RevealOnScroll>
         <GlassCard>
           <div className="grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-            <div className="max-w-xl space-y-4">
+            <div className="max-w-2xl space-y-4">
               <h1 className="text-4xl font-semibold tracking-tight text-forest-950 md:text-5xl">
                 ARAPONGA
               </h1>
@@ -18,11 +18,11 @@ export default function Hero() {
                 Plataforma orientada ao território para organização comunitária local
               </p>
             </div>
-            <div className="flex justify-center md:justify-end">
+            <div className="flex">
               <img
-                src="/bukeh.jpg"
+                src="/first_rght_side_cover.png"
                 alt=""
-                className="h-56 w-auto rounded-2xl object-cover shadow-lg md:h-72"
+                className="w-full rounded-3xl object-contain md:max-h-80"
               />
             </div>
           </div>
