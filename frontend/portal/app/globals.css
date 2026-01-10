@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-forest-50 text-forest-900;
+}
+
+/* container consistent */
+.container-max {
+  @apply mx-auto w-full max-w-5xl px-6;
+}
