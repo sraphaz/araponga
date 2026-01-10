@@ -22,7 +22,7 @@ export default function Hero() {
               <img
                 src="/first_rght_side_cover.png"
                 alt=""
-                className="h-64 w-full rounded-3xl object-cover md:h-80"
+                className="w-full rounded-3xl object-contain md:max-h-80"
               />
             </div>
           </div>

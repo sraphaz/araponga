@@ -30,7 +30,7 @@ export default function Support() {
               <img
                 src="/app_banner.png"
                 alt=""
-                className="w-full rounded-2xl object-cover"
+                className="w-full rounded-2xl object-contain"
               />
             </div>
           </div>
