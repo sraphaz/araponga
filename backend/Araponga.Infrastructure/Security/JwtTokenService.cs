@@ -141,7 +141,7 @@ public sealed class JwtTokenService : ITokenService
     private static byte[] Base64UrlDecode(string input)
     {
         var padded = input.Replace('-', '+').Replace('_', '/');
-        padded += padded.Length % 4 switch
+        padded += (padded.Length % 4) switch
         {
             0 => string.Empty,
             2 => "==",
