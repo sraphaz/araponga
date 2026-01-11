@@ -289,6 +289,7 @@ code {
 
 code {
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 pre code {
