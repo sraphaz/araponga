@@ -131,6 +131,7 @@ public sealed class MembershipsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> Validate(
         [FromRoute] Guid territoryId,
         [FromRoute] Guid membershipId,
@@ -143,9 +144,14 @@ public sealed class MembershipsController : ControllerBase
             return Unauthorized();
         }
 
-        if (!_accessEvaluator.IsCurator(userContext.User))
+        var canValidate = await _accessEvaluator.IsResidentAsync(
+            userContext.User.Id,
+            territoryId,
+            cancellationToken);
+
+        if (!canValidate)
         {
-            return Unauthorized();
+            return StatusCode(StatusCodes.Status403Forbidden);
         }
 
         if (!Enum.TryParse<VerificationStatus>(request.Status, true, out var status))

@@ -29,6 +29,16 @@ public sealed class InMemoryTerritoryMembershipRepository : ITerritoryMembership
         return Task.FromResult(membership);
     }
 
+    public Task<bool> HasValidatedResidentAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        var hasResident = _dataStore.Memberships.Any(m =>
+            m.TerritoryId == territoryId &&
+            m.Role == MembershipRole.Resident &&
+            m.VerificationStatus == VerificationStatus.Validated);
+
+        return Task.FromResult(hasResident);
+    }
+
     public Task AddAsync(TerritoryMembership membership, CancellationToken cancellationToken)
     {
         _dataStore.Memberships.Add(membership);

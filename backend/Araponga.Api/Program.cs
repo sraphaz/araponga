@@ -195,7 +195,8 @@ if (app.Environment.IsEnvironment("Testing"))
 }
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok", service = "Araponga.Api" }))
-    .AllowAnonymous();
+    .AllowAnonymous()
+    .ExcludeFromDescription();
 
 app.MapControllers();
 

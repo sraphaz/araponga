@@ -25,54 +25,80 @@ public sealed class MembershipService
             territoryId,
             cancellationToken);
 
+        if (role == MembershipRole.Visitor)
+        {
+            if (existing is not null)
+            {
+                return existing;
+            }
+
+            var visitorMembership = new TerritoryMembership(
+                Guid.NewGuid(),
+                userId,
+                territoryId,
+                role,
+                VerificationStatus.Validated,
+                DateTime.UtcNow);
+
+            await _membershipRepository.AddAsync(visitorMembership, cancellationToken);
+
+            await _auditLogger.LogAsync(
+                new Application.Models.AuditEntry(
+                    "membership.declared",
+                    userId,
+                    territoryId,
+                    visitorMembership.Id,
+                    DateTime.UtcNow),
+                cancellationToken);
+
+            return visitorMembership;
+        }
+
+        var hasValidatedResident = await _membershipRepository.HasValidatedResidentAsync(territoryId, cancellationToken);
         if (existing is not null)
         {
-            if (existing.Role == role)
+            if (existing.Role == MembershipRole.Resident)
             {
                 return existing;
             }
 
-            if (existing.Role == MembershipRole.Resident && role == MembershipRole.Visitor)
-            {
-                return existing;
-            }
+            var verificationStatus = hasValidatedResident
+                ? VerificationStatus.Pending
+                : VerificationStatus.Validated;
 
-            if (existing.Role == MembershipRole.Visitor && role == MembershipRole.Resident)
-            {
-                existing.UpdateRole(MembershipRole.Resident);
-                existing.UpdateVerificationStatus(VerificationStatus.Pending);
+            existing.UpdateRole(MembershipRole.Resident);
+            existing.UpdateVerificationStatus(verificationStatus);
 
-                await _membershipRepository.UpdateRoleAndStatusAsync(
+            await _membershipRepository.UpdateRoleAndStatusAsync(
+                existing.Id,
+                existing.Role,
+                existing.VerificationStatus,
+                cancellationToken);
+
+            var auditEvent = hasValidatedResident
+                ? "membership.upgraded"
+                : "membership.founder_validated";
+
+            await _auditLogger.LogAsync(
+                new Application.Models.AuditEntry(
+                    auditEvent,
+                    userId,
+                    territoryId,
                     existing.Id,
-                    existing.Role,
-                    existing.VerificationStatus,
-                    cancellationToken);
-
-                await _auditLogger.LogAsync(
-                    new Application.Models.AuditEntry(
-                        "membership.upgraded",
-                        userId,
-                        territoryId,
-                        existing.Id,
-                        DateTime.UtcNow),
-                    cancellationToken);
-
-                return existing;
-            }
+                    DateTime.UtcNow),
+                cancellationToken);
 
             return existing;
         }
 
-        var verificationStatus = role == MembershipRole.Resident
-            ? VerificationStatus.Pending
-            : VerificationStatus.Validated;
+        var status = hasValidatedResident ? VerificationStatus.Pending : VerificationStatus.Validated;
 
         var membership = new TerritoryMembership(
             Guid.NewGuid(),
             userId,
             territoryId,
             role,
-            verificationStatus,
+            status,
             DateTime.UtcNow);
 
         await _membershipRepository.AddAsync(membership, cancellationToken);
@@ -85,6 +111,18 @@ public sealed class MembershipService
                 membership.Id,
                 DateTime.UtcNow),
             cancellationToken);
+
+        if (!hasValidatedResident)
+        {
+            await _auditLogger.LogAsync(
+                new Application.Models.AuditEntry(
+                    "membership.founder_validated",
+                    userId,
+                    territoryId,
+                    membership.Id,
+                    DateTime.UtcNow),
+                cancellationToken);
+        }
 
         return membership;
     }

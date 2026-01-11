@@ -14,7 +14,7 @@ public sealed class DomainValidationTests
     public void Territory_RequiresName()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new Territory(Guid.NewGuid(), "", null, TerritoryStatus.Active, "Cidade", "ST", 0, 0, DateTime.UtcNow));
+            new Territory(Guid.NewGuid(), null, "", null, TerritoryStatus.Active, "Cidade", "ST", 0, 0, DateTime.UtcNow));
 
         Assert.Contains("name", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
@@ -23,7 +23,7 @@ public sealed class DomainValidationTests
     public void Territory_RequiresCity()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new Territory(Guid.NewGuid(), "Território", null, TerritoryStatus.Active, "", "ST", 0, 0, DateTime.UtcNow));
+            new Territory(Guid.NewGuid(), null, "Território", null, TerritoryStatus.Active, "", "ST", 0, 0, DateTime.UtcNow));
 
         Assert.Contains("city", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
@@ -32,7 +32,7 @@ public sealed class DomainValidationTests
     public void Territory_RequiresState()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
-            new Territory(Guid.NewGuid(), "Território", null, TerritoryStatus.Active, "Cidade", "", 0, 0, DateTime.UtcNow));
+            new Territory(Guid.NewGuid(), null, "Território", null, TerritoryStatus.Active, "Cidade", "", 0, 0, DateTime.UtcNow));
 
         Assert.Contains("state", exception.Message, StringComparison.OrdinalIgnoreCase);
     }

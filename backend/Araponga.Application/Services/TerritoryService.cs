@@ -53,6 +53,7 @@ public sealed class TerritoryService
 
         var territory = new Territory(
             Guid.NewGuid(),
+            null,
             name,
             description,
             TerritoryStatus.Pending,

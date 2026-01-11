@@ -5,6 +5,7 @@ namespace Araponga.Infrastructure.Postgres.Entities;
 public sealed class TerritoryRecord
 {
     public Guid Id { get; set; }
+    public Guid? ParentTerritoryId { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public TerritoryStatus Status { get; set; }
