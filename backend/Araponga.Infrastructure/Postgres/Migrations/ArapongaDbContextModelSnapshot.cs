@@ -168,6 +168,7 @@ public partial class ArapongaDbContextModelSnapshot : ModelSnapshot
         {
             entity.ToTable("territories");
             entity.HasKey(t => t.Id);
+            entity.Property(t => t.ParentTerritoryId);
             entity.Property(t => t.Name).HasMaxLength(200).IsRequired();
             entity.Property(t => t.Description).HasMaxLength(1000);
             entity.Property(t => t.Status).HasConversion<int>();

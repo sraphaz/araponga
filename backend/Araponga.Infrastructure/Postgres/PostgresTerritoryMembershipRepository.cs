@@ -35,6 +35,17 @@ public sealed class PostgresTerritoryMembershipRepository : ITerritoryMembership
         return record?.ToDomain();
     }
 
+    public Task<bool> HasValidatedResidentAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return _dbContext.TerritoryMemberships
+            .AsNoTracking()
+            .AnyAsync(
+                membership => membership.TerritoryId == territoryId &&
+                              membership.Role == MembershipRole.Resident &&
+                              membership.VerificationStatus == VerificationStatus.Validated,
+                cancellationToken);
+    }
+
     public async Task AddAsync(TerritoryMembership membership, CancellationToken cancellationToken)
     {
         _dbContext.TerritoryMemberships.Add(membership.ToRecord());

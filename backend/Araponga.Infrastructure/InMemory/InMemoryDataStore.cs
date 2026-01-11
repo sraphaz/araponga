@@ -14,6 +14,7 @@ public sealed class InMemoryDataStore
     {
         var territoryA = new Territory(
             Guid.Parse("11111111-1111-1111-1111-111111111111"),
+            null,
             "Sertão do Camburi",
             "Território canônico para comunidade local.",
             TerritoryStatus.Active,
@@ -25,6 +26,7 @@ public sealed class InMemoryDataStore
 
         var territoryB = new Territory(
             Guid.Parse("22222222-2222-2222-2222-222222222222"),
+            null,
             "Vale do Itamambuca",
             "Território canônico para operações comunitárias.",
             TerritoryStatus.Active,
@@ -36,6 +38,7 @@ public sealed class InMemoryDataStore
 
         var territoryC = new Territory(
             Guid.Parse("33333333-3333-3333-3333-333333333333"),
+            null,
             "Reserva do Silêncio",
             "Território inativo para testes.",
             TerritoryStatus.Inactive,

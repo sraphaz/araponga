@@ -4,6 +4,7 @@ public sealed class Territory
 {
     public Territory(
         Guid id,
+        Guid? parentTerritoryId,
         string name,
         string? description,
         TerritoryStatus status,
@@ -29,6 +30,7 @@ public sealed class Territory
         }
 
         Id = id;
+        ParentTerritoryId = parentTerritoryId;
         Name = name.Trim();
         Description = string.IsNullOrWhiteSpace(description) ? null : description.Trim();
         Status = status;
@@ -40,6 +42,7 @@ public sealed class Territory
     }
 
     public Guid Id { get; }
+    public Guid? ParentTerritoryId { get; }
     public string Name { get; }
     public string? Description { get; }
     public TerritoryStatus Status { get; }

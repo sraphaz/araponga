@@ -41,6 +41,8 @@
       <h2>Conteúdo</h2>
       <ul>
         <li><a href="#visao-geral">Visão geral</a></li>
+        <li><a href="#como-funciona">Como o Araponga funciona</a></li>
+        <li><a href="#territorios">Territórios</a></li>
         <li><a href="#conceitos">Conceitos de produto</a></li>
         <li><a href="#modelo-dominio">Modelo de domínio</a></li>
         <li><a href="#fluxos">Fluxos principais</a></li>
@@ -73,8 +75,71 @@
           <div class="card">
             <h3>Governança em camadas</h3>
             <p>
-              Vínculos (visitor/resident), validações (curadoria) e moderação (reports/bloqueios)
+              Vínculos (visitor/resident), validações comunitárias e moderação (reports/bloqueios)
               formam as camadas que definem o que aparece no feed e no mapa.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="como-funciona">
+        <span class="eyebrow">Como o Araponga funciona</span>
+        <h2>Do visitante ao morador validado</h2>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Visitante</h3>
+            <p>
+              Visitantes declaram vínculo com <code>role=Visitor</code>. O status já nasce como
+              <strong>VALIDATED</strong>, permitindo participação básica e acesso a conteúdo público.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Pedido de moradia</h3>
+            <p>
+              Para virar morador, o usuário declara <code>role=Resident</code>. O vínculo fica
+              <strong>PENDING</strong> até passar pela aprovação comunitária.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Aprovação comunitária</h3>
+            <p>
+              Apenas moradores <strong>VALIDATED</strong> do território podem aprovar pedidos via
+              <code>PATCH /api/v1/territories/{territoryId}/membership/{membershipId}/validation</code>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Fundador</h3>
+            <p>
+              Se ainda não existe nenhum morador validado no território, o primeiro residente é
+              autoaprovado e se torna o <strong>fundador</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="territorios">
+        <span class="eyebrow">Territórios</span>
+        <h2>Unidade primária com vínculo estrutural</h2>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Estado atual</h3>
+            <p>
+              Territórios continuam sendo a unidade primária de organização. Todo conteúdo e
+              governança são ancorados diretamente no território selecionado.
+            </p>
+          </div>
+          <div class="card">
+            <h3>ParentTerritoryId</h3>
+            <p>
+              O campo <code>ParentTerritoryId</code> existe apenas para modelar hierarquia estrutural
+              (ex.: bairro → município). Ele ainda não gera herança de permissões, feeds ou validações.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Roadmap (não implementado)</h3>
+            <p>
+              Herança de permissões, feeds agregados e regras automáticas por hierarquia permanecem
+              como roadmap e <strong>não</strong> fazem parte do backend atual.
             </p>
           </div>
         </div>
@@ -109,8 +174,9 @@
           <div class="card">
             <h3>Curadoria/Validação</h3>
             <p>
-              Alguns fluxos exigem curadoria (role de usuário <strong>Curator</strong>): validação de vínculos,
-              entidades de mapa e alertas ambientais.
+              A validação de vínculos de moradia é comunitária: apenas moradores <strong>VALIDATED</strong>
+              aprovam pedidos. Curadores continuam responsáveis por validação de entidades do mapa e alertas
+              ambientais.
             </p>
           </div>
           <div class="card">
@@ -259,8 +325,9 @@
           <h4>7. Membership: visitor → resident</h4>
           <p>
             <code>POST /api/v1/territories/{territoryId}/membership</code> declara vínculo. A validação
-            (morador) é feita por curadores em <code>/validation</code>. O status atual está em
-            <code>GET /api/v1/territories/{territoryId}/membership/me</code>.
+            (morador) é feita por moradores validados em <code>/validation</code>. O status atual está em
+            <code>GET /api/v1/territories/{territoryId}/membership/me</code>. Se não houver morador validado,
+            o primeiro residente é autoaprovado como fundador.
             Quando a policy exige presença, envie <code>X-Geo-Latitude</code>/<code>X-Geo-Longitude</code>.
           </p>
         </div>
@@ -310,7 +377,8 @@
         </table>
         <div class="notice">
           <strong>Erro 401:</strong> token ausente, inválido, expirado ou com issuer/audience incorretos.
-          Atualmente, autorizações negadas também retornam <strong>401</strong> (não há 403 no código).
+          Em geral, autorizações negadas retornam <strong>401</strong>, mas a validação de membership sem
+          morador validado retorna <strong>403</strong>.
         </div>
       </section>
 

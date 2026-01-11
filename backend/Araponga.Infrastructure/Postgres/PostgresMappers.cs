@@ -15,6 +15,7 @@ public static class PostgresMappers
         return new TerritoryRecord
         {
             Id = territory.Id,
+            ParentTerritoryId = territory.ParentTerritoryId,
             Name = territory.Name,
             Description = territory.Description,
             Status = territory.Status,
@@ -30,6 +31,7 @@ public static class PostgresMappers
     {
         return new Territory(
             record.Id,
+            record.ParentTerritoryId,
             record.Name,
             record.Description,
             record.Status,
