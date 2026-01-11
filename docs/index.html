@@ -90,9 +90,12 @@
         <a href="#product-brief" data-i18n="toc.link.productBrief">Product brief</a>
         <a href="#domains" data-i18n="toc.link.domains">Domínios</a>
         <a href="#flows" data-i18n="toc.link.flows">Fluxos principais</a>
+        <a href="#contracts" data-i18n="toc.link.contracts">Contracts &amp; Headers</a>
+        <a href="#roles" data-i18n="toc.link.roles">Roles &amp; Permissions</a>
         <a href="#quickstart" data-i18n="toc.link.quickstart">Quickstart</a>
         <a href="#swagger" data-i18n="toc.link.swagger">Swagger</a>
         <a href="#examples" data-i18n="toc.link.examples">Exemplos de API</a>
+        <a href="#features" data-i18n="toc.link.features">Feature flags</a>
         <a href="#principles" data-i18n="toc.link.principles">Princípios e governança</a>
         <a href="#design-coherence" data-i18n="toc.link.design">Design & Coerência</a>
         <a href="#support" data-i18n="toc.link.support">Apoio</a>
@@ -111,9 +114,9 @@
           regras de visibilidade e acesso.
         </p>
         <p data-i18n="productBrief.p2">
-          O Araponga entrega um feed territorial com postagens e eventos, além de um mapa derivado do conteúdo e das
-          entidades locais. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta memória
-          territorial e eventos locais — com mídias ancoradas em coordenadas quando fizer sentido.
+          O Araponga entrega um feed territorial com postagens e eventos, além de um mapa que hoje funciona como
+          camada de entidades e relações. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta
+          memória territorial e eventos locais — com mídia georreferenciada planejada para próxima iteração.
         </p>
       </div>
 
@@ -124,12 +127,12 @@
       </div>
 
       <div class="callout" data-i18n="productBrief.example">
-        <strong>Exemplo prático (Feed + Eventos + Mapa):</strong> em uma célula territorial, um morador publica um
+        <strong>Exemplo prático (Feed + Eventos + MapEntity):</strong> em uma célula territorial, um morador publica um
         evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao
         território e à visibilidade (público / restrito / residentes). O app consome o feed territorial filtrado pela
-        célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há referência
-        geográfica, esse conteúdo também é projetado no mapa como entidade territorial, conectando feed e mapa em uma
-        experiência situada com contexto claro e regras explícitas.
+        célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há uma entidade
+        associada, o conteúdo se conecta à MapEntity do território, fortalecendo a leitura espacial mesmo antes dos
+        pins georreferenciados.
       </div>
     </section>
 
@@ -181,7 +184,7 @@
           </p>
           <ul>
             <li data-i18n="domains.membership.fields"><strong>Campos:</strong> id, userId, territoryId, role, status.</li>
-            <li data-i18n="domains.membership.endpoints"><strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.</li>
+            <li data-i18n="domains.membership.endpoints"><strong>Endpoints:</strong> <code>POST /api/v1/territories/{territoryId}/membership</code>, <code>GET /api/v1/territories/{territoryId}/membership/me</code>, <code>PATCH /api/v1/territories/{territoryId}/membership/{membershipId}/validation</code> (curator).</li>
           </ul>
         </article>
 
@@ -201,7 +204,7 @@
 
         <article class="card">
           <h3 data-i18n="domains.map.title">Mapa</h3>
-          <p data-i18n="domains.map.what"><strong>O que é:</strong> entidades e camadas georreferenciadas do território.</p>
+          <p data-i18n="domains.map.what"><strong>O que é:</strong> camada de entidades e relações do território (ainda sem pins georreferenciados no produto).</p>
           <p data-i18n="domains.map.why">
             <strong>Por que existe:</strong> transforma informação em referência espacial.
             O mapa é uma projeção territorial derivada de conteúdo e cadastros, conectando o que aparece no feed às
@@ -211,10 +214,14 @@
             <li data-i18n="domains.map.fields"><strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.</li>
             <li data-i18n="domains.map.endpoints"><strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.</li>
           </ul>
+          <p class="note" data-i18n="domains.map.state">
+            Estado atual: <code>/map/entities</code> não expõe lat/lng no portal hoje; pins e coordenadas do mapa são uma próxima iteração.
+            Veja <a href="DOMAIN_MODEL_MER.md">DOMAIN_MODEL_MER.md</a> e <a href="BACKLOG.md">BACKLOG.md</a>.
+          </p>
         </article>
 
         <article class="card">
-          <h3 data-i18n="domains.media.title">Media + GeoAnchor</h3>
+          <h3 data-i18n="domains.media.title">Media + GeoAnchor (planejado)</h3>
           <p data-i18n="domains.media.what"><strong>O que é:</strong> mídia (foto/áudio/vídeo) ancorada em latitude/longitude (e, quando útil, altitude).</p>
           <p data-i18n="domains.media.why">
             <strong>Por que existe:</strong> constrói memória territorial com precisão — e com controle.
@@ -225,6 +232,9 @@
             <li data-i18n="domains.media.fields"><strong>Campos:</strong> mediaId, territoryId, lat, lon, altitude, visibility.</li>
             <li data-i18n="domains.media.endpoints"><strong>Endpoints:</strong> planejados (<em>upcoming</em>).</li>
           </ul>
+          <p class="note" data-i18n="domains.media.state">
+            Estado atual: o backend ainda não expõe contratos públicos para mídia/geoanchor. Esta camada entra como próxima iteração.
+          </p>
         </article>
       </div>
     </section>
@@ -254,18 +264,129 @@
         </div>
 
         <div class="flow">
-          <h3 data-i18n="flows.flow2.title">Fluxo 2 — Post georreferenciado</h3>
+          <h3 data-i18n="flows.flow2.title">Fluxo 2 — Post + Event approval + MapEntity relation</h3>
           <ol>
-            <li data-i18n="flows.flow2.step1"><strong>Criar post</strong> no feed do território.</li>
-            <li data-i18n="flows.flow2.step2"><strong>Anexar mídia</strong> com geoAnchor (lat/lon/alt) quando for relevante.</li>
-            <li data-i18n="flows.flow2.step3"><strong>Definir visibilidade</strong> (público, restrito, moradores).</li>
-            <li data-i18n="flows.flow2.step4"><strong>Distribuição coerente</strong>: a API publica no feed e, quando aplicável, no mapa local.</li>
+            <li data-i18n="flows.flow2.step1"><strong>Criar post/evento</strong> no feed do território (visitante cria evento com status PendingApproval).</li>
+            <li data-i18n="flows.flow2.step2"><strong>Relacionar a MapEntity</strong> (via <code>mapEntityId</code> ou relação posterior).</li>
+            <li data-i18n="flows.flow2.step3"><strong>Aprovação de evento</strong> por morador/curador via endpoint de approval.</li>
+            <li data-i18n="flows.flow2.step4"><strong>Validação de entidade</strong> (curador) quando a entidade é nova/sugerida.</li>
           </ol>
           <p class="note" data-i18n="flows.flow2.note">
-            Este fluxo está em construção; a etapa de mídia/geoAnchor é futura. A implementação deve priorizar:
-            privacidade, controle de visibilidade e consistência dos contratos.
+            A etapa de Media + GeoAnchor é planejada para próximas iterações. Prioridade atual: contratos de feed, aprovação e relações com MapEntity.
           </p>
         </div>
+      </div>
+    </section>
+
+    <section id="contracts" class="section">
+      <div class="section-header">
+        <h2 data-i18n="contracts.title">Contracts &amp; Headers (must-know)</h2>
+        <p data-i18n="contracts.intro">
+          Estes headers são parte do contrato real da API. Sem eles, o backend retorna erro de validação ou
+          não consegue resolver o território ativo.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <h3 data-i18n="contracts.session.title">X-Session-Id</h3>
+          <p data-i18n="contracts.session.body">
+            Identifica uma sessão anônima. Usado para seleção de território, feed sem query de territoryId,
+            e ações “anon” como likes.
+          </p>
+          <ul>
+            <li data-i18n="contracts.session.item1"><strong>Territory selection:</strong> <code>POST/GET /api/v1/territories/selection</code></li>
+            <li data-i18n="contracts.session.item2"><strong>Feed/Map fallback:</strong> quando não há <code>territoryId</code> na query.</li>
+            <li data-i18n="contracts.session.item3"><strong>Likes anônimos:</strong> o backend usa <code>session:{id}</code> como actor.</li>
+          </ul>
+          <pre><code>curl -X POST "http://localhost:8080/api/v1/territories/selection" \
+  -H "Content-Type: application/json" \
+  -H "X-Session-Id: 123e4567-e89b-12d3-a456-426614174000" \
+  -d '{"territoryId":"SEU_TERRITORY_ID"}'
+</code></pre>
+          <p class="note" data-i18n="contracts.session.note">
+            Gere um UUID no cliente e persista em storage/local para reutilizar enquanto a sessão existir.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 data-i18n="contracts.auth.title">Authorization (Bearer)</h3>
+          <p data-i18n="contracts.auth.body">
+            Endpoints que criam conteúdo, validam vínculos ou moderam exigem autenticação. Use o token JWT no header.
+          </p>
+          <ul>
+            <li data-i18n="contracts.auth.item1"><strong>Obrigatório:</strong> membership, feed POST, map entities, moderation.</li>
+            <li data-i18n="contracts.auth.item2"><strong>Opcional:</strong> endpoints com fallback de sessão (ex.: feed GET).</li>
+          </ul>
+          <pre><code>curl -X GET "http://localhost:8080/api/v1/feed?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+</code></pre>
+          <p class="note" data-i18n="contracts.auth.note">
+            Use um token real obtido em <code>/api/v1/auth/login</code> ou <code>/api/v1/auth/register</code>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="roles" class="section">
+      <div class="section-header">
+        <h2 data-i18n="roles.title">Roles &amp; Permissions (Visitor / Resident / Curator)</h2>
+        <p data-i18n="roles.intro">
+          As regras de papel são o núcleo da governança do território. Esta seção descreve o comportamento real do backend.
+        </p>
+      </div>
+
+      <ul class="principles">
+        <li data-i18n="roles.rule1"><strong>VISITOR:</strong> vínculo é validado automaticamente.</li>
+        <li data-i18n="roles.rule2"><strong>RESIDENT:</strong> vínculo nasce como <em>Pending</em> até validação.</li>
+        <li data-i18n="roles.rule3"><strong>Curator:</strong> valida resident e valida MapEntity sugerida.</li>
+        <li data-i18n="roles.rule4"><strong>Visitor:</strong> só cria Event e fica <em>PendingApproval</em>.</li>
+        <li data-i18n="roles.rule5"><strong>Resident:</strong> publica direto e aprova events.</li>
+      </ul>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th data-i18n="roles.table.action">Ação</th>
+              <th data-i18n="roles.table.visitor">Visitor</th>
+              <th data-i18n="roles.table.resident">Resident</th>
+              <th data-i18n="roles.table.curator">Curator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="roles.table.row1.action">Criar membership</td>
+              <td data-i18n="roles.table.row1.visitor">Auto-validado</td>
+              <td data-i18n="roles.table.row1.resident">Pending</td>
+              <td data-i18n="roles.table.row1.curator">Pending</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.table.row2.action">Criar Event</td>
+              <td data-i18n="roles.table.row2.visitor">PendingApproval</td>
+              <td data-i18n="roles.table.row2.resident">Published</td>
+              <td data-i18n="roles.table.row2.curator">Published</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.table.row3.action">Aprovar Event</td>
+              <td data-i18n="roles.table.row3.visitor">Não</td>
+              <td data-i18n="roles.table.row3.resident">Sim</td>
+              <td data-i18n="roles.table.row3.curator">Sim</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.table.row4.action">Validar membership</td>
+              <td data-i18n="roles.table.row4.visitor">Não</td>
+              <td data-i18n="roles.table.row4.resident">Não</td>
+              <td data-i18n="roles.table.row4.curator">Sim</td>
+            </tr>
+            <tr>
+              <td data-i18n="roles.table.row5.action">Validar MapEntity</td>
+              <td data-i18n="roles.table.row5.visitor">Não</td>
+              <td data-i18n="roles.table.row5.resident">Não</td>
+              <td data-i18n="roles.table.row5.curator">Sim</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -341,56 +462,197 @@ docker run --rm -p 8080:8080 \
 
       <div class="code-grid">
         <div>
-          <h3 data-i18n="examples.listTerritories">Listar territórios</h3>
-          <pre><code>curl -s http://localhost:8080/api/v1/territories | jq
+          <h3 data-i18n="examples.territories.title">Territórios (list + nearby)</h3>
+          <pre><code># Listar territórios
+curl -s "http://localhost:8080/api/v1/territories" | jq
+
+# Nearby (ordena por distância)
+curl -s "http://localhost:8080/api/v1/territories/nearby?lat=-23.5505&amp;lng=-46.6333" | jq
 </code></pre>
-          <p class="note" data-i18n="examples.listTerritories.note">
-            Use este endpoint para obter o <code>territoryId</code> e a célula territorial que o cliente precisa renderizar.
+          <p class="note" data-i18n="examples.territories.note">
+            Use para obter o <code>territoryId</code>. Melhorias sugeridas: controle explícito de raio/limite na API e no cliente.
           </p>
         </div>
 
         <div>
-          <h3 data-i18n="examples.listFeed">Listar feed do território</h3>
-          <pre><code>curl -s "http://localhost:8080/api/v1/feed?territoryId=SEU_TERRITORY_ID" | jq
+          <h3 data-i18n="examples.selection.title">Territory selection via sessão</h3>
+          <pre><code># Selecionar território ativo
+curl -X POST "http://localhost:8080/api/v1/territories/selection" \
+  -H "Content-Type: application/json" \
+  -H "X-Session-Id: 123e4567-e89b-12d3-a456-426614174000" \
+  -d '{"territoryId":"SEU_TERRITORY_ID"}'
+
+# Obter território ativo
+curl -s "http://localhost:8080/api/v1/territories/selection" \
+  -H "X-Session-Id: 123e4567-e89b-12d3-a456-426614174000" | jq
 </code></pre>
-          <p class="note" data-i18n="examples.listFeed.note">
-            O endpoint retorna um stream filtrado por território e visibilidade.
-            Se houver regras aplicadas por vínculo, teste com perfis visitante e morador para validar o comportamento.
+          <p class="note" data-i18n="examples.selection.note">
+            Use <code>X-Session-Id</code> para manter o território ativo entre requests anônimas.
           </p>
         </div>
 
         <div>
-          <h3 data-i18n="examples.listMap">Listar mapa do território</h3>
-          <pre><code>curl -s "http://localhost:8080/api/v1/map/entities?territoryId=SEU_TERRITORY_ID" | jq
-</code></pre>
-          <p class="note" data-i18n="examples.listMap.note">
-            Retorna entidades georreferenciadas para compor a camada local do mapa no cliente.
-          </p>
-        </div>
-
-        <div>
-          <h3 data-i18n="examples.listMedia">Listar mídia do território (planejado)</h3>
-          <pre><code># upcoming endpoint
-curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
-</code></pre>
-          <p class="note" data-i18n="examples.listMedia.note">
-            A camada de mídia/geoAnchor deve nascer com controle de visibilidade e finalidade explícita: memória
-            territorial com cuidado e contexto.
-          </p>
-        </div>
-
-        <div>
-          <h3 data-i18n="examples.postMedia">Postar mídia georreferenciada (planejado)</h3>
-          <pre><code>curl -X POST "http://localhost:8080/api/v1/media" \
+          <h3 data-i18n="examples.membership.title">Membership (visitor / resident / validation)</h3>
+          <pre><code># Visitor (auto-validado)
+curl -X POST "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/membership" \
   -H "Authorization: Bearer SEU_TOKEN" \
-  -F "territoryId=SEU_TERRITORY_ID" \
-  -F "lat=-23.5505" \
-  -F "lon=-46.6333" \
-  -F "visibility=RESIDENT" \
-  -F "file=@/caminho/arquivo.jpg"
+  -H "Content-Type: application/json" \
+  -d '{"role":"VISITOR"}'
+
+# Resident (exige X-Geo-Latitude / X-Geo-Longitude)
+curl -X POST "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/membership" \
+  -H "Authorization: Bearer SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "X-Geo-Latitude: -23.5505" \
+  -H "X-Geo-Longitude: -46.6333" \
+  -d '{"role":"RESIDENT"}'
+
+# Status do vínculo atual
+curl -s "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/membership/me" \
+  -H "Authorization: Bearer SEU_TOKEN" | jq
+
+# Curator valida resident
+curl -X PATCH "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/membership/SEU_MEMBERSHIP_ID/validation" \
+  -H "Authorization: Bearer SEU_TOKEN_CURATOR" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"VALIDATED"}'
 </code></pre>
-          <p class="note" data-i18n="examples.postMedia.note">
-            Planejado para próximas iterações. Prioridade: contratos claros, validações fortes (lat/lon/alt), e proteção de conteúdo sensível.
+          <p class="note" data-i18n="examples.membership.note">
+            Visitor é validado automaticamente; resident depende de curadoria. Curators são os únicos que validam vínculos.
+          </p>
+        </div>
+
+        <div>
+          <h3 data-i18n="examples.feed.title">Feed + Events (approval)</h3>
+          <pre><code># Listar feed
+curl -s "http://localhost:8080/api/v1/feed?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" | jq
+
+# Visitor cria Event (PendingApproval)
+curl -X POST "http://localhost:8080/api/v1/feed?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN_VISITOR" \
+  -H "Content-Type: application/json" \
+  -H "X-Geo-Latitude: -23.5505" \
+  -H "X-Geo-Longitude: -46.6333" \
+  -d '{
+    "title":"Mutirão na praça",
+    "content":"Encontro às 9h para limpeza comunitária.",
+    "type":"EVENT",
+    "visibility":"PUBLIC",
+    "mapEntityId":"SEU_MAP_ENTITY_ID",
+    "geoAnchors":[{"latitude":-23.5505,"longitude":-46.6333,"type":"EVENT"}]
+  }'
+
+# Resident aprova Event
+curl -X PATCH "http://localhost:8080/api/v1/feed/SEU_POST_ID/approval?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN_RESIDENT" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"PUBLISHED"}'
+
+# Like anônimo (usa X-Session-Id)
+curl -X POST "http://localhost:8080/api/v1/feed/SEU_POST_ID/likes?territoryId=SEU_TERRITORY_ID" \
+  -H "X-Session-Id: 123e4567-e89b-12d3-a456-426614174000"
+
+# Comment/share (autenticado)
+curl -X POST "http://localhost:8080/api/v1/feed/SEU_POST_ID/comments?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"content":"Obrigado por organizar!"}'
+
+curl -X POST "http://localhost:8080/api/v1/feed/SEU_POST_ID/shares?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+</code></pre>
+          <p class="note" data-i18n="examples.feed.note">
+            Visitor só cria eventos. Posts não-evento exigem resident. Use aprovação para publicar eventos pendentes.
+          </p>
+        </div>
+
+        <div>
+          <h3 data-i18n="examples.map.title">Map entities (suggest / validate / relate)</h3>
+          <pre><code># Listar entidades
+curl -s "http://localhost:8080/api/v1/map/entities?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" | jq
+
+# Sugerir entidade
+curl -X POST "http://localhost:8080/api/v1/map/entities?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Associação local","category":"COMMUNITY","latitude":-23.5505,"longitude":-46.6333}'
+
+# Curator valida entidade
+curl -X PATCH "http://localhost:8080/api/v1/map/entities/SEU_ENTITY_ID/validation?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN_CURATOR" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"VALIDATED"}'
+
+# Confirmar entidade
+curl -X POST "http://localhost:8080/api/v1/map/entities/SEU_ENTITY_ID/confirmations?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+
+# Relacionar morador à entidade
+curl -X POST "http://localhost:8080/api/v1/map/entities/SEU_ENTITY_ID/relations?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+</code></pre>
+          <p class="note" data-i18n="examples.map.note">
+            O mapa atual foca em entidades/relações; pins geográficos e mídia ancorada entram como próximas iterações.
+          </p>
+        </div>
+
+        <div>
+          <h3 data-i18n="examples.moderation.title">Moderation (reports / blocks)</h3>
+          <pre><code># Reportar post
+curl -X POST "http://localhost:8080/api/v1/reports/posts/SEU_POST_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"reason":"SPAM","details":"Conteúdo repetitivo"}'
+
+# Reportar usuário (com territoryId)
+curl -X POST "http://localhost:8080/api/v1/reports/users/SEU_USER_ID?territoryId=SEU_TERRITORY_ID" \
+  -H "Authorization: Bearer SEU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"reason":"ABUSE","details":"Comportamento abusivo"}'
+
+# Bloquear usuário
+curl -X POST "http://localhost:8080/api/v1/blocks/users/SEU_USER_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+
+# Desbloquear usuário
+curl -X DELETE "http://localhost:8080/api/v1/blocks/users/SEU_USER_ID" \
+  -H "Authorization: Bearer SEU_TOKEN"
+</code></pre>
+          <p class="note" data-i18n="examples.moderation.note">
+            Reports e blocks exigem autenticação. Para reports de usuário, o território é obrigatório (query ou sessão).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-header">
+        <h2 data-i18n="features.title">Feature flags per territory</h2>
+        <p data-i18n="features.intro">
+          Flags permitem habilitar/desabilitar capacidades por território. Curators controlam a lista de flags ativas.
+        </p>
+      </div>
+
+      <div class="code-grid">
+        <div>
+          <h3 data-i18n="features.list.title">Consultar flags</h3>
+          <pre><code>curl -s "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/features" | jq
+</code></pre>
+        </div>
+
+        <div>
+          <h3 data-i18n="features.update.title">Atualizar flags (curator)</h3>
+          <pre><code>curl -X PUT "http://localhost:8080/api/v1/territories/SEU_TERRITORY_ID/features" \
+  -H "Authorization: Bearer SEU_TOKEN_CURATOR" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabledFlags":["EVENTS","MAP_ENTITIES","MODERATION"]
+  }'
+</code></pre>
+          <p class="note" data-i18n="features.update.note">
+            Envie apenas flags válidas. O backend retorna erro se algum valor não for reconhecido.
           </p>
         </div>
       </div>
@@ -490,7 +752,13 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
 
       <div class="link-grid">
         <a href="#quickstart" data-i18n="links.local">Rodar localmente</a>
+        <a href="/swagger" data-i18n="links.swagger">Swagger</a>
+        <a href="/health" data-i18n="links.health">Health</a>
         <a href="https://github.com/sraphaz/araponga" data-i18n="links.github">GitHub</a>
+        <a href="DOMAIN_MODEL_MER.md" data-i18n="links.domainModel">DOMAIN_MODEL_MER.md</a>
+        <a href="MODERATION_REPORTS.md" data-i18n="links.moderation">MODERATION_REPORTS.md</a>
+        <a href="BACKLOG.md" data-i18n="links.backlog">BACKLOG.md</a>
+        <a href="ROADMAP.md" data-i18n="links.roadmap">ROADMAP.md</a>
         <a href="#support" data-i18n="links.support">Apoiar o Araponga</a>
         <a href="https://github.com/sponsors/sraphaz" data-i18n="links.sponsors">GitHub Sponsors</a>
         <a href="design/" data-i18n="links.design">Design & Coerência</a>
@@ -526,18 +794,21 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.productBrief": "Product brief",
         "toc.link.domains": "Domínios",
         "toc.link.flows": "Fluxos principais",
+        "toc.link.contracts": "Contracts &amp; Headers",
+        "toc.link.roles": "Roles &amp; Permissions",
         "toc.link.quickstart": "Quickstart",
         "toc.link.swagger": "Swagger",
         "toc.link.examples": "Exemplos de API",
+        "toc.link.features": "Feature flags",
         "toc.link.principles": "Princípios e governança",
         "toc.link.design": "Design & Coerência",
         "toc.link.support": "Apoio",
         "toc.link.links": "Links úteis",
         "productBrief.title": "Product brief",
         "productBrief.p1": "O Araponga organiza a comunicação local para moradores, visitantes e iniciativas comunitárias. Ele é usado por pessoas, coletivos e serviços que precisam publicar avisos, eventos e atualizações com contexto territorial. O <strong>território</strong> é a célula territorial que organiza a experiência, define contexto e estabelece prioridade. A partir dela, <strong>visitante</strong> e <strong>morador</strong> determinam regras de visibilidade e acesso.",
-        "productBrief.p2": "O Araponga entrega um feed territorial com postagens e eventos, além de um mapa derivado do conteúdo e das entidades locais. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta memória territorial e eventos locais — com mídias ancoradas em coordenadas quando fizer sentido.",
+        "productBrief.p2": "O Araponga entrega um feed territorial com postagens e eventos, além de um mapa que hoje funciona como camada de entidades e relações. Isso prioriza relevância, reforça confiança sobre o que aparece e sustenta memória territorial e eventos locais — com mídia georreferenciada planejada para próxima iteração.",
         "productBrief.callout": "<strong>Foco técnico:</strong> arquitetura orientada a domínios, contratos simples e auditáveis, governança em camadas e evolução incremental (MVP → camadas avançadas → experiências espaciais ancoradas em território). O objetivo é construir um núcleo sólido antes de acelerar funcionalidades.",
-        "productBrief.example": "<strong>Exemplo prático (Feed + Eventos + Mapa):</strong> em uma célula territorial, um morador publica um evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao território e à visibilidade (público / restrito / residentes). O app consome o feed territorial filtrado pela célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há referência geográfica, esse conteúdo também é projetado no mapa como entidade territorial, conectando feed e mapa em uma experiência situada com contexto claro e regras explícitas.",
+        "productBrief.example": "<strong>Exemplo prático (Feed + Eventos + MapEntity):</strong> em uma célula territorial, um morador publica um evento comunitário (mutirão, roda de conversa, aviso de trilha). O backend registra o conteúdo associado ao território e à visibilidade (público / restrito / residentes). O app consome o feed territorial filtrado pela célula e pelo papel do usuário (visitor/resident), priorizando relevância local. Quando há uma entidade associada, o conteúdo se conecta à MapEntity do território, fortalecendo a leitura espacial mesmo antes dos pins georreferenciados.",
         "domains.title": "Domínios",
         "domains.intro": "Os domínios existem para manter responsabilidades claras e evitar que regras sociais se misturem com representações do território. A intenção é proteger a integridade do sistema: território como referência, pessoas como vínculo, conteúdo como expressão, e governança como camada explícita. Abaixo estão os elementos essenciais no estágio atual.",
         "domains.territory.title": "Território",
@@ -554,22 +825,24 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.what": "<strong>O que é:</strong> vínculo entre pessoa e território (visitante ou morador).",
         "domains.membership.why": "<strong>Por que existe:</strong> governa visibilidade, acesso e prioridades locais. Esse domínio é o “coração operacional” das regras: sem ele, o território vira um filtro genérico; com ele, o território vira contexto de convivência.",
         "domains.membership.fields": "<strong>Campos:</strong> id, userId, territoryId, role, status.",
-        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
+        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>POST /api/v1/territories/{territoryId}/membership</code>, <code>GET /api/v1/territories/{territoryId}/membership/me</code>, <code>PATCH /api/v1/territories/{territoryId}/membership/{membershipId}/validation</code> (curator).",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>O que é:</strong> stream de postagens, alertas e eventos filtrados por território e visibilidade.",
         "domains.feed.why": "<strong>Por que existe:</strong> prioriza relevância local com regras claras. Eventos são um tipo de conteúdo do feed, com janela temporal e impacto no mapa. O feed é territorial para manter contexto, confiança e organização local.",
         "domains.feed.fields": "<strong>Campos:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
-        "domains.map.what": "<strong>O que é:</strong> entidades e camadas georreferenciadas do território.",
+        "domains.map.what": "<strong>O que é:</strong> camada de entidades e relações do território (ainda sem pins georreferenciados no produto).",
         "domains.map.why": "<strong>Por que existe:</strong> transforma informação em referência espacial. O mapa é uma projeção territorial derivada de conteúdo e cadastros, conectando o que aparece no feed às entidades locais visíveis e navegáveis.",
         "domains.map.fields": "<strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
-        "domains.media.title": "Media + GeoAnchor",
+        "domains.map.state": "Estado atual: <code>/map/entities</code> não expõe lat/lng no portal hoje; pins e coordenadas do mapa são uma próxima iteração. Veja <a href=\"DOMAIN_MODEL_MER.md\">DOMAIN_MODEL_MER.md</a> e <a href=\"BACKLOG.md\">BACKLOG.md</a>.",
+        "domains.media.title": "Media + GeoAnchor (planejado)",
         "domains.media.what": "<strong>O que é:</strong> mídia (foto/áudio/vídeo) ancorada em latitude/longitude (e, quando útil, altitude).",
         "domains.media.why": "<strong>Por que existe:</strong> constrói memória territorial com precisão — e com controle. GeoAnchor cria base para camadas futuras: visualização contextual, trilhas, registros de cuidado, e eventualmente representações espaciais mais complexas (inclusive 3D) geradas a partir de dados e mídias do app.",
         "domains.media.fields": "<strong>Campos:</strong> mediaId, territoryId, lat, lon, altitude, visibility.",
         "domains.media.endpoints": "<strong>Endpoints:</strong> planejados (<em>upcoming</em>).",
+        "domains.media.state": "Estado atual: o backend ainda não expõe contratos públicos para mídia/geoanchor. Esta camada entra como próxima iteração.",
         "flows.title": "Fluxos principais",
         "flows.intro": "Dois fluxos definem a experiência inicial. O sistema resolve visibilidade, prioriza contexto local e entrega respostas consistentes para cliente e API.",
         "flows.flow1.title": "Fluxo 1 — Onboarding",
@@ -578,12 +851,56 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "flows.flow1.step3": "<strong>Declaração de vínculo</strong>: visitante ou morador.",
         "flows.flow1.step4": "<strong>Resolução de visibilidade</strong>: o sistema filtra feed e mapa pelo papel e território ativo.",
         "flows.flow1.note": "Resultado: o usuário entra em um território como contexto real, com regras explícitas de convivência e acesso aplicadas desde o início.",
-        "flows.flow2.title": "Fluxo 2 — Post georreferenciado",
-        "flows.flow2.step1": "<strong>Criar post</strong> no feed do território.",
-        "flows.flow2.step2": "<strong>Anexar mídia</strong> com geoAnchor (lat/lon/alt) quando for relevante.",
-        "flows.flow2.step3": "<strong>Definir visibilidade</strong> (público, restrito, moradores).",
-        "flows.flow2.step4": "<strong>Distribuição coerente</strong>: a API publica no feed e, quando aplicável, no mapa local.",
-        "flows.flow2.note": "Este fluxo está em construção; a etapa de mídia/geoAnchor é futura. A implementação deve priorizar: privacidade, controle de visibilidade e consistência dos contratos.",
+        "flows.flow2.title": "Fluxo 2 — Post + Event approval + MapEntity relation",
+        "flows.flow2.step1": "<strong>Criar post/evento</strong> no feed do território (visitante cria evento com status PendingApproval).",
+        "flows.flow2.step2": "<strong>Relacionar a MapEntity</strong> (via <code>mapEntityId</code> ou relação posterior).",
+        "flows.flow2.step3": "<strong>Aprovação de evento</strong> por morador/curador via endpoint de approval.",
+        "flows.flow2.step4": "<strong>Validação de entidade</strong> (curador) quando a entidade é nova/sugerida.",
+        "flows.flow2.note": "A etapa de Media + GeoAnchor é planejada para próximas iterações. Prioridade atual: contratos de feed, aprovação e relações com MapEntity.",
+        "contracts.title": "Contracts &amp; Headers (must-know)",
+        "contracts.intro": "Estes headers são parte do contrato real da API. Sem eles, o backend retorna erro de validação ou não consegue resolver o território ativo.",
+        "contracts.session.title": "X-Session-Id",
+        "contracts.session.body": "Identifica uma sessão anônima. Usado para seleção de território, feed sem query de territoryId, e ações “anon” como likes.",
+        "contracts.session.item1": "<strong>Territory selection:</strong> <code>POST/GET /api/v1/territories/selection</code>",
+        "contracts.session.item2": "<strong>Feed/Map fallback:</strong> quando não há <code>territoryId</code> na query.",
+        "contracts.session.item3": "<strong>Likes anônimos:</strong> o backend usa <code>session:{id}</code> como actor.",
+        "contracts.session.note": "Gere um UUID no cliente e persista em storage/local para reutilizar enquanto a sessão existir.",
+        "contracts.auth.title": "Authorization (Bearer)",
+        "contracts.auth.body": "Endpoints que criam conteúdo, validam vínculos ou moderam exigem autenticação. Use o token JWT no header.",
+        "contracts.auth.item1": "<strong>Obrigatório:</strong> membership, feed POST, map entities, moderation.",
+        "contracts.auth.item2": "<strong>Opcional:</strong> endpoints com fallback de sessão (ex.: feed GET).",
+        "contracts.auth.note": "Use um token real obtido em <code>/api/v1/auth/login</code> ou <code>/api/v1/auth/register</code>.",
+        "roles.title": "Roles &amp; Permissions (Visitor / Resident / Curator)",
+        "roles.intro": "As regras de papel são o núcleo da governança do território. Esta seção descreve o comportamento real do backend.",
+        "roles.rule1": "<strong>VISITOR:</strong> vínculo é validado automaticamente.",
+        "roles.rule2": "<strong>RESIDENT:</strong> vínculo nasce como <em>Pending</em> até validação.",
+        "roles.rule3": "<strong>Curator:</strong> valida resident e valida MapEntity sugerida.",
+        "roles.rule4": "<strong>Visitor:</strong> só cria Event e fica <em>PendingApproval</em>.",
+        "roles.rule5": "<strong>Resident:</strong> publica direto e aprova events.",
+        "roles.table.action": "Ação",
+        "roles.table.visitor": "Visitor",
+        "roles.table.resident": "Resident",
+        "roles.table.curator": "Curator",
+        "roles.table.row1.action": "Criar membership",
+        "roles.table.row1.visitor": "Auto-validado",
+        "roles.table.row1.resident": "Pending",
+        "roles.table.row1.curator": "Pending",
+        "roles.table.row2.action": "Criar Event",
+        "roles.table.row2.visitor": "PendingApproval",
+        "roles.table.row2.resident": "Published",
+        "roles.table.row2.curator": "Published",
+        "roles.table.row3.action": "Aprovar Event",
+        "roles.table.row3.visitor": "Não",
+        "roles.table.row3.resident": "Sim",
+        "roles.table.row3.curator": "Sim",
+        "roles.table.row4.action": "Validar membership",
+        "roles.table.row4.visitor": "Não",
+        "roles.table.row4.resident": "Não",
+        "roles.table.row4.curator": "Sim",
+        "roles.table.row5.action": "Validar MapEntity",
+        "roles.table.row5.visitor": "Não",
+        "roles.table.row5.resident": "Não",
+        "roles.table.row5.curator": "Sim",
         "quickstart.title": "Quickstart",
         "quickstart.intro": "Comece localmente ou via Docker. Estes comandos são copy/paste. Dica: valide primeiro <code>/health</code>, depois abra o Swagger, e só então teste os fluxos.",
         "quickstart.local.title": "Local (dotnet)",
@@ -595,16 +912,23 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "swagger.note": "Se o embed não carregar, abra <a href=\"/swagger\">/swagger</a> em outra aba.",
         "examples.title": "Exemplos de API",
         "examples.intro": "Use um <code>territoryId</code> real retornado pelo endpoint de territórios. O princípio é simples: descobrir o território, consumir o feed filtrado e carregar o mapa local.",
-        "examples.listTerritories": "Listar territórios",
-        "examples.listTerritories.note": "Use este endpoint para obter o <code>territoryId</code> e a célula territorial que o cliente precisa renderizar.",
-        "examples.listFeed": "Listar feed do território",
-        "examples.listFeed.note": "O endpoint retorna um stream filtrado por território e visibilidade. Se houver regras aplicadas por vínculo, teste com perfis visitante e morador para validar o comportamento.",
-        "examples.listMap": "Listar mapa do território",
-        "examples.listMap.note": "Retorna entidades georreferenciadas para compor a camada local do mapa no cliente.",
-        "examples.listMedia": "Listar mídia do território (planejado)",
-        "examples.listMedia.note": "A camada de mídia/geoAnchor deve nascer com controle de visibilidade e finalidade explícita: memória territorial com cuidado e contexto.",
-        "examples.postMedia": "Postar mídia georreferenciada (planejado)",
-        "examples.postMedia.note": "Planejado para próximas iterações. Prioridade: contratos claros, validações fortes (lat/lon/alt), e proteção de conteúdo sensível.",
+        "examples.territories.title": "Territórios (list + nearby)",
+        "examples.territories.note": "Use para obter o <code>territoryId</code>. Melhorias sugeridas: controle explícito de raio/limite na API e no cliente.",
+        "examples.selection.title": "Territory selection via sessão",
+        "examples.selection.note": "Use <code>X-Session-Id</code> para manter o território ativo entre requests anônimas.",
+        "examples.membership.title": "Membership (visitor / resident / validation)",
+        "examples.membership.note": "Visitor é validado automaticamente; resident depende de curadoria. Curators são os únicos que validam vínculos.",
+        "examples.feed.title": "Feed + Events (approval)",
+        "examples.feed.note": "Visitor só cria eventos. Posts não-evento exigem resident. Use aprovação para publicar eventos pendentes.",
+        "examples.map.title": "Map entities (suggest / validate / relate)",
+        "examples.map.note": "O mapa atual foca em entidades/relações; pins geográficos e mídia ancorada entram como próximas iterações.",
+        "examples.moderation.title": "Moderation (reports / blocks)",
+        "examples.moderation.note": "Reports e blocks exigem autenticação. Para reports de usuário, o território é obrigatório (query ou sessão).",
+        "features.title": "Feature flags per territory",
+        "features.intro": "Flags permitem habilitar/desabilitar capacidades por território. Curators controlam a lista de flags ativas.",
+        "features.list.title": "Consultar flags",
+        "features.update.title": "Atualizar flags (curator)",
+        "features.update.note": "Envie apenas flags válidas. O backend retorna erro se algum valor não for reconhecido.",
         "principles.title": "Princípios e governança",
         "principles.intro": "O Araponga orienta decisões técnicas e de produto para fortalecer autonomia local e tratamento cuidadoso de dados. Estes princípios guiam a evolução do produto.",
         "principles.items.territory": "<strong>Território como referência:</strong> o espaço físico orienta a experiência, o contexto e a responsabilidade.",
@@ -629,7 +953,13 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "links.title": "Links úteis",
         "links.intro": "Atalhos para documentação, status, contribuição e licenças.",
         "links.local": "Rodar localmente",
+        "links.swagger": "Swagger",
+        "links.health": "Health",
         "links.github": "GitHub",
+        "links.domainModel": "DOMAIN_MODEL_MER.md",
+        "links.moderation": "MODERATION_REPORTS.md",
+        "links.backlog": "BACKLOG.md",
+        "links.roadmap": "ROADMAP.md",
         "links.support": "Apoiar o Araponga",
         "links.sponsors": "GitHub Sponsors",
         "links.design": "Design & Coerência",
@@ -651,18 +981,21 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.productBrief": "Resumen del producto",
         "toc.link.domains": "Dominios",
         "toc.link.flows": "Flujos principales",
+        "toc.link.contracts": "Contracts & Headers",
+        "toc.link.roles": "Roles y permisos",
         "toc.link.quickstart": "Inicio rápido",
         "toc.link.swagger": "Swagger",
         "toc.link.examples": "Ejemplos de API",
+        "toc.link.features": "Feature flags",
         "toc.link.principles": "Principios y gobernanza",
         "toc.link.design": "Diseño y coherencia",
         "toc.link.support": "Apoyo",
         "toc.link.links": "Enlaces útiles",
         "productBrief.title": "Resumen del producto",
         "productBrief.p1": "Araponga organiza la comunicación local para residentes, visitantes e iniciativas comunitarias. Lo usan personas, colectivos y servicios que necesitan publicar avisos, eventos y actualizaciones con contexto territorial. El <strong>territory</strong> es la célula territorial que organiza la experiencia, define contexto y establece prioridad. A partir de ella, <strong>visitor</strong> y <strong>resident</strong> determinan reglas de visibilidad y acceso.",
-        "productBrief.p2": "Araponga ofrece un feed territorial con publicaciones y eventos, además de un mapa derivado del contenido y de las entidades locales. Esto prioriza relevancia, refuerza la confianza sobre lo que aparece y sostiene memoria territorial y eventos locales — con medios anclados en coordenadas cuando tenga sentido.",
+        "productBrief.p2": "Araponga ofrece un feed territorial con publicaciones y eventos, además de un mapa que hoy funciona como capa de entidades y relaciones. Esto prioriza relevancia, refuerza la confianza sobre lo que aparece y sostiene memoria territorial y eventos locales — con medios georreferenciados planificados para la próxima iteración.",
         "productBrief.callout": "<strong>Enfoque técnico:</strong> arquitectura orientada a dominios, contratos simples y auditables, gobernanza en capas y evolución incremental (MVP → capas avanzadas → experiencias espaciales ancladas al territory). El objetivo es construir un núcleo sólido antes de acelerar funcionalidades.",
-        "productBrief.example": "<strong>Ejemplo práctico (Feed + Eventos + Mapa):</strong> en una célula territorial, un resident publica un evento comunitario (mutirão, ronda de conversación, aviso de sendero). El backend registra el contenido asociado al territory y a la visibilidad (público / restringido / residents). La app consume el feed territorial filtrado por la célula y por el rol del usuario (visitor/resident), priorizando relevancia local. Cuando hay referencia geográfica, ese contenido también se proyecta en el mapa como entidad territorial, conectando feed y mapa en una experiencia situada con contexto claro y reglas explícitas.",
+        "productBrief.example": "<strong>Ejemplo práctico (Feed + Eventos + MapEntity):</strong> en una célula territorial, un resident publica un evento comunitario (mutirão, ronda de conversación, aviso de sendero). El backend registra el contenido asociado al territory y a la visibilidad (público / restringido / residents). La app consume el feed territorial filtrado por la célula y por el rol del usuario (visitor/resident), priorizando relevancia local. Cuando hay una entidad asociada, el contenido se conecta a la MapEntity del territorio, fortaleciendo la lectura espacial incluso antes de los pins georreferenciados.",
         "domains.title": "Dominios",
         "domains.intro": "Los dominios existen para mantener responsabilidades claras y evitar que reglas sociales se mezclen con representaciones del territorio. La intención es proteger la integridad del sistema: territorio como referencia, personas como vínculo, contenido como expresión y gobernanza como capa explícita. A continuación están los elementos esenciales en la etapa actual.",
         "domains.territory.title": "Territory",
@@ -679,22 +1012,24 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.what": "<strong>Qué es:</strong> vínculo entre persona y territory (visitor o resident).",
         "domains.membership.why": "<strong>Por qué existe:</strong> gobierna visibilidad, acceso y prioridades locales. Este dominio es el “corazón operativo” de las reglas: sin él, el territorio se vuelve un filtro genérico; con él, el territorio se convierte en contexto de convivencia.",
         "domains.membership.fields": "<strong>Campos:</strong> id, userId, territoryId, role, status.",
-        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
+        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>POST /api/v1/territories/{territoryId}/membership</code>, <code>GET /api/v1/territories/{territoryId}/membership/me</code>, <code>PATCH /api/v1/territories/{territoryId}/membership/{membershipId}/validation</code> (curator).",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>Qué es:</strong> stream de publicaciones, alertas y eventos filtrados por territory y visibilidad.",
         "domains.feed.why": "<strong>Por qué existe:</strong> prioriza relevancia local con reglas claras. Los eventos son un tipo de contenido del feed, con ventana temporal e impacto en el mapa. El feed es territorial para mantener contexto, confianza y organización local.",
         "domains.feed.fields": "<strong>Campos:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
-        "domains.map.what": "<strong>Qué es:</strong> entidades y capas georreferenciadas del territory.",
+        "domains.map.what": "<strong>Qué es:</strong> capa de entidades y relaciones del territory (todavía sin pins georreferenciados en el producto).",
         "domains.map.why": "<strong>Por qué existe:</strong> transforma la información en referencia espacial. El mapa es una proyección territorial derivada de contenido y registros, conectando lo que aparece en el feed con las entidades locales visibles y navegables.",
         "domains.map.fields": "<strong>Campos:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
-        "domains.media.title": "Media + GeoAnchor",
+        "domains.map.state": "Estado actual: <code>/map/entities</code> no expone lat/lng en el portal hoy; los pins y coordenadas del mapa son una próxima iteración. Ver <a href=\"DOMAIN_MODEL_MER.md\">DOMAIN_MODEL_MER.md</a> y <a href=\"BACKLOG.md\">BACKLOG.md</a>.",
+        "domains.media.title": "Media + GeoAnchor (planificado)",
         "domains.media.what": "<strong>Qué es:</strong> medios (foto/audio/video) anclados en latitud/longitud (y, cuando sea útil, altitud).",
         "domains.media.why": "<strong>Por qué existe:</strong> construye memoria territorial con precisión — y con control. GeoAnchor crea base para capas futuras: visualización contextual, recorridos, registros de cuidado y eventualmente representaciones espaciales más complejas (incluido 3D) generadas a partir de datos y medios de la app.",
         "domains.media.fields": "<strong>Campos:</strong> mediaId, territoryId, lat, lon, altitude, visibility.",
         "domains.media.endpoints": "<strong>Endpoints:</strong> planificados (<em>upcoming</em>).",
+        "domains.media.state": "Estado actual: el backend aún no expone contratos públicos para media/geoanchor. Esta capa entra como próxima iteración.",
         "flows.title": "Flujos principales",
         "flows.intro": "Dos flujos definen la experiencia inicial. El sistema resuelve visibilidad, prioriza contexto local y entrega respuestas consistentes para cliente y API.",
         "flows.flow1.title": "Flujo 1 — Onboarding",
@@ -703,12 +1038,56 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "flows.flow1.step3": "<strong>Declaración de vínculo</strong>: visitor o resident.",
         "flows.flow1.step4": "<strong>Resolución de visibilidad</strong>: el sistema filtra feed y mapa por rol y territory activo.",
         "flows.flow1.note": "Resultado: el usuario entra en un territorio como contexto real, con reglas explícitas de convivencia y acceso aplicadas desde el inicio.",
-        "flows.flow2.title": "Flujo 2 — Post georreferenciado",
-        "flows.flow2.step1": "<strong>Crear post</strong> en el feed del territory.",
-        "flows.flow2.step2": "<strong>Adjuntar medios</strong> con geoAnchor (lat/lon/alt) cuando sea relevante.",
-        "flows.flow2.step3": "<strong>Definir visibilidad</strong> (público, restringido, residents).",
-        "flows.flow2.step4": "<strong>Distribución coherente</strong>: la API publica en el feed y, cuando aplica, en el mapa local.",
-        "flows.flow2.note": "Este flujo está en construcción; la etapa de medios/geoAnchor es futura. La implementación debe priorizar: privacidad, control de visibilidad y consistencia de contratos.",
+        "flows.flow2.title": "Flujo 2 — Post + Event approval + MapEntity relation",
+        "flows.flow2.step1": "<strong>Crear post/evento</strong> en el feed del territorio (visitor crea evento con status PendingApproval).",
+        "flows.flow2.step2": "<strong>Relacionar a MapEntity</strong> (vía <code>mapEntityId</code> o relación posterior).",
+        "flows.flow2.step3": "<strong>Aprobación de evento</strong> por resident/curator vía endpoint de approval.",
+        "flows.flow2.step4": "<strong>Validación de entidad</strong> (curator) cuando la entidad es nueva/sugerida.",
+        "flows.flow2.note": "La etapa de Media + GeoAnchor está planificada para próximas iteraciones. Prioridad actual: contratos de feed, aprobación y relaciones con MapEntity.",
+        "contracts.title": "Contracts &amp; Headers (must-know)",
+        "contracts.intro": "Estos headers son parte del contrato real de la API. Sin ellos, el backend devuelve error de validación o no logra resolver el territorio activo.",
+        "contracts.session.title": "X-Session-Id",
+        "contracts.session.body": "Identifica una sesión anónima. Se usa para selección de territorio, feed sin query de territoryId y acciones “anon” como likes.",
+        "contracts.session.item1": "<strong>Territory selection:</strong> <code>POST/GET /api/v1/territories/selection</code>",
+        "contracts.session.item2": "<strong>Feed/Map fallback:</strong> cuando no hay <code>territoryId</code> en la query.",
+        "contracts.session.item3": "<strong>Likes anónimos:</strong> el backend usa <code>session:{id}</code> como actor.",
+        "contracts.session.note": "Genere un UUID en el cliente y persístalo en storage/local para reutilizar mientras exista la sesión.",
+        "contracts.auth.title": "Authorization (Bearer)",
+        "contracts.auth.body": "Endpoints que crean contenido, validan vínculos o moderan exigen autenticación. Use el token JWT en el header.",
+        "contracts.auth.item1": "<strong>Obligatorio:</strong> membership, feed POST, map entities, moderation.",
+        "contracts.auth.item2": "<strong>Opcional:</strong> endpoints con fallback de sesión (ej.: feed GET).",
+        "contracts.auth.note": "Use un token real obtenido en <code>/api/v1/auth/login</code> o <code>/api/v1/auth/register</code>.",
+        "roles.title": "Roles &amp; Permissions (Visitor / Resident / Curator)",
+        "roles.intro": "Las reglas de rol son el núcleo de la gobernanza del territorio. Esta sección describe el comportamiento real del backend.",
+        "roles.rule1": "<strong>VISITOR:</strong> el vínculo se valida automáticamente.",
+        "roles.rule2": "<strong>RESIDENT:</strong> el vínculo nace como <em>Pending</em> hasta validación.",
+        "roles.rule3": "<strong>Curator:</strong> valida resident y valida MapEntity sugerida.",
+        "roles.rule4": "<strong>Visitor:</strong> solo crea Event y queda <em>PendingApproval</em>.",
+        "roles.rule5": "<strong>Resident:</strong> publica directo y aprueba events.",
+        "roles.table.action": "Acción",
+        "roles.table.visitor": "Visitor",
+        "roles.table.resident": "Resident",
+        "roles.table.curator": "Curator",
+        "roles.table.row1.action": "Crear membership",
+        "roles.table.row1.visitor": "Auto-validado",
+        "roles.table.row1.resident": "Pending",
+        "roles.table.row1.curator": "Pending",
+        "roles.table.row2.action": "Crear Event",
+        "roles.table.row2.visitor": "PendingApproval",
+        "roles.table.row2.resident": "Published",
+        "roles.table.row2.curator": "Published",
+        "roles.table.row3.action": "Aprobar Event",
+        "roles.table.row3.visitor": "No",
+        "roles.table.row3.resident": "Sí",
+        "roles.table.row3.curator": "Sí",
+        "roles.table.row4.action": "Validar membership",
+        "roles.table.row4.visitor": "No",
+        "roles.table.row4.resident": "No",
+        "roles.table.row4.curator": "Sí",
+        "roles.table.row5.action": "Validar MapEntity",
+        "roles.table.row5.visitor": "No",
+        "roles.table.row5.resident": "No",
+        "roles.table.row5.curator": "Sí",
         "quickstart.title": "Inicio rápido",
         "quickstart.intro": "Comience localmente o vía Docker. Estos comandos son copy/paste. Consejo: valide primero <code>/health</code>, luego abra el Swagger y solo entonces pruebe los flujos.",
         "quickstart.local.title": "Local (dotnet)",
@@ -719,17 +1098,24 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "swagger.intro": "Cuando la API esté en <code>Development</code>, Swagger se muestra abajo para navegar contratos y probar endpoints rápidamente.",
         "swagger.note": "Si el embed no carga, abre <a href=\"/swagger\">/swagger</a> en otra pestaña.",
         "examples.title": "Ejemplos de API",
-        "examples.intro": "Use un <code>territoryId</code> real retornado por el endpoint de territories. El principio es simple: descubrir el territory, consumir el feed filtrado y cargar el mapa local.",
-        "examples.listTerritories": "Listar territórios",
-        "examples.listTerritories.note": "Use este endpoint para obtener el <code>territoryId</code> y la célula territorial que el cliente necesita renderizar.",
-        "examples.listFeed": "Listar feed del territory",
-        "examples.listFeed.note": "El endpoint devuelve un stream filtrado por territory y visibilidad. Si hay reglas aplicadas por vínculo, pruebe con perfiles visitor y resident para validar el comportamiento.",
-        "examples.listMap": "Listar mapa del territory",
-        "examples.listMap.note": "Devuelve entidades georreferenciadas para componer la capa local del mapa en el cliente.",
-        "examples.listMedia": "Listar medios del territory (planificado)",
-        "examples.listMedia.note": "La capa de medios/geoAnchor debe nacer con control de visibilidad y finalidad explícita: memoria territorial con cuidado y contexto.",
-        "examples.postMedia": "Publicar medios georreferenciados (planificado)",
-        "examples.postMedia.note": "Planificado para próximas iteraciones. Prioridad: contratos claros, validaciones fuertes (lat/lon/alt) y protección de contenido sensible.",
+        "examples.intro": "Use un <code>territoryId</code> real retornado por el endpoint de territorios. El principio es simple: descubrir el territorio, consumir el feed filtrado y cargar el mapa local.",
+        "examples.territories.title": "Territorios (list + nearby)",
+        "examples.territories.note": "Úselo para obtener el <code>territoryId</code>. Mejoras sugeridas: control explícito de radio/límite en la API y en el cliente.",
+        "examples.selection.title": "Territory selection vía sesión",
+        "examples.selection.note": "Use <code>X-Session-Id</code> para mantener el territorio activo entre requests anónimas.",
+        "examples.membership.title": "Membership (visitor / resident / validation)",
+        "examples.membership.note": "Visitor se valida automáticamente; resident depende de curaduría. Curators son los únicos que validan vínculos.",
+        "examples.feed.title": "Feed + Events (approval)",
+        "examples.feed.note": "Visitor solo crea eventos. Posts no-evento requieren resident. Use aprobación para publicar eventos pendientes.",
+        "examples.map.title": "Map entities (suggest / validate / relate)",
+        "examples.map.note": "El mapa actual se enfoca en entidades/relaciones; pins geográficos y medios anclados entran como próximas iteraciones.",
+        "examples.moderation.title": "Moderation (reports / blocks)",
+        "examples.moderation.note": "Reports y blocks exigen autenticación. Para reports de usuario, el territorio es obligatorio (query o sesión).",
+        "features.title": "Feature flags per territory",
+        "features.intro": "Las flags permiten habilitar/deshabilitar capacidades por territorio. Curators controlan la lista de flags activas.",
+        "features.list.title": "Consultar flags",
+        "features.update.title": "Actualizar flags (curator)",
+        "features.update.note": "Envíe solo flags válidas. El backend devuelve error si algún valor no es reconocido.",
         "principles.title": "Principios y gobernanza",
         "principles.intro": "Araponga orienta decisiones técnicas y de producto para fortalecer autonomía local y tratamiento cuidadoso de datos. Estos principios guían la evolución del producto.",
         "principles.items.territory": "<strong>Territory como referencia:</strong> el espacio físico orienta la experiencia, el contexto y la responsabilidad.",
@@ -754,7 +1140,13 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "links.title": "Enlaces útiles",
         "links.intro": "Atajos para documentación, estado, contribución y licencias.",
         "links.local": "Ejecutar localmente",
+        "links.swagger": "Swagger",
+        "links.health": "Health",
         "links.github": "GitHub",
+        "links.domainModel": "DOMAIN_MODEL_MER.md",
+        "links.moderation": "MODERATION_REPORTS.md",
+        "links.backlog": "BACKLOG.md",
+        "links.roadmap": "ROADMAP.md",
         "links.support": "Apoyar Araponga",
         "links.sponsors": "GitHub Sponsors",
         "links.design": "Diseño y coherencia",
@@ -776,18 +1168,21 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "toc.link.productBrief": "Product brief",
         "toc.link.domains": "Domains",
         "toc.link.flows": "Core flows",
+        "toc.link.contracts": "Contracts & Headers",
+        "toc.link.roles": "Roles & Permissions",
         "toc.link.quickstart": "Quickstart",
         "toc.link.swagger": "Swagger",
         "toc.link.examples": "API examples",
+        "toc.link.features": "Feature flags",
         "toc.link.principles": "Principles & governance",
         "toc.link.design": "Design & Coherence",
         "toc.link.support": "Support",
         "toc.link.links": "Useful links",
         "productBrief.title": "Product brief",
         "productBrief.p1": "Araponga organizes local communication for residents, visitors, and community initiatives. It is used by people, collectives, and services that need to publish notices, events, and updates with territorial context. <strong>Territory</strong> is the territorial cell that organizes the experience, defines context, and sets priority. From it, <strong>visitor</strong> and <strong>resident</strong> determine visibility and access rules.",
-        "productBrief.p2": "Araponga delivers a territorial feed with posts and events, plus a map derived from content and local entities. This prioritizes relevance, reinforces trust in what appears, and sustains territorial memory and local events — with media anchored to coordinates when it makes sense.",
+        "productBrief.p2": "Araponga delivers a territorial feed with posts and events, plus a map that currently works as a layer of entities and relations. This prioritizes relevance, reinforces trust in what appears, and sustains territorial memory and local events — with georeferenced media planned for the next iteration.",
         "productBrief.callout": "<strong>Technical focus:</strong> domain-driven architecture, simple and auditable contracts, layered governance, and incremental evolution (MVP → advanced layers → spatial experiences anchored in territory). The goal is to build a solid core before accelerating features.",
-        "productBrief.example": "<strong>Practical example (Feed + Events + Map):</strong> in a territorial cell, a resident publishes a community event (community cleanup, conversation circle, trail notice). The backend records the content tied to the territory and visibility (public / restricted / residents). The app consumes the territorial feed filtered by the cell and the user role (visitor/resident), prioritizing local relevance. When there is geographic reference, that content is also projected on the map as a territorial entity, connecting feed and map in a situated experience with clear context and explicit rules.",
+        "productBrief.example": "<strong>Practical example (Feed + Events + MapEntity):</strong> in a territorial cell, a resident publishes a community event (community cleanup, conversation circle, trail notice). The backend records the content tied to the territory and visibility (public / restricted / residents). The app consumes the territorial feed filtered by the cell and the user role (visitor/resident), prioritizing local relevance. When there is an associated entity, the content connects to the territory MapEntity, strengthening spatial understanding even before georeferenced pins.",
         "domains.title": "Domains",
         "domains.intro": "Domains exist to keep responsibilities clear and avoid mixing social rules with territory representations. The intent is to protect system integrity: territory as reference, people as linkage, content as expression, and governance as an explicit layer. Below are the essential elements in the current stage.",
         "domains.territory.title": "Territory",
@@ -804,22 +1199,24 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "domains.membership.what": "<strong>What it is:</strong> link between person and territory (visitor or resident).",
         "domains.membership.why": "<strong>Why it exists:</strong> governs visibility, access, and local priorities. This domain is the “operational heart” of the rules: without it, territory becomes a generic filter; with it, territory becomes a coexistence context.",
         "domains.membership.fields": "<strong>Fields:</strong> id, userId, territoryId, role, status.",
-        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/territories/{territoryId}/membership</code>.",
+        "domains.membership.endpoints": "<strong>Endpoints:</strong> <code>POST /api/v1/territories/{territoryId}/membership</code>, <code>GET /api/v1/territories/{territoryId}/membership/me</code>, <code>PATCH /api/v1/territories/{territoryId}/membership/{membershipId}/validation</code> (curator).",
         "domains.feed.title": "Feed",
         "domains.feed.what": "<strong>What it is:</strong> stream of posts, alerts, and events filtered by territory and visibility.",
         "domains.feed.why": "<strong>Why it exists:</strong> prioritizes local relevance with clear rules. Events are a type of feed content, with a temporal window and impact on the map. The feed is territorial to maintain context, trust, and local organization.",
         "domains.feed.fields": "<strong>Fields:</strong> id, title, content, type, visibility, createdAtUtc.",
         "domains.feed.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/feed</code>, <code>POST /api/v1/feed</code>.",
         "domains.map.title": "Mapa",
-        "domains.map.what": "<strong>What it is:</strong> georeferenced entities and layers of the territory.",
+        "domains.map.what": "<strong>What it is:</strong> a layer of entities and relationships for the territory (no georeferenced pins yet in the product).",
         "domains.map.why": "<strong>Why it exists:</strong> turns information into spatial reference. The map is a territorial projection derived from content and records, connecting what appears in the feed to visible, navigable local entities.",
         "domains.map.fields": "<strong>Fields:</strong> id, name, category, status, visibility, createdAtUtc.",
         "domains.map.endpoints": "<strong>Endpoints:</strong> <code>GET /api/v1/map/entities</code>, <code>POST /api/v1/map/entities</code>.",
-        "domains.media.title": "Media + GeoAnchor",
+        "domains.map.state": "Current state: <code>/map/entities</code> does not expose lat/lng in the portal today; map pins and coordinates are a next iteration. See <a href=\"DOMAIN_MODEL_MER.md\">DOMAIN_MODEL_MER.md</a> and <a href=\"BACKLOG.md\">BACKLOG.md</a>.",
+        "domains.media.title": "Media + GeoAnchor (planned)",
         "domains.media.what": "<strong>What it is:</strong> media (photo/audio/video) anchored in latitude/longitude (and, when useful, altitude).",
         "domains.media.why": "<strong>Why it exists:</strong> builds territorial memory with precision — and with control. GeoAnchor creates a base for future layers: contextual visualization, trails, care records, and eventually more complex spatial representations (including 3D) generated from app data and media.",
         "domains.media.fields": "<strong>Fields:</strong> mediaId, territoryId, lat, lon, altitude, visibility.",
         "domains.media.endpoints": "<strong>Endpoints:</strong> planned (<em>upcoming</em>).",
+        "domains.media.state": "Current state: the backend does not expose public contracts for media/geoanchor yet. This layer enters as the next iteration.",
         "flows.title": "Core flows",
         "flows.intro": "Two flows define the initial experience. The system resolves visibility, prioritizes local context, and returns consistent responses for client and API.",
         "flows.flow1.title": "Flow 1 — Onboarding",
@@ -828,12 +1225,56 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "flows.flow1.step3": "<strong>Bond declaration</strong>: visitor or resident.",
         "flows.flow1.step4": "<strong>Visibility resolution</strong>: the system filters feed and map by role and active territory.",
         "flows.flow1.note": "Result: the user enters a territory as real context, with explicit coexistence and access rules applied from the start.",
-        "flows.flow2.title": "Flow 2 — Georeferenced post",
-        "flows.flow2.step1": "<strong>Create a post</strong> in the territory feed.",
-        "flows.flow2.step2": "<strong>Attach media</strong> with geoAnchor (lat/lon/alt) when relevant.",
-        "flows.flow2.step3": "<strong>Define visibility</strong> (public, restricted, residents).",
-        "flows.flow2.step4": "<strong>Coherent distribution</strong>: the API publishes to the feed and, when applicable, to the local map.",
-        "flows.flow2.note": "This flow is under construction; the media/geoAnchor step is future. Implementation should prioritize privacy, visibility control, and contract consistency.",
+        "flows.flow2.title": "Flow 2 — Post + Event approval + MapEntity relation",
+        "flows.flow2.step1": "<strong>Create post/event</strong> in the territory feed (visitor creates event with PendingApproval status).",
+        "flows.flow2.step2": "<strong>Relate to MapEntity</strong> (via <code>mapEntityId</code> or later relation).",
+        "flows.flow2.step3": "<strong>Event approval</strong> by resident/curator via approval endpoint.",
+        "flows.flow2.step4": "<strong>Entity validation</strong> (curator) when the entity is new/suggested.",
+        "flows.flow2.note": "The Media + GeoAnchor step is planned for upcoming iterations. Current priority: feed contracts, approvals, and MapEntity relationships.",
+        "contracts.title": "Contracts &amp; Headers (must-know)",
+        "contracts.intro": "These headers are part of the real API contract. Without them, the backend returns validation errors or cannot resolve the active territory.",
+        "contracts.session.title": "X-Session-Id",
+        "contracts.session.body": "Identifies an anonymous session. Used for territory selection, feed without a territoryId query, and “anon” actions like likes.",
+        "contracts.session.item1": "<strong>Territory selection:</strong> <code>POST/GET /api/v1/territories/selection</code>",
+        "contracts.session.item2": "<strong>Feed/Map fallback:</strong> when there is no <code>territoryId</code> in the query.",
+        "contracts.session.item3": "<strong>Anonymous likes:</strong> the backend uses <code>session:{id}</code> as actor.",
+        "contracts.session.note": "Generate a UUID on the client and persist it in storage/local to reuse while the session exists.",
+        "contracts.auth.title": "Authorization (Bearer)",
+        "contracts.auth.body": "Endpoints that create content, validate memberships, or moderate require authentication. Use the JWT token in the header.",
+        "contracts.auth.item1": "<strong>Required:</strong> membership, feed POST, map entities, moderation.",
+        "contracts.auth.item2": "<strong>Optional:</strong> endpoints with session fallback (e.g. feed GET).",
+        "contracts.auth.note": "Use a real token obtained from <code>/api/v1/auth/login</code> or <code>/api/v1/auth/register</code>.",
+        "roles.title": "Roles &amp; Permissions (Visitor / Resident / Curator)",
+        "roles.intro": "Role rules are the core of territorial governance. This section describes the real backend behavior.",
+        "roles.rule1": "<strong>VISITOR:</strong> membership is validated automatically.",
+        "roles.rule2": "<strong>RESIDENT:</strong> membership starts as <em>Pending</em> until validation.",
+        "roles.rule3": "<strong>Curator:</strong> validates resident and validates suggested MapEntity.",
+        "roles.rule4": "<strong>Visitor:</strong> can only create Event and stays <em>PendingApproval</em>.",
+        "roles.rule5": "<strong>Resident:</strong> publishes directly and approves events.",
+        "roles.table.action": "Action",
+        "roles.table.visitor": "Visitor",
+        "roles.table.resident": "Resident",
+        "roles.table.curator": "Curator",
+        "roles.table.row1.action": "Create membership",
+        "roles.table.row1.visitor": "Auto-validated",
+        "roles.table.row1.resident": "Pending",
+        "roles.table.row1.curator": "Pending",
+        "roles.table.row2.action": "Create Event",
+        "roles.table.row2.visitor": "PendingApproval",
+        "roles.table.row2.resident": "Published",
+        "roles.table.row2.curator": "Published",
+        "roles.table.row3.action": "Approve Event",
+        "roles.table.row3.visitor": "No",
+        "roles.table.row3.resident": "Yes",
+        "roles.table.row3.curator": "Yes",
+        "roles.table.row4.action": "Validate membership",
+        "roles.table.row4.visitor": "No",
+        "roles.table.row4.resident": "No",
+        "roles.table.row4.curator": "Yes",
+        "roles.table.row5.action": "Validate MapEntity",
+        "roles.table.row5.visitor": "No",
+        "roles.table.row5.resident": "No",
+        "roles.table.row5.curator": "Yes",
         "quickstart.title": "Quickstart",
         "quickstart.intro": "Start locally or via Docker. These commands are copy/paste. Tip: validate <code>/health</code> first, then open Swagger, and only then test the flows.",
         "quickstart.local.title": "Local (dotnet)",
@@ -845,16 +1286,23 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "swagger.note": "If the embed does not load, open <a href=\"/swagger\">/swagger</a> in another tab.",
         "examples.title": "API examples",
         "examples.intro": "Use a real <code>territoryId</code> returned by the territories endpoint. The principle is simple: discover the territory, consume the filtered feed, and load the local map.",
-        "examples.listTerritories": "List territories",
-        "examples.listTerritories.note": "Use this endpoint to obtain the <code>territoryId</code> and the territorial cell the client needs to render.",
-        "examples.listFeed": "List territory feed",
-        "examples.listFeed.note": "The endpoint returns a stream filtered by territory and visibility. If rules are applied by membership, test with visitor and resident profiles to validate behavior.",
-        "examples.listMap": "List territory map",
-        "examples.listMap.note": "Returns georeferenced entities to compose the local map layer in the client.",
-        "examples.listMedia": "List territory media (planned)",
-        "examples.listMedia.note": "The media/geoAnchor layer should be born with visibility control and explicit purpose: territorial memory with care and context.",
-        "examples.postMedia": "Post georeferenced media (planned)",
-        "examples.postMedia.note": "Planned for upcoming iterations. Priority: clear contracts, strong validations (lat/lon/alt), and protection of sensitive content.",
+        "examples.territories.title": "Territories (list + nearby)",
+        "examples.territories.note": "Use this to obtain the <code>territoryId</code>. Suggested improvements: explicit radius/limit control in the API and client.",
+        "examples.selection.title": "Territory selection via session",
+        "examples.selection.note": "Use <code>X-Session-Id</code> to keep the active territory between anonymous requests.",
+        "examples.membership.title": "Membership (visitor / resident / validation)",
+        "examples.membership.note": "Visitor is auto-validated; resident depends on curation. Curators are the only ones who validate memberships.",
+        "examples.feed.title": "Feed + Events (approval)",
+        "examples.feed.note": "Visitors can only create events. Non-event posts require resident. Use approval to publish pending events.",
+        "examples.map.title": "Map entities (suggest / validate / relate)",
+        "examples.map.note": "The current map focuses on entities/relations; geospatial pins and anchored media are next iterations.",
+        "examples.moderation.title": "Moderation (reports / blocks)",
+        "examples.moderation.note": "Reports and blocks require authentication. For user reports, territory is mandatory (query or session).",
+        "features.title": "Feature flags per territory",
+        "features.intro": "Flags enable/disable capabilities per territory. Curators control the list of enabled flags.",
+        "features.list.title": "List flags",
+        "features.update.title": "Update flags (curator)",
+        "features.update.note": "Send only valid flags. The backend returns an error if any value is not recognized.",
         "principles.title": "Principles & governance",
         "principles.intro": "Araponga guides technical and product decisions to strengthen local autonomy and careful data treatment. These principles guide product evolution.",
         "principles.items.territory": "<strong>Territory as reference:</strong> physical space guides experience, context, and responsibility.",
@@ -879,7 +1327,13 @@ curl -s "http://localhost:8080/api/v1/media?territoryId=SEU_TERRITORY_ID" | jq
         "links.title": "Useful links",
         "links.intro": "Shortcuts to documentation, status, contributions, and licenses.",
         "links.local": "Run locally",
+        "links.swagger": "Swagger",
+        "links.health": "Health",
         "links.github": "GitHub",
+        "links.domainModel": "DOMAIN_MODEL_MER.md",
+        "links.moderation": "MODERATION_REPORTS.md",
+        "links.backlog": "BACKLOG.md",
+        "links.roadmap": "ROADMAP.md",
         "links.support": "Support Araponga",
         "links.sponsors": "GitHub Sponsors",
         "links.design": "Design & Coherence",
