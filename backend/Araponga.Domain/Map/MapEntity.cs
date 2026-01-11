@@ -25,9 +25,11 @@ public sealed class MapEntity
             throw new ArgumentException("Name is required.", nameof(name));
         }
 
-        if (string.IsNullOrWhiteSpace(category))
+        if (!MapEntityCategory.TryNormalize(category, out var normalizedCategory))
         {
-            throw new ArgumentException("Category is required.", nameof(category));
+            throw new ArgumentException(
+                $"Category must be one of: {MapEntityCategory.AllowedList}.",
+                nameof(category));
         }
 
         if (!Geo.GeoCoordinate.IsValid(latitude, longitude))
