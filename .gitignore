@@ -1,6 +1,14 @@
 # .NET build artifacts
 **/bin/
 **/obj/
+**/*/bin/
+**/*/obj/
+**/node_modules/
+**/.next/
+**/dist/
+**/out/
+**/.turbo/
+**/.cache/
 
 # Visual Studio
 .vs/
@@ -11,3 +19,5 @@
 # OS
 .DS_Store
 Thumbs.db
+
+
