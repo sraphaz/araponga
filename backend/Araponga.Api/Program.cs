@@ -9,6 +9,7 @@ using Araponga.Infrastructure.Security;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -171,19 +172,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-var devPortalHost = "devportal.araponga.app";
-var devPortalPath = "/devportal";
-
 app.Use(async (context, next) =>
 {
-    if (context.Request.Host.HasValue &&
-        string.Equals(context.Request.Host.Host, devPortalHost, StringComparison.OrdinalIgnoreCase) &&
-        (context.Request.Path == "/" || context.Request.Path == PathString.Empty))
+    if (context.Request.Path == "/devportal")
     {
-        // Teste local: curl -I -H "Host: devportal.araponga.app" http://localhost:PORT/
-        var destination = $"{devPortalPath}{context.Request.QueryString}";
-        context.Response.Redirect(destination, permanent: false);
-        return;
+        context.Request.Path = "/devportal/index.html";
     }
 
     await next();
@@ -196,6 +189,24 @@ app.UseStaticFiles(new StaticFileOptions
     {
         if (string.Equals(context.File.Name, "index.html", StringComparison.OrdinalIgnoreCase) ||
             string.Equals(context.File.Name, "config.html", StringComparison.OrdinalIgnoreCase))
+        {
+            context.Context.Response.ContentType = "text/html; charset=utf-8";
+        }
+    }
+});
+
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    RequestPath = "/devportal",
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "devportal"))
+});
+app.UseStaticFiles(new StaticFileOptions
+{
+    RequestPath = "/devportal",
+    FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.WebRootPath, "devportal")),
+    OnPrepareResponse = context =>
+    {
+        if (string.Equals(context.File.Name, "index.html", StringComparison.OrdinalIgnoreCase))
         {
             context.Context.Response.ContentType = "text/html; charset=utf-8";
         }
