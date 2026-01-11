@@ -119,6 +119,20 @@ backend/
 - **Territory**  
   Lugar físico real, neutro e persistente.
 
+---
+
+## 📚 Documentação
+
+- [Visão do Produto](/docs/PRODUCT_VISION.md)
+- [Backlog](/docs/BACKLOG.md)
+- [User Stories](/docs/USER_STORIES.md)
+- [Modelo de Domínio (MER)](/docs/DOMAIN_MODEL_MER.md)
+- [Roadmap](/docs/ROADMAP.md)
+- [Moderação e Reports](/docs/MODERATION_REPORTS.md)
+- [Admin e Observabilidade](/docs/ADMIN_OBSERVABILITY.md)
+- [Glossário](/docs/GLOSSARY.md)
+- [Plano de Implementação](/docs/IMPLEMENTATION_PLAN.md)
+
 - **Membership**  
   Relação entre uma pessoa e um território (morador, visitante, etc.).
 
