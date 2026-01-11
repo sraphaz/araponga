@@ -48,7 +48,7 @@
       // ignore
     }
 
-    return './openapi.json';
+    return '/devportal/openapi.json';
   }
 
   async function loadExplorer() {
