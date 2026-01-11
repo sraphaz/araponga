@@ -171,6 +171,24 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+var devPortalHost = "devportal.araponga.app";
+var devPortalPath = "/devportal";
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Host.HasValue &&
+        string.Equals(context.Request.Host.Host, devPortalHost, StringComparison.OrdinalIgnoreCase) &&
+        (context.Request.Path == "/" || context.Request.Path == PathString.Empty))
+    {
+        // Teste local: curl -I -H "Host: devportal.araponga.app" http://localhost:PORT/
+        var destination = $"{devPortalPath}{context.Request.QueryString}";
+        context.Response.Redirect(destination, permanent: false);
+        return;
+    }
+
+    await next();
+});
+
 app.UseDefaultFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
