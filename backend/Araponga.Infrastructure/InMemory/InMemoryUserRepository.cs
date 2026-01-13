@@ -42,4 +42,20 @@ public sealed class InMemoryUserRepository : IUserRepository
         _dataStore.Users.Add(user);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<User>> ListByIdsAsync(
+        IReadOnlyCollection<Guid> userIds,
+        CancellationToken cancellationToken)
+    {
+        if (userIds.Count == 0)
+        {
+            return Task.FromResult<IReadOnlyList<User>>(Array.Empty<User>());
+        }
+
+        var users = _dataStore.Users
+            .Where(user => userIds.Contains(user.Id))
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<User>>(users);
+    }
 }
