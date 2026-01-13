@@ -55,6 +55,14 @@ if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnor
     builder.Services.AddScoped<ISanctionRepository, PostgresSanctionRepository>();
     builder.Services.AddScoped<IOutbox, PostgresOutbox>();
     builder.Services.AddScoped<INotificationInboxRepository, PostgresNotificationInboxRepository>();
+    builder.Services.AddScoped<IStoreRepository, PostgresStoreRepository>();
+    builder.Services.AddScoped<IListingRepository, PostgresListingRepository>();
+    builder.Services.AddScoped<IInquiryRepository, PostgresInquiryRepository>();
+    builder.Services.AddScoped<ICartRepository, PostgresCartRepository>();
+    builder.Services.AddScoped<ICartItemRepository, PostgresCartItemRepository>();
+    builder.Services.AddScoped<ICheckoutRepository, PostgresCheckoutRepository>();
+    builder.Services.AddScoped<ICheckoutItemRepository, PostgresCheckoutItemRepository>();
+    builder.Services.AddScoped<IPlatformFeeConfigRepository, PostgresPlatformFeeConfigRepository>();
     builder.Services.AddHostedService<OutboxDispatcherWorker>();
 }
 else
@@ -83,6 +91,14 @@ else
     builder.Services.AddSingleton<ISanctionRepository, InMemorySanctionRepository>();
     builder.Services.AddSingleton<IOutbox, InMemoryOutbox>();
     builder.Services.AddSingleton<INotificationInboxRepository, InMemoryNotificationInboxRepository>();
+    builder.Services.AddSingleton<IStoreRepository, InMemoryStoreRepository>();
+    builder.Services.AddSingleton<IListingRepository, InMemoryListingRepository>();
+    builder.Services.AddSingleton<IInquiryRepository, InMemoryInquiryRepository>();
+    builder.Services.AddSingleton<ICartRepository, InMemoryCartRepository>();
+    builder.Services.AddSingleton<ICartItemRepository, InMemoryCartItemRepository>();
+    builder.Services.AddSingleton<ICheckoutRepository, InMemoryCheckoutRepository>();
+    builder.Services.AddSingleton<ICheckoutItemRepository, InMemoryCheckoutItemRepository>();
+    builder.Services.AddSingleton<IPlatformFeeConfigRepository, InMemoryPlatformFeeConfigRepository>();
 }
 
 builder.Services.AddSingleton<ITokenService, JwtTokenService>();
@@ -105,6 +121,11 @@ builder.Services.AddScoped<ReportService>();
 builder.Services.AddScoped<UserBlockService>();
 builder.Services.AddScoped<FeatureFlagService>();
 builder.Services.AddScoped<CurrentUserAccessor>();
+builder.Services.AddScoped<StoreService>();
+builder.Services.AddScoped<ListingService>();
+builder.Services.AddScoped<InquiryService>();
+builder.Services.AddScoped<PlatformFeeService>();
+builder.Services.AddScoped<CartService>();
 
 // Swagger / OpenAPI
 builder.Services.AddEndpointsApiExplorer();

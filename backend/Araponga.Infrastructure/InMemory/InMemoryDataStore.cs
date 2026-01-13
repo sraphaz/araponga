@@ -3,6 +3,7 @@ using Araponga.Domain.Assets;
 using Araponga.Domain.Feed;
 using Araponga.Domain.Health;
 using Araponga.Domain.Map;
+using Araponga.Domain.Marketplace;
 using Araponga.Domain.Moderation;
 using Araponga.Domain.Social;
 using Araponga.Domain.Social.JoinRequests;
@@ -169,6 +170,14 @@ public sealed class InMemoryDataStore
         AssetGeoAnchors = new List<AssetGeoAnchor>();
         AssetValidations = new List<AssetValidation>();
         PostAssets = new List<PostAsset>();
+        TerritoryStores = new List<TerritoryStore>();
+        StoreListings = new List<StoreListing>();
+        ListingInquiries = new List<ListingInquiry>();
+        Carts = new List<Cart>();
+        CartItems = new List<CartItem>();
+        Checkouts = new List<Checkout>();
+        CheckoutItems = new List<CheckoutItem>();
+        PlatformFeeConfigs = new List<PlatformFeeConfig>();
     }
 
     public List<Territory> Territories { get; }
@@ -184,6 +193,14 @@ public sealed class InMemoryDataStore
     public List<AssetGeoAnchor> AssetGeoAnchors { get; }
     public List<AssetValidation> AssetValidations { get; }
     public List<PostAsset> PostAssets { get; }
+    public List<TerritoryStore> TerritoryStores { get; }
+    public List<StoreListing> StoreListings { get; }
+    public List<ListingInquiry> ListingInquiries { get; }
+    public List<Cart> Carts { get; }
+    public List<CartItem> CartItems { get; }
+    public List<Checkout> Checkouts { get; }
+    public List<CheckoutItem> CheckoutItems { get; }
+    public List<PlatformFeeConfig> PlatformFeeConfigs { get; }
     public Dictionary<string, Guid> ActiveTerritories { get; } = new(StringComparer.OrdinalIgnoreCase);
     public Dictionary<Guid, HashSet<string>> PostLikes { get; } = new();
     public Dictionary<Guid, List<PostComment>> PostComments { get; } = new();
