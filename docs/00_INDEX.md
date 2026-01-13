@@ -47,6 +47,12 @@ Documentos de planejamento e recomendações de implementação.
 
 - **[Plano de Refatoração - Recomendações Pendentes](./PLANO_REFACTOR_RECOMENDACOES_PENDENTES.md)** - Plano de implementação de recomendações pendentes
 
+### 🚀 Produção e Deploy
+Documentos sobre prontidão para produção e deploy.
+
+- **[Avaliação Completa para Produção](./50_PRODUCAO_AVALIACAO_COMPLETA.md)** - Análise completa de prontidão para produção, gaps críticos e recomendações
+- **[Plano de Requisitos Desejáveis](./51_PRODUCAO_PLANO_DESEJAVEIS.md)** - Plano detalhado de implementação para requisitos desejáveis (pós-lançamento)
+
 ### 🔗 Pull Requests
 Documentação detalhada de todos os Pull Requests implementados.
 
