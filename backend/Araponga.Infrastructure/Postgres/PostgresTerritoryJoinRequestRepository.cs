@@ -130,4 +130,45 @@ public sealed class PostgresTerritoryJoinRequestRepository : ITerritoryJoinReque
 
         record.RespondedAtUtc = respondedAtUtc;
     }
+
+    public async Task<IReadOnlyList<TerritoryJoinRequest>> ListIncomingPagedAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var requestIds = await _dbContext.TerritoryJoinRequestRecipients
+            .AsNoTracking()
+            .Where(recipient => recipient.RecipientUserId == recipientUserId)
+            .Select(recipient => recipient.JoinRequestId)
+            .ToListAsync(cancellationToken);
+
+        var records = await _dbContext.TerritoryJoinRequests
+            .AsNoTracking()
+            .Where(request => requestIds.Contains(request.Id) && request.Status == status)
+            .OrderByDescending(request => request.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountIncomingAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        CancellationToken cancellationToken)
+    {
+        var requestIds = await _dbContext.TerritoryJoinRequestRecipients
+            .AsNoTracking()
+            .Where(recipient => recipient.RecipientUserId == recipientUserId)
+            .Select(recipient => recipient.JoinRequestId)
+            .ToListAsync(cancellationToken);
+
+        return await _dbContext.TerritoryJoinRequests
+            .AsNoTracking()
+            .Where(request => requestIds.Contains(request.Id) && request.Status == status)
+            .CountAsync(cancellationToken);
+    }
 }

@@ -50,4 +50,26 @@ public sealed class InMemoryPlatformFeeConfigRepository : IPlatformFeeConfigRepo
 
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<PlatformFeeConfig>> ListActivePagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var configs = _dataStore.PlatformFeeConfigs
+            .Where(c => c.TerritoryId == territoryId && c.IsActive)
+            .OrderByDescending(c => c.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<PlatformFeeConfig>>(configs);
+    }
+
+    public Task<int> CountActiveAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.PlatformFeeConfigs.Count(c => c.TerritoryId == territoryId && c.IsActive);
+        return Task.FromResult(count);
+    }
 }

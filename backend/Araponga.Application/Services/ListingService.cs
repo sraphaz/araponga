@@ -200,15 +200,10 @@ public sealed class ListingService
         PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var listings = await _listingRepository.SearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
-        var totalCount = listings.Count;
-        var pagedItems = listings
-            .OrderByDescending(l => l.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
+        var totalCount = await _listingRepository.CountSearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
+        var listings = await _listingRepository.SearchPagedAsync(territoryId, type, query, category, tags, status, pagination.Skip, pagination.Take, cancellationToken);
 
-        return new PagedResult<StoreListing>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new PagedResult<StoreListing>(listings, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     private async Task<bool> CanManageStoreAsync(TerritoryStore store, Guid userId, CancellationToken cancellationToken)

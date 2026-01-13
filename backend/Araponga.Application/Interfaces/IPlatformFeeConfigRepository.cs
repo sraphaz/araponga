@@ -9,4 +9,18 @@ public interface IPlatformFeeConfigRepository
     Task<PlatformFeeConfig?> GetByIdAsync(Guid configId, CancellationToken cancellationToken);
     Task AddAsync(PlatformFeeConfig config, CancellationToken cancellationToken);
     Task UpdateAsync(PlatformFeeConfig config, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists active fee configs with pagination.
+    /// </summary>
+    Task<IReadOnlyList<PlatformFeeConfig>> ListActivePagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts active fee configs.
+    /// </summary>
+    Task<int> CountActiveAsync(Guid territoryId, CancellationToken cancellationToken);
 }

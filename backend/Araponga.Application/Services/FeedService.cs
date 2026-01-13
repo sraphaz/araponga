@@ -45,8 +45,11 @@ public sealed class FeedService
         Common.PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var posts = await _feedRepository.ListByTerritoryAsync(territoryId, cancellationToken);
-        return await _postFilterService.FilterAndPaginateAsync(posts, territoryId, userId, mapEntityId, assetId, pagination, cancellationToken);
+        var totalCount = await _feedRepository.CountByTerritoryAsync(territoryId, cancellationToken);
+        var posts = await _feedRepository.ListByTerritoryPagedAsync(territoryId, pagination.Skip, pagination.Take, cancellationToken);
+        var filtered = await _postFilterService.FilterPostsAsync(posts, territoryId, userId, mapEntityId, assetId, cancellationToken);
+        
+        return new Common.PagedResult<CommunityPost>(filtered, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     public Task<IReadOnlyList<CommunityPost>> ListForUserAsync(
@@ -61,15 +64,10 @@ public sealed class FeedService
         Common.PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var posts = await _feedRepository.ListByAuthorAsync(userId, cancellationToken);
-        var totalCount = posts.Count;
-        var pagedItems = posts
-            .OrderByDescending(p => p.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
+        var totalCount = await _feedRepository.CountByAuthorAsync(userId, cancellationToken);
+        var posts = await _feedRepository.ListByAuthorPagedAsync(userId, pagination.Skip, pagination.Take, cancellationToken);
 
-        return new Common.PagedResult<CommunityPost>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new Common.PagedResult<CommunityPost>(posts, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     public Task<Result<CommunityPost>> CreatePostAsync(

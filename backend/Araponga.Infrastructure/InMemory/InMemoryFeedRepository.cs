@@ -131,4 +131,48 @@ public sealed class InMemoryFeedRepository : IFeedRepository
         
         return Task.FromResult<IReadOnlyDictionary<Guid, PostCounts>>(result);
     }
+
+    public Task<IReadOnlyList<CommunityPost>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var posts = _dataStore.Posts
+            .Where(post => post.TerritoryId == territoryId)
+            .OrderByDescending(post => post.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<CommunityPost>>(posts);
+    }
+
+    public Task<IReadOnlyList<CommunityPost>> ListByAuthorPagedAsync(
+        Guid authorUserId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var posts = _dataStore.Posts
+            .Where(post => post.AuthorUserId == authorUserId)
+            .OrderByDescending(post => post.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<CommunityPost>>(posts);
+    }
+
+    public Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.Posts.Count(post => post.TerritoryId == territoryId);
+        return Task.FromResult(count);
+    }
+
+    public Task<int> CountByAuthorAsync(Guid authorUserId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.Posts.Count(post => post.AuthorUserId == authorUserId);
+        return Task.FromResult(count);
+    }
 }

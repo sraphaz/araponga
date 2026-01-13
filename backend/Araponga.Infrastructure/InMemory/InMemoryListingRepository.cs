@@ -92,4 +92,94 @@ public sealed class InMemoryListingRepository : IListingRepository
 
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<StoreListing>> SearchPagedAsync(
+        Guid territoryId,
+        ListingType? type,
+        string? query,
+        string? category,
+        string? tags,
+        ListingStatus? status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        IEnumerable<StoreListing> listings = _dataStore.StoreListings.Where(l => l.TerritoryId == territoryId);
+
+        if (type is not null)
+        {
+            listings = listings.Where(l => l.Type == type);
+        }
+
+        if (status is not null)
+        {
+            listings = listings.Where(l => l.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            listings = listings.Where(l => l.Category == category);
+        }
+
+        if (!string.IsNullOrWhiteSpace(tags))
+        {
+            listings = listings.Where(l => l.Tags != null && l.Tags.Contains(tags, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            listings = listings.Where(l =>
+                l.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                (!string.IsNullOrWhiteSpace(l.Description) && l.Description.Contains(query, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        var result = listings
+            .OrderByDescending(l => l.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<StoreListing>>(result);
+    }
+
+    public Task<int> CountSearchAsync(
+        Guid territoryId,
+        ListingType? type,
+        string? query,
+        string? category,
+        string? tags,
+        ListingStatus? status,
+        CancellationToken cancellationToken)
+    {
+        IEnumerable<StoreListing> listings = _dataStore.StoreListings.Where(l => l.TerritoryId == territoryId);
+
+        if (type is not null)
+        {
+            listings = listings.Where(l => l.Type == type);
+        }
+
+        if (status is not null)
+        {
+            listings = listings.Where(l => l.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(category))
+        {
+            listings = listings.Where(l => l.Category == category);
+        }
+
+        if (!string.IsNullOrWhiteSpace(tags))
+        {
+            listings = listings.Where(l => l.Tags != null && l.Tags.Contains(tags, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            listings = listings.Where(l =>
+                l.Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                (!string.IsNullOrWhiteSpace(l.Description) && l.Description.Contains(query, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        return Task.FromResult(listings.Count());
+    }
 }

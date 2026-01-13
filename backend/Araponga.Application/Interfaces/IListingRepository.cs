@@ -17,4 +17,30 @@ public interface IListingRepository
         CancellationToken cancellationToken);
     Task AddAsync(StoreListing listing, CancellationToken cancellationToken);
     Task UpdateAsync(StoreListing listing, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Searches listings with pagination.
+    /// </summary>
+    Task<IReadOnlyList<StoreListing>> SearchPagedAsync(
+        Guid territoryId,
+        ListingType? type,
+        string? query,
+        string? category,
+        string? tags,
+        ListingStatus? status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts listings matching search criteria.
+    /// </summary>
+    Task<int> CountSearchAsync(
+        Guid territoryId,
+        ListingType? type,
+        string? query,
+        string? category,
+        string? tags,
+        ListingStatus? status,
+        CancellationToken cancellationToken);
 }

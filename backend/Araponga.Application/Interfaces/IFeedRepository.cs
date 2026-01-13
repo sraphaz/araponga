@@ -7,6 +7,34 @@ public interface IFeedRepository
 {
     Task<IReadOnlyList<CommunityPost>> ListByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken);
     Task<IReadOnlyList<CommunityPost>> ListByAuthorAsync(Guid authorUserId, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists posts by territory with pagination.
+    /// </summary>
+    Task<IReadOnlyList<CommunityPost>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists posts by author with pagination.
+    /// </summary>
+    Task<IReadOnlyList<CommunityPost>> ListByAuthorPagedAsync(
+        Guid authorUserId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts posts by territory.
+    /// </summary>
+    Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts posts by author.
+    /// </summary>
+    Task<int> CountByAuthorAsync(Guid authorUserId, CancellationToken cancellationToken);
     Task<CommunityPost?> GetPostAsync(Guid postId, CancellationToken cancellationToken);
     Task AddPostAsync(CommunityPost post, CancellationToken cancellationToken);
     Task UpdateStatusAsync(Guid postId, PostStatus status, CancellationToken cancellationToken);

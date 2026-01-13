@@ -110,4 +110,90 @@ public sealed class PostgresReportRepository : IReportRepository
             record.Status,
             record.CreatedAtUtc)).ToList();
     }
+
+    public async Task<IReadOnlyList<ModerationReport>> ListPagedAsync(
+        Guid territoryId,
+        ReportTargetType? targetType,
+        ReportStatus? status,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbContext.ModerationReports
+            .AsNoTracking()
+            .Where(report => report.TerritoryId == territoryId);
+
+        if (targetType is not null)
+        {
+            query = query.Where(report => report.TargetType == targetType);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(report => report.Status == status);
+        }
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(report => report.CreatedAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(report => report.CreatedAtUtc <= toUtc.Value);
+        }
+
+        var records = await query
+            .OrderByDescending(report => report.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => new ModerationReport(
+            record.Id,
+            record.ReporterUserId,
+            record.TerritoryId,
+            record.TargetType,
+            record.TargetId,
+            record.Reason,
+            record.Details,
+            record.Status,
+            record.CreatedAtUtc)).ToList();
+    }
+
+    public async Task<int> CountAsync(
+        Guid territoryId,
+        ReportTargetType? targetType,
+        ReportStatus? status,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbContext.ModerationReports
+            .Where(report => report.TerritoryId == territoryId);
+
+        if (targetType is not null)
+        {
+            query = query.Where(report => report.TargetType == targetType);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(report => report.Status == status);
+        }
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(report => report.CreatedAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(report => report.CreatedAtUtc <= toUtc.Value);
+        }
+
+        return await query.CountAsync(cancellationToken);
+    }
 }

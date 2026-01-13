@@ -85,4 +85,88 @@ public sealed class InMemoryAssetRepository : IAssetRepository
         _dataStore.TerritoryAssets.Add(asset);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<TerritoryAsset>> ListPagedAsync(
+        Guid territoryId,
+        Guid? assetId,
+        IReadOnlyCollection<string>? types,
+        AssetStatus? status,
+        string? search,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dataStore.TerritoryAssets
+            .Where(asset => asset.TerritoryId == territoryId)
+            .AsEnumerable();
+
+        if (assetId is not null)
+        {
+            query = query.Where(asset => asset.Id == assetId.Value);
+        }
+
+        if (types is not null && types.Count > 0)
+        {
+            var normalized = types.Select(type => type.Trim().ToLowerInvariant()).ToHashSet();
+            query = query.Where(asset => normalized.Contains(asset.Type.ToLowerInvariant()));
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(asset => asset.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(asset =>
+                asset.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                (asset.Description is not null && asset.Description.Contains(search, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        var result = query
+            .OrderByDescending(asset => asset.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<TerritoryAsset>>(result);
+    }
+
+    public Task<int> CountAsync(
+        Guid territoryId,
+        Guid? assetId,
+        IReadOnlyCollection<string>? types,
+        AssetStatus? status,
+        string? search,
+        CancellationToken cancellationToken)
+    {
+        var query = _dataStore.TerritoryAssets
+            .Where(asset => asset.TerritoryId == territoryId)
+            .AsEnumerable();
+
+        if (assetId is not null)
+        {
+            query = query.Where(asset => asset.Id == assetId.Value);
+        }
+
+        if (types is not null && types.Count > 0)
+        {
+            var normalized = types.Select(type => type.Trim().ToLowerInvariant()).ToHashSet();
+            query = query.Where(asset => normalized.Contains(asset.Type.ToLowerInvariant()));
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(asset => asset.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            query = query.Where(asset =>
+                asset.Name.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                (asset.Description is not null && asset.Description.Contains(search, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        return Task.FromResult(query.Count());
+    }
 }

@@ -49,4 +49,27 @@ public sealed class PostgresHealthAlertRepository : IHealthAlertRepository
 
         record.Status = status;
     }
+
+    public async Task<IReadOnlyList<HealthAlert>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.HealthAlerts
+            .AsNoTracking()
+            .Where(alert => alert.TerritoryId == territoryId)
+            .OrderByDescending(alert => alert.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.HealthAlerts
+            .Where(alert => alert.TerritoryId == territoryId)
+            .CountAsync(cancellationToken);
+    }
 }

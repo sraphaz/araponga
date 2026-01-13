@@ -39,17 +39,22 @@ public sealed class HealthService
         PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var alerts = _alertCache is not null
-            ? await _alertCache.GetAlertsByTerritoryAsync(territoryId, cancellationToken)
-            : await _alertRepository.ListByTerritoryAsync(territoryId, cancellationToken);
-        var totalCount = alerts.Count;
-        var pagedItems = alerts
-            .OrderByDescending(a => a.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
+        if (_alertCache is not null)
+        {
+            var alerts = await _alertCache.GetAlertsByTerritoryAsync(territoryId, cancellationToken);
+            var cacheTotalCount = alerts.Count;
+            var pagedItems = alerts
+                .OrderByDescending(a => a.CreatedAtUtc)
+                .Skip(pagination.Skip)
+                .Take(pagination.Take)
+                .ToList();
+            return new PagedResult<HealthAlert>(pagedItems, pagination.PageNumber, pagination.PageSize, cacheTotalCount);
+        }
 
-        return new PagedResult<HealthAlert>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var totalCount = await _alertRepository.CountByTerritoryAsync(territoryId, cancellationToken);
+        var alertsPaged = await _alertRepository.ListByTerritoryPagedAsync(territoryId, pagination.Skip, pagination.Take, cancellationToken);
+
+        return new PagedResult<HealthAlert>(alertsPaged, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     public async Task<Result<HealthAlert>> ReportAlertAsync(

@@ -101,4 +101,83 @@ public sealed class PostgresAssetRepository : IAssetRepository
         record.ArchivedAtUtc = asset.ArchivedAtUtc;
         record.ArchiveReason = asset.ArchiveReason;
     }
+
+    public async Task<IReadOnlyList<TerritoryAsset>> ListPagedAsync(
+        Guid territoryId,
+        Guid? assetId,
+        IReadOnlyCollection<string>? types,
+        AssetStatus? status,
+        string? search,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        IQueryable<TerritoryAssetRecord> query = _dbContext.TerritoryAssets.AsNoTracking()
+            .Where(asset => asset.TerritoryId == territoryId);
+
+        if (assetId is not null)
+        {
+            query = query.Where(asset => asset.Id == assetId);
+        }
+
+        if (types is not null && types.Count > 0)
+        {
+            query = query.Where(asset => types.Contains(asset.Type));
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(asset => asset.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var pattern = $"%{search}%";
+            query = query.Where(asset => EF.Functions.ILike(asset.Name, pattern) ||
+                                         (asset.Description != null && EF.Functions.ILike(asset.Description, pattern)));
+        }
+
+        var records = await query
+            .OrderByDescending(asset => asset.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountAsync(
+        Guid territoryId,
+        Guid? assetId,
+        IReadOnlyCollection<string>? types,
+        AssetStatus? status,
+        string? search,
+        CancellationToken cancellationToken)
+    {
+        IQueryable<TerritoryAssetRecord> query = _dbContext.TerritoryAssets
+            .Where(asset => asset.TerritoryId == territoryId);
+
+        if (assetId is not null)
+        {
+            query = query.Where(asset => asset.Id == assetId);
+        }
+
+        if (types is not null && types.Count > 0)
+        {
+            query = query.Where(asset => types.Contains(asset.Type));
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(asset => asset.Status == status);
+        }
+
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var pattern = $"%{search}%";
+            query = query.Where(asset => EF.Functions.ILike(asset.Name, pattern) ||
+                                         (asset.Description != null && EF.Functions.ILike(asset.Description, pattern)));
+        }
+
+        return await query.CountAsync(cancellationToken);
+    }
 }
