@@ -111,8 +111,8 @@ public sealed class RepositoryTests
 
         var report = new ModerationReport(
             Guid.NewGuid(),
-            TerritoryId,
             UserId,
+            TerritoryId,
             ReportTargetType.Post,
             Guid.NewGuid(),
             "SPAM",

@@ -656,6 +656,6 @@ public sealed class MarketplaceServiceTests
 
         var receivedInquiries = await inquiryService.ListReceivedInquiriesAsync(ResidentUserId, CancellationToken.None);
         Assert.Single(receivedInquiries);
-        Assert.Equal(ResidentUserId, receivedInquiries[0].StoreId);
+        Assert.Equal(storeResult.store!.Id, receivedInquiries[0].StoreId);
     }
 }
