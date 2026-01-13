@@ -154,4 +154,52 @@ public sealed class PostgresFeedRepository : IFeedRepository
 
         return result;
     }
+
+    public async Task<IReadOnlyList<CommunityPost>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.CommunityPosts
+            .AsNoTracking()
+            .Where(post => post.TerritoryId == territoryId)
+            .OrderByDescending(post => post.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+        
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<IReadOnlyList<CommunityPost>> ListByAuthorPagedAsync(
+        Guid authorUserId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.CommunityPosts
+            .AsNoTracking()
+            .Where(post => post.AuthorUserId == authorUserId)
+            .OrderByDescending(post => post.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.CommunityPosts
+            .Where(post => post.TerritoryId == territoryId)
+            .CountAsync(cancellationToken);
+    }
+
+    public async Task<int> CountByAuthorAsync(Guid authorUserId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.CommunityPosts
+            .Where(post => post.AuthorUserId == authorUserId)
+            .CountAsync(cancellationToken);
+    }
 }

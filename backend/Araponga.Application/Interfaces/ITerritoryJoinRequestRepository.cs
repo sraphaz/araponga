@@ -12,6 +12,24 @@ public interface ITerritoryJoinRequestRepository
         Guid recipientUserId,
         TerritoryJoinRequestStatus status,
         CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists incoming join requests with pagination.
+    /// </summary>
+    Task<IReadOnlyList<TerritoryJoinRequest>> ListIncomingPagedAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts incoming join requests.
+    /// </summary>
+    Task<int> CountIncomingAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        CancellationToken cancellationToken);
     Task AddAsync(
         TerritoryJoinRequest request,
         IReadOnlyList<TerritoryJoinRequestRecipient> recipients,

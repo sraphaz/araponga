@@ -45,4 +45,62 @@ public sealed class PostgresInquiryRepository : IInquiryRepository
 
         return records.Select(record => record.ToDomain()).ToList();
     }
+
+    public async Task<IReadOnlyList<ListingInquiry>> ListByUserPagedAsync(
+        Guid userId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.ListingInquiries
+            .AsNoTracking()
+            .Where(i => i.FromUserId == userId)
+            .OrderByDescending(i => i.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<IReadOnlyList<ListingInquiry>> ListByStoreIdsPagedAsync(
+        IReadOnlyCollection<Guid> storeIds,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        if (storeIds.Count == 0)
+        {
+            return Array.Empty<ListingInquiry>();
+        }
+
+        var records = await _dbContext.ListingInquiries
+            .AsNoTracking()
+            .Where(i => storeIds.Contains(i.StoreId))
+            .OrderByDescending(i => i.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountByUserAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.ListingInquiries
+            .Where(i => i.FromUserId == userId)
+            .CountAsync(cancellationToken);
+    }
+
+    public async Task<int> CountByStoreIdsAsync(IReadOnlyCollection<Guid> storeIds, CancellationToken cancellationToken)
+    {
+        if (storeIds.Count == 0)
+        {
+            return 0;
+        }
+
+        return await _dbContext.ListingInquiries
+            .Where(i => storeIds.Contains(i.StoreId))
+            .CountAsync(cancellationToken);
+    }
 }

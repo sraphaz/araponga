@@ -52,4 +52,28 @@ public sealed class PostgresPlatformFeeConfigRepository : IPlatformFeeConfigRepo
         _dbContext.PlatformFeeConfigs.Update(config.ToRecord());
         return Task.CompletedTask;
     }
+
+    public async Task<IReadOnlyList<PlatformFeeConfig>> ListActivePagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.PlatformFeeConfigs
+            .AsNoTracking()
+            .Where(c => c.TerritoryId == territoryId && c.IsActive)
+            .OrderByDescending(c => c.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountActiveAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.PlatformFeeConfigs
+            .Where(c => c.TerritoryId == territoryId && c.IsActive)
+            .CountAsync(cancellationToken);
+    }
 }

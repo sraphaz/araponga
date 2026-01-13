@@ -304,19 +304,24 @@ public sealed class EventsService
         PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var events = _eventCache is not null
-            ? await _eventCache.GetEventsByTerritoryAsync(territoryId, fromUtc, toUtc, status, cancellationToken)
-            : await _eventRepository.ListByTerritoryAsync(territoryId, fromUtc, toUtc, status, cancellationToken);
-        var summaries = await BuildSummariesAsync(events, cancellationToken);
+        if (_eventCache is not null)
+        {
+            var events = await _eventCache.GetEventsByTerritoryAsync(territoryId, fromUtc, toUtc, status, cancellationToken);
+            var summaries = await BuildSummariesAsync(events, cancellationToken);
+            var cacheTotalCount = summaries.Count;
+            var pagedItems = summaries
+                .OrderByDescending(s => s.Event.StartsAtUtc)
+                .Skip(pagination.Skip)
+                .Take(pagination.Take)
+                .ToList();
+            return new PagedResult<EventSummary>(pagedItems, pagination.PageNumber, pagination.PageSize, cacheTotalCount);
+        }
 
-        var totalCount = summaries.Count;
-        var pagedItems = summaries
-            .OrderByDescending(s => s.Event.StartsAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
+        var totalCount = await _eventRepository.CountByTerritoryAsync(territoryId, fromUtc, toUtc, status, cancellationToken);
+        var eventsPaged = await _eventRepository.ListByTerritoryPagedAsync(territoryId, fromUtc, toUtc, status, pagination.Skip, pagination.Take, cancellationToken);
+        var summariesPaged = await BuildSummariesAsync(eventsPaged, cancellationToken);
 
-        return new PagedResult<EventSummary>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new PagedResult<EventSummary>(summariesPaged, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     public async Task<PagedResult<EventSummary>> GetEventsNearbyPagedAsync(
@@ -354,6 +359,8 @@ public sealed class EventsService
             territoryId,
             cancellationToken);
 
+        // Para nearby, ainda precisamos filtrar por distância em memória
+        // então vamos buscar mais resultados e filtrar depois
         var filtered = candidates
             .Select(evt => new
             {
@@ -366,14 +373,14 @@ public sealed class EventsService
             .Select(item => item.Event)
             .ToList();
 
-        var summaries = await BuildSummariesAsync(filtered, cancellationToken);
-        var totalCount = summaries.Count;
-        var pagedItems = summaries
+        var totalCount = filtered.Count;
+        var pagedItems = filtered
             .Skip(pagination.Skip)
             .Take(pagination.Take)
             .ToList();
 
-        return new PagedResult<EventSummary>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var summaries = await BuildSummariesAsync(pagedItems, cancellationToken);
+        return new PagedResult<EventSummary>(summaries, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     public async Task<IReadOnlyDictionary<Guid, EventSummary>> GetSummariesByIdsAsync(

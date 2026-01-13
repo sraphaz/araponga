@@ -44,4 +44,26 @@ public sealed class InMemoryHealthAlertRepository : IHealthAlertRepository
         alert.UpdateStatus(status);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<HealthAlert>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var alerts = _dataStore.HealthAlerts
+            .Where(alert => alert.TerritoryId == territoryId)
+            .OrderByDescending(alert => alert.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<HealthAlert>>(alerts);
+    }
+
+    public Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.HealthAlerts.Count(alert => alert.TerritoryId == territoryId);
+        return Task.FromResult(count);
+    }
 }

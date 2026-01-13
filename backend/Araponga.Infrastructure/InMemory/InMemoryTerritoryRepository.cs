@@ -103,4 +103,112 @@ public sealed class InMemoryTerritoryRepository : ITerritoryRepository
     {
         return degrees * Math.PI / 180.0;
     }
+
+    public Task<IReadOnlyList<Territory>> ListPagedAsync(
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var territories = _dataStore.Territories
+            .OrderBy(t => t.Name)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+        return Task.FromResult<IReadOnlyList<Territory>>(territories);
+    }
+
+    public Task<IReadOnlyList<Territory>> SearchPagedAsync(
+        string? query,
+        string? city,
+        string? state,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var territories = _dataStore.Territories.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            territories = territories.Where(t =>
+                t.Name.Contains(query.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(city))
+        {
+            territories = territories.Where(t =>
+                string.Equals(t.City, city.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(state))
+        {
+            territories = territories.Where(t =>
+                string.Equals(t.State, state.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        var result = territories
+            .OrderBy(t => t.Name)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<Territory>>(result);
+    }
+
+    public Task<IReadOnlyList<Territory>> NearbyPagedAsync(
+        double latitude,
+        double longitude,
+        double radiusKm,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var territories = _dataStore.Territories
+            .Select(t => new
+            {
+                Territory = t,
+                Distance = CalculateDistance(latitude, longitude, t.Latitude, t.Longitude)
+            })
+            .Where(t => t.Distance <= radiusKm)
+            .OrderBy(t => t.Distance)
+            .Skip(skip)
+            .Take(take)
+            .Select(t => t.Territory)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<Territory>>(territories);
+    }
+
+    public Task<int> CountAsync(CancellationToken cancellationToken)
+    {
+        return Task.FromResult(_dataStore.Territories.Count);
+    }
+
+    public Task<int> CountSearchAsync(
+        string? query,
+        string? city,
+        string? state,
+        CancellationToken cancellationToken)
+    {
+        var territories = _dataStore.Territories.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            territories = territories.Where(t =>
+                t.Name.Contains(query.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(city))
+        {
+            territories = territories.Where(t =>
+                string.Equals(t.City, city.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(state))
+        {
+            territories = territories.Where(t =>
+                string.Equals(t.State, state.Trim(), StringComparison.OrdinalIgnoreCase));
+        }
+
+        return Task.FromResult(territories.Count());
+    }
 }

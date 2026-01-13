@@ -14,4 +14,48 @@ public interface ITerritoryRepository
         double radiusKm,
         int limit,
         CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists territories with pagination.
+    /// </summary>
+    Task<IReadOnlyList<Territory>> ListPagedAsync(
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Searches territories with pagination.
+    /// </summary>
+    Task<IReadOnlyList<Territory>> SearchPagedAsync(
+        string? query,
+        string? city,
+        string? state,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Finds nearby territories with pagination.
+    /// </summary>
+    Task<IReadOnlyList<Territory>> NearbyPagedAsync(
+        double latitude,
+        double longitude,
+        double radiusKm,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts all territories.
+    /// </summary>
+    Task<int> CountAsync(CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts territories matching search criteria.
+    /// </summary>
+    Task<int> CountSearchAsync(
+        string? query,
+        string? city,
+        string? state,
+        CancellationToken cancellationToken);
 }

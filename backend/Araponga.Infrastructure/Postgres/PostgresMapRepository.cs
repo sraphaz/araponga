@@ -66,4 +66,27 @@ public sealed class PostgresMapRepository : IMapRepository
         record.ConfirmationCount += 1;
         _dbContext.MapEntities.Update(record);
     }
+
+    public async Task<IReadOnlyList<MapEntity>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.MapEntities
+            .AsNoTracking()
+            .Where(entity => entity.TerritoryId == territoryId)
+            .OrderByDescending(entity => entity.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.MapEntities
+            .Where(entity => entity.TerritoryId == territoryId)
+            .CountAsync(cancellationToken);
+    }
 }

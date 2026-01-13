@@ -115,4 +115,111 @@ public sealed class InMemoryTerritoryEventRepository : ITerritoryEventRepository
         _dataStore.TerritoryEvents.Add(territoryEvent);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<TerritoryEvent>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        EventStatus? status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dataStore.TerritoryEvents
+            .Where(evt => evt.TerritoryId == territoryId)
+            .AsEnumerable();
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(evt => evt.Status == status);
+        }
+
+        var results = query
+            .OrderBy(evt => evt.StartsAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+        
+        return Task.FromResult<IReadOnlyList<TerritoryEvent>>(results);
+    }
+
+    public Task<IReadOnlyList<TerritoryEvent>> ListByBoundingBoxPagedAsync(
+        double minLatitude,
+        double maxLatitude,
+        double minLongitude,
+        double maxLongitude,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        Guid? territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dataStore.TerritoryEvents
+            .Where(evt => evt.Latitude >= minLatitude && evt.Latitude <= maxLatitude)
+            .Where(evt => evt.Longitude >= minLongitude && evt.Longitude <= maxLongitude)
+            .AsEnumerable();
+
+        if (territoryId is not null)
+        {
+            query = query.Where(evt => evt.TerritoryId == territoryId);
+        }
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        var results = query
+            .OrderBy(evt => evt.StartsAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+        
+        return Task.FromResult<IReadOnlyList<TerritoryEvent>>(results);
+    }
+
+    public Task<int> CountByTerritoryAsync(
+        Guid territoryId,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        EventStatus? status,
+        CancellationToken cancellationToken)
+    {
+        var query = _dataStore.TerritoryEvents
+            .Where(evt => evt.TerritoryId == territoryId)
+            .AsEnumerable();
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(evt => evt.Status == status);
+        }
+
+        return Task.FromResult(query.Count());
+    }
 }

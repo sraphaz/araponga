@@ -82,4 +82,26 @@ public sealed class InMemoryMapRepository : IMapRepository
         _dataStore.MapEntities.Add(updated);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<MapEntity>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var entities = _dataStore.MapEntities
+            .Where(entity => entity.TerritoryId == territoryId)
+            .OrderByDescending(entity => entity.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<MapEntity>>(entities);
+    }
+
+    public Task<int> CountByTerritoryAsync(Guid territoryId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.MapEntities.Count(entity => entity.TerritoryId == territoryId);
+        return Task.FromResult(count);
+    }
 }

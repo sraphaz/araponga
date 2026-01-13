@@ -102,4 +102,42 @@ public sealed class InMemoryTerritoryJoinRequestRepository : ITerritoryJoinReque
         recipient?.MarkResponded(respondedAtUtc);
         return Task.CompletedTask;
     }
+
+    public Task<IReadOnlyList<TerritoryJoinRequest>> ListIncomingPagedAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var requestIds = _dataStore.TerritoryJoinRequestRecipients
+            .Where(recipient => recipient.RecipientUserId == recipientUserId)
+            .Select(recipient => recipient.JoinRequestId)
+            .ToHashSet();
+
+        var requests = _dataStore.TerritoryJoinRequests
+            .Where(request => requestIds.Contains(request.Id) && request.Status == status)
+            .OrderByDescending(request => request.CreatedAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<TerritoryJoinRequest>>(requests);
+    }
+
+    public Task<int> CountIncomingAsync(
+        Guid recipientUserId,
+        TerritoryJoinRequestStatus status,
+        CancellationToken cancellationToken)
+    {
+        var requestIds = _dataStore.TerritoryJoinRequestRecipients
+            .Where(recipient => recipient.RecipientUserId == recipientUserId)
+            .Select(recipient => recipient.JoinRequestId)
+            .ToHashSet();
+
+        var count = _dataStore.TerritoryJoinRequests
+            .Count(request => requestIds.Contains(request.Id) && request.Status == status);
+
+        return Task.FromResult(count);
+    }
 }

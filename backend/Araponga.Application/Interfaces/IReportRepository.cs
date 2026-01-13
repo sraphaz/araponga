@@ -26,4 +26,28 @@ public interface IReportRepository
         DateTime? fromUtc,
         DateTime? toUtc,
         CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Lists reports with pagination.
+    /// </summary>
+    Task<IReadOnlyList<ModerationReport>> ListPagedAsync(
+        Guid territoryId,
+        ReportTargetType? targetType,
+        ReportStatus? status,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        int skip,
+        int take,
+        CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Counts reports matching criteria.
+    /// </summary>
+    Task<int> CountAsync(
+        Guid territoryId,
+        ReportTargetType? targetType,
+        ReportStatus? status,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        CancellationToken cancellationToken);
 }

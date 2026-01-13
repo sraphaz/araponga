@@ -120,4 +120,110 @@ public sealed class PostgresTerritoryEventRepository : ITerritoryEventRepository
         _dbContext.TerritoryEvents.Update(territoryEvent.ToRecord());
         return Task.CompletedTask;
     }
+
+    public async Task<IReadOnlyList<TerritoryEvent>> ListByTerritoryPagedAsync(
+        Guid territoryId,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        EventStatus? status,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbContext.TerritoryEvents
+            .AsNoTracking()
+            .Where(evt => evt.TerritoryId == territoryId);
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(evt => evt.Status == status);
+        }
+
+        var records = await query
+            .OrderBy(evt => evt.StartsAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<IReadOnlyList<TerritoryEvent>> ListByBoundingBoxPagedAsync(
+        double minLatitude,
+        double maxLatitude,
+        double minLongitude,
+        double maxLongitude,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        Guid? territoryId,
+        int skip,
+        int take,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbContext.TerritoryEvents
+            .AsNoTracking()
+            .Where(evt => evt.Latitude >= minLatitude && evt.Latitude <= maxLatitude)
+            .Where(evt => evt.Longitude >= minLongitude && evt.Longitude <= maxLongitude);
+
+        if (territoryId is not null)
+        {
+            query = query.Where(evt => evt.TerritoryId == territoryId);
+        }
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        var records = await query
+            .OrderBy(evt => evt.StartsAtUtc)
+            .Skip(skip)
+            .Take(take)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task<int> CountByTerritoryAsync(
+        Guid territoryId,
+        DateTime? fromUtc,
+        DateTime? toUtc,
+        EventStatus? status,
+        CancellationToken cancellationToken)
+    {
+        var query = _dbContext.TerritoryEvents
+            .Where(evt => evt.TerritoryId == territoryId);
+
+        if (fromUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc >= fromUtc.Value);
+        }
+
+        if (toUtc is not null)
+        {
+            query = query.Where(evt => evt.StartsAtUtc <= toUtc.Value);
+        }
+
+        if (status is not null)
+        {
+            query = query.Where(evt => evt.Status == status);
+        }
+
+        return await query.CountAsync(cancellationToken);
+    }
 }
