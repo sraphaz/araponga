@@ -152,7 +152,7 @@ public sealed class ApplicationServiceTests
             -45.0,
             CancellationToken.None);
 
-        Assert.True(suggestion.success);
+        Assert.True(suggestion.IsSuccess);
 
         var validate = await service.ValidateAsync(
             ActiveTerritoryId,
@@ -169,7 +169,7 @@ public sealed class ApplicationServiceTests
             Guid.NewGuid(),
             CancellationToken.None);
 
-        Assert.False(confirm.success);
+        Assert.False(confirm.IsSuccess);
     }
 
     [Fact]
@@ -193,8 +193,8 @@ public sealed class ApplicationServiceTests
             residentId,
             CancellationToken.None);
 
-        Assert.True(relation.success);
-        Assert.NotNull(relation.relation);
+        Assert.True(relation.IsSuccess);
+        Assert.NotNull(relation.Value);
 
         var duplicate = await service.RelateAsync(
             ActiveTerritoryId,
@@ -202,8 +202,8 @@ public sealed class ApplicationServiceTests
             residentId,
             CancellationToken.None);
 
-        Assert.False(duplicate.success);
-        Assert.Null(duplicate.error);
+        Assert.False(duplicate.IsSuccess);
+        Assert.Null(duplicate.Error);
     }
 
     [Fact]
@@ -223,11 +223,11 @@ public sealed class ApplicationServiceTests
             "Desc",
             CancellationToken.None);
 
-        Assert.True(report.success);
+        Assert.True(report.IsSuccess);
 
         var validated = await service.ValidateAlertAsync(
             ActiveTerritoryId,
-            report.alert!.Id,
+            report.Value!.Id,
             Guid.Parse("cccccccc-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
             Araponga.Domain.Health.HealthAlertStatus.Validated,
             CancellationToken.None);
@@ -396,9 +396,9 @@ public sealed class ApplicationServiceTests
             "Praça central",
             CancellationToken.None);
 
-        Assert.True(create.success);
-        Assert.NotNull(create.summary);
-        Assert.Equal(MembershipRole.Visitor, create.summary!.Event.CreatedByMembership);
+        Assert.True(create.IsSuccess);
+        Assert.NotNull(create.Value);
+        Assert.Equal(MembershipRole.Visitor, create.Value!.Event.CreatedByMembership);
     }
 
     [Fact]
@@ -432,9 +432,9 @@ public sealed class ApplicationServiceTests
             null,
             CancellationToken.None);
 
-        Assert.True(create.success);
-        Assert.NotNull(create.summary);
-        Assert.Equal(MembershipRole.Resident, create.summary!.Event.CreatedByMembership);
+        Assert.True(create.IsSuccess);
+        Assert.NotNull(create.Value);
+        Assert.Equal(MembershipRole.Resident, create.Value!.Event.CreatedByMembership);
     }
 
     [Fact]
