@@ -1,3 +1,4 @@
+using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
 using Araponga.Domain.Feed;
 
@@ -113,5 +114,21 @@ public sealed class InMemoryFeedRepository : IFeedRepository
     public Task<int> GetShareCountAsync(Guid postId, CancellationToken cancellationToken)
     {
         return Task.FromResult(_dataStore.PostShares.TryGetValue(postId, out var shares) ? shares.Count : 0);
+    }
+
+    public Task<IReadOnlyDictionary<Guid, PostCounts>> GetCountsByPostIdsAsync(
+        IReadOnlyCollection<Guid> postIds,
+        CancellationToken cancellationToken)
+    {
+        var result = new Dictionary<Guid, PostCounts>();
+        
+        foreach (var postId in postIds)
+        {
+            var likeCount = _dataStore.PostLikes.TryGetValue(postId, out var likes) ? likes.Count : 0;
+            var shareCount = _dataStore.PostShares.TryGetValue(postId, out var shares) ? shares.Count : 0;
+            result[postId] = new PostCounts(likeCount, shareCount);
+        }
+        
+        return Task.FromResult<IReadOnlyDictionary<Guid, PostCounts>>(result);
     }
 }
