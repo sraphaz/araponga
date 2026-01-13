@@ -1,3 +1,4 @@
+using Araponga.Application.Common;
 using Araponga.Domain.Feed;
 
 namespace Araponga.Application.Interfaces;
@@ -14,4 +15,11 @@ public interface IFeedRepository
     Task AddShareAsync(Guid postId, Guid userId, CancellationToken cancellationToken);
     Task<int> GetLikeCountAsync(Guid postId, CancellationToken cancellationToken);
     Task<int> GetShareCountAsync(Guid postId, CancellationToken cancellationToken);
+    
+    /// <summary>
+    /// Gets like and share counts for multiple posts in a single batch operation.
+    /// </summary>
+    Task<IReadOnlyDictionary<Guid, PostCounts>> GetCountsByPostIdsAsync(
+        IReadOnlyCollection<Guid> postIds,
+        CancellationToken cancellationToken);
 }
