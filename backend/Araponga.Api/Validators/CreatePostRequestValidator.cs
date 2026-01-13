@@ -1,4 +1,5 @@
 using Araponga.Api.Contracts.Feed;
+using Araponga.Domain.Feed;
 using FluentValidation;
 
 namespace Araponga.Api.Validators;
@@ -15,12 +16,13 @@ public sealed class CreatePostRequestValidator : AbstractValidator<CreatePostReq
             .NotEmpty().WithMessage("Content is required.")
             .MaximumLength(4000).WithMessage("Content must not exceed 4000 characters.");
 
-
         RuleFor(x => x.Type)
-            .IsInEnum().WithMessage("Invalid post type.");
+            .Must(type => !string.IsNullOrWhiteSpace(type) && Enum.TryParse<PostType>(type, true, out _))
+            .WithMessage("Invalid post type. Valid values: General, Alert, Event.");
 
         RuleFor(x => x.Visibility)
-            .IsInEnum().WithMessage("Invalid visibility setting.");
+            .Must(visibility => !string.IsNullOrWhiteSpace(visibility) && Enum.TryParse<PostVisibility>(visibility, true, out _))
+            .WithMessage("Invalid visibility setting. Valid values: Public, ResidentsOnly.");
 
         RuleFor(x => x.GeoAnchors)
             .Must(anchors => anchors == null || anchors.Count <= 50)
