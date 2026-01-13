@@ -35,6 +35,7 @@ Documentos sobre moderação, observabilidade e operações.
 - **[Moderação e Reports](./30_MODERATION.md)** - Sistema de moderação e reports
 - **[Admin e Observabilidade](./31_ADMIN_OBSERVABILITY.md)** - Administração e observabilidade do sistema
 - **[Rastreabilidade](./32_TRACEABILITY.md)** - Rastreabilidade de requisitos e funcionalidades
+- **[API - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO.md)** - Documento completo de lógica de negócio e usabilidade de todas as operações da API
 
 ### 📝 Histórico e Mudanças
 Documentos sobre histórico e mudanças do projeto.
