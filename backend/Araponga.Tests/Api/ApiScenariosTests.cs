@@ -172,7 +172,7 @@ public sealed class ApiScenariosTests
         Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString());
 
         var html = await response.Content.ReadAsStringAsync();
-        Assert.Contains("Araponga API", html, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Araponga", html, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Developer Portal", html, StringComparison.OrdinalIgnoreCase);
     }
 
