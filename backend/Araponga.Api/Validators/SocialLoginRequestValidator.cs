@@ -1,3 +1,4 @@
+using System.Linq;
 using Araponga.Api.Contracts.Auth;
 using FluentValidation;
 
@@ -40,8 +41,14 @@ public sealed class SocialLoginRequestValidator : AbstractValidator<SocialLoginR
         When(x => !string.IsNullOrWhiteSpace(x.Cpf), () =>
         {
             RuleFor(x => x.Cpf)
-                .Length(11).WithMessage("CPF must be 11 characters.")
-                .Matches(@"^\d{11}$").WithMessage("CPF must contain only digits.");
+                .Must(cpf =>
+                {
+                    // Remove formatação (pontos, hífens, espaços)
+                    var digitsOnly = cpf?.Replace(".", "").Replace("-", "").Replace(" ", "") ?? "";
+                    // Deve ter exatamente 11 dígitos
+                    return digitsOnly.Length == 11 && digitsOnly.All(char.IsDigit);
+                })
+                .WithMessage("CPF must be a valid 11-digit number (formatting is optional).");
         });
 
         When(x => !string.IsNullOrWhiteSpace(x.ForeignDocument), () =>
