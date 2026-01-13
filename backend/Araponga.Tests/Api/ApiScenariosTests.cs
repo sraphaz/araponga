@@ -11,6 +11,7 @@ using Araponga.Api.Contracts.Features;
 using Araponga.Api.Contracts.JoinRequests;
 using Araponga.Api.Contracts.Map;
 using Araponga.Api.Contracts.Memberships;
+using Araponga.Api.Contracts.Marketplace;
 using Araponga.Api.Contracts.Territories;
 using Araponga.Infrastructure.InMemory;
 using Microsoft.Extensions.DependencyInjection;
@@ -1186,6 +1187,124 @@ public sealed class ApiScenariosTests
             $"api/v1/territories/{ActiveTerritoryId}/membership/me");
         Assert.NotNull(membershipStatus);
         Assert.Equal("NONE", membershipStatus!.Role);
+    }
+
+    [Fact]
+    public async Task Marketplace_VisitorCannotCreateStoreOrListing()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var visitorToken = await LoginForTokenAsync(client, "google", "visitor-store");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", visitorToken);
+
+        var storeResponse = await client.PostAsJsonAsync(
+            "api/v1/stores",
+            new UpsertStoreRequest(
+                ActiveTerritoryId,
+                "Loja Visitante",
+                null,
+                "ON_INQUIRY_ONLY",
+                new StoreContactPayload(null, null, null, null, null, null)));
+
+        Assert.Equal(HttpStatusCode.Forbidden, storeResponse.StatusCode);
+
+        var residentToken = await LoginForTokenAsync(client, "google", "resident-external");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", residentToken);
+
+        var residentStoreResponse = await client.PostAsJsonAsync(
+            "api/v1/stores",
+            new UpsertStoreRequest(
+                ActiveTerritoryId,
+                "Loja Morador",
+                null,
+                "ON_INQUIRY_ONLY",
+                new StoreContactPayload(null, null, null, null, null, null)));
+
+        residentStoreResponse.EnsureSuccessStatusCode();
+        var residentStore = await residentStoreResponse.Content.ReadFromJsonAsync<StoreResponse>();
+        Assert.NotNull(residentStore);
+
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", visitorToken);
+        var listingResponse = await client.PostAsJsonAsync(
+            "api/v1/listings",
+            new CreateListingRequest(
+                ActiveTerritoryId,
+                residentStore!.Id,
+                "PRODUCT",
+                "Produto",
+                null,
+                null,
+                null,
+                "FIXED",
+                10m,
+                "BRL",
+                "unidade",
+                null,
+                null,
+                "ACTIVE"));
+
+        Assert.Equal(HttpStatusCode.Forbidden, listingResponse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Marketplace_SearchAndInquiryWork()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var residentToken = await LoginForTokenAsync(client, "google", "resident-external");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", residentToken);
+
+        var storeResponse = await client.PostAsJsonAsync(
+            "api/v1/stores",
+            new UpsertStoreRequest(
+                ActiveTerritoryId,
+                "Loja Morador",
+                null,
+                "PUBLIC",
+                new StoreContactPayload("(11) 90000-0000", null, "loja@exemplo.com", null, null, "email")));
+
+        storeResponse.EnsureSuccessStatusCode();
+        var store = await storeResponse.Content.ReadFromJsonAsync<StoreResponse>();
+        Assert.NotNull(store);
+
+        var listingResponse = await client.PostAsJsonAsync(
+            "api/v1/listings",
+            new CreateListingRequest(
+                ActiveTerritoryId,
+                store!.Id,
+                "PRODUCT",
+                "Mel do Vale",
+                "Mel local",
+                "Alimentos",
+                "mel",
+                "FIXED",
+                30m,
+                "BRL",
+                "unidade",
+                null,
+                null,
+                "ACTIVE"));
+
+        listingResponse.EnsureSuccessStatusCode();
+        var listing = await listingResponse.Content.ReadFromJsonAsync<ListingResponse>();
+        Assert.NotNull(listing);
+
+        var search = await client.GetFromJsonAsync<List<ListingResponse>>(
+            $"api/v1/listings?territoryId={ActiveTerritoryId}&type=PRODUCT&q=mel");
+
+        Assert.NotNull(search);
+        Assert.Contains(search!, item => item.Id == listing!.Id);
+
+        var inquiryResponse = await client.PostAsJsonAsync(
+            $"api/v1/listings/{listing!.Id}/inquiries",
+            new CreateInquiryRequest("Quero saber mais"));
+
+        inquiryResponse.EnsureSuccessStatusCode();
+        var inquiry = await inquiryResponse.Content.ReadFromJsonAsync<InquiryResponse>();
+        Assert.NotNull(inquiry);
+        Assert.NotNull(inquiry!.StoreContact);
     }
 
     private static async Task<string> LoginForTokenAsync(HttpClient client, string provider, string externalId)

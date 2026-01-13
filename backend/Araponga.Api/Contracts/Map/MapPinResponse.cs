@@ -1,3 +1,5 @@
+using System;
+
 namespace Araponga.Api.Contracts.Map;
 
 public sealed record MapPinResponse(

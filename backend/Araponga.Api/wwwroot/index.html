@@ -13,27 +13,40 @@
     a { color: #7cd1ff; }
   </style>
   <script>
-    (function () {
-      var LANDING_URL = 'https://araponga.app';
-      var PORTAL_URL = '/devportal/?fromLanding=1';
-      var RETURN_PARAM = 'fromLanding';
-      var returnFlagKey = 'landingReturnAllowed';
-      var currentUrl = new URL(window.location.href);
-      var hasReturnFlag = sessionStorage.getItem(returnFlagKey) === '1';
-      var fromLanding = document.referrer.indexOf(LANDING_URL) === 0
-        || currentUrl.searchParams.get(RETURN_PARAM) === '1'
-        || hasReturnFlag;
+  (function () {
+    var LANDING_ORIGIN = 'https://araponga.app';
+    var PORTAL_URL = '/devportal/?fromLanding=1';
+    var RETURN_PARAM = 'fromLanding';
+    var returnFlagKey = 'landingReturnAllowed';
 
-      if (fromLanding) {
-        sessionStorage.setItem(returnFlagKey, '1');
-        window.location.replace(PORTAL_URL);
-        return;
+    var currentUrl = new URL(window.location.href);
+    var hasReturnFlag = sessionStorage.getItem(returnFlagKey) === '1';
+
+    function isFromLandingReferrer(ref) {
+      if (!ref) return false;
+      try {
+        var refUrl = new URL(ref);
+        return refUrl.origin === LANDING_ORIGIN;
+      } catch (_) {
+        return false;
       }
+    }
 
+    var fromLanding =
+      isFromLandingReferrer(document.referrer) ||
+      currentUrl.searchParams.get(RETURN_PARAM) === '1' ||
+      hasReturnFlag;
+
+    if (fromLanding) {
       sessionStorage.setItem(returnFlagKey, '1');
-      window.location.replace(LANDING_URL);
-    })();
-  </script>
+      window.location.replace(PORTAL_URL);
+      return;
+    }
+
+    sessionStorage.setItem(returnFlagKey, '1');
+    window.location.replace(LANDING_ORIGIN + '/');
+  })();
+</script>
 </head>
 <body>
   <main class="container">
