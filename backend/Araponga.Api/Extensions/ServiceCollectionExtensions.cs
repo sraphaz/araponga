@@ -8,6 +8,7 @@ using Araponga.Infrastructure.Outbox;
 using Araponga.Infrastructure.Postgres;
 using Araponga.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Araponga.Api.Extensions;
 
@@ -71,7 +72,14 @@ public static class ServiceCollectionExtensions
         if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
         {
             services.AddDbContext<ArapongaDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("Postgres")));
+                options.UseNpgsql(configuration.GetConnectionString("Postgres"), npgsqlOptions =>
+                {
+                    npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorCodesToAdd: null);
+                    npgsqlOptions.CommandTimeout(30);
+                }));
 
             services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ArapongaDbContext>());
             services.AddPostgresRepositories();

@@ -9,17 +9,128 @@ using Araponga.Infrastructure.Security;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog Configuration
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File(
+            "logs/araponga-.log",
+            rollingInterval: RollingInterval.Day,
+            retainedFileCountLimit: 30,
+            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
+});
+
+// Configuration Validation
+var jwtSigningKey = builder.Configuration["Jwt:SigningKey"] ?? builder.Configuration["JWT__SIGNINGKEY"];
+if (builder.Environment.IsProduction() && (string.IsNullOrWhiteSpace(jwtSigningKey) || jwtSigningKey == "dev-only-change-me"))
+{
+    throw new InvalidOperationException(
+        "JWT SigningKey must be configured via environment variable JWT__SIGNINGKEY in production. " +
+        "Never use the default value in production.");
+}
 
 // Configuration
 var jwtSection = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<JwtOptions>(jwtSection);
 builder.Services.Configure<PresencePolicyOptions>(builder.Configuration.GetSection("PresencePolicy"));
+
+// CORS Configuration
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ??
+                     (builder.Environment.IsDevelopment() ? new[] { "*" } : Array.Empty<string>());
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Default", corsBuilder =>
+    {
+        if (allowedOrigins.Contains("*"))
+        {
+            corsBuilder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+        }
+        else
+        {
+            corsBuilder.WithOrigins(allowedOrigins)
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials();
+        }
+    });
+});
+
+// Rate Limiting Configuration
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("global", limiterOptions =>
+    {
+        limiterOptions.PermitLimit = builder.Configuration.GetValue<int>("RateLimiting:PermitLimit", 60);
+        limiterOptions.Window = TimeSpan.FromSeconds(builder.Configuration.GetValue<int>("RateLimiting:WindowSeconds", 60));
+        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        limiterOptions.QueueLimit = builder.Configuration.GetValue<int>("RateLimiting:QueueLimit", 0);
+    });
+    
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = builder.Configuration.GetValue<int>("RateLimiting:PermitLimit", 60),
+                Window = TimeSpan.FromSeconds(builder.Configuration.GetValue<int>("RateLimiting:WindowSeconds", 60)),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = builder.Configuration.GetValue<int>("RateLimiting:QueueLimit", 0)
+            }));
+    
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.OnRejected = async (context, cancellationToken) =>
+    {
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        await context.HttpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        {
+            Title = "Too Many Requests",
+            Status = StatusCodes.Status429TooManyRequests,
+            Detail = "Rate limit exceeded. Please try again later.",
+            Instance = context.HttpContext.Request.Path
+        }, cancellationToken);
+    };
+});
+
+// Health Checks Configuration
+var healthChecksBuilder = builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy("API is healthy"));
+
+var persistenceProvider = builder.Configuration.GetValue<string>("Persistence:Provider") ?? "InMemory";
+if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
+{
+    // DbContext will be registered in AddInfrastructure
+    // Health check for database will be added after infrastructure is registered
+}
+
+// Infrastructure (repositories, unit of work, etc.) - must be called before adding database health check
+builder.Services.AddInfrastructure(builder.Configuration);
+
+// Add database health check after infrastructure is registered
+if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
+{
+    healthChecksBuilder.AddDbContextCheck<ArapongaDbContext>(
+        name: "database",
+        failureStatus: HealthStatus.Unhealthy,
+        tags: new[] { "db", "postgres" });
+}
 
 // Controllers with FluentValidation
 builder.Services.AddControllers();
@@ -29,9 +140,6 @@ builder.Services.AddFluentValidationClientsideAdapters();
 
 // Memory cache
 builder.Services.AddMemoryCache();
-
-// Infrastructure (repositories, unit of work, etc.)
-builder.Services.AddInfrastructure(builder.Configuration);
 
 // Application services
 builder.Services.AddApplicationServices();
@@ -80,16 +188,16 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-var persistenceProvider = builder.Configuration.GetValue<string>("Persistence:Provider") ?? "InMemory";
-var applyMigrations = builder.Configuration.GetValue<bool>("Persistence:ApplyMigrations");
+// Serilog Request Logging
+app.UseSerilogRequestLogging();
 
-if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase) && applyMigrations)
+// HTTPS Redirection (Production only)
+if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
 {
-    using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<ArapongaDbContext>();
-    dbContext.Database.Migrate();
+    app.UseHttpsRedirection();
 }
 
+// Exception Handler
 app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
@@ -180,8 +288,8 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
-// Importante: como você está rodando só em HTTP, removemos o redirect p/ HTTPS para não gerar warning.
-// app.UseHttpsRedirection();
+// CORS
+app.UseCors("Default");
 
 // IMPORTANTE: No ASP.NET Core, middlewares são executados na ordem de registro (FIFO)
 // O primeiro UseMiddleware registrado é o primeiro a ser executado
@@ -192,7 +300,55 @@ app.UseMiddleware<CorrelationIdMiddleware>();
 // Request logging middleware - registrado depois, executa DEPOIS do CorrelationIdMiddleware
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+// Rate Limiting
+app.UseRateLimiter();
+
 app.UseAuthorization();
+
+// Health Checks
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("self"),
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(entry => new
+            {
+                name = entry.Key,
+                status = entry.Value.Status.ToString(),
+                exception = entry.Value.Exception?.Message,
+                duration = entry.Value.Duration.TotalMilliseconds
+            }),
+            totalDuration = report.TotalDuration.TotalMilliseconds
+        });
+        await context.Response.WriteAsync(result);
+    }
+});
+
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("db") || check.Tags.Contains("self"),
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(entry => new
+            {
+                name = entry.Key,
+                status = entry.Value.Status.ToString(),
+                exception = entry.Value.Exception?.Message,
+                duration = entry.Value.Duration.TotalMilliseconds
+            }),
+            totalDuration = report.TotalDuration.TotalMilliseconds
+        });
+        await context.Response.WriteAsync(result);
+    }
+});
 
 if (app.Environment.IsEnvironment("Testing"))
 {
@@ -203,14 +359,21 @@ app.MapGet("/liveness", () => Results.Ok(new { status = "ok" }))
     .AllowAnonymous()
     .ExcludeFromDescription();
 
-app.MapGet("/readiness", () =>
-    Results.Ok(new { status = "ready" }))
-    // TODO: add dependency checks
-    .AllowAnonymous()
-    .ExcludeFromDescription();
-
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information("Starting Araponga API");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly");
+    throw;
+}
+finally
+{
+    Log.CloseAndFlush();
+}
 
 public partial class Program;

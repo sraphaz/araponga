@@ -149,6 +149,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(p => p.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(p => p.TerritoryId);
             entity.HasIndex(p => new { p.TerritoryId, p.CreatedAtUtc });
+            entity.HasIndex(p => new { p.TerritoryId, p.Status, p.CreatedAtUtc });
             entity.HasIndex(p => p.AuthorUserId);
             entity.HasIndex(p => p.MapEntityId);
             entity.HasIndex(p => new { p.ReferenceType, p.ReferenceId });
@@ -343,6 +344,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(r => r.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(r => r.ReporterUserId);
             entity.HasIndex(r => new { r.TargetType, r.TargetId });
+            entity.HasIndex(r => new { r.TargetType, r.TargetId, r.CreatedAtUtc });
             entity.HasIndex(r => new { r.TerritoryId, r.CreatedAtUtc });
             entity.HasIndex(r => r.CreatedAtUtc);
         });
