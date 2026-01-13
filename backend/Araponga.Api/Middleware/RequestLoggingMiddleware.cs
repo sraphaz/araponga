@@ -23,6 +23,10 @@ public sealed class RequestLoggingMiddleware
         var method = context.Request.Method;
         var path = context.Request.Path.Value ?? "/";
 
+        // Sanitize user-controlled values before logging to avoid log forging via control characters.
+        var sanitizedMethod = method.Replace("\r", string.Empty).Replace("\n", string.Empty).Trim();
+        var sanitizedPath = path.Replace("\r", string.Empty).Replace("\n", string.Empty).Trim();
+
         try
         {
             await _next(context);
@@ -32,7 +36,7 @@ public sealed class RequestLoggingMiddleware
             stopwatch.Stop();
             var statusCode = context.Response.StatusCode;
 
-            _observabilityLogger?.LogRequest(method, path, statusCode, stopwatch.ElapsedMilliseconds);
+            _observabilityLogger?.LogRequest(sanitizedMethod, sanitizedPath, statusCode, stopwatch.ElapsedMilliseconds);
         }
     }
 }
