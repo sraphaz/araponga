@@ -37,6 +37,9 @@ O Araponga é um aplicativo/plataforma que permite:
   - Uma entidade do território pode ser um estabelecimento, um órgão do governo, um espaço público ou um espaço natural.
 - 🧑‍🌾 **Diferenciar moradores e visitantes com respeito**
 - 🤝 **Fortalecer redes locais de cuidado, troca e presença**
+- 🏪 **Marketplace territorial** para trocas locais
+- 📅 **Eventos comunitários** organizados por território
+- 🚨 **Alertas de saúde pública** e comunicação emergencial
 
 Tudo isso **sem algoritmos de manipulação**,  
 sem feed global infinito,  
@@ -107,18 +110,35 @@ Ele é uma **infraestrutura digital comunitária**, pensada para:
 O backend segue princípios de **Clean Architecture**, com separação clara de responsabilidades:
 
 backend/
-├── Araponga.Api # API HTTP (controllers, endpoints)
+├── Araponga.Api # API HTTP (controllers, endpoints, middlewares)
 ├── Araponga.Application # Casos de uso / regras de aplicação
 ├── Araponga.Domain # Modelo de domínio (territory, regras centrais)
 ├── Araponga.Infrastructure # Persistência, integrações, adapters
 ├── Araponga.Shared # Tipos e utilitários compartilhados
 └── Araponga.Tests # Testes automatizados
 
-
 ### Conceitos centrais do domínio
 
 - **Territory**  
   Lugar físico real, neutro e persistente.
+
+- **Membership**  
+  Relação entre uma pessoa e um território (morador, visitante, etc.).
+
+- **Feed / Map**  
+  Informação contextual, sempre relacionada a um território específico.
+
+- **Marketplace**  
+  Sistema de trocas locais integrado ao território (stores, listings, cart, checkout).
+
+- **Events**  
+  Eventos comunitários organizados por território.
+
+- **Alerts**  
+  Alertas de saúde pública e comunicação emergencial.
+
+- **Assets**  
+  Recursos compartilhados do território (documentos, mídias, etc.).
 
 ---
 
@@ -137,38 +157,99 @@ backend/
 - [Decisões Arquiteturais (ADRs)](./docs/10_ARCHITECTURE_DECISIONS.md)
 - [Arquitetura de Services](./docs/11_ARCHITECTURE_SERVICES.md)
 - [Modelo de Domínio](./docs/12_DOMAIN_MODEL.md)
+- [Domain Routing](./docs/13_DOMAIN_ROUTING.md)
 
 ### Desenvolvimento
 - [Plano de Implementação](./docs/20_IMPLEMENTATION_PLAN.md)
 - [Revisão de Código](./docs/21_CODE_REVIEW.md)
 - [Análise de Coesão e Testes](./docs/22_COHESION_AND_TESTS.md)
+- [Implementação de Recomendações](./docs/23_IMPLEMENTATION_RECOMMENDATIONS.md)
 
 ### Operações
 - [Moderação](./docs/30_MODERATION.md)
 - [Admin e Observabilidade](./docs/31_ADMIN_OBSERVABILITY.md)
+- [Rastreabilidade](./docs/32_TRACEABILITY.md)
 
-- **Membership**  
-  Relação entre uma pessoa e um território (morador, visitante, etc.).
-
-- **Feed / Map**  
-  Informação contextual, sempre relacionada a um território específico.
+### Produção e Deploy
+- [Avaliação Completa para Produção](./docs/50_PRODUCAO_AVALIACAO_COMPLETA.md)
+- [Plano de Requisitos Desejáveis](./docs/51_PRODUCAO_PLANO_DESEJAVEIS.md)
 
 ---
 
 ## 🚀 Estado atual do projeto
 
-- ✅ Backend inicial estruturado
-- ✅ Autenticação social com JWT e gestão básica de usuários
+### Funcionalidades Implementadas ✅
+
+#### Core
+- ✅ Backend estruturado com Clean Architecture
+- ✅ Autenticação social com JWT e gestão de usuários
 - ✅ Descoberta e seleção de territórios
 - ✅ Vínculos (morador e visitante) com regras de visibilidade
-- ✅ Feed territorial com criação e moderação de conteúdo
-- ✅ Mapa territorial com entidades e relações
-- ✅ Moderação (reports e bloqueios)
+- ✅ Feature flags por território
+
+#### Feed e Social
+- ✅ Feed territorial com criação, interações (like, comment, share) e moderação
+- ✅ Feed pessoal e feed do território
+- ✅ Posts com GeoAnchors (georreferenciamento)
+- ✅ Paginação eficiente com otimizações (batch operations)
+
+#### Mapa
+- ✅ Mapa territorial com entidades (MapEntity) e relações
+- ✅ Pins integrados (MapEntity + GeoAnchors de posts e assets)
+- ✅ Visualização de entidades do território no mapa
+
+#### Marketplace
+- ✅ Stores (lojas/comércios) por território
+- ✅ Listings (produtos e serviços) com busca e filtros
+- ✅ Cart e Checkout
+- ✅ Inquiries (consultas de compra)
+- ✅ Platform Fees (taxas configuráveis por território)
+
+#### Eventos
+- ✅ Eventos comunitários por território
+- ✅ Participações em eventos
+- ✅ Eventos com georreferenciamento
+
+#### Alertas e Saúde
+- ✅ Alertas de saúde pública (Health Alerts)
+- ✅ Comunicação emergencial por território
+
+#### Assets
+- ✅ Recursos compartilhados do território (Territory Assets)
+- ✅ Validação e georreferenciamento de assets
+
+#### Moderação
+- ✅ Reports de posts e usuários
+- ✅ Bloqueios de usuários
+- ✅ Sanções territoriais e globais
+- ✅ Moderação automática por threshold
+
+#### Notificações
 - ✅ Notificações in-app com outbox e inbox persistido
-- ✅ Feature flags e health check
-- ✅ Testes automatizados
+- ✅ Sistema confiável de entrega de notificações
+
+#### Produção e Observabilidade
+- ✅ JWT secret via variáveis de ambiente (segurança)
+- ✅ HTTPS obrigatório em produção
+- ✅ Rate limiting (proteção contra DDoS)
+- ✅ Health checks completos (liveness e readiness)
+- ✅ Logging estruturado (Serilog)
+- ✅ CORS configurável
+- ✅ Validação de entrada (FluentValidation)
+- ✅ Connection pooling e retry policies
+- ✅ Índices de banco para performance
+
+#### Testes
+- ✅ Testes automatizados (unidade, integração, E2E)
+- ✅ Cobertura de testes ~82%
 - ✅ CI configurado com builds reprodutíveis (`packages.lock.json`)
-- 🚧 Frontend e experiências móveis em planejamento
+
+### Em Planejamento 🚧
+
+- 🚧 Frontend e experiências móveis
+- 🚧 Friends (círculo interno) e stories exclusivos
+- 🚧 Admin/observabilidade com dashboards avançados
+- 🚧 GeoAnchor avançado / memórias / galeria
 
 O projeto está em **evolução ativa**, com foco em solidez antes de escala.
 
@@ -178,7 +259,14 @@ O projeto está em **evolução ativa**, com foco em solidez antes de escala.
 
 > A documentação canônica de operação está em [`docs/README.md`](docs/README.md).
 
-### InMemory (padrão)
+### Pré-requisitos
+
+- .NET 8 SDK
+- Docker (opcional, para Postgres)
+- Git
+
+### InMemory (padrão, para desenvolvimento)
+
 ```bash
 dotnet restore
 dotnet build
@@ -186,25 +274,59 @@ dotnet test
 dotnet run --project backend/Araponga.Api
 ```
 
-### Postgres (docker compose)
+A API estará disponível em `http://localhost:5000` (ou porta configurada).
+
+### Postgres (docker compose, recomendado)
+
 ```bash
 docker compose up --build
 ```
 
+Isso sobe a API e o PostgreSQL em containers Docker.
+
 ### Migrations (Postgres)
+
 ```bash
 dotnet ef database update \
   --project backend/Araponga.Infrastructure \
   --startup-project backend/Araponga.Api
 ```
 
+### Configuração (Produção)
+
+Para rodar em produção, configure as variáveis de ambiente:
+
+**Obrigatório**:
+```bash
+JWT__SIGNINGKEY=<secret-forte-de-pelo-menos-32-bytes>
+```
+
+**Opcional** (se usar Postgres):
+```bash
+ConnectionStrings__Postgres=<connection-string>
+Persistence__Provider=Postgres
+Persistence__ApplyMigrations=true
+```
+
+**Opcional** (configurar CORS):
+```json
+{
+  "Cors": {
+    "AllowedOrigins": ["https://araponga.app", "https://www.araponga.app"]
+  }
+}
+```
+
+Mais detalhes em [`docs/50_PRODUCAO_AVALIACAO_COMPLETA.md`](./docs/50_PRODUCAO_AVALIACAO_COMPLETA.md).
+
 ### Portal de autosserviço
 
 A página inicial da API (`/`) serve um portal estático com explicação do produto,
 domínios, fluxos e quickstart. Em desenvolvimento, acesse também:
 
-- `/swagger` (documentação da API)
-- `/health` (status simples)
+- `/swagger` (documentação interativa da API)
+- `/health` (health check de liveness)
+- `/health/ready` (health check de readiness, verifica dependências)
 
 Quando a API está rodando localmente em ambiente de desenvolvimento, o portal
 exibe um preview do Swagger para navegação e testes rápidos.
@@ -213,71 +335,66 @@ Para publicação como site estático, o portal também está disponível em `do
 pode ser hospedado via GitHub Pages (basta apontar a origem para a pasta `docs`).
 A versão do GitHub Pages inclui links diretos para documentação, user stories e changelog.
 
+---
+
 ## 🤝 Contribuindo
 
 Consulte o guia em [`docs/41_CONTRIBUTING.md`](./docs/41_CONTRIBUTING.md).
 
 O Araponga é aberto à colaboração, especialmente de pessoas interessadas em:
 
-tecnologia com impacto social
-
-comunidades locais
-
-território, cultura e soberania
-
-arquitetura de software consciente
-
-regeneração e autonomia
+- tecnologia com impacto social
+- comunidades locais
+- território, cultura e soberania
+- arquitetura de software consciente
+- regeneração e autonomia
 
 Formas de contribuir:
 
-código
-
-testes
-
-documentação
-
-ideias
-
-feedback conceitual
+- código
+- testes
+- documentação
+- ideias
+- feedback conceitual
 
 Antes de abrir PRs grandes, abra uma issue para alinharmos a direção.
+
+---
 
 ## 🌎 Visão de futuro
 
 Algumas direções possíveis (não promessas fechadas):
 
-economias e moedas locais
+- economias e moedas locais
+- trocas de serviços comunitários
+- governança distribuída
+- integração com iniciativas regenerativas
+- tecnologia como guardiã do território, não como exploradora
 
-trocas de serviços comunitários
-
-governança distribuída
-
-integração com iniciativas regenerativas
-
-tecnologia como guardiã do território, não como exploradora
-
-O Araponga não quer crescer rápido.
+O Araponga não quer crescer rápido.  
 Quer criar raízes profundas.
 
-✨ Uma nota pessoal
+---
+
+## ✨ Uma nota pessoal
 
 Este projeto nasce de uma escuta atenta:
 
-da vida
+- da vida
+- do território
+- das comunidades
+- e dos limites do modelo digital atual
 
-do território
-
-das comunidades
-
-e dos limites do modelo digital atual
-
-Se você chegou até aqui e sentiu que isso faz sentido,
+Se você chegou até aqui e sentiu que isso faz sentido,  
 você já faz parte da conversa.
+
+---
 
 ## Developer Portal (GitHub Pages)
 
 O conteúdo estático do Developer Portal vive em `backend/Araponga.Api/wwwroot/devportal` e é publicado automaticamente via GitHub Actions na branch `gh-pages` quando há push em `main` ou `master`.
+
+---
 
 ## 📜 Licença
 
@@ -286,5 +403,5 @@ Este projeto é distribuído sob uma **licença aberta orientada à comunidade e
 - Versão oficial (EN): `LICENSE`
 - Versão em português (PT-BR): `LICENSE.pt-BR`
 
-🐦 Araponga canta para avisar, proteger e comunicar.
+🐦 Araponga canta para avisar, proteger e comunicar.  
 Que esta plataforma faça o mesmo.
