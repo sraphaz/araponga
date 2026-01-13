@@ -404,16 +404,8 @@ public sealed class EventsService
         var countLookup = counts.ToDictionary(count => count.EventId, count => count);
 
         var userIds = events.Select(evt => evt.CreatedByUserId).Distinct().ToList();
-        var displayNameLookup = new Dictionary<Guid, string>();
-
-        foreach (var userId in userIds)
-        {
-            var user = await _userRepository.GetByIdAsync(userId, cancellationToken);
-            if (user is not null)
-            {
-                displayNameLookup[userId] = user.DisplayName;
-            }
-        }
+        var users = await _userRepository.ListByIdsAsync(userIds, cancellationToken);
+        var displayNameLookup = users.ToDictionary(u => u.Id, u => u.DisplayName);
 
         return events.Select(evt =>
         {
