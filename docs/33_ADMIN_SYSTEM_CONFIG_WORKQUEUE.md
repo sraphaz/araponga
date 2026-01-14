@@ -1,82 +1,143 @@
-# System Config, Work Queue e Evidências (Admin)
+# System Config e Work Queue (P0)
 
-Este documento descreve os componentes “admin” introduzidos para suportar **configurações calibráveis**, **filas de revisão humana** e **evidências documentais**, preservando o modelo atual (User-Centric Membership) e o princípio de governança mínima por território.
+Este documento descreve a base **P0** implementada para:
 
-## Objetivos (P0)
+- **SystemConfig**: configurações globais calibráveis gerenciadas por `SystemAdmin`.
+- **Work Queue**: fila genérica de itens de trabalho para suportar **automação + fallback humano** (curadoria/moderação/verificações).
 
-- Centralizar configurações calibráveis do sistema em **SystemConfig** (auditável).
-- Padronizar filas de revisão humana em um modelo genérico **WorkItem** (Work Queue).
-- Implementar verificação documental:
-  - **Identidade (global)** com fallback para **SystemAdmin**
-  - **Residência (territorial)** com fallback para **Curator** do território
-- Permitir armazenamento de evidências fora do banco (arquivo) + metadados no banco (**DocumentEvidence**).
-- Habilitar **download por proxy** (API faz o streaming do storage), evitando URLs públicas ou pré-assinadas neste estágio.
+> Nota: **SystemConfig não armazena segredos** (senhas, API keys). Apenas valores calibráveis e seleção de provider.
+> Segredos devem permanecer em variáveis de ambiente/secret manager.
 
 ---
 
-## Papéis e permissões
+## 1) SystemConfig
 
-- **SystemAdmin** (via `SystemPermissionType.SystemAdmin`)
-  - Gerencia `SystemConfig`
-  - Decide verificação de **identidade**
-  - Pode acessar/baixar evidências via endpoints admin
-- **Curator** (via `MembershipCapabilityType.Curator`, territorial)
-  - Decide verificação de **residência** no território
-  - Decide curadoria de **assets** sugeridos no território
-  - Pode listar/completar WorkItems territoriais
-- **Moderator** (via `MembershipCapabilityType.Moderator`, territorial)
-  - Decide casos de moderação (WorkItem `MODERATIONCASE`)
-  - Pode listar/completar WorkItems territoriais (quando aplicável)
-- **Resident validado**
-  - Continua habilitado para validações comunitárias (onde o modelo prevê), mas a “decisão final” do fluxo é do Curator quando existir curadoria.
+### Objetivo
+Centralizar configurações globais que hoje ficam espalhadas (thresholds, janelas, toggles, providers, etc.), com:
 
----
-
-## SystemConfig
-
-### O que é
-`SystemConfig` é uma configuração **global** (não territorial) composta por:
-- `Key` (string única)
-- `Value` (string)
-- `Category` (ex.: Providers, Security, Moderation, Validation, etc.)
-- `Description` (opcional)
-- metadados de auditoria (created/updated por quem e quando)
-
-### Endpoints (SystemAdmin)
-- `GET /api/v1/admin/system-config`
-- `GET /api/v1/admin/system-config/{key}`
-- `PUT /api/v1/admin/system-config`
-
-> Todas as alterações são auditadas (`IAuditLogger`).
-
----
-
-## Work Queue (WorkItem)
-
-### O que é
-`WorkItem` representa um trabalho pendente de revisão/ação humana, com:
-- `Type` (ex.: `IdentityVerification`, `ResidencyVerification`, `AssetCuration`, `ModerationCase`)
-- `Status` (`Open`, `RequiresHumanReview`, `Completed`, `Cancelled`)
-- `Outcome` (`Approved`, `Rejected`, `NoAction`, `None`)
-- `TerritoryId` (opcional, para itens globais fica `null`)
-- requisitos de autorização:
-  - `RequiredSystemPermission` (ex.: SystemAdmin)
-  - `RequiredCapability` (ex.: Curator/Moderator)
-- `SubjectType` / `SubjectId` (ex.: USER, MEMBERSHIP, REPORT, ASSET)
-- `PayloadJson` (campo livre para anexar contexto mínimo)
+- auditoria (`system_config.created` / `system_config.updated`)
+- cache leve (5 min) com invalidação em update
 
 ### Endpoints
-**Globais (SystemAdmin):**
-- `GET /api/v1/admin/work-items`
-- `POST /api/v1/admin/work-items/{workItemId}/complete`
 
-**Por território (Curator/Moderator):**
-- `GET /api/v1/territories/{territoryId}/work-items`
-- `POST /api/v1/territories/{territoryId}/work-items/{workItemId}/complete`
+- **Listar configs** (filtro opcional por categoria):
+  - `GET /api/v1/admin/system-configs?category=MODERATION|VALIDATION|ASSETS|PROVIDERS|OBSERVABILITY|SECURITY|OTHER`
+
+- **Obter por key**:
+  - `GET /api/v1/admin/system-configs/{key}`
+
+- **Criar/atualizar (upsert)**:
+  - `PUT /api/v1/admin/system-configs/{key}`
+  - Body:
+    - `value` (string)
+    - `category` (string)
+    - `description` (string, opcional)
+
+### Permissão
+- Requer `SystemPermissionType.SystemAdmin`.
 
 ---
 
-## Evidências documentais (DocumentEvidence)
+## 2) Work Queue (Work Items)
+
+### Objetivo
+Representar uma fila genérica para tarefas que podem começar automáticas e, quando necessário, cair em revisão humana:
+
+- verificação de identidade (global)
+- verificação de residência (territorial)
+- curadoria de assets (territorial)
+- casos de moderação (territorial)
+
+Nesta fase P0, o foco é a **infra**: persistência, listagem e conclusão manual com auditoria.
+
+### Endpoints (Admin)
+
+- **Listar work items (global)**:
+  - `GET /api/v1/admin/work-items?type=&status=`
+  - `type`: `IDENTITYVERIFICATION|RESIDENCYVERIFICATION|ASSETCURATION|MODERATIONCASE|OTHER`
+  - `status`: `PENDING|AUTOPROCESSED|REQUIRESHUMANREVIEW|COMPLETED|CANCELLED`
+
+- **Completar work item (global)**:
+  - `POST /api/v1/admin/work-items/{workItemId}/complete`
+  - Body:
+    - `outcome` (string): `APPROVED|REJECTED|NOACTION`
+    - `notes` (string, opcional)
+
+### Endpoints (Território)
+
+- **Listar work items do território**:
+  - `GET /api/v1/territories/{territoryId}/work-items?type=&status=`
+  - Permissão: `Curator` **ou** `Moderator` no território (SystemAdmin também passa).
+
+- **Completar work item do território**:
+  - `POST /api/v1/territories/{territoryId}/work-items/{workItemId}/complete`
+  - Permissão:
+    - se o item exige `RequiredSystemPermission`: precisa dessa `SystemPermission`
+    - se o item exige `RequiredCapability`: precisa dessa `MembershipCapability`
+    - caso contrário: `Curator` **ou** `Moderator`
+
+### Auditoria
+- Criação: `work_item.created`
+- Conclusão: `work_item.completed`
+
+---
+
+## Próximos passos (P1/P2)
+
+- **P1 (Verificações)**: usar Work Items para fila de identidade e residência com evidências (upload/asset).
+- **P1 (Assets)**: manter validação comunitária por Resident, e adicionar decisão final por Curator (estado/curation status).
+- **P2 (Moderação)**: alimentar Work Items a partir de reports/blocks, com fallback para Moderator e (futuro) triagem por IA.
+
+---
+
+## 3) Verificações (P1 - já com endpoints iniciais)
+
+### Submissão (usuário)
+- **Identidade (global)**:
+  - `POST /api/v1/verification/identity/document`
+  - Body: `{"documentRef":"..."}`
+  - Resultado: retorna `workItemId` (vai para revisão humana por SystemAdmin).
+
+- **Identidade (global) com upload**:
+  - `POST /api/v1/verification/identity/document/upload` (multipart/form-data)
+  - Form: `file`
+  - Resultado: retorna `evidenceId` e `workItemId`.
+
+- **Residência (territorial)**:
+  - `POST /api/v1/memberships/{territoryId}/verify-residency/document`
+  - Body: `{"documentRef":"..."}`
+  - Resultado: retorna `workItemId` (vai para revisão humana por Curator do território).
+
+- **Residência (territorial) com upload**:
+  - `POST /api/v1/memberships/{territoryId}/verify-residency/document/upload` (multipart/form-data)
+  - Form: `file`
+  - Resultado: retorna `evidenceId` e `workItemId`.
+
+### Decisão (humano)
+- **Identidade (SystemAdmin)**:
+  - `POST /api/v1/admin/verifications/identity/{workItemId}/decide`
+  - Body: `{"outcome":"APPROVED|REJECTED","notes":"..."}`
+
+- **Residência (Curator)**:
+  - `POST /api/v1/territories/{territoryId}/verifications/residency/{workItemId}/decide`
+  - Body: `{"outcome":"APPROVED|REJECTED","notes":"..."}`
+
+---
+
+## 4) Assets (P1 - curadoria + fila)
+
+### Comportamento
+- Ao criar um `TerritoryAsset`, o status inicial passa a ser **`SUGGESTED`** e um Work Item de **`ASSETCURATION`** é criado para curadoria humana.
+- **Resident validado** continua podendo registrar validações (`/api/v1/assets/{assetId}/validate`), como sinal comunitário.
+- **Curator** faz a decisão final de curadoria.
+
+### Endpoint de curadoria (Curator)
+- `POST /api/v1/assets/{assetId}/curate?territoryId=...`
+- Body: `{"outcome":"APPROVED|REJECTED","notes":"..."}`
+
+---
+
+## 5) Evidências (DocumentEvidence) (P1)
 
 ### O que é
 `DocumentEvidence` armazena apenas **metadados**:
@@ -90,12 +151,6 @@ Este documento descreve os componentes “admin” introduzidos para suportar **
 
 O conteúdo do arquivo fica em `IFileStorage` (local ou S3/MinIO).
 
-### Upload (multipart/form-data)
-- **Identidade (global)**:
-  - `POST /api/v1/verification/identity/document/upload`
-- **Residência (territorial)**:
-  - `POST /api/v1/memberships/{territoryId}/verify-residency/document/upload`
-
 ### Download por proxy (stream via API)
 - **Admin (SystemAdmin)**:
   - `GET /api/v1/admin/evidences/{evidenceId}/download`
@@ -103,59 +158,4 @@ O conteúdo do arquivo fica em `IFileStorage` (local ou S3/MinIO).
   - `GET /api/v1/territories/{territoryId}/evidences/{evidenceId}/download`
 
 > O download por proxy permite aplicar autorização/auditoria e não expõe URL pública do storage.
-
----
-
-## Fluxos implementados
-
-### 1) Verificação de Identidade (global)
-1. Usuário faz upload (`/verification/identity/document/upload`)
-2. Sistema cria `DocumentEvidence (Kind=Identity)`
-3. Sistema cria `WorkItem (Type=IdentityVerification, RequiredSystemPermission=SystemAdmin)`
-4. SystemAdmin decide:
-   - `POST /api/v1/admin/verifications/identity/{workItemId}/decide` com outcome `APPROVED|REJECTED`
-
-### 2) Verificação de Residência (territorial)
-1. Usuário (Resident) faz upload (`/memberships/{territoryId}/verify-residency/document/upload`)
-2. Sistema cria `DocumentEvidence (Kind=Residency, TerritoryId=territoryId)`
-3. Sistema cria `WorkItem (Type=ResidencyVerification, RequiredCapability=Curator)`
-4. Curator decide:
-   - `POST /api/v1/territories/{territoryId}/verification/residency/{workItemId}/decide`
-
-### 3) Curadoria de Assets (territorial)
-1. Asset é criado como `Suggested`
-2. Sistema cria `WorkItem (Type=AssetCuration, RequiredCapability=Curator)`
-3. Curator aprova/rejeita via endpoint de curadoria
-
-### 4) Moderação por Reports (territorial)
-1. Um report é criado (post/user)
-2. Um `WorkItem (Type=ModerationCase)` é enfileirado
-3. Curator/Moderator decide:
-   - `POST /api/v1/territories/{territoryId}/moderation/cases/{workItemId}/decide`
-
----
-
-## Storage (Local vs S3/MinIO)
-
-### Interface
-`IFileStorage` define operações de:
-- `SaveAsync(stream, fileName, contentType)`
-- `OpenReadAsync(storageKey)`
-- `Provider` (`Local` ou `S3`)
-
-### Configuração S3/MinIO
-Para habilitar:
-- `Storage:Provider = S3`
-- `Storage:S3:Bucket`
-- `Storage:S3:Region`
-- `Storage:S3:ServiceUrl` (MinIO)
-- `Storage:S3:ForcePathStyle = true` (MinIO recomendado)
-- `Storage:S3:AccessKey` / `Storage:S3:SecretKey`
-
----
-
-## Observações
-
-- Este P0 não inclui OCR/IA/provedores de e-mail/SMS — apenas estrutura para calibrar via `SystemConfig` e evoluir.
-- A abordagem de download adotada é **proxy** (mais simples, mais controlada). URL pré-assinada fica para uma fase futura.
 
