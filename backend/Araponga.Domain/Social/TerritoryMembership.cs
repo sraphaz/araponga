@@ -9,6 +9,33 @@ public sealed class TerritoryMembership
         MembershipRole role,
         VerificationStatus verificationStatus,
         DateTime createdAtUtc)
+        : this(id, userId, territoryId, role, verificationStatus, null, null, null, createdAtUtc)
+    {
+    }
+
+    public TerritoryMembership(
+        Guid id,
+        Guid userId,
+        Guid territoryId,
+        MembershipRole role,
+        ResidencyVerification residencyVerification,
+        DateTime? lastGeoVerifiedAtUtc,
+        DateTime? lastDocumentVerifiedAtUtc,
+        DateTime createdAtUtc)
+        : this(id, userId, territoryId, role, null, residencyVerification, lastGeoVerifiedAtUtc, lastDocumentVerifiedAtUtc, createdAtUtc)
+    {
+    }
+
+    private TerritoryMembership(
+        Guid id,
+        Guid userId,
+        Guid territoryId,
+        MembershipRole role,
+        VerificationStatus? verificationStatus,
+        ResidencyVerification? residencyVerification,
+        DateTime? lastGeoVerifiedAtUtc,
+        DateTime? lastDocumentVerifiedAtUtc,
+        DateTime createdAtUtc)
     {
         if (userId == Guid.Empty)
         {
@@ -24,24 +51,84 @@ public sealed class TerritoryMembership
         UserId = userId;
         TerritoryId = territoryId;
         Role = role;
-        VerificationStatus = verificationStatus;
         CreatedAtUtc = createdAtUtc;
+
+        // Para compatibilidade durante migração: se verificationStatus foi fornecido, converter para residencyVerification
+        if (verificationStatus.HasValue)
+        {
+            VerificationStatus = verificationStatus.Value;
+            ResidencyVerification = ConvertVerificationStatusToResidencyVerification(verificationStatus.Value, role);
+        }
+        else if (residencyVerification.HasValue)
+        {
+            ResidencyVerification = residencyVerification.Value;
+        }
+        else
+        {
+            ResidencyVerification = Araponga.Domain.Social.ResidencyVerification.Unverified;
+        }
+
+        LastGeoVerifiedAtUtc = lastGeoVerifiedAtUtc;
+        LastDocumentVerifiedAtUtc = lastDocumentVerifiedAtUtc;
     }
 
     public Guid Id { get; }
     public Guid UserId { get; }
     public Guid TerritoryId { get; }
     public MembershipRole Role { get; private set; }
+    
+    [Obsolete("Use ResidencyVerification instead. This property will be removed in a future version.")]
     public VerificationStatus VerificationStatus { get; private set; }
+    
+    public ResidencyVerification ResidencyVerification { get; private set; }
+    public DateTime? LastGeoVerifiedAtUtc { get; private set; }
+    public DateTime? LastDocumentVerifiedAtUtc { get; private set; }
     public DateTime CreatedAtUtc { get; }
 
+    [Obsolete("Use UpdateResidencyVerification methods instead.")]
     public void UpdateVerificationStatus(VerificationStatus status)
     {
         VerificationStatus = status;
+        ResidencyVerification = ConvertVerificationStatusToResidencyVerification(status, Role);
     }
 
     public void UpdateRole(MembershipRole role)
     {
         Role = role;
+    }
+
+    public void UpdateResidencyVerification(ResidencyVerification verification)
+    {
+        ResidencyVerification = verification;
+    }
+
+    public void UpdateGeoVerification(DateTime verifiedAtUtc)
+    {
+        ResidencyVerification = Araponga.Domain.Social.ResidencyVerification.GeoVerified;
+        LastGeoVerifiedAtUtc = verifiedAtUtc;
+    }
+
+    public void UpdateDocumentVerification(DateTime verifiedAtUtc)
+    {
+        ResidencyVerification = Araponga.Domain.Social.ResidencyVerification.DocumentVerified;
+        LastDocumentVerifiedAtUtc = verifiedAtUtc;
+    }
+
+    private static ResidencyVerification ConvertVerificationStatusToResidencyVerification(
+        VerificationStatus status,
+        MembershipRole role)
+    {
+        if (role == MembershipRole.Visitor)
+        {
+            return Araponga.Domain.Social.ResidencyVerification.Unverified;
+        }
+
+        return status switch
+        {
+            VerificationStatus.Pending => Araponga.Domain.Social.ResidencyVerification.Unverified,
+            VerificationStatus.Validated => Araponga.Domain.Social.ResidencyVerification.GeoVerified, // Assumir geo como padrão
+            VerificationStatus.Rejected => Araponga.Domain.Social.ResidencyVerification.Unverified,
+            _ => Araponga.Domain.Social.ResidencyVerification.Unverified
+        };
     }
 }
