@@ -373,7 +373,6 @@ public sealed class ApplicationServiceTests
         var userRepository = new InMemoryUserRepository(dataStore);
         var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
         var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
-        var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -428,7 +427,6 @@ public sealed class ApplicationServiceTests
         var userRepository = new InMemoryUserRepository(dataStore);
         var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
         var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
-        var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -468,7 +466,6 @@ public sealed class ApplicationServiceTests
         var userRepository = new InMemoryUserRepository(dataStore);
         var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
         var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
-        var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -517,7 +514,6 @@ public sealed class ApplicationServiceTests
         var userRepository = new InMemoryUserRepository(dataStore);
         var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
         var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
-        var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -593,7 +589,6 @@ public sealed class ApplicationServiceTests
         var userRepository = new InMemoryUserRepository(dataStore);
         var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
         var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
-        var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
