@@ -30,7 +30,7 @@ public sealed class RepositoryTests
     }
 
     [Fact]
-    public async Task UserRepository_AddAndGetByProvider()
+    public async Task UserRepository_AddAndGetByAuthProvider()
     {
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryUserRepository(dataStore);
@@ -52,6 +52,8 @@ public sealed class RepositoryTests
         var found = await repository.GetByAuthProviderAsync("google", "test-external-id", CancellationToken.None);
         Assert.NotNull(found);
         Assert.Equal(user.Id, found!.Id);
+        Assert.Equal("google", found.AuthProvider);
+        Assert.Equal("test-external-id", found.ExternalId);
     }
 
     [Fact]
@@ -164,7 +166,7 @@ public sealed class RepositoryTests
     }
 
     [Fact]
-    public async Task ListingRepository_AddAndSearch()
+    public async Task StoreItemRepository_AddAndSearch()
     {
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryStoreItemRepository(dataStore);
@@ -279,7 +281,7 @@ public sealed class RepositoryTests
     }
 
     [Fact]
-    public async Task ListingRepository_SearchPagedAsync_ReturnsPagedResults()
+    public async Task StoreItemRepository_SearchPagedAsync_ReturnsPagedResults()
     {
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryStoreItemRepository(dataStore);

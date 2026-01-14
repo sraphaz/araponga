@@ -75,12 +75,12 @@ public sealed class DomainValidationTests
     }
 
     [Fact]
-    public void User_RequiresProvider()
+    public void User_RequiresAuthProvider()
     {
         var exception = Assert.Throws<ArgumentException>(() =>
             new User(Guid.NewGuid(), "User", "user@araponga.com", "123.456.789-00", null, null, null, "", "ext", DateTime.UtcNow));
 
-        Assert.Contains("provider", exception.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("auth provider", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -255,6 +255,52 @@ public sealed class DomainValidationTests
         Assert.Null(user.TwoFactorSecret);
         Assert.Null(user.TwoFactorRecoveryCodesHash);
         Assert.Null(user.TwoFactorVerifiedAtUtc);
+    }
+
+    [Fact]
+    public void User_UpdateIdentityVerification_UpdatesStatus()
+    {
+        var user = new User(
+            Guid.NewGuid(),
+            "User",
+            "user@araponga.com",
+            "123.456.789-00",
+            null,
+            null,
+            null,
+            "google",
+            "ext",
+            DateTime.UtcNow);
+
+        Assert.Equal(UserIdentityVerificationStatus.Unverified, user.IdentityVerificationStatus);
+        Assert.Null(user.IdentityVerifiedAtUtc);
+
+        var verifiedAt = DateTime.UtcNow;
+        user.UpdateIdentityVerification(UserIdentityVerificationStatus.Verified, verifiedAt);
+
+        Assert.Equal(UserIdentityVerificationStatus.Verified, user.IdentityVerificationStatus);
+        Assert.Equal(verifiedAt, user.IdentityVerifiedAtUtc);
+    }
+
+    [Fact]
+    public void User_UpdateIdentityVerification_WithoutTimestamp()
+    {
+        var user = new User(
+            Guid.NewGuid(),
+            "User",
+            "user@araponga.com",
+            "123.456.789-00",
+            null,
+            null,
+            null,
+            "google",
+            "ext",
+            DateTime.UtcNow);
+
+        user.UpdateIdentityVerification(UserIdentityVerificationStatus.Pending);
+
+        Assert.Equal(UserIdentityVerificationStatus.Pending, user.IdentityVerificationStatus);
+        Assert.Null(user.IdentityVerifiedAtUtc);
     }
 
     [Fact]
