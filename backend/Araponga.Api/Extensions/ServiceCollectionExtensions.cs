@@ -55,6 +55,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<CartService>();
         services.AddScoped<UserPreferencesService>();
         services.AddScoped<UserProfileService>();
+        services.AddScoped<SystemPermissionService>();
+        services.AddScoped<MembershipCapabilityService>();
 
         return services;
     }
@@ -64,6 +66,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventBus, InMemoryEventBus>();
         services.AddScoped<IEventHandler<PostCreatedEvent>, PostCreatedNotificationHandler>();
         services.AddScoped<IEventHandler<ReportCreatedEvent>, ReportCreatedNotificationHandler>();
+        services.AddScoped<IEventHandler<SystemPermissionRevokedEvent>, SystemPermissionRevokedCacheHandler>();
+        services.AddScoped<IEventHandler<MembershipCapabilityRevokedEvent>, MembershipCapabilityRevokedCacheHandler>();
 
         return services;
     }

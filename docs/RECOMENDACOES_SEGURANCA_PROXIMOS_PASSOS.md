@@ -295,14 +295,14 @@ public sealed class SystemPermissionsAdminController : ControllerBase
 - [x] ✅ Validação de segurança completa
 - [x] ✅ Testes de segurança
 - [x] ✅ Documentação de validação
-- [ ] ⏳ Criar eventos de domínio para revogação
-- [ ] ⏳ Implementar handlers de eventos para invalidação de cache
+- [x] ✅ Criar eventos de domínio para revogação
+- [x] ✅ Implementar handlers de eventos para invalidação de cache
 
 ### Fase 2: Serviços Administrativos (Curto Prazo)
-- [ ] ⏳ Criar `SystemPermissionService`
-- [ ] ⏳ Criar `MembershipCapabilityService`
+- [x] ✅ Criar `SystemPermissionService`
+- [x] ✅ Criar `MembershipCapabilityService`
 - [ ] ⏳ Adicionar logs de auditoria
-- [ ] ⏳ Criar testes para serviços administrativos
+- [x] ✅ Criar testes para serviços administrativos
 
 ### Fase 3: API Administrativa (Médio Prazo)
 - [ ] ⏳ Criar controllers administrativos
