@@ -4,13 +4,14 @@ using Araponga.Infrastructure.InMemory;
 using Araponga.Infrastructure.Security;
 using Microsoft.Extensions.Options;
 using Xunit;
+using static Araponga.Tests.TestIds;
 
 namespace Araponga.Tests.Application;
 
 public sealed class AuthService2FATests
 {
-    // ID único para testes de 2FA (não conflita com IDs pré-populados do InMemoryDataStore)
-    private static readonly Guid UserId = Guid.Parse("ffffffff-ffff-ffff-ffff-ffffffffffff");
+    // Usar TestIds.TestUserId2FA para manter coerência com a massa de testes
+    private static readonly Guid UserId = TestUserId2FA;
 
     [Fact]
     public async Task Setup2FAAsync_GeneratesSecretAndQR()
