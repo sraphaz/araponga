@@ -75,7 +75,7 @@ public sealed class MembershipServiceTests
 
         if (!result.IsSuccess)
         {
-            Assert.True(false, $"BecomeResidentAsync failed: {result.Error}");
+            Assert.Fail($"BecomeResidentAsync failed: {result.Error}");
         }
         Assert.True(result.IsSuccess);
         Assert.NotNull(result.Value);

@@ -1,5 +1,7 @@
 namespace Araponga.Domain.Social;
 
+#pragma warning disable CS0618 // Obsolete API used for backward compatibility during migration
+
 public sealed class TerritoryMembership
 {
     public TerritoryMembership(
@@ -161,3 +163,5 @@ public sealed class TerritoryMembership
         };
     }
 }
+
+#pragma warning restore CS0618

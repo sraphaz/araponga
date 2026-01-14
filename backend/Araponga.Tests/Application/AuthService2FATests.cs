@@ -262,7 +262,6 @@ public sealed class AuthService2FATests
             CancellationToken.None);
 
         Assert.True(result.IsSuccess);
-        Assert.NotNull(result.Value);
         Assert.NotNull(result.Value!.token);
     }
 
