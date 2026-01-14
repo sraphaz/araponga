@@ -86,4 +86,67 @@ public sealed class InMemoryTerritoryMembershipRepository : ITerritoryMembership
         membership.UpdateVerificationStatus(status);
         return Task.CompletedTask;
     }
+
+    public Task<bool> HasResidentMembershipAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var hasResident = _dataStore.Memberships.Any(m =>
+            m.UserId == userId &&
+            m.Role == MembershipRole.Resident);
+
+        return Task.FromResult(hasResident);
+    }
+
+    public Task<TerritoryMembership?> GetResidentMembershipAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var membership = _dataStore.Memberships.FirstOrDefault(m =>
+            m.UserId == userId &&
+            m.Role == MembershipRole.Resident);
+
+        return Task.FromResult(membership);
+    }
+
+    public Task<IReadOnlyList<TerritoryMembership>> ListByUserAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var memberships = _dataStore.Memberships
+            .Where(m => m.UserId == userId)
+            .ToList();
+
+        return Task.FromResult<IReadOnlyList<TerritoryMembership>>(memberships);
+    }
+
+    public Task UpdateResidencyVerificationAsync(Guid membershipId, ResidencyVerification verification, CancellationToken cancellationToken)
+    {
+        var membership = _dataStore.Memberships.FirstOrDefault(m => m.Id == membershipId);
+        if (membership is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        membership.UpdateResidencyVerification(verification);
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateGeoVerificationAsync(Guid membershipId, DateTime verifiedAtUtc, CancellationToken cancellationToken)
+    {
+        var membership = _dataStore.Memberships.FirstOrDefault(m => m.Id == membershipId);
+        if (membership is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        membership.UpdateGeoVerification(verifiedAtUtc);
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateDocumentVerificationAsync(Guid membershipId, DateTime verifiedAtUtc, CancellationToken cancellationToken)
+    {
+        var membership = _dataStore.Memberships.FirstOrDefault(m => m.Id == membershipId);
+        if (membership is null)
+        {
+            return Task.CompletedTask;
+        }
+
+        membership.UpdateDocumentVerification(verifiedAtUtc);
+        return Task.CompletedTask;
+    }
 }

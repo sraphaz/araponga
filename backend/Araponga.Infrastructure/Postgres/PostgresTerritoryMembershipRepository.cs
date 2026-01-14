@@ -96,4 +96,82 @@ public sealed class PostgresTerritoryMembershipRepository : ITerritoryMembership
         membership.Role = role;
         membership.VerificationStatus = status;
     }
+
+    public Task<bool> HasResidentMembershipAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        return _dbContext.TerritoryMemberships
+            .AsNoTracking()
+            .AnyAsync(
+                membership => membership.UserId == userId &&
+                              membership.Role == MembershipRole.Resident,
+                cancellationToken);
+    }
+
+    public async Task<TerritoryMembership?> GetResidentMembershipAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var record = await _dbContext.TerritoryMemberships
+            .AsNoTracking()
+            .FirstOrDefaultAsync(
+                membership => membership.UserId == userId &&
+                              membership.Role == MembershipRole.Resident,
+                cancellationToken);
+        return record?.ToDomain();
+    }
+
+    public async Task<IReadOnlyList<TerritoryMembership>> ListByUserAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.TerritoryMemberships
+            .AsNoTracking()
+            .Where(membership => membership.UserId == userId)
+            .ToListAsync(cancellationToken);
+
+        return records.Select(record => record.ToDomain()).ToList();
+    }
+
+    public async Task UpdateResidencyVerificationAsync(Guid membershipId, ResidencyVerification verification, CancellationToken cancellationToken)
+    {
+        var membership = await _dbContext.TerritoryMemberships
+            .FirstOrDefaultAsync(m => m.Id == membershipId, cancellationToken);
+
+        if (membership is null)
+        {
+            return;
+        }
+
+        // TODO: Atualizar quando migration adicionar campo ResidencyVerification
+        // Por enquanto, apenas atualizar o domain object (persistência será feita na migration)
+        // Quando a migration adicionar o campo, atualizar: membership.ResidencyVerification = verification;
+    }
+
+    public async Task UpdateGeoVerificationAsync(Guid membershipId, DateTime verifiedAtUtc, CancellationToken cancellationToken)
+    {
+        var membership = await _dbContext.TerritoryMemberships
+            .FirstOrDefaultAsync(m => m.Id == membershipId, cancellationToken);
+
+        if (membership is null)
+        {
+            return;
+        }
+
+        // TODO: Atualizar quando migration adicionar campos
+        // Quando a migration adicionar os campos, atualizar:
+        // membership.ResidencyVerification = ResidencyVerification.GeoVerified;
+        // membership.LastGeoVerifiedAtUtc = verifiedAtUtc;
+    }
+
+    public async Task UpdateDocumentVerificationAsync(Guid membershipId, DateTime verifiedAtUtc, CancellationToken cancellationToken)
+    {
+        var membership = await _dbContext.TerritoryMemberships
+            .FirstOrDefaultAsync(m => m.Id == membershipId, cancellationToken);
+
+        if (membership is null)
+        {
+            return;
+        }
+
+        // TODO: Atualizar quando migration adicionar campos
+        // Quando a migration adicionar os campos, atualizar:
+        // membership.ResidencyVerification = ResidencyVerification.DocumentVerified;
+        // membership.LastDocumentVerifiedAtUtc = verifiedAtUtc;
+    }
 }
