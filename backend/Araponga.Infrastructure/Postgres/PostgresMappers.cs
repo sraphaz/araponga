@@ -60,6 +60,10 @@ public static class PostgresMappers
             Provider = user.Provider,
             ExternalId = user.ExternalId,
             Role = user.Role,
+            TwoFactorEnabled = user.TwoFactorEnabled,
+            TwoFactorSecret = user.TwoFactorSecret,
+            TwoFactorRecoveryCodesHash = user.TwoFactorRecoveryCodesHash,
+            TwoFactorVerifiedAtUtc = user.TwoFactorVerifiedAtUtc,
             CreatedAtUtc = user.CreatedAtUtc
         };
     }
@@ -77,6 +81,10 @@ public static class PostgresMappers
             record.Provider,
             record.ExternalId,
             record.Role,
+            record.TwoFactorEnabled,
+            record.TwoFactorSecret,
+            record.TwoFactorRecoveryCodesHash,
+            record.TwoFactorVerifiedAtUtc,
             record.CreatedAtUtc);
     }
 
@@ -88,13 +96,31 @@ public static class PostgresMappers
             UserId = membership.UserId,
             TerritoryId = membership.TerritoryId,
             Role = membership.Role,
-            VerificationStatus = membership.VerificationStatus,
+            VerificationStatus = membership.VerificationStatus, // Mantém para compatibilidade
+            ResidencyVerification = membership.ResidencyVerification,
+            LastGeoVerifiedAtUtc = membership.LastGeoVerifiedAtUtc,
+            LastDocumentVerifiedAtUtc = membership.LastDocumentVerifiedAtUtc,
             CreatedAtUtc = membership.CreatedAtUtc
         };
     }
 
     public static TerritoryMembership ToDomain(this TerritoryMembershipRecord record)
     {
+        // Usar novo construtor se ResidencyVerification estiver disponível
+        if (record.ResidencyVerification != default(ResidencyVerification))
+        {
+            return new TerritoryMembership(
+                record.Id,
+                record.UserId,
+                record.TerritoryId,
+                record.Role,
+                record.ResidencyVerification,
+                record.LastGeoVerifiedAtUtc,
+                record.LastDocumentVerifiedAtUtc,
+                record.CreatedAtUtc);
+        }
+
+        // Fallback para compatibilidade com dados antigos
         return new TerritoryMembership(
             record.Id,
             record.UserId,

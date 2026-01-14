@@ -83,6 +83,10 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(u => u.Provider).HasMaxLength(80).IsRequired();
             entity.Property(u => u.ExternalId).HasMaxLength(160).IsRequired();
             entity.Property(u => u.Role).HasConversion<int>();
+            // 2FA fields
+            entity.Property(u => u.TwoFactorSecret).HasMaxLength(500);
+            entity.Property(u => u.TwoFactorRecoveryCodesHash).HasMaxLength(500);
+            entity.Property(u => u.TwoFactorVerifiedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(u => u.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(u => u.Email).IsUnique();
             entity.HasIndex(u => new { u.Provider, u.ExternalId }).IsUnique();
@@ -108,11 +112,18 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.ToTable("territory_memberships");
             entity.HasKey(m => m.Id);
             entity.Property(m => m.Role).HasConversion<int>();
-            entity.Property(m => m.VerificationStatus).HasConversion<int>();
+            entity.Property(m => m.VerificationStatus).HasConversion<int>(); // Mantém para compatibilidade
+            entity.Property(m => m.ResidencyVerification).HasConversion<int>();
+            entity.Property(m => m.LastGeoVerifiedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(m => m.LastDocumentVerifiedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(m => m.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(m => m.UserId);
             entity.HasIndex(m => m.TerritoryId);
             entity.HasIndex(m => new { m.UserId, m.TerritoryId }).IsUnique();
+            // Índice único parcial para garantir 1 Resident por User
+            entity.HasIndex(m => m.UserId)
+                .HasFilter("\"Role\" = 1") // MembershipRole.Resident = 1
+                .IsUnique();
         });
 
         modelBuilder.Entity<UserTerritoryRecord>(entity =>
