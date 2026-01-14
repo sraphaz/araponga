@@ -265,13 +265,17 @@ public sealed class AuthService
         var codes = new List<string>();
         for (int i = 0; i < count; i++)
         {
-            var bytes = new byte[8];
+            // Gerar bytes suficientes para garantir 12 caracteres após remover caracteres especiais
+            // 9 bytes = 12 caracteres Base64, garantindo pelo menos 12 após limpeza
+            var bytes = new byte[9];
             RandomNumberGenerator.Fill(bytes);
-            var code = Convert.ToBase64String(bytes)
+            var base64 = Convert.ToBase64String(bytes)
                 .Replace("+", "-")
                 .Replace("/", "_")
-                .Replace("=", "")
-                .Substring(0, 12);
+                .Replace("=", "");
+            
+            // Pegar os primeiros 12 caracteres (garantido ter pelo menos 12)
+            var code = base64.Length >= 12 ? base64.Substring(0, 12) : base64;
             codes.Add(code);
         }
         return codes;
