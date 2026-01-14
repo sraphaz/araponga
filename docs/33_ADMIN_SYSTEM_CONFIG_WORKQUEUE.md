@@ -135,3 +135,27 @@ Nesta fase P0, o foco é a **infra**: persistência, listagem e conclusão manua
 - `POST /api/v1/assets/{assetId}/curate?territoryId=...`
 - Body: `{"outcome":"APPROVED|REJECTED","notes":"..."}`
 
+---
+
+## 5) Evidências (DocumentEvidence) (P1)
+
+### O que é
+`DocumentEvidence` armazena apenas **metadados**:
+- `Id`
+- `UserId`
+- `TerritoryId` (obrigatório para residência; nulo para identidade)
+- `Kind` (`Identity` | `Residency`)
+- `StorageProvider` (`Local` | `S3`)
+- `StorageKey` (chave/caminho no storage)
+- `ContentType`, `SizeBytes`, `Sha256`, `OriginalFileName`, `CreatedAtUtc`
+
+O conteúdo do arquivo fica em `IFileStorage` (local ou S3/MinIO).
+
+### Download por proxy (stream via API)
+- **Admin (SystemAdmin)**:
+  - `GET /api/v1/admin/evidences/{evidenceId}/download`
+- **Território (Curator/Moderator)**:
+  - `GET /api/v1/territories/{territoryId}/evidences/{evidenceId}/download`
+
+> O download por proxy permite aplicar autorização/auditoria e não expõe URL pública do storage.
+
