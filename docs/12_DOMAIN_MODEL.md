@@ -5,14 +5,15 @@
 ## Entidades principais
 
 ### Identidade e Autenticação
-- **User** (identidade pessoal global, autenticação, verificação de identidade global)
+- **User** (identidade pessoal global, autenticação via AuthProvider, verificação de identidade global via UserIdentityVerificationStatus)
+- **SystemPermission** (permissões globais do sistema: Admin, SystemOperator - não territoriais)
 - **UserPreferences** (preferências de privacidade e notificações do usuário)
 
 ### Território e Vínculos
 - **Territory** (território geográfico)
-- **TerritoryMembership** (vínculo User ↔ Territory: Visitor/Resident, verificação de residência)
-- **MembershipSettings** (configurações e opt-ins do membro no território) *[novo na refatoração]*
-- **MembershipCapability** (capacidades operacionais: Curator, Moderator) *[novo na refatoração]*
+- **TerritoryMembership** (vínculo User ↔ Territory: MembershipRole Visitor/Resident, ResidencyVerification Flags, MembershipStatus)
+- **MembershipSettings** (configurações e opt-ins do membro no território, ex: marketplace_opt_in)
+- **MembershipCapability** (capacidades operacionais territoriais: Curator, Moderator, EventOrganizer - empilháveis)
 - **FeatureFlag** (flags de funcionalidades por território)
 
 ### Conteúdo
@@ -85,15 +86,23 @@
 ## Princípios do Modelo
 
 ### User-Centric
-- **User** é a pessoa única e global.
+- **User** é a pessoa única e global, focada em identidade e autenticação:
+  - DisplayName, Email, CPF/ForeignDocument, PhoneNumber, Address
+  - AuthProvider (ex: "google", "apple") + ExternalId (chave única)
+  - TwoFactor (2FA) settings
+  - UserIdentityVerificationStatus (verificação global de identidade: Unverified, Pending, Verified, Rejected)
+- **SystemPermission** representa permissões globais do sistema (Admin, SystemOperator):
+  - Não são territoriais, são globais
+  - Concedidas/revogadas com auditoria (GrantedByUserId, RevokedByUserId)
 - Verificação de identidade (`UserIdentityVerificationStatus`) pertence ao User, não ao Membership.
-- Papel técnico global (Admin) pertence ao User.
 
 ### Membership como Vínculo Territorial
-- **TerritoryMembership** representa apenas o vínculo User ↔ Territory.
-- Papel territorial: Visitor ou Resident.
-- Verificação de residência: Unverified, GeoVerified, DocumentVerified.
+- **TerritoryMembership** representa apenas o vínculo User ↔ Territory:
+  - MembershipRole: Visitor ou Resident
+  - ResidencyVerification (Flags): None, GeoVerified, DocumentVerified (permite acumulação)
+  - MembershipStatus: Pending, Active, Suspended, Revoked
 - Regra: 1 Resident por User (máximo) em todo o sistema.
+- UserTerritory foi removido (legado, substituído por TerritoryMembership).
 
 ### Settings como Escolhas
 - **MembershipSettings** concentra configurações e opt-ins do membro.
@@ -101,10 +110,11 @@
 - MarketplaceOptIn é exemplo de setting.
 
 ### Capacidades como Poderes Operacionais
-- **MembershipCapability** representa capacidades territoriais (Curator, Moderator).
+- **MembershipCapability** representa capacidades territoriais (Curator, Moderator, EventOrganizer, etc.).
 - Não são papéis sociais, são poderes operacionais.
 - Empilháveis (um Membership pode ter múltiplas).
 - Atuam apenas no território do Membership.
+- Podem ser concedidas/revogadas com auditoria (GrantedByUserId, GrantedByMembershipId, Reason).
 
 ### Marketplace como Regra Composta
 - Marketplace não é papel, identidade ou verificação.
