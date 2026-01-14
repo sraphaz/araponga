@@ -21,6 +21,7 @@ public sealed class MembershipsController : ControllerBase
     private readonly CurrentUserAccessor _currentUserAccessor;
     private readonly TerritoryService _territoryService;
     private readonly AccessEvaluator _accessEvaluator;
+    private readonly ITerritoryMembershipRepository _membershipRepository;
     private readonly PresencePolicyOptions _presencePolicy;
 
     public MembershipsController(
@@ -28,12 +29,14 @@ public sealed class MembershipsController : ControllerBase
         CurrentUserAccessor currentUserAccessor,
         TerritoryService territoryService,
         AccessEvaluator accessEvaluator,
+        ITerritoryMembershipRepository membershipRepository,
         IOptions<PresencePolicyOptions> presencePolicy)
     {
         _membershipService = membershipService;
         _currentUserAccessor = currentUserAccessor;
         _territoryService = territoryService;
         _accessEvaluator = accessEvaluator;
+        _membershipRepository = membershipRepository;
         _presencePolicy = presencePolicy.Value;
     }
 
@@ -174,6 +177,299 @@ public sealed class MembershipsController : ControllerBase
             status,
             cancellationToken);
         return success ? NoContent() : BadRequest(new { error = "Membership not found." });
+    }
+
+    /// <summary>
+    /// Entra em um território como Visitor.
+    /// </summary>
+    [HttpPost]
+    [Route("api/v1/territories/{territoryId:guid}/enter")]
+    [ProducesResponseType(typeof(EnterTerritoryResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<EnterTerritoryResponse>> EnterAsVisitor(
+        [FromRoute] Guid territoryId,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var territory = await _territoryService.GetByIdAsync(territoryId, cancellationToken);
+        if (territory is null)
+        {
+            return NotFound();
+        }
+
+        var membership = await _membershipService.EnterAsVisitorAsync(
+            userContext.User.Id,
+            territoryId,
+            cancellationToken);
+
+        var response = new EnterTerritoryResponse(
+            membership.Id,
+            membership.UserId,
+            membership.TerritoryId,
+            membership.Role.ToString().ToUpperInvariant(),
+            membership.ResidencyVerification.ToString().ToUpperInvariant(),
+            membership.LastGeoVerifiedAtUtc,
+            membership.LastDocumentVerifiedAtUtc,
+            membership.CreatedAtUtc);
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Solicita tornar-se Resident no território.
+    /// </summary>
+    [HttpPost]
+    [Route("api/v1/memberships/{territoryId:guid}/become-resident")]
+    [ProducesResponseType(typeof(MembershipDetailResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<MembershipDetailResponse>> BecomeResident(
+        [FromRoute] Guid territoryId,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var territory = await _territoryService.GetByIdAsync(territoryId, cancellationToken);
+        if (territory is null)
+        {
+            return NotFound();
+        }
+
+        var result = await _membershipService.BecomeResidentAsync(
+            userContext.User.Id,
+            territoryId,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            if (result.Error?.Contains("already has a Resident") == true)
+            {
+                return Conflict(new { error = result.Error });
+            }
+            return BadRequest(new { error = result.Error });
+        }
+
+        var membership = result.Value!;
+        var response = new MembershipDetailResponse(
+            membership.Id,
+            membership.UserId,
+            membership.TerritoryId,
+            membership.Role.ToString().ToUpperInvariant(),
+            membership.ResidencyVerification.ToString().ToUpperInvariant(),
+            membership.LastGeoVerifiedAtUtc,
+            membership.LastDocumentVerifiedAtUtc,
+            membership.CreatedAtUtc);
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Transfere residência para outro território.
+    /// </summary>
+    [HttpPost]
+    [Route("api/v1/memberships/transfer-residency")]
+    [ProducesResponseType(typeof(MembershipDetailResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<MembershipDetailResponse>> TransferResidency(
+        [FromBody] TransferResidencyRequest request,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var territory = await _territoryService.GetByIdAsync(request.ToTerritoryId, cancellationToken);
+        if (territory is null)
+        {
+            return NotFound();
+        }
+
+        var result = await _membershipService.TransferResidencyAsync(
+            userContext.User.Id,
+            request.ToTerritoryId,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            if (result.Error?.Contains("does not have a Resident") == true)
+            {
+                return BadRequest(new { error = result.Error });
+            }
+            return Conflict(new { error = result.Error });
+        }
+
+        var membership = result.Value!;
+        var response = new MembershipDetailResponse(
+            membership.Id,
+            membership.UserId,
+            membership.TerritoryId,
+            membership.Role.ToString().ToUpperInvariant(),
+            membership.ResidencyVerification.ToString().ToUpperInvariant(),
+            membership.LastGeoVerifiedAtUtc,
+            membership.LastDocumentVerifiedAtUtc,
+            membership.CreatedAtUtc);
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Verifica residência por geolocalização.
+    /// </summary>
+    [HttpPost]
+    [Route("api/v1/memberships/{territoryId:guid}/verify-residency/geo")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> VerifyResidencyGeo(
+        [FromRoute] Guid territoryId,
+        [FromBody] VerifyResidencyGeoRequest request,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        // TODO: Validar que a geo enviada é compatível com o território
+        var result = await _membershipService.VerifyResidencyByGeoAsync(
+            userContext.User.Id,
+            territoryId,
+            DateTime.UtcNow,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(new { error = result.Error });
+        }
+
+        return Ok(new { message = "Residency verified by geolocation." });
+    }
+
+    /// <summary>
+    /// Verifica residência por comprovante documental.
+    /// </summary>
+    [HttpPost]
+    [Route("api/v1/memberships/{territoryId:guid}/verify-residency/document")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> VerifyResidencyDocument(
+        [FromRoute] Guid territoryId,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        // TODO: Processar upload de comprovante se necessário
+        var result = await _membershipService.VerifyResidencyByDocumentAsync(
+            userContext.User.Id,
+            territoryId,
+            DateTime.UtcNow,
+            cancellationToken);
+
+        if (result.IsFailure)
+        {
+            return BadRequest(new { error = result.Error });
+        }
+
+        return Ok(new { message = "Document verification submitted." });
+    }
+
+    /// <summary>
+    /// Consulta meu estado de membership no território.
+    /// </summary>
+    [HttpGet]
+    [Route("api/v1/memberships/{territoryId:guid}/me")]
+    [ProducesResponseType(typeof(MembershipDetailResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<MembershipDetailResponse>> GetMyMembership(
+        [FromRoute] Guid territoryId,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var membership = await _membershipRepository.GetByUserAndTerritoryAsync(
+            userContext.User.Id,
+            territoryId,
+            cancellationToken);
+
+        if (membership is null)
+        {
+            return NotFound();
+        }
+
+        var response = new MembershipDetailResponse(
+            membership.Id,
+            membership.UserId,
+            membership.TerritoryId,
+            membership.Role.ToString().ToUpperInvariant(),
+            membership.ResidencyVerification.ToString().ToUpperInvariant(),
+            membership.LastGeoVerifiedAtUtc,
+            membership.LastDocumentVerifiedAtUtc,
+            membership.CreatedAtUtc);
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Lista todos os meus memberships.
+    /// </summary>
+    [HttpGet]
+    [Route("api/v1/memberships/me")]
+    [ProducesResponseType(typeof(MyMembershipsResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<MyMembershipsResponse>> ListMyMemberships(
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var memberships = await _membershipService.ListMyMembershipsAsync(
+            userContext.User.Id,
+            cancellationToken);
+
+        var response = new MyMembershipsResponse(
+            memberships.Select(m => new MembershipDetailResponse(
+                m.Id,
+                m.UserId,
+                m.TerritoryId,
+                m.Role.ToString().ToUpperInvariant(),
+                m.ResidencyVerification.ToString().ToUpperInvariant(),
+                m.LastGeoVerifiedAtUtc,
+                m.LastDocumentVerifiedAtUtc,
+                m.CreatedAtUtc)).ToList());
+
+        return Ok(response);
     }
 
     private bool RequiresPresence(MembershipRole role)
