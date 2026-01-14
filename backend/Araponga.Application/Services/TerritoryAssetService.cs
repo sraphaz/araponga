@@ -6,17 +6,17 @@ using Araponga.Domain.Geo;
 
 namespace Araponga.Application.Services;
 
-public sealed class AssetService
+public sealed class TerritoryAssetService
 {
-    private readonly IAssetRepository _assetRepository;
+    private readonly ITerritoryAssetRepository _assetRepository;
     private readonly IAssetGeoAnchorRepository _anchorRepository;
     private readonly IAssetValidationRepository _validationRepository;
     private readonly ITerritoryMembershipRepository _membershipRepository;
     private readonly IAuditLogger _auditLogger;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AssetService(
-        IAssetRepository assetRepository,
+    public TerritoryAssetService(
+        ITerritoryAssetRepository assetRepository,
         IAssetGeoAnchorRepository anchorRepository,
         IAssetValidationRepository validationRepository,
         ITerritoryMembershipRepository membershipRepository,
@@ -31,7 +31,7 @@ public sealed class AssetService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IReadOnlyList<AssetDetails>> ListAsync(
+    public async Task<IReadOnlyList<TerritoryAssetDetails>> ListAsync(
         Guid territoryId,
         IReadOnlyCollection<string>? types,
         AssetStatus? status,
@@ -50,7 +50,7 @@ public sealed class AssetService
         return await BuildAssetDetailsAsync(territoryId, assets, cancellationToken);
     }
 
-    public async Task<PagedResult<AssetDetails>> ListPagedAsync(
+    public async Task<PagedResult<TerritoryAssetDetails>> ListPagedAsync(
         Guid territoryId,
         IReadOnlyCollection<string>? types,
         AssetStatus? status,
@@ -75,10 +75,10 @@ public sealed class AssetService
             .Take(pagination.Take)
             .ToList();
 
-        return new PagedResult<AssetDetails>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new PagedResult<TerritoryAssetDetails>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
-    public async Task<AssetDetails?> GetByIdAsync(Guid assetId, CancellationToken cancellationToken)
+    public async Task<TerritoryAssetDetails?> GetByIdAsync(Guid assetId, CancellationToken cancellationToken)
     {
         var asset = await _assetRepository.GetByIdAsync(assetId, cancellationToken);
         if (asset is null)
@@ -90,29 +90,29 @@ public sealed class AssetService
         return details.Count > 0 ? details[0] : null;
     }
 
-    public async Task<Result<AssetDetails>> CreateAsync(
+    public async Task<Result<TerritoryAssetDetails>> CreateAsync(
         Guid territoryId,
         Guid userId,
         string type,
         string name,
         string? description,
-        IReadOnlyCollection<AssetGeoAnchorInput>? geoAnchors,
+        IReadOnlyCollection<TerritoryAssetGeoAnchorInput>? geoAnchors,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(type) || string.IsNullOrWhiteSpace(name))
         {
-            return Result<AssetDetails>.Failure("Type and name are required.");
+            return Result<TerritoryAssetDetails>.Failure("Type and name are required.");
         }
 
         if (geoAnchors is null || geoAnchors.Count == 0)
         {
-            return Result<AssetDetails>.Failure("At least one geoAnchor is required.");
+            return Result<TerritoryAssetDetails>.Failure("At least one geoAnchor is required.");
         }
 
         var anchors = BuildAnchors(geoAnchors);
         if (anchors.Count == 0)
         {
-            return Result<AssetDetails>.Failure("Invalid geoAnchors.");
+            return Result<TerritoryAssetDetails>.Failure("Invalid geoAnchors.");
         }
 
         var now = DateTime.UtcNow;
@@ -148,41 +148,41 @@ public sealed class AssetService
         var details = await BuildAssetDetailsAsync(territoryId, new[] { asset }, cancellationToken);
         if (details.Count == 0)
         {
-            return Result<AssetDetails>.Failure("Unable to build asset details.");
+            return Result<TerritoryAssetDetails>.Failure("Unable to build asset details.");
         }
-        return Result<AssetDetails>.Success(details[0]);
+        return Result<TerritoryAssetDetails>.Success(details[0]);
     }
 
-    public async Task<Result<AssetDetails>> UpdateAsync(
+    public async Task<Result<TerritoryAssetDetails>> UpdateAsync(
         Guid assetId,
         Guid territoryId,
         Guid userId,
         string type,
         string name,
         string? description,
-        IReadOnlyCollection<AssetGeoAnchorInput>? geoAnchors,
+        IReadOnlyCollection<TerritoryAssetGeoAnchorInput>? geoAnchors,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(type) || string.IsNullOrWhiteSpace(name))
         {
-            return Result<AssetDetails>.Failure("Type and name are required.");
+            return Result<TerritoryAssetDetails>.Failure("Type and name are required.");
         }
 
         if (geoAnchors is null || geoAnchors.Count == 0)
         {
-            return Result<AssetDetails>.Failure("At least one geoAnchor is required.");
+            return Result<TerritoryAssetDetails>.Failure("At least one geoAnchor is required.");
         }
 
         var asset = await _assetRepository.GetByIdAsync(assetId, cancellationToken);
         if (asset is null || asset.TerritoryId != territoryId)
         {
-            return Result<AssetDetails>.Failure("Asset not found.");
+            return Result<TerritoryAssetDetails>.Failure("Asset not found.");
         }
 
         var anchors = BuildAnchors(geoAnchors);
         if (anchors.Count == 0)
         {
-            return Result<AssetDetails>.Failure("Invalid geoAnchors.");
+            return Result<TerritoryAssetDetails>.Failure("Invalid geoAnchors.");
         }
 
         var now = DateTime.UtcNow;
@@ -210,12 +210,12 @@ public sealed class AssetService
         var details = await BuildAssetDetailsAsync(territoryId, new[] { asset }, cancellationToken);
         if (details.Count == 0)
         {
-            return Result<AssetDetails>.Failure("Unable to build asset details.");
+            return Result<TerritoryAssetDetails>.Failure("Unable to build asset details.");
         }
-        return Result<AssetDetails>.Success(details[0]);
+        return Result<TerritoryAssetDetails>.Success(details[0]);
     }
 
-    public async Task<Result<AssetDetails>> ArchiveAsync(
+    public async Task<Result<TerritoryAssetDetails>> ArchiveAsync(
         Guid assetId,
         Guid territoryId,
         Guid userId,
@@ -225,7 +225,7 @@ public sealed class AssetService
         var asset = await _assetRepository.GetByIdAsync(assetId, cancellationToken);
         if (asset is null || asset.TerritoryId != territoryId)
         {
-            return Result<AssetDetails>.Failure("Asset not found.");
+            return Result<TerritoryAssetDetails>.Failure("Asset not found.");
         }
 
         var now = DateTime.UtcNow;
@@ -241,12 +241,12 @@ public sealed class AssetService
         var details = await BuildAssetDetailsAsync(territoryId, new[] { asset }, cancellationToken);
         if (details.Count == 0)
         {
-            return Result<AssetDetails>.Failure("Unable to build asset details.");
+            return Result<TerritoryAssetDetails>.Failure("Unable to build asset details.");
         }
-        return Result<AssetDetails>.Success(details[0]);
+        return Result<TerritoryAssetDetails>.Success(details[0]);
     }
 
-    public async Task<Result<AssetValidationResult>> ValidateAsync(
+    public async Task<Result<TerritoryAssetValidationResult>> ValidateAsync(
         Guid assetId,
         Guid territoryId,
         Guid userId,
@@ -255,7 +255,7 @@ public sealed class AssetService
         var asset = await _assetRepository.GetByIdAsync(assetId, cancellationToken);
         if (asset is null || asset.TerritoryId != territoryId)
         {
-            return Result<AssetValidationResult>.Failure("Asset not found.");
+            return Result<TerritoryAssetValidationResult>.Failure("Asset not found.");
         }
 
         var exists = await _validationRepository.ExistsAsync(assetId, userId, cancellationToken);
@@ -274,19 +274,19 @@ public sealed class AssetService
         var details = await BuildAssetDetailsAsync(territoryId, new[] { asset }, cancellationToken);
         if (details.Count == 0)
         {
-            return Result<AssetValidationResult>.Failure("Unable to build asset details.");
+            return Result<TerritoryAssetValidationResult>.Failure("Unable to build asset details.");
         }
-        return Result<AssetValidationResult>.Success(new AssetValidationResult(details[0], created));
+        return Result<TerritoryAssetValidationResult>.Success(new TerritoryAssetValidationResult(details[0], created));
     }
 
-    private async Task<IReadOnlyList<AssetDetails>> BuildAssetDetailsAsync(
+    private async Task<IReadOnlyList<TerritoryAssetDetails>> BuildAssetDetailsAsync(
         Guid territoryId,
         IReadOnlyCollection<TerritoryAsset> assets,
         CancellationToken cancellationToken)
     {
         if (assets.Count == 0)
         {
-            return Array.Empty<AssetDetails>();
+            return Array.Empty<TerritoryAssetDetails>();
         }
 
         var assetIds = assets.Select(asset => asset.Id).ToList();
@@ -297,7 +297,7 @@ public sealed class AssetService
         var validationCounts = await _validationRepository.CountByAssetIdsAsync(assetIds, cancellationToken);
         var eligibleResidentsCount = (await _membershipRepository.ListResidentUserIdsAsync(territoryId, cancellationToken)).Count;
 
-        return assets.Select(asset => new AssetDetails(
+        return assets.Select(asset => new TerritoryAssetDetails(
             asset,
             anchorLookup.TryGetValue(asset.Id, out var assetAnchors)
                 ? assetAnchors
@@ -307,7 +307,7 @@ public sealed class AssetService
     }
 
     private static IReadOnlyCollection<(double Latitude, double Longitude)> BuildAnchors(
-        IReadOnlyCollection<AssetGeoAnchorInput> geoAnchors)
+        IReadOnlyCollection<TerritoryAssetGeoAnchorInput> geoAnchors)
     {
         const int MaxAnchors = 50;
         const int Precision = 5;

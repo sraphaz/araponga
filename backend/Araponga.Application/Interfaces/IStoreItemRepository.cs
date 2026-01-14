@@ -2,7 +2,7 @@ using Araponga.Domain.Marketplace;
 
 namespace Araponga.Application.Interfaces;
 
-public interface IListingRepository
+public interface IStoreItemRepository
 {
     Task<StoreItem?> GetByIdAsync(Guid itemId, CancellationToken cancellationToken);
     Task<IReadOnlyList<StoreItem>> ListByIdsAsync(IReadOnlyCollection<Guid> itemIds, CancellationToken cancellationToken);

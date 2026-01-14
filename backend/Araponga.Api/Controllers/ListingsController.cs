@@ -14,17 +14,17 @@ namespace Araponga.Api.Controllers;
 [Tags("Listings")]
 public sealed class ListingsController : ControllerBase
 {
-    private readonly ListingService _listingService;
+    private readonly StoreItemService _itemService;
     private readonly CurrentUserAccessor _currentUserAccessor;
 
-    public ListingsController(ListingService listingService, CurrentUserAccessor currentUserAccessor)
+    public ListingsController(StoreItemService itemService, CurrentUserAccessor currentUserAccessor)
     {
-        _listingService = listingService;
+        _itemService = itemService;
         _currentUserAccessor = currentUserAccessor;
     }
 
     /// <summary>
-    /// Cria um listing (produto ou serviço).
+    /// Cria um item (produto ou serviço).
     /// </summary>
     [HttpPost]
     [ProducesResponseType(typeof(ListingResponse), StatusCodes.Status201Created)]
@@ -61,7 +61,7 @@ public sealed class ListingsController : ControllerBase
             return Unauthorized();
         }
 
-        var result = await _listingService.CreateListingAsync(
+        var result = await _itemService.CreateItemAsync(
             request.TerritoryId,
             userContext.User.Id,
             request.StoreId,
@@ -86,14 +86,14 @@ public sealed class ListingsController : ControllerBase
                 return StatusCode(StatusCodes.Status403Forbidden);
             }
 
-            return BadRequest(new { error = result.Error ?? "Unable to create listing." });
+            return BadRequest(new { error = result.Error ?? "Unable to create item." });
         }
 
         return CreatedAtAction(nameof(GetListingById), new { id = result.Value.Id }, ToResponse(result.Value));
     }
 
     /// <summary>
-    /// Atualiza um listing.
+    /// Atualiza um item.
     /// </summary>
     [HttpPatch("{id:guid}")]
     [ProducesResponseType(typeof(ListingResponse), StatusCodes.Status200OK)]
@@ -143,7 +143,7 @@ public sealed class ListingsController : ControllerBase
             return Unauthorized();
         }
 
-        var result = await _listingService.UpdateListingAsync(
+        var result = await _itemService.UpdateItemAsync(
             id,
             userContext.User.Id,
             type,
@@ -176,7 +176,7 @@ public sealed class ListingsController : ControllerBase
     }
 
     /// <summary>
-    /// Arquiva um listing.
+    /// Arquiva um item.
     /// </summary>
     [HttpPost("{id:guid}/archive")]
     [ProducesResponseType(typeof(ListingResponse), StatusCodes.Status200OK)]
@@ -191,7 +191,7 @@ public sealed class ListingsController : ControllerBase
             return Unauthorized();
         }
 
-        var result = await _listingService.ArchiveListingAsync(id, userContext.User.Id, cancellationToken);
+        var result = await _itemService.ArchiveItemAsync(id, userContext.User.Id, cancellationToken);
         if (!result.IsSuccess || result.Value is null)
         {
             if (result.Error?.Contains("not found", StringComparison.OrdinalIgnoreCase) == true)
@@ -201,19 +201,22 @@ public sealed class ListingsController : ControllerBase
 
             return result.Error?.Contains("not authorized", StringComparison.OrdinalIgnoreCase) == true
                 ? StatusCode(StatusCodes.Status403Forbidden)
-                : BadRequest(new { error = result.Error ?? "Unable to archive listing." });
+                : BadRequest(new { error = result.Error ?? "Unable to archive item." });
         }
 
         return Ok(ToResponse(result.Value));
     }
 
     /// <summary>
-    /// Busca listings no território.
+    /// Busca items (produtos e serviços) no território.
     /// </summary>
+    /// <remarks>
+    /// Endpoint público. Visitantes e moradores podem consultar produtos e serviços disponíveis no território.
+    /// Por padrão, retorna apenas items ativos (Status=Active).
+    /// </remarks>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<ListingResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<IEnumerable<ListingResponse>>> SearchListings(
         [FromQuery] Guid territoryId,
         [FromQuery] string? type,
@@ -250,13 +253,7 @@ public sealed class ListingsController : ControllerBase
             parsedStatus = resolvedStatus;
         }
 
-        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
-        if (userContext.Status != TokenStatus.Valid)
-        {
-            return Unauthorized();
-        }
-
-        var listings = await _listingService.SearchListingsAsync(
+        var items = await _itemService.SearchItemsAsync(
             territoryId,
             parsedType,
             q,
@@ -265,17 +262,20 @@ public sealed class ListingsController : ControllerBase
             parsedStatus,
             cancellationToken);
 
-        var response = listings.Select(ToResponse).ToList();
+        var response = items.Select(ToResponse).ToList();
         return Ok(response);
     }
 
     /// <summary>
-    /// Busca listings no território (paginado).
+    /// Busca items (produtos e serviços) no território (paginado).
     /// </summary>
+    /// <remarks>
+    /// Endpoint público. Visitantes e moradores podem consultar produtos e serviços disponíveis no território.
+    /// Por padrão, retorna apenas items ativos (Status=Active).
+    /// </remarks>
     [HttpGet("paged")]
     [ProducesResponseType(typeof(PagedResponse<ListingResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<PagedResponse<ListingResponse>>> SearchListingsPaged(
         [FromQuery] Guid territoryId,
         [FromQuery] string? type,
@@ -314,14 +314,8 @@ public sealed class ListingsController : ControllerBase
             parsedStatus = resolvedStatus;
         }
 
-        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
-        if (userContext.Status != TokenStatus.Valid)
-        {
-            return Unauthorized();
-        }
-
         var pagination = new PaginationParameters(pageNumber, pageSize);
-        var pagedResult = await _listingService.SearchListingsPagedAsync(
+        var pagedResult = await _itemService.SearchItemsPagedAsync(
             territoryId,
             parsedType,
             q,
@@ -344,28 +338,25 @@ public sealed class ListingsController : ControllerBase
     }
 
     /// <summary>
-    /// Detalhe de um listing.
+    /// Obtém detalhes de um item (produto ou serviço).
     /// </summary>
+    /// <remarks>
+    /// Endpoint público. Visitantes e moradores podem consultar detalhes de produtos e serviços.
+    /// </remarks>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(ListingResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ListingResponse>> GetListingById(
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
-        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
-        if (userContext.Status != TokenStatus.Valid)
-        {
-            return Unauthorized();
-        }
-
-        var listing = await _listingService.GetByIdAsync(id, cancellationToken);
-        if (listing is null)
+        var item = await _itemService.GetByIdAsync(id, cancellationToken);
+        if (item is null)
         {
             return NotFound();
         }
 
-        return Ok(ToResponse(listing));
+        return Ok(ToResponse(item));
     }
 
     private static ListingResponse ToResponse(StoreItem listing)

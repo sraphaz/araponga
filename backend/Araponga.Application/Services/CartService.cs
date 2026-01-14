@@ -9,7 +9,7 @@ public sealed class CartService
 {
     private readonly ICartRepository _cartRepository;
     private readonly ICartItemRepository _cartItemRepository;
-    private readonly IListingRepository _listingRepository;
+    private readonly IStoreItemRepository _itemRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly ICheckoutRepository _checkoutRepository;
     private readonly ICheckoutItemRepository _checkoutItemRepository;
@@ -20,7 +20,7 @@ public sealed class CartService
     public CartService(
         ICartRepository cartRepository,
         ICartItemRepository cartItemRepository,
-        IListingRepository listingRepository,
+        IStoreItemRepository itemRepository,
         IStoreRepository storeRepository,
         ICheckoutRepository checkoutRepository,
         ICheckoutItemRepository checkoutItemRepository,
@@ -30,7 +30,7 @@ public sealed class CartService
     {
         _cartRepository = cartRepository;
         _cartItemRepository = cartItemRepository;
-        _listingRepository = listingRepository;
+        _itemRepository = itemRepository;
         _storeRepository = storeRepository;
         _checkoutRepository = checkoutRepository;
         _checkoutItemRepository = checkoutItemRepository;
@@ -66,7 +66,7 @@ public sealed class CartService
         }
 
         var itemIds = items.Select(i => i.ItemId).Distinct().ToList();
-        var storeItems = await _listingRepository.ListByIdsAsync(itemIds, cancellationToken);
+        var storeItems = await _itemRepository.ListByIdsAsync(itemIds, cancellationToken);
         var itemMap = storeItems.ToDictionary(l => l.Id, l => l);
 
         var storeIds = storeItems.Select(l => l.StoreId).Distinct().ToList();
@@ -107,10 +107,10 @@ public sealed class CartService
             return Result<CartItem>.Failure("Quantity must be at least 1.");
         }
 
-        var storeItem = await _listingRepository.GetByIdAsync(itemId, cancellationToken);
+        var storeItem = await _itemRepository.GetByIdAsync(itemId, cancellationToken);
         if (storeItem is null || storeItem.TerritoryId != territoryId)
         {
-            return Result<CartItem>.Failure("Listing not found for territory.");
+            return Result<CartItem>.Failure("Item not found for territory.");
         }
 
         var cart = await GetOrCreateCartAsync(territoryId, userId, cancellationToken);
@@ -208,7 +208,7 @@ public sealed class CartService
         }
 
         var itemIds = cartItems.Select(i => i.ItemId).Distinct().ToList();
-        var storeItems = await _listingRepository.ListByIdsAsync(itemIds, cancellationToken);
+        var storeItems = await _itemRepository.ListByIdsAsync(itemIds, cancellationToken);
         var itemMap = storeItems.ToDictionary(l => l.Id, l => l);
 
         var storeIds = storeItems.Select(l => l.StoreId).Distinct().ToList();

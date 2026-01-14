@@ -4,29 +4,29 @@ using Araponga.Domain.Marketplace;
 
 namespace Araponga.Application.Services;
 
-public sealed class ListingService
+public sealed class StoreItemService
 {
-    private readonly IListingRepository _listingRepository;
+    private readonly IStoreItemRepository _itemRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly IUserRepository _userRepository;
     private readonly AccessEvaluator _accessEvaluator;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ListingService(
-        IListingRepository listingRepository,
+    public StoreItemService(
+        IStoreItemRepository itemRepository,
         IStoreRepository storeRepository,
         IUserRepository userRepository,
         AccessEvaluator accessEvaluator,
         IUnitOfWork unitOfWork)
     {
-        _listingRepository = listingRepository;
+        _itemRepository = itemRepository;
         _storeRepository = storeRepository;
         _userRepository = userRepository;
         _accessEvaluator = accessEvaluator;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<StoreItem>> CreateListingAsync(
+    public async Task<Result<StoreItem>> CreateItemAsync(
         Guid territoryId,
         Guid userId,
         Guid storeId,
@@ -61,7 +61,7 @@ public sealed class ListingService
         }
 
         var now = DateTime.UtcNow;
-        var listing = new StoreItem(
+        var item = new StoreItem(
             Guid.NewGuid(),
             territoryId,
             storeId,
@@ -80,13 +80,13 @@ public sealed class ListingService
             now,
             now);
 
-        await _listingRepository.AddAsync(listing, cancellationToken);
+        await _itemRepository.AddAsync(item, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
-        return Result<StoreItem>.Success(listing);
+        return Result<StoreItem>.Success(item);
     }
 
-    public async Task<Result<StoreItem>> UpdateListingAsync(
-        Guid listingId,
+    public async Task<Result<StoreItem>> UpdateItemAsync(
+        Guid itemId,
         Guid userId,
         ItemType? type,
         string? title,
@@ -102,10 +102,10 @@ public sealed class ListingService
         ItemStatus? status,
         CancellationToken cancellationToken)
     {
-        var listing = await _listingRepository.GetByIdAsync(listingId, cancellationToken);
-        if (listing is null)
+        var item = await _itemRepository.GetByIdAsync(itemId, cancellationToken);
+        if (item is null)
         {
-            return Result<StoreItem>.Failure("Listing not found.");
+            return Result<StoreItem>.Failure("Item not found.");
         }
 
         if (title is not null && string.IsNullOrWhiteSpace(title))
@@ -113,7 +113,7 @@ public sealed class ListingService
             return Result<StoreItem>.Failure("Title is required.");
         }
 
-        var store = await _storeRepository.GetByIdAsync(listing.StoreId, cancellationToken);
+        var store = await _storeRepository.GetByIdAsync(item.StoreId, cancellationToken);
         if (store is null)
         {
             return Result<StoreItem>.Failure("Store not found.");
@@ -125,38 +125,38 @@ public sealed class ListingService
         }
 
         var now = DateTime.UtcNow;
-        listing.UpdateDetails(
-            type ?? listing.Type,
-            title ?? listing.Title,
-            description ?? listing.Description,
-            category ?? listing.Category,
-            tags ?? listing.Tags,
-            pricingType ?? listing.PricingType,
-            priceAmount ?? listing.PriceAmount,
-            currency ?? listing.Currency,
-            unit ?? listing.Unit,
-            latitude ?? listing.Latitude,
-            longitude ?? listing.Longitude,
-            status ?? listing.Status,
+        item.UpdateDetails(
+            type ?? item.Type,
+            title ?? item.Title,
+            description ?? item.Description,
+            category ?? item.Category,
+            tags ?? item.Tags,
+            pricingType ?? item.PricingType,
+            priceAmount ?? item.PriceAmount,
+            currency ?? item.Currency,
+            unit ?? item.Unit,
+            latitude ?? item.Latitude,
+            longitude ?? item.Longitude,
+            status ?? item.Status,
             now);
 
-        await _listingRepository.UpdateAsync(listing, cancellationToken);
+        await _itemRepository.UpdateAsync(item, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
-        return Result<StoreItem>.Success(listing);
+        return Result<StoreItem>.Success(item);
     }
 
-    public async Task<Result<StoreItem>> ArchiveListingAsync(
-        Guid listingId,
+    public async Task<Result<StoreItem>> ArchiveItemAsync(
+        Guid itemId,
         Guid userId,
         CancellationToken cancellationToken)
     {
-        var listing = await _listingRepository.GetByIdAsync(listingId, cancellationToken);
-        if (listing is null)
+        var item = await _itemRepository.GetByIdAsync(itemId, cancellationToken);
+        if (item is null)
         {
-            return Result<StoreItem>.Failure("Listing not found.");
+            return Result<StoreItem>.Failure("Item not found.");
         }
 
-        var store = await _storeRepository.GetByIdAsync(listing.StoreId, cancellationToken);
+        var store = await _storeRepository.GetByIdAsync(item.StoreId, cancellationToken);
         if (store is null)
         {
             return Result<StoreItem>.Failure("Store not found.");
@@ -167,18 +167,18 @@ public sealed class ListingService
             return Result<StoreItem>.Failure("Not authorized.");
         }
 
-        listing.Archive(DateTime.UtcNow);
-        await _listingRepository.UpdateAsync(listing, cancellationToken);
+        item.Archive(DateTime.UtcNow);
+        await _itemRepository.UpdateAsync(item, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
-        return Result<StoreItem>.Success(listing);
+        return Result<StoreItem>.Success(item);
     }
 
-    public Task<StoreItem?> GetByIdAsync(Guid listingId, CancellationToken cancellationToken)
+    public Task<StoreItem?> GetByIdAsync(Guid itemId, CancellationToken cancellationToken)
     {
-        return _listingRepository.GetByIdAsync(listingId, cancellationToken);
+        return _itemRepository.GetByIdAsync(itemId, cancellationToken);
     }
 
-    public Task<IReadOnlyList<StoreItem>> SearchListingsAsync(
+    public Task<IReadOnlyList<StoreItem>> SearchItemsAsync(
         Guid territoryId,
         ItemType? type,
         string? query,
@@ -187,10 +187,10 @@ public sealed class ListingService
         ItemStatus? status,
         CancellationToken cancellationToken)
     {
-        return _listingRepository.SearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
+        return _itemRepository.SearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
     }
 
-    public async Task<PagedResult<StoreItem>> SearchListingsPagedAsync(
+    public async Task<PagedResult<StoreItem>> SearchItemsPagedAsync(
         Guid territoryId,
         ItemType? type,
         string? query,
@@ -200,10 +200,10 @@ public sealed class ListingService
         PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        var totalCount = await _listingRepository.CountSearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
-        var listings = await _listingRepository.SearchPagedAsync(territoryId, type, query, category, tags, status, pagination.Skip, pagination.Take, cancellationToken);
+        var totalCount = await _itemRepository.CountSearchAsync(territoryId, type, query, category, tags, status, cancellationToken);
+        var items = await _itemRepository.SearchPagedAsync(territoryId, type, query, category, tags, status, pagination.Skip, pagination.Take, cancellationToken);
 
-        return new PagedResult<StoreItem>(listings, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new PagedResult<StoreItem>(items, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
     private async Task<bool> CanManageStoreAsync(Store store, Guid userId, CancellationToken cancellationToken)

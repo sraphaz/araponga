@@ -8,36 +8,36 @@ namespace Araponga.Application.Services;
 public sealed class InquiryService
 {
     private readonly IInquiryRepository _inquiryRepository;
-    private readonly IListingRepository _listingRepository;
+    private readonly IStoreItemRepository _itemRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public InquiryService(
         IInquiryRepository inquiryRepository,
-        IListingRepository listingRepository,
+        IStoreItemRepository itemRepository,
         IStoreRepository storeRepository,
         IUnitOfWork unitOfWork)
     {
         _inquiryRepository = inquiryRepository;
-        _listingRepository = listingRepository;
+        _itemRepository = itemRepository;
         _storeRepository = storeRepository;
         _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<InquiryCreationResult>> CreateInquiryAsync(
-        Guid listingId,
+        Guid itemId,
         Guid fromUserId,
         string? message,
         Guid? batchId,
         CancellationToken cancellationToken)
     {
-        var listing = await _listingRepository.GetByIdAsync(listingId, cancellationToken);
-        if (listing is null)
+        var item = await _itemRepository.GetByIdAsync(itemId, cancellationToken);
+        if (item is null)
         {
-            return Result<InquiryCreationResult>.Failure("Listing not found.");
+            return Result<InquiryCreationResult>.Failure("Item not found.");
         }
 
-        var store = await _storeRepository.GetByIdAsync(listing.StoreId, cancellationToken);
+        var store = await _storeRepository.GetByIdAsync(item.StoreId, cancellationToken);
         if (store is null)
         {
             return Result<InquiryCreationResult>.Failure("Store not found.");
@@ -45,9 +45,9 @@ public sealed class InquiryService
 
         var inquiry = new ItemInquiry(
             Guid.NewGuid(),
-            listing.TerritoryId,
-            listing.Id,
-            listing.StoreId,
+            item.TerritoryId,
+            item.Id,
+            item.StoreId,
             fromUserId,
             message,
             InquiryStatus.Open,

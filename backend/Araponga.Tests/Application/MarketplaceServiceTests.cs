@@ -16,14 +16,14 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -42,7 +42,7 @@ public sealed class MarketplaceServiceTests
         Assert.True(storeResult.IsSuccess);
         Assert.NotNull(storeResult.Value);
 
-        var listingResult = await listingService.CreateListingAsync(
+        var listingResult = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,
@@ -83,14 +83,14 @@ public sealed class MarketplaceServiceTests
         dataStore.Users.Add(visitor);
 
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -122,7 +122,7 @@ public sealed class MarketplaceServiceTests
             null,
             CancellationToken.None);
 
-        var listingResult = await listingService.CreateListingAsync(
+        var listingResult = await itemService.CreateItemAsync(
             TerritoryId,
             visitor.Id,
             residentStore.Value!.Id,
@@ -148,7 +148,7 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var inquiryRepository = new InMemoryInquiryRepository(dataStore);
         var cartRepository = new InMemoryCartRepository(dataStore);
         var cartItemRepository = new InMemoryCartItemRepository(dataStore);
@@ -161,12 +161,12 @@ public sealed class MarketplaceServiceTests
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var inquiryService = new InquiryService(inquiryRepository, listingRepository, storeRepository, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var inquiryService = new InquiryService(inquiryRepository, itemRepository, storeRepository, unitOfWork);
         var cartService = new CartService(
             cartRepository,
             cartItemRepository,
-            listingRepository,
+            itemRepository,
             storeRepository,
             checkoutRepository,
             checkoutItemRepository,
@@ -191,7 +191,7 @@ public sealed class MarketplaceServiceTests
         var store = storeResult.Value!;
         await storeService.SetPaymentsEnabledAsync(store.Id, ResidentUserId, true, CancellationToken.None);
 
-        var product = await listingService.CreateListingAsync(
+        var product = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             store.Id,
@@ -209,7 +209,7 @@ public sealed class MarketplaceServiceTests
             ItemStatus.Active,
             CancellationToken.None);
 
-        var service = await listingService.CreateListingAsync(
+        var service = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             store.Id,
@@ -236,7 +236,7 @@ public sealed class MarketplaceServiceTests
             true,
             CancellationToken.None);
 
-        var listings = await listingService.SearchListingsAsync(
+        var listings = await itemService.SearchItemsAsync(
             TerritoryId,
             ItemType.Product,
             "mel",
@@ -344,14 +344,14 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -367,7 +367,7 @@ public sealed class MarketplaceServiceTests
             null,
             CancellationToken.None);
 
-        var createResult = await listingService.CreateListingAsync(
+        var createResult = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,
@@ -388,7 +388,7 @@ public sealed class MarketplaceServiceTests
         Assert.True(createResult.IsSuccess);
         var listing = createResult.Value!;
 
-        var updateResult = await listingService.UpdateListingAsync(
+        var updateResult = await itemService.UpdateItemAsync(
             listing.Id,
             ResidentUserId,
             ItemType.Product,
@@ -409,7 +409,7 @@ public sealed class MarketplaceServiceTests
         Assert.Equal("Produto Atualizado", updateResult.Value!.Title);
         Assert.Equal(15m, updateResult.Value.PriceAmount);
 
-        var archiveResult = await listingService.ArchiveListingAsync(listing.Id, ResidentUserId, CancellationToken.None);
+        var archiveResult = await itemService.ArchiveItemAsync(listing.Id, ResidentUserId, CancellationToken.None);
         Assert.True(archiveResult.IsSuccess);
         Assert.Equal(ItemStatus.Archived, archiveResult.Value!.Status);
     }
@@ -419,14 +419,14 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -442,7 +442,7 @@ public sealed class MarketplaceServiceTests
             null,
             CancellationToken.None);
 
-        await listingService.CreateListingAsync(
+        await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,
@@ -460,7 +460,7 @@ public sealed class MarketplaceServiceTests
             ItemStatus.Active,
             CancellationToken.None);
 
-        await listingService.CreateListingAsync(
+        await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,
@@ -478,7 +478,7 @@ public sealed class MarketplaceServiceTests
             ItemStatus.Active,
             CancellationToken.None);
 
-        var productResults = await listingService.SearchListingsAsync(
+        var productResults = await itemService.SearchItemsAsync(
             TerritoryId,
             ItemType.Product,
             "mel",
@@ -490,7 +490,7 @@ public sealed class MarketplaceServiceTests
         Assert.Single(productResults);
         Assert.Equal(ItemType.Product, productResults[0].Type);
 
-        var categoryResults = await listingService.SearchListingsAsync(
+        var categoryResults = await itemService.SearchItemsAsync(
             TerritoryId,
             null,
             null,
@@ -508,7 +508,7 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var storeRepository = new InMemoryStoreRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var cartRepository = new InMemoryCartRepository(dataStore);
         var cartItemRepository = new InMemoryCartItemRepository(dataStore);
         var checkoutRepository = new InMemoryCheckoutRepository(dataStore);
@@ -521,11 +521,11 @@ public sealed class MarketplaceServiceTests
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
         var cartService = new CartService(
             cartRepository,
             cartItemRepository,
-            listingRepository,
+            itemRepository,
             storeRepository,
             checkoutRepository,
             checkoutItemRepository,
@@ -547,7 +547,7 @@ public sealed class MarketplaceServiceTests
             null,
             CancellationToken.None);
 
-        var listingResult = await listingService.CreateListingAsync(
+        var listingResult = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,
@@ -603,7 +603,7 @@ public sealed class MarketplaceServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var inquiryRepository = new InMemoryInquiryRepository(dataStore);
-        var listingRepository = new InMemoryListingRepository(dataStore);
+        var itemRepository = new InMemoryStoreItemRepository(dataStore);
         var storeRepository = new InMemoryStoreRepository(dataStore);
         var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
@@ -611,8 +611,8 @@ public sealed class MarketplaceServiceTests
         var cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions());
         var accessEvaluator = new AccessEvaluator(membershipRepository, cache);
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var listingService = new ListingService(listingRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
-        var inquiryService = new InquiryService(inquiryRepository, listingRepository, storeRepository, unitOfWork);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, accessEvaluator, unitOfWork);
+        var inquiryService = new InquiryService(inquiryRepository, itemRepository, storeRepository, unitOfWork);
 
         var buyerId = Guid.NewGuid();
         await userRepository.AddAsync(
@@ -633,7 +633,7 @@ public sealed class MarketplaceServiceTests
             null,
             CancellationToken.None);
 
-        var listingResult = await listingService.CreateListingAsync(
+        var listingResult = await itemService.CreateItemAsync(
             TerritoryId,
             ResidentUserId,
             storeResult.Value!.Id,

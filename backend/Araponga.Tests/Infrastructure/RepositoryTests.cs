@@ -168,7 +168,7 @@ public sealed class RepositoryTests
     public async Task ListingRepository_AddAndSearch()
     {
         var dataStore = new InMemoryDataStore();
-        var repository = new InMemoryListingRepository(dataStore);
+        var repository = new InMemoryStoreItemRepository(dataStore);
         var storeId = Guid.NewGuid();
 
         var listing = new StoreItem(
@@ -283,7 +283,7 @@ public sealed class RepositoryTests
     public async Task ListingRepository_SearchPagedAsync_ReturnsPagedResults()
     {
         var dataStore = new InMemoryDataStore();
-        var repository = new InMemoryListingRepository(dataStore);
+        var repository = new InMemoryStoreItemRepository(dataStore);
 
         // Criar alguns listings
         for (int i = 0; i < 12; i++)

@@ -43,12 +43,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<MapService>();
         services.AddScoped<ActiveTerritoryService>();
         services.AddScoped<HealthService>();
-        services.AddScoped<AssetService>();
+        services.AddScoped<TerritoryAssetService>();
         services.AddScoped<ReportService>();
         services.AddScoped<UserBlockService>();
         services.AddScoped<FeatureFlagService>();
         services.AddScoped<StoreService>();
-        services.AddScoped<ListingService>();
+        services.AddScoped<StoreItemService>();
         services.AddScoped<InquiryService>();
         services.AddScoped<PlatformFeeService>();
         services.AddScoped<CartService>();
@@ -113,7 +113,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMapRepository, PostgresMapRepository>();
         services.AddScoped<IMapEntityRelationRepository, PostgresMapEntityRelationRepository>();
         services.AddScoped<IPostGeoAnchorRepository, PostgresPostGeoAnchorRepository>();
-        services.AddScoped<IAssetRepository, PostgresAssetRepository>();
+        services.AddScoped<ITerritoryAssetRepository, PostgresAssetRepository>();
         services.AddScoped<IAssetGeoAnchorRepository, PostgresAssetGeoAnchorRepository>();
         services.AddScoped<IAssetValidationRepository, PostgresAssetValidationRepository>();
         services.AddScoped<IPostAssetRepository, PostgresPostAssetRepository>();
@@ -127,7 +127,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IOutbox, PostgresOutbox>();
         services.AddScoped<INotificationInboxRepository, PostgresNotificationInboxRepository>();
         services.AddScoped<IStoreRepository, PostgresStoreRepository>();
-        services.AddScoped<IListingRepository, PostgresListingRepository>();
+        services.AddScoped<IStoreItemRepository, PostgresStoreItemRepository>();
         services.AddScoped<IInquiryRepository, PostgresInquiryRepository>();
         services.AddScoped<ICartRepository, PostgresCartRepository>();
         services.AddScoped<ICartItemRepository, PostgresCartItemRepository>();
@@ -152,7 +152,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IMapRepository, InMemoryMapRepository>();
         services.AddSingleton<IMapEntityRelationRepository, InMemoryMapEntityRelationRepository>();
         services.AddSingleton<IPostGeoAnchorRepository, InMemoryPostGeoAnchorRepository>();
-        services.AddSingleton<IAssetRepository, InMemoryAssetRepository>();
+        services.AddSingleton<ITerritoryAssetRepository, InMemoryAssetRepository>();
         services.AddSingleton<IAssetGeoAnchorRepository, InMemoryAssetGeoAnchorRepository>();
         services.AddSingleton<IAssetValidationRepository, InMemoryAssetValidationRepository>();
         services.AddSingleton<IPostAssetRepository, InMemoryPostAssetRepository>();
@@ -166,7 +166,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IOutbox, InMemoryOutbox>();
         services.AddSingleton<INotificationInboxRepository, InMemoryNotificationInboxRepository>();
         services.AddSingleton<IStoreRepository, InMemoryStoreRepository>();
-        services.AddSingleton<IListingRepository, InMemoryListingRepository>();
+        services.AddSingleton<IStoreItemRepository, InMemoryStoreItemRepository>();
         services.AddSingleton<IInquiryRepository, InMemoryInquiryRepository>();
         services.AddSingleton<ICartRepository, InMemoryCartRepository>();
         services.AddSingleton<ICartItemRepository, InMemoryCartItemRepository>();

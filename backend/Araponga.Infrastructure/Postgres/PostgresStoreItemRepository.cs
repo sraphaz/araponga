@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Araponga.Infrastructure.Postgres;
 
-public sealed class PostgresListingRepository : IListingRepository
+public sealed class PostgresStoreItemRepository : IStoreItemRepository
 {
     private readonly ArapongaDbContext _dbContext;
 
-    public PostgresListingRepository(ArapongaDbContext dbContext)
+    public PostgresStoreItemRepository(ArapongaDbContext dbContext)
     {
         _dbContext = dbContext;
     }

@@ -1,5 +1,5 @@
 namespace Araponga.Application.Models;
 
-public sealed record AssetGeoAnchorInput(
+public sealed record TerritoryAssetGeoAnchorInput(
     double Latitude,
     double Longitude);

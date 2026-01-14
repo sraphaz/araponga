@@ -3,11 +3,11 @@ using Araponga.Domain.Marketplace;
 
 namespace Araponga.Infrastructure.InMemory;
 
-public sealed class InMemoryListingRepository : IListingRepository
+public sealed class InMemoryStoreItemRepository : IStoreItemRepository
 {
     private readonly InMemoryDataStore _dataStore;
 
-    public InMemoryListingRepository(InMemoryDataStore dataStore)
+    public InMemoryStoreItemRepository(InMemoryDataStore dataStore)
     {
         _dataStore = dataStore;
     }
