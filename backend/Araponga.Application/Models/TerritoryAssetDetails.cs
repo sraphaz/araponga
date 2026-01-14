@@ -2,7 +2,7 @@ using Araponga.Domain.Assets;
 
 namespace Araponga.Application.Models;
 
-public sealed record AssetDetails(
+public sealed record TerritoryAssetDetails(
     TerritoryAsset Asset,
     IReadOnlyList<AssetGeoAnchor> Anchors,
     int ValidationsCount,

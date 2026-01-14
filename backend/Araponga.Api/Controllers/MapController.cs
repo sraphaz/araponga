@@ -21,7 +21,7 @@ public sealed class MapController : ControllerBase
     private readonly FeedService _feedService;
     private readonly EventsService _eventsService;
     private readonly IPostGeoAnchorRepository _postGeoAnchorRepository;
-    private readonly IAssetRepository _assetRepository;
+    private readonly ITerritoryAssetRepository _assetRepository;
     private readonly IAssetGeoAnchorRepository _assetGeoAnchorRepository;
     private readonly CurrentUserAccessor _currentUserAccessor;
     private readonly ActiveTerritoryService _activeTerritoryService;
@@ -32,7 +32,7 @@ public sealed class MapController : ControllerBase
         FeedService feedService,
         EventsService eventsService,
         IPostGeoAnchorRepository postGeoAnchorRepository,
-        IAssetRepository assetRepository,
+        ITerritoryAssetRepository assetRepository,
         IAssetGeoAnchorRepository assetGeoAnchorRepository,
         CurrentUserAccessor currentUserAccessor,
         ActiveTerritoryService activeTerritoryService,

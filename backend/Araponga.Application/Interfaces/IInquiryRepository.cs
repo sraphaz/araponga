@@ -4,14 +4,14 @@ namespace Araponga.Application.Interfaces;
 
 public interface IInquiryRepository
 {
-    Task AddAsync(ListingInquiry inquiry, CancellationToken cancellationToken);
-    Task<IReadOnlyList<ListingInquiry>> ListByUserAsync(Guid userId, CancellationToken cancellationToken);
-    Task<IReadOnlyList<ListingInquiry>> ListByStoreIdsAsync(IReadOnlyCollection<Guid> storeIds, CancellationToken cancellationToken);
+    Task AddAsync(ItemInquiry inquiry, CancellationToken cancellationToken);
+    Task<IReadOnlyList<ItemInquiry>> ListByUserAsync(Guid userId, CancellationToken cancellationToken);
+    Task<IReadOnlyList<ItemInquiry>> ListByStoreIdsAsync(IReadOnlyCollection<Guid> storeIds, CancellationToken cancellationToken);
     
     /// <summary>
     /// Lists inquiries by user with pagination.
     /// </summary>
-    Task<IReadOnlyList<ListingInquiry>> ListByUserPagedAsync(
+    Task<IReadOnlyList<ItemInquiry>> ListByUserPagedAsync(
         Guid userId,
         int skip,
         int take,
@@ -20,7 +20,7 @@ public interface IInquiryRepository
     /// <summary>
     /// Lists inquiries by store IDs with pagination.
     /// </summary>
-    Task<IReadOnlyList<ListingInquiry>> ListByStoreIdsPagedAsync(
+    Task<IReadOnlyList<ItemInquiry>> ListByStoreIdsPagedAsync(
         IReadOnlyCollection<Guid> storeIds,
         int skip,
         int take,

@@ -3,7 +3,7 @@ using Araponga.Domain.Assets;
 
 namespace Araponga.Infrastructure.InMemory;
 
-public sealed class InMemoryAssetRepository : IAssetRepository
+public sealed class InMemoryAssetRepository : ITerritoryAssetRepository
 {
     private readonly InMemoryDataStore _dataStore;
 

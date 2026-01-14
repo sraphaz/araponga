@@ -2,7 +2,7 @@ using Araponga.Domain.Assets;
 
 namespace Araponga.Application.Interfaces;
 
-public interface IAssetRepository
+public interface ITerritoryAssetRepository
 {
     Task<IReadOnlyList<TerritoryAsset>> ListAsync(
         Guid territoryId,

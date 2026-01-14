@@ -1,6 +1,6 @@
 namespace Araponga.Domain.Marketplace;
 
-public enum ListingStatus
+public enum ItemStatus
 {
     Active = 1,
     OutOfStock = 2,

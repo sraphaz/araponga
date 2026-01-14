@@ -9,7 +9,7 @@ public sealed class CartService
 {
     private readonly ICartRepository _cartRepository;
     private readonly ICartItemRepository _cartItemRepository;
-    private readonly IListingRepository _listingRepository;
+    private readonly IStoreItemRepository _itemRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly ICheckoutRepository _checkoutRepository;
     private readonly ICheckoutItemRepository _checkoutItemRepository;
@@ -20,7 +20,7 @@ public sealed class CartService
     public CartService(
         ICartRepository cartRepository,
         ICartItemRepository cartItemRepository,
-        IListingRepository listingRepository,
+        IStoreItemRepository itemRepository,
         IStoreRepository storeRepository,
         ICheckoutRepository checkoutRepository,
         ICheckoutItemRepository checkoutItemRepository,
@@ -30,7 +30,7 @@ public sealed class CartService
     {
         _cartRepository = cartRepository;
         _cartItemRepository = cartItemRepository;
-        _listingRepository = listingRepository;
+        _itemRepository = itemRepository;
         _storeRepository = storeRepository;
         _checkoutRepository = checkoutRepository;
         _checkoutItemRepository = checkoutItemRepository;
@@ -65,11 +65,11 @@ public sealed class CartService
             return new CartDetails(cart, Array.Empty<CartItemDetails>());
         }
 
-        var listingIds = items.Select(i => i.ListingId).Distinct().ToList();
-        var listings = await _listingRepository.ListByIdsAsync(listingIds, cancellationToken);
-        var listingMap = listings.ToDictionary(l => l.Id, l => l);
+        var itemIds = items.Select(i => i.ItemId).Distinct().ToList();
+        var storeItems = await _itemRepository.ListByIdsAsync(itemIds, cancellationToken);
+        var itemMap = storeItems.ToDictionary(l => l.Id, l => l);
 
-        var storeIds = listings.Select(l => l.StoreId).Distinct().ToList();
+        var storeIds = storeItems.Select(l => l.StoreId).Distinct().ToList();
         var stores = await _storeRepository.ListByIdsAsync(storeIds, cancellationToken);
         var storeMap = stores.ToDictionary(s => s.Id, s => s);
 
@@ -77,18 +77,18 @@ public sealed class CartService
 
         foreach (var item in items)
         {
-            if (!listingMap.TryGetValue(item.ListingId, out var listing))
+            if (!itemMap.TryGetValue(item.ItemId, out var storeItem))
             {
                 continue;
             }
 
-            if (!storeMap.TryGetValue(listing.StoreId, out var store))
+            if (!storeMap.TryGetValue(storeItem.StoreId, out var store))
             {
                 continue;
             }
 
-            var isPurchasable = IsPurchasable(listing, store);
-            itemDetails.Add(new CartItemDetails(item, listing, store, isPurchasable));
+            var isPurchasable = IsPurchasable(storeItem, store);
+            itemDetails.Add(new CartItemDetails(item, storeItem, store, isPurchasable));
         }
 
         return new CartDetails(cart, itemDetails);
@@ -97,7 +97,7 @@ public sealed class CartService
     public async Task<Result<CartItem>> AddItemAsync(
         Guid territoryId,
         Guid userId,
-        Guid listingId,
+        Guid itemId,
         int quantity,
         string? notes,
         CancellationToken cancellationToken)
@@ -107,19 +107,19 @@ public sealed class CartService
             return Result<CartItem>.Failure("Quantity must be at least 1.");
         }
 
-        var listing = await _listingRepository.GetByIdAsync(listingId, cancellationToken);
-        if (listing is null || listing.TerritoryId != territoryId)
+        var storeItem = await _itemRepository.GetByIdAsync(itemId, cancellationToken);
+        if (storeItem is null || storeItem.TerritoryId != territoryId)
         {
-            return Result<CartItem>.Failure("Listing not found for territory.");
+            return Result<CartItem>.Failure("Item not found for territory.");
         }
 
         var cart = await GetOrCreateCartAsync(territoryId, userId, cancellationToken);
-        var existing = await _cartItemRepository.GetByCartAndListingAsync(cart.Id, listingId, cancellationToken);
+        var existing = await _cartItemRepository.GetByCartAndListingAsync(cart.Id, itemId, cancellationToken);
         var now = DateTime.UtcNow;
 
         if (existing is null)
         {
-            var item = new CartItem(Guid.NewGuid(), cart.Id, listingId, quantity, notes, now, now);
+            var item = new CartItem(Guid.NewGuid(), cart.Id, itemId, quantity, notes, now, now);
             await _cartItemRepository.AddAsync(item, cancellationToken);
             cart.Touch(now);
             await _cartRepository.UpdateAsync(cart, cancellationToken);
@@ -207,17 +207,17 @@ public sealed class CartService
             return Result<CheckoutResult>.Success(new CheckoutResult(Array.Empty<CheckoutBundle>(), Array.Empty<InquiryBundle>(), Array.Empty<CheckoutSummary>()));
         }
 
-        var listingIds = cartItems.Select(i => i.ListingId).Distinct().ToList();
-        var listings = await _listingRepository.ListByIdsAsync(listingIds, cancellationToken);
-        var listingMap = listings.ToDictionary(l => l.Id, l => l);
+        var itemIds = cartItems.Select(i => i.ItemId).Distinct().ToList();
+        var storeItems = await _itemRepository.ListByIdsAsync(itemIds, cancellationToken);
+        var itemMap = storeItems.ToDictionary(l => l.Id, l => l);
 
-        var storeIds = listings.Select(l => l.StoreId).Distinct().ToList();
+        var storeIds = storeItems.Select(l => l.StoreId).Distinct().ToList();
         var stores = await _storeRepository.ListByIdsAsync(storeIds, cancellationToken);
         var storeMap = stores.ToDictionary(s => s.Id, s => s);
 
         var groupedItems = cartItems
-            .Where(item => listingMap.ContainsKey(item.ListingId))
-            .GroupBy(item => listingMap[item.ListingId].StoreId)
+            .Where(item => itemMap.ContainsKey(item.ItemId))
+            .GroupBy(item => itemMap[item.ItemId].StoreId)
             .ToList();
 
         var checkoutBundles = new List<CheckoutBundle>();
@@ -231,19 +231,19 @@ public sealed class CartService
                 continue;
             }
 
-            var purchasable = new List<(CartItem Item, StoreListing Listing)>();
-            var nonPurchasable = new List<(CartItem Item, StoreListing Listing)>();
+            var purchasable = new List<(CartItem Item, StoreItem StoreItem)>();
+            var nonPurchasable = new List<(CartItem Item, StoreItem StoreItem)>();
 
             foreach (var item in group)
             {
-                var listing = listingMap[item.ListingId];
-                if (IsPurchasable(listing, store))
+                var storeItem = itemMap[item.ItemId];
+                if (IsPurchasable(storeItem, store))
                 {
-                    purchasable.Add((item, listing));
+                    purchasable.Add((item, storeItem));
                 }
                 else
                 {
-                    nonPurchasable.Add((item, listing));
+                    nonPurchasable.Add((item, storeItem));
                 }
             }
 
@@ -251,7 +251,7 @@ public sealed class CartService
             {
                 var checkoutId = Guid.NewGuid();
                 var currency = purchasable
-                    .Select(p => p.Listing.Currency)
+                    .Select(p => p.StoreItem.Currency)
                     .FirstOrDefault(value => !string.IsNullOrWhiteSpace(value)) ?? "BRL";
 
                 var checkout = new Checkout(
@@ -271,19 +271,19 @@ public sealed class CartService
                 decimal subtotal = 0;
                 decimal platformFeeTotal = 0;
 
-                foreach (var (item, listing) in purchasable)
+                foreach (var (item, storeItem) in purchasable)
                 {
-                    var unitPrice = listing.PriceAmount ?? 0m;
+                    var unitPrice = storeItem.PriceAmount ?? 0m;
                     var lineSubtotal = unitPrice * item.Quantity;
-                    var platformFeeLine = await CalculatePlatformFeeAsync(territoryId, listing.Type, lineSubtotal, item.Quantity, cancellationToken);
+                    var platformFeeLine = await CalculatePlatformFeeAsync(territoryId, storeItem.Type, lineSubtotal, item.Quantity, cancellationToken);
                     var lineTotal = lineSubtotal + platformFeeLine;
 
                     checkoutItems.Add(new CheckoutItem(
                         Guid.NewGuid(),
                         checkoutId,
-                        listing.Id,
-                        listing.Type,
-                        listing.Title,
+                        storeItem.Id,
+                        storeItem.Type,
+                        storeItem.Title,
                         item.Quantity,
                         unitPrice,
                         lineSubtotal,
@@ -312,12 +312,12 @@ public sealed class CartService
             if (nonPurchasable.Count > 0)
             {
                 var batchId = Guid.NewGuid();
-                foreach (var (item, listing) in nonPurchasable)
+                foreach (var (item, storeItem) in nonPurchasable)
                 {
-                    var inquiry = new ListingInquiry(
+                    var inquiry = new ItemInquiry(
                         Guid.NewGuid(),
                         territoryId,
-                        listing.Id,
+                        storeItem.Id,
                         store.Id,
                         userId,
                         message,
@@ -326,7 +326,7 @@ public sealed class CartService
                         DateTime.UtcNow);
 
                     await _inquiryRepository.AddAsync(inquiry, cancellationToken);
-                    inquiries.Add(new InquiryBundle(inquiry.Id, store.Id, listing.Id, inquiry.BatchId));
+                    inquiries.Add(new InquiryBundle(inquiry.Id, store.Id, storeItem.Id, inquiry.BatchId));
                 }
             }
         }
@@ -340,21 +340,21 @@ public sealed class CartService
         return Result<CheckoutResult>.Success(result);
     }
 
-    private static bool IsPurchasable(StoreListing listing, TerritoryStore store)
+    private static bool IsPurchasable(StoreItem storeItem, Store store)
     {
-        return listing.PricingType == ListingPricingType.Fixed &&
-               listing.Status == ListingStatus.Active &&
+        return storeItem.PricingType == ItemPricingType.Fixed &&
+               storeItem.Status == ItemStatus.Active &&
                store.PaymentsEnabled;
     }
 
     private async Task<decimal> CalculatePlatformFeeAsync(
         Guid territoryId,
-        ListingType listingType,
+        ItemType itemType,
         decimal lineSubtotal,
         int quantity,
         CancellationToken cancellationToken)
     {
-        var config = await _platformFeeConfigRepository.GetActiveAsync(territoryId, listingType, cancellationToken);
+        var config = await _platformFeeConfigRepository.GetActiveAsync(territoryId, itemType, cancellationToken);
         if (config is null)
         {
             return 0m;

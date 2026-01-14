@@ -15,7 +15,7 @@ public sealed class PostCreationService
 {
     private readonly IFeedRepository _feedRepository;
     private readonly IMapRepository _mapRepository;
-    private readonly IAssetRepository _assetRepository;
+    private readonly ITerritoryAssetRepository _assetRepository;
     private readonly IPostGeoAnchorRepository _postGeoAnchorRepository;
     private readonly IPostAssetRepository _postAssetRepository;
     private readonly ISanctionRepository _sanctionRepository;
@@ -27,7 +27,7 @@ public sealed class PostCreationService
     public PostCreationService(
         IFeedRepository feedRepository,
         IMapRepository mapRepository,
-        IAssetRepository assetRepository,
+        ITerritoryAssetRepository assetRepository,
         IPostGeoAnchorRepository postGeoAnchorRepository,
         IPostAssetRepository postAssetRepository,
         ISanctionRepository sanctionRepository,

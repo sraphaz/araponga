@@ -1,6 +1,6 @@
 namespace Araponga.Domain.Marketplace;
 
-public enum ListingType
+public enum ItemType
 {
     Product = 1,
     Service = 2

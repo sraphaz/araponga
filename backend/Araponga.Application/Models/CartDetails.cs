@@ -4,8 +4,8 @@ namespace Araponga.Application.Models;
 
 public sealed record CartItemDetails(
     CartItem Item,
-    StoreListing Listing,
-    TerritoryStore Store,
+    StoreItem StoreItem,
+    Store Store,
     bool IsPurchasable);
 
 public sealed record CartDetails(

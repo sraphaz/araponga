@@ -18,13 +18,13 @@ public sealed class AssetsController : ControllerBase
     private readonly ActiveTerritoryService _activeTerritoryService;
     private readonly CurrentUserAccessor _currentUserAccessor;
     private readonly AccessEvaluator _accessEvaluator;
-    private readonly AssetService _assetService;
+    private readonly TerritoryAssetService _assetService;
 
     public AssetsController(
         ActiveTerritoryService activeTerritoryService,
         CurrentUserAccessor currentUserAccessor,
         AccessEvaluator accessEvaluator,
-        AssetService assetService)
+        TerritoryAssetService assetService)
     {
         _activeTerritoryService = activeTerritoryService;
         _currentUserAccessor = currentUserAccessor;
@@ -231,7 +231,7 @@ public sealed class AssetsController : ControllerBase
             request.Type,
             request.Name,
             request.Description,
-            request.GeoAnchors.Select(anchor => new AssetGeoAnchorInput(anchor.Latitude, anchor.Longitude)).ToList(),
+            request.GeoAnchors.Select(anchor => new TerritoryAssetGeoAnchorInput(anchor.Latitude, anchor.Longitude)).ToList(),
             cancellationToken);
 
         if (!result.IsSuccess || result.Value is null)
@@ -284,7 +284,7 @@ public sealed class AssetsController : ControllerBase
             request.Type,
             request.Name,
             request.Description,
-            request.GeoAnchors.Select(anchor => new AssetGeoAnchorInput(anchor.Latitude, anchor.Longitude)).ToList(),
+            request.GeoAnchors.Select(anchor => new TerritoryAssetGeoAnchorInput(anchor.Latitude, anchor.Longitude)).ToList(),
             cancellationToken);
 
         if (!result.IsSuccess || result.Value is null)
@@ -387,7 +387,7 @@ public sealed class AssetsController : ControllerBase
             result.Value.Asset.ValidationPct));
     }
 
-    private AssetResponse ToResponse(AssetDetails details)
+    private AssetResponse ToResponse(TerritoryAssetDetails details)
     {
         var asset = details.Asset;
         return new AssetResponse(

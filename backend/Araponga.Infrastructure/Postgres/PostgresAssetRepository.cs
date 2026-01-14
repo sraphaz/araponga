@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Araponga.Infrastructure.Postgres;
 
-public sealed class PostgresAssetRepository : IAssetRepository
+public sealed class PostgresAssetRepository : ITerritoryAssetRepository
 {
     private readonly ArapongaDbContext _dbContext;
 

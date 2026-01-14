@@ -1,5 +1,12 @@
 namespace Araponga.Domain.Assets;
 
+/// <summary>
+/// Representa um recurso valioso do território (naturais, culturais, comunitários, infraestruturais, simbólicos).
+/// TerritoryAssets sempre pertencem a um Territory e não são vendáveis.
+/// TerritoryAssets não representam mídia (foto, vídeo, documento, link) - mídia deve ser tratada como
+/// registro/evidência associada a um TerritoryAsset, Event ou Post.
+/// O campo Type deve representar o tipo de recurso territorial (ex.: "natural", "cultural", "community", "infrastructure", "knowledge").
+/// </summary>
 public sealed class TerritoryAsset
 {
     public TerritoryAsset(
@@ -33,16 +40,36 @@ public sealed class TerritoryAsset
     }
 
     public Guid Id { get; }
+    
+    /// <summary>
+    /// ID do Territory ao qual este asset pertence. TerritoryAssets sempre pertencem a um Territory.
+    /// </summary>
     public Guid TerritoryId { get; }
+    
     public string Type { get; private set; }
     public string Name { get; private set; }
     public string? Description { get; private set; }
     public AssetStatus Status { get; private set; }
+    
+    /// <summary>
+    /// ID do usuário que criou o asset (auditoria). TerritoryAssets não têm "owner" individual.
+    /// </summary>
     public Guid CreatedByUserId { get; }
+    
     public DateTime CreatedAtUtc { get; }
+    
+    /// <summary>
+    /// ID do usuário que atualizou o asset (auditoria). Não representa ownership ou stewardship.
+    /// </summary>
     public Guid UpdatedByUserId { get; private set; }
+    
     public DateTime UpdatedAtUtc { get; private set; }
+    
+    /// <summary>
+    /// ID do usuário que arquivou o asset (auditoria). Não representa ownership ou stewardship.
+    /// </summary>
     public Guid? ArchivedByUserId { get; private set; }
+    
     public DateTime? ArchivedAtUtc { get; private set; }
     public string? ArchiveReason { get; private set; }
 
