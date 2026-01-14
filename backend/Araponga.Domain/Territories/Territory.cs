@@ -1,5 +1,9 @@
 namespace Araponga.Domain.Territories;
 
+/// <summary>
+/// Representa um território geográfico. Territory não possui Owner individual.
+/// A governança é exercida por papéis territoriais atribuídos a memberships via TerritoryMembership.
+/// </summary>
 public sealed class Territory
 {
     public Territory(

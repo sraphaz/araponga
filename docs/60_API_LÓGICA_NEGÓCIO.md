@@ -531,19 +531,22 @@ O Araponga é uma plataforma **território-first** e **comunidade-first** para o
 
 ## 📦 Assets (Recursos Territoriais)
 
+**TerritoryAssets** representam recursos valiosos do território que pertencem ao próprio território (naturais, culturais, comunitários, infraestruturais, simbólicos). TerritoryAssets não são vendáveis e não devem ser tratados como produtos ou serviços. Mídia (foto, vídeo, documento, link) deve ser tratada como registro/evidência associada a um TerritoryAsset, Event ou Post, não como TerritoryAsset em si.
+
 ### Criar Asset (`POST /api/v1/assets`)
 
-**Descrição**: Cria um recurso compartilhado do território (documento, mídia, etc.).
+**Descrição**: Cria um recurso territorial valioso (ex.: trilha, nascente, ponto cultural, infraestrutura comunitária).
 
 **Como usar**:
 - Exige autenticação
-- Body: `territoryId`, título, descrição, tipo, `geoAnchors` (obrigatório)
+- Body: `territoryId`, nome, descrição, tipo, `geoAnchors` (obrigatório)
 
 **Regras de negócio**:
 - **Permissão**: Apenas moradores validados (RESIDENT, VALIDATED) podem criar
 - **Geolocalização**: Obrigatória (pelo menos um GeoAnchor)
 - **Status**: Asset é criado como `PENDING` (aguarda validação)
-- **Limites**: Título máximo 200 caracteres, descrição máxima 2000 caracteres
+- **Limites**: Nome máximo 200 caracteres, descrição máxima 1000 caracteres
+- **Não vendável**: TerritoryAssets não podem ser vendidos ou transferidos via marketplace
 
 ### Listar Assets (`GET /api/v1/assets`)
 
@@ -577,9 +580,11 @@ O Araponga é uma plataforma **território-first** e **comunidade-first** para o
 
 ## 🏪 Marketplace
 
+O Marketplace lida exclusivamente com produtos e serviços oferecidos por moradores. Stores e Listings não são TerritoryAssets e não podem vender ou transferir TerritoryAssets. Produtos/serviços podem referenciar um TerritoryAsset apenas de forma contextual (ex.: "Serviço de guia na trilha X"), sem implicar propriedade ou venda do asset.
+
 ### Criar Store (`POST /api/v1/stores`)
 
-**Descrição**: Cria uma loja/comércio no território.
+**Descrição**: Cria uma loja/comércio no território para operação econômica de um morador.
 
 **Como usar**:
 - Exige autenticação
@@ -590,10 +595,11 @@ O Araponga é uma plataforma **território-first** e **comunidade-first** para o
 - **Limites**: Nome máximo 200 caracteres, descrição máxima 2000 caracteres
 - **Status**: Store é criada como `ACTIVE`
 - **Contato**: `contactVisibility` define se contato é público ou privado
+- **Não é Asset**: Store representa operação econômica, não é um TerritoryAsset
 
 ### Criar Listing (`POST /api/v1/listings`)
 
-**Descrição**: Cria um produto ou serviço em uma store.
+**Descrição**: Cria um produto ou serviço em uma store (oferecido por um morador).
 
 **Como usar**:
 - Exige autenticação
@@ -604,6 +610,7 @@ O Araponga é uma plataforma **território-first** e **comunidade-first** para o
 - **Tipos**: PRODUCT (produto) ou SERVICE (serviço)
 - **Preço**: Pode ser FREE, FIXED (preço fixo), NEGOTIABLE (negociável)
 - **Status**: Listing é criado como `ACTIVE`
+- **Não vende Assets**: Listings não podem vender ou transferir TerritoryAssets; podem apenas referenciar contextualmente (ex.: serviço de guia relacionado a uma trilha)
 
 ### Buscar Listings (`GET /api/v1/listings/search`)
 

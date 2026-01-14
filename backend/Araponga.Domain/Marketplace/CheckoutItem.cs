@@ -5,8 +5,8 @@ public sealed class CheckoutItem
     public CheckoutItem(
         Guid id,
         Guid checkoutId,
-        Guid listingId,
-        ListingType listingType,
+        Guid itemId,
+        ItemType itemType,
         string titleSnapshot,
         int quantity,
         decimal? unitPrice,
@@ -20,9 +20,9 @@ public sealed class CheckoutItem
             throw new ArgumentException("Checkout ID is required.", nameof(checkoutId));
         }
 
-        if (listingId == Guid.Empty)
+        if (itemId == Guid.Empty)
         {
-            throw new ArgumentException("Listing ID is required.", nameof(listingId));
+            throw new ArgumentException("Item ID is required.", nameof(itemId));
         }
 
         if (string.IsNullOrWhiteSpace(titleSnapshot))
@@ -37,8 +37,8 @@ public sealed class CheckoutItem
 
         Id = id;
         CheckoutId = checkoutId;
-        ListingId = listingId;
-        ListingType = listingType;
+        ItemId = itemId;
+        ItemType = itemType;
         TitleSnapshot = titleSnapshot.Trim();
         Quantity = quantity;
         UnitPrice = unitPrice;
@@ -50,8 +50,8 @@ public sealed class CheckoutItem
 
     public Guid Id { get; }
     public Guid CheckoutId { get; }
-    public Guid ListingId { get; }
-    public ListingType ListingType { get; }
+    public Guid ItemId { get; }
+    public ItemType ItemType { get; }
     public string TitleSnapshot { get; }
     public int Quantity { get; }
     public decimal? UnitPrice { get; }

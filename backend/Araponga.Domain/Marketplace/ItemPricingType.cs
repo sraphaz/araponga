@@ -1,6 +1,6 @@
 namespace Araponga.Domain.Marketplace;
 
-public enum ListingPricingType
+public enum ItemPricingType
 {
     Fixed = 1,
     Estimate = 2,

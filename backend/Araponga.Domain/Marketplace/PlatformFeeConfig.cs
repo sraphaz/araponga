@@ -5,7 +5,7 @@ public sealed class PlatformFeeConfig
     public PlatformFeeConfig(
         Guid id,
         Guid territoryId,
-        ListingType listingType,
+        ItemType itemType,
         PlatformFeeMode feeMode,
         decimal feeValue,
         string? currency,
@@ -25,7 +25,7 @@ public sealed class PlatformFeeConfig
 
         Id = id;
         TerritoryId = territoryId;
-        ListingType = listingType;
+        ItemType = itemType;
         FeeMode = feeMode;
         FeeValue = feeValue;
         Currency = currency;
@@ -36,7 +36,7 @@ public sealed class PlatformFeeConfig
 
     public Guid Id { get; }
     public Guid TerritoryId { get; }
-    public ListingType ListingType { get; }
+    public ItemType ItemType { get; }
     public PlatformFeeMode FeeMode { get; private set; }
     public decimal FeeValue { get; private set; }
     public string? Currency { get; private set; }

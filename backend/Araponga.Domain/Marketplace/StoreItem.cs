@@ -1,23 +1,29 @@
 namespace Araponga.Domain.Marketplace;
 
-public sealed class StoreListing
+/// <summary>
+/// Representa um produto ou serviço oferecido por um morador através de uma Store.
+/// StoreItem não é um TerritoryAsset e não pode vender ou transferir TerritoryAssets.
+/// Items podem referenciar TerritoryAssets contextualmente (ex.: "Serviço de guia na trilha X"),
+/// mas isso não implica propriedade ou venda do asset.
+/// </summary>
+public sealed class StoreItem
 {
-    public StoreListing(
+    public StoreItem(
         Guid id,
         Guid territoryId,
         Guid storeId,
-        ListingType type,
+        ItemType type,
         string title,
         string? description,
         string? category,
         string? tags,
-        ListingPricingType pricingType,
+        ItemPricingType pricingType,
         decimal? priceAmount,
         string? currency,
         string? unit,
         double? latitude,
         double? longitude,
-        ListingStatus status,
+        ItemStatus status,
         DateTime createdAtUtc,
         DateTime updatedAtUtc)
     {
@@ -58,34 +64,34 @@ public sealed class StoreListing
     public Guid Id { get; }
     public Guid TerritoryId { get; }
     public Guid StoreId { get; }
-    public ListingType Type { get; private set; }
+    public ItemType Type { get; private set; }
     public string Title { get; private set; }
     public string? Description { get; private set; }
     public string? Category { get; private set; }
     public string? Tags { get; private set; }
-    public ListingPricingType PricingType { get; private set; }
+    public ItemPricingType PricingType { get; private set; }
     public decimal? PriceAmount { get; private set; }
     public string? Currency { get; private set; }
     public string? Unit { get; private set; }
     public double? Latitude { get; private set; }
     public double? Longitude { get; private set; }
-    public ListingStatus Status { get; private set; }
+    public ItemStatus Status { get; private set; }
     public DateTime CreatedAtUtc { get; }
     public DateTime UpdatedAtUtc { get; private set; }
 
     public void UpdateDetails(
-        ListingType type,
+        ItemType type,
         string title,
         string? description,
         string? category,
         string? tags,
-        ListingPricingType pricingType,
+        ItemPricingType pricingType,
         decimal? priceAmount,
         string? currency,
         string? unit,
         double? latitude,
         double? longitude,
-        ListingStatus status,
+        ItemStatus status,
         DateTime updatedAtUtc)
     {
         Type = type;
@@ -105,7 +111,7 @@ public sealed class StoreListing
 
     public void Archive(DateTime updatedAtUtc)
     {
-        Status = ListingStatus.Archived;
+        Status = ItemStatus.Archived;
         UpdatedAtUtc = updatedAtUtc;
     }
 }

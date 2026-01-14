@@ -4,43 +4,43 @@ namespace Araponga.Application.Interfaces;
 
 public interface IListingRepository
 {
-    Task<StoreListing?> GetByIdAsync(Guid listingId, CancellationToken cancellationToken);
-    Task<IReadOnlyList<StoreListing>> ListByIdsAsync(IReadOnlyCollection<Guid> listingIds, CancellationToken cancellationToken);
-    Task<IReadOnlyList<StoreListing>> ListByStoreAsync(Guid storeId, CancellationToken cancellationToken);
-    Task<IReadOnlyList<StoreListing>> SearchAsync(
+    Task<StoreItem?> GetByIdAsync(Guid itemId, CancellationToken cancellationToken);
+    Task<IReadOnlyList<StoreItem>> ListByIdsAsync(IReadOnlyCollection<Guid> itemIds, CancellationToken cancellationToken);
+    Task<IReadOnlyList<StoreItem>> ListByStoreAsync(Guid storeId, CancellationToken cancellationToken);
+    Task<IReadOnlyList<StoreItem>> SearchAsync(
         Guid territoryId,
-        ListingType? type,
+        ItemType? type,
         string? query,
         string? category,
         string? tags,
-        ListingStatus? status,
+        ItemStatus? status,
         CancellationToken cancellationToken);
-    Task AddAsync(StoreListing listing, CancellationToken cancellationToken);
-    Task UpdateAsync(StoreListing listing, CancellationToken cancellationToken);
+    Task AddAsync(StoreItem item, CancellationToken cancellationToken);
+    Task UpdateAsync(StoreItem item, CancellationToken cancellationToken);
     
     /// <summary>
-    /// Searches listings with pagination.
+    /// Searches items with pagination.
     /// </summary>
-    Task<IReadOnlyList<StoreListing>> SearchPagedAsync(
+    Task<IReadOnlyList<StoreItem>> SearchPagedAsync(
         Guid territoryId,
-        ListingType? type,
+        ItemType? type,
         string? query,
         string? category,
         string? tags,
-        ListingStatus? status,
+        ItemStatus? status,
         int skip,
         int take,
         CancellationToken cancellationToken);
     
     /// <summary>
-    /// Counts listings matching search criteria.
+    /// Counts items matching search criteria.
     /// </summary>
     Task<int> CountSearchAsync(
         Guid territoryId,
-        ListingType? type,
+        ItemType? type,
         string? query,
         string? category,
         string? tags,
-        ListingStatus? status,
+        ItemStatus? status,
         CancellationToken cancellationToken);
 }

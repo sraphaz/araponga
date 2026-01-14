@@ -1,11 +1,11 @@
 namespace Araponga.Domain.Marketplace;
 
-public sealed class ListingInquiry
+public sealed class ItemInquiry
 {
-    public ListingInquiry(
+    public ItemInquiry(
         Guid id,
         Guid territoryId,
-        Guid listingId,
+        Guid itemId,
         Guid storeId,
         Guid fromUserId,
         string? message,
@@ -18,9 +18,9 @@ public sealed class ListingInquiry
             throw new ArgumentException("Territory ID is required.", nameof(territoryId));
         }
 
-        if (listingId == Guid.Empty)
+        if (itemId == Guid.Empty)
         {
-            throw new ArgumentException("Listing ID is required.", nameof(listingId));
+            throw new ArgumentException("Item ID is required.", nameof(itemId));
         }
 
         if (storeId == Guid.Empty)
@@ -35,7 +35,7 @@ public sealed class ListingInquiry
 
         Id = id;
         TerritoryId = territoryId;
-        ListingId = listingId;
+        ItemId = itemId;
         StoreId = storeId;
         FromUserId = fromUserId;
         Message = message;
@@ -46,7 +46,7 @@ public sealed class ListingInquiry
 
     public Guid Id { get; }
     public Guid TerritoryId { get; }
-    public Guid ListingId { get; }
+    public Guid ItemId { get; }
     public Guid StoreId { get; }
     public Guid FromUserId { get; }
     public string? Message { get; }

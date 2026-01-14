@@ -17,10 +17,10 @@ public sealed class PlatformFeeService
 
     public Task<PlatformFeeConfig?> GetActiveFeeConfigAsync(
         Guid territoryId,
-        ListingType listingType,
+        ItemType itemType,
         CancellationToken cancellationToken)
     {
-        return _configRepository.GetActiveAsync(territoryId, listingType, cancellationToken);
+        return _configRepository.GetActiveAsync(territoryId, itemType, cancellationToken);
     }
 
     public Task<IReadOnlyList<PlatformFeeConfig>> ListActiveAsync(Guid territoryId, CancellationToken cancellationToken)
@@ -41,14 +41,14 @@ public sealed class PlatformFeeService
 
     public async Task<PlatformFeeConfig> UpsertFeeConfigAsync(
         Guid territoryId,
-        ListingType listingType,
+        ItemType itemType,
         PlatformFeeMode feeMode,
         decimal feeValue,
         string? currency,
         bool isActive,
         CancellationToken cancellationToken)
     {
-        var existing = await _configRepository.GetActiveAsync(territoryId, listingType, cancellationToken);
+        var existing = await _configRepository.GetActiveAsync(territoryId, itemType, cancellationToken);
         var now = DateTime.UtcNow;
 
         if (existing is null)
@@ -56,7 +56,7 @@ public sealed class PlatformFeeService
             var config = new PlatformFeeConfig(
                 Guid.NewGuid(),
                 territoryId,
-                listingType,
+                itemType,
                 feeMode,
                 feeValue,
                 currency,

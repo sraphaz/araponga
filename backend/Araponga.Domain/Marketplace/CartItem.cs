@@ -5,7 +5,7 @@ public sealed class CartItem
     public CartItem(
         Guid id,
         Guid cartId,
-        Guid listingId,
+        Guid itemId,
         int quantity,
         string? notes,
         DateTime createdAtUtc,
@@ -16,9 +16,9 @@ public sealed class CartItem
             throw new ArgumentException("Cart ID is required.", nameof(cartId));
         }
 
-        if (listingId == Guid.Empty)
+        if (itemId == Guid.Empty)
         {
-            throw new ArgumentException("Listing ID is required.", nameof(listingId));
+            throw new ArgumentException("Item ID is required.", nameof(itemId));
         }
 
         if (quantity < 1)
@@ -28,7 +28,7 @@ public sealed class CartItem
 
         Id = id;
         CartId = cartId;
-        ListingId = listingId;
+        ItemId = itemId;
         Quantity = quantity;
         Notes = notes;
         CreatedAtUtc = createdAtUtc;
@@ -37,7 +37,7 @@ public sealed class CartItem
 
     public Guid Id { get; }
     public Guid CartId { get; }
-    public Guid ListingId { get; }
+    public Guid ItemId { get; }
     public int Quantity { get; private set; }
     public string? Notes { get; private set; }
     public DateTime CreatedAtUtc { get; }

@@ -43,7 +43,7 @@ public sealed class InquiryService
             return Result<InquiryCreationResult>.Failure("Store not found.");
         }
 
-        var inquiry = new ListingInquiry(
+        var inquiry = new ItemInquiry(
             Guid.NewGuid(),
             listing.TerritoryId,
             listing.Id,
@@ -69,24 +69,24 @@ public sealed class InquiryService
         return Result<InquiryCreationResult>.Success(new InquiryCreationResult(inquiry, contact));
     }
 
-    public Task<IReadOnlyList<ListingInquiry>> ListMyInquiriesAsync(Guid userId, CancellationToken cancellationToken)
+    public Task<IReadOnlyList<ItemInquiry>> ListMyInquiriesAsync(Guid userId, CancellationToken cancellationToken)
     {
         return _inquiryRepository.ListByUserAsync(userId, cancellationToken);
     }
 
-    public async Task<IReadOnlyList<ListingInquiry>> ListReceivedInquiriesAsync(Guid ownerUserId, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ItemInquiry>> ListReceivedInquiriesAsync(Guid ownerUserId, CancellationToken cancellationToken)
     {
         var stores = await _storeRepository.ListByOwnerAsync(ownerUserId, cancellationToken);
         if (stores.Count == 0)
         {
-            return Array.Empty<ListingInquiry>();
+            return Array.Empty<ItemInquiry>();
         }
 
         var storeIds = stores.Select(s => s.Id).ToList();
         return await _inquiryRepository.ListByStoreIdsAsync(storeIds, cancellationToken);
     }
 
-    public async Task<Common.PagedResult<ListingInquiry>> ListMyInquiriesPagedAsync(
+    public async Task<Common.PagedResult<ItemInquiry>> ListMyInquiriesPagedAsync(
         Guid userId,
         Common.PaginationParameters pagination,
         CancellationToken cancellationToken)
@@ -99,10 +99,10 @@ public sealed class InquiryService
             .Take(pagination.Take)
             .ToList();
 
-        return new Common.PagedResult<ListingInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new Common.PagedResult<ItemInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 
-    public async Task<Common.PagedResult<ListingInquiry>> ListReceivedInquiriesPagedAsync(
+    public async Task<Common.PagedResult<ItemInquiry>> ListReceivedInquiriesPagedAsync(
         Guid ownerUserId,
         Common.PaginationParameters pagination,
         CancellationToken cancellationToken)
@@ -110,7 +110,7 @@ public sealed class InquiryService
         var stores = await _storeRepository.ListByOwnerAsync(ownerUserId, cancellationToken);
         if (stores.Count == 0)
         {
-            return new Common.PagedResult<ListingInquiry>(Array.Empty<ListingInquiry>(), pagination.PageNumber, pagination.PageSize, 0);
+            return new Common.PagedResult<ItemInquiry>(Array.Empty<ItemInquiry>(), pagination.PageNumber, pagination.PageSize, 0);
         }
 
         var storeIds = stores.Select(s => s.Id).ToList();
@@ -122,6 +122,6 @@ public sealed class InquiryService
             .Take(pagination.Take)
             .ToList();
 
-        return new Common.PagedResult<ListingInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return new Common.PagedResult<ItemInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
     }
 }
