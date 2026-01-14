@@ -4,64 +4,76 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Developer Portal da API Araponga: território, memberships, feed, mapa, marketplace, eventos, moderação e notificações." />
+  <meta name="theme-color" content="#0a0e12" />
   <title>Araponga API • Developer Portal</title>
   <link rel="icon" href="./assets/images/araponga-icon.svg" />
   <link rel="apple-touch-icon" href="./assets/images/araponga-icon.svg" />
   <link rel="stylesheet" href="./assets/css/devportal.css" />
 </head>
 <body>
-  <a class="skip-link" href="#conteudo">Pular para conteúdo</a>
+  <a class="skip-link" href="#conteudo" data-i18n="ui.skip">Pular para conteúdo</a>
 
-  <header class="header">
+  <header class="header" role="banner">
     <div class="container hero">
-      <div class="return-banner">
-        <span>Developer Portal da API Araponga</span>
-        <a href="https://araponga.app" rel="noopener">← Voltar para araponga.app</a>
+      <div class="return-banner" role="complementary">
+        <span data-i18n="ui.portalTitle">Developer Portal da API Araponga</span>
+        <div class="lang-switcher" aria-label="Selecionar idioma">
+          <label class="lang-label" for="lang-select" data-i18n="ui.lang">Idioma</label>
+          <select id="lang-select" class="lang-select">
+            <option value="pt">Português</option>
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="it">Italiano</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+        <a href="https://araponga.app" rel="noopener" aria-label="Voltar para o site principal do Araponga" data-i18n="ui.backHome">← Voltar para araponga.app</a>
       </div>
 
-      <span class="hero-tag">Araponga API • Developer Portal</span>
-      <h1>Infraestrutura territorial para comunidades locais.</h1>
-      <p>
+      <span class="hero-tag" aria-label="Categoria" data-i18n="ui.heroTag">Araponga API • Developer Portal</span>
+      <h1 data-i18n="ui.heroTitle">Infraestrutura territorial para comunidades locais.</h1>
+      <p data-i18n-html="ui.heroLeadHtml">
         O Araponga é uma plataforma comunitária <strong>territory-first</strong>. O território organiza contexto,
         visibilidade e governança. Este portal documenta o produto e a API exatamente como implementada hoje,
         para acelerar o onboarding de desenvolvedores com segurança e previsibilidade.
       </p>
 
-      <div class="hero-actions">
-        <a class="button" href="#quickstart">Quickstart</a>
-        <a class="button secondary" href="#openapi">OpenAPI</a>
-        <a class="button secondary" href="#auth">Autenticação</a>
-        <a class="button secondary" href="#territory-session">Selecionar território</a>
-      </div>
+      <nav class="hero-actions" aria-label="Ações rápidas">
+        <a class="button" href="#quickstart" aria-label="Ir para o guia de início rápido" data-i18n="ui.quickstart">Quickstart</a>
+        <a class="button secondary" href="#openapi" aria-label="Ver documentação OpenAPI" data-i18n="ui.openapi">OpenAPI</a>
+        <a class="button secondary" href="#auth" aria-label="Ver documentação de autenticação" data-i18n="ui.auth">Autenticação</a>
+        <a class="button secondary" href="#territory-session" aria-label="Ver como selecionar território" data-i18n="ui.selectTerritory">Selecionar território</a>
+      </nav>
     </div>
   </header>
 
   <div class="container layout" id="conteudo">
-    <nav class="nav" aria-label="Navegação do portal">
-      <h2>Conteúdo</h2>
-      <ul>
-        <li><a href="#visao-geral">Visão geral</a></li>
-        <li><a href="#como-funciona">Como o Araponga funciona</a></li>
-        <li><a href="#territorios">Territórios</a></li>
-        <li><a href="#conceitos">Conceitos de produto</a></li>
-        <li><a href="#modelo-dominio">Modelo de domínio</a></li>
-        <li><a href="#fluxos">Fluxos principais</a></li>
-        <li><a href="#marketplace">Marketplace</a></li>
-        <li><a href="#eventos">Eventos</a></li>
-        <li><a href="#auth">Autenticação (JWT)</a></li>
-        <li><a href="#territory-session">Território & headers</a></li>
-        <li><a href="#openapi">OpenAPI / Explorer</a></li>
-        <li><a href="#erros">Erros & convenções</a></li>
-        <li><a href="#quickstart">Quickstart</a></li>
-        <li><a href="#versoes">Versões</a></li>
+    <nav class="nav" aria-label="Navegação do portal" role="navigation">
+      <h2 data-i18n="nav.title">Conteúdo</h2>
+      <ul role="list">
+        <li><a href="#visao-geral" data-i18n="nav.overview">Visão geral</a></li>
+        <li><a href="#como-funciona" data-i18n="nav.howItWorks">Como o Araponga funciona</a></li>
+        <li><a href="#territorios" data-i18n="nav.territories">Territórios</a></li>
+        <li><a href="#conceitos" data-i18n="nav.productConcepts">Conceitos de produto</a></li>
+        <li><a href="#modelo-dominio" data-i18n="nav.domainModel">Modelo de domínio</a></li>
+        <li><a href="#fluxos" data-i18n="nav.flows">Fluxos principais</a></li>
+        <li><a href="#casos-de-uso" data-i18n="nav.useCases">Casos de uso</a></li>
+        <li><a href="#marketplace" data-i18n="nav.marketplace">Marketplace</a></li>
+        <li><a href="#eventos" data-i18n="nav.events">Eventos</a></li>
+        <li><a href="#auth" data-i18n="nav.jwt">Autenticação (JWT)</a></li>
+        <li><a href="#territory-session" data-i18n="nav.headers">Território & headers</a></li>
+        <li><a href="#openapi" data-i18n="nav.openapi">OpenAPI / Explorer</a></li>
+        <li><a href="#erros" data-i18n="nav.errors">Erros & convenções</a></li>
+        <li><a href="#quickstart" data-i18n="nav.quickstart">Quickstart</a></li>
+        <li><a href="#versoes" data-i18n="nav.versions">Versões</a></li>
       </ul>
     </nav>
 
-    <main>
+    <main role="main">
       <section class="section" id="visao-geral">
-        <span class="eyebrow">Visão geral</span>
-        <h2>API orientada a território + curadoria comunitária.</h2>
-        <p>
+        <span class="eyebrow" data-i18n="overview.eyebrow">Visão geral</span>
+        <h2 data-i18n="overview.title">API orientada a território + curadoria comunitária.</h2>
+        <p data-i18n="overview.lead">
           A API da Araponga cria um núcleo confiável para território, vínculos, feed, mapa, marketplace e eventos. Ela prioriza
           regras explícitas (visibilidade, validação e moderação) para que experiências locais sejam
           auditáveis e evoluam com segurança.
@@ -86,8 +98,8 @@
       </section>
 
       <section class="section" id="como-funciona">
-        <span class="eyebrow">Como o Araponga funciona</span>
-        <h2>Do visitante ao morador validado</h2>
+        <span class="eyebrow" data-i18n="how.eyebrow">Como o Araponga funciona</span>
+        <h2 data-i18n="how.title">Do visitante ao morador validado</h2>
         <div class="grid-two">
           <div class="card">
             <h3>Visitante</h3>
@@ -123,8 +135,8 @@
       </section>
 
       <section class="section" id="territorios">
-        <span class="eyebrow">Territórios</span>
-        <h2>Unidade primária com vínculo estrutural</h2>
+        <span class="eyebrow" data-i18n="territories.eyebrow">Territórios</span>
+        <h2 data-i18n="territories.title">Unidade primária com vínculo estrutural</h2>
         <div class="grid-two">
           <div class="card">
             <h3>Estado atual</h3>
@@ -151,8 +163,8 @@
       </section>
 
       <section class="section" id="conceitos">
-        <span class="eyebrow">Conceitos de produto</span>
-        <h2>Semântica de negócio</h2>
+        <span class="eyebrow" data-i18n="concepts.eyebrow">Conceitos de produto</span>
+        <h2 data-i18n="concepts.title">Semântica de negócio</h2>
         <div class="grid-two">
           <div class="card">
             <h3>Territory-first</h3>
@@ -196,53 +208,123 @@
       </section>
 
       <section class="section" id="modelo-dominio">
-        <span class="eyebrow">Modelo de domínio</span>
-        <h2>Entidades principais e relacionamentos</h2>
-        <figure class="diagram">
-          <img src="/devportal/assets/images/domain-diagram.svg" alt="Diagrama de relacionamento entre User, Territory, Membership, Feed, Map, Marketplace, Events e Moderação" />
-          <figcaption>
-            O diagrama resume as relações centrais implementadas hoje no backend.
-          </figcaption>
-        </figure>
+        <span class="eyebrow" data-i18n="domain.eyebrow">Modelo de domínio</span>
+        <h2 data-i18n="domain.title">Entidades principais e relacionamentos</h2>
+        <div class="callout">
+          <strong data-i18n="domain.diagramPlaceholder">Diagrama do domínio: removido temporariamente (vou refazer a imagem).</strong>
+        </div>
 
-        <div class="grid-two">
+        <div class="model-grid">
           <div class="card">
-            <h3>O que liga com o quê</h3>
-            <ul>
-              <li><strong>User</strong> cria identidade autenticada e recebe role (Visitor/Resident/Curator).</li>
-              <li><strong>TerritoryMembership</strong> conecta User ↔ Territory e define role/status.</li>
-              <li><strong>CommunityPost</strong> pertence ao Territory e pode referenciar MapEntity.</li>
-              <li><strong>PostGeoAnchor</strong> ancora posts no mapa.</li>
-              <li><strong>MapEntity</strong> pertence ao Territory, começa como sugerida e pode ser validada.</li>
-              <li><strong>TerritoryStore</strong> representa loja de um morador no território.</li>
-              <li><strong>StoreListing</strong> representa produto ou serviço oferecido por uma loja.</li>
-              <li><strong>Cart</strong> e <strong>CartItem</strong> gerenciam carrinho de compras por território.</li>
-              <li><strong>ListingInquiry</strong> representa interesse em um listing.</li>
-              <li><strong>TerritoryEvent</strong> representa eventos territoriais com data/hora e localização.</li>
-              <li><strong>Reports</strong> e <strong>Blocks</strong> modulam visibilidade e segurança.</li>
-              <li><strong>OutboxMessage</strong> garante a intenção de notificar em transações confiáveis.</li>
-              <li><strong>UserNotification</strong> compõe o inbox in-app por usuário.</li>
-              <li><strong>Feature Flags</strong> habilitam tipos de post por território (AlertPosts).</li>
-            </ul>
+            <h3>👤 Identidade e Membros</h3>
+            <dl class="entity-list">
+              <dt><strong>User</strong></dt>
+              <dd>Cria identidade autenticada e recebe role (Visitor/Resident/Curator)</dd>
+              
+              <dt><strong>TerritoryMembership</strong></dt>
+              <dd>Conecta <code>User ↔ Territory</code> e define role/status de validação</dd>
+            </dl>
           </div>
+
           <div class="card">
-            <h3>Por que existe</h3>
-            <ul>
-              <li>Separar território de identidade evita acoplamento social no mapa.</li>
-              <li>Vínculos explicitam presença local e governança comunitária.</li>
-              <li>Posts + geo anchors conectam feed e mapa sem confundir o domínio.</li>
-              <li>Marketplace permite economia local dentro do território.</li>
-              <li>Eventos conectam comunidade com atividades locais.</li>
-              <li>Moderação mantém confiança com regras auditáveis.</li>
-              <li>Notificações usam outbox para evitar perda de eventos após o commit.</li>
+            <h3>📝 Feed e Conteúdo</h3>
+            <dl class="entity-list">
+              <dt><strong>CommunityPost</strong></dt>
+              <dd>Pertence ao Territory e pode referenciar MapEntity</dd>
+              
+              <dt><strong>PostGeoAnchor</strong></dt>
+              <dd>Ancora posts no mapa com coordenadas geográficas</dd>
+              
+              <dt><strong>Feature Flags</strong></dt>
+              <dd>Habilitam tipos de post por território (ex: AlertPosts)</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <h3>🗺️ Mapa e Localização</h3>
+            <dl class="entity-list">
+              <dt><strong>MapEntity</strong></dt>
+              <dd>Pertence ao Territory, começa como sugerida e pode ser validada por curadores</dd>
+              
+              <dt><strong>TerritoryAsset</strong></dt>
+              <dd>Recursos territoriais com geolocalização obrigatória (rios, nascentes, etc.)</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <h3>🛒 Marketplace</h3>
+            <dl class="entity-list">
+              <dt><strong>TerritoryStore</strong></dt>
+              <dd>Representa loja de um morador no território</dd>
+              
+              <dt><strong>StoreListing</strong></dt>
+              <dd>Produto ou serviço oferecido por uma loja</dd>
+              
+              <dt><strong>Cart</strong> / <strong>CartItem</strong></dt>
+              <dd>Gerenciam carrinho de compras por território</dd>
+              
+              <dt><strong>ListingInquiry</strong></dt>
+              <dd>Representa interesse de um usuário em um listing</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <h3>📅 Eventos</h3>
+            <dl class="entity-list">
+              <dt><strong>TerritoryEvent</strong></dt>
+              <dd>Eventos territoriais com data/hora de início (obrigatória) e fim (opcional), além de geolocalização obrigatória. Aparecem no feed e no mapa automaticamente</dd>
+              
+              <dt><strong>EventParticipation</strong></dt>
+              <dd>Usuários declaram participação com status: <code>Going</code>, <code>Interested</code> ou <code>NotGoing</code></dd>
+              
+              <dt><strong>Integração Feed-Mapa</strong></dt>
+              <dd>Criação de evento gera automaticamente um post no feed e um pin no mapa. Exemplo: "Feira de artesanato" na Praça Central aparece em ambos</dd>
+            </dl>
+            <div class="example-box">
+              <strong>Exemplo prático:</strong> Morador cria evento "Mutirão de limpeza" para sábado 9h na Praça. O evento aparece no feed como post e no mapa como pin, permitindo que outros moradores vejam e declarem participação.
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>🛡️ Moderação e Segurança</h3>
+            <dl class="entity-list">
+              <dt><strong>Reports</strong></dt>
+              <dd>Denúncias de posts ou usuários</dd>
+              
+              <dt><strong>Blocks</strong></dt>
+              <dd>Bloqueios que filtram conteúdo do feed e mapa</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <h3>🔔 Notificações</h3>
+            <dl class="entity-list">
+              <dt><strong>OutboxMessage</strong></dt>
+              <dd>Garante a intenção de notificar em transações confiáveis</dd>
+              
+              <dt><strong>UserNotification</strong></dt>
+              <dd>Compõe o inbox in-app por usuário</dd>
+            </dl>
+          </div>
+
+          <div class="card card-full">
+            <h3>💡 Por que essa estrutura existe</h3>
+            <ul class="rationale-list">
+              <li><strong>Separação de responsabilidades:</strong> Território separado de identidade evita acoplamento social no mapa</li>
+              <li><strong>Governança clara:</strong> Vínculos explicitam presença local e governança comunitária</li>
+              <li><strong>Integração feed-mapa:</strong> Posts + geo anchors conectam feed e mapa sem confundir o domínio</li>
+              <li><strong>Economia local:</strong> Marketplace permite economia dentro do território</li>
+              <li><strong>Engajamento:</strong> Eventos conectam comunidade com atividades locais</li>
+              <li><strong>Confiança:</strong> Moderação mantém confiança com regras auditáveis</li>
+              <li><strong>Confiabilidade:</strong> Notificações usam outbox para evitar perda de eventos após commit</li>
             </ul>
           </div>
         </div>
       </section>
 
       <section class="section" id="fluxos">
-        <span class="eyebrow">Fluxos principais</span>
-        <h2>Sequências orientadas a produto e API</h2>
+        <span class="eyebrow" data-i18n="flows.eyebrow">Fluxos principais</span>
+        <h2 data-i18n="flows.title">Sequências orientadas a produto e API</h2>
 
         <div class="flow-step">
           <h4>1. Autenticação social → JWT</h4>
@@ -394,10 +476,55 @@
         </div>
       </section>
 
+      <section class="section" id="casos-de-uso">
+        <span class="eyebrow" data-i18n="usecases.eyebrow">Casos de uso</span>
+        <h2 data-i18n="usecases.title">Como usar a API (cenários práticos)</h2>
+        <p data-i18n-html="usecases.leadHtml">
+          Estes cenários conectam objetivo → pré-requisitos → endpoints. Em geral, você vai precisar de um JWT
+          e de um território selecionado via <code>X-Session-Id</code>.
+        </p>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Onboarding (primeiro acesso)</h3>
+            <ul>
+              <li><strong>Autenticar</strong>: <code>POST /api/v1/auth/social</code></li>
+              <li><strong>Descobrir território</strong>: <code>GET /api/v1/territories</code> (ou <code>/nearby</code>)</li>
+              <li><strong>Selecionar território</strong>: <code>POST /api/v1/territories/selection</code> + <code>X-Session-Id</code></li>
+              <li><strong>Checar membership</strong>: <code>GET /api/v1/territories/{territoryId}/membership/me</code></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Publicar conteúdo (feed + mapa)</h3>
+            <ul>
+              <li><strong>Ler feed</strong>: <code>GET /api/v1/feed</code></li>
+              <li><strong>Criar post</strong>: <code>POST /api/v1/feed</code> (com <code>geoAnchors</code> opcionais)</li>
+              <li><strong>Ver pins</strong>: <code>GET /api/v1/map/pins</code> (tipos: entity/asset/alert/post)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Operações territoriais (assets/alerts)</h3>
+            <ul>
+              <li><strong>Criar asset</strong>: <code>POST /api/v1/assets</code> (geo obrigatória)</li>
+              <li><strong>Criar alerta</strong>: <code>POST /api/v1/alerts</code> (validação por curadoria)</li>
+              <li><strong>Listar pins</strong>: <code>GET /api/v1/map/pins?types=asset,alert</code></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Economia local e eventos</h3>
+            <ul>
+              <li><strong>Loja</strong>: <code>POST /api/v1/stores</code></li>
+              <li><strong>Listings</strong>: <code>POST /api/v1/listings</code> e <code>GET /api/v1/listings/search</code></li>
+              <li><strong>Carrinho</strong>: <code>POST /api/v1/cart/items</code> e <code>POST /api/v1/cart/checkout</code></li>
+              <li><strong>Evento</strong>: <code>POST /api/v1/events</code> e <code>POST /api/v1/events/{id}/participation</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="marketplace">
-        <span class="eyebrow">Marketplace</span>
-        <h2>Economia local territorial</h2>
-        <p>
+        <span class="eyebrow" data-i18n="marketplace.eyebrow">Marketplace</span>
+        <h2 data-i18n="marketplace.title">Economia local territorial</h2>
+        <p data-i18n="marketplace.lead">
           O marketplace permite que moradores criem lojas, listem produtos/serviços, gerenciem carrinho de compras
           e recebam inquiries de interessados. Tudo ancorado no território.
         </p>
@@ -487,9 +614,9 @@
       </section>
 
       <section class="section" id="eventos">
-        <span class="eyebrow">Eventos</span>
-        <h2>Eventos territoriais com data/hora e localização</h2>
-        <p>
+        <span class="eyebrow" data-i18n="events.eyebrow">Eventos</span>
+        <h2 data-i18n="events.title">Eventos territoriais com data/hora e localização</h2>
+        <p data-i18n="events.lead">
           Eventos são criados por moradores e aparecem no feed e no mapa. Eles têm data/hora de início
           (obrigatória) e fim (opcional), além de geolocalização obrigatória.
         </p>
@@ -530,9 +657,9 @@
       </section>
 
       <section class="section" id="auth">
-        <span class="eyebrow">Autenticação</span>
-        <h2>JWT (HS256)</h2>
-        <p>
+        <span class="eyebrow" data-i18n="auth.eyebrow">Autenticação</span>
+        <h2 data-i18n="auth.title">JWT (HS256)</h2>
+        <p data-i18n-html="auth.leadHtml">
           O token é emitido pelo endpoint <code>/api/v1/auth/social</code>. Ele utiliza algoritmo HS256 e
           valida <code>issuer</code> e <code>audience</code> conforme configuração em <code>appsettings.json</code>.
         </p>
@@ -570,9 +697,9 @@
       </section>
 
       <section class="section" id="territory-session">
-        <span class="eyebrow">Contexto e headers</span>
-        <h2>Território, sessão e geolocalização</h2>
-        <p>
+        <span class="eyebrow" data-i18n="headers.eyebrow">Contexto e headers</span>
+        <h2 data-i18n="headers.title">Território, sessão e geolocalização</h2>
+        <p data-i18n-html="headers.leadHtml">
           Várias rotas aceitam o território via <code>territoryId</code> na query ou via sessão com
           <code>X-Session-Id</code>. Além disso, algumas operações exigem presença geográfica.
         </p>
@@ -604,26 +731,26 @@
       </section>
 
       <section class="section" id="openapi">
-        <span class="eyebrow">OpenAPI</span>
-        <h2>API Explorer (Swagger UI local)</h2>
+        <span class="eyebrow" data-i18n="openapi.eyebrow">OpenAPI</span>
+        <h2 data-i18n="openapi.title">API Explorer (Swagger UI local)</h2>
         <div class="api-explorer">
-          <p>
+          <p data-i18n-html="openapi.leadHtml">
             O explorer usa a especificação real da API. Ele tenta carregar o Swagger dinâmico em
             <code>/swagger/v1/swagger.json</code> (quando o backend roda em <code>Development</code>) e usa
             fallback para <code>./openapi.json</code>. A navegação é feita por tags, endpoints e schemas.
           </p>
-          <a class="button" href="./openapi.json">Baixar OpenAPI (JSON)</a>
+          <a class="button" href="./openapi.json" data-i18n="openapi.download">Baixar OpenAPI (JSON)</a>
           <button class="button secondary" type="button" data-explorer-button aria-expanded="false">
-            Abrir Explorer
+            <span data-i18n="openapi.open">Abrir Explorer</span>
           </button>
-          <p data-explorer-status class="callout">Explorer pronto para carregar.</p>
+          <p data-explorer-status class="callout" data-i18n="openapi.statusReady">Explorer pronto para carregar.</p>
           <div id="openapi-browser" class="swagger-hidden" aria-live="polite"></div>
         </div>
       </section>
 
       <section class="section" id="erros">
-        <span class="eyebrow">Erros & convenções</span>
-        <h2>Como interpretar respostas</h2>
+        <span class="eyebrow" data-i18n="errors.eyebrow">Erros & convenções</span>
+        <h2 data-i18n="errors.title">Como interpretar respostas</h2>
         <div class="grid-two">
           <div class="card">
             <h3>Formato de erro</h3>
@@ -652,11 +779,12 @@
       </section>
 
       <section class="section" id="quickstart">
-        <span class="eyebrow">Quickstart</span>
-        <h2>Copie e cole (5–10 comandos)</h2>
-        <div class="code-block">
-          <code>
-# 1) Rodar API
+        <span class="eyebrow" data-i18n="quickstart.eyebrow">Quickstart</span>
+        <h2 data-i18n="quickstart.title">Copie e cole (5–10 comandos)</h2>
+        <div class="grid-two">
+          <div class="card">
+            <h3 data-i18n="quickstart.bashTitle">Bash (Linux/macOS/Git Bash)</h3>
+            <pre class="code-block"><code># 1) Rodar API
 ASPNETCORE_ENVIRONMENT=Development dotnet run --project backend/Araponga.Api --urls http://localhost:8080
 
 # 2) Autenticação social (gera token)
@@ -671,39 +799,39 @@ curl http://localhost:8080/api/v1/territories
 curl -X POST http://localhost:8080/api/v1/territories/selection \
   -H "Content-Type: application/json" \
   -H "X-Session-Id: session-123" \
-  -d '{"territoryId":"11111111-1111-1111-1111-111111111111"}'
+  -d '{"territoryId":"11111111-1111-1111-1111-111111111111"}'</code></pre>
+          </div>
+          <div class="card">
+            <h3 data-i18n="quickstart.powershellTitle">PowerShell (Windows)</h3>
+            <pre class="code-block"><code># 1) Rodar API
+$env:ASPNETCORE_ENVIRONMENT="Development"
+dotnet run --project backend/Araponga.Api --urls "http://localhost:8080"
 
-# 5) Listar feed
-curl http://localhost:8080/api/v1/feed \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "X-Session-Id: session-123"
+# 2) Autenticação social (gera token)
+curl.exe -X POST "http://localhost:8080/api/v1/auth/social" `
+  -H "Content-Type: application/json" `
+  -d "{\"provider\":\"google\",\"externalId\":\"abc-123\",\"displayName\":\"Ana\",\"cpf\":\"12345678900\"}"
 
-# 6) Listar pins do mapa (asset, alert, entity, post, media)
-curl http://localhost:8080/api/v1/map/pins?types=asset,alert,entity \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "X-Session-Id: session-123"
+# 3) Descobrir território
+curl.exe "http://localhost:8080/api/v1/territories"
 
-# 7) Criar asset territorial
-curl -X POST http://localhost:8080/api/v1/assets \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "Content-Type: application/json" \
-  -H "X-Session-Id: session-123" \
-  -d '{"territoryId":"11111111-1111-1111-1111-111111111111","type":"river","name":"Rio do Vale","geoAnchors":[{"latitude":-23.55,"longitude":-46.63}]}' 
-
-# 8) Criar alerta ambiental
-curl -X POST http://localhost:8080/api/v1/alerts \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "X-Session-Id: session-123" \
-  -H "Content-Type: application/json" \
-  -d '{"title":"Queimada","description":"Fumaça próxima à nascente"}'
-          </code>
+# 4) Selecionar território (X-Session-Id)
+curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
+  -H "Content-Type: application/json" `
+  -H "X-Session-Id: session-123" `
+  -d "{\"territoryId\":\"11111111-1111-1111-1111-111111111111\"}"</code></pre>
+          </div>
+        </div>
+        <div class="callout">
+          <span data-i18n-html="quickstart.tipHtml"><strong>Dica:</strong> para manter o portal em <code>docs/</code> e no <code>wwwroot</code> sincronizados, execute
+          <code>./docs/devportal/sync-devportal.ps1</code>.</span>
         </div>
       </section>
 
       <section class="section" id="versoes">
-        <span class="eyebrow">Versões & compatibilidade</span>
-        <h2>Versionamento</h2>
-        <p>
+        <span class="eyebrow" data-i18n="versions.eyebrow">Versões & compatibilidade</span>
+        <h2 data-i18n="versions.title">Versionamento</h2>
+        <p data-i18n-html="versions.leadHtml">
           A API atual utiliza prefixo <code>/api/v1</code>. Mudanças compatíveis devem manter o contrato dentro
           dessa versão. Para evolução maior, a estratégia recomendada é introduzir um novo prefixo.
         </p>
@@ -712,15 +840,15 @@ curl -X POST http://localhost:8080/api/v1/alerts \
         </div>
       </section>
 
-      <footer class="footer">
+      <footer class="footer" role="contentinfo">
         <p>
-          Portal disponível em <a href="https://devportal.araponga.app">https://devportal.araponga.app</a>.
+          Portal disponível em <a href="https://devportal.araponga.app" rel="noopener">https://devportal.araponga.app</a>.
           Para contribuir, consulte o repositório e a documentação técnica local.
         </p>
       </footer>
     </main>
   </div>
 
-  <script src="/devportal/assets/js/devportal.js"></script>
+  <script src="./assets/js/devportal.js"></script>
 </body>
 </html>
