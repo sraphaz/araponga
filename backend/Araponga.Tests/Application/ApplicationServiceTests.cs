@@ -140,7 +140,10 @@ public sealed class ApplicationServiceTests
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryMapRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
+        var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var auditLogger = new InMemoryAuditLogger(dataStore);
         var blockRepository = new InMemoryUserBlockRepository(dataStore);
         var relationRepository = new InMemoryMapEntityRelationRepository(dataStore);
@@ -182,7 +185,10 @@ public sealed class ApplicationServiceTests
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryMapRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
+        var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var auditLogger = new InMemoryAuditLogger(dataStore);
         var blockRepository = new InMemoryUserBlockRepository(dataStore);
         var relationRepository = new InMemoryMapEntityRelationRepository(dataStore);
@@ -363,8 +369,10 @@ public sealed class ApplicationServiceTests
         var participationRepository = new InMemoryEventParticipationRepository(dataStore);
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -415,8 +423,10 @@ public sealed class ApplicationServiceTests
         var participationRepository = new InMemoryEventParticipationRepository(dataStore);
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -452,8 +462,10 @@ public sealed class ApplicationServiceTests
         var participationRepository = new InMemoryEventParticipationRepository(dataStore);
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -498,8 +510,10 @@ public sealed class ApplicationServiceTests
         var participationRepository = new InMemoryEventParticipationRepository(dataStore);
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -571,8 +585,10 @@ public sealed class ApplicationServiceTests
         var participationRepository = new InMemoryEventParticipationRepository(dataStore);
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
         var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var unitOfWork = new InMemoryUnitOfWork();
         var service = new EventsService(
             eventRepository,
@@ -757,9 +773,10 @@ public sealed class ApplicationServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryTerritoryMembershipRepository(dataStore);
+        var territoryRepository = new InMemoryTerritoryRepository(dataStore);
         var auditLogger = new InMemoryAuditLogger(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
-        var service = new MembershipService(repository, auditLogger, unitOfWork);
+        var service = new MembershipService(repository, territoryRepository, auditLogger, unitOfWork);
 
         var status = await service.GetStatusAsync(Guid.NewGuid(), ActiveTerritoryId, CancellationToken.None);
         Assert.Null(status);
@@ -778,7 +795,8 @@ public sealed class ApplicationServiceTests
             CancellationToken.None);
 
         var updated = await repository.GetByUserAndTerritoryAsync(membership.UserId, ActiveTerritoryId, CancellationToken.None);
-        Assert.Equal(VerificationStatus.Validated, updated!.VerificationStatus);
+        // VerificationStatus.Validated é convertido para ResidencyVerification.GeoVerified para Resident
+        Assert.Equal(ResidencyVerification.GeoVerified, updated!.ResidencyVerification);
     }
 
     [Fact]
@@ -786,9 +804,10 @@ public sealed class ApplicationServiceTests
     {
         var dataStore = new InMemoryDataStore();
         var repository = new InMemoryTerritoryMembershipRepository(dataStore);
+        var territoryRepository = new InMemoryTerritoryRepository(dataStore);
         var auditLogger = new InMemoryAuditLogger(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
-        var service = new MembershipService(repository, auditLogger, unitOfWork);
+        var service = new MembershipService(repository, territoryRepository, auditLogger, unitOfWork);
 
         var userId = Guid.NewGuid();
 
@@ -806,7 +825,8 @@ public sealed class ApplicationServiceTests
 
         Assert.Equal(visitor.Id, upgraded.Id);
         Assert.Equal(MembershipRole.Resident, upgraded.Role);
-        Assert.Equal(VerificationStatus.Pending, upgraded.VerificationStatus);
+        // Como já há um Resident validado no território (do InMemoryDataStore), o novo Resident fica Unverified
+        Assert.Equal(ResidencyVerification.Unverified, upgraded.ResidencyVerification);
     }
 
     [Fact]
@@ -868,7 +888,10 @@ public sealed class ApplicationServiceTests
         var dataStore = new InMemoryDataStore();
         var feedRepository = new InMemoryFeedRepository(dataStore);
         var cache = new MemoryCache(new MemoryCacheOptions());
-        var accessEvaluator = new AccessEvaluator(new InMemoryTerritoryMembershipRepository(dataStore), cache);
+        var membershipRepository = new InMemoryTerritoryMembershipRepository(dataStore);
+        var userRepository = new InMemoryUserRepository(dataStore);
+        var membershipAccessRules = new MembershipAccessRules(membershipRepository, userRepository);
+        var accessEvaluator = new AccessEvaluator(membershipRepository, membershipAccessRules, cache);
         var featureFlags = new InMemoryFeatureFlagService();
         var auditLogger = new InMemoryAuditLogger(dataStore);
         var blockRepository = new InMemoryUserBlockRepository(dataStore);
