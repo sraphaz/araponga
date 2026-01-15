@@ -13,7 +13,7 @@
 | Cobertura de Testes >90% | 40h | 🟡 Em Progresso | 45% |
 | Testes de Performance | 24h | ⏳ Pendente | 0% |
 | Testes de Segurança | 16h | ⏳ Pendente | 0% |
-| Estratégia de Cache | 24h | 🟡 Em Progresso | 70% |
+| Estratégia de Cache | 24h | 🟡 Em Progresso | 85% |
 | Paginação Completa | 16h | ⏳ Pendente | 0% |
 | Reduzir Duplicação | 16h | 🟡 Em Progresso | 80% |
 | **Total** | **100h** | **🟡 30%** | |
@@ -126,9 +126,11 @@
 - ✅ Integrado no `TerritoryAssetService` (invalidação após criar/atualizar/validar assets)
 - ✅ Integrado no `EventsService` (invalidação após criar/atualizar/cancelar eventos)
 - ✅ Integrado no `TerritoryService` (invalidação após criar território)
+- ✅ Integrado no `PostCreationService` (invalidação após criar post)
+- ✅ Integrado no `MapService` (invalidação após criar/validar map entities)
 - ✅ `HealthService` já tinha invalidação implementada
 - ✅ TTLs movidos para `Constants.Cache`
-- ⏳ Integrar em outros services (FeedService, MapService, etc.)
+- ⏳ Adicionar métricas de cache hit/miss
 - ⏳ Adicionar métricas de cache hit/miss
 
 ### 6. Refatoração: Reduzir Duplicação
@@ -220,7 +222,7 @@
 
 **Em Progresso:**
 - ✅ 319/319 testes passando (100%)
-- 🟡 Cache invalidation integrado em 7 services (faltam mais)
+- ✅ Cache invalidation integrado em 9 services
 - 🟡 Refatoração 80% completa
 
 **Próximos Passos:**
