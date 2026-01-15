@@ -73,6 +73,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ChatService>();
         services.AddScoped<InputSanitizationService>();
         services.AddScoped<SellerPayoutService>();
+        services.AddScoped<TerritoryPayoutConfigService>();
         
         // Payout Gateway
         services.AddScoped<IPayoutGateway, Araponga.Infrastructure.Payments.MockPayoutGateway>();
