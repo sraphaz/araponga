@@ -229,12 +229,13 @@
 - 🟡 Refatoração 85% completa
 
 **Próximos Passos:**
-1. Corrigir 2 testes que ainda falham
+1. ✅ Todos os testes passando (319/319)
 2. Adicionar mais testes para infraestrutura
 3. Implementar testes de performance (k6/NBomber)
 4. Expandir testes de segurança
-5. Completar integração de cache invalidation
-6. Finalizar refatoração (mover mais constantes)
+5. Completar integração de cache invalidation (85% - faltam métricas)
+6. Finalizar refatoração (85% - verificar mais services)
+7. Completar paginação (50% - verificar outros endpoints)
 
 ---
 
