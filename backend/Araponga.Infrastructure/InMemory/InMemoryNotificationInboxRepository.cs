@@ -34,6 +34,13 @@ public sealed class InMemoryNotificationInboxRepository : INotificationInboxRepo
         return Task.FromResult<IReadOnlyList<UserNotification>>(notifications);
     }
 
+    public Task<int> CountByUserAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        var count = _dataStore.UserNotifications
+            .Count(notification => notification.UserId == userId);
+        return Task.FromResult(count);
+    }
+
     public Task<bool> MarkAsReadAsync(
         Guid notificationId,
         Guid userId,

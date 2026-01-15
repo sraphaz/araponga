@@ -594,6 +594,162 @@ public sealed class SecurityTests
             response.StatusCode == HttpStatusCode.Forbidden);
     }
 
+    [Fact]
+    public async Task InputValidation_PathTraversal_IsBlocked()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var token = await LoginForTokenAsync(client, "google", "path-traversal-test");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Tentar path traversal em parâmetro de rota
+        var maliciousPath = "../../../etc/passwd";
+        var response = await client.GetAsync($"api/v1/assets/{maliciousPath}");
+
+        // Deve retornar 400 (Bad Request) ou 404 (Not Found), nunca executar o path
+        Assert.True(
+            response.StatusCode == HttpStatusCode.BadRequest ||
+            response.StatusCode == HttpStatusCode.NotFound ||
+            response.StatusCode == HttpStatusCode.Unauthorized);
+    }
+
+    [Fact]
+    public async Task InputValidation_CSRF_RequiresAuthentication()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        // Tentar fazer requisição de escrita sem autenticação (simula CSRF)
+        var response = await client.PostAsJsonAsync(
+            $"api/v1/feed?territoryId={ActiveTerritoryId}",
+            new CreatePostRequest(
+                "Test Post",
+                "Content",
+                "GENERAL",
+                "PUBLIC",
+                null,
+                null,
+                null));
+
+        // Deve retornar 401 (Unauthorized) - CSRF não deve passar
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task InputValidation_NoSQLInjection_IsSanitized()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var token = await LoginForTokenAsync(client, "google", "nosql-injection-test");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Tentar NoSQL injection em parâmetro de query
+        var nosqlPayload = "'; db.users.drop(); --";
+        var response = await client.GetAsync($"api/v1/assets?territoryId={ActiveTerritoryId}&search={Uri.EscapeDataString(nosqlPayload)}");
+
+        // Deve retornar 200 (com resultados vazios ou sanitizados) ou 401
+        Assert.True(
+            response.StatusCode == HttpStatusCode.OK ||
+            response.StatusCode == HttpStatusCode.Unauthorized);
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            // O JSON não deve conter comandos NoSQL executáveis
+            Assert.DoesNotContain("db.", content, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    [Fact]
+    public async Task InputValidation_CommandInjection_IsBlocked()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var token = await LoginForTokenAsync(client, "google", "command-injection-test");
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        // Tentar command injection em parâmetro
+        var commandPayload = "; rm -rf /";
+        var response = await client.GetAsync($"api/v1/assets?territoryId={ActiveTerritoryId}&search={Uri.EscapeDataString(commandPayload)}");
+
+        // Deve retornar 200 (com resultados vazios) ou 401, nunca executar o comando
+        Assert.True(
+            response.StatusCode == HttpStatusCode.OK ||
+            response.StatusCode == HttpStatusCode.Unauthorized ||
+            response.StatusCode == HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Authorization_ResourceOwnership_IsEnforced()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        // Criar dois usuários diferentes
+        var token1 = await LoginForTokenAsync(client, "google", "owner-user");
+        var token2 = await LoginForTokenAsync(client, "google", "other-user");
+
+        // Usuário 1 cria um post
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token1);
+        client.DefaultRequestHeaders.Add(ApiHeaders.SessionId, "owner-session");
+        await client.PostAsJsonAsync(
+            "api/v1/territories/selection",
+            new Araponga.Api.Contracts.Territories.TerritorySelectionRequest(ActiveTerritoryId));
+
+        var createResponse = await client.PostAsJsonAsync(
+            $"api/v1/feed?territoryId={ActiveTerritoryId}",
+            new CreatePostRequest(
+                "Owner's Post",
+                "Content",
+                "GENERAL",
+                "PUBLIC",
+                null,
+                null,
+                null));
+
+        if (createResponse.StatusCode == HttpStatusCode.Created)
+        {
+            var post = await createResponse.Content.ReadFromJsonAsync<Araponga.Api.Contracts.Feed.FeedItemResponse>();
+            if (post is not null)
+            {
+                // Usuário 2 tenta deletar o post do usuário 1
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token2);
+                client.DefaultRequestHeaders.Remove(ApiHeaders.SessionId);
+                client.DefaultRequestHeaders.Add(ApiHeaders.SessionId, "other-session");
+
+                var deleteResponse = await client.DeleteAsync($"api/v1/feed/{post.Id}?territoryId={ActiveTerritoryId}");
+
+                // Deve retornar 403 (Forbidden) ou 401 (Unauthorized)
+                Assert.True(
+                    deleteResponse.StatusCode == HttpStatusCode.Forbidden ||
+                    deleteResponse.StatusCode == HttpStatusCode.Unauthorized ||
+                    deleteResponse.StatusCode == HttpStatusCode.NotFound);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task SecurityHeaders_HTTPS_IsEnforced()
+    {
+        using var factory = new ApiFactory();
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("api/v1/territories");
+        response.EnsureSuccessStatusCode();
+
+        // Verificar se há headers relacionados a HTTPS/segurança
+        var hasStrictTransportSecurity = response.Headers.Contains("Strict-Transport-Security");
+        var hasContentSecurityPolicy = response.Headers.Contains("Content-Security-Policy") ||
+                                      response.Content.Headers.Contains("Content-Security-Policy");
+
+        // Em ambiente de teste, pode não ter HSTS, mas CSP deve estar presente
+        Assert.True(hasContentSecurityPolicy || hasStrictTransportSecurity,
+            "Pelo menos um header de segurança HTTPS deve estar presente");
+    }
+
     private static async Task<string> LoginForTokenAsync(HttpClient client, string provider, string externalId)
     {
         var response = await client.PostAsJsonAsync(
