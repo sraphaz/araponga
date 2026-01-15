@@ -139,7 +139,7 @@ public sealed class ResidencyRequestService
 
         _cache.Set(key, new RateLimitState { CreatedCount = 1 }, new MemoryCacheEntryOptions
         {
-            AbsoluteExpirationRelativeToNow = RateLimitWindow
+            AbsoluteExpirationRelativeToNow = Constants.ResidencyRequests.RateLimitWindow
         });
     }
 
