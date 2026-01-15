@@ -215,7 +215,8 @@ Além do feed, existem services de suporte a **governança**, **filas** e **conf
 - `IChatMessageRepository`: persistência e listagem cursor-based de mensagens
 - `IChatConversationStatsRepository`: read model (última mensagem/preview/contagem)
 - `IUserRepository`: checar `UserIdentityVerificationStatus`
-- `FeatureFlagCacheService`: gates por território (ChatEnabled, canais, grupos, DM, mídia)
+- `FeatureFlagCacheService`: leitura cacheada de flags por território
+- `TerritoryFeatureFlagGuard`: gates consistentes por território (ChatEnabled, canais, grupos, DM, mídia)
 - `AccessEvaluator`: gates de membership/capability (`Resident` validado, `Curator`, `Moderator`, `SystemAdmin`)
 - `IUnitOfWork`: commit transacional
 
