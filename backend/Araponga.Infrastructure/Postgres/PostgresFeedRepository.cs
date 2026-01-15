@@ -60,7 +60,6 @@ public sealed class PostgresFeedRepository : IFeedRepository
         }
 
         record.Status = status;
-        _dbContext.CommunityPosts.Update(record);
     }
 
     public async Task AddLikeAsync(Guid postId, string actorId, CancellationToken cancellationToken)

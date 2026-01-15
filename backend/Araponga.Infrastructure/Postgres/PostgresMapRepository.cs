@@ -40,7 +40,6 @@ public sealed class PostgresMapRepository : IMapRepository
     public async Task UpdateStatusAsync(Guid entityId, MapEntityStatus status, CancellationToken cancellationToken)
     {
         var record = await _dbContext.MapEntities
-            .AsNoTracking()
             .FirstOrDefaultAsync(e => e.Id == entityId, cancellationToken);
 
         if (record is null)
@@ -49,13 +48,11 @@ public sealed class PostgresMapRepository : IMapRepository
         }
 
         record.Status = status;
-        _dbContext.MapEntities.Update(record);
     }
 
     public async Task IncrementConfirmationAsync(Guid entityId, CancellationToken cancellationToken)
     {
         var record = await _dbContext.MapEntities
-            .AsNoTracking()
             .FirstOrDefaultAsync(e => e.Id == entityId, cancellationToken);
 
         if (record is null)
@@ -64,7 +61,6 @@ public sealed class PostgresMapRepository : IMapRepository
         }
 
         record.ConfirmationCount += 1;
-        _dbContext.MapEntities.Update(record);
     }
 
     public async Task<IReadOnlyList<MapEntity>> ListByTerritoryPagedAsync(

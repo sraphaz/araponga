@@ -3,6 +3,7 @@ using System;
 using Araponga.Infrastructure.Postgres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Araponga.Infrastructure.Postgres.Migrations
 {
     [DbContext(typeof(ArapongaDbContext))]
-    partial class ArapongaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260115054158_AddRowVersionForOptimisticConcurrency")]
+    partial class AddRowVersionForOptimisticConcurrency
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

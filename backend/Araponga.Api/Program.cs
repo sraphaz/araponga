@@ -208,6 +208,26 @@ builder.Services.AddFluentValidationClientsideAdapters();
 // Memory cache
 builder.Services.AddMemoryCache();
 
+// Redis Cache Configuration (optional, falls back to IMemoryCache if not configured)
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis");
+if (!string.IsNullOrWhiteSpace(redisConnectionString))
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = redisConnectionString;
+    });
+}
+
+// Register distributed cache service with fallback
+builder.Services.AddSingleton<Araponga.Application.Interfaces.IDistributedCacheService>(
+    serviceProvider =>
+    {
+        var distributedCache = serviceProvider.GetService<Microsoft.Extensions.Caching.Distributed.IDistributedCache>();
+        var memoryCache = serviceProvider.GetRequiredService<Microsoft.Extensions.Caching.Memory.IMemoryCache>();
+        var logger = serviceProvider.GetRequiredService<Microsoft.Extensions.Logging.ILogger<Araponga.Infrastructure.Caching.RedisCacheService>>();
+        return new Araponga.Infrastructure.Caching.RedisCacheService(distributedCache, memoryCache, logger);
+    });
+
 // Application services
 builder.Services.AddApplicationServices();
 
