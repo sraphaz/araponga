@@ -14,17 +14,30 @@ public sealed class TerritoryPaymentConfigService
     private readonly ITerritoryPaymentConfigRepository _configRepository;
     private readonly IPlatformFeeConfigRepository _platformFeeRepository;
     private readonly IFeatureFlagService _featureFlagService;
+    private readonly IAuditLogger _auditLogger;
     private readonly IUnitOfWork _unitOfWork;
+
+    private static readonly HashSet<string> AllowedGateways = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "stripe", "mercadopago", "pagseguro", "mock"
+    };
+
+    private static readonly HashSet<string> SupportedCurrencies = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BRL", "USD", "EUR"
+    };
 
     public TerritoryPaymentConfigService(
         ITerritoryPaymentConfigRepository configRepository,
         IPlatformFeeConfigRepository platformFeeRepository,
         IFeatureFlagService featureFlagService,
+        IAuditLogger auditLogger,
         IUnitOfWork unitOfWork)
     {
         _configRepository = configRepository;
         _platformFeeRepository = platformFeeRepository;
         _featureFlagService = featureFlagService;
+        _auditLogger = auditLogger;
         _unitOfWork = unitOfWork;
     }
 
@@ -83,6 +96,20 @@ public sealed class TerritoryPaymentConfigService
                 "Payment feature flag must be enabled for this territory before configuring payment settings.");
         }
 
+        // Validar gateway provider contra whitelist
+        if (!AllowedGateways.Contains(gatewayProvider))
+        {
+            return Result<TerritoryPaymentConfig>.Failure(
+                $"Gateway provider '{gatewayProvider}' is not allowed. Allowed providers: {string.Join(", ", AllowedGateways)}");
+        }
+
+        // Validar currency
+        if (!SupportedCurrencies.Contains(currency))
+        {
+            return Result<TerritoryPaymentConfig>.Failure(
+                $"Currency '{currency}' is not supported. Supported currencies: {string.Join(", ", SupportedCurrencies)}");
+        }
+
         var existing = await _configRepository.GetActiveAsync(territoryId, cancellationToken);
         var now = DateTime.UtcNow;
 
@@ -101,6 +128,16 @@ public sealed class TerritoryPaymentConfigService
 
             await _configRepository.UpdateAsync(existing, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
+
+            // Auditoria
+            await _auditLogger.LogAsync(
+                new AuditEntry(
+                    "payment.config.updated",
+                    actorUserId,
+                    territoryId,
+                    existing.Id,
+                    DateTime.UtcNow),
+                cancellationToken);
 
             return Result<TerritoryPaymentConfig>.Success(existing);
         }
@@ -122,6 +159,16 @@ public sealed class TerritoryPaymentConfigService
 
             await _configRepository.AddAsync(newConfig, cancellationToken);
             await _unitOfWork.CommitAsync(cancellationToken);
+
+            // Auditoria
+            await _auditLogger.LogAsync(
+                new AuditEntry(
+                    "payment.config.created",
+                    actorUserId,
+                    territoryId,
+                    newConfig.Id,
+                    DateTime.UtcNow),
+                cancellationToken);
 
             return Result<TerritoryPaymentConfig>.Success(newConfig);
         }

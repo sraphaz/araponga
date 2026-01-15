@@ -2,6 +2,7 @@ using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
 using Araponga.Application.Models;
 using Araponga.Domain.Marketplace;
+using System.Text.RegularExpressions;
 
 namespace Araponga.Application.Services;
 
@@ -13,17 +14,24 @@ public sealed class PaymentService
     private readonly IPaymentGateway _paymentGateway;
     private readonly ICheckoutRepository _checkoutRepository;
     private readonly TerritoryPaymentConfigService _paymentConfigService;
+    private readonly IAuditLogger _auditLogger;
     private readonly IUnitOfWork _unitOfWork;
+    private static readonly HashSet<string> SupportedCurrencies = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BRL", "USD", "EUR"
+    };
 
     public PaymentService(
         IPaymentGateway paymentGateway,
         ICheckoutRepository checkoutRepository,
         TerritoryPaymentConfigService paymentConfigService,
+        IAuditLogger auditLogger,
         IUnitOfWork unitOfWork)
     {
         _paymentGateway = paymentGateway;
         _checkoutRepository = checkoutRepository;
         _paymentConfigService = paymentConfigService;
+        _auditLogger = auditLogger;
         _unitOfWork = unitOfWork;
     }
 
@@ -56,6 +64,13 @@ public sealed class PaymentService
         if (checkout.TotalAmount is null || checkout.TotalAmount <= 0)
         {
             return Result<CreatePaymentResponse>.Failure("Checkout total amount is invalid.");
+        }
+
+        // Validar currency
+        if (!SupportedCurrencies.Contains(checkout.Currency))
+        {
+            return Result<CreatePaymentResponse>.Failure(
+                $"Currency {checkout.Currency} is not supported. Supported currencies: {string.Join(", ", SupportedCurrencies)}");
         }
 
         // Verificar se pagamentos estão habilitados para o território
@@ -104,12 +119,29 @@ public sealed class PaymentService
             paymentMetadata,
             cancellationToken);
 
+        // Verificar se já existe PaymentIntentId (proteção contra race condition)
+        if (!string.IsNullOrWhiteSpace(checkout.PaymentIntentId))
+        {
+            return Result<CreatePaymentResponse>.Failure(
+                "Payment already created for this checkout. Use the existing payment intent.");
+        }
+
         // Atualizar checkout com PaymentIntentId e status
         checkout.SetPaymentIntentId(paymentIntentResult.PaymentIntentId, DateTime.UtcNow);
         checkout.SetStatus(CheckoutStatus.AwaitingPayment, DateTime.UtcNow);
 
         await _checkoutRepository.UpdateAsync(checkout, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
+
+        // Auditoria
+        await _auditLogger.LogAsync(
+            new AuditEntry(
+                "payment.created",
+                userId,
+                checkout.TerritoryId,
+                checkout.Id,
+                DateTime.UtcNow),
+            cancellationToken);
 
         return Result<CreatePaymentResponse>.Success(new CreatePaymentResponse(
             paymentIntentResult.PaymentIntentId,
@@ -126,6 +158,12 @@ public sealed class PaymentService
         Guid userId,
         CancellationToken cancellationToken)
     {
+        // Validar formato do PaymentIntentId
+        if (string.IsNullOrWhiteSpace(paymentIntentId) || paymentIntentId.Length < 10 || paymentIntentId.Length > 200)
+        {
+            return Result<ConfirmPaymentResponse>.Failure("Invalid paymentIntentId format.");
+        }
+
         var checkout = await GetCheckoutByPaymentIntentIdAsync(paymentIntentId, cancellationToken);
         if (checkout is null)
         {
@@ -162,6 +200,16 @@ public sealed class PaymentService
 
         await _checkoutRepository.UpdateAsync(checkout, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
+
+        // Auditoria
+        await _auditLogger.LogAsync(
+            new AuditEntry(
+                "payment.confirmed",
+                userId,
+                checkout.TerritoryId,
+                checkout.Id,
+                DateTime.UtcNow),
+            cancellationToken);
 
         return Result<ConfirmPaymentResponse>.Success(new ConfirmPaymentResponse(
             paymentIntentId,
@@ -207,6 +255,16 @@ public sealed class PaymentService
         await _checkoutRepository.UpdateAsync(checkout, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
 
+        // Auditoria de webhook (sem userId pois é notificação do gateway)
+        await _auditLogger.LogAsync(
+            new AuditEntry(
+                "payment.webhook.processed",
+                Guid.Empty, // Gateway não tem userId
+                checkout.TerritoryId,
+                checkout.Id,
+                DateTime.UtcNow),
+            cancellationToken);
+
         return OperationResult.Success();
     }
 
@@ -241,6 +299,23 @@ public sealed class PaymentService
             return Result<CreateRefundResponse>.Failure("Checkout does not have a payment intent ID.");
         }
 
+        // Validar amount de reembolso
+        if (amount.HasValue)
+        {
+            if (amount.Value <= 0)
+            {
+                return Result<CreateRefundResponse>.Failure("Refund amount must be positive.");
+            }
+
+            // Converter total do checkout para centavos
+            var checkoutTotalInCents = (long)(checkout.TotalAmount!.Value * 100);
+            if (amount.Value > checkoutTotalInCents)
+            {
+                return Result<CreateRefundResponse>.Failure(
+                    "Refund amount cannot exceed checkout total amount.");
+            }
+        }
+
         var refundResult = await _paymentGateway.CreateRefundAsync(
             checkout.PaymentIntentId,
             amount,
@@ -257,6 +332,16 @@ public sealed class PaymentService
 
         await _checkoutRepository.UpdateAsync(checkout, cancellationToken);
         await _unitOfWork.CommitAsync(cancellationToken);
+
+        // Auditoria
+        await _auditLogger.LogAsync(
+            new AuditEntry(
+                "payment.refunded",
+                userId,
+                checkout.TerritoryId,
+                checkout.Id,
+                DateTime.UtcNow),
+            cancellationToken);
 
         return Result<CreateRefundResponse>.Success(new CreateRefundResponse(
             refundResult.RefundId,

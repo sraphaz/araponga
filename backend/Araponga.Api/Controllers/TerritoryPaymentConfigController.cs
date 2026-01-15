@@ -108,6 +108,37 @@ public sealed class TerritoryPaymentConfigController : ControllerBase
             return BadRequest(new { error = "Invalid feeTransparencyLevel." });
         }
 
+        // Validar gateway provider (será validado no service também, mas validar aqui também)
+        if (string.IsNullOrWhiteSpace(request.GatewayProvider) || request.GatewayProvider.Length > 100)
+        {
+            return BadRequest(new { error = "Gateway provider is required and must be at most 100 characters." });
+        }
+
+        // Validar currency
+        if (string.IsNullOrWhiteSpace(request.Currency) || request.Currency.Length > 10)
+        {
+            return BadRequest(new { error = "Currency is required and must be at most 10 characters." });
+        }
+
+        // Validar minimumAmount
+        if (request.MinimumAmount < 0)
+        {
+            return BadRequest(new { error = "Minimum amount must be non-negative." });
+        }
+
+        // Validar maximumAmount
+        if (request.MaximumAmount.HasValue)
+        {
+            if (request.MaximumAmount.Value < 0)
+            {
+                return BadRequest(new { error = "Maximum amount must be non-negative." });
+            }
+            if (request.MaximumAmount.Value < request.MinimumAmount)
+            {
+                return BadRequest(new { error = "Maximum amount must be greater than or equal to minimum amount." });
+            }
+        }
+
         var result = await _configService.UpsertConfigAsync(
             territoryId,
             userContext.User.Id,
@@ -161,6 +192,18 @@ public sealed class TerritoryPaymentConfigController : ControllerBase
         if (!Enum.TryParse<ItemType>(request.ItemType, ignoreCase: true, out var itemType))
         {
             return BadRequest(new { error = "Invalid itemType." });
+        }
+
+        // Validar amountInCents
+        if (request.AmountInCents <= 0)
+        {
+            return BadRequest(new { error = "Amount must be positive." });
+        }
+
+        // Validar limites de amount (prevenir valores extremos)
+        if (request.AmountInCents > 1_000_000_000) // 10 milhões (em centavos)
+        {
+            return BadRequest(new { error = "Amount exceeds maximum allowed value." });
         }
 
         var result = await _configService.CalculateFeeBreakdownAsync(
