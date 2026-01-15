@@ -191,14 +191,18 @@ public sealed class AssetsControllerTests
         using var client = factory.CreateClient();
 
         var assetId = Guid.NewGuid();
-        var response = await client.PutAsJsonAsync(
-            $"api/v1/assets/{assetId}?territoryId={ActiveTerritoryId}",
-            new UpdateAssetRequest("Updated", null, null, new List<Araponga.Api.Contracts.Assets.AssetGeoAnchorRequest>
+        // O endpoint usa PATCH (HttpPatch)
+        var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/assets/{assetId}?territoryId={ActiveTerritoryId}")
+        {
+            Content = JsonContent.Create(new UpdateAssetRequest("Updated", null, null, new List<Araponga.Api.Contracts.Assets.AssetGeoAnchorRequest>
             {
                 new Araponga.Api.Contracts.Assets.AssetGeoAnchorRequest(-23.37, -45.02)
-            }));
+            }))
+        };
+        var response = await client.SendAsync(request);
 
-        // Pode retornar Unauthorized (sem token) ou BadRequest (territoryId inválido)
+        // O endpoint primeiro valida territoryId, depois GeoAnchors, depois autenticação
+        // Pode retornar BadRequest (territoryId inválido ou GeoAnchors vazio) ou Unauthorized (sem token)
         Assert.True(response.StatusCode == HttpStatusCode.Unauthorized || 
                    response.StatusCode == HttpStatusCode.BadRequest);
     }

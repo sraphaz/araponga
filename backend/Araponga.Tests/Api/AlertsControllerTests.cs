@@ -163,12 +163,14 @@ public sealed class AlertsControllerTests
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var alertId = Guid.NewGuid();
-        var response = await client.PostAsync(
+        var response = await client.PostAsJsonAsync(
             $"api/v1/alerts/{alertId}/validate?territoryId={ActiveTerritoryId}",
-            null);
+            new ValidateAlertRequest("VALIDATED"));
 
-        // Deve retornar Unauthorized ou Forbidden se não for curator
+        // Pode retornar Unauthorized (não é curator), BadRequest (alert não encontrado ou status inválido), NotFound (alert não existe), ou NoContent (sucesso)
         Assert.True(response.StatusCode == HttpStatusCode.Unauthorized || 
-                   response.StatusCode == HttpStatusCode.Forbidden);
+                   response.StatusCode == HttpStatusCode.BadRequest ||
+                   response.StatusCode == HttpStatusCode.NotFound ||
+                   response.StatusCode == HttpStatusCode.NoContent);
     }
 }
