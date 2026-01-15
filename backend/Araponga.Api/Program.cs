@@ -286,6 +286,16 @@ if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnor
         tags: new[] { "db", "postgres" });
 }
 
+// Anti-forgery tokens for CSRF protection
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-CSRF-Token";
+    options.Cookie.Name = "__Host-CSRF";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+});
+
 // Controllers with FluentValidation
 builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();

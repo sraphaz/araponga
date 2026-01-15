@@ -47,19 +47,50 @@ public sealed class SecurityHeadersMiddleware
                 "geolocation=(), microphone=(), camera=()");
         }
 
-        // Content-Security-Policy: Política de segurança de conteúdo
-        // Permite apenas recursos do mesmo origin e inline scripts/styles necessários
+        // Content-Security-Policy: Política de segurança de conteúdo mais restritiva
+        // Remove 'unsafe-inline' e 'unsafe-eval' quando possível
         if (!context.Response.Headers.ContainsKey("Content-Security-Policy"))
         {
-            var csp = "default-src 'self'; " +
+            // CSP mais restritivo: sem unsafe-inline/unsafe-eval para scripts
+            // Para DevPortal e Swagger, pode ser necessário ajustar
+            var isDevPortal = context.Request.Path.StartsWithSegments("/devportal");
+            var isSwagger = context.Request.Path.StartsWithSegments("/swagger");
+            
+            string csp;
+            if (isDevPortal || isSwagger)
+            {
+                // DevPortal e Swagger precisam de inline scripts/styles
+                csp = "default-src 'self'; " +
                       "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
                       "style-src 'self' 'unsafe-inline'; " +
                       "img-src 'self' data: https:; " +
                       "font-src 'self' data:; " +
                       "connect-src 'self'; " +
                       "frame-ancestors 'none';";
+            }
+            else
+            {
+                // API endpoints: CSP mais restritivo
+                csp = "default-src 'self'; " +
+                      "script-src 'self'; " +
+                      "style-src 'self'; " +
+                      "img-src 'self' data:; " +
+                      "font-src 'self'; " +
+                      "connect-src 'self'; " +
+                      "frame-ancestors 'none'; " +
+                      "base-uri 'self'; " +
+                      "form-action 'self';";
+            }
             
             context.Response.Headers.Append("Content-Security-Policy", csp);
+        }
+
+        // Strict-Transport-Security: Forçar HTTPS (apenas em produção)
+        if (!context.Response.Headers.ContainsKey("Strict-Transport-Security") && 
+            context.Request.IsHttps)
+        {
+            context.Response.Headers.Append("Strict-Transport-Security", 
+                "max-age=31536000; includeSubDomains; preload");
         }
 
         await _next(context);
