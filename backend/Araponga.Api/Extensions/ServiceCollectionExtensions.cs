@@ -10,6 +10,7 @@ using Araponga.Infrastructure.Postgres;
 using Araponga.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration;
 
 namespace Araponga.Api.Extensions;
 
@@ -70,6 +71,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<DocumentEvidenceService>();
         services.AddScoped<ModerationCaseService>();
         services.AddScoped<ChatService>();
+        services.AddScoped<InputSanitizationService>();
 
         return services;
     }
@@ -115,6 +117,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<Araponga.Application.Interfaces.IObservabilityLogger, InMemoryObservabilityLogger>();
         services.AddSingleton<ITokenService, JwtTokenService>();
+        services.AddSingleton<Araponga.Infrastructure.Security.ISecretsService, Araponga.Infrastructure.Security.EnvironmentSecretsService>();
         
         var storageProvider = configuration.GetValue<string>("Storage:Provider") ?? "Local";
         if (string.Equals(storageProvider, "S3", StringComparison.OrdinalIgnoreCase))

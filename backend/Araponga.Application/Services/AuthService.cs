@@ -260,8 +260,29 @@ public sealed class AuthService
             return OperationResult.Failure("2FA is not enabled.");
         }
 
-        // TODO: Validar senha ou código 2FA se fornecido
-        // Por enquanto, apenas desabilitar
+        // Validar código 2FA se fornecido
+        if (!string.IsNullOrWhiteSpace(passwordOrCode))
+        {
+            // Tentar validar como código TOTP
+            if (!string.IsNullOrEmpty(user.TwoFactorSecret))
+            {
+                var secretBytes = Base32Encoding.ToBytes(user.TwoFactorSecret);
+                var totp = new Totp(secretBytes);
+                if (!totp.VerifyTotp(passwordOrCode, out _, new VerificationWindow(1, 1)))
+                {
+                    // Se não for código TOTP válido, tentar como recovery code
+                    if (string.IsNullOrEmpty(user.TwoFactorRecoveryCodesHash))
+                    {
+                        return OperationResult.Failure("Invalid 2FA code or recovery code.");
+                    }
+                    var recoveryCodeHash = HashRecoveryCode(passwordOrCode);
+                    if (!VerifyRecoveryCode(recoveryCodeHash, user.TwoFactorRecoveryCodesHash))
+                    {
+                        return OperationResult.Failure("Invalid 2FA code or recovery code.");
+                    }
+                }
+            }
+        }
 
         user.DisableTwoFactor();
 
