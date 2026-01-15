@@ -73,6 +73,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ChatService>();
         services.AddScoped<InputSanitizationService>();
         services.AddScoped<SellerPayoutService>();
+        
+        // Payout Gateway
+        services.AddScoped<IPayoutGateway, MockPayoutGateway>();
 
         return services;
     }
