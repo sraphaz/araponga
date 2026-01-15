@@ -15,6 +15,7 @@ public sealed class MapService
     private readonly IUserBlockRepository _userBlockRepository;
     private readonly IMapEntityRelationRepository _relationRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly CacheInvalidationService? _cacheInvalidation;
 
     public MapService(
         IMapRepository mapRepository,
@@ -24,7 +25,8 @@ public sealed class MapService
         IMapEntityRelationRepository relationRepository,
         IUnitOfWork unitOfWork,
         MapEntityCacheService? mapEntityCache = null,
-        UserBlockCacheService? userBlockCache = null)
+        UserBlockCacheService? userBlockCache = null,
+        CacheInvalidationService? cacheInvalidation = null)
     {
         _mapRepository = mapRepository;
         _accessEvaluator = accessEvaluator;
@@ -34,6 +36,7 @@ public sealed class MapService
         _unitOfWork = unitOfWork;
         _mapEntityCache = mapEntityCache;
         _userBlockCache = userBlockCache;
+        _cacheInvalidation = cacheInvalidation;
     }
 
     public async Task<IReadOnlyList<MapEntity>> ListEntitiesAsync(
@@ -163,6 +166,7 @@ public sealed class MapService
 
         // Invalidate cache when map entity is created
         _mapEntityCache?.InvalidateTerritoryEntities(territoryId);
+        _cacheInvalidation?.InvalidateMapEntityCache(territoryId);
 
         return Result<MapEntity>.Success(entity);
     }
@@ -226,6 +230,7 @@ public sealed class MapService
 
         // Invalidate cache when map entity status changes
         _mapEntityCache?.InvalidateTerritoryEntities(territoryId);
+        _cacheInvalidation?.InvalidateMapEntityCache(territoryId);
 
         return true;
     }

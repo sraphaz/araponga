@@ -23,6 +23,7 @@ public sealed class PostCreationService
     private readonly IAuditLogger _auditLogger;
     private readonly IEventBus _eventBus;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly CacheInvalidationService? _cacheInvalidation;
 
     public PostCreationService(
         IFeedRepository feedRepository,
@@ -34,7 +35,8 @@ public sealed class PostCreationService
         IFeatureFlagService featureFlags,
         IAuditLogger auditLogger,
         IEventBus eventBus,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        CacheInvalidationService? cacheInvalidation = null)
     {
         _feedRepository = feedRepository;
         _mapRepository = mapRepository;
@@ -46,6 +48,7 @@ public sealed class PostCreationService
         _auditLogger = auditLogger;
         _eventBus = eventBus;
         _unitOfWork = unitOfWork;
+        _cacheInvalidation = cacheInvalidation;
     }
 
     public async Task<Result<CommunityPost>> CreatePostAsync(
@@ -139,6 +142,9 @@ public sealed class PostCreationService
 
         await _unitOfWork.CommitAsync(cancellationToken);
 
+        // Invalidar cache de feed do território após criar post
+        _cacheInvalidation?.InvalidateFeedCache(territoryId);
+
         return Result<CommunityPost>.Success(post);
     }
 
@@ -146,32 +152,28 @@ public sealed class PostCreationService
         Guid postId,
         IReadOnlyCollection<Models.GeoAnchorInput>? geoAnchors)
     {
-        const int MaxAnchors = 50;
-        const int Precision = 5;
-
         if (geoAnchors is null || geoAnchors.Count == 0)
         {
             return Array.Empty<Domain.Map.PostGeoAnchor>();
         }
 
         var now = DateTime.UtcNow;
-        const string AnchorType = "POST";
 
         return geoAnchors
             .Where(anchor => GeoCoordinate.IsValid(anchor.Latitude, anchor.Longitude))
             .Select(anchor => new
             {
-                Latitude = Math.Round(anchor.Latitude, Precision, MidpointRounding.AwayFromZero),
-                Longitude = Math.Round(anchor.Longitude, Precision, MidpointRounding.AwayFromZero)
+                Latitude = Math.Round(anchor.Latitude, Constants.Posts.GeoAnchorPrecision, MidpointRounding.AwayFromZero),
+                Longitude = Math.Round(anchor.Longitude, Constants.Posts.GeoAnchorPrecision, MidpointRounding.AwayFromZero)
             })
             .Distinct()
-            .Take(MaxAnchors)
+            .Take(Constants.Posts.MaxAnchors)
             .Select(anchor => new Domain.Map.PostGeoAnchor(
                 Guid.NewGuid(),
                 postId,
                 anchor.Latitude,
                 anchor.Longitude,
-                AnchorType,
+                Constants.Posts.PostAnchorType,
                 now))
             .ToList();
     }

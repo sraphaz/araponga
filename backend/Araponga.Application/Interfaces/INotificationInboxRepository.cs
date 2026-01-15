@@ -10,5 +10,6 @@ public interface INotificationInboxRepository
         int skip,
         int take,
         CancellationToken cancellationToken);
+    Task<int> CountByUserAsync(Guid userId, CancellationToken cancellationToken);
     Task<bool> MarkAsReadAsync(Guid notificationId, Guid userId, DateTime readAtUtc, CancellationToken cancellationToken);
 }

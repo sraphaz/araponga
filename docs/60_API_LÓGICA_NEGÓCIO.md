@@ -1,8 +1,9 @@
 # API Araponga - Lógica de Negócio e Usabilidade
 
 **Documento de Negócio Completo**  
-**Versão**: 1.0  
-**Data**: 2025-01-13
+**Versão**: 1.1  
+**Data**: 2025-01-13  
+**Última Atualização**: 2025-01-15 (Fase 2 - Paginação, Testes de Segurança e Performance)
 
 ---
 
@@ -82,6 +83,48 @@ Quando o rate limit é excedido, a API retorna:
 **Territoriais (Curator/Moderator)**:
 - `GET /api/v1/territories/{territoryId}/work-items`
 - `POST /api/v1/territories/{territoryId}/work-items/{workItemId}/complete`
+
+---
+
+## 📄 Paginação
+
+Todos os endpoints de listagem têm versões paginadas disponíveis. O padrão de paginação é:
+
+### Parâmetros de Paginação
+- `pageNumber` (int, padrão: 1) - Número da página (1-indexed)
+- `pageSize` (int, padrão: 20) - Itens por página (mínimo: 1, máximo: 100)
+
+### Resposta Paginada
+```json
+{
+  "items": [...],
+  "pageNumber": 1,
+  "pageSize": 20,
+  "totalCount": 150,
+  "totalPages": 8,
+  "hasPreviousPage": false,
+  "hasNextPage": true
+}
+```
+
+### Endpoints com Paginação
+- ✅ `GET /api/v1/territories/paged`
+- ✅ `GET /api/v1/feed/paged`
+- ✅ `GET /api/v1/feed/me/paged`
+- ✅ `GET /api/v1/assets/paged`
+- ✅ `GET /api/v1/alerts/paged`
+- ✅ `GET /api/v1/events/paged`
+- ✅ `GET /api/v1/events/nearby/paged`
+- ✅ `GET /api/v1/map/entities/paged`
+- ✅ `GET /api/v1/map/pins/paged`
+- ✅ `GET /api/v1/notifications/paged`
+- ✅ `GET /api/v1/inquiries/me/paged`
+- ✅ `GET /api/v1/inquiries/received/paged`
+- ✅ `GET /api/v1/join-requests/incoming/paged`
+- ✅ `GET /api/v1/reports/paged`
+- ✅ `GET /api/v1/items/paged`
+
+**Nota**: Chat usa cursor-based pagination (`beforeCreatedAtUtc`/`beforeMessageId`) em vez de paginação numérica.
 
 ---
 
@@ -572,6 +615,21 @@ Quando o rate limit é excedido, a API retorna:
 - **Visibilidade**: Respeita regras de visibilidade de cada tipo de conteúdo
 - **Filtros**: `type` filtra por tipo de pin
 - **Retorno**: Dados mínimos para projeção no mapa (coordenadas, ID, tipo, título básico)
+
+### Obter Pins do Mapa Paginados (`GET /api/v1/map/pins/paged`)
+
+**Descrição**: Obtém pins do mapa com paginação.
+
+**Como usar**:
+- Exige autenticação
+- Query params: `territoryId` (opcional), `type` (filtro opcional), `pageNumber` (padrão: 1), `pageSize` (padrão: 20)
+- Header `X-Session-Id` para identificar território ativo
+
+**Regras de negócio**:
+- **Paginação**: Padrão 20 itens por página
+- **Visibilidade**: Respeita regras de visibilidade de cada tipo de conteúdo
+- **Filtros**: `type` filtra por tipo de pin
+- **Retorno**: `PagedResponse<MapPinResponse>` com metadados de paginação
 
 ---
 

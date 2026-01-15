@@ -58,6 +58,13 @@ public sealed class PostgresNotificationInboxRepository : INotificationInboxRepo
             record.SourceOutboxId)).ToList();
     }
 
+    public async Task<int> CountByUserAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        return await _dbContext.UserNotifications
+            .Where(notification => notification.UserId == userId)
+            .CountAsync(cancellationToken);
+    }
+
     public async Task<bool> MarkAsReadAsync(
         Guid notificationId,
         Guid userId,

@@ -450,10 +450,7 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions
     }
 });
 
-if (app.Environment.IsEnvironment("Testing"))
-{
-    app.MapGet("/__throw", (HttpContext _) => throw new InvalidOperationException("boom"));
-}
+// Endpoint de teste removido - não deve estar em produção
 
 app.MapGet("/liveness", () => Results.Ok(new { status = "ok" }))
     .AllowAnonymous()

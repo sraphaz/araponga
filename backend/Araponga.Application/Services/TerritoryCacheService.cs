@@ -12,8 +12,6 @@ public sealed class TerritoryCacheService
 {
     private readonly ITerritoryRepository _territoryRepository;
     private readonly IMemoryCache _cache;
-    private const string ActiveTerritoriesCacheKey = "territories:active";
-    private static readonly TimeSpan CacheExpiration = TimeSpan.FromMinutes(30);
 
     public TerritoryCacheService(ITerritoryRepository territoryRepository, IMemoryCache cache)
     {
@@ -26,7 +24,7 @@ public sealed class TerritoryCacheService
     /// </summary>
     public async Task<IReadOnlyList<Territory>> GetActiveTerritoriesAsync(CancellationToken cancellationToken)
     {
-        if (_cache.TryGetValue<IReadOnlyList<Territory>>(ActiveTerritoriesCacheKey, out var cached))
+        if (_cache.TryGetValue<IReadOnlyList<Territory>>(Constants.CacheKeys.ActiveTerritories, out var cached))
         {
             return cached ?? Array.Empty<Territory>();
         }
@@ -37,7 +35,7 @@ public sealed class TerritoryCacheService
             .OrderBy(t => t.Name)
             .ToList();
 
-        _cache.Set(ActiveTerritoriesCacheKey, activeTerritories, CacheExpiration);
+        _cache.Set(Constants.CacheKeys.ActiveTerritories, activeTerritories, Constants.Cache.TerritoryExpiration);
 
         return activeTerritories;
     }
@@ -47,7 +45,7 @@ public sealed class TerritoryCacheService
     /// </summary>
     public void InvalidateActiveTerritories()
     {
-        _cache.Remove(ActiveTerritoriesCacheKey);
+        _cache.Remove(Constants.CacheKeys.ActiveTerritories);
     }
 
     /// <summary>
@@ -57,7 +55,7 @@ public sealed class TerritoryCacheService
     {
         if (useCache)
         {
-            var cacheKey = $"territory:{id}";
+            var cacheKey = Constants.CacheKeys.Territory(id);
             if (_cache.TryGetValue<Territory>(cacheKey, out var cached))
             {
                 return cached;
@@ -66,7 +64,7 @@ public sealed class TerritoryCacheService
             var territory = await _territoryRepository.GetByIdAsync(id, cancellationToken);
             if (territory is not null)
             {
-                _cache.Set(cacheKey, territory, TimeSpan.FromMinutes(10));
+                _cache.Set(cacheKey, territory, Constants.Cache.TerritoryDetailExpiration);
             }
 
             return territory;
@@ -80,7 +78,7 @@ public sealed class TerritoryCacheService
     /// </summary>
     public void InvalidateTerritory(Guid territoryId)
     {
-        _cache.Remove($"territory:{territoryId}");
+        _cache.Remove(Constants.CacheKeys.Territory(territoryId));
         // Also invalidate active list since it may have changed
         InvalidateActiveTerritories();
     }
