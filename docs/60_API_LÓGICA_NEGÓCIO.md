@@ -289,7 +289,8 @@ O Araponga é uma plataforma **território-first** e **comunidade-first** para o
   - `PUBLIC`: Visível para todos (visitantes e moradores)
   - `RESIDENTS_ONLY`: Visível apenas para moradores validados
 - **Sanções**: Usuários com sanção de posting não podem criar posts
-- **Feature Flags**: Posts do tipo ALERT só são permitidos se feature flag estiver habilitada no território
+- **Feature Flags**: Posts do tipo `ALERT` só são permitidos se a flag `ALERTPOSTS` estiver habilitada no território.
+  - Observação: quando um alerta de saúde é **validado**, a publicação do post `ALERT` no feed também depende dessa mesma flag (para evitar bypass).
 - **GeoAnchors**: Deriva automaticamente de mídias (não são enviados manualmente)
 - **Limites**: Título máximo 200 caracteres, conteúdo máximo 4000 caracteres
 - **Status**: Posts são criados como `PUBLISHED` por padrão
@@ -890,8 +891,8 @@ O Marketplace lida exclusivamente com produtos e serviços oferecidos por morado
 
 **Regras de negócio**:
 - **Permissão**: Todos usuários autenticados podem consultar
-- **Retorno**: Lista de flags habilitadas/desabilitadas
-- **Exemplos**: AlertPosts, Marketplace, etc.
+- **Retorno**: Lista de flags **habilitadas** no território (strings em `UPPERCASE`, sem underscores).
+- **Exemplos**: `ALERTPOSTS`, `MARKETPLACEENABLED`, `CHATENABLED`, etc.
 
 ### Atualizar Feature Flags (`PUT /api/v1/territories/{territoryId}/features`)
 
@@ -900,7 +901,7 @@ O Marketplace lida exclusivamente com produtos e serviços oferecidos por morado
 **Como usar**:
 - Exige autenticação
 - Path param: `territoryId`
-- Body: Objeto com flags e valores (true/false)
+- Body: `enabledFlags: string[]` (lista de flags habilitadas, em qualquer casing)
 
 **Regras de negócio**:
 - **Permissão**: Apenas curadores (CURATOR) podem atualizar
@@ -1046,6 +1047,7 @@ O Marketplace lida exclusivamente com produtos e serviços oferecidos por morado
 - `POST /api/v1/cart` - Adicionar ao carrinho
 - `GET /api/v1/cart` - Obter carrinho
 - `POST /api/v1/cart/checkout` - Finalizar compra
+  - Observação: o módulo de marketplace é controlado por flag territorial `MARKETPLACEENABLED`. Quando desabilitado no território, endpoints de consulta/ação retornam `404` para evitar exposição do marketplace.
 
 ### Chat
 - `GET /api/v1/territories/{territoryId}/chat/channels` - Listar canais do território (Público/Moradores)
@@ -1135,7 +1137,7 @@ Todas as operações de chat devem checar flags antes de qualquer acesso ao banc
 - **Participação**: invite-only (admin/owner adiciona/removem participantes).
 
 #### DM (Direct)
-- **Habilitação**: depende de flag territorial `CHAT_DM_ENABLED`.
+- **Habilitação**: depende de flag territorial `CHATDMENABLED` (`FeatureFlag.ChatDmEnabled`).
 - **Iniciar**: usuário verificado e permitido pelas preferências do destinatário (`contactVisibility`/chat settings) e por `UserBlock`.
 - **Ler/Escrever**: apenas participantes (ou `SYSTEM_ADMIN`).
 
