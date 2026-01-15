@@ -152,32 +152,28 @@ public sealed class PostCreationService
         Guid postId,
         IReadOnlyCollection<Models.GeoAnchorInput>? geoAnchors)
     {
-        const int MaxAnchors = 50;
-        const int Precision = 5;
-
         if (geoAnchors is null || geoAnchors.Count == 0)
         {
             return Array.Empty<Domain.Map.PostGeoAnchor>();
         }
 
         var now = DateTime.UtcNow;
-        const string AnchorType = "POST";
 
         return geoAnchors
             .Where(anchor => GeoCoordinate.IsValid(anchor.Latitude, anchor.Longitude))
             .Select(anchor => new
             {
-                Latitude = Math.Round(anchor.Latitude, Precision, MidpointRounding.AwayFromZero),
-                Longitude = Math.Round(anchor.Longitude, Precision, MidpointRounding.AwayFromZero)
+                Latitude = Math.Round(anchor.Latitude, Constants.Posts.GeoAnchorPrecision, MidpointRounding.AwayFromZero),
+                Longitude = Math.Round(anchor.Longitude, Constants.Posts.GeoAnchorPrecision, MidpointRounding.AwayFromZero)
             })
             .Distinct()
-            .Take(MaxAnchors)
+            .Take(Constants.Posts.MaxAnchors)
             .Select(anchor => new Domain.Map.PostGeoAnchor(
                 Guid.NewGuid(),
                 postId,
                 anchor.Latitude,
                 anchor.Longitude,
-                AnchorType,
+                Constants.Posts.PostAnchorType,
                 now))
             .ToList();
     }

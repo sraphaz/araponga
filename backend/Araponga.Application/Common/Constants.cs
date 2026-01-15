@@ -223,4 +223,25 @@ public static class Constants
         /// </summary>
         public const double EarthRadiusKm = 6371.0;
     }
+
+    /// <summary>
+    /// Constantes de posts e geo anchors.
+    /// </summary>
+    public static class Posts
+    {
+        /// <summary>
+        /// Número máximo de geo anchors por post (50).
+        /// </summary>
+        public const int MaxAnchors = 50;
+
+        /// <summary>
+        /// Precisão decimal para coordenadas de geo anchors (5 casas decimais).
+        /// </summary>
+        public const int GeoAnchorPrecision = 5;
+
+        /// <summary>
+        /// Tipo de anchor para posts.
+        /// </summary>
+        public const string PostAnchorType = "POST";
+    }
 }
