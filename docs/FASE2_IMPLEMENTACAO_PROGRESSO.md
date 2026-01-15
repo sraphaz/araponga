@@ -16,7 +16,7 @@
 | Estratégia de Cache | 24h | 🟡 Em Progresso | 85% |
 | Paginação Completa | 16h | ⏳ Pendente | 0% |
 | Reduzir Duplicação | 16h | 🟡 Em Progresso | 85% |
-| **Total** | **100h** | **🟡 30%** | |
+| **Total** | **100h** | **🟡 35%** | |
 
 ---
 
@@ -212,7 +212,7 @@
 
 ## 📈 Resumo Executivo
 
-### Progresso Atual: 30%
+### Progresso Atual: 35%
 
 **Implementado:**
 - ✅ 57 novos testes criados (Alerts, Assets, Marketplace, Territories, Events)
