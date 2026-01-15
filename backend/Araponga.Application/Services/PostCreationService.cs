@@ -23,6 +23,7 @@ public sealed class PostCreationService
     private readonly IAuditLogger _auditLogger;
     private readonly IEventBus _eventBus;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly CacheInvalidationService? _cacheInvalidation;
 
     public PostCreationService(
         IFeedRepository feedRepository,
@@ -34,7 +35,8 @@ public sealed class PostCreationService
         IFeatureFlagService featureFlags,
         IAuditLogger auditLogger,
         IEventBus eventBus,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        CacheInvalidationService? cacheInvalidation = null)
     {
         _feedRepository = feedRepository;
         _mapRepository = mapRepository;
@@ -46,6 +48,7 @@ public sealed class PostCreationService
         _auditLogger = auditLogger;
         _eventBus = eventBus;
         _unitOfWork = unitOfWork;
+        _cacheInvalidation = cacheInvalidation;
     }
 
     public async Task<Result<CommunityPost>> CreatePostAsync(
@@ -138,6 +141,9 @@ public sealed class PostCreationService
             cancellationToken);
 
         await _unitOfWork.CommitAsync(cancellationToken);
+
+        // Invalidar cache de feed do território após criar post
+        _cacheInvalidation?.InvalidateFeedCache(territoryId);
 
         return Result<CommunityPost>.Success(post);
     }
