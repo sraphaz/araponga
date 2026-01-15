@@ -65,8 +65,18 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
 
     public async Task CommitAsync(CancellationToken cancellationToken)
     {
-        // Salva mudanças primeiro
-        await SaveChangesAsync(cancellationToken);
+        try
+        {
+            // Salva mudanças primeiro
+            await SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Re-throw com mensagem mais clara
+            throw new InvalidOperationException(
+                "Concurrency conflict detected. The entity was modified by another process. Please retry the operation.",
+                ex);
+        }
         
         // Se há uma transação ativa, faz commit da transação
         if (_currentTransaction is not null)
@@ -174,6 +184,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(m => m.LastGeoVerifiedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(m => m.LastDocumentVerifiedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(m => m.CreatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(m => m.RowVersion).IsRowVersion();
             entity.HasIndex(m => m.UserId);
             entity.HasIndex(m => m.TerritoryId);
             entity.HasIndex(m => new { m.UserId, m.TerritoryId }).IsUnique();
@@ -318,6 +329,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(p => p.Status).HasConversion<int>();
             entity.Property(p => p.ReferenceType).HasMaxLength(40);
             entity.Property(p => p.CreatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(p => p.RowVersion).IsRowVersion();
             entity.HasIndex(p => p.TerritoryId);
             entity.HasIndex(p => new { p.TerritoryId, p.CreatedAtUtc });
             entity.HasIndex(p => new { p.TerritoryId, p.Status, p.CreatedAtUtc });
@@ -350,6 +362,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(e => e.Status).HasConversion<string>().HasMaxLength(32);
             entity.Property(e => e.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.Property(e => e.UpdatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(e => e.RowVersion).IsRowVersion();
             entity.HasIndex(e => new { e.TerritoryId, e.StartsAtUtc });
             entity.HasIndex(e => new { e.TerritoryId, e.Status });
             entity.HasIndex(e => new { e.Latitude, e.Longitude });
@@ -379,6 +392,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(e => e.Visibility).HasConversion<int>();
             entity.Property(e => e.ConfirmationCount).IsRequired();
             entity.Property(e => e.CreatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(e => e.RowVersion).IsRowVersion();
             entity.HasIndex(e => e.TerritoryId);
             entity.HasIndex(e => new { e.TerritoryId, e.Status });
             entity.HasIndex(e => new { e.TerritoryId, e.Visibility });

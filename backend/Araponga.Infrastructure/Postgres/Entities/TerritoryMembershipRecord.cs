@@ -12,4 +12,5 @@ public sealed class TerritoryMembershipRecord
     public DateTime? LastGeoVerifiedAtUtc { get; set; }
     public DateTime? LastDocumentVerifiedAtUtc { get; set; }
     public DateTime CreatedAtUtc { get; set; }
+    public byte[] RowVersion { get; set; } = Array.Empty<byte>();
 }

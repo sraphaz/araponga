@@ -115,10 +115,18 @@ public sealed class PostgresTerritoryEventRepository : ITerritoryEventRepository
         return Task.CompletedTask;
     }
 
-    public Task UpdateAsync(TerritoryEvent territoryEvent, CancellationToken cancellationToken)
+    public async Task UpdateAsync(TerritoryEvent territoryEvent, CancellationToken cancellationToken)
     {
-        _dbContext.TerritoryEvents.Update(territoryEvent.ToRecord());
-        return Task.CompletedTask;
+        var record = await _dbContext.TerritoryEvents
+            .FirstOrDefaultAsync(e => e.Id == territoryEvent.Id, cancellationToken);
+
+        if (record is null)
+        {
+            return;
+        }
+
+        var updatedRecord = territoryEvent.ToRecord();
+        _dbContext.Entry(record).CurrentValues.SetValues(updatedRecord);
     }
 
     public async Task<IReadOnlyList<TerritoryEvent>> ListByTerritoryPagedAsync(
