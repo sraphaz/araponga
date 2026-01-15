@@ -85,6 +85,8 @@
 
 **Total de testes criados**: 35 novos testes
 
+**Status dos testes**: 16/18 passando (2 ainda precisam de ajustes finos)
+
 ### 4. Estratégia de Cache e Invalidação
 - ✅ `CacheInvalidationService` criado
 - ✅ Integrado no `MembershipService` (invalidação após criar/atualizar membership)
