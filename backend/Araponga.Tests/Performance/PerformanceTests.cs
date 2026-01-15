@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using Araponga.Api;
 using Araponga.Api.Contracts.Auth;
 using Araponga.Api.Contracts.Feed;
+using Araponga.Api.Contracts.Territories;
 using Xunit;
 
 namespace Araponga.Tests.Performance;
