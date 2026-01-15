@@ -154,6 +154,7 @@ A arquitetura prioriza domínios de negócio bem definidos e evolução incremen
 
 ### Componentes principais
 - **API RESTful**: expõe recursos via HTTP, documentada com Swagger / OpenAPI  
+- **Paginação e validação**: endpoints paginados para eficiência e validação robusta de dados  
 - **Portal de autosserviço**: interface web para interação com feed, mapa e configurações  
 - **Persistência**: banco relacional PostgreSQL com suporte a dados geográficos  
 - **Autenticação e autorização**: baseada em papéis e políticas territoriais  

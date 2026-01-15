@@ -30,6 +30,10 @@ export default function Technology() {
                     OpenAPI
                   </li>
                   <li>
+                    <strong>Paginação e validação</strong>: endpoints paginados para eficiência e
+                    validação robusta de dados
+                  </li>
+                  <li>
                     <strong>Portal de autosserviço</strong>: interface web para interação com feed,
                     mapa e configurações
                   </li>
