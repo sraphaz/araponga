@@ -15,8 +15,8 @@
 | Testes de Segurança | 16h | ⏳ Pendente | 0% |
 | Estratégia de Cache | 24h | 🟡 Em Progresso | 60% |
 | Paginação Completa | 16h | ⏳ Pendente | 0% |
-| Reduzir Duplicação | 16h | 🟡 Em Progresso | 50% |
-| **Total** | **100h** | **🟡 20%** | |
+| Reduzir Duplicação | 16h | 🟡 Em Progresso | 70% |
+| **Total** | **100h** | **🟡 25%** | |
 
 ---
 
@@ -99,13 +99,15 @@
 - ⏳ Adicionar métricas de cache hit/miss
 
 ### 6. Refatoração: Reduzir Duplicação
-- ✅ `Constants.cs` criado (paginação, cache, geo, validação, rate limiting)
+- ✅ `Constants.cs` criado (paginação, cache, geo, validação, rate limiting, moderação, auth)
 - ✅ `ValidationHelpers.cs` criado (validações comuns)
 - ✅ `PaginationParameters` atualizado para usar constantes
 - ✅ `AccessEvaluator` atualizado para usar constantes de cache
 - ✅ `TerritoryCacheService` atualizado para usar constantes
 - ✅ `AlertCacheService` atualizado para usar constantes
 - ✅ `MembershipService` atualizado para usar constantes de geo
+- ✅ `ReportService` atualizado para usar constantes de moderação
+- ✅ `AuthService` atualizado para usar constantes de autenticação
 - ⏳ Atualizar outros services para usar helpers e constantes
 
 ---
