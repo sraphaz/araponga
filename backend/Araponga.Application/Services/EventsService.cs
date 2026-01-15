@@ -459,7 +459,7 @@ public sealed class EventsService
                 Math.Cos(lat1) * Math.Cos(lat2) *
                 Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
         var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-        return Radius * c;
+        return Constants.Geography.EarthRadiusKm * c;
     }
 
     private static double DegreesToRadians(double degrees)
