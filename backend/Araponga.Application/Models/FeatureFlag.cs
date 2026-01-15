@@ -12,5 +12,8 @@ public enum FeatureFlag
     ChatTerritoryResidentsChannel = 6,
     ChatGroups = 7,
     ChatDmEnabled = 8,
-    ChatMediaEnabled = 9
+    ChatMediaEnabled = 9,
+
+    // Payment module (territory-scoped)
+    PaymentEnabled = 10
 }

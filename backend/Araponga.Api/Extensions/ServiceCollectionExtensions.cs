@@ -72,6 +72,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ModerationCaseService>();
         services.AddScoped<ChatService>();
         services.AddScoped<InputSanitizationService>();
+        services.AddScoped<PaymentService>();
+        services.AddScoped<TerritoryPaymentConfigService>();
 
         return services;
     }
@@ -166,6 +168,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICheckoutRepository, PostgresCheckoutRepository>();
         services.AddScoped<ICheckoutItemRepository, PostgresCheckoutItemRepository>();
         services.AddScoped<IPlatformFeeConfigRepository, PostgresPlatformFeeConfigRepository>();
+        services.AddScoped<ITerritoryPaymentConfigRepository, PostgresTerritoryPaymentConfigRepository>();
         services.AddScoped<IUserPreferencesRepository, PostgresUserPreferencesRepository>();
         services.AddScoped<IMembershipSettingsRepository, PostgresMembershipSettingsRepository>();
         services.AddScoped<IMembershipCapabilityRepository, PostgresMembershipCapabilityRepository>();
@@ -179,6 +182,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IChatConversationParticipantRepository, PostgresChatConversationParticipantRepository>();
         services.AddScoped<IChatMessageRepository, PostgresChatMessageRepository>();
         services.AddScoped<IChatConversationStatsRepository, PostgresChatConversationStatsRepository>();
+
+        // Payment Gateway
+        services.AddScoped<Araponga.Application.Interfaces.IPaymentGateway, Araponga.Infrastructure.Payments.MockPaymentGateway>();
 
         return services;
     }
@@ -216,6 +222,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ICheckoutRepository, InMemoryCheckoutRepository>();
         services.AddSingleton<ICheckoutItemRepository, InMemoryCheckoutItemRepository>();
         services.AddSingleton<IPlatformFeeConfigRepository, InMemoryPlatformFeeConfigRepository>();
+        services.AddSingleton<ITerritoryPaymentConfigRepository, InMemoryTerritoryPaymentConfigRepository>();
         services.AddSingleton<IUserPreferencesRepository, InMemoryUserPreferencesRepository>();
         services.AddSingleton<IMembershipSettingsRepository, InMemoryMembershipSettingsRepository>();
         services.AddSingleton<IMembershipCapabilityRepository, InMemoryMembershipCapabilityRepository>();

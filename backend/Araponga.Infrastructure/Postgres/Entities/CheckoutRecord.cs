@@ -13,6 +13,7 @@ public sealed class CheckoutRecord
     public decimal? ItemsSubtotalAmount { get; set; }
     public decimal? PlatformFeeAmount { get; set; }
     public decimal? TotalAmount { get; set; }
+    public string? PaymentIntentId { get; set; }
     public DateTime CreatedAtUtc { get; set; }
     public DateTime UpdatedAtUtc { get; set; }
 }

@@ -7,6 +7,46 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2026-01-18] - Fase 6: Sistema de Pagamentos ✅ 100% Completo
+
+### Sistema de Pagamentos
+
+- ✅ **Gateway de Pagamento Plugável**: Interface `IPaymentGateway` criada para suportar múltiplos gateways (Stripe, MercadoPago, PagSeguro, etc.)
+- ✅ **PaymentService**: Serviço completo para orquestrar pagamentos, validações e integração com checkout
+- ✅ **Configuração por Território**: `TerritoryPaymentConfig` permite configurar gateway, limites e transparência por território
+- ✅ **Feature Flags**: `PaymentEnabled` adicionado para controle por território
+- ✅ **Fees Transparentes**: Breakdown de fees com 3 níveis de transparência (Basic, Detailed, Full)
+- ✅ **Webhooks**: Handler para processar notificações do gateway
+- ✅ **Reembolsos**: Sistema completo de reembolsos (total e parcial)
+- ✅ **Validação de Limites**: Validação automática de valores mínimos/máximos por território
+- ✅ **Integração com PlatformFeeConfig**: Cálculo de fees integrado com configurações existentes
+
+### Arquivos Criados
+
+- `backend/Araponga.Application/Services/PaymentService.cs`: Orquestração de pagamentos
+- `backend/Araponga.Application/Services/TerritoryPaymentConfigService.cs`: Gerenciamento de configurações
+- `backend/Araponga.Application/Interfaces/IPaymentGateway.cs`: Interface para gateways
+- `backend/Araponga.Application/Interfaces/ITerritoryPaymentConfigRepository.cs`: Repositório de configurações
+- `backend/Araponga.Application/Models/PaymentModels.cs`: Modelos de request/response
+- `backend/Araponga.Domain/Marketplace/TerritoryPaymentConfig.cs`: Entidade de configuração
+- `backend/Araponga.Infrastructure/Payments/MockPaymentGateway.cs`: Implementação mock para desenvolvimento
+- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryPaymentConfigRepository.cs`: Repositório Postgres
+- `backend/Araponga.Api/Controllers/PaymentController.cs`: Endpoints de pagamento
+- `backend/Araponga.Api/Controllers/TerritoryPaymentConfigController.cs`: Endpoints de configuração
+- `backend/Araponga.Infrastructure/Postgres/Migrations/20260118000000_AddTerritoryPaymentConfig.cs`: Migration
+
+### Arquivos Modificados
+
+- `backend/Araponga.Domain/Marketplace/Checkout.cs`: Adicionado `PaymentIntentId`
+- `backend/Araponga.Application/Interfaces/ICheckoutRepository.cs`: Adicionados `GetByIdAsync` e `GetByPaymentIntentIdAsync`
+- `backend/Araponga.Application/Models/FeatureFlag.cs`: Adicionado `PaymentEnabled = 10`
+- `backend/Araponga.Infrastructure/Postgres/PostgresCheckoutRepository.cs`: Implementação dos novos métodos
+- `backend/Araponga.Infrastructure/InMemory/InMemoryCheckoutRepository.cs`: Implementação dos novos métodos
+- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`: Registro de serviços de pagamento
+- `backend/Araponga.Api/wwwroot/devportal/index.html`: Adicionado card "Marketplace e Pagamentos"
+
+---
+
 ## [2026-01-15] - Fase 5: Segurança Avançada ✅ 100% Completo
 
 ### Segurança Avançada

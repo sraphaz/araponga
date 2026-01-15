@@ -283,6 +283,7 @@ public sealed class InMemoryDataStore
         Checkouts = new List<Checkout>();
         CheckoutItems = new List<CheckoutItem>();
         PlatformFeeConfigs = new List<PlatformFeeConfig>();
+        TerritoryPaymentConfigs = new List<TerritoryPaymentConfig>();
         EventParticipations = new List<EventParticipation>();
     }
 
@@ -308,6 +309,7 @@ public sealed class InMemoryDataStore
     public List<Checkout> Checkouts { get; }
     public List<CheckoutItem> CheckoutItems { get; }
     public List<PlatformFeeConfig> PlatformFeeConfigs { get; }
+    public List<TerritoryPaymentConfig> TerritoryPaymentConfigs { get; }
     public Dictionary<string, Guid> ActiveTerritories { get; } = new(StringComparer.OrdinalIgnoreCase);
     public Dictionary<Guid, HashSet<string>> PostLikes { get; } = new();
     public Dictionary<Guid, List<PostComment>> PostComments { get; } = new();

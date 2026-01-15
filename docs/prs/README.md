@@ -43,7 +43,15 @@ Esta pasta contém a documentação detalhada de todos os Pull Requests implemen
   - Runbook e Troubleshooting completo
   - 7 arquivos criados, 12+ modificados, ~2000+ linhas de documentação
 
-### 🔒 Segurança Avançada
+### 💳 Sistema de Pagamentos
+
+- **[PR Fase 6: Sistema de Pagamentos](./PR_FASE6_SISTEMA_PAGAMENTOS.md)** - Sistema completo de pagamentos com gateway plugável, configuração por território e fees transparentes
+
+## 💳 Sistema de Pagamentos
+
+- **[PR Fase 6: Sistema de Pagamentos](./PR_FASE6_SISTEMA_PAGAMENTOS.md)** - Gateway plugável, configuração por território, fees transparentes
+
+## 🔒 Segurança Avançada
 
 - **[PR_FASE5_SEGURANCA_AVANCADA.md](./PR_FASE5_SEGURANCA_AVANCADA.md)**  
   Fase 5: Segurança Avançada (100% completo ✅)

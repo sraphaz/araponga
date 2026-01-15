@@ -28,4 +28,16 @@ public sealed class InMemoryCheckoutRepository : ICheckoutRepository
 
         return Task.CompletedTask;
     }
+
+    public Task<Checkout?> GetByIdAsync(Guid checkoutId, CancellationToken cancellationToken)
+    {
+        var checkout = _dataStore.Checkouts.FirstOrDefault(c => c.Id == checkoutId);
+        return Task.FromResult(checkout);
+    }
+
+    public Task<Checkout?> GetByPaymentIntentIdAsync(string paymentIntentId, CancellationToken cancellationToken)
+    {
+        var checkout = _dataStore.Checkouts.FirstOrDefault(c => c.PaymentIntentId == paymentIntentId);
+        return Task.FromResult(checkout);
+    }
 }

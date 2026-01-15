@@ -56,6 +56,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
     public DbSet<CheckoutRecord> Checkouts => Set<CheckoutRecord>();
     public DbSet<CheckoutItemRecord> CheckoutItems => Set<CheckoutItemRecord>();
     public DbSet<PlatformFeeConfigRecord> PlatformFeeConfigs => Set<PlatformFeeConfigRecord>();
+    public DbSet<TerritoryPaymentConfigRecord> TerritoryPaymentConfigs => Set<TerritoryPaymentConfigRecord>();
 
     // Chat
     public DbSet<ChatConversationRecord> ChatConversations => Set<ChatConversationRecord>();
@@ -697,6 +698,21 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(i => i.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(i => i.CheckoutId);
             entity.HasIndex(i => i.ItemId);
+        });
+
+        modelBuilder.Entity<TerritoryPaymentConfigRecord>(entity =>
+        {
+            entity.ToTable("territory_payment_configs");
+            entity.HasKey(c => c.Id);
+            entity.Property(c => c.GatewayProvider).HasMaxLength(100).IsRequired();
+            entity.Property(c => c.Currency).HasMaxLength(10).IsRequired();
+            entity.Property(c => c.MinimumAmount).IsRequired();
+            entity.Property(c => c.MaximumAmount);
+            entity.Property(c => c.FeeTransparencyLevel).HasConversion<int>();
+            entity.Property(c => c.CreatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(c => c.UpdatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.HasIndex(c => c.TerritoryId);
+            entity.HasIndex(c => new { c.TerritoryId, c.IsActive });
         });
 
         modelBuilder.Entity<PlatformFeeConfigRecord>(entity =>

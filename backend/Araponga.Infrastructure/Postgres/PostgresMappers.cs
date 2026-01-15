@@ -300,6 +300,7 @@ public static class PostgresMappers
             ItemsSubtotalAmount = checkout.ItemsSubtotalAmount,
             PlatformFeeAmount = checkout.PlatformFeeAmount,
             TotalAmount = checkout.TotalAmount,
+            PaymentIntentId = checkout.PaymentIntentId,
             CreatedAtUtc = checkout.CreatedAtUtc,
             UpdatedAtUtc = checkout.UpdatedAtUtc
         };
@@ -318,7 +319,8 @@ public static class PostgresMappers
             record.PlatformFeeAmount,
             record.TotalAmount,
             record.CreatedAtUtc,
-            record.UpdatedAtUtc);
+            record.UpdatedAtUtc,
+            record.PaymentIntentId);
     }
 
     public static CheckoutItemRecord ToRecord(this CheckoutItem item)
@@ -369,6 +371,40 @@ public static class PostgresMappers
             CreatedAtUtc = config.CreatedAtUtc,
             UpdatedAtUtc = config.UpdatedAtUtc
         };
+    }
+
+    public static TerritoryPaymentConfigRecord ToRecord(this TerritoryPaymentConfig config)
+    {
+        return new TerritoryPaymentConfigRecord
+        {
+            Id = config.Id,
+            TerritoryId = config.TerritoryId,
+            GatewayProvider = config.GatewayProvider,
+            IsActive = config.IsActive,
+            Currency = config.Currency,
+            MinimumAmount = config.MinimumAmount,
+            MaximumAmount = config.MaximumAmount,
+            ShowFeeBreakdown = config.ShowFeeBreakdown,
+            FeeTransparencyLevel = config.FeeTransparencyLevel,
+            CreatedAtUtc = config.CreatedAtUtc,
+            UpdatedAtUtc = config.UpdatedAtUtc
+        };
+    }
+
+    public static TerritoryPaymentConfig ToDomain(this TerritoryPaymentConfigRecord record)
+    {
+        return new TerritoryPaymentConfig(
+            record.Id,
+            record.TerritoryId,
+            record.GatewayProvider,
+            record.IsActive,
+            record.Currency,
+            record.MinimumAmount,
+            record.MaximumAmount,
+            record.ShowFeeBreakdown,
+            record.FeeTransparencyLevel,
+            record.CreatedAtUtc,
+            record.UpdatedAtUtc);
     }
 
     public static PlatformFeeConfig ToDomain(this PlatformFeeConfigRecord record)

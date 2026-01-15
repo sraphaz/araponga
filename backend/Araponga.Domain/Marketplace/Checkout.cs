@@ -20,6 +20,7 @@ public sealed class Checkout
     /// <param name="totalAmount">Valor total (subtotal + taxa da plataforma)</param>
     /// <param name="createdAtUtc">Data de criação</param>
     /// <param name="updatedAtUtc">Data da última atualização</param>
+    /// <param name="paymentIntentId">ID da intenção de pagamento no gateway (opcional)</param>
     public Checkout(
         Guid id,
         Guid territoryId,
@@ -31,7 +32,8 @@ public sealed class Checkout
         decimal? platformFeeAmount,
         decimal? totalAmount,
         DateTime createdAtUtc,
-        DateTime updatedAtUtc)
+        DateTime updatedAtUtc,
+        string? paymentIntentId = null)
     {
         if (territoryId == Guid.Empty)
         {
@@ -59,6 +61,7 @@ public sealed class Checkout
         TotalAmount = totalAmount;
         CreatedAtUtc = createdAtUtc;
         UpdatedAtUtc = updatedAtUtc;
+        PaymentIntentId = paymentIntentId;
     }
 
     /// <summary>
@@ -117,6 +120,11 @@ public sealed class Checkout
     public DateTime UpdatedAtUtc { get; private set; }
 
     /// <summary>
+    /// ID da intenção de pagamento no gateway (ex: Stripe PaymentIntent ID).
+    /// </summary>
+    public string? PaymentIntentId { get; private set; }
+
+    /// <summary>
     /// Define os valores totais do checkout.
     /// </summary>
     /// <param name="itemsSubtotal">Subtotal dos itens</param>
@@ -139,6 +147,17 @@ public sealed class Checkout
     public void SetStatus(CheckoutStatus status, DateTime updatedAtUtc)
     {
         Status = status;
+        UpdatedAtUtc = updatedAtUtc;
+    }
+
+    /// <summary>
+    /// Define o ID da intenção de pagamento no gateway.
+    /// </summary>
+    /// <param name="paymentIntentId">ID da intenção de pagamento</param>
+    /// <param name="updatedAtUtc">Data da atualização</param>
+    public void SetPaymentIntentId(string paymentIntentId, DateTime updatedAtUtc)
+    {
+        PaymentIntentId = paymentIntentId;
         UpdatedAtUtc = updatedAtUtc;
     }
 }
