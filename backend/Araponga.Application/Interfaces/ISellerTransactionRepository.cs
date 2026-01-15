@@ -10,6 +10,7 @@ public interface ISellerTransactionRepository
     Task<List<SellerTransaction>> GetBySellerUserIdAsync(Guid sellerUserId, CancellationToken cancellationToken);
     Task<List<SellerTransaction>> GetByStatusAsync(Guid territoryId, SellerTransactionStatus status, CancellationToken cancellationToken);
     Task<List<SellerTransaction>> GetReadyForPayoutAsync(Guid territoryId, CancellationToken cancellationToken);
+    Task<List<SellerTransaction>> GetByPayoutIdAsync(string payoutId, CancellationToken cancellationToken);
     Task AddAsync(SellerTransaction transaction, CancellationToken cancellationToken);
     Task UpdateAsync(SellerTransaction transaction, CancellationToken cancellationToken);
 }

@@ -63,6 +63,15 @@ public sealed class PostgresSellerTransactionRepository : ISellerTransactionRepo
         return records.Select(r => r.ToDomain()).ToList();
     }
 
+    public async Task<List<SellerTransaction>> GetByPayoutIdAsync(string payoutId, CancellationToken cancellationToken)
+    {
+        var records = await _dbContext.SellerTransactions
+            .Where(r => r.PayoutId == payoutId)
+            .OrderByDescending(r => r.CreatedAtUtc)
+            .ToListAsync(cancellationToken);
+        return records.Select(r => r.ToDomain()).ToList();
+    }
+
     public Task AddAsync(SellerTransaction transaction, CancellationToken cancellationToken)
     {
         _dbContext.SellerTransactions.Add(transaction.ToRecord());

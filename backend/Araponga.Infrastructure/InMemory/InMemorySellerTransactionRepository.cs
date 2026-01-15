@@ -60,6 +60,15 @@ public sealed class InMemorySellerTransactionRepository : ISellerTransactionRepo
         return Task.FromResult(transactions);
     }
 
+    public Task<List<SellerTransaction>> GetByPayoutIdAsync(string payoutId, CancellationToken cancellationToken)
+    {
+        var transactions = _dataStore.SellerTransactions
+            .Where(t => t.PayoutId == payoutId)
+            .OrderByDescending(t => t.CreatedAtUtc)
+            .ToList();
+        return Task.FromResult(transactions);
+    }
+
     public Task AddAsync(SellerTransaction transaction, CancellationToken cancellationToken)
     {
         _dataStore.SellerTransactions.Add(transaction);
