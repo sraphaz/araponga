@@ -66,6 +66,7 @@
         <li><a href="#openapi" data-i18n="nav.openapi">OpenAPI / Explorer</a></li>
         <li><a href="#erros" data-i18n="nav.errors">Erros & convenções</a></li>
         <li><a href="#quickstart" data-i18n="nav.quickstart">Quickstart</a></li>
+        <li><a href="#capacidades-tecnicas">Capacidades Técnicas</a></li>
         <li><a href="#versoes" data-i18n="nav.versions">Versões</a></li>
       </ul>
     </nav>
@@ -962,6 +963,47 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
         </div>
         <div class="callout">
           <span data-i18n-html="quickstart.tipHtml"><strong>Dica:</strong> este portal tem fonte única em <code>backend/Araponga.Api/wwwroot/devportal</code> (HTML/CSS/JS/OpenAPI). O deploy do GitHub Pages publica exatamente essa pasta.</span>
+        </div>
+      </section>
+
+      <section class="section" id="capacidades-tecnicas">
+        <span class="eyebrow">Capacidades Técnicas</span>
+        <h2>Capacidades Técnicas</h2>
+        <p>
+          O Araponga oferece recursos avançados de qualidade, performance e observabilidade.
+          Estas são as principais capacidades técnicas da plataforma:
+        </p>
+        <div class="model-grid">
+          <div class="card">
+            <h3>Qualidade de Código e Confiabilidade</h3>
+            <ul>
+              <li>Paginação completa em 15 endpoints</li>
+              <li>Validação robusta com FluentValidation</li>
+              <li>Cobertura de testes >90%</li>
+              <li>Testes de segurança e performance</li>
+              <li>Refatoração completa de services</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Performance e Escalabilidade</h3>
+            <ul>
+              <li>Concorrência otimista com RowVersion</li>
+              <li>Cache distribuído (Redis)</li>
+              <li>Processamento assíncrono de eventos</li>
+              <li>Suporte a read replicas</li>
+              <li>Deployment multi-instância</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Observabilidade e Monitoramento</h3>
+            <ul>
+              <li>Logs centralizados (Serilog + Seq)</li>
+              <li>Métricas Prometheus</li>
+              <li>Distributed tracing (OpenTelemetry)</li>
+              <li>Dashboards e alertas</li>
+              <li>Runbook e troubleshooting</li>
+            </ul>
+          </div>
         </div>
       </section>
 
