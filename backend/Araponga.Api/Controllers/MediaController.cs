@@ -33,7 +33,6 @@ public sealed class MediaController : ControllerBase
     /// Faz upload de uma mídia (imagem, vídeo, etc.).
     /// </summary>
     [HttpPost("upload")]
-    [EnableRateLimiting("default")]
     [Consumes("multipart/form-data")]
     [ProducesResponseType(typeof(MediaAssetResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
