@@ -1843,10 +1843,25 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
         
         diagramToggles.forEach(function(toggle) {
           var rendered = false;
+          var diagramContainer = toggle.querySelector('.mermaid');
+          var containerDiv = toggle.querySelector('.sequence-diagram-container');
+          
+          // Adicionar botão de fullscreen
+          if (diagramContainer && containerDiv) {
+            var fullscreenBtn = document.createElement('button');
+            fullscreenBtn.className = 'diagram-fullscreen-btn';
+            fullscreenBtn.textContent = '⛶ Tela Cheia';
+            fullscreenBtn.setAttribute('aria-label', 'Abrir diagrama em tela cheia');
+            containerDiv.appendChild(fullscreenBtn);
+            
+            fullscreenBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              openDiagramFullscreen(diagramContainer);
+            });
+          }
           
           toggle.addEventListener('toggle', function(event) {
             if (this.open && !rendered) {
-              var diagramContainer = this.querySelector('.mermaid');
               if (diagramContainer) {
                 var diagramId = diagramContainer.getAttribute('data-diagram') || 'diagram-' + Date.now();
                 var diagramContent = diagramContainer.textContent.trim();
@@ -1855,16 +1870,17 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
                   try {
                     mermaid.run({
                       nodes: [diagramContainer],
-                      suppressErrors: true
+                      suppressErrors: false
                     }).then(function() {
                       rendered = true;
+                      diagramContainer.setAttribute('data-processed', 'true');
                     }).catch(function(err) {
                       console.error('Erro ao renderizar diagrama:', err);
                       var errorMsg = document.createElement('div');
                       errorMsg.className = 'callout';
                       errorMsg.style.color = 'var(--danger)';
-                      errorMsg.textContent = 'Erro ao renderizar diagrama. Recarregue a página.';
-                      diagramContainer.parentNode.appendChild(errorMsg);
+                      errorMsg.textContent = 'Erro ao renderizar diagrama: ' + (err.message || 'Erro desconhecido');
+                      containerDiv.appendChild(errorMsg);
                     });
                   } catch (err) {
                     console.error('Erro ao inicializar renderização:', err);
@@ -1874,6 +1890,72 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
             }
           });
         });
+      }
+      
+      // Função para abrir diagrama em tela cheia
+      function openDiagramFullscreen(diagramElement) {
+        // Criar modal se não existir
+        var modal = document.getElementById('diagram-modal');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'diagram-modal';
+          modal.className = 'diagram-modal';
+          
+          var modalContent = document.createElement('div');
+          modalContent.className = 'diagram-modal-content';
+          
+          var closeBtn = document.createElement('button');
+          closeBtn.className = 'diagram-modal-close';
+          closeBtn.textContent = '×';
+          closeBtn.setAttribute('aria-label', 'Fechar');
+          closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+          
+          var mermaidClone = document.createElement('div');
+          mermaidClone.className = 'mermaid';
+          mermaidClone.textContent = diagramElement.textContent;
+          
+          modalContent.appendChild(mermaidClone);
+          modal.appendChild(closeBtn);
+          modal.appendChild(modalContent);
+          document.body.appendChild(modal);
+          
+          // Fechar com ESC
+          modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+              modal.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+          
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+              modal.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+        
+        // Clonar conteúdo do diagrama
+        var modalMermaid = modal.querySelector('.mermaid');
+        if (modalMermaid) {
+          modalMermaid.textContent = diagramElement.textContent;
+          modalMermaid.removeAttribute('data-processed');
+          
+          // Renderizar no modal
+          mermaid.run({
+            nodes: [modalMermaid],
+            suppressErrors: false
+          }).then(function() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }).catch(function(err) {
+            console.error('Erro ao renderizar diagrama no modal:', err);
+            alert('Erro ao renderizar diagrama: ' + (err.message || 'Erro desconhecido'));
+          });
+        }
       }
 
         if (document.readyState === 'loading') {
