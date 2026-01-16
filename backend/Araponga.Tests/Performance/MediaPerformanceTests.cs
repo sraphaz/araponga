@@ -44,7 +44,7 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
     {
         if (ShouldSkipPerformanceTests())
         {
-            global::SkippableFact.Skip.If(true, "Testes de performance pulados em CI/CD. Configure SKIP_PERFORMANCE_TESTS=false para executar.");
+            Skip.If(true, "Testes de performance pulados em CI/CD. Configure SKIP_PERFORMANCE_TESTS=false para executar.");
         }
     }
 
@@ -60,7 +60,7 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         _unitOfWork = _scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
     }
 
-    [global::SkippableFact.SkippableFact]
+    [SkippableFact]
     public async Task UploadMultipleImages_ShouldCompleteWithinTimeLimit()
     {
         SkipIfNeeded();
@@ -93,7 +93,7 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.Equal(imageCount, successfulUploads);
     }
 
-    [global::SkippableFact.SkippableFact]
+    [SkippableFact]
     public async Task UploadSingleLargeImage_ShouldCompleteWithinTimeLimit()
     {
         SkipIfNeeded();
@@ -121,7 +121,7 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.NotNull(result.Value);
     }
 
-    [global::SkippableFact.SkippableFact]
+    [SkippableFact]
     public async Task GetMediaUrlMultipleTimes_ShouldUseCache()
     {
         SkipIfNeeded();
@@ -164,7 +164,7 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.All(urlResults, result => Assert.Equal(firstUrl, result.Value));
     }
 
-    [global::SkippableFact.SkippableFact]
+    [SkippableFact]
     public async Task ListMediaByOwner_WithMultipleAttachments_ShouldCompleteWithinTimeLimit()
     {
         SkipIfNeeded();
