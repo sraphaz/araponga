@@ -2,6 +2,7 @@ using Araponga.Application.Models;
 using Araponga.Domain.Assets;
 using Araponga.Domain.Events;
 using Araponga.Domain.Feed;
+using Araponga.Domain.Financial;
 using Araponga.Domain.Health;
 using Araponga.Domain.Map;
 using Araponga.Domain.Marketplace;
@@ -308,6 +309,18 @@ public sealed class InMemoryDataStore
     public List<Checkout> Checkouts { get; }
     public List<CheckoutItem> CheckoutItems { get; }
     public List<PlatformFeeConfig> PlatformFeeConfigs { get; }
+    public List<TerritoryPayoutConfig> TerritoryPayoutConfigs { get; } = new();
+    
+    // Financial
+    public List<FinancialTransaction> FinancialTransactions { get; } = new();
+    public List<TransactionStatusHistory> TransactionStatusHistories { get; } = new();
+    public List<SellerBalance> SellerBalances { get; } = new();
+    public List<SellerTransaction> SellerTransactions { get; } = new();
+    public List<PlatformFinancialBalance> PlatformFinancialBalances { get; } = new();
+    public List<PlatformRevenueTransaction> PlatformRevenueTransactions { get; } = new();
+    public List<PlatformExpenseTransaction> PlatformExpenseTransactions { get; } = new();
+    public List<ReconciliationRecord> ReconciliationRecords { get; } = new();
+    
     public Dictionary<string, Guid> ActiveTerritories { get; } = new(StringComparer.OrdinalIgnoreCase);
     public Dictionary<Guid, HashSet<string>> PostLikes { get; } = new();
     public Dictionary<Guid, List<PostComment>> PostComments { get; } = new();

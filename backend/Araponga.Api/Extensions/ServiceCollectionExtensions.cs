@@ -72,6 +72,11 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ModerationCaseService>();
         services.AddScoped<ChatService>();
         services.AddScoped<InputSanitizationService>();
+        services.AddScoped<SellerPayoutService>();
+        services.AddScoped<TerritoryPayoutConfigService>();
+        
+        // Payout Gateway
+        services.AddScoped<IPayoutGateway, Araponga.Infrastructure.Payments.MockPayoutGateway>();
 
         return services;
     }
@@ -107,6 +112,7 @@ public static class ServiceCollectionExtensions
             services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ArapongaDbContext>());
             services.AddPostgresRepositories();
             services.AddHostedService<OutboxDispatcherWorker>();
+            services.AddHostedService<Araponga.Infrastructure.Background.PayoutProcessingWorker>();
         }
         else
         {
@@ -166,6 +172,18 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICheckoutRepository, PostgresCheckoutRepository>();
         services.AddScoped<ICheckoutItemRepository, PostgresCheckoutItemRepository>();
         services.AddScoped<IPlatformFeeConfigRepository, PostgresPlatformFeeConfigRepository>();
+        services.AddScoped<ITerritoryPayoutConfigRepository, PostgresTerritoryPayoutConfigRepository>();
+        
+        // Financial
+        services.AddScoped<IFinancialTransactionRepository, PostgresFinancialTransactionRepository>();
+        services.AddScoped<ITransactionStatusHistoryRepository, PostgresTransactionStatusHistoryRepository>();
+        services.AddScoped<ISellerBalanceRepository, PostgresSellerBalanceRepository>();
+        services.AddScoped<ISellerTransactionRepository, PostgresSellerTransactionRepository>();
+        services.AddScoped<IPlatformFinancialBalanceRepository, PostgresPlatformFinancialBalanceRepository>();
+        services.AddScoped<IPlatformRevenueTransactionRepository, PostgresPlatformRevenueTransactionRepository>();
+        services.AddScoped<IPlatformExpenseTransactionRepository, PostgresPlatformExpenseTransactionRepository>();
+        services.AddScoped<IReconciliationRecordRepository, PostgresReconciliationRecordRepository>();
+        
         services.AddScoped<IUserPreferencesRepository, PostgresUserPreferencesRepository>();
         services.AddScoped<IMembershipSettingsRepository, PostgresMembershipSettingsRepository>();
         services.AddScoped<IMembershipCapabilityRepository, PostgresMembershipCapabilityRepository>();
@@ -216,6 +234,18 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ICheckoutRepository, InMemoryCheckoutRepository>();
         services.AddSingleton<ICheckoutItemRepository, InMemoryCheckoutItemRepository>();
         services.AddSingleton<IPlatformFeeConfigRepository, InMemoryPlatformFeeConfigRepository>();
+        services.AddSingleton<ITerritoryPayoutConfigRepository, InMemoryTerritoryPayoutConfigRepository>();
+        
+        // Financial
+        services.AddSingleton<IFinancialTransactionRepository, InMemoryFinancialTransactionRepository>();
+        services.AddSingleton<ITransactionStatusHistoryRepository, InMemoryTransactionStatusHistoryRepository>();
+        services.AddSingleton<ISellerBalanceRepository, InMemorySellerBalanceRepository>();
+        services.AddSingleton<ISellerTransactionRepository, InMemorySellerTransactionRepository>();
+        services.AddSingleton<IPlatformFinancialBalanceRepository, InMemoryPlatformFinancialBalanceRepository>();
+        services.AddSingleton<IPlatformRevenueTransactionRepository, InMemoryPlatformRevenueTransactionRepository>();
+        services.AddSingleton<IPlatformExpenseTransactionRepository, InMemoryPlatformExpenseTransactionRepository>();
+        services.AddSingleton<IReconciliationRecordRepository, InMemoryReconciliationRecordRepository>();
+        
         services.AddSingleton<IUserPreferencesRepository, InMemoryUserPreferencesRepository>();
         services.AddSingleton<IMembershipSettingsRepository, InMemoryMembershipSettingsRepository>();
         services.AddSingleton<IMembershipCapabilityRepository, InMemoryMembershipCapabilityRepository>();
