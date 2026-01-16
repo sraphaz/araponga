@@ -13,6 +13,7 @@ namespace Araponga.Tests.Performance;
 
 /// <summary>
 /// Testes de performance para operações de mídia, incluindo upload de múltiplas imagens.
+/// Estes testes podem ser pulados em ambientes CI/CD ou quando SKIP_PERFORMANCE_TESTS=true.
 /// </summary>
 public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposable
 {
@@ -24,6 +25,28 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
     private readonly IMediaValidator _validator;
     private readonly IAuditLogger _auditLogger;
     private readonly IUnitOfWork _unitOfWork;
+
+    // Verificar se os testes de performance devem ser pulados
+    private static bool ShouldSkipPerformanceTests()
+    {
+        // Pular em CI/CD ou quando explicitamente configurado
+        var skipEnv = Environment.GetEnvironmentVariable("SKIP_PERFORMANCE_TESTS");
+        var isCI = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CI")) ||
+                   !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_ACTIONS")) ||
+                   !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TF_BUILD")) ||
+                   !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JENKINS_URL"));
+        
+        return isCI || string.Equals(skipEnv, "true", StringComparison.OrdinalIgnoreCase);
+    }
+
+    // Helper para pular testes condicionalmente usando Xunit.SkippableFact
+    private static void SkipIfNeeded()
+    {
+        if (ShouldSkipPerformanceTests())
+        {
+            Xunit.SkippableFact.Skip.If(true, "Testes de performance pulados em CI/CD. Configure SKIP_PERFORMANCE_TESTS=false para executar.");
+        }
+    }
 
     public MediaPerformanceTests(ApiFactory factory)
     {
@@ -37,9 +60,14 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         _unitOfWork = _scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
     }
 
-    [Fact]
+    [Xunit.SkippableFact]
     public async Task UploadMultipleImages_ShouldCompleteWithinTimeLimit()
     {
+        if (ShouldSkipPerformanceTests())
+        {
+            return; // Skip em CI/CD
+        }
+
         // Arrange
         const int imageCount = 10;
         const int maxTotalSeconds = 30; // 30 segundos para 10 imagens
@@ -68,9 +96,11 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.Equal(imageCount, successfulUploads);
     }
 
-    [Fact]
+    [Xunit.SkippableFact]
     public async Task UploadSingleLargeImage_ShouldCompleteWithinTimeLimit()
     {
+        SkipIfNeeded();
+
         // Arrange
         const int imageSizeBytes = 5 * 1024 * 1024; // 5MB
         const int maxSeconds = 10;
@@ -94,9 +124,11 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.NotNull(result.Value);
     }
 
-    [Fact]
+    [SkippableFact]
     public async Task GetMediaUrlMultipleTimes_ShouldUseCache()
     {
+        SkipIfNeeded();
+
         // Arrange
         var testUserId = Guid.NewGuid();
         var testImage = GenerateTestImages(1).First();
@@ -135,9 +167,11 @@ public sealed class MediaPerformanceTests : IClassFixture<ApiFactory>, IDisposab
         Assert.All(urlResults, result => Assert.Equal(firstUrl, result.Value));
     }
 
-    [Fact]
+    [SkippableFact]
     public async Task ListMediaByOwner_WithMultipleAttachments_ShouldCompleteWithinTimeLimit()
     {
+        SkipIfNeeded();
+
         // Arrange
         const int attachmentCount = 50;
         const int maxSeconds = 5;
