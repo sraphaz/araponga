@@ -1864,11 +1864,36 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
             if (this.open && !rendered) {
               if (diagramContainer) {
                 var diagramId = diagramContainer.getAttribute('data-diagram') || 'diagram-' + Date.now();
-                var diagramContent = diagramContainer.textContent.trim();
+                
+                // Pegar o código Mermaid diretamente do conteúdo do elemento
+                // Isso pega apenas o texto, sem HTML de filhos
+                var diagramContent = '';
+                
+                // Se o elemento tem filhos, pegar apenas texto direto, não de filhos HTML
+                var childNodes = diagramContainer.childNodes;
+                for (var i = 0; i < childNodes.length; i++) {
+                  var node = childNodes[i];
+                  // Se é um nó de texto, adicionar ao conteúdo
+                  if (node.nodeType === 3) { // TEXT_NODE
+                    diagramContent += node.textContent;
+                  }
+                }
+                
+                diagramContent = diagramContent.trim();
+                
+                // Se não encontrou texto direto, tentar textContent mas limpar HTML
+                if (!diagramContent || diagramContent === '') {
+                  diagramContent = diagramContainer.textContent || diagramContainer.innerText || '';
+                  // Remover qualquer tag HTML que possa estar no conteúdo
+                  diagramContent = diagramContent.replace(/<[^>]*>/g, '').trim();
+                }
                 
                 if (diagramContent && !diagramContainer.hasAttribute('data-processed')) {
-                  // Guardar o texto original antes de renderizar
+                  // Guardar o texto original LIMPO antes de renderizar
                   diagramContainer.setAttribute('data-original-code', diagramContent);
+                  
+                  // Limpar qualquer conteúdo HTML e garantir que está limpo
+                  diagramContainer.textContent = diagramContent;
                   
                   try {
                     mermaid.run({
