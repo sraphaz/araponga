@@ -1864,11 +1864,24 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
             if (this.open && !rendered) {
               if (diagramContainer) {
                 var diagramId = diagramContainer.getAttribute('data-diagram') || 'diagram-' + Date.now();
-                var diagramContent = diagramContainer.textContent.trim();
-                
-                if (diagramContent && !diagramContainer.hasAttribute('data-processed')) {
-                  // Guardar o texto original antes de renderizar
-                  diagramContainer.setAttribute('data-original-code', diagramContent);
+                 var diagramContent = diagramContainer.textContent.trim();
+                 
+                 // Limpar HTML tags e scripts de forma segura (Mermaid não aceita HTML)
+                 // Remove todas as tags HTML, incluindo <script>, <style>, e entidades HTML
+                 var cleanedDiagramContent = diagramContent
+                   .replace(/<script[\s\S]*?<\/script>/gi, '')
+                   .replace(/<style[\s\S]*?<\/style>/gi, '')
+                   .replace(/<[^>]+>/g, '')
+                   .replace(/&lt;/g, '<')
+                   .replace(/&gt;/g, '>')
+                   .replace(/&amp;/g, '&')
+                   .replace(/&quot;/g, '"')
+                   .replace(/&#x27;/g, "'")
+                   .trim();
+                 
+                 if (cleanedDiagramContent && !diagramContainer.hasAttribute('data-processed')) {
+                   // Guardar o texto original limpo antes de renderizar
+                   diagramContainer.setAttribute('data-original-code', cleanedDiagramContent);
                   
                   try {
                     mermaid.run({
@@ -1917,38 +1930,27 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
       
       // Função para abrir diagrama em tela cheia
       function openDiagramFullscreen(diagramElement) {
-        // SEMPRE buscar primeiro do data-original-code (nunca usar textContent se já foi renderizado)
+        // SEMPRE buscar primeiro do data-original-code (código original antes de renderizar)
         var diagramText = diagramElement.getAttribute('data-original-code');
         
-        // Se não encontrou, o elemento pode não ter sido renderizado ainda
-        // Nesse caso, tentar pegar o textContent ANTES que seja processado
+        // Se não encontrou no data-attribute, tentar buscar do elemento original
         if (!diagramText || diagramText.trim() === '') {
-          // Se não foi renderizado ainda, pegar textContent
+          // Se o elemento ainda não foi renderizado, pegar o textContent
           if (!diagramElement.hasAttribute('data-processed')) {
-            // Pegar apenas texto direto, não HTML
-            diagramText = '';
-            var childNodes = diagramElement.childNodes;
-            for (var i = 0; i < childNodes.length; i++) {
-              var node = childNodes[i];
-              if (node.nodeType === 3) { // TEXT_NODE
-                diagramText += node.textContent;
-              }
-            }
-            diagramText = diagramText.trim();
-            
-            // Remover HTML se houver
+            diagramText = diagramElement.textContent || diagramElement.innerText || '';
+            // Limpar HTML se houver
             if (diagramText) {
               diagramText = diagramText.replace(/<[^>]*>/g, '').trim();
             }
           } else {
-            // Já foi renderizado mas não tem data-original-code - procurar no parent
+            // Já foi renderizado mas não tem data-original-code - procurar no container
             var parentContainer = diagramElement.closest('.sequence-diagram-container');
             if (parentContainer) {
               var originalCode = parentContainer.querySelector('.mermaid[data-diagram]');
               if (originalCode && originalCode.getAttribute('data-original-code')) {
                 diagramText = originalCode.getAttribute('data-original-code');
               } else {
-                console.error('Diagrama já renderizado mas não tem data-original-code');
+                console.error('Diagrama já foi renderizado mas não tem data-original-code');
                 alert('Erro: Não foi possível encontrar o código original do diagrama. Recarregue a página.');
                 return;
               }
