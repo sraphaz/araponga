@@ -1949,49 +1949,60 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
 
         <div class="grid-two spaced">
           <div class="card">
-            <h3>🔮 Funcionalidades Planejadas</h3>
+            <h3>🔮 Roadmap Estratégico: 28 Fases</h3>
+            <p class="card-intro">
+              O Araponga segue um roadmap estruturado em <strong>28 fases</strong>, organizadas em ondas estratégicas
+              que fortalecem progressivamente a autonomia territorial, economia local e soberania comunitária.
+            </p>
             <dl class="entity-list">
-              <dt><strong>FinancialManager & FinancialViewer</strong></dt>
+              <dt><strong>Onda 1: MVP Essencial (Fases 8-11)</strong></dt>
               <dd>
-                Papéis administrativos territoriais para gestão financeira:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Configuração de taxas de plataforma por território</li>
-                  <li>Visualização de saldos e movimentações</li>
-                  <li>Relatórios financeiros territoriais</li>
-                  <li>Gestão de payout e distribuição de receitas</li>
-                </ul>
+                Infraestrutura de mídia, perfil completo, mídias em conteúdo e edição. Base sólida para
+                comunicação rica e expressão comunitária.
               </dd>
 
-              <dt><strong>GeoAnchor Avançado</strong></dt>
+              <dt><strong>Onda 2: Comunicação e Governança (Fases 13-14)</strong></dt>
               <dd>
-                Recursos avançados de geolocalização:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Memórias e galeria associadas a locais</li>
-                  <li>Pins visuais customizados</li>
-                  <li>Rastreamento temporal de mudanças geográficas</li>
-                </ul>
+                Conector de e-mail e <strong>governança comunitária com votação</strong>. Ferramentas para
+                decisão coletiva e participação democrática.
               </dd>
 
-              <dt><strong>Indicadores Comunitários</strong></dt>
+              <dt><strong>Onda 3: Soberania Territorial (Fases 17-18)</strong></dt>
               <dd>
-                Métricas de saúde territorial:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Indicadores de engajamento comunitário</li>
-                  <li>Alertas ambientais avançados</li>
-                  <li>Dashboard de saúde do território</li>
-                </ul>
+                <strong>Gamificação harmoniosa</strong> e <strong>saúde territorial com monitoramento</strong>.
+                Engajamento sustentável e cuidado com o território.
               </dd>
 
-              <dt><strong>Integrações Externas</strong></dt>
+              <dt><strong>Onda 4: Economia Local (Fases 20, 23-24)</strong></dt>
               <dd>
-                Conectores e serviços externos:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Geocoding e reverse geocoding</li>
-                  <li>Notificações push via FCM/APNs</li>
-                  <li>E-mail como canal de notificação</li>
-                </ul>
+                <strong>Moeda territorial</strong>, <strong>compra coletiva</strong> e <strong>trocas comunitárias</strong>.
+                Economia circular e autonomia financeira territorial.
+              </dd>
+
+              <dt><strong>Onda 5: Conformidade e Inteligência (Fases 12, 15)</strong></dt>
+              <dd>
+                Otimizações finais e <strong>inteligência artificial</strong> integrada. Performance e
+                capacidades avançadas mantendo os princípios do projeto.
+              </dd>
+
+              <dt><strong>Onda 6: Diferenciais (Fases 16, 19, 21-22)</strong></dt>
+              <dd>
+                <strong>Entregas territoriais</strong>, arquitetura modular, suporte a criptomoedas e
+                integrações externas. Expansão de capacidades mantendo autonomia.
+              </dd>
+
+              <dt><strong>Onda 7: Autonomia Digital e Economia Circular (Fases 25-28)</strong></dt>
+              <dd>
+                <strong>Hub de serviços digitais</strong> (Fase 25), <strong>chat com IA e consumo consciente</strong> (Fase 26),
+                <strong>negociação territorial e assinatura coletiva</strong> (Fase 27), e <strong>banco de sementes e mudas</strong> (Fase 28).
+                Autonomia digital completa e soberania alimentar territorial.
               </dd>
             </dl>
+            <p class="card-divider">
+              <strong>📊 Visão completa:</strong> Consulte o <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/ROADMAP_VISUAL.md">Roadmap Visual</a>
+              e a <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/RESUMO_EXECUTIVO_ESTRATEGICO.md">Estratégia Executiva</a>
+              para detalhes completos das 28 fases e suas correlações.
+            </p>
           </div>
 
           <div class="card">
@@ -2211,8 +2222,15 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
                  var diagramContent = diagramContainer.getAttribute('data-mermaid-code') || diagramContainer.innerHTML.trim();
                  
                  // Decodifica entidades HTML em ordem segura para evitar double unescaping
-                 // IMPORTANTE: &amp; deve ser decodificado por último para evitar converter &amp;lt; em &lt;
+                 // IMPORTANTE: Converter setas Mermaid ANTES de decodificar &gt; e &lt;
+                 // &gt;&gt; -> -> (seta sólida)
+                 // &lt;&lt; -> <- (seta reversa)
+                 // &gt;-&gt; -> --> (seta tracejada)
                  var tempContent = diagramContent
+                   .replace(/&gt;&gt;/g, '->')      // &gt;&gt; -> ->
+                   .replace(/&lt;&lt;/g, '<-')      // &lt;&lt; -> <-
+                   .replace(/&gt;-&gt;/g, '-->')    // &gt;-&gt; -> -->
+                   .replace(/&lt;-&lt;/g, '<--')    // &lt;-&lt; -> <--
                    .replace(/&quot;/g, '"')
                    .replace(/&#x27;/g, "'")
                    .replace(/&#39;/g, "'")
@@ -2486,8 +2504,12 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
               
               // Tentar limpeza agressiva e re-renderizar
               var originalText = diagramText;
-              // Decodificar entidades HTML primeiro
+              // Decodificar entidades HTML primeiro (convertendo setas Mermaid ANTES)
               var decodedText = originalText
+                .replace(/&gt;&gt;/g, '->')      // &gt;&gt; -> ->
+                .replace(/&lt;&lt;/g, '<-')      // &lt;&lt; -> <-
+                .replace(/&gt;-&gt;/g, '-->')    // &gt;-&gt; -> -->
+                .replace(/&lt;-&lt;/g, '<--')    // &lt;-&lt; -> <--
                 .replace(/&quot;/g, '"')
                 .replace(/&#x27;/g, "'")
                 .replace(/&#39;/g, "'")
