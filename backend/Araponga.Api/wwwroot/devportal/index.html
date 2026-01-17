@@ -69,6 +69,8 @@
         <li><a href="#quickstart" data-i18n="nav.quickstart">Quickstart</a></li>
         <li><a href="#capacidades-tecnicas">Capacidades Técnicas</a></li>
         <li><a href="#versoes" data-i18n="nav.versions">Versões</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#contribuir">Contribuir</a></li>
       </ul>
     </nav>
 
@@ -974,46 +976,95 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
 
       <section class="section" id="casos-de-uso">
         <span class="eyebrow" data-i18n="usecases.eyebrow">Casos de uso</span>
-        <h2 data-i18n="usecases.title">Como usar a API (cenários práticos)</h2>
-        <p data-i18n-html="usecases.leadHtml">
-          Estes cenários conectam objetivo → pré-requisitos → endpoints. Em geral, você vai precisar de um JWT
-          e de um território selecionado via <code>X-Session-Id</code>.
+        <h2 data-i18n="usecases.title">Jornadas práticas e funcionalidades implementadas</h2>
+        <p class="lead-text" style="margin-bottom: 2rem;">
+          Cenários práticos conectando objetivo → pré-requisitos → endpoints. Todas as jornadas requerem
+          autenticação (JWT) e seleção de território via <code>X-Session-Id</code>. Os exemplos abaixo
+          refletem funcionalidades já implementadas e testadas em produção.
         </p>
-        <div class="grid-two">
+
+        <div class="grid-two" style="margin-bottom: 3rem;">
           <div class="card">
-            <h3>Onboarding (primeiro acesso)</h3>
-            <ul>
-              <li><strong>Autenticar</strong>: <code>POST /api/v1/auth/social</code></li>
-              <li><strong>Descobrir território</strong>: <code>GET /api/v1/territories</code> (ou <code>/nearby</code>)</li>
-              <li><strong>Selecionar território</strong>: <code>POST /api/v1/territories/selection</code> + <code>X-Session-Id</code></li>
-              <li><strong>Checar membership</strong>: <code>GET /api/v1/memberships/{territoryId}/me</code></li>
-            </ul>
+            <h3>🚀 Onboarding completo</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Primeira jornada: autenticação, descoberta de território e vínculo inicial.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Autenticar:</strong> <code>POST /api/v1/auth/social</code> (obtém JWT)</li>
+              <li><strong>Descobrir território:</strong> <code>GET /api/v1/territories/nearby?lat=-23.55&lng=-46.63</code></li>
+              <li><strong>Selecionar território:</strong> <code>POST /api/v1/territories/selection</code> + header <code>X-Session-Id</code></li>
+              <li><strong>Declarar vínculo:</strong> <code>POST /api/v1/memberships/{territoryId}/enter-visitor</code></li>
+              <li><strong>Verificar membership:</strong> <code>GET /api/v1/memberships/{territoryId}/me</code></li>
+            </ol>
           </div>
+
           <div class="card">
-            <h3>Publicar conteúdo (feed + mapa + mídias)</h3>
-            <ul>
-              <li><strong>Ler feed</strong>: <code>GET /api/v1/feed</code></li>
-              <li><strong>Criar post</strong>: <code>POST /api/v1/feed</code> (com <code>geoAnchors</code> opcionais e <code>mediaIds</code> para até 10 imagens)</li>
-              <li><strong>Upload de mídia</strong>: <code>POST /api/v1/media/upload</code> para obter <code>mediaId</code></li>
-              <li><strong>Ver pins</strong>: <code>GET /api/v1/map/pins</code> (tipos: entity/asset/alert/post)</li>
-            </ul>
+            <h3>📝 Publicar conteúdo com mídias</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Criar post com até 10 imagens e âncoras geográficas opcionais.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Upload de mídias:</strong> <code>POST /api/v1/media/upload</code> (obtém <code>mediaIds</code>)</li>
+              <li><strong>Criar post:</strong> <code>POST /api/v1/feed</code> com <code>mediaIds</code> (até 10 imagens)</li>
+              <li><strong>GeoAnchors automáticos:</strong> derivados de mídias quando disponíveis</li>
+              <li><strong>Visualizar no mapa:</strong> <code>GET /api/v1/map/pins?types=post</code></li>
+              <li><strong>Ver no feed:</strong> <code>GET /api/v1/feed/paged</code></li>
+            </ol>
           </div>
+
           <div class="card">
-            <h3>Operações territoriais (assets/alerts)</h3>
-            <ul>
-              <li><strong>Criar asset</strong>: <code>POST /api/v1/assets</code> (geo obrigatória)</li>
-              <li><strong>Criar alerta</strong>: <code>POST /api/v1/alerts</code> (validação por curadoria)</li>
-              <li><strong>Listar pins</strong>: <code>GET /api/v1/map/pins?types=asset,alert</code></li>
-            </ul>
+            <h3>🗺️ Assets territoriais com geolocalização</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Recursos territoriais (rios, trilhas, nascentes) sempre com geolocalização obrigatória.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Criar asset:</strong> <code>POST /api/v1/assets</code> (geo obrigatória em <code>geoAnchors</code>)</li>
+              <li><strong>Tipos disponíveis:</strong> <code>river</code>, <code>trail</code>, <code>spring</code>, <code>lookout</code>, <code>sanctuary</code></li>
+              <li><strong>Apenas moradores verificados ou curadores:</strong> podem criar/editar/arquivar</li>
+              <li><strong>Visualizar no mapa:</strong> <code>GET /api/v1/map/pins?types=asset&assetTypes=river,trail</code></li>
+            </ol>
           </div>
+
           <div class="card">
-            <h3>Economia local e eventos (com mídias)</h3>
-            <ul>
-              <li><strong>Loja</strong>: <code>POST /api/v1/stores</code></li>
-              <li><strong>Items (produtos/serviços)</strong>: <code>POST /api/v1/items</code> com <code>mediaIds</code> (até 10 imagens) e <code>GET /api/v1/items</code></li>
-              <li><strong>Carrinho</strong>: <code>POST /api/v1/cart/items</code> e <code>POST /api/v1/cart/checkout</code></li>
-              <li><strong>Evento</strong>: <code>POST /api/v1/events</code> com <code>coverMediaId</code> e <code>additionalMediaIds</code>, <code>POST /api/v1/events/{eventId}/interest</code>, <code>POST /api/v1/events/{eventId}/confirm</code></li>
-            </ul>
+            <h3>💬 Chat territorial e grupos</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Conversas territoriais, grupos e mensagens diretas com suporte a mídias.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Criar conversa:</strong> <code>POST /api/v1/chat/conversations</code></li>
+              <li><strong>Enviar mensagem:</strong> <code>POST /api/v1/chat/conversations/{id}/messages</code></li>
+              <li><strong>Mensagem com imagem:</strong> incluir <code>mediaId</code> no payload</li>
+              <li><strong>Listar conversas:</strong> <code>GET /api/v1/chat/conversations</code></li>
+              <li><strong>Histórico:</strong> <code>GET /api/v1/chat/conversations/{id}/messages</code></li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3>🏪 Marketplace e economia local</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Lojas, produtos/serviços, carrinho e checkout com até 10 imagens por item.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Criar loja:</strong> <code>POST /api/v1/stores</code></li>
+              <li><strong>Adicionar itens:</strong> <code>POST /api/v1/items</code> com <code>mediaIds</code> (até 10 imagens)</li>
+              <li><strong>Carrinho:</strong> <code>POST /api/v1/cart/items</code></li>
+              <li><strong>Checkout:</strong> <code>POST /api/v1/cart/checkout</code></li>
+              <li><strong>Consultar itens:</strong> <code>GET /api/v1/items</code> (paginação incluída)</li>
+            </ol>
+          </div>
+
+          <div class="card">
+            <h3>📅 Eventos comunitários com mídias</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+              Eventos territoriais com data/hora, geolocalização obrigatória e imagens.
+            </p>
+            <ol style="padding-left: 1.25rem; line-height: 1.8;">
+              <li><strong>Criar evento:</strong> <code>POST /api/v1/events</code> (geo obrigatória)</li>
+              <li><strong>Imagens:</strong> <code>coverMediaId</code> e <code>additionalMediaIds</code> (até 10)</li>
+              <li><strong>Marcar interesse:</strong> <code>POST /api/v1/events/{id}/interest</code></li>
+              <li><strong>Confirmar presença:</strong> <code>POST /api/v1/events/{id}/confirm</code></li>
+              <li><strong>Aparece no feed e mapa:</strong> eventos aparecem em ambos os contextos</li>
+            </ol>
           </div>
         </div>
       </section>
