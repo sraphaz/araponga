@@ -552,9 +552,9 @@
     "assetIds": ["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"],
     "mediaIds": ["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", "cccccccc-cccc-cccc-cccc-cccccccccccc"]
   }'</code></pre>
-          <div style="margin-top: 1rem; padding: 1rem; background: #1a2a3a; border-radius: 0.5rem;">
+          <div class="info-box">
             <strong>📸 Mídias em Posts:</strong>
-            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+            <ul>
               <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code></li>
               <li><strong>Associar ao post</strong>: Inclua os <code>mediaIds</code> no array ao criar o post (máximo 10 imagens)</li>
               <li><strong>Resposta</strong>: O <code>FeedItemResponse</code> inclui <code>mediaUrls</code> (array de URLs) e <code>mediaCount</code></li>
