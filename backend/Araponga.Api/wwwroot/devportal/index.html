@@ -1530,6 +1530,38 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
 
           <div class="card">
             <div class="card-icon-header">
+              <span class="icon">📦</span>
+              <h3>Media Storage Config</h3>
+            </div>
+            <p class="card-intro">
+              Configuração explícita e aberta do provedor de blob storage para mídias (Local, S3, AzureBlob) via painel administrativo.
+            </p>
+            <div style="margin-top: 1rem;">
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/active</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/{configId}</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">PUT /api/v1/admin/media-storage-config/{configId}</code>
+              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config/{configId}/activate</code>
+            </div>
+            <p class="card-divider" style="margin-top: 1rem;">
+              <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite configurar provedores de storage sem editar <code>appsettings.json</code>.
+            </p>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-subtle); border-radius: var(--radius-sm);">
+              <strong>📦 Providers Suportados:</strong>
+              <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                <li><strong>Local</strong>: Armazenamento em disco local (desenvolvimento/testes). Configuração: <code>BasePath</code></li>
+                <li><strong>S3</strong>: Amazon S3 (produção recomendado). Configuração: <code>BucketName</code>, <code>Region</code>, <code>AccessKeyId</code>, <code>Prefix</code> (opcional)</li>
+                <li><strong>AzureBlob</strong>: Azure Blob Storage (produção). Configuração: <code>ConnectionString</code>, <code>ContainerName</code>, <code>Prefix</code> (opcional)</li>
+              </ul>
+              <p style="margin-top: 0.75rem; font-size: 0.875em; color: var(--text-muted);">
+                <strong>Segurança:</strong> Secrets (AccessKeyId, ConnectionString) são mascarados nas respostas (mostram apenas últimos caracteres ou host). Use o painel administrativo para configurar storage sem expor credenciais no código.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
               <span class="icon">📋</span>
               <h3>Work Queue</h3>
             </div>

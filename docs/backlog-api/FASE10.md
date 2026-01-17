@@ -440,6 +440,8 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 
 **Atualização (Configuração Avançada por Território)**: Sistema de configuração avançada de mídias por território usando feature flags e configurações granulares está em implementação. Permite que cada território configure tipos de mídia permitidos, limites de tamanho/quantidade, e que usuários escolham quais tipos de mídia visualizar. Consulte `FASE10_CONFIG_MIDIAS_TERRITORIO.md` e `FASE10_CONFIG_MIDIAS_IMPLEMENTACAO.md` para detalhes.
 
+**Atualização (Configuração de Blob Storage via Painel Administrativo)**: Sistema de configuração explícita e aberta do provedor de blob storage para mídias (Local, S3, AzureBlob) via painel administrativo está implementado. Permite configurar provedores de storage sem editar `appsettings.json`, com suporte para Local, Amazon S3 e Azure Blob Storage. Consulte `FASE10_STORAGE_CONFIG_ADMIN.md` para detalhes da arquitetura.
+
 ## 🛡️ Segurança Avançada Implementada
 
 ### Validações de Segurança
