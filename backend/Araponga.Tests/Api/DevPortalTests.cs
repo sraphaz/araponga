@@ -245,4 +245,213 @@ public class DevPortalTests : IClassFixture<ApiFactory>
         Assert.Contains("diagram-modal", content, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldHaveCorrectBackgroundColor(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que o fundo é cinza escuro (#141a21)
+        Assert.Contains("#141a21", content, StringComparison.OrdinalIgnoreCase);
+        // Verifica que está aplicado no background-color do SVG
+        Assert.True(
+            content.Contains("background-color: #141a21", StringComparison.OrdinalIgnoreCase) ||
+            content.Contains("background-color:#141a21", StringComparison.OrdinalIgnoreCase),
+            $"Diagrama {svgFileName} deve ter background-color: #141a21");
+    }
+
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldHaveCorrectLineColors(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que as linhas principais são azul claro (#7dd3ff)
+        Assert.Contains("#7dd3ff", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que os estilos CSS customizados estão presentes
+        Assert.Contains("Cores customizadas Araponga", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(".messageLine0", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(".messageLine1", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(".actor-line", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que as cores azul estão aplicadas com !important
+        var hasBlueInStyles = content.Contains(".messageLine0") && 
+                             (content.Contains("stroke: #7dd3ff") || content.Contains("stroke:#7dd3ff")) &&
+                             content.Contains("!important");
+        Assert.True(hasBlueInStyles, 
+            $"Diagrama {svgFileName} deve ter .messageLine0 com stroke: #7dd3ff !important");
+    }
+
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldHaveCorrectAccentColors(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que os contornos/labels são verde água (#4dd4a8)
+        Assert.Contains("#4dd4a8", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que os estilos CSS para labels e loops estão presentes
+        Assert.Contains(".labelBox", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(".loopLine", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que as cores verde água estão aplicadas
+        var hasGreenInStyles = (content.Contains(".labelBox") || content.Contains(".loopLine")) &&
+                              (content.Contains("stroke: #4dd4a8") || content.Contains("stroke:#4dd4a8"));
+        Assert.True(hasGreenInStyles, 
+            $"Diagrama {svgFileName} deve ter .labelBox ou .loopLine com stroke: #4dd4a8");
+    }
+
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldNotHaveOldColors(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que não há cores antigas hardcoded que não foram corrigidas
+        // Cores antigas que não devem estar presentes:
+        Assert.DoesNotContain("#eaeaea", content, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("#666\"", content, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("stroke=\"#999\"", content, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("stroke=\"#333\"", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que não há fill com cor antiga
+        Assert.DoesNotContain("fill=\"#eaeaea\"", content, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldHaveCustomStylesWithImportant(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que os estilos CSS customizados estão presentes com !important
+        Assert.Contains("Cores customizadas Araponga", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("!important", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que os estilos principais estão presentes
+        Assert.Contains("#mermaid-svg .messageLine0", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("#mermaid-svg .actor-line", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("#mermaid-svg .actor", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que pelo menos um estilo tem !important
+        var importantMatches = Regex.Matches(content, @"!important", RegexOptions.IgnoreCase);
+        Assert.True(importantMatches.Count >= 5, 
+            $"Diagrama {svgFileName} deve ter pelo menos 5 estilos com !important, mas encontrado {importantMatches.Count}");
+    }
+
+    [Theory]
+    [InlineData("auth.svg")]
+    [InlineData("territory-discovery.svg")]
+    [InlineData("feed-listing.svg")]
+    [InlineData("post-creation.svg")]
+    [InlineData("membership-resident.svg")]
+    [InlineData("moderation.svg")]
+    [InlineData("marketplace-checkout.svg")]
+    [InlineData("notifications-outbox.svg")]
+    [InlineData("events-creation.svg")]
+    [InlineData("assets-validation.svg")]
+    [InlineData("residency-verification.svg")]
+    [InlineData("chat-media.svg")]
+    [InlineData("map-entities.svg")]
+    public async Task DevPortal_DiagramSvg_ShouldHaveCorrectActorColors(string svgFileName)
+    {
+        // Act
+        var response = await _client.GetAsync($"/devportal/assets/images/diagrams/{svgFileName}");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Assert
+        // Verifica que os atores têm as cores corretas
+        // Fundo dos atores: #1a2129 (ou fill="#1a2129")
+        Assert.Contains("#1a2129", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Borda dos atores: azul #7dd3ff
+        Assert.Contains("#7dd3ff", content, StringComparison.OrdinalIgnoreCase);
+        
+        // Verifica que há pelo menos um ator com as cores corretas
+        var hasCorrectActorFill = content.Contains("fill=\"#1a2129\"", StringComparison.OrdinalIgnoreCase) ||
+                                  content.Contains("fill='#1a2129'", StringComparison.OrdinalIgnoreCase);
+        var hasCorrectActorStroke = content.Contains("stroke=\"#7dd3ff\"", StringComparison.OrdinalIgnoreCase) ||
+                                    content.Contains("stroke='#7dd3ff'", StringComparison.OrdinalIgnoreCase);
+        
+        Assert.True(hasCorrectActorFill || hasCorrectActorStroke, 
+            $"Diagrama {svgFileName} deve ter atores com fill=\"#1a2129\" e stroke=\"#7dd3ff\"");
+    }
+
 }
