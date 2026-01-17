@@ -121,8 +121,25 @@ function fixSVGColors(svgContent) {
   });
   
   // 11. Remover estilos antigos duplicados dos atores (se houver)
-  // Remove estilos antigos que usam #e8edf2 para textos dos atores
-  fixed = fixed.replace(/#mermaid-svg text\.actor > tspan[^{]*\{[^}]*fill:\s*#e8edf2[^}]*\}/gi, '');
+  // Remove estilos antigos que usam #e8edf2 ou outras cores para textos dos atores
+  fixed = fixed.replace(/#mermaid-svg text\.actor[^}]*fill:\s*#[0-9a-f]{3,6}[^}]*\}/gi, '');
+  fixed = fixed.replace(/#mermaid-svg text\.actor[^}]*fill:\s*#[0-9a-f]{3,6}[^}]*\}/gi, '');
+  
+  // 11.1. Adicionar fill inline nos tspan dos atores para garantir cor verde água
+  fixed = fixed.replace(/<tspan([^>]*x="[^"]*"[^>]*)>(.*?)<\/tspan>/g, (match, attrs, content) => {
+    // Verificar se está dentro de um elemento text com class="actor"
+    const beforeMatch = fixed.substring(0, fixed.indexOf(match));
+    const textMatch = beforeMatch.match(/<text[^>]*class="actor[^"]*"[^>]*>/);
+    if (textMatch) {
+      // Se já tem fill, substituir; se não, adicionar
+      if (attrs.includes('fill=')) {
+        return `<tspan${attrs.replace(/fill="[^"]*"/, `fill="${COLORS.actorText}"`)}>${content}</tspan>`;
+      } else {
+        return `<tspan${attrs} fill="${COLORS.actorText}">${content}</tspan>`;
+      }
+    }
+    return match;
+  });
   
   // 12. Adicionar estilos CSS customizados no final do <style>
   const styleEnd = fixed.indexOf('</style>');
