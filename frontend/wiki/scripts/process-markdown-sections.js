@@ -29,7 +29,7 @@ function processMarkdownForProgressiveDisclosure(html, options = {}) {
     const nextHeadingIndex = nextHeadingMatch ? nextHeadingMatch.index : remainingHtml.length;
     
     const sectionContent = remainingHtml.substring(0, nextHeadingIndex);
-    const sectionLength = sectionContent.replace(/<[^>]*>/g, '').trim().length;
+    const sectionLength = getTextContent(sectionContent).trim().length;
 
     // Se a seção é longa o suficiente, adiciona atributos para colapsar
     if (sectionLength > minLength) {
