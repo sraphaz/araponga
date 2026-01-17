@@ -11,14 +11,15 @@ const DIAGRAMS_DIR = path.join(__dirname, '../backend/Araponga.Api/wwwroot/devpo
 // Cores do tema Araponga
 const COLORS = {
   background: '#141a21',      // Fundo cinza escuro
-  text: '#e8edf2',            // Texto branco
-  textMuted: '#b8c5d2',       // Texto cinza claro
+  text: '#ffffff',            // Texto branco puro para melhor contraste
+  textMuted: '#e8edf2',       // Texto cinza claro
   accent: '#4dd4a8',          // Verde água
   link: '#7dd3ff',            // Azul claro
   border: '#25303a',          // Borda cinza
   actorBg: '#1a2129',         // Fundo dos atores (um pouco mais claro)
   actorBorder: '#7dd3ff',     // Borda dos atores (azul)
   actorLine: '#7dd3ff',       // Linha dos atores (azul)
+  actorText: '#4dd4a8',       // Texto dos atores (verde água para contraste harmonioso)
   messageLine: '#7dd3ff',      // Linhas de mensagem (azul)
   arrowhead: '#7dd3ff',       // Pontas de seta (azul)
   labelBoxBorder: '#4dd4a8',   // Borda de labels (verde água)
@@ -73,10 +74,26 @@ function fixSVGColors(svgContent) {
     return match.replace(/fill:#333333/g, `fill:${COLORS.arrowhead}`).replace(/stroke:#333333/g, `stroke:${COLORS.arrowhead}`);
   });
   
-  // 6. Corrigir textos
+  // 6. Corrigir textos (incluindo textos dos atores inline)
   fixed = fixed.replace(/fill:black/g, `fill:${COLORS.text}`);
   fixed = fixed.replace(/fill="#000"/g, `fill="${COLORS.text}"`);
   fixed = fixed.replace(/fill="#333"/g, `fill="${COLORS.text}"`);
+  
+  // 6.1. Corrigir textos dos atores inline (tspan dentro de .actor-box)
+  fixed = fixed.replace(/<text[^>]*class="actor[^"]*"[^>]*><tspan[^>]*>/g, (match) => {
+    // Se o tspan não tem fill já definido, não precisamos adicionar (será controlado pelo CSS)
+    return match;
+  });
+  
+  // 6.2. Garantir que textos dos atores usam cor clara (substituir qualquer cor escura inline)
+  fixed = fixed.replace(/<tspan([^>]*)fill="#[0-9a-f]{3,6}"([^>]*)>(.*?)<\/tspan>/gi, (match, before, after, content) => {
+    // Se estiver dentro de um ator, usar cor clara
+    const beforeMatch = match.match(/class="actor[^"]*"/);
+    if (beforeMatch) {
+      return `<tspan${before}fill="${COLORS.actorText}"${after}>${content}</tspan>`;
+    }
+    return match;
+  });
   
   // 7. Corrigir labelBox (bordas verdes)
   fixed = fixed.replace(/class="labelBox"[^>]*stroke:hsl\([^)]+\)/g, (match) => {
@@ -103,7 +120,28 @@ function fixSVGColors(svgContent) {
     return match.replace(/fill:#f4f4f4/, `fill:${COLORS.activationBg}`).replace(/stroke:#666/, `stroke:${COLORS.activationBorder}`);
   });
   
-  // 11. Adicionar estilos CSS customizados no final do <style>
+  // 11. Remover estilos antigos duplicados dos atores (se houver)
+  // Remove estilos antigos que usam #e8edf2 ou outras cores para textos dos atores
+  fixed = fixed.replace(/#mermaid-svg text\.actor[^}]*fill:\s*#[0-9a-f]{3,6}[^}]*\}/gi, '');
+  fixed = fixed.replace(/#mermaid-svg text\.actor[^}]*fill:\s*#[0-9a-f]{3,6}[^}]*\}/gi, '');
+  
+  // 11.1. Adicionar fill inline nos tspan dos atores para garantir cor verde água
+  fixed = fixed.replace(/<tspan([^>]*x="[^"]*"[^>]*)>(.*?)<\/tspan>/g, (match, attrs, content) => {
+    // Verificar se está dentro de um elemento text com class="actor"
+    const beforeMatch = fixed.substring(0, fixed.indexOf(match));
+    const textMatch = beforeMatch.match(/<text[^>]*class="actor[^"]*"[^>]*>/);
+    if (textMatch) {
+      // Se já tem fill, substituir; se não, adicionar
+      if (attrs.includes('fill=')) {
+        return `<tspan${attrs.replace(/fill="[^"]*"/, `fill="${COLORS.actorText}"`)}>${content}</tspan>`;
+      } else {
+        return `<tspan${attrs} fill="${COLORS.actorText}">${content}</tspan>`;
+      }
+    }
+    return match;
+  });
+  
+  // 12. Adicionar estilos CSS customizados no final do <style>
   const styleEnd = fixed.indexOf('</style>');
   if (styleEnd > -1) {
     const customStyles = `
@@ -126,7 +164,13 @@ function fixSVGColors(svgContent) {
 #mermaid-svg .messageText, #mermaid-svg .labelText, #mermaid-svg .loopText { 
   fill: ${COLORS.text} !important; 
 }
-#mermaid-svg text.actor > tspan { fill: ${COLORS.text} !important; }
+#mermaid-svg text.actor > tspan, 
+#mermaid-svg .actor-box tspan, 
+#mermaid-svg .actor tspan,
+#mermaid-svg text[class*="actor"] tspan { 
+  fill: ${COLORS.actorText} !important; 
+  color: ${COLORS.actorText} !important;
+}
 `;
     fixed = fixed.slice(0, styleEnd) + customStyles + fixed.slice(styleEnd);
   }
