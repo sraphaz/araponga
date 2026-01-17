@@ -2487,7 +2487,21 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
         if (modalMermaid) {
           // Limpar conteúdo anterior (SVG renderizado)
           modalMermaid.innerHTML = '';
-          modalMermaid.textContent = diagramText.trim();
+          
+          // Converter setas Mermaid ANTES de definir o textContent
+          var cleanedText = diagramText.trim()
+            .replace(/&gt;&gt;/g, '->')      // &gt;&gt; -> ->
+            .replace(/&lt;&lt;/g, '<-')      // &lt;&lt; -> <-
+            .replace(/&gt;-&gt;/g, '-->')    // &gt;-&gt; -> -->
+            .replace(/&lt;-&lt;/g, '<--')    // &lt;-&lt; -> <--
+            .replace(/&quot;/g, '"')
+            .replace(/&#x27;/g, "'")
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+          
+          modalMermaid.textContent = cleanedText;
           modalMermaid.removeAttribute('data-processed');
           modalMermaid.removeAttribute('id');
           
