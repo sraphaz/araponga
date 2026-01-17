@@ -82,6 +82,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<MediaService>();
         services.AddScoped<Araponga.Application.Services.Media.TerritoryMediaConfigService>();
         services.AddScoped<Araponga.Application.Services.Users.UserMediaPreferencesService>();
+        services.AddScoped<Araponga.Application.Services.Media.MediaStorageConfigService>();
         
         // Payout Gateway
         services.AddScoped<IPayoutGateway, Araponga.Infrastructure.Payments.MockPayoutGateway>();
@@ -328,6 +329,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IMediaAttachmentRepository, InMemoryMediaAttachmentRepository>();
         services.AddSingleton<ITerritoryMediaConfigRepository, InMemoryTerritoryMediaConfigRepository>();
         services.AddSingleton<IUserMediaPreferencesRepository, InMemoryUserMediaPreferencesRepository>();
+        services.AddSingleton<IMediaStorageConfigRepository, InMemoryMediaStorageConfigRepository>();
 
         return services;
     }
