@@ -101,7 +101,11 @@ export function MobileSidebar() {
               </h3>
               <ul className="space-y-1">
                 {section.items.map((item) => {
-                  const isActive = pathname === item.href;
+                  // Normalizar pathname e href para comparação (remover trailing slash)
+                  const normalizedPathname = pathname.replace(/\/$/, '') || '/';
+                  const normalizedHref = item.href.replace(/\/$/, '') || '/';
+                  const isActive = normalizedPathname === normalizedHref || 
+                                 (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
                   return (
                     <li key={item.href}>
                       <Link

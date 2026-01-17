@@ -75,9 +75,14 @@ export function Sidebar() {
     setOpenSections(newOpen);
   };
 
-  // Auto-open section if current path matches
+  // Auto-open section if current path matches (normalizado)
+  const normalizedPathname = (pathname || '/').replace(/\/$/, '') || '/';
   const currentSection = sidebarSections.find((section) =>
-    section.items.some((item) => pathname === item.href || pathname.startsWith(item.href))
+    section.items.some((item) => {
+      const normalizedHref = item.href.replace(/\/$/, '') || '/';
+      return normalizedPathname === normalizedHref || 
+             (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
+    })
   );
   if (currentSection && !openSections.has(currentSection.title)) {
     setOpenSections(new Set([...openSections, currentSection.title]));
@@ -110,7 +115,11 @@ export function Sidebar() {
               {isOpen && (
                 <ul className="sidebar-items">
                   {section.items.map((item) => {
-                    const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                    // Normalizar pathname e href para comparação (remover trailing slash)
+                    const normalizedPathname = pathname.replace(/\/$/, '') || '/';
+                    const normalizedHref = item.href.replace(/\/$/, '') || '/';
+                    const isActive = normalizedPathname === normalizedHref || 
+                                   (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
                     return (
                       <li key={item.href}>
                         <Link

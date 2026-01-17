@@ -11,7 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "type-check": "tsc --noEmit",
-    "test:links": "node scripts/test-links.js"
+    "test:links": "node scripts/test-links.mjs"
   },
   "dependencies": {
     "next": "^15.0.0",

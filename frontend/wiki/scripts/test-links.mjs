@@ -9,21 +9,16 @@ import { URL } from 'url';
 const BASE_URL = process.env.WIKI_URL || 'https://devportal.araponga.app/wiki';
 const TIMEOUT = 10000;
 
-// Links que devem funcionar
+// Links que devem funcionar (com basePath)
 const REQUIRED_LINKS = [
   '/wiki/',
-  '/wiki/docs',
-  '/wiki/docs/ONBOARDING_PUBLICO',
-  '/wiki/docs/ONBOARDING_DEVELOPERS',
-  '/wiki/docs/ONBOARDING_ANALISTAS_FUNCIONAIS',
-  '/wiki/docs/00_INDEX',
-];
-
-// Links externos (não precisam retornar 200, apenas não devem quebrar)
-const EXTERNAL_LINKS = [
-  'https://github.com/sraphaz/araponga',
-  'https://discord.gg/auwqN8Yjgw',
-  'https://araponga.app',
+  '/wiki/docs/',
+  '/wiki/docs/ONBOARDING_PUBLICO/',
+  '/wiki/docs/ONBOARDING_DEVELOPERS/',
+  '/wiki/docs/ONBOARDING_ANALISTAS_FUNCIONAIS/',
+  '/wiki/docs/00_INDEX/',
+  '/wiki/docs/01_PRODUCT_VISION/',
+  '/wiki/docs/DISCORD_SETUP/',
 ];
 
 function fetch(url) {
