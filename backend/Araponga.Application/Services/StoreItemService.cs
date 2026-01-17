@@ -1,7 +1,10 @@
 using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
+using Araponga.Application.Interfaces.Media;
 using Araponga.Application.Services;
+using Araponga.Application.Services.Media;
 using Araponga.Domain.Marketplace;
+using Araponga.Domain.Media;
 using Araponga.Domain.Membership;
 
 namespace Araponga.Application.Services;
@@ -11,6 +14,9 @@ public sealed class StoreItemService
     private readonly IStoreItemRepository _itemRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IMediaAssetRepository _mediaAssetRepository;
+    private readonly IMediaAttachmentRepository _mediaAttachmentRepository;
+    private readonly TerritoryMediaConfigService _mediaConfigService;
     private readonly AccessEvaluator _accessEvaluator;
     private readonly MembershipAccessRules _accessRules;
     private readonly TerritoryFeatureFlagGuard _featureGuard;
@@ -21,6 +27,9 @@ public sealed class StoreItemService
         IStoreItemRepository itemRepository,
         IStoreRepository storeRepository,
         IUserRepository userRepository,
+        IMediaAssetRepository mediaAssetRepository,
+        IMediaAttachmentRepository mediaAttachmentRepository,
+        TerritoryMediaConfigService mediaConfigService,
         AccessEvaluator accessEvaluator,
         MembershipAccessRules accessRules,
         TerritoryFeatureFlagGuard featureGuard,
@@ -30,6 +39,9 @@ public sealed class StoreItemService
         _itemRepository = itemRepository;
         _storeRepository = storeRepository;
         _userRepository = userRepository;
+        _mediaAssetRepository = mediaAssetRepository;
+        _mediaAttachmentRepository = mediaAttachmentRepository;
+        _mediaConfigService = mediaConfigService;
         _accessEvaluator = accessEvaluator;
         _accessRules = accessRules;
         _featureGuard = featureGuard;
@@ -53,6 +65,7 @@ public sealed class StoreItemService
         double? latitude,
         double? longitude,
         ItemStatus status,
+        IReadOnlyCollection<Guid>? mediaIds,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(title))
@@ -73,6 +86,101 @@ public sealed class StoreItemService
             if (!await CanManageStoreAsync(store, userId, cancellationToken))
             {
                 return Result<StoreItem>.Failure("Not authorized. Marketplace rules not met or not store owner/curator.");
+            }
+        }
+
+        // Validar e normalizar mediaIds
+        var normalizedMediaIds = mediaIds?
+            .Where(id => id != Guid.Empty)
+            .Distinct()
+            .ToList();
+
+        if (normalizedMediaIds is not null && normalizedMediaIds.Count > 0)
+        {
+            // Obter limites efetivos da configuração territorial (com fallback para global)
+            var limits = await _mediaConfigService.GetEffectiveContentLimitsAsync(
+                territoryId,
+                MediaContentType.Marketplace,
+                cancellationToken);
+
+            // Validar quantidade máxima de mídias
+            if (normalizedMediaIds.Count > limits.MaxMediaCount)
+            {
+                return Result<StoreItem>.Failure($"Maximum {limits.MaxMediaCount} media items allowed per item.");
+            }
+
+            var mediaAssets = await _mediaAssetRepository.ListByIdsAsync(normalizedMediaIds, cancellationToken);
+            if (mediaAssets.Count != normalizedMediaIds.Count)
+            {
+                return Result<StoreItem>.Failure("One or more media assets not found.");
+            }
+
+            // Validar que todas as mídias pertencem ao usuário
+            if (mediaAssets.Any(media => media.UploadedByUserId != userId || media.IsDeleted))
+            {
+                return Result<StoreItem>.Failure("One or more media assets are invalid or do not belong to the user.");
+            }
+
+            var images = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Image).ToList();
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+
+            // Validar imagens
+            if (images.Count > 0 && !limits.ImagesEnabled)
+            {
+                return Result<StoreItem>.Failure("Images are not enabled for marketplace items in this territory.");
+            }
+
+            // Validar vídeos
+            if (videos.Count > 0 && !limits.VideosEnabled)
+            {
+                return Result<StoreItem>.Failure("Videos are not enabled for marketplace items in this territory.");
+            }
+            if (videos.Count > limits.MaxVideoCount)
+            {
+                return Result<StoreItem>.Failure($"Maximum {limits.MaxVideoCount} video(s) allowed per item.");
+            }
+            foreach (var video in videos)
+            {
+                if (video.SizeBytes > limits.MaxVideoSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxVideoSizeBytes / (1024.0 * 1024.0);
+                    return Result<StoreItem>.Failure($"Video size exceeds {maxSizeMB:F1}MB limit for marketplace items.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedVideoMimeTypes != null && limits.AllowedVideoMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedVideoMimeTypes.Contains(video.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<StoreItem>.Failure($"Video MIME type '{video.MimeType}' is not allowed for marketplace items.");
+                    }
+                }
+            }
+
+            // Validar áudios
+            if (audios.Count > 0 && !limits.AudioEnabled)
+            {
+                return Result<StoreItem>.Failure("Audio is not enabled for marketplace items in this territory.");
+            }
+            if (audios.Count > limits.MaxAudioCount)
+            {
+                return Result<StoreItem>.Failure($"Maximum {limits.MaxAudioCount} audio(s) allowed per item.");
+            }
+            foreach (var audio in audios)
+            {
+                if (audio.SizeBytes > limits.MaxAudioSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxAudioSizeBytes / (1024.0 * 1024.0);
+                    return Result<StoreItem>.Failure($"Audio size exceeds {maxSizeMB:F1}MB limit for marketplace items.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedAudioMimeTypes != null && limits.AllowedAudioMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedAudioMimeTypes.Contains(audio.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<StoreItem>.Failure($"Audio MIME type '{audio.MimeType}' is not allowed for marketplace items.");
+                    }
+                }
             }
         }
 
@@ -97,6 +205,24 @@ public sealed class StoreItemService
             now);
 
         await _itemRepository.AddAsync(item, cancellationToken);
+
+        // Criar MediaAttachments para as mídias associadas ao item
+        if (normalizedMediaIds is not null && normalizedMediaIds.Count > 0)
+        {
+            foreach (var (mediaId, index) in normalizedMediaIds.Select((id, idx) => (id, idx)))
+            {
+                var attachment = new MediaAttachment(
+                    Guid.NewGuid(),
+                    mediaId,
+                    MediaOwnerType.StoreItem,
+                    item.Id,
+                    index,
+                    now);
+
+                await _mediaAttachmentRepository.AddAsync(attachment, cancellationToken);
+            }
+        }
+
         await _unitOfWork.CommitAsync(cancellationToken);
         
         // Invalidar cache de items da store
@@ -193,6 +319,10 @@ public sealed class StoreItemService
 
         item.Archive(DateTime.UtcNow);
         await _itemRepository.UpdateAsync(item, cancellationToken);
+
+        // Deletar mídias associadas ao item quando arquivado
+        await _mediaAttachmentRepository.DeleteByOwnerAsync(MediaOwnerType.StoreItem, item.Id, cancellationToken);
+
         await _unitOfWork.CommitAsync(cancellationToken);
         
         // Invalidar cache de items da store

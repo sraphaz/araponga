@@ -17,6 +17,7 @@ namespace Araponga.Api.Contracts.Marketplace;
 /// <param name="Latitude">Latitude da localização do item</param>
 /// <param name="Longitude">Longitude da localização do item</param>
 /// <param name="Status">Status inicial do item (opcional, padrão: Active)</param>
+/// <param name="MediaIds">IDs das mídias associadas ao item (máx 10)</param>
 public sealed record CreateItemRequest(
     Guid TerritoryId,
     Guid StoreId,
@@ -31,7 +32,8 @@ public sealed record CreateItemRequest(
     string? Unit,
     double? Latitude,
     double? Longitude,
-    string? Status);
+    string? Status,
+    IReadOnlyCollection<Guid>? MediaIds = null);
 
 /// <summary>
 /// Request para atualizar um item existente.
@@ -48,6 +50,7 @@ public sealed record CreateItemRequest(
 /// <param name="Latitude">Latitude da localização do item</param>
 /// <param name="Longitude">Longitude da localização do item</param>
 /// <param name="Status">Status do item</param>
+/// <param name="MediaIds">IDs das mídias associadas ao item (máx 10)</param>
 public sealed record UpdateItemRequest(
     string? Type,
     string? Title,
@@ -60,7 +63,8 @@ public sealed record UpdateItemRequest(
     string? Unit,
     double? Latitude,
     double? Longitude,
-    string? Status);
+    string? Status,
+    IReadOnlyCollection<Guid>? MediaIds = null);
 
 /// <summary>
 /// Response com os dados de um item do marketplace.
@@ -82,6 +86,8 @@ public sealed record UpdateItemRequest(
 /// <param name="Status">Status do item (ACTIVE, ARCHIVED)</param>
 /// <param name="CreatedAtUtc">Data de criação</param>
 /// <param name="UpdatedAtUtc">Data da última atualização</param>
+/// <param name="PrimaryImageUrl">URL da imagem primária do item</param>
+/// <param name="ImageUrls">URLs das imagens adicionais do item</param>
 public sealed record ItemResponse(
     Guid Id,
     Guid TerritoryId,
@@ -99,4 +105,6 @@ public sealed record ItemResponse(
     double? Longitude,
     string Status,
     DateTime CreatedAtUtc,
-    DateTime UpdatedAtUtc);
+    DateTime UpdatedAtUtc,
+    string? PrimaryImageUrl = null,
+    IReadOnlyCollection<string>? ImageUrls = null);

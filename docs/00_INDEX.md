@@ -1,5 +1,12 @@
 # Índice da Documentação
 
+**Versão**: 2.0  
+**Data**: 2025-01-20  
+**Última Atualização**: 2025-01-20  
+**Status**: ✅ Atualizado
+
+---
+
 Este documento organiza toda a documentação do projeto Araponga de forma estruturada e fácil de navegar.
 
 ## 📋 Estrutura da Documentação
@@ -40,7 +47,9 @@ Documentos sobre moderação, observabilidade e operações.
 - **[Rastreabilidade](./32_TRACEABILITY.md)** - Rastreabilidade de requisitos e funcionalidades
 - **[System Config, Work Queue e Evidências](./33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md)** - Configurações globais, fila genérica e evidências documentais (P0)
 - **[API - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO.md)** - Documento completo de lógica de negócio e usabilidade de todas as operações da API
-- **Chat**: documentado em `60_API_LÓGICA_NEGÓCIO.md` (seção “Chat”) e no DevPortal/OpenAPI (`backend/Araponga.Api/wwwroot/devportal/openapi.json`)
+- **Chat**: documentado em `60_API_LÓGICA_NEGÓCIO.md` (seção "Chat") e no DevPortal/OpenAPI (`backend/Araponga.Api/wwwroot/devportal/openapi.json`)
+- **[Mídias em Conteúdo](./MEDIA_IN_CONTENT.md)** - Documentação completa da integração de mídias em Posts, Eventos, Marketplace e Chat
+- **[Sistema de Mídia](./MEDIA_SYSTEM.md)** - Documentação técnica do sistema de mídia (armazenamento, processamento, APIs)
 - **[Planejamento: Preferências de Usuário](./61_USER_PREFERENCES_PLAN.md)** - Planejamento completo da funcionalidade de preferências de privacidade e configurações do usuário
 
 ### 🔒 Segurança
@@ -55,12 +64,24 @@ Documentos sobre segurança, configuração e implementação de medidas de segu
 Documentos sobre histórico e mudanças do projeto.
 
 - **[Changelog](./40_CHANGELOG.md)** - Histórico de mudanças e versões
+- **[Onboarding Público](./ONBOARDING_PUBLICO.md)** 🌟 - Página pública de entrada para conhecer o projeto e escolher seu caminho
+- **[Cartilha Completa](./CARTILHA_COMPLETA.md)** 📘 - Guia detalhado para todos os papéis no projeto
+- **[Onboarding para Desenvolvedores](./ONBOARDING_DEVELOPERS.md)** 🌱 - Guia completo para novos desenvolvedores usando Cursor
+- **[Onboarding para Analistas Funcionais](./ONBOARDING_ANALISTAS_FUNCIONAIS.md)** 👁️ - Guia para analistas funcionais que observam territórios e propõem melhorias
+- **[FAQ - Perguntas Frequentes](./ONBOARDING_FAQ.md)** ❓ - Respostas para dúvidas comuns sobre onboarding e contribuição
+- **[Sistema de Mentoria](./MENTORIA.md)** 🤝 - Guia para mentores e quem busca orientação
+- **[Priorização de Propostas](./PRIORIZACAO_PROPOSTAS.md)** 📊 - Critérios e processo para validar funcionalidades
+- **[Estrutura do Projeto](./PROJECT_STRUCTURE.md)** 📁 - Guia para navegar o código
+- **[Estratégia de Consolidação do Ecossistema](./ECOSSISTEMA_CONSOLIDACAO_ESTRATEGIA.md)** 🌱 - Plano estratégico completo
+- **[Checklist de Implementação](./ECOSSISTEMA_CONSOLIDACAO_CHECKLIST.md)** ✅ - Checklist detalhado da estratégia
+- **[Configuração do Discord](./DISCORD_SETUP.md)** 💬 - Guia para configurar e usar o Discord do time
 - **[Contribuindo](./41_CONTRIBUTING.md)** - Guia para contribuidores
 
 ### 📋 Planos e Recomendações
 Documentos de planejamento e recomendações de implementação.
 
-- **[Backlog API](./backlog-api/README.md)** - Backlog completo da API com 24 fases organizadas estrategicamente
+- **[Backlog API](./backlog-api/README.md)** - Backlog completo da API com 29 fases organizadas estrategicamente
+- **[Status das Fases](./STATUS_FASES.md)** - Status detalhado de todas as 29 fases
 - **[Recomendações de Segurança](./recommendations/RECOMENDACOES_SEGURANCA_PROXIMOS_PASSOS.md)** - Recomendações de segurança e próximos passos
 - **[Plano de Refatoração - Recomendações Pendentes](./recommendations/PLANO_REFACTOR_RECOMENDACOES_PENDENTES.md)** - Plano de implementação de recomendações pendentes
 - **[Planejamento: Preferências de Usuário](./61_USER_PREFERENCES_PLAN.md)** - Planejamento completo da funcionalidade de preferências de privacidade e configurações do usuário

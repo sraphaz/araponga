@@ -97,7 +97,25 @@ public sealed class InMemoryDataStore
             null,
             DateTime.UtcNow);
 
-        Users = new List<User> { residentUser, curatorUser };
+        var adminUser = new User(
+            Guid.Parse("ffffffff-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+            "System Admin",
+            "admin@araponga.com",
+            null,
+            "PASS-ADMIN",
+            "(11) 97777-0000",
+            "Admin Address",
+            "google",
+            "admin-external",
+            false,
+            null,
+            null,
+            null,
+            UserIdentityVerificationStatus.Unverified,
+            null,
+            DateTime.UtcNow);
+
+        Users = new List<User> { residentUser, curatorUser, adminUser };
 
         var membershipId = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
         Memberships = new List<TerritoryMembership>
@@ -178,6 +196,16 @@ public sealed class InMemoryDataStore
                 curatorMembershipIdTerritoryA,
                 "Seeded curator capability for in-memory tests")
         };
+
+        // Adicionar SystemPermission para adminUser
+        SystemPermissions.Add(new SystemPermission(
+            Guid.Parse("aaaaaaaa-ffff-ffff-ffff-ffffffffffff"),
+            adminUser.Id,
+            SystemPermissionType.SystemAdmin,
+            DateTime.UtcNow,
+            null,
+            null,
+            null));
 
         TerritoryEvents = new List<TerritoryEvent>
         {
@@ -351,4 +379,7 @@ public sealed class InMemoryDataStore
     // Media
     public List<MediaAsset> MediaAssets { get; } = new();
     public List<MediaAttachment> MediaAttachments { get; } = new();
-    }
+    public List<TerritoryMediaConfig> TerritoryMediaConfigs { get; } = new();
+    public List<UserMediaPreferences> UserMediaPreferences { get; } = new();
+    public List<MediaStorageConfig> MediaStorageConfigs { get; } = new();
+}

@@ -403,7 +403,7 @@
               <dd>Conversas e grupos (inclui chat territorial).</dd>
 
               <dt><strong>ChatMessage</strong></dt>
-              <dd>Mensagens com paginação por cursor (beforeCreatedAt / beforeMessageId). Suporta envio de imagens (1 por mensagem, máx. 5MB).</dd>
+              <dd>Mensagens com paginação por cursor (beforeCreatedAt / beforeMessageId). Suporta envio de imagens (1 por mensagem, máx. 5MB) e áudios curtos (1 por mensagem, máx. 2MB, até 60s). Vídeos não são permitidos em chat.</dd>
 
               <dt><strong>Participants</strong></dt>
               <dd>Participantes, papéis e “read state” (marcar como lido).</dd>
@@ -534,7 +534,7 @@
           <h4>5. Criar post + âncoras geográficas + mídias</h4>
           <p>
             Para criar post use <code>POST /api/v1/feed</code>. As âncoras geográficas são opcionais e
-            posts são criados por moradores. Posts podem incluir até 10 imagens através do campo <code>mediaIds</code>.
+            posts são criados por moradores. Posts podem incluir até 10 mídias (imagens, vídeos e/ou áudios) através do campo <code>mediaIds</code>, com no máximo 1 vídeo e 1 áudio por post.
             Eventos são criados via <code>POST /api/v1/events</code>,
             com data/hora e geolocalização obrigatória, e aparecem no feed e no mapa.
           </p>
@@ -553,12 +553,15 @@
     "mediaIds": ["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", "cccccccc-cccc-cccc-cccc-cccccccccccc"]
   }'</code></pre>
           <div class="info-box">
-            <strong>📸 Mídias em Posts:</strong>
-            <ul>
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code></li>
-              <li><strong>Associar ao post</strong>: Inclua os <code>mediaIds</code> no array ao criar o post (máximo 10 imagens)</li>
-              <li><strong>Resposta</strong>: O <code>FeedItemResponse</code> inclui <code>mediaUrls</code> (array de URLs) e <code>mediaCount</code></li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o post</li>
+            <strong>📸🎥🎧 Mídias em Posts (Imagens, Vídeos e Áudios):</strong>
+            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Associar ao post</strong>: Inclua os <code>mediaIds</code> no array ao criar o post (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
+              <li><strong>Vídeos</strong>: Máximo 1 vídeo por post, até 50MB, até 60 segundos (similar a TikTok/Instagram Reels). Formatos suportados: MP4</li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por post, até 10MB, até 5 minutos (podcasts curtos, narrações). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Resposta</strong>: O <code>FeedItemResponse</code> inclui <code>mediaUrls</code> (array de URLs de imagens, vídeos e áudios) e <code>mediaCount</code></li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o post. Vídeos maiores que 50MB, áudios maiores que 10MB, mais de 1 vídeo ou mais de 1 áudio por post retornam erro</li>
             </ul>
           </div>
           <details class="sequence-diagram-toggle">
@@ -805,12 +808,14 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
   }'</code></pre>
           <div class="info-box">
             <strong>💬 Mídias em Chat:</strong>
-            <ul>
-              <li><strong>Upload de mídia</strong>: Use <code>POST /api/v1/media/upload</code> para fazer upload da imagem</li>
+            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+              <li><strong>Upload de mídia</strong>: Use <code>POST /api/v1/media/upload</code> para fazer upload da imagem ou áudio (aceita imagens JPEG/PNG/WebP e áudios MP3/WAV/OGG, não aceita vídeos)</li>
               <li><strong>Enviar mensagem</strong>: Inclua o <code>mediaId</code> no campo opcional ao enviar mensagem</li>
-              <li><strong>Limite</strong>: 1 imagem por mensagem, máximo 5MB, apenas imagens (não vídeos)</li>
+              <li><strong>Imagens</strong>: 1 imagem por mensagem, máximo 5MB. Formatos: JPEG, PNG, WebP</li>
+              <li><strong>Áudios</strong>: 1 áudio por mensagem (mensagens de voz), máximo 2MB, até 60 segundos. Formatos: MP3, WAV, OGG</li>
+              <li><strong>Vídeos</strong>: Não permitidos (apenas imagens e áudios permitidos por questões de performance e privacidade)</li>
               <li><strong>Resposta</strong>: O <code>MessageResponse</code> inclui <code>mediaUrl</code> e <code>hasMedia</code></li>
-              <li><strong>Validação</strong>: A mídia deve pertencer ao usuário que está enviando a mensagem</li>
+              <li><strong>Validação</strong>: A mídia deve pertencer ao usuário que está enviando a mensagem. Vídeos retornam erro "Only images and audios are allowed in chat messages"</li>
             </ul>
           </div>
           <details class="sequence-diagram-toggle">
@@ -978,12 +983,16 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
     "mediaIds": ["dddddddd-dddd-dddd-dddd-dddddddddddd", "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"]
   }'</code></pre>
           <div class="info-box">
-            <strong>📸 Mídias em Items:</strong>
+            <strong>📸🎥🎧 Mídias em Items (Imagens, Vídeos e Áudios):</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code></li>
-              <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 imagens)</li>
-              <li><strong>Imagem principal</strong>: A primeira imagem do array é usada como <code>primaryImageUrl</code></li>
-              <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as imagens)</li>
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
+              <li><strong>Vídeos</strong>: Máximo 1 vídeo por item, até 30MB, até 30 segundos (demonstração rápida de produto). Formatos suportados: MP4</li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por item, até 5MB, até 2 minutos (descrição de produto, demonstração de serviço). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Imagem principal</strong>: A primeira mídia do array é usada como <code>primaryImageUrl</code> (se for vídeo ou áudio, a URL é retornada)</li>
+              <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as mídias: imagens, vídeos e áudios)</li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o item. Vídeos maiores que 30MB, áudios maiores que 5MB, mais de 1 vídeo ou mais de 1 áudio por item retornam erro</li>
             </ul>
           </div>
         </div>
@@ -1342,12 +1351,16 @@ curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/
     "additionalMediaIds": ["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"]
   }'</code></pre>
           <div class="info-box">
-            <strong>📸 Mídias em Eventos:</strong>
+            <strong>📸🎥🎧 Mídias em Eventos (Imagens, Vídeos e Áudios):</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code></li>
-              <li><strong>Imagem de capa</strong>: Use <code>coverMediaId</code> para definir a imagem principal do evento (opcional)</li>
-              <li><strong>Imagens adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 10 imagens adicionais</li>
-              <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code></li>
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Mídia de capa</strong>: Use <code>coverMediaId</code> para definir a mídia principal do evento (imagem, vídeo ou áudio, opcional). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
+              <li><strong>Mídias adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 5 mídias adicionais (imagens, vídeos ou áudios). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
+              <li><strong>Vídeos</strong>: Máximo 1 vídeo por evento (em capa ou adicionais), até 100MB, até 2 minutos. Formatos suportados: MP4</li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por evento (em capa ou adicionais), até 20MB, até 10 minutos (promoção de eventos, trilhas sonoras). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 6 mídias no total: 1 capa + 5 adicionais, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code> (pode conter URLs de vídeos e áudios)</li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário e <code>coverMediaId</code> não pode estar em <code>additionalMediaIds</code>. Vídeos maiores que 100MB, áudios maiores que 20MB, mais de 1 vídeo ou mais de 1 áudio por evento retornam erro</li>
             </ul>
           </div>
         </div>
@@ -1513,6 +1526,38 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
             <p class="card-divider">
               <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite ajustar configurações críticas como thresholds de verificação, políticas de presença e parâmetros de governança.
             </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">📦</span>
+              <h3>Media Storage Config</h3>
+            </div>
+            <p class="card-intro">
+              Configuração explícita e aberta do provedor de blob storage para mídias (Local, S3, AzureBlob) via painel administrativo.
+            </p>
+            <div style="margin-top: 1rem;">
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/active</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/{configId}</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">PUT /api/v1/admin/media-storage-config/{configId}</code>
+              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config/{configId}/activate</code>
+            </div>
+            <p class="card-divider" style="margin-top: 1rem;">
+              <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite configurar provedores de storage sem editar <code>appsettings.json</code>.
+            </p>
+            <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-subtle); border-radius: var(--radius-sm);">
+              <strong>📦 Providers Suportados:</strong>
+              <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                <li><strong>Local</strong>: Armazenamento em disco local (desenvolvimento/testes). Configuração: <code>BasePath</code></li>
+                <li><strong>S3</strong>: Amazon S3 (produção recomendado). Configuração: <code>BucketName</code>, <code>Region</code>, <code>AccessKeyId</code>, <code>Prefix</code> (opcional)</li>
+                <li><strong>AzureBlob</strong>: Azure Blob Storage (produção). Configuração: <code>ConnectionString</code>, <code>ContainerName</code>, <code>Prefix</code> (opcional)</li>
+              </ul>
+              <p style="margin-top: 0.75rem; font-size: 0.875em; color: var(--text-muted);">
+                <strong>Segurança:</strong> Secrets (AccessKeyId, ConnectionString) são mascarados nas respostas (mostram apenas últimos caracteres ou host). Use o painel administrativo para configurar storage sem expor credenciais no código.
+              </p>
+            </div>
           </div>
 
           <div class="card">

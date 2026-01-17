@@ -43,9 +43,11 @@ public sealed class JoinRequestServiceTests
                 featureFlagService),
             CacheTestHelper.CreateDistributedCacheService());
         var unitOfWork = new InMemoryUnitOfWork();
+        var settingsRepository = new InMemoryMembershipSettingsRepository(dataStore);
         return new JoinRequestService(
             joinRequestRepository,
             membershipRepository,
+            settingsRepository,
             userRepository,
             accessEvaluator,
             unitOfWork);

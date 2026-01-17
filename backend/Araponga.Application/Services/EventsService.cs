@@ -1,11 +1,14 @@
 using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
+using Araponga.Application.Interfaces.Media;
 using Araponga.Application.Metrics;
 using Araponga.Application.Models;
 using Araponga.Application.Services;
+using Araponga.Application.Services.Media;
 using Araponga.Domain.Events;
 using Araponga.Domain.Feed;
 using Araponga.Domain.Geo;
+using Araponga.Domain.Media;
 using Araponga.Domain.Membership;
 using Araponga.Domain.Users;
 
@@ -17,6 +20,9 @@ public sealed class EventsService
     private readonly EventCacheService? _eventCache;
     private readonly IEventParticipationRepository _participationRepository;
     private readonly IFeedRepository _feedRepository;
+    private readonly IMediaAssetRepository _mediaAssetRepository;
+    private readonly IMediaAttachmentRepository _mediaAttachmentRepository;
+    private readonly TerritoryMediaConfigService _mediaConfigService;
     private readonly AccessEvaluator _accessEvaluator;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -26,6 +32,9 @@ public sealed class EventsService
         ITerritoryEventRepository eventRepository,
         IEventParticipationRepository participationRepository,
         IFeedRepository feedRepository,
+        IMediaAssetRepository mediaAssetRepository,
+        IMediaAttachmentRepository mediaAttachmentRepository,
+        TerritoryMediaConfigService mediaConfigService,
         AccessEvaluator accessEvaluator,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork,
@@ -35,6 +44,9 @@ public sealed class EventsService
         _eventRepository = eventRepository;
         _participationRepository = participationRepository;
         _feedRepository = feedRepository;
+        _mediaAssetRepository = mediaAssetRepository;
+        _mediaAttachmentRepository = mediaAttachmentRepository;
+        _mediaConfigService = mediaConfigService;
         _accessEvaluator = accessEvaluator;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -52,6 +64,8 @@ public sealed class EventsService
         double latitude,
         double longitude,
         string? locationLabel,
+        Guid? coverMediaId,
+        IReadOnlyCollection<Guid>? additionalMediaIds,
         CancellationToken cancellationToken)
     {
         if (territoryId == Guid.Empty)
@@ -79,6 +93,116 @@ public sealed class EventsService
             return Result<EventSummary>.Failure("EndsAtUtc must be after StartsAtUtc.");
         }
 
+        // Validar e normalizar mídias
+        var normalizedAdditionalMediaIds = additionalMediaIds?
+            .Where(id => id != Guid.Empty)
+            .Distinct()
+            .ToList();
+
+        var allMediaIds = new List<Guid>();
+        if (coverMediaId.HasValue && coverMediaId.Value != Guid.Empty)
+        {
+            allMediaIds.Add(coverMediaId.Value);
+        }
+        if (normalizedAdditionalMediaIds is not null && normalizedAdditionalMediaIds.Count > 0)
+        {
+            allMediaIds.AddRange(normalizedAdditionalMediaIds);
+        }
+
+        if (allMediaIds.Count > 0)
+        {
+            // Obter limites efetivos da configuração territorial (com fallback para global)
+            var limits = await _mediaConfigService.GetEffectiveContentLimitsAsync(
+                territoryId,
+                MediaContentType.Events,
+                cancellationToken);
+
+            // Validar quantidade máxima de mídias (1 capa + adicionais)
+            const int maxTotalMedia = 6; // 1 capa + 5 adicionais
+            if (allMediaIds.Count > maxTotalMedia)
+            {
+                return Result<EventSummary>.Failure($"Maximum {maxTotalMedia} media items allowed per event (1 cover + {maxTotalMedia - 1} additional).");
+            }
+            if (normalizedAdditionalMediaIds is not null && normalizedAdditionalMediaIds.Count > limits.MaxMediaCount - 1) // -1 para capa
+            {
+                return Result<EventSummary>.Failure($"Maximum {limits.MaxMediaCount - 1} additional media items allowed per event (plus 1 cover).");
+            }
+
+            var mediaAssets = await _mediaAssetRepository.ListByIdsAsync(allMediaIds, cancellationToken);
+            if (mediaAssets.Count != allMediaIds.Count)
+            {
+                return Result<EventSummary>.Failure("One or more media assets not found.");
+            }
+
+            // Validar que todas as mídias pertencem ao usuário
+            if (mediaAssets.Any(media => media.UploadedByUserId != userId || media.IsDeleted))
+            {
+                return Result<EventSummary>.Failure("One or more media assets are invalid or do not belong to the user.");
+            }
+
+            var images = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Image).ToList();
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+
+            // Validar imagens
+            if (images.Count > 0 && !limits.ImagesEnabled)
+            {
+                return Result<EventSummary>.Failure("Images are not enabled for events in this territory.");
+            }
+
+            // Validar vídeos
+            if (videos.Count > 0 && !limits.VideosEnabled)
+            {
+                return Result<EventSummary>.Failure("Videos are not enabled for events in this territory.");
+            }
+            if (videos.Count > limits.MaxVideoCount)
+            {
+                return Result<EventSummary>.Failure($"Maximum {limits.MaxVideoCount} video(s) allowed per event.");
+            }
+            foreach (var video in videos)
+            {
+                if (video.SizeBytes > limits.MaxVideoSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxVideoSizeBytes / (1024.0 * 1024.0);
+                    return Result<EventSummary>.Failure($"Video size exceeds {maxSizeMB:F1}MB limit for events.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedVideoMimeTypes != null && limits.AllowedVideoMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedVideoMimeTypes.Contains(video.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<EventSummary>.Failure($"Video MIME type '{video.MimeType}' is not allowed for events.");
+                    }
+                }
+            }
+
+            // Validar áudios
+            if (audios.Count > 0 && !limits.AudioEnabled)
+            {
+                return Result<EventSummary>.Failure("Audio is not enabled for events in this territory.");
+            }
+            if (audios.Count > limits.MaxAudioCount)
+            {
+                return Result<EventSummary>.Failure($"Maximum {limits.MaxAudioCount} audio(s) allowed per event.");
+            }
+            foreach (var audio in audios)
+            {
+                if (audio.SizeBytes > limits.MaxAudioSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxAudioSizeBytes / (1024.0 * 1024.0);
+                    return Result<EventSummary>.Failure($"Audio size exceeds {maxSizeMB:F1}MB limit for events.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedAudioMimeTypes != null && limits.AllowedAudioMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedAudioMimeTypes.Contains(audio.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<EventSummary>.Failure($"Audio MIME type '{audio.MimeType}' is not allowed for events.");
+                    }
+                }
+            }
+        }
+
         var isResident = await _accessEvaluator.IsResidentAsync(userId, territoryId, cancellationToken);
         var membership = isResident ? MembershipRole.Resident : MembershipRole.Visitor;
         var now = DateTime.UtcNow;
@@ -100,6 +224,41 @@ public sealed class EventsService
             now);
 
         await _eventRepository.AddAsync(territoryEvent, cancellationToken);
+
+        // Criar MediaAttachments para as mídias associadas ao evento
+        if (allMediaIds.Count > 0)
+        {
+            // Imagem de capa (DisplayOrder = 0)
+            if (coverMediaId.HasValue && coverMediaId.Value != Guid.Empty)
+            {
+                var coverAttachment = new MediaAttachment(
+                    Guid.NewGuid(),
+                    coverMediaId.Value,
+                    MediaOwnerType.Event,
+                    territoryEvent.Id,
+                    0,
+                    now);
+
+                await _mediaAttachmentRepository.AddAsync(coverAttachment, cancellationToken);
+            }
+
+            // Imagens adicionais (DisplayOrder = 1+)
+            if (normalizedAdditionalMediaIds is not null && normalizedAdditionalMediaIds.Count > 0)
+            {
+                foreach (var (mediaId, index) in normalizedAdditionalMediaIds.Select((id, idx) => (id, idx + 1)))
+                {
+                    var attachment = new MediaAttachment(
+                        Guid.NewGuid(),
+                        mediaId,
+                        MediaOwnerType.Event,
+                        territoryEvent.Id,
+                        index,
+                        now);
+
+                    await _mediaAttachmentRepository.AddAsync(attachment, cancellationToken);
+                }
+            }
+        }
 
         var postContent = string.IsNullOrWhiteSpace(description) ? title.Trim() : description.Trim();
         var post = new CommunityPost(
@@ -213,6 +372,10 @@ public sealed class EventsService
 
         territoryEvent.Cancel(DateTime.UtcNow);
         await _eventRepository.UpdateAsync(territoryEvent, cancellationToken);
+
+        // Deletar mídias associadas ao evento quando cancelado
+        await _mediaAttachmentRepository.DeleteByOwnerAsync(MediaOwnerType.Event, territoryEvent.Id, cancellationToken);
+
         await _unitOfWork.CommitAsync(cancellationToken);
 
         // Invalidar cache de eventos do território

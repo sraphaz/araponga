@@ -1,6 +1,7 @@
 using Araponga.Api.Security;
 using Araponga.Application.Interfaces;
 using Araponga.Application.Interfaces.Media;
+using Araponga.Application.Interfaces.Users;
 using Araponga.Application.Services;
 using Araponga.Application.Events;
 using Araponga.Infrastructure.Eventing;
@@ -79,6 +80,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<SellerPayoutService>();
         services.AddScoped<TerritoryPayoutConfigService>();
         services.AddScoped<MediaService>();
+        services.AddScoped<Araponga.Application.Interfaces.Media.IGlobalMediaLimits, Araponga.Api.Services.GlobalMediaLimitsService>();
+        services.AddScoped<Araponga.Application.Services.Media.TerritoryMediaConfigService>();
+        services.AddScoped<Araponga.Application.Services.Users.UserMediaPreferencesService>();
+        services.AddScoped<Araponga.Application.Services.Media.MediaStorageConfigService>();
         
         // Payout Gateway
         services.AddScoped<IPayoutGateway, Araponga.Infrastructure.Payments.MockPayoutGateway>();
@@ -254,6 +259,9 @@ public static class ServiceCollectionExtensions
         // Media
         services.AddScoped<IMediaAssetRepository, PostgresMediaAssetRepository>();
         services.AddScoped<IMediaAttachmentRepository, PostgresMediaAttachmentRepository>();
+        // TODO: Implementar PostgresTerritoryMediaConfigRepository e PostgresUserMediaPreferencesRepository
+        // services.AddScoped<ITerritoryMediaConfigRepository, Araponga.Infrastructure.Postgres.PostgresTerritoryMediaConfigRepository>();
+        // services.AddScoped<IUserMediaPreferencesRepository, Araponga.Infrastructure.Postgres.PostgresUserMediaPreferencesRepository>();
 
         return services;
     }
@@ -320,6 +328,9 @@ public static class ServiceCollectionExtensions
         // Media
         services.AddSingleton<IMediaAssetRepository, InMemoryMediaAssetRepository>();
         services.AddSingleton<IMediaAttachmentRepository, InMemoryMediaAttachmentRepository>();
+        services.AddSingleton<ITerritoryMediaConfigRepository, InMemoryTerritoryMediaConfigRepository>();
+        services.AddSingleton<IUserMediaPreferencesRepository, InMemoryUserMediaPreferencesRepository>();
+        services.AddSingleton<IMediaStorageConfigRepository, InMemoryMediaStorageConfigRepository>();
 
         return services;
     }

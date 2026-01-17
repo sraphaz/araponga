@@ -72,12 +72,32 @@ function Copy-DocumentToWiki {
         $content = $content -replace '\.\/MAPA_([^.]+)\.md', '[Mapa $1](Mapa-$1)'
         $content = $content -replace '\.\/REVISAO_([^.]+)\.md', '[Revisão $1](Revisão-$1)'
         
-        # Links para documentos da raiz docs/
+        # Links para documentos da raiz docs/ (onboarding e outros)
         $content = $content -replace '\.\.\/00_INDEX\.md', '[Índice](00-Índice)'
         $content = $content -replace '\.\.\/01_PRODUCT_VISION\.md', '[Visão do Produto](01-Visão-do-Produto)'
         $content = $content -replace '\.\.\/02_ROADMAP\.md', '[Roadmap](02-Roadmap)'
         $content = $content -replace '\.\.\/03_BACKLOG\.md', '[Backlog](03-Backlog)'
         $content = $content -replace '\.\.\/40_CHANGELOG\.md', '[Changelog](40-Changelog)'
+        $content = $content -replace '\.\.\/41_CONTRIBUTING\.md', '[Contribuindo](41-Contribuindo)'
+        
+        # Links de onboarding (com e sem ../docs/)
+        $content = $content -replace '\.\.\/ONBOARDING_PUBLICO\.md', '[Onboarding Público](Onboarding-Público)'
+        $content = $content -replace '\.\.\/ONBOARDING_DEVELOPERS\.md', '[Onboarding Desenvolvedores](Onboarding-Desenvolvedores)'
+        $content = $content -replace '\.\.\/ONBOARDING_ANALISTAS_FUNCIONAIS\.md', '[Onboarding Analistas Funcionais](Onboarding-Analistas-Funcionais)'
+        $content = $content -replace '\.\.\/CARTILHA_COMPLETA\.md', '[Cartilha Completa](Cartilha-Completa)'
+        $content = $content -replace '\.\.\/DISCORD_SETUP\.md', '[Discord Setup](Discord-Setup)'
+        $content = $content -replace '\.\.\/docs\/ONBOARDING_PUBLICO\.md', '[Onboarding Público](Onboarding-Público)'
+        $content = $content -replace '\.\.\/docs\/ONBOARDING_DEVELOPERS\.md', '[Onboarding Desenvolvedores](Onboarding-Desenvolvedores)'
+        $content = $content -replace '\.\.\/docs\/ONBOARDING_ANALISTAS_FUNCIONAIS\.md', '[Onboarding Analistas Funcionais](Onboarding-Analistas-Funcionais)'
+        $content = $content -replace '\.\.\/docs\/CARTILHA_COMPLETA\.md', '[Cartilha Completa](Cartilha-Completa)'
+        $content = $content -replace '\.\.\/docs\/DISCORD_SETUP\.md', '[Discord Setup](Discord-Setup)'
+        $content = $content -replace '\.\/ONBOARDING_PUBLICO\.md', '[Onboarding Público](Onboarding-Público)'
+        $content = $content -replace '\.\/ONBOARDING_DEVELOPERS\.md', '[Onboarding Desenvolvedores](Onboarding-Desenvolvedores)'
+        $content = $content -replace '\.\/ONBOARDING_ANALISTAS_FUNCIONAIS\.md', '[Onboarding Analistas Funcionais](Onboarding-Analistas-Funcionais)'
+        $content = $content -replace '\.\/CARTILHA_COMPLETA\.md', '[Cartilha Completa](Cartilha-Completa)'
+        $content = $content -replace '\.\/DISCORD_SETUP\.md', '[Discord Setup](Discord-Setup)'
+        
+        # Links para outros documentos docs/
         $content = $content -replace '\.\.\/MEDIA_SYSTEM\.md', '[Media System](Media-System)'
         $content = $content -replace '\.\.\/MONITORING\.md', '[Monitoring](Monitoring)'
         $content = $content -replace '\.\.\/METRICS\.md', '[Metrics](Metrics)'
@@ -92,6 +112,14 @@ function Copy-DocumentToWiki {
         $content = $content -replace '\.\.\/backlog-api\/README\.md', '[Backlog API](Backlog-API)'
         $content = $content -replace '\.\.\/backlog-api\/implementacoes\/FASE(\d+)_([^.]+)\.md', '[Fase $1 $2](Home#backlog-api)'
         $content = $content -replace '\.\/implementacoes\/FASE(\d+)_([^.]+)\.md', '[Fase $1 $2](Home#backlog-api)'
+        
+        # Links absolutos do GitHub (transformar em links da Wiki quando for documentação local)
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/([^.]+)\.md', '[${1}](${1})'
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/ONBOARDING_PUBLICO\.md', '[Onboarding Público](Onboarding-Público)'
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/ONBOARDING_DEVELOPERS\.md', '[Onboarding Desenvolvedores](Onboarding-Desenvolvedores)'
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/ONBOARDING_ANALISTAS_FUNCIONAIS\.md', '[Onboarding Analistas Funcionais](Onboarding-Analistas-Funcionais)'
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/CARTILHA_COMPLETA\.md', '[Cartilha Completa](Cartilha-Completa)'
+        $content = $content -replace 'https://github.com/sraphaz/araponga/blob/main/docs/DISCORD_SETUP\.md', '[Discord Setup](Discord-Setup)'
         
         # Adicionar link para documento completo no repositório
         $repoPath = $sourceFile.Replace($ROOT_DIR, "").Replace("\", "/").TrimStart("/")
@@ -115,11 +143,27 @@ function Copy-DocumentToWiki {
 Write-Host "`n📋 Criando estrutura organizada..." -ForegroundColor Yellow
 
 # 1. Home.md - Página Principal
-$homeContent = @"
+# Usar o conteúdo elevado e consciente do WIKI_HOME.md se existir
+$wikiHomeFile = Join-Path $DOCS_ROOT "WIKI_HOME.md"
+if (Test-Path $wikiHomeFile) {
+    Write-Host "  📖 Usando WIKI_HOME.md com conteúdo elevado..." -ForegroundColor Cyan
+    $homeContent = Get-Content $wikiHomeFile -Raw -Encoding UTF8
+    # Ajustar links para estrutura da Wiki
+    $homeContent = $homeContent -replace '\.\./docs/', ''
+    $homeContent = $homeContent -replace 'docs/', ''
+    $homeContent = $homeContent -replace 'https://github.com/sraphaz/araponga/blob/main/docs/([^.]+)\.md', '[$1]($1)'
+    $homeContent = $homeContent -replace 'ONBOARDING_PUBLICO', 'Onboarding-Público'
+    $homeContent = $homeContent -replace 'ONBOARDING_DEVELOPERS', 'Onboarding-Desenvolvedores'
+    $homeContent = $homeContent -replace 'ONBOARDING_ANALISTAS_FUNCIONAIS', 'Onboarding-Analistas-Funcionais'
+    $homeContent = $homeContent -replace 'CARTILHA_COMPLETA', 'Cartilha-Completa'
+    $homeContent = $homeContent -replace 'DISCORD_SETUP', 'Discord-Setup'
+} else {
+    # Fallback para conteúdo padrão
+    $homeContent = @"
 # 🦜 Araponga - Documentação Completa
 
 **Status Atual**: 9.3/10 | **Fases Completas**: 1-8 ✅  
-**Última Atualização**: 2025-01-16
+**Última Atualização**: 2025-01-20
 
 ---
 
@@ -127,8 +171,14 @@ $homeContent = @"
 
 - **[📖 Guia de Início](Início-Rápido)** - Comece aqui se é novo no projeto
 - **[📊 Status do Projeto](Status-do-Projeto)** - Visão geral do estado atual
-- **[🎯 Backlog API](Backlog-API)** - Plano completo de 24 fases
+- **[🎯 Backlog API](Backlog-API)** - Plano completo de 29 fases
 - **[📚 Índice Completo](00-Índice)** - Todos os documentos organizados
+
+---
+
+## 🌱 Para Conhecer o Projeto
+
+**[🌟 Onboarding Público](Onboarding-Público)** - Sua porta de entrada para o Araponga
 
 ---
 
@@ -185,7 +235,7 @@ $homeContent = @"
 
 ---
 
-## 📋 Backlog API - 24 Fases
+## 📋 Backlog API - 29 Fases
 
 ### ✅ Fases Completas (1-8)
 - [Fase 1: Segurança e Fundação Crítica](Fase-1-Segurança-Fundação-Crítica) ✅
@@ -224,6 +274,15 @@ $homeContent = @"
 - [Fase 19: Arquitetura Modular](Fase-19-Arquitetura-Modular)
 - [Fase 21: Criptomoedas](Fase-21-Criptomoedas)
 - [Fase 22: Integrações Externas](Fase-22-Integrações-Externas)
+
+### 🟢 Onda 7: Autonomia Digital e Economia Circular (25-28)
+- [Fase 25: Hub de Serviços Digitais](Fase-25-Hub-Serviços-Digitais)
+- [Fase 26: Chat com IA e Consumo Consciente](Fase-26-Chat-IA-Consumo-Consciente)
+- [Fase 27: Negociação Territorial](Fase-27-Negociação-Territorial)
+- [Fase 28: Banco de Sementes e Mudas](Fase-28-Banco-Sementes-Mudas)
+
+### 🟡 Onda 8: Mobile Avançado (29)
+- [Fase 29: Suporte Mobile Avançado](Fase-29-Suporte-Mobile-Avançado)
 
 **📊 Ver**: [Backlog API Completo](Backlog-API) | [Reorganização Estratégica](Reorganização-Estratégica-Final)
 
@@ -277,7 +336,7 @@ Bem-vindo à documentação do **Araponga**! Este guia ajuda você a começar ra
 4. **[Status do Projeto](Status-do-Projeto)** - Estado atual
 
 ### Planejamento
-- **[Backlog API](Backlog-API)** - Plano completo de 24 fases
+- **[Backlog API](Backlog-API)** - Plano completo de 29 fases
 - **[Avaliação para Produção](50-Produção-Avaliação-Completa)** - Prontidão atual
 - **[Reorganização Estratégica](Reorganização-Estratégica-Final)** - Estratégia de implementação
 
@@ -382,13 +441,13 @@ $statusContent = @"
 - Fase 13: Conector de Emails
 - Fase 14: Governança Comunitária
 
-**Ver**: [Backlog API Completo](Backlog-API) para todas as 24 fases
+**Ver**: [Backlog API Completo](Backlog-API) para todas as 29 fases
 
 ---
 
 ## 📈 Progresso
 
-- **Fases Completas**: 8/24 (33%)
+- **Fases Completas**: 8/29 (28%)
 - **Valor Entregue**: ~40% (Ondas 1-2 críticas)
 - **Tempo Estimado Restante**: ~170 dias com paralelização
 
@@ -406,16 +465,16 @@ Write-Host "  ✅ Status-do-Projeto.md criado" -ForegroundColor Green
 
 # 4. Página do Backlog API
 $backlogContent = @"
-# 📋 Backlog API - 24 Fases Estratégicas
+# 📋 Backlog API - 29 Fases Estratégicas
 
 **Status Atual**: 9.3/10 | **Fases Completas**: 1-8 ✅  
-**Última Atualização**: 2025-01-16
+**Última Atualização**: 2025-01-20
 
 ---
 
 ## 🎯 Visão Geral
 
-O Backlog API organiza 24 fases em **6 Ondas Estratégicas** para elevar a aplicação de 7.4-8.0/10 para 10/10 em todas as categorias.
+O Backlog API organiza 29 fases em **8 Ondas Estratégicas** para elevar a aplicação de 7.4-8.0/10 para 10/10 em todas as categorias.
 
 **Estimativa Total**: 380 dias sequenciais / ~170 dias com paralelização  
 **90% do valor em 233 dias (47 semanas)**
@@ -464,6 +523,15 @@ O Backlog API organiza 24 fases em **6 Ondas Estratégicas** para elevar a aplic
 - [Fase 19: Arquitetura Modular](Fase-19-Arquitetura-Modular) - 35 dias
 - [Fase 21: Criptomoedas](Fase-21-Criptomoedas) - 28 dias
 - [Fase 22: Integrações Externas](Fase-22-Integrações-Externas) - 35 dias
+
+### 🟢 Onda 7: Autonomia Digital e Economia Circular (84 dias) - 10% do Valor
+- [Fase 25: Hub de Serviços Digitais](Fase-25-Hub-Serviços-Digitais) - 21 dias
+- [Fase 26: Chat com IA e Consumo Consciente](Fase-26-Chat-IA-Consumo-Consciente) - 14 dias
+- [Fase 27: Negociação Territorial](Fase-27-Negociação-Territorial) - 28 dias
+- [Fase 28: Banco de Sementes e Mudas](Fase-28-Banco-Sementes-Mudas) - 21 dias
+
+### 🟡 Onda 8: Mobile Avançado (14 dias) - 2% do Valor
+- [Fase 29: Suporte Mobile Avançado](Fase-29-Suporte-Mobile-Avançado) - 14 dias
 
 ---
 
@@ -527,11 +595,19 @@ $phaseNames = @{
     22 = "Fase-22-Integrações-Externas"
     23 = "Fase-23-Compra-Coletiva"
     24 = "Fase-24-Sistema-Trocas"
+    25 = "Fase-25-Hub-Serviços-Digitais"
+    26 = "Fase-26-Chat-IA-Consumo-Consciente"
+    27 = "Fase-27-Negociação-Territorial"
+    28 = "Fase-28-Banco-Sementes-Mudas"
+    29 = "Fase-29-Suporte-Mobile-Avançado"
+    27 = "Fase-27-Negociação-Territorial"
+    28 = "Fase-28-Banco-Sementes-Mudas"
+    29 = "Fase-29-Suporte-Mobile-Avançado"
 }
 
 # Copiar todas as fases
-Write-Host "`n📄 Copiando fases (1-24)..." -ForegroundColor Yellow
-for ($i = 1; $i -le 24; $i++) {
+Write-Host "`n📄 Copiando fases (1-29)..." -ForegroundColor Yellow
+for ($i = 1; $i -le 29; $i++) {
     $phaseFile = "$DOCS_DIR\FASE$i.md"
     $phaseName = $phaseNames[$i]
     
@@ -568,6 +644,11 @@ $mainDocs = @{
     "41_CONTRIBUTING.md" = "41-Contribuindo"
     "50_PRODUCAO_AVALIACAO_COMPLETA.md" = "50-Produção-Avaliação-Completa"
     "51_PRODUCAO_PLANO_DESEJAVEIS.md" = "51-Produção-Plano-Desejáveis"
+    "ONBOARDING_PUBLICO.md" = "Onboarding-Público"
+    "ONBOARDING_DEVELOPERS.md" = "Onboarding-Desenvolvedores"
+    "ONBOARDING_ANALISTAS_FUNCIONAIS.md" = "Onboarding-Analistas-Funcionais"
+    "CARTILHA_COMPLETA.md" = "Cartilha-Completa"
+    "DISCORD_SETUP.md" = "Discord-Setup"
     "60_API_LÓGICA_NEGÓCIO.md" = "60-API-Lógica-de-Negócio"
     "61_USER_PREFERENCES_PLAN.md" = "61-Preferências-de-Usuário"
     "70_AVALIACAO_GERAL_APLICACAO.md" = "70-Avaliação-Geral-Aplicação"

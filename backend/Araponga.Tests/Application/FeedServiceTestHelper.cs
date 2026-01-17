@@ -39,8 +39,17 @@ public static class FeedServiceTestHelper
         var postAssetRepository = new InMemoryPostAssetRepository(dataStore);
         var assetRepository = new InMemoryAssetRepository(dataStore);
         var sanctionRepository = new InMemorySanctionRepository(dataStore);
+        var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
+        var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
         var unitOfWork = new InMemoryUnitOfWork();
         var eventBusInstance = eventBus ?? new NoOpEventBus();
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlags,
+            unitOfWork,
+            globalMediaLimits);
 
         // Create the specialized services
         var postCreationService = new PostCreationService(
@@ -49,8 +58,11 @@ public static class FeedServiceTestHelper
             assetRepository,
             geoAnchorRepository,
             postAssetRepository,
+            mediaAssetRepository,
+            mediaAttachmentRepository,
             sanctionRepository,
             featureFlags,
+            mediaConfigService,
             auditLogger,
             eventBusInstance,
             unitOfWork);

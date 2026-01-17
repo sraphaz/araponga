@@ -1,10 +1,13 @@
 using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
+using Araponga.Application.Interfaces.Media;
 using Araponga.Application.Metrics;
 using Araponga.Application.Events;
 using Araponga.Application.Models;
+using Araponga.Application.Services.Media;
 using Araponga.Domain.Feed;
 using Araponga.Domain.Geo;
+using Araponga.Domain.Media;
 using Araponga.Domain.Moderation;
 
 namespace Araponga.Application.Services;
@@ -19,8 +22,11 @@ public sealed class PostCreationService
     private readonly ITerritoryAssetRepository _assetRepository;
     private readonly IPostGeoAnchorRepository _postGeoAnchorRepository;
     private readonly IPostAssetRepository _postAssetRepository;
+    private readonly IMediaAssetRepository _mediaAssetRepository;
+    private readonly IMediaAttachmentRepository _mediaAttachmentRepository;
     private readonly ISanctionRepository _sanctionRepository;
     private readonly IFeatureFlagService _featureFlags;
+    private readonly TerritoryMediaConfigService _mediaConfigService;
     private readonly IAuditLogger _auditLogger;
     private readonly IEventBus _eventBus;
     private readonly IUnitOfWork _unitOfWork;
@@ -32,8 +38,11 @@ public sealed class PostCreationService
         ITerritoryAssetRepository assetRepository,
         IPostGeoAnchorRepository postGeoAnchorRepository,
         IPostAssetRepository postAssetRepository,
+        IMediaAssetRepository mediaAssetRepository,
+        IMediaAttachmentRepository mediaAttachmentRepository,
         ISanctionRepository sanctionRepository,
         IFeatureFlagService featureFlags,
+        TerritoryMediaConfigService mediaConfigService,
         IAuditLogger auditLogger,
         IEventBus eventBus,
         IUnitOfWork unitOfWork,
@@ -44,8 +53,11 @@ public sealed class PostCreationService
         _assetRepository = assetRepository;
         _postGeoAnchorRepository = postGeoAnchorRepository;
         _postAssetRepository = postAssetRepository;
+        _mediaAssetRepository = mediaAssetRepository;
+        _mediaAttachmentRepository = mediaAttachmentRepository;
         _sanctionRepository = sanctionRepository;
         _featureFlags = featureFlags;
+        _mediaConfigService = mediaConfigService;
         _auditLogger = auditLogger;
         _eventBus = eventBus;
         _unitOfWork = unitOfWork;
@@ -63,6 +75,7 @@ public sealed class PostCreationService
         Guid? mapEntityId,
         IReadOnlyCollection<Models.GeoAnchorInput>? geoAnchors,
         IReadOnlyCollection<Guid>? assetIds,
+        IReadOnlyCollection<Guid>? mediaIds,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
@@ -110,6 +123,102 @@ public sealed class PostCreationService
             }
         }
 
+        // Validar e normalizar mediaIds
+        var normalizedMediaIds = mediaIds?
+            .Where(id => id != Guid.Empty)
+            .Distinct()
+            .ToList();
+
+        if (normalizedMediaIds is not null && normalizedMediaIds.Count > 0)
+        {
+            // Obter limites efetivos da configuração territorial (com fallback para global)
+            var limits = await _mediaConfigService.GetEffectiveContentLimitsAsync(
+                territoryId,
+                MediaContentType.Posts,
+                cancellationToken);
+
+            // Validar quantidade máxima de mídias
+            if (normalizedMediaIds.Count > limits.MaxMediaCount)
+            {
+                return Result<CommunityPost>.Failure($"Maximum {limits.MaxMediaCount} media items allowed per post.");
+            }
+
+            var mediaAssets = await _mediaAssetRepository.ListByIdsAsync(normalizedMediaIds, cancellationToken);
+            if (mediaAssets.Count != normalizedMediaIds.Count)
+            {
+                return Result<CommunityPost>.Failure("One or more media assets not found.");
+            }
+
+            // Validar que todas as mídias pertencem ao usuário
+            if (mediaAssets.Any(media => media.UploadedByUserId != userId || media.IsDeleted))
+            {
+                return Result<CommunityPost>.Failure("One or more media assets are invalid or do not belong to the user.");
+            }
+
+            // Validar tipos de mídia habilitados e quantidades
+            var images = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Image).ToList();
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+
+            // Validar imagens
+            if (images.Count > 0 && !limits.ImagesEnabled)
+            {
+                return Result<CommunityPost>.Failure("Images are not enabled for posts in this territory.");
+            }
+
+            // Validar vídeos
+            if (videos.Count > 0 && !limits.VideosEnabled)
+            {
+                return Result<CommunityPost>.Failure("Videos are not enabled for posts in this territory.");
+            }
+            if (videos.Count > limits.MaxVideoCount)
+            {
+                return Result<CommunityPost>.Failure($"Maximum {limits.MaxVideoCount} video(s) allowed per post.");
+            }
+            foreach (var video in videos)
+            {
+                if (video.SizeBytes > limits.MaxVideoSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxVideoSizeBytes / (1024.0 * 1024.0);
+                    return Result<CommunityPost>.Failure($"Video size exceeds {maxSizeMB:F1}MB limit for posts.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedVideoMimeTypes != null && limits.AllowedVideoMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedVideoMimeTypes.Contains(video.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<CommunityPost>.Failure($"Video MIME type '{video.MimeType}' is not allowed for posts.");
+                    }
+                }
+            }
+
+            // Validar áudios
+            if (audios.Count > 0 && !limits.AudioEnabled)
+            {
+                return Result<CommunityPost>.Failure("Audio is not enabled for posts in this territory.");
+            }
+            if (audios.Count > limits.MaxAudioCount)
+            {
+                return Result<CommunityPost>.Failure($"Maximum {limits.MaxAudioCount} audio(s) allowed per post.");
+            }
+            foreach (var audio in audios)
+            {
+                if (audio.SizeBytes > limits.MaxAudioSizeBytes)
+                {
+                    var maxSizeMB = limits.MaxAudioSizeBytes / (1024.0 * 1024.0);
+                    return Result<CommunityPost>.Failure($"Audio size exceeds {maxSizeMB:F1}MB limit for posts.");
+                }
+                // Validar tipo MIME se configurado
+                if (limits.AllowedAudioMimeTypes != null && limits.AllowedAudioMimeTypes.Count > 0)
+                {
+                    if (!limits.AllowedAudioMimeTypes.Contains(audio.MimeType, StringComparer.OrdinalIgnoreCase))
+                    {
+                        return Result<CommunityPost>.Failure($"Audio MIME type '{audio.MimeType}' is not allowed for posts.");
+                    }
+                }
+            }
+        }
+
         var post = new CommunityPost(
             Guid.NewGuid(),
             territoryId,
@@ -131,6 +240,24 @@ public sealed class PostCreationService
         {
             var postAssets = normalizedAssetIds.Select(assetId => new PostAsset(post.Id, assetId)).ToList();
             await _postAssetRepository.AddAsync(postAssets, cancellationToken);
+        }
+
+        // Criar MediaAttachments para as mídias associadas ao post
+        if (normalizedMediaIds is not null && normalizedMediaIds.Count > 0)
+        {
+            var now = DateTime.UtcNow;
+            foreach (var (mediaId, index) in normalizedMediaIds.Select((id, idx) => (id, idx)))
+            {
+                var attachment = new MediaAttachment(
+                    Guid.NewGuid(),
+                    mediaId,
+                    MediaOwnerType.Post,
+                    post.Id,
+                    index,
+                    now);
+
+                await _mediaAttachmentRepository.AddAsync(attachment, cancellationToken);
+            }
         }
 
         await _auditLogger.LogAsync(

@@ -1,7 +1,10 @@
 using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
+using Araponga.Application.Interfaces.Media;
 using Araponga.Application.Models;
+using Araponga.Application.Services.Media;
 using Araponga.Domain.Chat;
+using Araponga.Domain.Media;
 using Araponga.Domain.Membership;
 using Araponga.Domain.Users;
 
@@ -14,6 +17,9 @@ public sealed class ChatService
     private readonly IChatMessageRepository _messageRepository;
     private readonly IChatConversationStatsRepository _statsRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IMediaAssetRepository _mediaAssetRepository;
+    private readonly IMediaAttachmentRepository _mediaAttachmentRepository;
+    private readonly TerritoryMediaConfigService _mediaConfigService;
     private readonly FeatureFlagCacheService _featureFlags;
     private readonly AccessEvaluator _accessEvaluator;
     private readonly IUnitOfWork _unitOfWork;
@@ -24,6 +30,9 @@ public sealed class ChatService
         IChatMessageRepository messageRepository,
         IChatConversationStatsRepository statsRepository,
         IUserRepository userRepository,
+        IMediaAssetRepository mediaAssetRepository,
+        IMediaAttachmentRepository mediaAttachmentRepository,
+        TerritoryMediaConfigService mediaConfigService,
         FeatureFlagCacheService featureFlags,
         AccessEvaluator accessEvaluator,
         IUnitOfWork unitOfWork)
@@ -33,6 +42,9 @@ public sealed class ChatService
         _messageRepository = messageRepository;
         _statsRepository = statsRepository;
         _userRepository = userRepository;
+        _mediaAssetRepository = mediaAssetRepository;
+        _mediaAttachmentRepository = mediaAttachmentRepository;
+        _mediaConfigService = mediaConfigService;
         _featureFlags = featureFlags;
         _accessEvaluator = accessEvaluator;
         _unitOfWork = unitOfWork;
@@ -328,6 +340,7 @@ public sealed class ChatService
         Guid conversationId,
         Guid userId,
         string text,
+        Guid? mediaId,
         CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(text))
@@ -359,6 +372,95 @@ public sealed class ChatService
             return OperationResult<ChatMessage>.Failure("Conversation is disabled.");
         }
 
+        // Validar mídia se fornecida
+        if (mediaId.HasValue && mediaId.Value != Guid.Empty)
+        {
+            var mediaAsset = await _mediaAssetRepository.GetByIdAsync(mediaId.Value, cancellationToken);
+            if (mediaAsset is null)
+            {
+                return OperationResult<ChatMessage>.Failure("Media asset not found.");
+            }
+
+            if (mediaAsset.UploadedByUserId != userId || mediaAsset.IsDeleted)
+            {
+                return OperationResult<ChatMessage>.Failure("Media asset is invalid or does not belong to the user.");
+            }
+
+            // Validar tipo: apenas imagens e áudios em chat (vídeos não permitidos)
+            if (mediaAsset.MediaType == MediaType.Video)
+            {
+                return OperationResult<ChatMessage>.Failure("Videos are not allowed in chat messages.");
+            }
+            if (mediaAsset.MediaType != MediaType.Image && mediaAsset.MediaType != MediaType.Audio)
+            {
+                return OperationResult<ChatMessage>.Failure("Only images and audio are allowed in chat messages.");
+            }
+
+            // Obter limites efetivos da configuração territorial (com fallback para global)
+            // Nota: DMs não têm TerritoryId, então usar limites globais padrão
+            if (conversation.TerritoryId.HasValue)
+            {
+                var chatLimits = await _mediaConfigService.GetEffectiveChatLimitsAsync(
+                    conversation.TerritoryId.Value,
+                    cancellationToken);
+
+                // Validar imagens
+                if (mediaAsset.MediaType == MediaType.Image)
+                {
+                    if (!chatLimits.ImagesEnabled)
+                    {
+                        return OperationResult<ChatMessage>.Failure("Images are not enabled for chat in this territory.");
+                    }
+                    if (mediaAsset.SizeBytes > chatLimits.MaxImageSizeBytes)
+                    {
+                        var maxSizeMB = chatLimits.MaxImageSizeBytes / (1024.0 * 1024.0);
+                        return OperationResult<ChatMessage>.Failure($"Image size exceeds {maxSizeMB:F1}MB limit for chat.");
+                    }
+                    // Validar tipo MIME se configurado
+                    if (chatLimits.AllowedImageMimeTypes != null && chatLimits.AllowedImageMimeTypes.Count > 0)
+                    {
+                        if (!chatLimits.AllowedImageMimeTypes.Contains(mediaAsset.MimeType, StringComparer.OrdinalIgnoreCase))
+                        {
+                            return OperationResult<ChatMessage>.Failure($"Image MIME type '{mediaAsset.MimeType}' is not allowed for chat.");
+                        }
+                    }
+                }
+                // Validar áudios
+                else if (mediaAsset.MediaType == MediaType.Audio)
+                {
+                    if (!chatLimits.AudioEnabled)
+                    {
+                        return OperationResult<ChatMessage>.Failure("Audio is not enabled for chat in this territory.");
+                    }
+                    if (mediaAsset.SizeBytes > chatLimits.MaxAudioSizeBytes)
+                    {
+                        var maxSizeMB = chatLimits.MaxAudioSizeBytes / (1024.0 * 1024.0);
+                        return OperationResult<ChatMessage>.Failure($"Audio size exceeds {maxSizeMB:F1}MB limit for chat.");
+                    }
+                    // Validar tipo MIME se configurado
+                    if (chatLimits.AllowedAudioMimeTypes != null && chatLimits.AllowedAudioMimeTypes.Count > 0)
+                    {
+                        if (!chatLimits.AllowedAudioMimeTypes.Contains(mediaAsset.MimeType, StringComparer.OrdinalIgnoreCase))
+                        {
+                            return OperationResult<ChatMessage>.Failure($"Audio MIME type '{mediaAsset.MimeType}' is not allowed for chat.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Para DMs (sem TerritoryId), usar limites padrão fixos como fallback
+                if (mediaAsset.MediaType == MediaType.Image && mediaAsset.SizeBytes > 5 * 1024 * 1024) // 5MB
+                {
+                    return OperationResult<ChatMessage>.Failure("Image size exceeds 5MB limit for chat.");
+                }
+                if (mediaAsset.MediaType == MediaType.Audio && mediaAsset.SizeBytes > 2 * 1024 * 1024) // 2MB
+                {
+                    return OperationResult<ChatMessage>.Failure("Audio size exceeds 2MB limit for chat.");
+                }
+            }
+        }
+
         var message = new ChatMessage(
             Guid.NewGuid(),
             conversationId,
@@ -372,6 +474,20 @@ public sealed class ChatService
             deletedByUserId: null);
 
         await _messageRepository.AddAsync(message, cancellationToken);
+
+        // Criar MediaAttachment se mídia foi fornecida
+        if (mediaId.HasValue && mediaId.Value != Guid.Empty)
+        {
+            var attachment = new MediaAttachment(
+                Guid.NewGuid(),
+                mediaId.Value,
+                MediaOwnerType.ChatMessage,
+                message.Id,
+                0,
+                DateTime.UtcNow);
+
+            await _mediaAttachmentRepository.AddAsync(attachment, cancellationToken);
+        }
 
         // Atualizar stats (upsert)
         var existingStats = await _statsRepository.GetAsync(conversationId, cancellationToken);

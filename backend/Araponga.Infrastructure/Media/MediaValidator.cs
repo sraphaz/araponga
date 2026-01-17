@@ -49,7 +49,8 @@ public sealed class MediaValidator : IMediaValidator
     private bool IsAllowedMimeType(string mimeType)
     {
         return _options.AllowedImageMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase) ||
-               _options.AllowedVideoMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase);
+               _options.AllowedVideoMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase) ||
+               _options.AllowedAudioMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase);
     }
 
     private long GetMaxSizeForMimeType(string mimeType)
@@ -62,6 +63,11 @@ public sealed class MediaValidator : IMediaValidator
         if (_options.AllowedVideoMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase))
         {
             return _options.MaxVideoSizeBytes;
+        }
+
+        if (_options.AllowedAudioMimeTypes.Contains(mimeType, StringComparer.OrdinalIgnoreCase))
+        {
+            return _options.MaxAudioSizeBytes;
         }
 
         // Tipo não reconhecido - retorna limite conservador
