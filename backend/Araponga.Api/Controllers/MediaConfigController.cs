@@ -119,7 +119,10 @@ public sealed class MediaConfigController : ControllerBase
             config.MaxVideoSizeBytes,
             config.MaxAudioSizeBytes,
             config.MaxVideoDurationSeconds,
-            config.MaxAudioDurationSeconds);
+            config.MaxAudioDurationSeconds,
+            config.AllowedImageMimeTypes,
+            config.AllowedVideoMimeTypes,
+            config.AllowedAudioMimeTypes);
     }
 
     private static MediaChatConfigResponse MapChatConfigToResponse(MediaChatConfig config)
@@ -130,7 +133,9 @@ public sealed class MediaConfigController : ControllerBase
             config.VideosEnabled,
             config.MaxImageSizeBytes,
             config.MaxAudioSizeBytes,
-            config.MaxAudioDurationSeconds);
+            config.MaxAudioDurationSeconds,
+            config.AllowedImageMimeTypes,
+            config.AllowedAudioMimeTypes);
     }
 
     private static TerritoryMediaConfig UpdateConfigFromRequest(
@@ -176,7 +181,10 @@ public sealed class MediaConfigController : ControllerBase
             MaxVideoSizeBytes = request.MaxVideoSizeBytes ?? existing.MaxVideoSizeBytes,
             MaxAudioSizeBytes = request.MaxAudioSizeBytes ?? existing.MaxAudioSizeBytes,
             MaxVideoDurationSeconds = request.MaxVideoDurationSeconds ?? existing.MaxVideoDurationSeconds,
-            MaxAudioDurationSeconds = request.MaxAudioDurationSeconds ?? existing.MaxAudioDurationSeconds
+            MaxAudioDurationSeconds = request.MaxAudioDurationSeconds ?? existing.MaxAudioDurationSeconds,
+            AllowedImageMimeTypes = request.AllowedImageMimeTypes != null ? new List<string>(request.AllowedImageMimeTypes) : existing.AllowedImageMimeTypes,
+            AllowedVideoMimeTypes = request.AllowedVideoMimeTypes != null ? new List<string>(request.AllowedVideoMimeTypes) : existing.AllowedVideoMimeTypes,
+            AllowedAudioMimeTypes = request.AllowedAudioMimeTypes != null ? new List<string>(request.AllowedAudioMimeTypes) : existing.AllowedAudioMimeTypes
         };
     }
 
@@ -191,7 +199,9 @@ public sealed class MediaConfigController : ControllerBase
             VideosEnabled = false, // Sempre bloqueado para chat
             MaxImageSizeBytes = request.MaxImageSizeBytes ?? existing.MaxImageSizeBytes,
             MaxAudioSizeBytes = request.MaxAudioSizeBytes ?? existing.MaxAudioSizeBytes,
-            MaxAudioDurationSeconds = request.MaxAudioDurationSeconds ?? existing.MaxAudioDurationSeconds
+            MaxAudioDurationSeconds = request.MaxAudioDurationSeconds ?? existing.MaxAudioDurationSeconds,
+            AllowedImageMimeTypes = request.AllowedImageMimeTypes != null ? new List<string>(request.AllowedImageMimeTypes) : existing.AllowedImageMimeTypes,
+            AllowedAudioMimeTypes = request.AllowedAudioMimeTypes != null ? new List<string>(request.AllowedAudioMimeTypes) : existing.AllowedAudioMimeTypes
         };
     }
 }

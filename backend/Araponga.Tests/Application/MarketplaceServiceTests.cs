@@ -63,7 +63,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
 
         return (storeService, itemService);
     }
@@ -256,7 +266,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
         var inquiryService = new InquiryService(inquiryRepository, itemRepository, storeRepository, featureGuard, unitOfWork);
         var cartService = new CartService(
             cartRepository,
@@ -471,7 +491,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -555,7 +585,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
 
         var storeResult = await storeService.UpsertMyStoreAsync(
             TerritoryId,
@@ -664,7 +704,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
         var cartService = new CartService(
             cartRepository,
             cartItemRepository,
@@ -768,7 +818,17 @@ public sealed class MarketplaceServiceTests
         var storeService = new StoreService(storeRepository, userRepository, accessEvaluator, membershipAccessRules, unitOfWork);
         var mediaAssetRepository = new InMemoryMediaAssetRepository(dataStore);
         var mediaAttachmentRepository = new InMemoryMediaAttachmentRepository(dataStore);
-        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
+        var mediaConfigRepository = new InMemoryTerritoryMediaConfigRepository(dataStore);
+        var globalMediaLimits = new Araponga.Infrastructure.InMemory.InMemoryGlobalMediaLimits();
+        // Obter featureFlags do CreateAccessAsync
+        var featureFlagsForMedia = new InMemoryFeatureFlagService();
+        featureFlagsForMedia.SetEnabledFlags(TerritoryId, new List<FeatureFlag> { FeatureFlag.MarketplaceEnabled });
+        var mediaConfigService = new Araponga.Application.Services.Media.TerritoryMediaConfigService(
+            mediaConfigRepository,
+            featureFlagsForMedia,
+            unitOfWork,
+            globalMediaLimits);
+        var itemService = new StoreItemService(itemRepository, storeRepository, userRepository, mediaAssetRepository, mediaAttachmentRepository, mediaConfigService, accessEvaluator, membershipAccessRules, featureGuard, unitOfWork);
         var inquiryService = new InquiryService(inquiryRepository, itemRepository, storeRepository, featureGuard, unitOfWork);
 
         var buyerId = Guid.NewGuid();

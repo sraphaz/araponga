@@ -86,7 +86,7 @@ public sealed class MediaConfigIntegrationTests
         var updateRequest = new UpdateTerritoryMediaConfigRequest(
             new MediaContentConfigRequest(
                 ImagesEnabled: false,
-                null, null, null, null, null, null, null, null, null, null),
+                null, null, null, null, null, null, null, null, null, null, null, null, null),
             null, null, null);
 
         var response = await client.PutAsJsonAsync(
@@ -112,7 +112,16 @@ public sealed class MediaConfigIntegrationTests
                 VideosEnabled: true,
                 AudioEnabled: true,
                 MaxMediaCount: 5,
-                null, null, null, null, null, null, null),
+                MaxVideoCount: null,
+                MaxAudioCount: null,
+                MaxImageSizeBytes: null,
+                MaxVideoSizeBytes: null,
+                MaxAudioSizeBytes: null,
+                MaxVideoDurationSeconds: null,
+                MaxAudioDurationSeconds: null,
+                AllowedImageMimeTypes: null,
+                AllowedVideoMimeTypes: null,
+                AllowedAudioMimeTypes: null),
             null, null, null);
 
         var response = await client.PutAsJsonAsync(
@@ -144,7 +153,9 @@ public sealed class MediaConfigIntegrationTests
                 VideosEnabled: false,
                 MaxImageSizeBytes: 3 * 1024 * 1024,
                 MaxAudioSizeBytes: 1 * 1024 * 1024,
-                MaxAudioDurationSeconds: 30));
+                MaxAudioDurationSeconds: 30,
+                AllowedImageMimeTypes: null,
+                AllowedAudioMimeTypes: null));
 
         var response = await client.PutAsJsonAsync(
             $"api/v1/territories/{ActiveTerritoryId}/media-config",
@@ -181,7 +192,7 @@ public sealed class MediaConfigIntegrationTests
             null,
             new MediaContentConfigRequest(
                 ImagesEnabled: false,
-                null, null, null, null, null, null, null, null, null, null),
+                null, null, null, null, null, null, null, null, null, null, null, null, null),
             null);
 
         var response = await client.PutAsJsonAsync(
@@ -213,7 +224,7 @@ public sealed class MediaConfigIntegrationTests
         var updateRequest = new UpdateTerritoryMediaConfigRequest(
             new MediaContentConfigRequest(
                 ImagesEnabled: false,
-                null, null, null, null, null, null, null, null, null, null),
+                null, null, null, null, null, null, null, null, null, null, null, null, null),
             null, null, null);
 
         await client.PutAsJsonAsync(

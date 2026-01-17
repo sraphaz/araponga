@@ -129,7 +129,7 @@ public sealed class MediaConfigValidationIntegrationTests
                     ImagesEnabled: mediaType != "Images",
                     VideosEnabled: mediaType != "Videos",
                     AudioEnabled: mediaType != "Audio",
-                    null, null, null, null, null, null, null, null),
+                    null, null, null, null, null, null, null, null, null, null, null),
                 null, null, null),
             "Events" => new UpdateTerritoryMediaConfigRequest(
                 null,
@@ -137,7 +137,7 @@ public sealed class MediaConfigValidationIntegrationTests
                     ImagesEnabled: mediaType != "Images",
                     VideosEnabled: mediaType != "Videos",
                     AudioEnabled: mediaType != "Audio",
-                    null, null, null, null, null, null, null, null),
+                    null, null, null, null, null, null, null, null, null, null, null),
                 null, null),
             "Marketplace" => new UpdateTerritoryMediaConfigRequest(
                 null, null,
@@ -145,7 +145,7 @@ public sealed class MediaConfigValidationIntegrationTests
                     ImagesEnabled: mediaType != "Images",
                     VideosEnabled: mediaType != "Videos",
                     AudioEnabled: mediaType != "Audio",
-                    null, null, null, null, null, null, null, null),
+                    null, null, null, null, null, null, null, null, null, null, null),
                 null),
             _ => throw new ArgumentException($"Invalid content type: {contentType}")
         };
@@ -266,7 +266,19 @@ public sealed class MediaConfigValidationIntegrationTests
         var enableRequest = new UpdateTerritoryMediaConfigRequest(
             new MediaContentConfigRequest(
                 ImagesEnabled: true,
-                null, null, null, null, null, null, null, null, null, null),
+                VideosEnabled: null,
+                AudioEnabled: null,
+                MaxMediaCount: null,
+                MaxVideoCount: null,
+                MaxAudioCount: null,
+                MaxImageSizeBytes: null,
+                MaxVideoSizeBytes: null,
+                MaxAudioSizeBytes: null,
+                MaxVideoDurationSeconds: null,
+                MaxAudioDurationSeconds: null,
+                AllowedImageMimeTypes: null,
+                AllowedVideoMimeTypes: null,
+                AllowedAudioMimeTypes: null),
             null, null, null);
         var enableResponse = await client.PutAsJsonAsync(
             $"api/v1/territories/{ActiveTerritoryId}/media-config",
@@ -366,7 +378,10 @@ public sealed class MediaConfigValidationIntegrationTests
                 MaxVideoSizeBytes: 30 * 1024 * 1024,
                 MaxAudioSizeBytes: 10 * 1024 * 1024,
                 MaxVideoDurationSeconds: 60,
-                MaxAudioDurationSeconds: 120),
+                MaxAudioDurationSeconds: 120,
+                AllowedImageMimeTypes: null,
+                AllowedVideoMimeTypes: null,
+                AllowedAudioMimeTypes: null),
             null, null, null);
 
         var updateResponse = await curatorClient.PutAsJsonAsync(

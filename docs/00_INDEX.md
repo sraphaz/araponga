@@ -68,6 +68,12 @@ Documentos sobre histórico e mudanças do projeto.
 - **[Cartilha Completa](./CARTILHA_COMPLETA.md)** 📘 - Guia detalhado para todos os papéis no projeto
 - **[Onboarding para Desenvolvedores](./ONBOARDING_DEVELOPERS.md)** 🌱 - Guia completo para novos desenvolvedores usando Cursor
 - **[Onboarding para Analistas Funcionais](./ONBOARDING_ANALISTAS_FUNCIONAIS.md)** 👁️ - Guia para analistas funcionais que observam territórios e propõem melhorias
+- **[FAQ - Perguntas Frequentes](./ONBOARDING_FAQ.md)** ❓ - Respostas para dúvidas comuns sobre onboarding e contribuição
+- **[Sistema de Mentoria](./MENTORIA.md)** 🤝 - Guia para mentores e quem busca orientação
+- **[Priorização de Propostas](./PRIORIZACAO_PROPOSTAS.md)** 📊 - Critérios e processo para validar funcionalidades
+- **[Estrutura do Projeto](./PROJECT_STRUCTURE.md)** 📁 - Guia para navegar o código
+- **[Estratégia de Consolidação do Ecossistema](./ECOSSISTEMA_CONSOLIDACAO_ESTRATEGIA.md)** 🌱 - Plano estratégico completo
+- **[Checklist de Implementação](./ECOSSISTEMA_CONSOLIDACAO_CHECKLIST.md)** ✅ - Checklist detalhado da estratégia
 - **[Configuração do Discord](./DISCORD_SETUP.md)** 💬 - Guia para configurar e usar o Discord do time
 - **[Contribuindo](./41_CONTRIBUTING.md)** - Guia para contribuidores
 

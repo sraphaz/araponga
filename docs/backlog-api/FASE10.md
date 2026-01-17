@@ -321,30 +321,30 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 
 #### 10.9 Configuração Avançada de Limites de Mídia
 **Estimativa**: 16 horas (2 dias)  
-**Status**: ⏳ Pendente  
+**Status**: ✅ Completo  
 **Prioridade**: 🟡 Média
 
 **Contexto**: Estender `TerritoryMediaConfig` (já existente) para incluir configuração de limites de tamanho e tipos MIME, permitindo override de limites globais por território.
 
 **Tarefas**:
-- [ ] Estender modelo `TerritoryMediaConfig`:
-  - [ ] Adicionar campos para limites de tamanho por tipo (imagem, vídeo, áudio) em cada contexto (posts, events, marketplace, chat)
-  - [ ] Adicionar campos para tipos MIME permitidos (override opcional)
-  - [ ] Adicionar validação de limites mínimos/máximos
-- [ ] Estender `TerritoryMediaConfigService`:
-  - [ ] Validar limites contra valores globais (`MediaStorageOptions`)
-  - [ ] Aplicar limites por território quando disponíveis (fallback para global)
-- [ ] Estender `MediaConfigController`:
-  - [ ] Endpoints para atualizar limites de tamanho
-  - [ ] Endpoints para atualizar tipos MIME permitidos
-- [ ] Atualizar serviços de conteúdo (`PostCreationService`, `EventsService`, `StoreItemService`, `ChatService`):
-  - [ ] Usar limites do `TerritoryMediaConfig` quando disponíveis
-  - [ ] Fallback para `MediaStorageOptions` se não configurado
+- [x] Estender modelo `TerritoryMediaConfig`:
+  - [x] Adicionar campos para limites de tamanho por tipo (imagem, vídeo, áudio) em cada contexto (posts, events, marketplace, chat)
+  - [x] Adicionar campos para tipos MIME permitidos (override opcional)
+  - [x] Adicionar validação de limites mínimos/máximos
+- [x] Estender `TerritoryMediaConfigService`:
+  - [x] Validar limites contra valores globais (`MediaStorageOptions` via `IGlobalMediaLimits`)
+  - [x] Aplicar limites por território quando disponíveis (fallback para global)
+- [x] Estender `MediaConfigController`:
+  - [x] Endpoints para atualizar limites de tamanho (já existente via `UpdateTerritoryMediaConfigRequest`)
+  - [x] Endpoints para atualizar tipos MIME permitidos (já existente via `UpdateTerritoryMediaConfigRequest`)
+- [x] Atualizar serviços de conteúdo (`PostCreationService`, `EventsService`, `StoreItemService`, `ChatService`):
+  - [x] Usar limites do `TerritoryMediaConfig` quando disponíveis
+  - [x] Fallback para `MediaStorageOptions` via `IGlobalMediaLimits` se não configurado
 - [ ] Interface administrativa (DevPortal):
   - [ ] Seção para configuração de limites de mídia
   - [ ] Explicação de limites globais vs territoriais
-- [ ] Testes de integração
-- [ ] Documentação
+- [x] Testes de integração (existentes: `MediaConfigIntegrationTests`, `MediaConfigValidationIntegrationTests`)
+- [x] Documentação
 
 **Arquivos a Modificar**:
 - `backend/Araponga.Domain/Media/TerritoryMediaConfig.cs`
@@ -494,6 +494,8 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 
 **Atualização (Configuração de Blob Storage via Painel Administrativo)**: Sistema de configuração explícita e aberta do provedor de blob storage para mídias (Local, S3, AzureBlob) via painel administrativo está implementado. Permite configurar provedores de storage sem editar `appsettings.json`, com suporte para Local, Amazon S3 e Azure Blob Storage. Consulte `FASE10_STORAGE_CONFIG_ADMIN.md` para detalhes da arquitetura.
 
+**Atualização (Configuração Avançada de Limites de Mídia - Fase 10.9)**: Sistema de configuração avançada de limites de mídia por território está implementado. Permite que curadores configurem limites de tamanho e tipos MIME permitidos para cada tipo de conteúdo (Posts, Events, Marketplace, Chat), com validação contra limites globais e fallback automático. Todos os serviços de conteúdo (`PostCreationService`, `EventsService`, `StoreItemService`, `ChatService`) usam esses limites configuráveis. Consulte `FASE10_CONFIG_FLEXIBILIZACAO_AVALIACAO.md` para contexto completo.
+
 ## 🛡️ Segurança Avançada Implementada
 
 ### Validações de Segurança
@@ -577,3 +579,15 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - ✅ Segurança: Secrets (AccessKeyId, ConnectionString) mascarados nas respostas
 - ⏳ Integração com `MediaStorageFactory` (em implementação - usar configuração do painel quando disponível, fallback para `appsettings.json`)
 - 📝 Documentação completa em `FASE10_STORAGE_CONFIG_ADMIN.md`
+
+### Configuração Avançada de Limites de Mídia por Território (Fase 10.9)
+- ✅ Modelo `TerritoryMediaConfig` estendido com campos de limites de tamanho e tipos MIME por tipo de mídia e contexto
+- ✅ Serviço `TerritoryMediaConfigService` com validação contra `IGlobalMediaLimits` (abstração de `MediaStorageOptions`)
+- ✅ Validação de limites mínimos/máximos contra valores globais
+- ✅ Fallback automático para valores globais quando limites territoriais não estão configurados
+- ✅ Integração completa em `PostCreationService`, `EventsService`, `StoreItemService` e `ChatService`
+- ✅ Validação de tipos MIME permitidos por território (override opcional)
+- ✅ API `MediaConfigController` com endpoints para atualizar limites de tamanho e tipos MIME
+- ✅ Contratos de API (`UpdateTerritoryMediaConfigRequest`) com suporte a tipos MIME permitidos
+- ✅ Testes de integração: `MediaConfigIntegrationTests` e `MediaConfigValidationIntegrationTests`
+- ⏳ Interface administrativa no DevPortal (pendente - seção de configuração de limites de mídia)

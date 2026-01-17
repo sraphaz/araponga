@@ -25,7 +25,10 @@ public sealed record MediaContentConfigRequest(
     long? MaxVideoSizeBytes,
     long? MaxAudioSizeBytes,
     int? MaxVideoDurationSeconds,
-    int? MaxAudioDurationSeconds);
+    int? MaxAudioDurationSeconds,
+    IReadOnlyList<string>? AllowedImageMimeTypes,
+    IReadOnlyList<string>? AllowedVideoMimeTypes,
+    IReadOnlyList<string>? AllowedAudioMimeTypes);
 
 /// <summary>
 /// Configuração de mídia para Chat.
@@ -36,4 +39,6 @@ public sealed record MediaChatConfigRequest(
     bool? VideosEnabled,
     long? MaxImageSizeBytes,
     long? MaxAudioSizeBytes,
-    int? MaxAudioDurationSeconds);
+    int? MaxAudioDurationSeconds,
+    IReadOnlyList<string>? AllowedImageMimeTypes,
+    IReadOnlyList<string>? AllowedAudioMimeTypes);

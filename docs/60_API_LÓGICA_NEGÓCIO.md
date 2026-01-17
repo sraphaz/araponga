@@ -1295,6 +1295,28 @@ A plataforma Araponga suporta **mídias ricas** (imagens, vídeos e áudios) em 
 - **Configuração por tipo de conteúdo**: Posts, Eventos, Marketplace, Chat
 - **Limites personalizáveis**: Tamanho máximo, quantidade, duração (vídeos/áudios)
 - **Habilitação por tipo**: Imagens, Vídeos, Áudios podem ser habilitados/desabilitados por território
+- **Tipos MIME permitidos**: Override opcional dos tipos MIME permitidos por tipo de mídia (imagem, vídeo, áudio)
+- **Validação contra limites globais**: Limites territoriais não podem exceder valores globais (`MediaStorageOptions`)
+- **Fallback automático**: Quando limites territoriais não estão configurados, usa valores globais automaticamente
+
+**Exemplo de configuração (Posts)**:
+- `ImagesEnabled`: true/false
+- `VideosEnabled`: true/false
+- `AudioEnabled`: true/false
+- `MaxMediaCount`: Quantidade máxima de mídias no total
+- `MaxVideoCount`: Quantidade máxima de vídeos (padrão: 1)
+- `MaxAudioCount`: Quantidade máxima de áudios (padrão: 1)
+- `MaxImageSizeBytes`: Tamanho máximo de imagens (não pode exceder limite global)
+- `MaxVideoSizeBytes`: Tamanho máximo de vídeos (não pode exceder limite global)
+- `MaxAudioSizeBytes`: Tamanho máximo de áudios (não pode exceder limite global)
+- `AllowedImageMimeTypes`: Lista opcional de tipos MIME permitidos para imagens (ex: `["image/jpeg", "image/png"]`)
+- `AllowedVideoMimeTypes`: Lista opcional de tipos MIME permitidos para vídeos (ex: `["video/mp4"]`)
+- `AllowedAudioMimeTypes`: Lista opcional de tipos MIME permitidos para áudios (ex: `["audio/mpeg", "audio/wav"]`)
+
+**Validações**:
+- Limites territoriais são validados contra valores globais (não podem exceder)
+- Tipos MIME configurados são validados durante criação de conteúdo
+- Se tipos MIME não estiverem configurados, usa tipos MIME globais como fallback
 
 **Preferências do Usuário**:
 - `GET /api/v1/user/media-preferences` - Obter preferências
