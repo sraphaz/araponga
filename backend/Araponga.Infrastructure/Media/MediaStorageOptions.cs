@@ -26,6 +26,11 @@ public sealed class MediaStorageOptions
     public long MaxVideoSizeBytes { get; set; } = 50 * 1024 * 1024; // 50MB
 
     /// <summary>
+    /// Tamanho máximo para áudios em bytes (padrão: 20MB).
+    /// </summary>
+    public long MaxAudioSizeBytes { get; set; } = 20 * 1024 * 1024; // 20MB
+
+    /// <summary>
     /// Largura máxima para imagens em pixels (padrão: 4000px).
     /// </summary>
     public int MaxImageWidthPx { get; set; } = 4000;
@@ -61,6 +66,19 @@ public sealed class MediaStorageOptions
     public IReadOnlySet<string> AllowedVideoMimeTypes { get; set; } = new HashSet<string>
     {
         "video/mp4"
+    };
+
+    /// <summary>
+    /// Tipos MIME permitidos para áudios.
+    /// </summary>
+    public IReadOnlySet<string> AllowedAudioMimeTypes { get; set; } = new HashSet<string>
+    {
+        "audio/mpeg",      // MP3
+        "audio/mp3",       // MP3 (alternativo)
+        "audio/wav",       // WAV
+        "audio/x-wav",     // WAV (alternativo)
+        "audio/ogg",       // OGG
+        "audio/vorbis"     // OGG Vorbis
     };
 
     // S3 Configuration

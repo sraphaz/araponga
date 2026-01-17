@@ -1,0 +1,58 @@
+# Suporte a Vídeos em Mídias - Fase 10
+
+## 🎯 Objetivo
+
+Expandir a Fase 10 (Mídias em Conteúdo) com suporte completo a vídeos em Posts, Eventos e Marketplace, mantendo restrição de apenas imagens no Chat.
+
+## ✨ Funcionalidades
+
+### Posts
+- Máximo 1 vídeo por post (pode combinar com imagens até 10 mídias)
+- Limite: 50MB, 60 segundos (similar a TikTok/Instagram Reels)
+- Formatos: MP4
+
+### Eventos
+- Máximo 1 vídeo por evento (em capa ou adicionais)
+- Limite: 100MB, 120 segundos
+- Formatos: MP4
+
+### Marketplace (Items)
+- Máximo 1 vídeo por item (pode combinar com imagens até 10 mídias)
+- Limite: 30MB, 30 segundos (demonstração rápida de produto)
+- Formatos: MP4
+
+### Chat
+- Vídeos **não permitidos** (apenas imagens)
+- Razão: Performance e privacidade
+
+## 🔒 Segurança
+
+- ✅ Validação de propriedade (vídeos devem pertencer ao usuário)
+- ✅ Validação de quantidade (máx. 1 vídeo por post/evento/item)
+- ✅ Validação de tamanho (limites específicos por tipo)
+- ✅ Validação de tipo (Chat bloqueia vídeos)
+- ✅ Validação de estado (vídeos deletados não podem ser usados)
+
+## 🧪 Testes
+
+13 testes de integração implementados cobrindo:
+- Validação de quantidade de vídeos
+- Validação de tamanho de vídeos
+- Combinação vídeo + imagens
+- Bloqueio de vídeos no chat
+- Validações de segurança (propriedade, estado)
+
+## 📝 Documentação
+
+- ✅ DevPortal atualizado com informações sobre vídeos
+- ✅ FASE10.md atualizado com regras de vídeos
+- ✅ Documentos técnicos criados (mapa de impacto, implementação)
+
+## ⚠️ Limitações Conhecidas
+
+- Validação de duração ainda não implementada (requer metadados de vídeo)
+- Processamento de vídeo (transcoding, thumbnails) planejado para futuro
+
+---
+
+**Status**: ✅ Pronto para review

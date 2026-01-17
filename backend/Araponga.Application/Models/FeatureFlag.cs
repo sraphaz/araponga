@@ -12,5 +12,12 @@ public enum FeatureFlag
     ChatTerritoryResidentsChannel = 6,
     ChatGroups = 7,
     ChatDmEnabled = 8,
-    ChatMediaEnabled = 9
+    ChatMediaEnabled = 9,
+
+    // Media module (territory-scoped)
+    MediaImagesEnabled = 10,
+    MediaVideosEnabled = 11,
+    MediaAudioEnabled = 12,
+    ChatMediaImagesEnabled = 13,
+    ChatMediaAudioEnabled = 14
 }

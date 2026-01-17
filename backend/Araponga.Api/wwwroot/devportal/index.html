@@ -651,14 +651,15 @@ sequenceDiagram
     "mediaIds": ["bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", "cccccccc-cccc-cccc-cccc-cccccccccccc"]
   }'</code></pre>
           <div style="margin-top: 1rem; padding: 1rem; background: #1a2a3a; border-radius: 0.5rem;">
-            <strong>📸🎥 Mídias em Posts (Imagens e Vídeos):</strong>
+            <strong>📸🎥🎵 Mídias em Posts (Imagens, Vídeos e Áudios):</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP e vídeos MP4)</li>
-              <li><strong>Associar ao post</strong>: Inclua os <code>mediaIds</code> no array ao criar o post (máximo 10 mídias: imagens e/ou vídeos)</li>
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Associar ao post</strong>: Inclua os <code>mediaIds</code> no array ao criar o post (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
               <li><strong>Vídeos</strong>: Máximo 1 vídeo por post, até 50MB, até 60 segundos (similar a TikTok/Instagram Reels). Formatos suportados: MP4</li>
-              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens e vídeos). Formatos suportados: JPEG, PNG, WebP</li>
-              <li><strong>Resposta</strong>: O <code>FeedItemResponse</code> inclui <code>mediaUrls</code> (array de URLs de imagens e vídeos) e <code>mediaCount</code></li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o post. Vídeos maiores que 50MB ou mais de 1 vídeo por post retornam erro</li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por post, até 10MB, até 5 minutos (podcasts curtos, narrações). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Resposta</strong>: O <code>FeedItemResponse</code> inclui <code>mediaUrls</code> (array de URLs de imagens, vídeos e áudios) e <code>mediaCount</code></li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o post. Vídeos maiores que 50MB, áudios maiores que 10MB, mais de 1 vídeo ou mais de 1 áudio por post retornam erro</li>
             </ul>
           </div>
           <details class="sequence-diagram-toggle">
@@ -964,12 +965,13 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
           <div style="margin-top: 1rem; padding: 1rem; background: #1a2a3a; border-radius: 0.5rem;">
             <strong>💬 Mídias em Chat:</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Use <code>POST /api/v1/media/upload</code> para fazer upload da imagem (aceita apenas imagens JPEG/PNG/WebP, não aceita vídeos)</li>
+              <li><strong>Upload de mídia</strong>: Use <code>POST /api/v1/media/upload</code> para fazer upload da imagem ou áudio (aceita imagens JPEG/PNG/WebP e áudios MP3/WAV/OGG, não aceita vídeos)</li>
               <li><strong>Enviar mensagem</strong>: Inclua o <code>mediaId</code> no campo opcional ao enviar mensagem</li>
-              <li><strong>Limite</strong>: 1 imagem por mensagem, máximo 5MB, apenas imagens (vídeos não permitidos por questões de performance e privacidade)</li>
-              <li><strong>Formatos suportados</strong>: JPEG, PNG, WebP (apenas imagens, vídeos retornam erro "Only images are allowed in chat messages")</li>
+              <li><strong>Imagens</strong>: 1 imagem por mensagem, máximo 5MB. Formatos: JPEG, PNG, WebP</li>
+              <li><strong>Áudios</strong>: 1 áudio por mensagem (mensagens de voz), máximo 2MB, até 60 segundos. Formatos: MP3, WAV, OGG</li>
+              <li><strong>Vídeos</strong>: Não permitidos (apenas imagens e áudios permitidos por questões de performance e privacidade)</li>
               <li><strong>Resposta</strong>: O <code>MessageResponse</code> inclui <code>mediaUrl</code> e <code>hasMedia</code></li>
-              <li><strong>Validação</strong>: A mídia deve pertencer ao usuário que está enviando a mensagem</li>
+              <li><strong>Validação</strong>: A mídia deve pertencer ao usuário que está enviando a mensagem. Vídeos retornam erro "Only images and audio are allowed in chat messages"</li>
             </ul>
           </div>
         </div>
@@ -1076,15 +1078,16 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
     "mediaIds": ["dddddddd-dddd-dddd-dddd-dddddddddddd", "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"]
   }'</code></pre>
           <div style="margin-top: 1rem; padding: 1rem; background: #1a2a3a; border-radius: 0.5rem;">
-            <strong>📸🎥 Mídias em Items (Imagens e Vídeos):</strong>
+            <strong>📸🎥🎵 Mídias em Items (Imagens, Vídeos e Áudios):</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP e vídeos MP4)</li>
-              <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 mídias: imagens e/ou vídeos)</li>
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
               <li><strong>Vídeos</strong>: Máximo 1 vídeo por item, até 30MB, até 30 segundos (demonstração rápida de produto). Formatos suportados: MP4</li>
-              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens e vídeos). Formatos suportados: JPEG, PNG, WebP</li>
-              <li><strong>Imagem principal</strong>: A primeira mídia do array é usada como <code>primaryImageUrl</code> (se for vídeo, a URL do vídeo é retornada)</li>
-              <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as mídias: imagens e vídeos)</li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o item</li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por item, até 5MB, até 2 minutos (descrição de produto, demonstração de serviço). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Imagem principal</strong>: A primeira mídia do array é usada como <code>primaryImageUrl</code> (se for vídeo ou áudio, a URL é retornada)</li>
+              <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as mídias: imagens, vídeos e áudios)</li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o item. Vídeos maiores que 30MB, áudios maiores que 5MB, mais de 1 vídeo ou mais de 1 áudio por item retornam erro</li>
             </ul>
           </div>
         </div>
@@ -1434,15 +1437,16 @@ curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/
     "additionalMediaIds": ["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"]
   }'</code></pre>
           <div style="margin-top: 1rem; padding: 1rem; background: #1a2a3a; border-radius: 0.5rem;">
-            <strong>📸🎥 Mídias em Eventos (Imagens e Vídeos):</strong>
+            <strong>📸🎥🎵 Mídias em Eventos (Imagens, Vídeos e Áudios):</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP e vídeos MP4)</li>
-              <li><strong>Mídia de capa</strong>: Use <code>coverMediaId</code> para definir a mídia principal do evento (imagem ou vídeo, opcional). Formatos: JPEG, PNG, WebP (imagens) ou MP4 (vídeos)</li>
-              <li><strong>Mídias adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 5 mídias adicionais (imagens ou vídeos). Formatos: JPEG, PNG, WebP (imagens) ou MP4 (vídeos)</li>
+              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+              <li><strong>Mídia de capa</strong>: Use <code>coverMediaId</code> para definir a mídia principal do evento (imagem, vídeo ou áudio, opcional). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
+              <li><strong>Mídias adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 5 mídias adicionais (imagens, vídeos ou áudios). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
               <li><strong>Vídeos</strong>: Máximo 1 vídeo por evento (em capa ou adicionais), até 100MB, até 2 minutos. Formatos suportados: MP4</li>
-              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 6 mídias no total: 1 capa + 5 adicionais, combinando imagens e vídeos). Formatos suportados: JPEG, PNG, WebP</li>
-              <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code> (pode conter URLs de vídeos)</li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário e <code>coverMediaId</code> não pode estar em <code>additionalMediaIds</code></li>
+              <li><strong>Áudios</strong>: Máximo 1 áudio por evento (em capa ou adicionais), até 20MB, até 10 minutos (promoção de eventos, trilhas sonoras). Formatos suportados: MP3, WAV, OGG</li>
+              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 6 mídias no total: 1 capa + 5 adicionais, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+              <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code> (pode conter URLs de vídeos e áudios)</li>
+              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário e <code>coverMediaId</code> não pode estar em <code>additionalMediaIds</code>. Vídeos maiores que 100MB, áudios maiores que 20MB, mais de 1 vídeo ou mais de 1 áudio por evento retornam erro</li>
             </ul>
           </div>
         </div>
@@ -1752,16 +1756,37 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
               <li><strong>Validação de exclusão</strong>: Mídias deletadas não podem ser associadas a conteúdo</li>
               <li><strong>Validação de duplicatas</strong>: IDs duplicados são rejeitados no mesmo request</li>
               <li><strong>Validação de GUIDs vazios</strong>: GUIDs vazios são filtrados e rejeitados</li>
-              <li><strong>Limites de quantidade</strong>: Posts e Items (máx. 10 mídias: imagens e/ou vídeos), Eventos (1 capa + 5 adicionais), Chat (1 imagem por mensagem)</li>
+              <li><strong>Limites de quantidade</strong>: Posts e Items (máx. 10 mídias: imagens, vídeos e/ou áudios), Eventos (1 capa + 5 adicionais), Chat (1 mídia por mensagem: imagem ou áudio)</li>
               <li><strong>Limites de vídeos</strong>: Posts (1 vídeo, 50MB, 60s), Eventos (1 vídeo, 100MB, 120s), Items (1 vídeo, 30MB, 30s), Chat (vídeos não permitidos)</li>
-              <li><strong>Validação de tipo</strong>: Chat aceita apenas imagens (vídeos não permitidos). Posts, Eventos e Items aceitam imagens e vídeos</li>
+              <li><strong>Limites de áudios</strong>: Posts (1 áudio, 10MB, 5min), Eventos (1 áudio, 20MB, 10min), Items (1 áudio, 5MB, 2min), Chat (1 áudio, 2MB, 60s - mensagens de voz)</li>
+              <li><strong>Validação de tipo</strong>: Chat aceita imagens e áudios (vídeos não permitidos). Posts, Eventos e Items aceitam imagens, vídeos e áudios</li>
               <li><strong>Validação de quantidade de vídeos</strong>: Máximo 1 vídeo por post/evento/item</li>
-              <li><strong>Validação de tamanho</strong>: Posts (50MB), Eventos (100MB), Items (30MB), Chat (5MB apenas imagens)</li>
-              <li><strong>Validação de duração</strong>: Posts (60s), Eventos (120s), Items (30s) - validação futura via metadados de vídeo</li>
-              <li><strong>Referências de redes sociais</strong>: Limites baseados em TikTok/Instagram (Posts 60s similar a Reels), eventos flexíveis (120s), produtos curtos (Items 30s similar a stories)</li>
+              <li><strong>Validação de quantidade de áudios</strong>: Máximo 1 áudio por post/evento/item</li>
+              <li><strong>Validação de tamanho</strong>: Posts (50MB vídeo, 10MB áudio), Eventos (100MB vídeo, 20MB áudio), Items (30MB vídeo, 5MB áudio), Chat (5MB apenas imagens)</li>
+              <li><strong>Validação de duração</strong>: Posts (60s vídeo, 5min áudio), Eventos (120s vídeo, 10min áudio), Items (30s vídeo, 2min áudio) - validação futura via metadados</li>
+              <li><strong>Formatos de áudio</strong>: MP3, WAV, OGG (validação em MediaValidator)</li>
+              <li><strong>Referências de redes sociais</strong>: Limites baseados em TikTok/Instagram (Posts 60s similar a Reels), eventos flexíveis (120s), produtos curtos (Items 30s similar a stories), Twitter/X (140s para áudio)</li>
               <li><strong>Validação de overlap</strong>: CoverMediaId não pode estar em AdditionalMediaIds</li>
               <li><strong>Validação de existência</strong>: Todas as mídias devem existir no sistema antes de serem associadas</li>
             </ul>
+          </div>
+          <div class="card">
+            <h3>⚙️ Configuração Avançada de Mídias por Território</h3>
+            <p style="margin-top: 0.5rem;">Cada território pode configurar quais tipos de mídia estão disponíveis e quais limites aplicar:</p>
+            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+              <li><strong>Feature Flags</strong>: Habilita/desabilita tipos de mídia por território (MediaImagesEnabled, MediaVideosEnabled, MediaAudioEnabled, ChatMediaImagesEnabled, ChatMediaAudioEnabled)</li>
+              <li><strong>Configuração por Conteúdo</strong>: Limites específicos para Posts, Eventos, Marketplace e Chat (quantidade, tamanho, duração)</li>
+              <li><strong>Preferências do Usuário</strong>: Usuários podem escolher quais tipos de mídia visualizar (ShowImages, ShowVideos, ShowAudio, AutoPlayVideos, AutoPlayAudio)</li>
+              <li><strong>Hierarquia de Configuração</strong>: Feature Flags (nível mais alto) → TerritoryMediaConfig → UserMediaPreferences (apenas visualização)</li>
+              <li><strong>Valores Padrão</strong>: Se um território não tiver configuração, valores padrão são aplicados (10 mídias posts, 1 vídeo 50MB, 1 áudio 10MB, etc.)</li>
+              <li><strong>Endpoints (Curators)</strong>: <code>GET /api/v1/territories/{territoryId}/media-config</code> (obter), <code>PUT /api/v1/territories/{territoryId}/media-config</code> (atualizar)</li>
+              <li><strong>Endpoints (Usuários)</strong>: <code>GET /api/v1/user/media-preferences</code> (obter), <code>PUT /api/v1/user/media-preferences</code> (atualizar)</li>
+              <li><strong>Segurança</strong>: Configuração de território requer Curator, preferências de usuário são pessoais</li>
+              <li><strong>Filtragem</strong>: Respostas de API filtram mídias baseado em feature flags, configuração do território e preferências do usuário</li>
+            </ul>
+            <p style="margin-top: 1rem; font-style: italic; color: #888;">
+              📝 <strong>Nota</strong>: A configuração avançada de mídias está em implementação. Consulte <code>FASE10_CONFIG_MIDIAS_TERRITORIO.md</code> para detalhes completos.
+            </p>
           </div>
         </div>
       </section>

@@ -383,15 +383,28 @@ public sealed class ChatService
             }
 
             // Validar tipo: apenas imagens em chat
-            if (mediaAsset.MediaType != MediaType.Image)
+            // Validar tipo: apenas imagens e áudios em chat (vídeos não permitidos)
+            if (mediaAsset.MediaType != MediaType.Image && mediaAsset.MediaType != MediaType.Audio)
             {
-                return OperationResult<ChatMessage>.Failure("Only images are allowed in chat messages.");
+                return OperationResult<ChatMessage>.Failure("Only images and audio are allowed in chat messages.");
             }
 
-            // Validar tamanho: máximo 5MB
-            if (mediaAsset.SizeBytes > 5 * 1024 * 1024)
+            // Validar tamanho: máximo 5MB para imagens, máximo 2MB para áudios
+            if (mediaAsset.MediaType == MediaType.Image)
             {
-                return OperationResult<ChatMessage>.Failure("Image size exceeds 5MB limit for chat.");
+                if (mediaAsset.SizeBytes > 5 * 1024 * 1024) // 5MB
+                {
+                    return OperationResult<ChatMessage>.Failure("Image size exceeds 5MB limit for chat.");
+                }
+            }
+            else if (mediaAsset.MediaType == MediaType.Audio)
+            {
+                // Áudios curtos (mensagens de voz): máximo 2MB, até 60 segundos (validação de duração futura)
+                const long maxAudioSizeBytes = 2 * 1024 * 1024; // 2MB
+                if (mediaAsset.SizeBytes > maxAudioSizeBytes)
+                {
+                    return OperationResult<ChatMessage>.Failure("Audio size exceeds 2MB limit for chat.");
+                }
             }
         }
 

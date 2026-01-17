@@ -351,4 +351,6 @@ public sealed class InMemoryDataStore
     // Media
     public List<MediaAsset> MediaAssets { get; } = new();
     public List<MediaAttachment> MediaAttachments { get; } = new();
-    }
+    public List<TerritoryMediaConfig> TerritoryMediaConfigs { get; } = new();
+    public List<UserMediaPreferences> UserMediaPreferences { get; } = new();
+}

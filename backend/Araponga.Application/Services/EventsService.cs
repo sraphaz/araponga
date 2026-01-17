@@ -141,6 +141,24 @@ public sealed class EventsService
                     return Result<EventSummary>.Failure("Video size exceeds 100MB limit for events.");
                 }
             }
+
+            // Validar que há no máximo 1 áudio por evento (em capa ou adicionais)
+            var audioCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Audio);
+            if (audioCount > 1)
+            {
+                return Result<EventSummary>.Failure("Only one audio is allowed per event (either as cover or additional media).");
+            }
+
+            // Validar tamanho de áudio (máximo 20MB, duração será validada no futuro)
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+            foreach (var audio in audios)
+            {
+                const long maxAudioSizeBytes = 20 * 1024 * 1024; // 20MB
+                if (audio.SizeBytes > maxAudioSizeBytes)
+                {
+                    return Result<EventSummary>.Failure("Audio size exceeds 20MB limit for events.");
+                }
+            }
         }
 
         var isResident = await _accessEvaluator.IsResidentAsync(userId, territoryId, cancellationToken);

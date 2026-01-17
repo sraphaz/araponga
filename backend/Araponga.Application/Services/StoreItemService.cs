@@ -127,6 +127,24 @@ public sealed class StoreItemService
                     return Result<StoreItem>.Failure("Video size exceeds 30MB limit for marketplace items.");
                 }
             }
+
+            // Validar que há no máximo 1 áudio por item
+            var audioCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Audio);
+            if (audioCount > 1)
+            {
+                return Result<StoreItem>.Failure("Only one audio is allowed per item.");
+            }
+
+            // Validar tamanho de áudio (máximo 5MB, duração será validada no futuro)
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+            foreach (var audio in audios)
+            {
+                const long maxAudioSizeBytes = 5 * 1024 * 1024; // 5MB
+                if (audio.SizeBytes > maxAudioSizeBytes)
+                {
+                    return Result<StoreItem>.Failure("Audio size exceeds 5MB limit for marketplace items.");
+                }
+            }
         }
 
         var now = DateTime.UtcNow;

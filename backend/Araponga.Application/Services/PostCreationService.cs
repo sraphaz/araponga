@@ -161,6 +161,24 @@ public sealed class PostCreationService
                     return Result<CommunityPost>.Failure("Video size exceeds 50MB limit for posts.");
                 }
             }
+
+            // Validar que há no máximo 1 áudio por post
+            var audioCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Audio);
+            if (audioCount > 1)
+            {
+                return Result<CommunityPost>.Failure("Only one audio is allowed per post.");
+            }
+
+            // Validar tamanho de áudio (máximo 10MB, duração será validada no futuro)
+            var audios = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Audio).ToList();
+            foreach (var audio in audios)
+            {
+                const long maxAudioSizeBytes = 10 * 1024 * 1024; // 10MB
+                if (audio.SizeBytes > maxAudioSizeBytes)
+                {
+                    return Result<CommunityPost>.Failure("Audio size exceeds 10MB limit for posts.");
+                }
+            }
         }
 
         var post = new CommunityPost(
