@@ -51,7 +51,7 @@
   --radius-full: 9999px;
   
   --max-width: 1280px;
-  --content-max: 920px;
+  --content-max: 1200px;
   --nav-width: 280px;
   
   /* Breakpoints para telas grandes */
@@ -86,22 +86,21 @@ body {
   position: relative;
 }
 
-/* Marca d'água sutil do Araponga */
+/* Marca d'água sutil do Araponga - replicada ao longo da página */
 body::before {
   content: '';
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(400px, 50vw, 600px);
-  height: clamp(400px, 50vw, 600px);
-  max-width: 90vw;
-  max-height: 90vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("../images/Logo_2_watermark.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0.02; /* Muito sutil, quase imperceptível */
+  background-repeat: repeat; /* Replicar até o fim da página */
+  background-position: 0 0;
+  background-size: auto; /* Usar resolução original da imagem */
+  opacity: 0.015; /* Quase imperceptível */
   pointer-events: none;
   z-index: 0;
   mix-blend-mode: soft-light;
@@ -405,22 +404,22 @@ main {
 /* Aumentar amplitude em telas maiores mantendo limite claro */
 @media (min-width: 1366px) {
   :root {
-    --max-width: 1600px;
-    --content-max: 1200px;
+    --max-width: 1800px;
+    --content-max: 1600px;
   }
 }
 
 @media (min-width: 1920px) {
   :root {
-    --max-width: 1800px;
-    --content-max: 1400px;
+    --max-width: 2200px;
+    --content-max: 2000px;
   }
 }
 
 @media (min-width: 2560px) {
   :root {
-    --max-width: 2400px;
-    --content-max: 2000px;
+    --max-width: 2800px;
+    --content-max: 2600px;
   }
 }
 
@@ -576,17 +575,6 @@ main {
   letter-spacing: normal;
 }
 
-@media (min-width: 768px) {
-  .section p {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em;
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 .section .eyebrow {
   color: var(--accent);
@@ -713,35 +701,6 @@ main {
   margin-bottom: 0; /* Último parágrafo sem margin-bottom */
 }
 
-/* Justificar apenas parágrafos longos em telas maiores */
-@media (min-width: 768px) {
-  .card p {
-    /* Apenas justificar se o parágrafo tiver mais de 2 linhas prováveis */
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em; /* Espaçamento sutil entre palavras */
-    letter-spacing: 0.01em; /* Espaçamento sutil entre letras */
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-  
-  /* Não justificar parágrafos muito curtos mesmo em telas maiores */
-  .card p:only-child,
-  .card p[style*="margin: 1rem"],
-  .card p[style*="margin-top: 1rem"] {
-    text-align: left;
-    word-spacing: normal;
-  }
-}
-
-/* Em telas muito grandes, usar justify mais conservador */
-@media (min-width: 1600px) {
-  .card p {
-    word-spacing: 0.03em;
-    letter-spacing: 0.015em;
-  }
-}
 
 .card ul {
   margin: 0.75rem 0 0;
@@ -797,17 +756,6 @@ main {
   letter-spacing: normal;
 }
 
-@media (min-width: 768px) {
-  .entity-list dd {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em;
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 /* Rationale list */
 .rationale-list {
@@ -878,17 +826,6 @@ main {
   margin: 0;
 }
 
-@media (min-width: 768px) {
-  .callout {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em;
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 .callout strong {
   color: var(--text);
@@ -918,17 +855,6 @@ main {
   text-align: left;
 }
 
-@media (min-width: 768px) {
-  .card-intro {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em;
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 .card-list {
   padding-left: clamp(1rem, 2vw, 1.25rem);
@@ -1019,17 +945,6 @@ main {
   letter-spacing: normal;
 }
 
-@media (min-width: 768px) {
-  .lead-text {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.025em; /* Espaçamento sutil mas perceptível */
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 .lead-text.space-bottom {
   margin-bottom: 2rem;
@@ -1201,17 +1116,6 @@ pre code {
   letter-spacing: normal;
 }
 
-@media (min-width: 768px) {
-  .flow-step p {
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.02em;
-    letter-spacing: 0.01em;
-    hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-  }
-}
 
 /* Notice */
 .notice {
@@ -1478,15 +1382,6 @@ pre code {
   }
 }
 
-/* Ajustes de justificação em telas médias e grandes */
-@media (min-width: 768px) {
-  .card p,
-  .lead-text,
-  .section p,
-  .callout {
-    text-align: justify;
-  }
-}
 
 /* Ajustes finos para telas grandes - melhor aproveitamento de espaço */
 @media (min-width: 1366px) {
@@ -1829,19 +1724,27 @@ pre code {
   max-width: none;
 }
 
-/* Diagramas SVG com cores customizadas aplicadas durante geração */
+/* Diagramas SVG - aplicar filtros para tema escuro com cores azul e verde água */
 .sequence-diagram-container img.mermaid-diagram {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 1rem auto;
   border-radius: var(--radius-sm);
-  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
+  /* Ajustar cores: inverter apenas o necessário, manter linhas azuis (#7dd3ff) e verde água (#4dd4a8) */
+  filter: brightness(1.8) contrast(1.6) saturate(1.8) hue-rotate(-10deg);
+  transition: filter 0.3s ease;
+}
+
+.sequence-diagram-container img.mermaid-diagram:hover {
+  filter: brightness(2) contrast(1.8) saturate(2) hue-rotate(-10deg);
 }
 
 /* Para o modal também aplicar os mesmos filtros */
 .diagram-modal-content img.mermaid-diagram {
-  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
+  max-width: 100%;
+  height: auto;
+  filter: brightness(1.8) contrast(1.6) saturate(1.8) hue-rotate(-10deg);
 }
 
 /* Ajustar cores específicas via CSS (quando SVG é inline) */
