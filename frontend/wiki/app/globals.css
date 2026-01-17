@@ -1291,6 +1291,29 @@
   @apply border-t border-forest-200/80 dark:border-forest-800/80;
 }
 
+/* API Domain Diagram - Visual explicativo */
+.api-domain-diagram-container {
+  @apply my-16;
+}
+
+.api-domain-diagram-container .glass-card {
+  @apply shadow-xl;
+  background: linear-gradient(135deg, rgba(241, 248, 244, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+}
+
+:root.dark .api-domain-diagram-container .glass-card {
+  background: linear-gradient(135deg, rgba(10, 14, 18, 0.95) 0%, rgba(20, 26, 33, 0.98) 100%);
+}
+
+.api-domain-diagram-container img {
+  @apply w-full h-auto;
+  transition: transform 0.5s ease;
+}
+
+.api-domain-diagram-container:hover img {
+  transform: scale(1.01);
+}
+
 /* Mobile Responsive - Sidebar */
 @media (max-width: 1023px) {
   .sidebar-container {

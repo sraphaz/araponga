@@ -9,6 +9,7 @@ import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { FeatureCard } from "../components/ui/FeatureCard";
 import { QuickLinks } from "../components/layout/QuickLinks";
+import { ApiDomainDiagram } from "../components/content/ApiDomainDiagram";
 
 function processMarkdownLinks(html: string, basePath: string = '/wiki'): string {
   // Processa links <a href="/docs/..."> para <a href="/wiki/docs/...">
@@ -94,6 +95,9 @@ export default async function HomePage() {
                 className="markdown-content prose-headings:first:mt-0"
                 dangerouslySetInnerHTML={{ __html: onboardingDoc.content }}
               />
+
+              {/* Diagrama do Domínio API - Visual Explicativo */}
+              <ApiDomainDiagram />
             </div>
           </div>
         )}
