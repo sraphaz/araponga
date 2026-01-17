@@ -552,6 +552,36 @@
         </div>
 
         <div class="flow-step">
+          <h4>5a. Criar evento comunitário</h4>
+          <p>
+            Eventos são criados via <code>POST /api/v1/events</code> com data/hora e geolocalização obrigatória.
+            Eventos aparecem automaticamente no feed e no mapa. Usuários podem marcar interesse ou confirmação.
+          </p>
+          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/events \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -H "X-Session-Id: session-123" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111",
+    "title": "Mutirão de limpeza",
+    "description": "Encontro sábado 9h",
+    "startsAtUtc": "2025-01-25T09:00:00Z",
+    "latitude": -23.55,
+    "longitude": -46.63,
+    "locationLabel": "Praça Central"
+  }'</code></pre>
+          <details class="sequence-diagram-toggle">
+            <summary class="sequence-diagram-summary">
+              <span>📊 Ver Diagrama de Sequência</span>
+            </summary>
+            <div class="sequence-diagram-container">
+              <img src="./assets/images/diagrams/events-creation.svg" alt="Diagrama de sequência: Eventos - Criação e confirmação" class="mermaid-diagram" data-diagram="events-creation" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
+              <button class="diagram-fullscreen-btn" onclick="openDiagramFullscreen(this.previousElementSibling)" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
+            </div>
+          </details>
+        </div>
+
+        <div class="flow-step">
           <h4>6. Assets territoriais (com geolocalização obrigatória)</h4>
           <p>
             Assets sempre possuem ao menos uma âncora geográfica e são exibidos no mapa via pins do tipo
@@ -1441,7 +1471,7 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
                   <li>Acesso a filas de trabalho globais (WorkItems)</li>
                   <li>Download de evidências para auditoria e compliance</li>
                   <li>Monitoramento de operações críticas</li>
-                </ul>
+            </ul>
                 <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9em;">
                   <strong>Autorização:</strong> Acesso via <code>SystemPermission</code> do tipo <code>SystemAdmin</code>.
                   SystemAdmin possui implicitamente todas as capabilities em todos os territórios.
