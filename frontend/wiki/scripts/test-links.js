@@ -3,8 +3,8 @@
  * Verifica se todos os links funcionam na URL real da wiki
  */
 
-const https = require('https');
-const { URL } = require('url');
+import https from 'https';
+import { URL } from 'url';
 
 const BASE_URL = process.env.WIKI_URL || 'https://devportal.araponga.app/wiki';
 const TIMEOUT = 10000;

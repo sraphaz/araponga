@@ -41,7 +41,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['var(--font-sora)', 'system-ui', 'sans-serif']
+        sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
       }
     }
   },
