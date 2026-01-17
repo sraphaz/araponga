@@ -115,7 +115,23 @@ function Copy-DocumentToWiki {
 Write-Host "`n📋 Criando estrutura organizada..." -ForegroundColor Yellow
 
 # 1. Home.md - Página Principal
-$homeContent = @"
+# Usar o conteúdo elevado e consciente do WIKI_HOME.md se existir
+$wikiHomeFile = Join-Path $DOCS_ROOT "WIKI_HOME.md"
+if (Test-Path $wikiHomeFile) {
+    Write-Host "  📖 Usando WIKI_HOME.md com conteúdo elevado..." -ForegroundColor Cyan
+    $homeContent = Get-Content $wikiHomeFile -Raw -Encoding UTF8
+    # Ajustar links para estrutura da Wiki
+    $homeContent = $homeContent -replace '\.\./docs/', ''
+    $homeContent = $homeContent -replace 'docs/', ''
+    $homeContent = $homeContent -replace 'https://github.com/sraphaz/araponga/blob/main/docs/([^.]+)\.md', '[$1]($1)'
+    $homeContent = $homeContent -replace 'ONBOARDING_PUBLICO', 'Onboarding-Público'
+    $homeContent = $homeContent -replace 'ONBOARDING_DEVELOPERS', 'Onboarding-Desenvolvedores'
+    $homeContent = $homeContent -replace 'ONBOARDING_ANALISTAS_FUNCIONAIS', 'Onboarding-Analistas-Funcionais'
+    $homeContent = $homeContent -replace 'CARTILHA_COMPLETA', 'Cartilha-Completa'
+    $homeContent = $homeContent -replace 'DISCORD_SETUP', 'Discord-Setup'
+} else {
+    # Fallback para conteúdo padrão
+    $homeContent = @"
 # 🦜 Araponga - Documentação Completa
 
 **Status Atual**: 9.3/10 | **Fases Completas**: 1-8 ✅  
@@ -129,6 +145,12 @@ $homeContent = @"
 - **[📊 Status do Projeto](Status-do-Projeto)** - Visão geral do estado atual
 - **[🎯 Backlog API](Backlog-API)** - Plano completo de 29 fases
 - **[📚 Índice Completo](00-Índice)** - Todos os documentos organizados
+
+---
+
+## 🌱 Para Conhecer o Projeto
+
+**[🌟 Onboarding Público](Onboarding-Público)** - Sua porta de entrada para o Araponga
 
 ---
 
