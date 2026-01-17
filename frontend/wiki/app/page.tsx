@@ -39,12 +39,12 @@ export default async function HomePage() {
       <Header />
 
       {/* Main Content */}
-      <main className="flex-1 container-max py-12">
+      <main className="flex-1 container-max py-16 md:py-20">
         {onboardingDoc && (
           <div className="glass-card animation-fade-in">
             <div className="glass-card__content">
               {/* Document Title */}
-              <h1 className="text-5xl md:text-6xl font-bold text-forest-900 mb-8 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-10 leading-tight tracking-tight">
                 {onboardingDoc.title}
               </h1>
 
@@ -75,38 +75,38 @@ export default async function HomePage() {
           </div>
         )}
 
-        {/* Quick Navigation */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
+        {/* Quick Navigation - Enterprise design */}
+        <div className="mt-16 grid md:grid-cols-3 gap-6">
           <Link
             href="/docs/ONBOARDING_DEVELOPERS"
-            className="glass-card group hover:scale-105 transition-transform duration-300"
+            className="glass-card group transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
           >
             <div className="glass-card__content text-center">
-              <div className="text-4xl mb-4">👨‍💻</div>
-              <h3 className="text-xl font-bold text-forest-900 mb-2">Desenvolvedores</h3>
-              <p className="text-forest-600 text-sm">Comece a desenvolver com o Araponga</p>
+              <div className="text-5xl mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">👨‍💻</div>
+              <h3 className="text-xl md:text-2xl font-bold text-forest-900 dark:text-forest-50 mb-3 transition-colors">Desenvolvedores</h3>
+              <p className="text-forest-600 dark:text-forest-300 text-sm md:text-base leading-relaxed">Comece a desenvolver com o Araponga</p>
             </div>
           </Link>
 
           <Link
             href="/docs/ONBOARDING_ANALISTAS_FUNCIONAIS"
-            className="glass-card group hover:scale-105 transition-transform duration-300"
+            className="glass-card group transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
           >
             <div className="glass-card__content text-center">
-              <div className="text-4xl mb-4">👁️</div>
-              <h3 className="text-xl font-bold text-forest-900 mb-2">Analistas</h3>
-              <p className="text-forest-600 text-sm">Observe territórios e proponha melhorias</p>
+              <div className="text-5xl mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">👁️</div>
+              <h3 className="text-xl md:text-2xl font-bold text-forest-900 dark:text-forest-50 mb-3 transition-colors">Analistas</h3>
+              <p className="text-forest-600 dark:text-forest-300 text-sm md:text-base leading-relaxed">Observe territórios e proponha melhorias</p>
             </div>
           </Link>
 
           <Link
             href="/docs/00_INDEX"
-            className="glass-card group hover:scale-105 transition-transform duration-300"
+            className="glass-card group transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
           >
             <div className="glass-card__content text-center">
-              <div className="text-4xl mb-4">📚</div>
-              <h3 className="text-xl font-bold text-forest-900 mb-2">Índice Completo</h3>
-              <p className="text-forest-600 text-sm">Explore toda a documentação</p>
+              <div className="text-5xl mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">📚</div>
+              <h3 className="text-xl md:text-2xl font-bold text-forest-900 dark:text-forest-50 mb-3 transition-colors">Índice Completo</h3>
+              <p className="text-forest-600 dark:text-forest-300 text-sm md:text-base leading-relaxed">Explore toda a documentação</p>
             </div>
           </Link>
         </div>
