@@ -120,7 +120,11 @@ function fixSVGColors(svgContent) {
     return match.replace(/fill:#f4f4f4/, `fill:${COLORS.activationBg}`).replace(/stroke:#666/, `stroke:${COLORS.activationBorder}`);
   });
   
-  // 11. Adicionar estilos CSS customizados no final do <style>
+  // 11. Remover estilos antigos duplicados dos atores (se houver)
+  // Remove estilos antigos que usam #e8edf2 para textos dos atores
+  fixed = fixed.replace(/#mermaid-svg text\.actor > tspan[^{]*\{[^}]*fill:\s*#e8edf2[^}]*\}/gi, '');
+  
+  // 12. Adicionar estilos CSS customizados no final do <style>
   const styleEnd = fixed.indexOf('</style>');
   if (styleEnd > -1) {
     const customStyles = `
