@@ -109,6 +109,24 @@ public sealed class StoreItemService
             {
                 return Result<StoreItem>.Failure("One or more media assets are invalid or do not belong to the user.");
             }
+
+            // Validar que há no máximo 1 vídeo por item
+            var videoCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Video);
+            if (videoCount > 1)
+            {
+                return Result<StoreItem>.Failure("Only one video is allowed per item.");
+            }
+
+            // Validar tamanho de vídeo (máximo 30MB, duração será validada no futuro)
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            foreach (var video in videos)
+            {
+                const long maxVideoSizeBytes = 30 * 1024 * 1024; // 30MB
+                if (video.SizeBytes > maxVideoSizeBytes)
+                {
+                    return Result<StoreItem>.Failure("Video size exceeds 30MB limit for marketplace items.");
+                }
+            }
         }
 
         var now = DateTime.UtcNow;

@@ -123,6 +123,24 @@ public sealed class EventsService
             {
                 return Result<EventSummary>.Failure("One or more media assets are invalid or do not belong to the user.");
             }
+
+            // Validar que há no máximo 1 vídeo por evento (em capa ou adicionais)
+            var videoCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Video);
+            if (videoCount > 1)
+            {
+                return Result<EventSummary>.Failure("Only one video is allowed per event (either as cover or additional media).");
+            }
+
+            // Validar tamanho de vídeo (máximo 100MB, duração será validada no futuro)
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            foreach (var video in videos)
+            {
+                const long maxVideoSizeBytes = 100 * 1024 * 1024; // 100MB
+                if (video.SizeBytes > maxVideoSizeBytes)
+                {
+                    return Result<EventSummary>.Failure("Video size exceeds 100MB limit for events.");
+                }
+            }
         }
 
         var isResident = await _accessEvaluator.IsResidentAsync(userId, territoryId, cancellationToken);

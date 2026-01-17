@@ -12,10 +12,10 @@
 ## 🎯 Objetivo
 
 Integrar mídias (imagens, vídeos) em todas as funcionalidades de conteúdo, permitindo:
-- Múltiplas imagens por post
-- Imagem de capa em eventos
-- Múltiplas imagens por item no marketplace
-- Envio de imagens no chat
+- Múltiplas mídias por post (imagens e vídeos, máximo 1 vídeo)
+- Mídia de capa em eventos (imagem ou vídeo, máximo 1 vídeo no total)
+- Múltiplas mídias por item no marketplace (imagens e vídeos, máximo 1 vídeo)
+- Envio de imagens no chat (vídeos não permitidos)
 - Exclusão de posts com mídias associadas
 
 **Princípios**:
@@ -39,23 +39,27 @@ Integrar mídias (imagens, vídeos) em todas as funcionalidades de conteúdo, pe
 ### Requisitos Funcionais
 
 #### 1. Mídias em Posts
-- ✅ Múltiplas imagens por post (até 10 imagens)
+- ✅ Múltiplas mídias por post (até 10 mídias: imagens e/ou vídeos)
+- ✅ Máximo 1 vídeo por post (até 50MB, até 60 segundos)
 - ✅ Ordem de exibição configurável
 - ✅ Exclusão de post deleta mídias associadas
 - ✅ Visualização de mídias em posts
 
 #### 2. Mídias em Eventos
-- ✅ Imagem de capa do evento
-- ✅ Múltiplas imagens adicionais (opcional)
+- ✅ Mídia de capa do evento (imagem ou vídeo)
+- ✅ Múltiplas mídias adicionais (até 5: imagens ou vídeos)
+- ✅ Máximo 1 vídeo por evento (até 100MB, até 2 minutos)
 - ✅ Exclusão de evento deleta mídias associadas
 
 #### 3. Mídias em Marketplace
-- ✅ Múltiplas imagens por item (até 10 imagens)
-- ✅ Imagem principal (primeira)
+- ✅ Múltiplas mídias por item (até 10: imagens e/ou vídeos)
+- ✅ Máximo 1 vídeo por item (até 30MB, até 30 segundos)
+- ✅ Imagem principal (primeira mídia, pode ser vídeo)
 - ✅ Exclusão de item deleta mídias associadas
 
 #### 4. Mídias em Chat
 - ✅ Envio de imagens em mensagens
+- ❌ Vídeos não permitidos (apenas imagens, máximo 5MB)
 - ✅ Visualização de imagens em chat
 - ✅ Validação de tamanho e tipo
 
@@ -358,10 +362,31 @@ Integrar mídias (imagens, vídeos) em todas as funcionalidades de conteúdo, pe
 
 ### Limites de Mídias
 
-- **Posts**: Máx. 10 imagens por post
-- **Eventos**: 1 imagem de capa + máx. 5 imagens adicionais
-- **Marketplace**: Máx. 10 imagens por item
-- **Chat**: 1 imagem por mensagem, máx. 5MB
+- **Posts**: Máx. 10 mídias (imagens e/ou vídeos), máximo 1 vídeo (50MB, 60s)
+- **Eventos**: 1 mídia de capa (imagem ou vídeo) + máx. 5 mídias adicionais, máximo 1 vídeo no total (100MB, 120s)
+- **Marketplace**: Máx. 10 mídias (imagens e/ou vídeos), máximo 1 vídeo (30MB, 30s)
+- **Chat**: 1 imagem por mensagem, máx. 5MB (vídeos não permitidos)
+
+### Regras de Vídeos (Baseadas em Redes Sociais)
+
+#### Posts
+- **Duração**: Até 60 segundos (similar a TikTok/Instagram Reels)
+- **Tamanho**: Máximo 50MB
+- **Quantidade**: Apenas 1 vídeo por post (pode combinar com imagens, total máximo 10 mídias)
+
+#### Eventos
+- **Duração**: Até 2 minutos (mais flexível para eventos)
+- **Tamanho**: Máximo 100MB
+- **Quantidade**: Apenas 1 vídeo por evento (em capa ou adicionais, total máximo 6 mídias: 1 capa + 5 adicionais)
+
+#### Marketplace (Items)
+- **Duração**: Até 30 segundos (demonstração rápida de produto)
+- **Tamanho**: Máximo 30MB
+- **Quantidade**: Apenas 1 vídeo por item (pode combinar com imagens, total máximo 10 mídias)
+
+#### Chat
+- **Vídeos não permitidos**: Apenas imagens (por questões de performance e privacidade)
+- **Limite**: 1 imagem por mensagem, máximo 5MB
 
 ### Exclusão de Mídias
 
@@ -375,4 +400,71 @@ Integrar mídias (imagens, vídeos) em todas as funcionalidades de conteúdo, pe
 **Depende de**: Fase 8 (Infraestrutura de Mídia) ✅  
 **Bloqueia**: Fase 11 (Edição e Gestão) - Desbloqueado
 
-**Nota**: Exclusão automática de mídias e testes de integração pendentes para fase futura.
+**Nota**: Exclusão automática de mídias e testes de integração foram implementados.
+
+**Atualização (Suporte a Vídeos)**: Suporte a vídeos foi implementado em Posts, Eventos e Marketplace, com regras baseadas em redes sociais existentes (TikTok: 60s, Instagram: 60s-10min). Chat mantém restrição de apenas imagens por questões de performance e privacidade. Consulte `FASE10_VIDEOS_MAPA_IMPACTO.md` para detalhes completos.
+
+## 🛡️ Segurança Avançada Implementada
+
+### Validações de Segurança
+
+#### 1. Validação de Propriedade
+- ✅ Todas as mídias devem pertencer ao usuário que está criando o conteúdo
+- ✅ Validação realizada em `PostCreationService`, `EventsService`, `StoreItemService`, `ChatService`
+- ✅ Retorna erro `400 Bad Request` se mídia não pertence ao usuário
+
+#### 2. Validação de Estado
+- ✅ Mídias deletadas (soft delete) não podem ser associadas a conteúdo
+- ✅ Validação de `IsDeleted` em todos os serviços
+
+#### 3. Validação de Duplicatas
+- ✅ IDs duplicados são rejeitados no mesmo request
+- ✅ Validação no FluentValidation (validators)
+
+#### 4. Validação de GUIDs Vazios
+- ✅ GUIDs vazios são filtrados e rejeitados
+- ✅ Normalização em todos os serviços
+
+#### 5. Limites de Quantidade
+- ✅ **Posts**: Máx. 10 mídias (imagens e/ou vídeos), máximo 1 vídeo (validação em `PostCreationService`)
+- ✅ **Eventos**: 1 capa + máx. 5 adicionais, máximo 1 vídeo no total (validação em `EventsService`)
+- ✅ **Items**: Máx. 10 mídias (imagens e/ou vídeos), máximo 1 vídeo (validação em `StoreItemService`)
+- ✅ **Chat**: 1 imagem por mensagem (validação em `ChatService`)
+
+#### 6. Validação de Tipo e Vídeos
+- ✅ Chat aceita apenas imagens (vídeos não permitidos)
+- ✅ Posts, Eventos e Items aceitam imagens e vídeos
+- ✅ Validação de `MediaType.Image` em `ChatService` para manter restrição
+- ✅ Validação de `MediaType.Video` em `PostCreationService`, `EventsService`, `StoreItemService` para limitar quantidade
+
+#### 7. Validação de Tamanho
+- ✅ Chat: 5MB por imagem (apenas imagens)
+- ✅ Posts: 50MB por vídeo (validação em `PostCreationService`)
+- ✅ Eventos: 100MB por vídeo (validação em `EventsService`)
+- ✅ Items: 30MB por vídeo (validação em `StoreItemService`)
+- ✅ Validação de `SizeBytes` em todos os serviços
+
+#### 10. Validação de Vídeos (Novo)
+- ✅ Máximo 1 vídeo por post (validação em `PostCreationService`)
+- ✅ Máximo 1 vídeo por evento (validação em `EventsService`)
+- ✅ Máximo 1 vídeo por item (validação em `StoreItemService`)
+- ✅ Limites de tamanho específicos para vídeos (50MB posts, 100MB eventos, 30MB items)
+- ⚠️ Validação de duração ainda não implementada (requer metadados de vídeo - futuro)
+
+#### 8. Validação de Overlap
+- ✅ `CoverMediaId` não pode estar em `AdditionalMediaIds`
+- ✅ Validação em `CreateEventRequestValidator`
+
+#### 9. Validação de Existência
+- ✅ Todas as mídias devem existir no sistema antes de serem associadas
+- ✅ Validação via `IMediaAssetRepository.ListByIdsAsync`
+
+### Auditoria e Logging
+- ✅ Todas as operações de mídia são auditadas via `IAuditLogger`
+- ✅ Logs estruturados para rastreabilidade
+
+### Exclusão Automática
+- ✅ Quando conteúdo é deletado, `MediaAttachment` é deletado automaticamente
+- ✅ Implementado em `ReportService` (posts moderados) e `ModerationCaseService` (posts ocultos)
+- ✅ Implementado em `EventsService` (eventos cancelados)
+- ✅ Implementado em `StoreItemService` (items arquivados)

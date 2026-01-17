@@ -80,12 +80,14 @@ public sealed class FeedController : ControllerBase
         var eventLookup = await LoadEventSummariesAsync(posts, cancellationToken);
         var postIds = posts.Select(p => p.Id).ToList();
         var counts = await _feedService.GetCountsByPostIdsAsync(postIds, cancellationToken);
+        var mediaUrlsByPost = await LoadMediaUrlsByPostIdsAsync(postIds, cancellationToken);
         
         var response = new List<FeedItemResponse>();
         foreach (var post in posts)
         {
             var postCounts = counts.GetValueOrDefault(post.Id, new PostCounts(0, 0));
             var eventSummary = ResolveEventSummary(post, eventLookup);
+            var mediaUrls = mediaUrlsByPost.GetValueOrDefault(post.Id, Array.Empty<string>());
 
             response.Add(new FeedItemResponse(
                 post.Id,
@@ -99,7 +101,9 @@ public sealed class FeedController : ControllerBase
                 post.Type == PostType.Alert,
                 postCounts.LikeCount,
                 postCounts.ShareCount,
-                post.CreatedAtUtc));
+                post.CreatedAtUtc,
+                mediaUrls.Count > 0 ? mediaUrls : null,
+                mediaUrls.Count));
         }
 
         return Ok(response);

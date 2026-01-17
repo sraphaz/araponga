@@ -143,6 +143,24 @@ public sealed class PostCreationService
             {
                 return Result<CommunityPost>.Failure("One or more media assets are invalid or do not belong to the user.");
             }
+
+            // Validar que há no máximo 1 vídeo por post
+            var videoCount = mediaAssets.Count(media => media.MediaType == Domain.Media.MediaType.Video);
+            if (videoCount > 1)
+            {
+                return Result<CommunityPost>.Failure("Only one video is allowed per post.");
+            }
+
+            // Validar tamanho de vídeo (máximo 50MB, duração será validada no futuro)
+            var videos = mediaAssets.Where(media => media.MediaType == Domain.Media.MediaType.Video).ToList();
+            foreach (var video in videos)
+            {
+                const long maxVideoSizeBytes = 50 * 1024 * 1024; // 50MB
+                if (video.SizeBytes > maxVideoSizeBytes)
+                {
+                    return Result<CommunityPost>.Failure("Video size exceeds 50MB limit for posts.");
+                }
+            }
         }
 
         var post = new CommunityPost(

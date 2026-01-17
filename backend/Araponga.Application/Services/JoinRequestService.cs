@@ -13,6 +13,7 @@ public sealed class JoinRequestService
 {
     private readonly ITerritoryJoinRequestRepository _joinRequestRepository;
     private readonly ITerritoryMembershipRepository _membershipRepository;
+    private readonly IMembershipSettingsRepository _settingsRepository;
     private readonly IUserRepository _userRepository;
     private readonly AccessEvaluator _accessEvaluator;
     private readonly IUnitOfWork _unitOfWork;
@@ -20,12 +21,14 @@ public sealed class JoinRequestService
     public JoinRequestService(
         ITerritoryJoinRequestRepository joinRequestRepository,
         ITerritoryMembershipRepository membershipRepository,
+        IMembershipSettingsRepository settingsRepository,
         IUserRepository userRepository,
         AccessEvaluator accessEvaluator,
         IUnitOfWork unitOfWork)
     {
         _joinRequestRepository = joinRequestRepository;
         _membershipRepository = membershipRepository;
+        _settingsRepository = settingsRepository;
         _userRepository = userRepository;
         _accessEvaluator = accessEvaluator;
         _unitOfWork = unitOfWork;
@@ -269,6 +272,19 @@ public sealed class JoinRequestService
                 decidedAtUtc);
 
             await _membershipRepository.AddAsync(newMembership, cancellationToken);
+            
+            // Criar MembershipSettings automaticamente (similar ao MembershipService.BecomeResidentAsync)
+            var existingSettings = await _settingsRepository.GetByMembershipIdAsync(newMembership.Id, cancellationToken);
+            if (existingSettings is null)
+            {
+                var settingsNow = DateTime.UtcNow;
+                var newSettings = new MembershipSettings(
+                    newMembership.Id,
+                    marketplaceOptIn: false,
+                    settingsNow,
+                    settingsNow);
+                await _settingsRepository.AddAsync(newSettings, cancellationToken);
+            }
         }
         else if (membership.Role != MembershipRole.Resident ||
                  !membership.HasAnyVerification())
