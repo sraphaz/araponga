@@ -191,6 +191,8 @@ Quem **usa** e **melhora**:
 - **[Roadmap](./02_ROADMAP.md)** - O que está planejado
 - **[Glossário](./05_GLOSSARY.md)** - Termos e conceitos
 
+**💡 Dica**: Não precisa ler tudo de uma vez. Comece pela Visão do Produto para entender o propósito.
+
 ### 2. Escolha seu Caminho
 
 #### Quer Construir Código?

@@ -117,23 +117,156 @@ O Cursor te ajuda a:
 
 ## 🚀 Primeiros Passos
 
-### 1. Configurar o Ambiente
+### 1. Verificar Requisitos Mínimos
 
-#### Instalar o Cursor
-1. Acesse: https://cursor.sh/
-2. Baixe e instale (é gratuito)
-3. Abra o Cursor
+Antes de começar, vamos garantir que você tem tudo necessário:
 
-#### Clonar o Projeto
+#### Requisitos do Sistema
+
+**Obrigatórios:**
+- **Sistema Operacional**: Windows 10/11, macOS 10.15+, ou Linux (Ubuntu 20.04+)
+- **Memória RAM**: Mínimo 4GB (recomendado 8GB ou mais)
+- **Espaço em Disco**: Mínimo 2GB livres
+- **Conexão Internet**: Para baixar dependências e atualizações
+
+**Programas Necessários:**
+
+1. **Git** (controle de versão)
+   - Windows: Baixe em https://git-scm.com/download/win
+   - macOS: Instale via `brew install git` ou https://git-scm.com/download/mac
+   - Linux: `sudo apt install git` (Ubuntu/Debian) ou equivalente
+
+2. **.NET SDK 8.0** (para executar o projeto)
+   - Baixe em: https://dotnet.microsoft.com/download/dotnet/8.0
+   - Escolha "SDK" (não apenas Runtime)
+   - Instale seguindo as instruções do instalador
+   - Verifique após instalar: `dotnet --version` (deve mostrar 8.0.x)
+
+3. **Cursor** (editor de código recomendado)
+   - Baixe em: https://cursor.sh/
+   - É gratuito e tem versões para Windows, macOS e Linux
+   - Instale normalmente (setup automático)
+
+**Opcionais (mas recomendados):**
+
+4. **Docker Desktop** (para banco de dados Postgres)
+   - Baixe em: https://www.docker.com/products/docker-desktop
+   - Útil para rodar banco de dados localmente
+   - Não é obrigatório - o projeto funciona com banco em memória para desenvolvimento
+
+#### Verificar Instalações
+
+Abra um terminal (PowerShell no Windows, Terminal no macOS/Linux) e execute:
+
 ```bash
+# Verificar Git
+git --version
+# Deve mostrar algo como: git version 2.40.0 ou superior
+
+# Verificar .NET
+dotnet --version
+# Deve mostrar: 8.0.x
+
+# Verificar Cursor (se instalado)
+# Abra o Cursor e vá em Help > About para ver a versão
+```
+
+**Se alguma verificação falhar**: Instale o programa correspondente e tente novamente.
+
+### 2. Configurar o Ambiente
+
+#### Passo 1: Clonar o Projeto
+
+Abra um terminal e execute:
+
+```bash
+# Clone o repositório
 git clone https://github.com/sraphaz/araponga.git
+
+# Entre na pasta do projeto
 cd araponga
 ```
 
-#### Abrir no Cursor
-1. No Cursor: `File > Open Folder`
-2. Selecione a pasta `araponga`
-3. Pronto! O Cursor já está lendo as regras do projeto
+**Verificação**: Você deve ver a pasta `araponga` com arquivos dentro (backend/, docs/, README.md, etc.)
+
+#### Passo 2: Restaurar Dependências
+
+```bash
+# Restaura pacotes NuGet necessários
+dotnet restore
+```
+
+**O que acontece**: O .NET baixa todas as bibliotecas necessárias (pode levar alguns minutos na primeira vez).
+
+**Verificação**: Ao terminar, não deve haver erros. Você verá "Restore succeeded" ou similar.
+
+#### Passo 3: Compilar o Projeto
+
+```bash
+# Compila o projeto para verificar se tudo está OK
+dotnet build
+```
+
+**Verificação**: Deve terminar com "Build succeeded". Se houver erros, verifique se o .NET SDK 8.0 está instalado corretamente.
+
+#### Passo 4: Abrir no Cursor
+
+1. **Abra o Cursor** (duplo-clique no ícone)
+2. **File > Open Folder** (ou `Ctrl+K Ctrl+O` no Windows/Linux, `Cmd+K Cmd+O` no macOS)
+3. **Selecione a pasta `araponga`** que você acabou de clonar
+4. **Pronto!** O Cursor automaticamente:
+   - Lê o arquivo `.cursorrules` com todas as regras do projeto
+   - Configura o ambiente de desenvolvimento
+   - Prepara para você começar a trabalhar
+
+**Verificação**: No Cursor, você deve ver a estrutura do projeto na barra lateral (Explorer).
+
+#### Passo 5: (Opcional) Testar o Projeto
+
+Para garantir que tudo está funcionando:
+
+```bash
+# Rodar os testes
+dotnet test
+```
+
+**O que acontece**: Executa todos os testes automatizados (pode levar alguns minutos).
+
+**Resultado esperado**: Todos os testes passam (ou a maioria, se houver alguns pendentes). Se houver falhas, não se preocupe - pode ser configuração específica.
+
+**Executar a API localmente** (opcional, para ver funcionando):
+
+```bash
+# Rodar a API
+dotnet run --project backend/Araponga.Api
+```
+
+**O que acontece**: A API inicia e você verá uma mensagem como "Now listening on: http://localhost:5000"
+
+**Testar**: Abra no navegador `http://localhost:5000` - você verá o portal do desenvolvedor.
+
+**Para parar**: Pressione `Ctrl+C` no terminal.
+
+---
+
+### 3. Configuração Consciente (Recomendado)
+
+#### Espaço de Trabalho Adequado
+
+**Considere:**
+- **Dedique tempo** - desenvolvimento requer atenção
+- **Ambiente confortável** - lugar onde você pode focar
+- **Internet estável** - para baixar dependências e pesquisar
+- **Backup** - git já faz isso, mas mantenha suas mudanças commitadas
+
+#### Primeiro Uso do Cursor
+
+**Cursor pode parecer complexo no início - é normal!**
+
+- **Comece simples**: Use a interface básica primeiro
+- **Explore gradualmente**: Vá descobrindo funcionalidades conforme precisa
+- **Use a ajuda**: `Ctrl+Shift+P` (Windows/Linux) ou `Cmd+Shift+P` (macOS) abre comandos
+- **Pergunte ao Cursor**: Ele entende o contexto do projeto e pode ajudar
 
 ### 2. Entender a Estrutura
 
@@ -150,7 +283,7 @@ backend/
 
 **Não precisa entender tudo de uma vez**. O Cursor vai te ajudar quando você precisar.
 
-### 3. Começar Pequeno
+### 5. Começar Pequeno
 
 **Sugestões de primeiras contribuições**:
 
