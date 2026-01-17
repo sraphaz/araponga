@@ -24,6 +24,7 @@ export function ApiDomainDiagram() {
               height={800}
               className="w-full h-auto object-contain"
               priority
+              unoptimized={true}
               onError={(e) => {
                 // Fallback se imagem não existir
                 const target = e.target as HTMLImageElement;
