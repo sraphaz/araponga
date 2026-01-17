@@ -97,7 +97,7 @@ body::before {
   height: clamp(400px, 50vw, 600px);
   max-width: 90vw;
   max-height: 90vh;
-  background-image: url("../images/araponga-icon.svg");
+  background-image: url("../images/Logo_2_watermark.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
