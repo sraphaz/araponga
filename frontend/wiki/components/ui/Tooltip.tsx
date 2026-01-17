@@ -16,34 +16,47 @@ export function Tooltip({ content, children, position = "top" }: TooltipProps) {
 
   useEffect(() => {
     if (isVisible && triggerRef.current && tooltipRef.current) {
-      const triggerRect = triggerRef.current.getBoundingClientRect();
-      const tooltipRect = tooltipRef.current.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+      const updatePosition = () => {
+        if (!triggerRef.current || !tooltipRef.current) return;
+        
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+        const tooltipRect = tooltipRef.current.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
-      let top = 0;
-      let left = 0;
+        let top = 0;
+        let left = 0;
 
-      switch (position) {
-        case "top":
-          top = triggerRect.top + scrollTop - tooltipRect.height - 8;
-          left = triggerRect.left + scrollLeft + triggerRect.width / 2 - tooltipRect.width / 2;
-          break;
-        case "bottom":
-          top = triggerRect.bottom + scrollTop + 8;
-          left = triggerRect.left + scrollLeft + triggerRect.width / 2 - tooltipRect.width / 2;
-          break;
-        case "left":
-          top = triggerRect.top + scrollTop + triggerRect.height / 2 - tooltipRect.height / 2;
-          left = triggerRect.left + scrollLeft - tooltipRect.width - 8;
-          break;
-        case "right":
-          top = triggerRect.top + scrollTop + triggerRect.height / 2 - tooltipRect.height / 2;
-          left = triggerRect.right + scrollLeft + 8;
-          break;
-      }
+        switch (position) {
+          case "top":
+            top = triggerRect.top + scrollTop - tooltipRect.height - 8;
+            left = triggerRect.left + scrollLeft + triggerRect.width / 2 - tooltipRect.width / 2;
+            break;
+          case "bottom":
+            top = triggerRect.bottom + scrollTop + 8;
+            left = triggerRect.left + scrollLeft + triggerRect.width / 2 - tooltipRect.width / 2;
+            break;
+          case "left":
+            top = triggerRect.top + scrollTop + triggerRect.height / 2 - tooltipRect.height / 2;
+            left = triggerRect.left + scrollLeft - tooltipRect.width - 8;
+            break;
+          case "right":
+            top = triggerRect.top + scrollTop + triggerRect.height / 2 - tooltipRect.height / 2;
+            left = triggerRect.right + scrollLeft + 8;
+            break;
+        }
 
-      setTooltipPosition({ top, left });
+        setTooltipPosition({ top, left });
+      };
+
+      updatePosition();
+      window.addEventListener("scroll", updatePosition);
+      window.addEventListener("resize", updatePosition);
+
+      return () => {
+        window.removeEventListener("scroll", updatePosition);
+        window.removeEventListener("resize", updatePosition);
+      };
     }
   }, [isVisible, position]);
 
