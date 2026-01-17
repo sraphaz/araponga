@@ -30,6 +30,16 @@ const COLORS = {
   activationBorder: '#7dd3ff'  // Borda de ativação (azul)
 };
 
+// Padrões de tipografia e espaçamento
+const TYPOGRAPHY = {
+  actorFontSize: '15px',      // Tamanho da fonte dos atores (padronizado)
+  messageFontSize: '14px',    // Tamanho da fonte das mensagens (padronizado)
+  labelFontSize: '14px',      // Tamanho da fonte dos labels (padronizado)
+  actorBoxHeight: '60',       // Altura padrão das caixas dos atores
+  actorBoxPadding: '12',      // Padding padrão dos atores
+  messageSpacing: '45'        // Espaçamento vertical padrão entre mensagens
+};
+
 // Função para converter RGB para hex
 function rgbToHex(rgb) {
   const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
@@ -140,6 +150,67 @@ function fixSVGColors(svgContent) {
     }
     return match;
   });
+  
+  // 12. Padronizar tamanhos de fonte
+  // 12.1. Textos dos atores
+  fixed = fixed.replace(/<text([^>]*class="actor[^"]*"[^>]*)style="([^"]*)"([^>]*)>/g, (match, before, style, after) => {
+    // Padronizar font-size para atores
+    if (style.includes('font-size:')) {
+      style = style.replace(/font-size:\s*\d+px/g, `font-size: ${TYPOGRAPHY.actorFontSize}`);
+    } else {
+      style = `${style}; font-size: ${TYPOGRAPHY.actorFontSize}`.replace(/^;\s*/, '');
+    }
+    return `<text${before}style="${style}"${after}>`;
+  });
+  
+  // 12.2. Textos de mensagens
+  fixed = fixed.replace(/<text([^>]*class="messageText[^"]*"[^>]*)style="([^"]*)"([^>]*)>/g, (match, before, style, after) => {
+    // Padronizar font-size para mensagens
+    if (style.includes('font-size:')) {
+      style = style.replace(/font-size:\s*\d+px/g, `font-size: ${TYPOGRAPHY.messageFontSize}`);
+    } else {
+      style = `${style}; font-size: ${TYPOGRAPHY.messageFontSize}`.replace(/^;\s*/, '');
+    }
+    return `<text${before}style="${style}"${after}>`;
+  });
+  
+  // 12.3. Labels e outros textos
+  fixed = fixed.replace(/<text([^>]*class="(labelText|loopText|noteText)[^"]*"[^>]*)style="([^"]*)"([^>]*)>/g, (match, before, className, style, after) => {
+    // Padronizar font-size para labels
+    if (style.includes('font-size:')) {
+      style = style.replace(/font-size:\s*\d+px/g, `font-size: ${TYPOGRAPHY.labelFontSize}`);
+    } else {
+      style = `${style}; font-size: ${TYPOGRAPHY.labelFontSize}`.replace(/^;\s*/, '');
+    }
+    return `<text${before}style="${style}"${after}>`;
+  });
+  
+  // 13. Padronizar altura das caixas dos atores
+  fixed = fixed.replace(/<rect([^>]*class="actor[^"]*"[^>]*)height="\d+"([^>]*)>/g, (match, before, after) => {
+    // Padronizar altura das caixas dos atores
+    return `<rect${before}height="${TYPOGRAPHY.actorBoxHeight}"${after}>`;
+  });
+  
+  // 14. Adicionar estilos CSS padrão para tipografia no final do <style>
+  const styleEnd = fixed.indexOf('</style>');
+  if (styleEnd > -1) {
+    const typographyStyles = `
+/* Tipografia padronizada Araponga */
+#mermaid-svg text.actor, #mermaid-svg .actor-box { 
+  font-size: ${TYPOGRAPHY.actorFontSize} !important; 
+  font-weight: 500 !important;
+}
+#mermaid-svg .messageText { 
+  font-size: ${TYPOGRAPHY.messageFontSize} !important; 
+  font-weight: 400 !important;
+}
+#mermaid-svg .labelText, #mermaid-svg .loopText, #mermaid-svg .noteText { 
+  font-size: ${TYPOGRAPHY.labelFontSize} !important; 
+  font-weight: 400 !important;
+}
+`;
+    fixed = fixed.slice(0, styleEnd) + typographyStyles + fixed.slice(styleEnd);
+  }
   
   // 12. Adicionar estilos CSS customizados no final do <style>
   const styleEnd = fixed.indexOf('</style>');
