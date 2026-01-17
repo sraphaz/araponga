@@ -59,8 +59,10 @@
   /* Full HD (1920px+): max-width 1800px, content-max 1400px */
   /* QHD/Ultra HD (2560px+): max-width 2400px, content-max 2000px */
   
-  /* Tipografia */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  /* Tipografia - padrões elevados de design */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums;
   font-feature-settings: "kern" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1724,27 +1726,72 @@ pre code {
   max-width: none;
 }
 
-/* Diagramas SVG - aplicar filtros para tema escuro com cores azul e verde água */
+/* Diagramas SVG - manter fundo cinza escuro e realçar linhas/textos */
 .sequence-diagram-container img.mermaid-diagram {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 1rem auto;
   border-radius: var(--radius-sm);
-  /* Ajustar cores: inverter apenas o necessário, manter linhas azuis (#7dd3ff) e verde água (#4dd4a8) */
-  filter: brightness(1.8) contrast(1.6) saturate(1.8) hue-rotate(-10deg);
-  transition: filter 0.3s ease;
+  /* Não aplicar filtros que estragam o fundo - fundo deve ser cinza escuro naturalmente */
+  /* As cores azul e verde devem vir do SVG gerado */
+  background-color: var(--bg-card);
+  padding: 1rem;
 }
 
 .sequence-diagram-container img.mermaid-diagram:hover {
-  filter: brightness(2) contrast(1.8) saturate(2) hue-rotate(-10deg);
+  opacity: 0.95;
 }
 
-/* Para o modal também aplicar os mesmos filtros */
+/* Para o modal também */
 .diagram-modal-content img.mermaid-diagram {
   max-width: 100%;
   height: auto;
-  filter: brightness(1.8) contrast(1.6) saturate(1.8) hue-rotate(-10deg);
+  background-color: var(--bg-card);
+  padding: 1rem;
+}
+
+/* Estilos para SVG inline quando necessário */
+.sequence-diagram-container svg#mermaid-svg {
+  background-color: var(--bg-card) !important;
+}
+
+.sequence-diagram-container svg#mermaid-svg .messageLine0,
+.sequence-diagram-container svg#mermaid-svg .messageLine1 {
+  stroke: var(--link) !important; /* Azul claro #7dd3ff */
+  stroke-width: 2px !important;
+}
+
+.sequence-diagram-container svg#mermaid-svg .actor-line {
+  stroke: var(--link) !important; /* Azul claro */
+  opacity: 0.6;
+}
+
+.sequence-diagram-container svg#mermaid-svg .messageText,
+.sequence-diagram-container svg#mermaid-svg .labelText,
+.sequence-diagram-container svg#mermaid-svg .loopText {
+  fill: var(--text) !important;
+  color: var(--text) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.sequence-diagram-container svg#mermaid-svg .labelBox {
+  fill: var(--bg-card) !important;
+  stroke: var(--accent) !important; /* Verde água #4dd4a8 */
+  stroke-width: 2px !important;
+}
+
+.sequence-diagram-container svg#mermaid-svg #arrowhead path,
+.sequence-diagram-container svg#mermaid-svg .marker {
+  fill: var(--link) !important; /* Azul claro */
+  stroke: var(--link) !important;
+}
+
+.sequence-diagram-container svg#mermaid-svg .loopLine {
+  stroke: var(--accent) !important; /* Verde água */
+  stroke-width: 2px !important;
+  opacity: 0.8;
 }
 
 /* Ajustar cores específicas via CSS (quando SVG é inline) */

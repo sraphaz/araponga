@@ -28,6 +28,9 @@ Documentos sobre desenvolvimento, testes e implementação.
 - **[Revisão de Código](./21_CODE_REVIEW.md)** - Análise de gaps, inconsistências e melhorias
 - **[Análise de Coesão e Testes](./22_COHESION_AND_TESTS.md)** - Avaliação de coesão e cobertura de testes
 - **[Implementação de Recomendações](./23_IMPLEMENTATION_RECOMMENDATIONS.md)** - Status das recomendações implementadas
+- **[Planejamento do Frontend Flutter](./24_FLUTTER_FRONTEND_PLAN.md)** - Planejamento completo do app mobile Flutter (arquitetura, stack, funcionalidades, UX/UI)
+- **[Roadmap de Implementação do Frontend Flutter](./25_FLUTTER_IMPLEMENTATION_ROADMAP.md)** ⭐ - Roadmap extensivo detalhado por fases, sincronizado com API até Fase 28 (jornadas, funcionalidades, papéis, padrões elevados)
+- **[Diretrizes de Design do App Flutter](./26_FLUTTER_DESIGN_GUIDELINES.md)** 🎨 ⭐ - Diretrizes high-end profissionais de design (cores, formas, transições, efeitos, estratégias de conversão preservando identidade visual)
 
 ### 🛡️ Operações e Governança
 Documentos sobre moderação, observabilidade e operações.
@@ -112,6 +115,7 @@ Documentação detalhada de todos os Pull Requests implementados.
 - Plano de Implementação → `20_IMPLEMENTATION_PLAN.md`
 - Revisão de Código → `21_CODE_REVIEW.md`
 - Análise de Coesão → `22_COHESION_AND_TESTS.md`
+- Planejamento do Frontend Flutter → `24_FLUTTER_FRONTEND_PLAN.md`
 
 **Operações:**
 - Moderação → `30_MODERATION.md`
