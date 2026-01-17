@@ -87,12 +87,29 @@ async function testLink(url, expectedStatus = 200) {
 async function extractLinksFromHTML(html, baseUrl) {
   const links = [];
   const linkRegex = /href=["']([^"']+)["']/gi;
-  let match;
   
+  // Lista de esquemas de URL perigosos/bloqueados
+  const dangerousSchemes = [
+    'javascript:',
+    'data:',
+    'vbscript:',
+    'file:',
+    'about:',
+  ];
+  
+  let match;
   while ((match = linkRegex.exec(html)) !== null) {
     let link = match[1];
-    // Ignora anchors e javascript: links
-    if (link.startsWith('#') || link.startsWith('javascript:')) continue;
+    
+    // Ignora anchors (#) e esquemas perigosos
+    if (link.startsWith('#')) continue;
+    
+    // Verifica esquemas perigosos (case-insensitive)
+    const lowerLink = link.toLowerCase().trim();
+    const isDangerous = dangerousSchemes.some(scheme => 
+      lowerLink.startsWith(scheme)
+    );
+    if (isDangerous) continue;
     
     // Converte links relativos para absolutos
     if (link.startsWith('/')) {
