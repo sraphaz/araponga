@@ -1,4 +1,4 @@
-# Estratégia de Testes - Araponga Flutter App
+alize os proximos passos em toda a documentação para # Estratégia de Testes - Araponga Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
