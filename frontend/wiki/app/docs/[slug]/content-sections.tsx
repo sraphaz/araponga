@@ -14,54 +14,67 @@ interface Section {
 function processContentIntoSections(html: string): Section[] {
   const sections: Section[] = [];
   
-  // Primeiro, vamos dividir por headings h2, h3, h4
-  const parts = html.split(/(<h[2-4][^>]*>.*?<\/h[2-4]>)/gi);
+  // Regex para encontrar headings com IDs
+  const headingRegex = /<h([2-4])([^>]*?)id="([^"]*)"([^>]*?)>(.*?)<\/h\1>/gi;
   
-  let currentSection: Section | null = null;
+  const matches: Array<{ index: number; level: number; id: string; title: string; fullMatch: string }> = [];
+  let match;
   
-  for (const part of parts) {
-    // Verifica se é um heading
-    const headingMatch = part.match(/<h([2-4])([^>]*)id="([^"]*)"[^>]*>(.*?)<\/h\1>/i);
-    
-    if (headingMatch) {
-      // Se havia uma seção anterior, adiciona ela
-      if (currentSection) {
-        sections.push(currentSection);
-      }
-      
-      const level = parseInt(headingMatch[1]);
-      const id = headingMatch[3];
-      const title = headingMatch[4].replace(/<[^>]*>/g, '');
-      
-      currentSection = {
-        title,
-        content: part, // O heading faz parte do conteúdo
-        isLong: false,
-        level,
-        id,
-      };
-    } else if (currentSection) {
-      // Adiciona conteúdo à seção atual
-      currentSection.content += part;
-    } else {
-      // Conteúdo antes do primeiro heading
-      if (part.trim()) {
-        const textLength = part.replace(/<[^>]*>/g, '').trim().length;
-        sections.push({
-          title: '',
-          content: part,
-          isLong: textLength > 500,
-          level: 1,
-        });
-      }
+  // Coleta todos os matches primeiro
+  while ((match = headingRegex.exec(html)) !== null) {
+    matches.push({
+      index: match.index,
+      level: parseInt(match[1]),
+      id: match[3],
+      title: match[5].replace(/<[^>]*>/g, '').trim(),
+      fullMatch: match[0],
+    });
+  }
+  
+  // Se não há headings, retorna todo o conteúdo como uma seção
+  if (matches.length === 0) {
+    const textLength = html.replace(/<[^>]*>/g, '').trim().length;
+    return [{
+      title: '',
+      content: html,
+      isLong: textLength > 500,
+      level: 1,
+    }];
+  }
+  
+  // Processa conteúdo antes do primeiro heading
+  if (matches[0].index > 0) {
+    const beforeContent = html.substring(0, matches[0].index);
+    if (beforeContent.trim()) {
+      const textLength = beforeContent.replace(/<[^>]*>/g, '').trim().length;
+      sections.push({
+        title: '',
+        content: beforeContent,
+        isLong: textLength > 500,
+        level: 1,
+      });
     }
   }
   
-  // Adiciona última seção se houver
-  if (currentSection) {
-    const textLength = currentSection.content.replace(/<[^>]*>/g, '').trim().length;
-    currentSection.isLong = textLength > 500;
-    sections.push(currentSection);
+  // Processa cada seção de heading
+  for (let i = 0; i < matches.length; i++) {
+    const currentMatch = matches[i];
+    const nextMatch = matches[i + 1];
+    
+    // Conteúdo desta seção: do heading atual até o próximo (ou fim)
+    const contentStart = currentMatch.index;
+    const contentEnd = nextMatch ? nextMatch.index : html.length;
+    const sectionContent = html.substring(contentStart, contentEnd);
+    
+    const textLength = sectionContent.replace(/<[^>]*>/g, '').trim().length;
+    
+    sections.push({
+      title: currentMatch.title,
+      content: sectionContent,
+      isLong: textLength > 500,
+      level: currentMatch.level,
+      id: currentMatch.id,
+    });
   }
   
   return sections;
@@ -89,8 +102,7 @@ export function ContentSections({ htmlContent }: ContentSectionsProps) {
         }
         
         if (!section.isLong) {
-          // Seção com título mas curta - renderiza normalmente
-          const HeadingTag = section.title ? (`h${section.level}` as keyof JSX.IntrinsicElements) : 'div';
+          // Seção com título mas curta - renderiza normalmente (heading já está no content)
           return (
             <section key={index} id={section.id} className="mb-8">
               <div dangerouslySetInnerHTML={{ __html: section.content }} />
@@ -98,11 +110,17 @@ export function ContentSections({ htmlContent }: ContentSectionsProps) {
           );
         }
         
-        // Seção longa - usa Accordion
+        // Seção longa - extrai título e usa Accordion
+        // O título já está no HTML, mas vamos extraí-lo para o Accordion
+        const HeadingTag = `h${section.level}` as keyof JSX.IntrinsicElements;
+        
         return (
           <section key={index} id={section.id} className="mb-6">
-            <Accordion title={section.title || 'Conteúdo'} defaultOpen={index === 0 || index === 1}>
-              <div dangerouslySetInnerHTML={{ __html: section.content }} />
+            <Accordion title={section.title || 'Conteúdo'} defaultOpen={index <= 1}>
+              <div 
+                className="markdown-content"
+                dangerouslySetInnerHTML={{ __html: section.content }} 
+              />
             </Accordion>
           </section>
         );
