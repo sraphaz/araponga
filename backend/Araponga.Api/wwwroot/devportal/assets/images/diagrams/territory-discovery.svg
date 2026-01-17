@@ -137,6 +137,76 @@
 #mermaid-svg .messageText, #mermaid-svg .labelText, #mermaid-svg .loopText { 
   fill: #ffffff !important; 
 }
+
+
+/* Tipografia padronizada Araponga */
+#mermaid-svg text.actor, #mermaid-svg .actor-box { 
+  font-size: 15px !important; 
+  font-weight: 500 !important;
+}
+#mermaid-svg .messageText { 
+  font-size: 14px !important; 
+  font-weight: 400 !important;
+}
+#mermaid-svg .labelText, #mermaid-svg .loopText, #mermaid-svg .noteText { 
+  font-size: 14px !important; 
+  font-weight: 400 !important;
+}
+
+/* Cores customizadas Araponga */
+#mermaid-svg .messageLine0 { stroke: #7dd3ff !important; }
+#mermaid-svg .messageLine1 { stroke: #7dd3ff !important; }
+#mermaid-svg .actor-line { stroke: #7dd3ff !important; }
+#mermaid-svg .actor { fill: #1a2129 !important; stroke: #7dd3ff !important; }
+#mermaid-svg .labelBox { stroke: #4dd4a8 !important; }
+#mermaid-svg .loopLine { stroke: #4dd4a8 !important; }
+#mermaid-svg .note { stroke: #4dd4a8 !important; fill: #2a3a45 !important; }
+#mermaid-svg .activation0, #mermaid-svg .activation1, #mermaid-svg .activation2 { 
+  fill: #2a3a45 !important; 
+  stroke: #7dd3ff !important; 
+}
+#mermaid-svg #arrowhead path, #mermaid-svg .marker { 
+  fill: #7dd3ff !important; 
+  stroke: #7dd3ff !important; 
+}
+#mermaid-svg .messageText, #mermaid-svg .labelText, #mermaid-svg .loopText { 
+  fill: #ffffff !important; 
+}
+
+
+/* Tipografia padronizada Araponga */
+#mermaid-svg text.actor, #mermaid-svg .actor-box { 
+  font-size: 15px !important; 
+  font-weight: 500 !important;
+}
+#mermaid-svg .messageText { 
+  font-size: 14px !important; 
+  font-weight: 400 !important;
+}
+#mermaid-svg .labelText, #mermaid-svg .loopText, #mermaid-svg .noteText { 
+  font-size: 14px !important; 
+  font-weight: 400 !important;
+}
+
+/* Cores customizadas Araponga */
+#mermaid-svg .messageLine0 { stroke: #7dd3ff !important; }
+#mermaid-svg .messageLine1 { stroke: #7dd3ff !important; }
+#mermaid-svg .actor-line { stroke: #7dd3ff !important; }
+#mermaid-svg .actor { fill: #1a2129 !important; stroke: #7dd3ff !important; }
+#mermaid-svg .labelBox { stroke: #4dd4a8 !important; }
+#mermaid-svg .loopLine { stroke: #4dd4a8 !important; }
+#mermaid-svg .note { stroke: #4dd4a8 !important; fill: #2a3a45 !important; }
+#mermaid-svg .activation0, #mermaid-svg .activation1, #mermaid-svg .activation2 { 
+  fill: #2a3a45 !important; 
+  stroke: #7dd3ff !important; 
+}
+#mermaid-svg #arrowhead path, #mermaid-svg .marker { 
+  fill: #7dd3ff !important; 
+  stroke: #7dd3ff !important; 
+}
+#mermaid-svg .messageText, #mermaid-svg .labelText, #mermaid-svg .loopText { 
+  fill: #ffffff !important; 
+}
 #mermaid-svg text.actor > tspan, 
 #mermaid-svg .actor-box tspan, 
 #mermaid-svg .actor tspan,

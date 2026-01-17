@@ -185,10 +185,10 @@ function fixSVGColors(svgContent) {
     return `<text${before}style="${style}"${after}>`;
   });
   
-  // 13. Padronizar altura das caixas dos atores
-  fixed = fixed.replace(/<rect([^>]*class="actor[^"]*"[^>]*)height="\d+"([^>]*)>/g, (match, before, after) => {
-    // Padronizar altura das caixas dos atores
-    return `<rect${before}height="${TYPOGRAPHY.actorBoxHeight}"${after}>`;
+  // 13. Padronizar altura das caixas dos atores (tanto top quanto bottom)
+  // Padronizar alturas: substituir qualquer altura entre 60-70px por 60px
+  fixed = fixed.replace(/<rect([^>]*class="actor[^"]*"[^>]*)\s+height="(6[0-9]|70)"([^>]*)>/g, (match, before, height, after) => {
+    return match.replace(/height="(6[0-9]|70)"/, `height="${TYPOGRAPHY.actorBoxHeight}"`);
   });
   
   // 14. Adicionar estilos CSS customizados e de tipografia no final do <style>
