@@ -76,7 +76,7 @@ export function AppBanner() {
             <div className="app-banner-visual">
               <div className="app-banner-image-wrapper">
                 <Image
-                  src="/app_banner.png"
+                  src="/wiki/app_banner.png"
                   alt="Araponga App - Plataforma Digital Comunitária"
                   width={800}
                   height={600}

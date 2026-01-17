@@ -78,7 +78,7 @@
   body {
     @apply text-forest-900 dark:text-forest-100 bg-forest-50 dark:bg-forest-950;
     min-height: 100vh;
-    background-image: url("/bukeh.jpg");
+    background-image: url("/wiki/bukeh.jpg");
     background-repeat: repeat;
     background-size: cover;
     background-position: center;
@@ -117,7 +117,7 @@
     height: var(--body-watermark-size);
     max-width: 95vw;
     max-height: 95vh;
-    background-image: url("/Logo_1.png");
+    background-image: url("/wiki/Logo_1.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -208,7 +208,7 @@
     height: var(--watermark-size);
     bottom: var(--watermark-bottom);
     right: var(--watermark-right);
-    background-image: url("/Logo_1.png");
+    background-image: url("/wiki/Logo_1.png");
     background-repeat: no-repeat;
     background-position: bottom right;
     background-size: contain;
