@@ -71,7 +71,11 @@ public class DevPortalTests : IClassFixture<ApiFactory>
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Contains("javascript", response.Content.Headers.ContentType?.MediaType ?? "", StringComparison.OrdinalIgnoreCase);
+        var contentType = response.Content.Headers.ContentType?.MediaType ?? "";
+        Assert.True(
+            contentType.Equals("application/javascript", StringComparison.OrdinalIgnoreCase) ||
+            contentType.Equals("text/javascript", StringComparison.OrdinalIgnoreCase),
+            $"Content-Type deve ser 'application/javascript' ou 'text/javascript', mas foi '{contentType}'");
         
         var content = await response.Content.ReadAsStringAsync();
         Assert.NotNull(content);
@@ -147,8 +151,8 @@ public class DevPortalTests : IClassFixture<ApiFactory>
 
         // Assert
         // Verifica que não há onclick inline nos botões de fullscreen (CSP compliance)
-        // Nota: Este teste falhará até que todos os onclick sejam substituídos por event listeners
-        var onclickMatches = Regex.Matches(content, @"class\s*=\s*[""']diagram-fullscreen-btn[""'].*onclick", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        // Procura especificamente por onclick= após diagram-fullscreen-btn
+        var onclickMatches = Regex.Matches(content, @"diagram-fullscreen-btn[^>]*onclick\s*=", RegexOptions.IgnoreCase);
         Assert.True(onclickMatches.Count == 0, 
             $"Encontrado {onclickMatches.Count} onclick inline nos botões de fullscreen. Devem usar event listeners para CSP compliance.");
     }
