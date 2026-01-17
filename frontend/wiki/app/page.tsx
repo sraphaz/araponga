@@ -10,6 +10,7 @@ import { Footer } from "../components/layout/Footer";
 import { FeatureCard } from "../components/ui/FeatureCard";
 import { QuickLinks } from "../components/layout/QuickLinks";
 import { ApiDomainDiagram } from "../components/content/ApiDomainDiagram";
+import { AppBanner } from "../components/content/AppBanner";
 
 function processMarkdownLinks(html: string, basePath: string = '/wiki'): string {
   // Processa links <a href="/docs/..."> para <a href="/wiki/docs/...">
@@ -101,6 +102,9 @@ export default async function HomePage() {
             </div>
           </div>
         )}
+
+        {/* App Banner - Call to Action para Lançamento */}
+        <AppBanner />
 
         {/* Section Divider */}
         <div className="mt-20 mb-8 relative">

@@ -1314,6 +1314,214 @@
   transform: scale(1.01);
 }
 
+/* App Banner - Call to Action para Lançamento */
+.app-banner-container {
+  @apply my-20;
+}
+
+.app-banner-card {
+  @apply shadow-2xl border-2 border-forest-300/50 dark:border-forest-700/50;
+  background: linear-gradient(135deg, rgba(241, 248, 244, 0.98) 0%, rgba(255, 255, 255, 1) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+:root.dark .app-banner-card {
+  background: linear-gradient(135deg, rgba(10, 14, 18, 0.98) 0%, rgba(20, 26, 33, 1) 100%);
+}
+
+/* Padrão de fundo decorativo sutil */
+.app-banner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(77, 212, 168, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(125, 211, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-banner-grid {
+  @apply grid lg:grid-cols-2 gap-12 items-center relative z-10;
+}
+
+.app-banner-content {
+  @apply space-y-6;
+}
+
+.app-banner-badge {
+  @apply inline-flex items-center space-x-2 px-4 py-2 rounded-full;
+  @apply bg-[#4dd4a8]/10 dark:bg-[#4dd4a8]/20;
+  @apply border border-[#4dd4a8]/30 dark:border-[#4dd4a8]/40;
+  @apply text-[#4dd4a8] dark:text-[#5ee5b9];
+  @apply font-semibold text-sm;
+  @apply animate-pulse-slow;
+}
+
+.app-banner-badge-icon {
+  @apply text-lg;
+  animation: bounce-slow 2s infinite;
+}
+
+.app-banner-badge-text {
+  @apply tracking-wide uppercase text-xs;
+}
+
+.app-banner-title {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+  @apply text-forest-900 dark:text-forest-50;
+  @apply leading-tight tracking-tight;
+  background: linear-gradient(135deg, 
+    rgb(20, 40, 30) 0%, 
+    rgb(30, 60, 45) 50%, 
+    rgb(40, 80, 60) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:root.dark .app-banner-title {
+  background: linear-gradient(135deg, 
+    rgb(240, 255, 250) 0%, 
+    rgb(200, 250, 230) 50%, 
+    rgb(180, 240, 220) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-banner-description {
+  @apply text-lg md:text-xl text-forest-700 dark:text-forest-300;
+  @apply leading-relaxed;
+  @apply max-w-xl;
+}
+
+.app-banner-features {
+  @apply flex flex-wrap gap-4 mt-6;
+}
+
+.app-banner-feature {
+  @apply flex items-center space-x-2 px-4 py-2 rounded-lg;
+  @apply bg-forest-100/80 dark:bg-forest-900/60;
+  @apply text-forest-700 dark:text-forest-300;
+  @apply text-sm font-medium;
+  @apply transition-all duration-300;
+  @apply hover:bg-forest-200/80 dark:hover:bg-forest-800/80;
+  @apply hover:scale-105;
+}
+
+.app-banner-feature-icon {
+  @apply text-lg;
+}
+
+.app-banner-cta {
+  @apply flex flex-col sm:flex-row gap-4 mt-8;
+}
+
+.app-banner-button-primary {
+  @apply inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-xl;
+  @apply bg-gradient-to-r from-[#4dd4a8] to-[#5ee5b9];
+  @apply text-white font-semibold text-base;
+  @apply shadow-lg shadow-[#4dd4a8]/30;
+  @apply transition-all duration-300;
+  @apply hover:shadow-xl hover:shadow-[#4dd4a8]/40;
+  @apply hover:scale-105 hover:-translate-y-1;
+  @apply active:scale-100;
+}
+
+.app-banner-button-primary:hover {
+  background: linear-gradient(135deg, #5ee5b9 0%, #6ef6ca 100%);
+}
+
+.app-banner-button-secondary {
+  @apply inline-flex items-center justify-center px-8 py-4 rounded-xl;
+  @apply border-2 border-forest-300 dark:border-forest-700;
+  @apply bg-transparent text-forest-700 dark:text-forest-300;
+  @apply font-semibold text-base;
+  @apply transition-all duration-300;
+  @apply hover:bg-forest-100 dark:hover:bg-forest-900;
+  @apply hover:border-forest-400 dark:hover:border-forest-600;
+  @apply hover:scale-105;
+  @apply active:scale-100;
+}
+
+.app-banner-button-icon {
+  @apply w-5 h-5 transition-transform duration-300;
+}
+
+.app-banner-button-primary:hover .app-banner-button-icon {
+  @apply translate-x-1;
+}
+
+.app-banner-visual {
+  @apply relative;
+}
+
+.app-banner-image-wrapper {
+  @apply relative rounded-2xl overflow-hidden;
+  @apply shadow-2xl;
+  @apply border-2 border-forest-200/80 dark:border-forest-800/80;
+  @apply transform transition-transform duration-500;
+  @apply hover:scale-[1.02];
+}
+
+.app-banner-image {
+  @apply w-full h-auto object-contain;
+  @apply transition-opacity duration-500;
+}
+
+.app-banner-overlay {
+  @apply absolute inset-0 pointer-events-none;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(77, 212, 168, 0.02) 50%,
+    transparent 100%
+  );
+  @apply opacity-0 transition-opacity duration-500;
+}
+
+.app-banner-image-wrapper:hover .app-banner-overlay {
+  @apply opacity-100;
+}
+
+/* Animação de pulse suave */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1023px) {
+  .app-banner-grid {
+    @apply grid-cols-1 gap-8;
+  }
+
+  .app-banner-visual {
+    @apply order-first;
+  }
+
+  .app-banner-title {
+    @apply text-3xl md:text-4xl;
+  }
+
+  .app-banner-description {
+    @apply text-base md:text-lg;
+  }
+}
+
 /* Mobile Responsive - Sidebar */
 @media (max-width: 1023px) {
   .sidebar-container {
