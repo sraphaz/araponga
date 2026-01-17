@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/Accordion";
+import { Accordion } from "../ui/Accordion";
 
 interface DocumentSectionProps {
   title: string;
@@ -9,6 +9,7 @@ interface DocumentSectionProps {
   defaultOpen?: boolean;
   children: ReactNode;
   level?: 2 | 3 | 4;
+  isLong?: boolean;
 }
 
 export function DocumentSection({
@@ -17,14 +18,12 @@ export function DocumentSection({
   defaultOpen = false,
   children,
   level = 2,
+  isLong = false,
 }: DocumentSectionProps) {
   const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
 
-  // Para seções muito curtas (< 500 caracteres), não usar accordion
-  const contentLength = typeof children === "string" ? children.length : 1000;
-  const shouldCollapse = contentLength > 500;
-
-  if (!shouldCollapse) {
+  // Para seções muito curtas, não usar accordion
+  if (!isLong) {
     return (
       <section id={id} className="document-section mb-8">
         <HeadingTag className="document-section-heading">{title}</HeadingTag>
@@ -33,17 +32,11 @@ export function DocumentSection({
     );
   }
 
+  // Para seções longas, usar accordion
   return (
     <section id={id} className="document-section mb-6">
-      <Accordion type="single" collapsible defaultValue={defaultOpen ? id : undefined}>
-        <AccordionItem value={id || title} className="border-none">
-          <AccordionTrigger className="document-section-trigger">
-            <HeadingTag className="document-section-heading mb-0">{title}</HeadingTag>
-          </AccordionTrigger>
-          <AccordionContent className="document-section-content pt-4">
-            {children}
-          </AccordionContent>
-        </AccordionItem>
+      <Accordion title={title} defaultOpen={defaultOpen}>
+        <div dangerouslySetInnerHTML={{ __html: children as string }} />
       </Accordion>
     </section>
   );
