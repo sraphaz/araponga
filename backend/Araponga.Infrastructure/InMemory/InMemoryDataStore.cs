@@ -97,7 +97,25 @@ public sealed class InMemoryDataStore
             null,
             DateTime.UtcNow);
 
-        Users = new List<User> { residentUser, curatorUser };
+        var adminUser = new User(
+            Guid.Parse("ffffffff-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+            "System Admin",
+            "admin@araponga.com",
+            null,
+            "PASS-ADMIN",
+            "(11) 97777-0000",
+            "Admin Address",
+            "google",
+            "admin-external",
+            false,
+            null,
+            null,
+            null,
+            UserIdentityVerificationStatus.Unverified,
+            null,
+            DateTime.UtcNow);
+
+        Users = new List<User> { residentUser, curatorUser, adminUser };
 
         var membershipId = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
         Memberships = new List<TerritoryMembership>
