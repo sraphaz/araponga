@@ -49,6 +49,7 @@ public sealed class MediaConfigController : ControllerBase
     /// Atualiza configuração de mídia de um território (requer Curator).
     /// </summary>
     [HttpPut]
+    [Consumes("application/json")]
     [ProducesResponseType(typeof(TerritoryMediaConfigResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

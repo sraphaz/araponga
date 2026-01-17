@@ -1220,8 +1220,11 @@ public sealed class MediaInContentIntegrationTests
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         var item = await response.Content.ReadFromJsonAsync<ItemResponse>();
         Assert.NotNull(item);
-        Assert.NotNull(item!.ImageUrls);
-        Assert.True(item.ImageUrls.Count >= 3, $"Expected at least 3 media items, but got {item.ImageUrls.Count}");
+        // Primeira mídia (vídeo) vai para PrimaryImageUrl, as outras 2 (imagens) vão para ImageUrls
+        Assert.NotNull(item!.PrimaryImageUrl);
+        Assert.NotNull(item.ImageUrls);
+        Assert.Equal(2, item.ImageUrls.Count); // 2 imagens após a primeira mídia (vídeo)
+        // Total: 1 PrimaryImageUrl (vídeo) + 2 ImageUrls (imagens) = 3 mídias
     }
 
 
