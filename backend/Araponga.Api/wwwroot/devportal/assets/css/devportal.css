@@ -1467,30 +1467,19 @@ pre code {
   max-width: none;
 }
 
-/* Ajustar cores dos diagramas SVG para tema do devportal */
+/* Diagramas SVG com cores customizadas aplicadas durante geração */
 .sequence-diagram-container img.mermaid-diagram {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 1rem auto;
   border-radius: var(--radius-sm);
-  /* Inverter e ajustar cores para tema dark usando filtros CSS */
-  filter: 
-    invert(0.85)
-    hue-rotate(180deg)
-    saturate(1.2)
-    brightness(1.1)
-    contrast(1.2);
+  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
 }
 
 /* Para o modal também aplicar os mesmos filtros */
 .diagram-modal-content img.mermaid-diagram {
-  filter: 
-    invert(0.85)
-    hue-rotate(180deg)
-    saturate(1.2)
-    brightness(1.1)
-    contrast(1.2);
+  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
 }
 
 /* Ajustar cores específicas via CSS (quando SVG é inline) */
