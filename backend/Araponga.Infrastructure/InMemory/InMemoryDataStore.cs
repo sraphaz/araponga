@@ -197,6 +197,16 @@ public sealed class InMemoryDataStore
                 "Seeded curator capability for in-memory tests")
         };
 
+        // Adicionar SystemPermission para adminUser
+        SystemPermissions.Add(new SystemPermission(
+            Guid.Parse("aaaaaaaa-ffff-ffff-ffff-ffffffffffff"),
+            adminUser.Id,
+            SystemPermissionType.SystemAdmin,
+            DateTime.UtcNow,
+            null,
+            null,
+            null));
+
         TerritoryEvents = new List<TerritoryEvent>
         {
             new(
