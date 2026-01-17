@@ -32,14 +32,21 @@ public sealed class MediaConfigController : ControllerBase
     }
 
     /// <summary>
-    /// Obtém configuração de mídia de um território.
+    /// Obtém configuração de mídia de um território (requer autenticação).
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(TerritoryMediaConfigResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<TerritoryMediaConfigResponse>> Get(
         [FromRoute] Guid territoryId,
         CancellationToken cancellationToken)
     {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
         var config = await _configService.GetConfigAsync(territoryId, cancellationToken);
         var response = MapToResponse(config);
         return Ok(response);

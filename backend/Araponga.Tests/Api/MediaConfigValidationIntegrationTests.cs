@@ -268,9 +268,10 @@ public sealed class MediaConfigValidationIntegrationTests
                 ImagesEnabled: true,
                 null, null, null, null, null, null, null, null, null, null),
             null, null, null);
-        await curatorClient.PutAsJsonAsync(
+        var enableResponse = await curatorClient.PutAsJsonAsync(
             $"api/v1/territories/{ActiveTerritoryId}/media-config",
             enableRequest);
+        enableResponse.EnsureSuccessStatusCode();
 
         // Criar post com imagem
         var imageId = await UploadTestImageAsync(client);
