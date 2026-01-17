@@ -34,8 +34,9 @@
       <h1 data-i18n="ui.heroTitle">Infraestrutura territorial para comunidades locais.</h1>
       <p data-i18n-html="ui.heroLeadHtml">
         O Araponga é uma plataforma comunitária <strong>territory-first</strong>. O território organiza contexto,
-        visibilidade e governança. Este portal documenta o produto e a API exatamente como implementada hoje,
-        para acelerar o onboarding de desenvolvedores com segurança e previsibilidade.
+        visibilidade e governança. Esta infraestrutura técnica permite que comunidades construam autonomia econômica
+        e organizacional a partir de seus próprios recursos locais. Este portal documenta o produto e a API exatamente
+        como implementada hoje, para acelerar o onboarding de desenvolvedores com segurança e previsibilidade.
       </p>
 
       <nav class="hero-actions" aria-label="Ações rápidas">
@@ -77,26 +78,36 @@
     <main role="main">
       <section class="section" id="visao-geral">
         <span class="eyebrow" data-i18n="overview.eyebrow">Visão geral</span>
-        <h2 data-i18n="overview.title">API orientada a território + curadoria comunitária.</h2>
-        <p data-i18n="overview.lead">
-          A API da Araponga cria um núcleo confiável para território, vínculos, feed, mapa, marketplace e eventos. Ela prioriza
-          regras explícitas (visibilidade, validação e moderação) para que experiências locais sejam
-          auditáveis e evoluam com segurança.
-        </p>
+        <div class="section-header-with-icon">
+          <img src="./assets/images/araponga-icon.svg" alt="Araponga" class="section-icon" aria-hidden="true" />
+          <div>
+            <h2 data-i18n="overview.title">API orientada a território + curadoria comunitária.</h2>
+            <p data-i18n="overview.lead">
+              A API da Araponga cria um núcleo confiável para território, vínculos, feed, mapa, marketplace e eventos. Ela prioriza
+              regras explícitas (visibilidade, validação e moderação) para que experiências locais sejam
+              auditáveis e evoluam com segurança. A arquitetura suporta decisões comunitárias, economia local
+              circular e regeneração social territorial através de ferramentas técnicas que respeitam a soberania
+              e pertencimento dos grupos locais.
+            </p>
+          </div>
+        </div>
         <div class="grid-two">
           <div class="card">
             <h3>Por que território?</h3>
             <p>
               Território é o recorte geográfico base. Ele separa o "onde" do "quem" e do "o quê".
               Isso evita que conteúdo social distorça o mapa e mantém o contexto local como primeira-class.
+              A geografia como fundamento estrutural fortalece vínculos de pertencimento e permite que
+              comunidades gerenciem seus próprios processos de organização e economia.
             </p>
           </div>
           <div class="card">
             <h3>Governança em camadas</h3>
             <p>
               Vínculos (visitor/resident), validações comunitárias, moderação (reports/bloqueios) e
-              notificações in-app
-              formam as camadas que definem o que aparece no feed e no mapa.
+              notificações in-app formam as camadas que definem o que aparece no feed e no mapa.
+              Cada camada pode ser configurada e auditada pela própria comunidade, garantindo transparência
+              e autonomia nas decisões que afetam o território.
             </p>
           </div>
         </div>
@@ -872,7 +883,8 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
           <div class="card">
             <h3>🏪 Marketplace e economia local</h3>
             <p class="card-intro">
-              Lojas, produtos/serviços, carrinho e checkout com até 10 imagens por item.
+              Lojas, produtos/serviços, carrinho e checkout com até 10 imagens por item. Economia circular
+              territorial que mantém recursos na comunidade.
             </p>
             <ol class="card-list">
               <li><strong>Criar loja:</strong> <code>POST /api/v1/stores</code></li>
@@ -904,7 +916,9 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
         <h2 data-i18n="marketplace.title">Economia local territorial</h2>
         <p data-i18n="marketplace.lead">
           O marketplace permite criar lojas e publicar produtos/serviços (items), gerenciar carrinho de compras
-          e recebam inquiries de interessados. Tudo ancorado no território.
+          e receber inquiries de interessados. Tudo ancorado no território. O sistema de payout territorial
+          garante que recursos financeiros permaneçam na comunidade, fortalecendo ciclos econômicos locais
+          e permitindo que comunidades construam autonomia através de suas próprias capacidades produtivas.
         </p>
 
         <div class="flow-step">
@@ -1457,85 +1471,78 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
           combina responsabilidades territoriais (curadores e moderadores) com supervisão global (SystemAdmin).
         </p>
 
-        <div class="grid-two" style="margin-bottom: 3rem;">
+        <div class="model-grid spaced">
           <div class="card">
-            <h3>👤 Papéis Administrativos</h3>
-            <dl class="entity-list">
-              <dt><strong>SystemAdmin</strong></dt>
-              <dd>
-                Administrador global do sistema com acesso irrestrito. Responsável por:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Configurações globais do sistema (SystemConfig)</li>
-                  <li>Decisão de verificação de identidade global (fallback humano)</li>
-                  <li>Aprovação de pedidos de moradia quando não há curadores (bootstrap)</li>
-                  <li>Acesso a filas de trabalho globais (WorkItems)</li>
-                  <li>Download de evidências para auditoria e compliance</li>
-                  <li>Monitoramento de operações críticas</li>
+            <div class="card-icon-header">
+              <span class="icon">👤</span>
+              <h3>Papéis Administrativos</h3>
+            </div>
+            <p class="card-intro">
+              Governança em camadas: SystemAdmin (global), Curators (territorial) e FinancialManager (planejado).
+            </p>
+            <ul class="card-list">
+              <li><strong>SystemAdmin</strong>: Acesso irrestrito global. Configurações do sistema, verificações de identidade, filas de trabalho globais e auditoria.</li>
+              <li><strong>Curator</strong>: Morador verificado com permissões territoriais. Aprova pedidos de moradia, valida entidades do mapa e modera conteúdo.</li>
+              <li><strong>FinancialManager</strong> <em>(Roadmap)</em>: Gestão financeira territorial planejada para configuração de taxas, visualização de saldos e relatórios.</li>
             </ul>
-                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9em;">
-                  <strong>Autorização:</strong> Acesso via <code>SystemPermission</code> do tipo <code>SystemAdmin</code>.
-                  SystemAdmin possui implicitamente todas as capabilities em todos os territórios.
-                </p>
-              </dd>
-
-              <dt><strong>FinancialManager</strong> (Roadmap)</dt>
-              <dd>
-                Papel administrativo territorial planejado para gestão financeira local:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Configuração de taxas de plataforma por território</li>
-                  <li>Visualização de saldos e movimentações financeiras</li>
-                  <li>Gestão de payout e distribuição de receitas</li>
-                  <li>Relatórios financeiros territoriais</li>
-                </ul>
-                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9em;">
-                  <strong>Status:</strong> Endpoints financeiros atualmente restritos a SystemAdmin.
-                  Suporte a FinancialManager e FinancialViewer será implementado em fase futura.
-                </p>
-              </dd>
-
-              <dt><strong>Curator</strong> (Territorial)</dt>
-              <dd>
-                Morador verificado com permissões de curadoria no território:
-                <ul style="margin-top: 0.5rem; padding-left: 1.25rem;">
-                  <li>Aprovação de pedidos de moradia (JoinRequests)</li>
-                  <li>Validação de entidades do mapa</li>
-                  <li>Moderação de conteúdo e usuários</li>
-                  <li>Acesso a filas de trabalho territoriais</li>
-                </ul>
-              </dd>
-            </dl>
           </div>
 
           <div class="card">
-            <h3>🔧 Endpoints e Funcionalidades</h3>
-            <dl class="entity-list">
-              <dt><strong>System Config</strong> (SystemAdmin)</dt>
-              <dd>
-                <code>GET /api/v1/admin/system-configs</code><br>
-                <code>GET/PUT /api/v1/admin/system-configs/{key}</code><br>
-                Configurações globais calibráveis (governança, validações, thresholds).
-              </dd>
+            <div class="card-icon-header">
+              <span class="icon">⚙️</span>
+              <h3>System Config</h3>
+            </div>
+            <p class="card-intro">
+              Configurações globais calibráveis para governança, validações e thresholds do sistema.
+            </p>
+            <div style="margin-top: 1rem;">
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/system-configs</code>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/system-configs/{key}</code>
+              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">PUT /api/v1/admin/system-configs/{key}</code>
+            </div>
+            <p class="card-divider">
+              <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite ajustar configurações críticas como thresholds de verificação, políticas de presença e parâmetros de governança.
+            </p>
+          </div>
 
-              <dt><strong>Work Items</strong></dt>
-              <dd>
-                <code>GET /api/v1/admin/work-items</code> (SystemAdmin)<br>
-                <code>GET /api/v1/territories/{territoryId}/work-items</code> (Curator)<br>
-                Filas genéricas para revisão humana (verificações, moderação, curadoria).
-              </dd>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">📋</span>
+              <h3>Work Queue</h3>
+            </div>
+            <p class="card-intro">
+              Filas genéricas para revisão humana de verificações, moderação e curadoria.
+            </p>
+            <div style="margin-top: 1rem;">
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/work-items</code>
+              <p style="margin: 0.5rem 0; font-size: 0.9em; color: var(--text-subtle);">← SystemAdmin (global)</p>
+              <code style="display: block; margin-top: 1rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/territories/{territoryId}/work-items</code>
+              <p style="margin: 0.5rem 0; font-size: 0.9em; color: var(--text-subtle);">← Curator (territorial)</p>
+            </div>
+            <p class="card-divider">
+              <strong>Uso:</strong> WorkItems representam tarefas que requerem decisão humana: verificação de identidade, aprovação de moradia, validação de entidades do mapa, moderação de conteúdo.
+            </p>
+          </div>
 
-              <dt><strong>Upload de Documentos</strong></dt>
-              <dd>
-                <code>POST /api/v1/verification/identity/document/upload</code><br>
-                <code>POST /api/v1/memberships/{territoryId}/verify-residency/document/upload</code><br>
-                Upload seguro de evidências documentais para verificação.
-              </dd>
-
-              <dt><strong>Download por Proxy</strong> (SystemAdmin)</dt>
-              <dd>
-                <code>GET /api/v1/admin/evidences/{evidenceId}/download</code><br>
-                Streaming seguro do storage com autorização e auditoria (sem URLs públicas).
-              </dd>
-            </dl>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">📄</span>
+              <h3>Evidências & Documentos</h3>
+            </div>
+            <p class="card-intro">
+              Upload seguro de evidências documentais e download por proxy com auditoria completa.
+            </p>
+            <div style="margin-top: 1rem;">
+              <p style="margin-bottom: 0.75rem; font-weight: 600; color: var(--text);">Upload:</p>
+              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/verification/identity/document/upload</code>
+              <code style="display: block; margin-bottom: 1rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/memberships/{territoryId}/verify-residency/document/upload</code>
+              
+              <p style="margin-bottom: 0.75rem; margin-top: 1rem; font-weight: 600; color: var(--text);">Download (SystemAdmin):</p>
+              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/evidences/{evidenceId}/download</code>
+            </div>
+            <p class="card-divider">
+              <strong>Segurança:</strong> Upload seguro com validação de tipo e tamanho. Download via proxy sem URLs públicas, com autorização e auditoria de acesso.
+            </p>
           </div>
         </div>
 
@@ -1779,99 +1786,156 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
 
       <section class="section" id="roadmap">
         <span class="eyebrow">Visão Futura</span>
-        <h2>Roadmap e Direcionamento</h2>
-        <p class="lead-text space-bottom">
-          O Araponga evolui de forma consciente e sustentável, priorizando funcionalidades que
-          fortalecem a organização comunitária local. Abaixo estão as direções planejadas e
-          oportunidades de contribuição.
-        </p>
-
-        <div class="grid-two spaced">
-          <div class="card">
-            <h3>🔮 Roadmap Estratégico: 28 Fases</h3>
-            <p class="card-intro">
-              O Araponga segue um roadmap estruturado em <strong>28 fases</strong>, organizadas em ondas estratégicas
-              que fortalecem progressivamente a autonomia territorial, economia local e soberania comunitária.
+        <div class="section-header-with-icon">
+          <img src="./assets/images/araponga-icon.svg" alt="Araponga" class="section-icon" aria-hidden="true" />
+          <div>
+            <h2>Roadmap e Direcionamento</h2>
+            <p class="lead-text space-bottom">
+              O Araponga evolui de forma consciente e sustentável, priorizando funcionalidades que
+              fortalecem a organização comunitária local. O roadmap de 28 fases desenha um caminho
+              gradual em direção a maior autonomia territorial, economia circular e regeneração social.
+              Cada fase expande capacidades técnicas que, em conjunto, permitem que comunidades
+              construam e sustentem seus próprios sistemas de organização, economia e cuidado territorial.
+              Abaixo estão as direções planejadas e oportunidades de contribuição.
             </p>
-            <dl class="entity-list">
-              <dt><strong>Onda 1: MVP Essencial (Fases 8-11)</strong></dt>
-              <dd>
-                Infraestrutura de mídia, perfil completo, mídias em conteúdo e edição. Base sólida para
-                comunicação rica e expressão comunitária.
-              </dd>
+          </div>
+        </div>
 
-              <dt><strong>Onda 2: Comunicação e Governança (Fases 13-14)</strong></dt>
-              <dd>
-                Conector de e-mail e <strong>governança comunitária com votação</strong>. Ferramentas para
-                decisão coletiva e participação democrática.
-              </dd>
+        <div class="model-grid spaced">
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">1️⃣</span>
+              <h3>Onda 1: MVP Essencial</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 8-11:</strong> Infraestrutura de mídia, perfil completo, mídias em conteúdo e edição.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Base sólida para comunicação rica e expressão comunitária. Fundamentos técnicos essenciais para suportar o crescimento da plataforma.
+            </p>
+          </div>
 
-              <dt><strong>Onda 3: Soberania Territorial (Fases 17-18)</strong></dt>
-              <dd>
-                <strong>Gamificação harmoniosa</strong> e <strong>saúde territorial com monitoramento</strong>.
-                Engajamento sustentável e cuidado com o território.
-              </dd>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">2️⃣</span>
+              <h3>Onda 2: Comunicação e Governança</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 13-14:</strong> Conector de e-mail e governança comunitária com votação.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Ferramentas para decisão coletiva e participação democrática. Fortalece a capacidade de comunidades de se organizarem de forma transparente e inclusiva.
+            </p>
+          </div>
 
-              <dt><strong>Onda 4: Economia Local (Fases 20, 23-24)</strong></dt>
-              <dd>
-                <strong>Moeda territorial</strong>, <strong>compra coletiva</strong> e <strong>trocas comunitárias</strong>.
-                Economia circular e autonomia financeira territorial.
-              </dd>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">3️⃣</span>
+              <h3>Onda 3: Soberania Territorial</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 17-18:</strong> Gamificação harmoniosa e saúde territorial com monitoramento.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Engajamento sustentável e cuidado com o território. Promove conexão entre moradores e seu espaço físico
+              através de mecânicas conscientes. Monitoramento territorial permite identificar padrões, necessidades
+              e oportunidades de regeneração social e ambiental no próprio lugar de pertencimento.
+            </p>
+          </div>
 
-              <dt><strong>Onda 5: Conformidade e Inteligência (Fases 12, 15)</strong></dt>
-              <dd>
-                Otimizações finais e <strong>inteligência artificial</strong> integrada. Performance e
-                capacidades avançadas mantendo os princípios do projeto.
-              </dd>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">4️⃣</span>
+              <h3>Onda 4: Economia Local</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 20, 23-24:</strong> Moeda territorial, compra coletiva e trocas comunitárias.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Economia circular e autonomia financeira territorial. Moeda territorial, compras coletivas
+              e sistemas de troca permitem que recursos circulem dentro da comunidade, reduzindo dependência
+              externa e fortalecendo redes locais de produção e consumo.
+            </p>
+          </div>
 
-              <dt><strong>Onda 6: Diferenciais (Fases 16, 19, 21-22)</strong></dt>
-              <dd>
-                <strong>Entregas territoriais</strong>, arquitetura modular, suporte a criptomoedas e
-                integrações externas. Expansão de capacidades mantendo autonomia.
-              </dd>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">5️⃣</span>
+              <h3>Onda 5: Conformidade e Inteligência</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 12, 15:</strong> Otimizações finais e inteligência artificial integrada.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Performance e capacidades avançadas mantendo os princípios do projeto. Tecnologia como ferramenta de empoderamento, não manipulação.
+            </p>
+          </div>
 
-              <dt><strong>Onda 7: Autonomia Digital e Economia Circular (Fases 25-28)</strong></dt>
-              <dd>
-                <strong>Hub de serviços digitais</strong> (Fase 25), <strong>chat com IA e consumo consciente</strong> (Fase 26),
-                <strong>negociação territorial e assinatura coletiva</strong> (Fase 27), e <strong>banco de sementes e mudas</strong> (Fase 28).
-                Autonomia digital completa e soberania alimentar territorial.
-              </dd>
-            </dl>
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">6️⃣</span>
+              <h3>Onda 6: Diferenciais</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 16, 19, 21-22:</strong> Entregas territoriais, arquitetura modular, suporte a criptomoedas e integrações externas.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Expansão de capacidades mantendo autonomia. Flexibilidade arquitetural para adaptação e evolução sem dependência de fornecedores únicos.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">7️⃣</span>
+              <h3>Onda 7: Autonomia Digital e Economia Circular</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 25-28:</strong> Hub de serviços digitais, chat com IA, consumo consciente, negociação territorial, assinatura coletiva e banco de sementes e mudas.
+            </p>
+            <p style="color: var(--text-muted); margin: 0;">
+              Autonomia digital completa e soberania alimentar territorial. Hub de serviços digitais,
+              consumo consciente e banco de sementes consolidam a capacidade de comunidades se organizarem
+              de forma resiliente, mantendo controle sobre recursos digitais e alimentares fundamentais.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">🎯</span>
+              <h3>Direcionamento e Princípios</h3>
+            </div>
+            <p class="card-intro">
+              Princípios fundamentais que guiam a evolução do Araponga através das 28 fases.
+            </p>
+            <ul class="card-list">
+              <li><strong>Território-first:</strong> Todas as funcionalidades fortalecem o vínculo com o território físico e organização comunitária local.</li>
+              <li><strong>Governança transparente:</strong> Regras explícitas, auditáveis e evolutivas, com separação clara entre governança global e territorial.</li>
+              <li><strong>Baixa excitação, alto cuidado:</strong> Interface e funcionalidades que promovem foco, clareza e continuidade, sem manipulação algorítmica.</li>
+              <li><strong>Qualidade sobre velocidade:</strong> Cobertura de testes >90%, validações robustas, arquitetura limpa e documentação atualizada.</li>
+            </ul>
             <p class="card-divider">
               <strong>📊 Visão completa:</strong> Consulte o <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/ROADMAP_VISUAL.md">Roadmap Visual</a>
               e a <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/RESUMO_EXECUTIVO_ESTRATEGICO.md">Estratégia Executiva</a>
               para detalhes completos das 28 fases e suas correlações.
             </p>
           </div>
-
-          <div class="card">
-            <h3>🎯 Princípios de Evolução</h3>
-            <dl class="entity-list">
-              <dt><strong>Território-first</strong></dt>
-              <dd>Todas as funcionalidades devem fortalecer o vínculo com o território físico e a organização comunitária local.</dd>
-
-              <dt><strong>Governança transparente</strong></dt>
-              <dd>Regras explícitas, auditáveis e evolutivas, com separação clara entre governança global e territorial.</dd>
-
-              <dt><strong>Baixa excitação, alto cuidado</strong></dt>
-              <dd>Interface e funcionalidades que promovem foco, clareza e continuidade, sem manipulação algorítmica.</dd>
-
-              <dt><strong>Qualidade sobre velocidade</strong></dt>
-              <dd>Cobertura de testes >90%, validações robustas, arquitetura limpa e documentação atualizada.</dd>
-            </dl>
-          </div>
         </div>
       </section>
 
       <section class="section" id="contribuir">
         <span class="eyebrow">Contribuição</span>
-        <h2>Contribua com o Araponga</h2>
-        <p class="lead-text space-bottom">
-          O Araponga é um projeto comunitário de código aberto. Contribuições são bem-vindas e
-          essenciais para fortalecer a plataforma e alcançar comunidades ao redor do mundo.
-        </p>
+        <div class="section-header-with-icon">
+          <img src="./assets/images/araponga-icon.svg" alt="Araponga" class="section-icon" aria-hidden="true" />
+          <div>
+            <h2>Contribua com o Araponga</h2>
+            <p class="lead-text space-bottom">
+              O Araponga é um projeto comunitário de código aberto. Contribuições são bem-vindas e
+              essenciais para fortalecer a plataforma e alcançar comunidades ao redor do mundo.
+            </p>
+          </div>
+        </div>
 
-        <div class="grid-two spaced-sm">
+        <div class="model-grid spaced-sm">
           <div class="card">
             <h3>💻 Para Desenvolvedores</h3>
             <p class="card-intro">
@@ -1909,6 +1973,27 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
               para visão de produto, arquitetura, decisões técnicas e guias de implementação.
             </p>
           </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">💚</span>
+              <h3>Contribuição Financeira via PIX</h3>
+            </div>
+            <p class="card-intro">
+              Ajude a sustentar o projeto Araponga com uma contribuição financeira. Sua doação apoia o desenvolvimento contínuo e a manutenção da plataforma.
+            </p>
+            <p style="color: var(--text-muted); margin: 1rem 0;">
+              Contribuições são investidas diretamente em infraestrutura, ferramentas de desenvolvimento e melhorias da plataforma.
+            </p>
+            <p class="card-divider" style="margin-top: 1.5rem;">
+              <a href="#" class="button" style="width: 100%; text-align: center; justify-content: center;">
+                <strong>💰 Contribuir via PIX</strong>
+              </a>
+            </p>
+            <p style="margin-top: 1rem; color: var(--text-subtle); font-size: 0.875em; text-align: center;">
+              Qualquer valor faz diferença para o crescimento do projeto
+            </p>
+          </div>
         </div>
 
         <div class="callout highlight">
@@ -1934,10 +2019,21 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
       </section>
 
       <footer class="footer" role="contentinfo">
-        <p>
-          Portal disponível em <a href="https://devportal.araponga.app" rel="noopener">https://devportal.araponga.app</a>.
-          Para contribuir, consulte o repositório e a documentação técnica local.
-        </p>
+        <div class="footer-content">
+          <div class="footer-brand">
+            <img src="./assets/images/araponga-icon.svg" alt="Araponga" class="footer-icon" aria-hidden="true" />
+            <div>
+              <p class="footer-title">Araponga API</p>
+              <p class="footer-subtitle">Developer Portal</p>
+            </div>
+          </div>
+          <div class="footer-links">
+            <p>
+              Portal disponível em <a href="https://devportal.araponga.app" rel="noopener">https://devportal.araponga.app</a>.
+              Para contribuir, consulte o <a href="https://github.com/sraphaz/araponga" rel="noopener">repositório</a> e a documentação técnica local.
+            </p>
+          </div>
+        </div>
       </footer>
     </main>
   </div>

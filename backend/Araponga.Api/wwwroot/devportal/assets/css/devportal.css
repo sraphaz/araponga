@@ -83,6 +83,35 @@ body {
   line-height: 1.7;
   font-size: clamp(0.9375rem, 0.875rem + 0.3125vw, 1.0625rem);
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Marca d'água sutil do Araponga */
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(400px, 50vw, 600px);
+  height: clamp(400px, 50vw, 600px);
+  max-width: 90vw;
+  max-height: 90vh;
+  background-image: url("../images/araponga-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.02; /* Muito sutil, quase imperceptível */
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: soft-light;
+  filter: grayscale(100%) brightness(1.5);
+}
+
+/* Garantir que conteúdo fique acima da marca d'água */
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 img {
@@ -536,6 +565,11 @@ main {
   margin: 0 0 1rem;
   line-height: 1.75; /* Otimizado para leitura longa (era 1.7 implícito) */
   max-width: 65ch; /* Limitar largura de linha para legibilidade ideal */
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .section .eyebrow {
@@ -552,15 +586,19 @@ main {
 .grid-two {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  margin-top: 1.5rem;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  /* Garantir que cards não estourem */
+  min-width: 0;
 }
 
 .model-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  margin-top: 1.5rem;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  /* Garantir que cards não estourem */
+  min-width: 0;
 }
 
 @media (min-width: 640px) {
@@ -596,7 +634,7 @@ main {
 .card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
   border: 1px solid var(--border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
   position: relative;
@@ -604,6 +642,9 @@ main {
   backdrop-filter: blur(10px); /* Efeito blur sutil */
   transform: translateZ(0); /* GPU acceleration */
   will-change: transform, box-shadow; /* Otimização de performance */
+  min-width: 0; /* Permite shrink em grids */
+  display: flex;
+  flex-direction: column;
 }
 
 .card::before {
@@ -636,19 +677,39 @@ main {
 }
 
 .card h3 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 clamp(0.5rem, 1.5vw, 0.75rem);
   color: var(--text);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  line-height: 1.3;
 }
 
 .card p {
   margin: 0;
   color: var(--text-muted);
+  text-align: justify;
+  text-justify: inter-word; /* Melhor distribuição de palavras */
+  hyphens: auto; /* Hifenização automática para melhor justificação */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
+/* Não justificar parágrafos muito curtos */
+.card p:only-child,
+.card p:first-child:last-child {
+  text-align: left;
+}
+
+/* Parágrafos com menos de 50 caracteres não justificam bem */
+.card p[style*="margin"] {
+  text-align: left;
 }
 
 .card ul {
   margin: 0.75rem 0 0;
-  padding-left: 1.5rem;
+  padding-left: clamp(1.25rem, 2.5vw, 1.5rem);
   color: var(--text-muted);
+  /* Listas não devem ser justificadas */
+  text-align: left;
 }
 
 .card li {
@@ -689,8 +750,21 @@ main {
   margin: 0;
   padding-left: 0;
   color: var(--text-muted);
-  line-height: 1.6;
-  font-size: 0.9375rem;
+  line-height: 1.75;
+  font-size: clamp(0.875rem, 0.8125rem + 0.2vw, 0.9375rem);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  max-width: 100%;
+}
+
+/* Em telas pequenas, dd não justificado */
+@media (max-width: 767px) {
+  .entity-list dd {
+    text-align: left;
+  }
 }
 
 /* Rationale list */
@@ -746,12 +820,15 @@ main {
 
 /* Callout */
 .callout {
-  padding: 1.25rem 1.5rem;
+  padding: clamp(1rem, 2vw, 1.25rem) clamp(1.25rem, 2.5vw, 1.5rem);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--bg-muted);
   color: var(--text-muted);
-  margin: 1.5rem 0;
+  margin: clamp(1rem, 2vw, 1.5rem) 0;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.75;
 }
 
 .callout strong {
@@ -777,18 +854,26 @@ main {
 /* Card content patterns */
 .card-intro {
   color: var(--text-muted);
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  line-height: 1.7;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
 }
 
 .card-list {
-  padding-left: 1.25rem;
-  line-height: 1.8;
+  padding-left: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.75;
   margin: 0;
+  /* Listas não devem ser justificadas */
+  text-align: left;
 }
 
 .card-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: clamp(0.375rem, 1vw, 0.5rem);
+  text-align: left; /* Items de lista sempre alinhados à esquerda */
 }
 
 .card-list li:last-child {
@@ -796,9 +881,10 @@ main {
 }
 
 .card-divider {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  padding-top: clamp(1rem, 2vw, 1.5rem);
   border-top: 1px solid var(--border-subtle);
+  text-align: left; /* Divisores mantêm texto à esquerda */
 }
 
 .content-block {
@@ -857,9 +943,15 @@ main {
 
 .lead-text {
   font-size: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
-  line-height: 1.8;
+  line-height: 1.75;
   font-weight: 400; /* Peso normal para texto longo */
   color: var(--text); /* Mais visível que muted */
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  max-width: 100%;
 }
 
 .lead-text.space-bottom {
@@ -1005,10 +1097,11 @@ pre code {
 /* Flow steps */
 .flow-step {
   border-left: 3px solid var(--accent);
-  padding-left: 1.5rem;
-  margin-bottom: 2rem;
+  padding-left: clamp(1rem, 2.5vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
   padding-top: 0.25rem;
   transition: all 0.2s ease;
+  max-width: 100%;
 }
 
 .flow-step:hover {
@@ -1024,6 +1117,10 @@ pre code {
 .flow-step p {
   margin: 0 0 1rem;
   color: var(--text-muted);
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.75;
+  padding-right: clamp(0.5rem, 2vw, 1rem);
 }
 
 /* Notice */
@@ -1275,7 +1372,182 @@ pre code {
   }
   
   .card {
-    padding: 1.5rem;
+    padding: 1.25rem;
+  }
+  
+  /* Em telas pequenas, texto não justificado fica melhor */
+  .card p,
+  .lead-text,
+  .section p {
+    text-align: left;
+  }
+  
+  /* Callout menor em mobile */
+  .callout {
+    padding: 1rem;
+  }
+}
+
+/* Ajustes de justificação em telas médias e grandes */
+@media (min-width: 768px) {
+  .card p,
+  .lead-text,
+  .section p,
+  .callout {
+    text-align: justify;
+  }
+}
+
+/* Ajustes finos para telas grandes - melhor aproveitamento de espaço */
+@media (min-width: 1366px) {
+  .card {
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+  
+  .section {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+  }
+  
+  /* Aumentar line-height em telas grandes para melhor respiração */
+  .lead-text {
+    line-height: 1.8;
+  }
+  
+  .card p,
+  .section p {
+    line-height: 1.8;
+  }
+}
+
+/* Section header with icon */
+.section-header-with-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  position: relative;
+}
+
+.section-icon {
+  width: clamp(48px, 6vw, 64px);
+  height: clamp(48px, 6vw, 64px);
+  flex-shrink: 0;
+  opacity: 0.5;
+  filter: brightness(1.3) saturate(0.8);
+  transition: all 0.3s ease;
+  mix-blend-mode: soft-light;
+}
+
+.section-header-with-icon:hover .section-icon {
+  opacity: 0.7;
+  filter: brightness(1.4) saturate(1);
+}
+
+.section-header-with-icon > div {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Em mobile, ícone menor e menos visível */
+@media (max-width: 767px) {
+  .section-header-with-icon {
+    gap: 0.75rem;
+  }
+  
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+  }
+}
+
+/* Footer */
+.footer {
+  margin-top: clamp(4rem, 8vw, 6rem);
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.footer-icon {
+  width: clamp(40px, 5vw, 56px);
+  height: clamp(40px, 5vw, 56px);
+  opacity: 0.7;
+  filter: brightness(1.1);
+  transition: opacity 0.3s ease;
+}
+
+.footer-brand:hover .footer-icon {
+  opacity: 0.9;
+}
+
+.footer-title {
+  margin: 0;
+  font-size: clamp(1rem, 1.125rem + 0.25vw, 1.25rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.footer-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: clamp(0.875rem, 0.9375rem + 0.2vw, 1rem);
+  color: var(--text-muted);
+}
+
+.footer-links {
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+.footer-links p {
+  margin: 0;
+  text-align: left;
+}
+
+.footer-links a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: rgba(125, 211, 255, 0.3);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.footer-links a:hover {
+  text-decoration-color: var(--link);
+}
+
+/* Responsividade do footer */
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+  
+  .footer-links {
+    text-align: right;
+  }
+  
+  .footer-links p {
+    text-align: right;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-header-with-icon {
+    margin-bottom: 2.5rem;
   }
 }
 
@@ -1467,30 +1739,19 @@ pre code {
   max-width: none;
 }
 
-/* Ajustar cores dos diagramas SVG para tema do devportal */
+/* Diagramas SVG com cores customizadas aplicadas durante geração */
 .sequence-diagram-container img.mermaid-diagram {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 1rem auto;
   border-radius: var(--radius-sm);
-  /* Inverter e ajustar cores para tema dark usando filtros CSS */
-  filter: 
-    invert(0.85)
-    hue-rotate(180deg)
-    saturate(1.2)
-    brightness(1.1)
-    contrast(1.2);
+  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
 }
 
 /* Para o modal também aplicar os mesmos filtros */
 .diagram-modal-content img.mermaid-diagram {
-  filter: 
-    invert(0.85)
-    hue-rotate(180deg)
-    saturate(1.2)
-    brightness(1.1)
-    contrast(1.2);
+  /* Cores já aplicadas no SVG gerado - sem filtros necessários */
 }
 
 /* Ajustar cores específicas via CSS (quando SVG é inline) */
