@@ -530,7 +530,7 @@
   .markdown-content ul,
   .markdown-content ol {
     @apply mb-8 pl-8 space-y-4; /* Mais espaço entre itens para respiração */
-    max-width: 68ch; /* Mesma largura que parágrafos */
+    /* Removido max-width - conteúdo usa toda largura disponível */
   }
 
   .markdown-content li {
