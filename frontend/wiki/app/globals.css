@@ -172,9 +172,22 @@
 }
 
 @layer components {
-  /* Container consistent */
+  /* Container consistent - Responsivo e otimizado */
   .container-max {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10;
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8 xl:px-10;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .container-max {
+      max-width: 90rem; /* 1440px - melhor aproveitamento de espaço */
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container-max {
+      max-width: 96rem; /* 1536px - ainda mais espaço em telas muito grandes */
+    }
   }
 
   /* Glass card - Modern design refinement */
@@ -284,20 +297,35 @@
     @apply glass-card;
   }
 
+  .category-card {
+    @apply h-full;
+    min-height: 280px;
+  }
+
   .category-card__content {
-    padding: 2rem 1.75rem;
+    padding: 1.75rem 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (min-width: 640px) {
+    .category-card__content {
+      padding: 2rem 1.75rem;
+    }
   }
 
   @media (min-width: 1024px) {
     .category-card__content {
-      padding: 2.5rem 2.25rem;
+      padding: 2.25rem 2rem;
+      min-height: 320px;
     }
   }
 
   /* Doc link - Design limpo e legível */
   .doc-link {
-    @apply flex items-center gap-3 px-5 py-3 rounded-lg;
-    @apply text-base text-forest-700 dark:text-forest-300;
+    @apply flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg;
+    @apply text-sm sm:text-base text-forest-700 dark:text-forest-300;
     @apply hover:text-forest-900 dark:hover:text-forest-50;
     @apply transition-colors duration-200 ease-out;
     @apply hover:bg-forest-50/80 dark:hover:bg-forest-900/60;

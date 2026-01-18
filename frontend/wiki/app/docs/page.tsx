@@ -60,29 +60,69 @@ async function getAllDocs() {
 export default async function DocsPage() {
   const allDocs = await getAllDocs();
 
+  // Agrupar categorias por áreas semânticas para quebras visuais
+  const coreCategories = [
+    "🎯 Visão e Produto",
+    "🏗️ Arquitetura e Design",
+  ];
+  
+  const communityCategories = [
+    "🌱 Onboarding e Comunidade",
+    "🔧 Desenvolvimento",
+  ];
+  
+  const referenceCategories = [
+    "🛡️ Segurança",
+    "📚 Referência",
+  ];
+
+  const categoryGroups = [
+    { title: "Fundamentos", categories: coreCategories },
+    { title: "Comunidade e Desenvolvimento", categories: communityCategories },
+    { title: "Referência e Segurança", categories: referenceCategories },
+  ];
+
   return (
-    <main className="flex-1 container-max py-12 xl:py-16">
+    <main className="flex-1 container-max py-8 sm:py-12 lg:py-16">
         {/* Hero Section - Assertivo e direto */}
-        <div className="mb-16 animation-fade-in">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
+        <div className="mb-12 sm:mb-16 lg:mb-20 animation-fade-in">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-4 sm:mb-6 leading-tight tracking-tight">
             Documentação
           </h1>
-          <p className="text-xl md:text-2xl text-forest-600 dark:text-forest-400 max-w-3xl leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-forest-600 dark:text-forest-400 max-w-3xl leading-relaxed">
             Documentação técnica, arquitetural e funcional da plataforma Araponga, organizada por categoria.
           </p>
         </div>
 
-        {/* Categories Grid - Responsivo e profissional */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
-          {Object.entries(docStructure).map(([category, docs], index) => (
-            <div
-              key={category}
-              className="animation-slide-up"
-              style={{ animationDelay: `${index * 0.08}s` }}
-            >
-              <CategoryCard category={category} docs={docs} />
-            </div>
-          ))}
+        {/* Categories Grid - Responsivo com quebras semânticas */}
+        <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+          {categoryGroups.map((group, groupIndex) => {
+            const groupCategories = Object.entries(docStructure).filter(([category]) =>
+              group.categories.includes(category)
+            );
+
+            return (
+              <section key={group.title} className="animation-fade-in">
+                {/* Quebra semântica visual - título de grupo */}
+                <h2 className="text-2xl sm:text-3xl font-semibold text-forest-700 dark:text-forest-300 mb-8 sm:mb-10 lg:mb-12 pb-4 border-b border-forest-200 dark:border-forest-800">
+                  {group.title}
+                </h2>
+
+                {/* Grid responsivo - mobile: 1 col, tablet: 2 cols, desktop: 3 cols */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+                  {groupCategories.map(([category, docs], index) => (
+                    <div
+                      key={category}
+                      className="animation-slide-up"
+                      style={{ animationDelay: `${(groupIndex * 3 + index) * 0.08}s` }}
+                    >
+                      <CategoryCard category={category} docs={docs} />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
     </main>
   );
