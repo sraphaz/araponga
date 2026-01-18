@@ -131,6 +131,8 @@
             <li><a href="#openapi" class="sidebar-link" data-i18n="nav.openapi"><span class="sidebar-link-title">OpenAPI / Explorer</span></a></li>
             <li><a href="#erros" class="sidebar-link" data-i18n="nav.errors"><span class="sidebar-link-title">Erros & convenções</span></a></li>
             <li><a href="#quickstart" class="sidebar-link" data-i18n="nav.quickstart"><span class="sidebar-link-title">Quickstart</span></a></li>
+            <li><a href="#onboarding-analistas" class="sidebar-link"><span class="sidebar-link-title">Onboarding Analistas Funcionais</span></a></li>
+            <li><a href="#onboarding-developers" class="sidebar-link"><span class="sidebar-link-title">Onboarding Desenvolvedores</span></a></li>
           </ul>
         </div>
 
@@ -1804,6 +1806,541 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
         </div>
         <div class="callout">
           <span data-i18n-html="quickstart.tipHtml"><strong>Dica:</strong> este portal tem fonte única em <code>backend/Araponga.Api/wwwroot/devportal</code> (HTML/CSS/JS/OpenAPI). O deploy do GitHub Pages publica exatamente essa pasta.</span>
+        </div>
+      </section>
+
+      <section class="section" id="onboarding-analistas">
+        <span class="eyebrow">Onboarding Técnico</span>
+        <h2>Onboarding para Analistas Funcionais - Guia Técnico Detalhado</h2>
+        <p class="lead-text">
+          Este guia técnico fornece um passo a passo detalhado para analistas funcionais começarem a trabalhar com o Araponga,
+          desde a configuração inicial até a análise funcional prática usando a API.
+        </p>
+
+        <div class="flow-step">
+          <h4>Passo 1: Configuração Inicial do Ambiente</h4>
+          <p>
+            <strong>O que você precisa:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong>Navegador web</strong> com suporte a JavaScript (Chrome, Firefox, Edge, Safari)</li>
+            <li><strong>Ferramenta para testar API</strong>: Postman, Insomnia, ou curl (linha de comando)</li>
+            <li><strong>Acesso à API Araponga</strong>: URL base da API (ex: <code>http://localhost:8080</code> ou URL de produção)</li>
+            <li><strong>Conta de usuário</strong>: CPF ou documento estrangeiro para autenticação</li>
+          </ul>
+          <p>
+            <strong>Configuração (5 minutos):</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Instale ferramenta de teste de API</strong>: Baixe Postman (<a href="https://www.postman.com/downloads/">https://www.postman.com/downloads/</a>) ou use curl</li>
+            <li><strong>Configure ambiente</strong>: Anote a URL da API e prepare dados de autenticação (CPF, nome, email)</li>
+            <li><strong>Verifique acesso</strong>: Teste se consegue acessar a URL base da API no navegador</li>
+          </ol>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 2: Autenticação Social (Primeiro Acesso)</h4>
+          <p>
+            <strong>O que acontece:</strong> Você obtém um token JWT que permite acesso à API.
+          </p>
+          <p>
+            <strong>Endpoint:</strong> <code>POST /api/v1/auth/social</code>
+          </p>
+          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/auth/social \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "google",
+    "externalId": "seu-id-unico",
+    "displayName": "Seu Nome",
+    "cpf": "12345678900",
+    "email": "seu@email.com"
+  }'</code></pre>
+          <p>
+            <strong>Resposta esperada:</strong>
+          </p>
+          <pre class="code-block"><code>{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "expiresAt": "2025-01-21T10:00:00Z"
+}</code></pre>
+          <p>
+            <strong>Próximo passo:</strong> Guarde o token. Você vai usar ele em todas as requisições autenticadas.
+          </p>
+          <div class="callout">
+            <strong>Importante:</strong> O token expira após um período (verifique <code>expiresAt</code>). Se receber erro 401, você precisa autenticar novamente.
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 3: Descobrir Territórios Disponíveis</h4>
+          <p>
+            <strong>O que acontece:</strong> Você lista todos os territórios disponíveis na plataforma para escolher qual analisar.
+          </p>
+          <p>
+            <strong>Endpoint:</strong> <code>GET /api/v1/territories</code>
+          </p>
+          <pre class="code-block"><code>curl http://localhost:8080/api/v1/territories \
+  -H "Authorization: Bearer &lt;seu-token&gt;"</code></pre>
+          <p>
+            <strong>Resposta esperada:</strong>
+          </p>
+          <pre class="code-block"><code>{
+  "items": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "name": "Sertão do Camburi",
+      "description": "Território comunitário...",
+      "latitude": -23.55,
+      "longitude": -46.63
+    }
+  ]
+}</code></pre>
+          <p>
+            <strong>Análise funcional:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong>Observe os dados retornados</strong>: Nome, descrição, localização geográfica</li>
+            <li><strong>Pergunte-se</strong>: Esses dados são suficientes para identificar um território? Falta algo?</li>
+            <li><strong>Documente observações</strong>: O que você observa que poderia melhorar?</li>
+          </ul>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 4: Selecionar Território para Análise</h4>
+          <p>
+            <strong>O que acontece:</strong> Você define qual território vai analisar, facilitando requisições subsequentes.
+          </p>
+          <p>
+            <strong>Endpoint:</strong> <code>POST /api/v1/territories/selection</code>
+          </p>
+          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/territories/selection \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer &lt;seu-token&gt;" \
+  -H "X-Session-Id: sessao-analise-001" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111"
+  }'</code></pre>
+          <p>
+            <strong>Análise funcional:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong>Observe o fluxo</strong>: Você precisa de um <code>X-Session-Id</code> único para cada sessão de análise</li>
+            <li><strong>Pergunte-se</strong>: Seria melhor não precisar disso? Como isso afeta a experiência?</li>
+            <li><strong>Documente necessidades</strong>: O que facilitaria seu trabalho como analista?</li>
+          </ul>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 5: Explorar Feed do Território</h4>
+          <p>
+            <strong>O que acontece:</strong> Você vê o conteúdo publicado no feed do território selecionado.
+          </p>
+          <p>
+            <strong>Endpoint:</strong> <code>GET /api/v1/feed</code>
+          </p>
+          <pre class="code-block"><code>curl http://localhost:8080/api/v1/feed \
+  -H "Authorization: Bearer &lt;seu-token&gt;" \
+  -H "X-Session-Id: sessao-analise-001"</code></pre>
+          <p>
+            <strong>Resposta esperada:</strong>
+          </p>
+          <pre class="code-block"><code>{
+  "items": [
+    {
+      "id": "...",
+      "title": "Mutirão de limpeza",
+      "content": "Encontro sábado 9h...",
+      "type": "General",
+      "visibility": "Public",
+      "authorName": "Ana Silva",
+      "createdAtUtc": "2025-01-20T10:00:00Z"
+    }
+  ],
+  "pagination": {
+    "pageNumber": 1,
+    "pageSize": 20,
+    "totalCount": 45,
+    "totalPages": 3
+  }
+}</code></pre>
+          <p>
+            <strong>Análise funcional - exercício prático:</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Observe os tipos de conteúdo</strong>: Quais tipos existem? (<code>General</code>, <code>AlertPost</code>, etc.)</li>
+            <li><strong>Analise visibilidade</strong>: O que significa <code>Public</code> vs <code>ResidentsOnly</code>?</li>
+            <li><strong>Identifique necessidades</strong>: Que filtros seriam úteis? (por tipo, por data, por autor)</li>
+            <li><strong>Documente proposta</strong>: Escreva uma proposta de melhoria baseada na observação</li>
+          </ol>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 6: Analisar Marketplace do Território</h4>
+          <p>
+            <strong>O que acontece:</strong> Você explora produtos e serviços disponíveis no marketplace territorial.
+          </p>
+          <p>
+            <strong>Endpoint:</strong> <code>GET /api/v1/items</code>
+          </p>
+          <pre class="code-block"><code>curl "http://localhost:8080/api/v1/items?territoryId=11111111-1111-1111-1111-111111111111&amp;q=bolo&amp;category=Alimentos" \
+  -H "Authorization: Bearer &lt;seu-token&gt;"</code></pre>
+          <p>
+            <strong>Análise funcional - exercício prático:</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Teste diferentes buscas</strong>: Por nome (<code>q=bolo</code>), por categoria (<code>category=Alimentos</code>)</li>
+            <li><strong>Observe resultados</strong>: As buscas são eficientes? Retornam resultados relevantes?</li>
+            <li><strong>Identifique necessidades</strong>: Que filtros faltam? (preço, localização, disponibilidade)</li>
+            <li><strong>Documente observações</strong>: O que você observa que poderia melhorar?</li>
+          </ol>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 7: Propor Melhoria Funcional (Criar Issue no GitHub)</h4>
+          <p>
+            <strong>O que fazer:</strong> Após observar e analisar, documente suas observações e propostas.
+          </p>
+          <p>
+            <strong>Template de Issue (GitHub):</strong>
+          </p>
+          <pre class="code-block"><code>## Análise Funcional: [Nome da Funcionalidade Proposta]
+
+### Contexto Territorial
+- **Território observado**: [Nome]
+- **Necessidade identificada**: [Descrição clara]
+
+### Análise Técnica (via API)
+- **Endpoint testado**: `GET /api/v1/...`
+- **Comportamento atual**: [O que observou]
+- **Limitações identificadas**: [O que falta]
+
+### Proposta Funcional
+- **O que faria**: [Descrição clara]
+- **Como funcionaria**: [Fluxo de uso]
+- **Regras de negócio**: [Quem pode fazer o quê]
+
+### Benefícios
+- Para o território: [Benefício territorial]
+- Para a comunidade: [Benefício comunitário]
+
+### Evidências Técnicas
+[Exemplos de requisições/respostas da API que suportam a proposta]</code></pre>
+        </div>
+
+        <div class="info-box">
+          <strong>Próximos Passos para Analistas Funcionais:</strong>
+          <ul>
+            <li><strong>Continue explorando a API</strong>: Teste outros endpoints (<code>/api/v1/events</code>, <code>/api/v1/map/entities</code>)</li>
+            <li><strong>Documente observações</strong>: Crie um documento com suas análises e propostas</li>
+            <li><strong>Valide com comunidade</strong>: Converse com pessoas do território sobre necessidades observadas</li>
+            <li><strong>Crie Issues no GitHub</strong>: Transforme observações em propostas concretas</li>
+            <li><strong>Participe de Discussions</strong>: Debata propostas com desenvolvedores e outros analistas</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="onboarding-developers">
+        <span class="eyebrow">Onboarding Técnico</span>
+        <h2>Onboarding para Desenvolvedores - Guia Técnico Detalhado</h2>
+        <p class="lead-text">
+          Este guia técnico fornece um passo a passo detalhado para desenvolvedores configurarem o ambiente de desenvolvimento
+          e começarem a contribuir com código no Araponga.
+        </p>
+
+        <div class="flow-step">
+          <h4>Passo 1: Verificar Requisitos do Sistema</h4>
+          <p>
+            <strong>Requisitos obrigatórios:</strong>
+          </p>
+          <table class="kv-table">
+            <thead>
+              <tr>
+                <th>Componente</th>
+                <th>Versão Mínima</th>
+                <th>Como Verificar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sistema Operacional</td>
+                <td>Windows 10/11, macOS 10.15+, Linux (Ubuntu 20.04+)</td>
+                <td><code>systeminfo</code> (Windows) ou <code>uname -a</code> (Linux/macOS)</td>
+              </tr>
+              <tr>
+                <td>.NET SDK</td>
+                <td>8.0 ou superior</td>
+                <td><code>dotnet --version</code> (deve mostrar 8.0.x)</td>
+              </tr>
+              <tr>
+                <td>Git</td>
+                <td>2.30 ou superior</td>
+                <td><code>git --version</code></td>
+              </tr>
+              <tr>
+                <td>Memória RAM</td>
+                <td>Mínimo 4GB (recomendado 8GB+)</td>
+                <td>Verificar nas configurações do sistema</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            <strong>Se algum requisito faltar:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong>.NET SDK 8.0</strong>: Baixe em <a href="https://dotnet.microsoft.com/download/dotnet/8.0">https://dotnet.microsoft.com/download/dotnet/8.0</a> (escolha "SDK", não apenas Runtime)</li>
+            <li><strong>Git</strong>: Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> | macOS: <code>brew install git</code> | Linux: <code>sudo apt install git</code></li>
+          </ul>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 2: Clonar o Repositório</h4>
+          <p>
+            <strong>O que acontece:</strong> Você baixa todo o código fonte do projeto para sua máquina local.
+          </p>
+          <pre class="code-block"><code># Clone o repositório
+git clone https://github.com/sraphaz/araponga.git
+
+# Entre na pasta do projeto
+cd araponga</code></pre>
+          <p>
+            <strong>Verificação:</strong>
+          </p>
+          <pre class="code-block"><code># Verifique que os arquivos foram baixados
+ls backend/
+# Deve mostrar: Araponga.Api, Araponga.Application, Araponga.Domain, etc.</code></pre>
+          <p>
+            <strong>Estrutura do projeto:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong><code>backend/</code></strong>: Código fonte C# (.NET) organizado em camadas (Clean Architecture)</li>
+            <li><strong><code>docs/</code></strong>: Documentação do projeto (visão, roadmap, API, etc.)</li>
+            <li><strong><code>frontend/</code></strong>: Código frontend (Wiki e DevPortal)</li>
+            <li><strong><code>.cursorrules</code></strong>: Regras e padrões do projeto (Cursor lê automaticamente)</li>
+          </ul>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 3: Restaurar Dependências</h4>
+          <p>
+            <strong>O que acontece:</strong> O .NET baixa todas as bibliotecas (pacotes NuGet) necessárias para o projeto compilar e rodar.
+          </p>
+          <pre class="code-block"><code># Restaura pacotes NuGet
+dotnet restore</code></pre>
+          <p>
+            <strong>O que você vai ver:</strong>
+          </p>
+          <pre class="code-block"><code>Determining projects to restore...
+Restored backend/Araponga.Domain/Araponga.Domain.csproj
+Restored backend/Araponga.Application/Araponga.Application.csproj
+...
+Restore succeeded.</code></pre>
+          <p>
+            <strong>Tempo estimado:</strong> 2-5 minutos na primeira vez (depende da velocidade da internet).
+          </p>
+          <div class="callout">
+            <strong>Se houver erros:</strong> Verifique sua conexão com internet e se o .NET SDK 8.0 está instalado corretamente.
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 4: Compilar o Projeto</h4>
+          <p>
+            <strong>O que acontece:</strong> O .NET compila todo o código C# para verificar se está tudo correto e pronto para executar.
+          </p>
+          <pre class="code-block"><code># Compila o projeto
+dotnet build</code></pre>
+          <p>
+            <strong>Resultado esperado:</strong>
+          </p>
+          <pre class="code-block"><code>Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+Time Elapsed 00:01:23</code></pre>
+          <p>
+            <strong>Se houver erros de compilação:</strong>
+          </p>
+          <ul class="card-list">
+            <li>Verifique se o .NET SDK 8.0 está instalado: <code>dotnet --version</code></li>
+            <li>Verifique se todas as dependências foram restauradas: <code>dotnet restore</code> novamente</li>
+            <li>Verifique se há conflitos de versão: procure por mensagens de erro específicas</li>
+          </ul>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 5: Executar Testes Automatizados</h4>
+          <p>
+            <strong>O que acontece:</strong> Todos os testes automatizados são executados para garantir que o código está funcionando corretamente.
+          </p>
+          <pre class="code-block"><code># Executa todos os testes
+dotnet test</code></pre>
+          <p>
+            <strong>Resultado esperado:</strong>
+          </p>
+          <pre class="code-block"><code>Passed!  - Failed:     0, Passed:   245, Skipped:     0
+Total:   245
+Duration: 00:02:15</code></pre>
+          <p>
+            <strong>Se alguns testes falharem:</strong>
+          </p>
+          <ul class="card-list">
+            <li><strong>Não se preocupe imediatamente</strong>: Pode ser configuração específica do seu ambiente</li>
+            <li><strong>Verifique mensagens de erro</strong>: Leia a saída do teste para entender o problema</li>
+            <li><strong>Teste em modo verbose</strong>: <code>dotnet test --verbosity detailed</code> para mais informações</li>
+            <li><strong>Verifique dependências externas</strong>: Alguns testes podem precisar de banco de dados ou serviços externos</li>
+          </ul>
+          <div class="callout">
+            <strong>Cobertura de testes:</strong> O projeto mantém cobertura acima de 90%. Novos códigos devem incluir testes.
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 6: Executar a API Localmente</h4>
+          <p>
+            <strong>O que acontece:</strong> Você inicia o servidor da API localmente para testar e desenvolver.
+          </p>
+          <pre class="code-block"><code># Configurar ambiente de desenvolvimento
+export ASPNETCORE_ENVIRONMENT=Development  # Linux/macOS
+# OU
+$env:ASPNETCORE_ENVIRONMENT="Development"  # Windows PowerShell
+
+# Executar a API
+dotnet run --project backend/Araponga.Api --urls http://localhost:8080</code></pre>
+          <p>
+            <strong>O que você vai ver:</strong>
+          </p>
+          <pre class="code-block"><code>info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:8080
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.</code></pre>
+          <p>
+            <strong>Testar a API:</strong>
+          </p>
+          <pre class="code-block"><code># Em outro terminal, teste se a API está respondendo
+curl http://localhost:8080/api/v1/territories
+
+# Ou abra no navegador:
+# http://localhost:8080</code></pre>
+          <p>
+            <strong>Para parar a API:</strong> Pressione <code>Ctrl+C</code> no terminal onde está rodando.
+          </p>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 7: Abrir o Projeto no Cursor (Recomendado)</h4>
+          <p>
+            <strong>O que é o Cursor:</strong> Editor de código com IA que entende o contexto do projeto e ajuda você a programar seguindo os padrões.
+          </p>
+          <p>
+            <strong>Instalar Cursor:</strong>
+          </p>
+          <ul class="card-list">
+            <li>Baixe em <a href="https://cursor.sh/">https://cursor.sh/</a></li>
+            <li>Instale normalmente (setup automático)</li>
+          </ul>
+          <p>
+            <strong>Abrir projeto no Cursor:</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li>Abra o Cursor</li>
+            <li><strong>File > Open Folder</strong> (ou <code>Ctrl+K Ctrl+O</code> no Windows/Linux, <code>Cmd+K Cmd+O</code> no macOS)</li>
+            <li>Selecione a pasta <code>araponga</code> que você clonou</li>
+            <li>Pronto! O Cursor automaticamente:
+              <ul>
+                <li>Lê o arquivo <code>.cursorrules</code> com todas as regras do projeto</li>
+                <li>Configura o ambiente de desenvolvimento</li>
+                <li>Prepara autocompletar e sugestões baseadas no projeto</li>
+              </ul>
+            </li>
+          </ol>
+          <div class="info-box">
+            <strong>Como o Cursor te ajuda:</strong>
+            <ul>
+              <li><strong>Entender código:</strong> Pergunte "Como funciona a criação de posts?" e o Cursor explica</li>
+              <li><strong>Criar código novo:</strong> Descreva o que quer ("Criar endpoint para listar eventos") e o Cursor gera seguindo padrões</li>
+              <li><strong>Validar código:</strong> Peça "Este código segue Clean Architecture?" e o Cursor valida</li>
+              <li><strong>Aprender padrões:</strong> O Cursor aplica automaticamente as regras do <code>.cursorrules</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 8: Entender a Estrutura do Código (Clean Architecture)</h4>
+          <p>
+            <strong>Organização em camadas:</strong>
+          </p>
+          <pre class="code-block"><code>backend/
+├── Araponga.Domain/          # Camada mais interna (não depende de nada)
+│   └── Entidades, Value Objects, Interfaces de Repositórios
+│
+├── Araponga.Application/     # Camada de lógica de negócio
+│   └── Services, Use Cases, DTOs de Aplicação
+│
+├── Araponga.Infrastructure/  # Camada de infraestrutura
+│   └── Implementações de Repositórios, Storage, External Services
+│
+├── Araponga.Api/             # Camada mais externa (HTTP, Controllers)
+│   └── Controllers, Middlewares, Configurações de API
+│
+└── Araponga.Tests/           # Testes automatizados
+    └── Testes unitários, integração, E2E</code></pre>
+          <p>
+            <strong>Regra fundamental:</strong> Dependências apontam para dentro (Domain não depende de nada, Application depende apenas de Domain, etc.).
+          </p>
+          <p>
+            <strong>Exemplo prático - Criação de Posts:</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Controller</strong> (<code>Araponga.Api/Controllers/FeedController.cs</code>) recebe requisição HTTP</li>
+            <li><strong>Controller</strong> chama <strong>Service</strong> (<code>Araponga.Application/Services/PostCreationService.cs</code>)</li>
+            <li><strong>Service</strong> usa <strong>Entidades</strong> (<code>Araponga.Domain/Feed/CommunityPost.cs</code>) para criar post</li>
+            <li><strong>Service</strong> usa <strong>Repository Interface</strong> (<code>IPostRepository</code>) para salvar</li>
+            <li><strong>Repository Implementation</strong> (<code>Araponga.Infrastructure/Postgres/PostgresPostRepository.cs</code>) salva no banco</li>
+          </ol>
+        </div>
+
+        <div class="flow-step">
+          <h4>Passo 9: Primeira Contribuição - Exemplo Prático</h4>
+          <p>
+            <strong>Exercício sugerido:</strong> Melhorar mensagem de erro em um endpoint.
+          </p>
+          <p>
+            <strong>Passo a passo:</strong>
+          </p>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Escolha um endpoint</strong>: Ex: <code>GET /api/v1/feed</code> (listar posts do feed)</li>
+            <li><strong>Encontre o Controller</strong>: <code>backend/Araponga.Api/Controllers/FeedController.cs</code></li>
+            <li><strong>Encontre o Service</strong>: <code>backend/Araponga.Application/Services/FeedService.cs</code></li>
+            <li><strong>Analise o código</strong>: Pergunte ao Cursor "Como funciona a listagem de posts?"</li>
+            <li><strong>Identifique melhoria</strong>: Ex: Mensagem de erro quando não há posts poderia ser mais clara</li>
+            <li><strong>Implemente a mudança</strong>: Use o Cursor para fazer a alteração seguindo padrões</li>
+            <li><strong>Adicione teste</strong>: Crie teste que valida a nova mensagem de erro</li>
+            <li><strong>Valide build e testes</strong>:
+              <pre class="code-block"><code>dotnet build
+dotnet test</code></pre>
+            </li>
+            <li><strong>Crie Pull Request</strong>: Siga o template em <code>.github/pull_request_template.md</code></li>
+          </ol>
+        </div>
+
+        <div class="info-box">
+          <strong>Recursos de Aprendizado para Desenvolvedores:</strong>
+          <ul>
+            <li><strong>Documentação técnica</strong>: <code>docs/60_API_LÓGICA_NEGÓCIO.md</code> - Como as funcionalidades funcionam</li>
+            <li><strong>Modelo de domínio</strong>: <code>docs/12_DOMAIN_MODEL.md</code> - Entidades e relacionamentos</li>
+            <li><strong>Padrões de código</strong>: <code>.cursorrules</code> - Regras que o Cursor aplica automaticamente</li>
+            <li><strong>Arquitetura</strong>: <code>docs/10_ARCHITECTURE_DECISIONS.md</code> - Decisões arquiteturais (ADRs)</li>
+            <li><strong>Guia de contribuição</strong>: <code>docs/41_CONTRIBUTING.md</code> - Como contribuir com código</li>
+          </ul>
+        </div>
+
+        <div class="callout highlight">
+          <strong>Lembrete importante:</strong>
+          <ul>
+            <li>O Cursor lê automaticamente o <code>.cursorrules</code> e aplica padrões</li>
+            <li>Você não precisa saber tudo de uma vez - aprenda fazendo</li>
+            <li>Pequenas contribuições são bem-vindas - comece pequeno</li>
+            <li>Testes são obrigatórios para código novo - cobertura >90%</li>
+            <li>Documentação deve ser atualizada quando código muda</li>
+          </ul>
         </div>
       </section>
 
