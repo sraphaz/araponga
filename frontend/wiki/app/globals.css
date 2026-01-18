@@ -342,7 +342,7 @@
     .category-card {
       min-height: 260px;
     }
-    
+
     .category-card__content {
       padding: 1.75rem 1.5rem;
     }
@@ -353,7 +353,7 @@
       min-height: 280px;
       max-height: 420px;
     }
-    
+
     .category-card__content {
       padding: 2rem 1.75rem;
     }
