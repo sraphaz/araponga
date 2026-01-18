@@ -78,17 +78,31 @@ async function getDocContent(filePath: string) {
       }
     );
 
+    // Adiciona IDs aos headings garantindo unicidade
+    const usedIds = new Map<string, number>(); // Rastreia IDs já usados e seus contadores
+    
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
         // Usa sanitize-html para remover HTML de forma segura
         const cleanText = getTextContent(text);
-        const id = cleanText
+        let baseId = cleanText
           .toLowerCase()
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos
           .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dash
           .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+        
+        // Garante ID único: se já existe, adiciona sufixo numérico
+        let id = baseId;
+        if (usedIds.has(baseId)) {
+          const count = (usedIds.get(baseId) || 0) + 1;
+          usedIds.set(baseId, count);
+          id = `${baseId}-${count}`;
+        } else {
+          usedIds.set(baseId, 0);
+        }
+        
         return `<h${level} id="${id}">${text}</h${level}>`;
       }
     );

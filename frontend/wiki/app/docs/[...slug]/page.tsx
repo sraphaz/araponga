@@ -63,19 +63,32 @@ async function getDocContent(filePath: string) {
       .use(remarkGfm)
       .process(content);
 
-    // Adiciona IDs aos headings para navegação
+    // Adiciona IDs aos headings para navegação (garantindo unicidade)
     let htmlContent = processedContent.toString();
+    const usedIds = new Map<string, number>(); // Rastreia IDs já usados e seus contadores
+    
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
         // Usa sanitize-html para remover HTML de forma segura
         const cleanText = getTextContent(text);
-        const id = cleanText
+        let baseId = cleanText
           .toLowerCase()
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos
           .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dash
           .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+        
+        // Garante ID único: se já existe, adiciona sufixo numérico
+        let id = baseId;
+        if (usedIds.has(baseId)) {
+          const count = (usedIds.get(baseId) || 0) + 1;
+          usedIds.set(baseId, count);
+          id = `${baseId}-${count}`;
+        } else {
+          usedIds.set(baseId, 0);
+        }
+        
         return `<h${level} id="${id}">${text}</h${level}>`;
       }
     );
@@ -113,10 +126,10 @@ async function getAllDocsRecursive(basePath: string = ''): Promise<string[]> {
 
     for (const entry of entries) {
       // Normaliza separadores de caminho para '/' (funciona em todos os sistemas)
-      const fullPath = basePath 
+      const fullPath = basePath
         ? `${basePath}/${entry.name}`.replace(/\\/g, '/')
         : entry.name;
-      
+
       if (entry.isDirectory()) {
         // Recursivamente busca em subdiretórios
         const subFiles = await getAllDocsRecursive(fullPath);
@@ -144,11 +157,11 @@ export async function generateStaticParams() {
 
 export default async function DocPage({ params }: PageProps) {
   const { slug } = await params;
-  
+
   // slug é um array, ex: ['backlog-api', 'README']
   // Constrói o caminho do arquivo normalizando separadores
   const filePath = `${slug.join('/')}.md`.replace(/\\/g, '/');
-  
+
   const doc = await getDocContent(filePath);
 
   if (!doc) {
