@@ -119,7 +119,7 @@ export default async function HomePage() {
   return (
     <main className="container-max py-16 md:py-20">
         {onboardingDoc && (
-          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8">
+          <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] 2xl:grid-cols-[1fr_320px] gap-6 lg:gap-8 xl:gap-10">
             {/* Main Content Column */}
             <div>
               <div className="glass-card animation-fade-in">

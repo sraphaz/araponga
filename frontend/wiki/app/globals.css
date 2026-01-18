@@ -22,7 +22,7 @@
     --spacing-section: 120px;
     --spacing-card: 80px;
     --gradient-overlay: linear-gradient(180deg, rgba(241, 248, 244, 0.6) 0%, rgba(241, 248, 244, 0.2) 100%);
-    
+
     /* Design System - Typography Scale */
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
@@ -34,21 +34,21 @@
     --font-size-4xl: 2.25rem;
     --font-size-5xl: 3rem;
     --font-size-6xl: 3.75rem;
-    
+
     /* Line Heights - Optimized for reading */
     --line-height-tight: 1.25;
     --line-height-snug: 1.375;
     --line-height-normal: 1.5;
     --line-height-relaxed: 1.75;
     --line-height-loose: 2;
-    
+
     /* Letter Spacing */
     --letter-spacing-tighter: -0.05em;
     --letter-spacing-tight: -0.025em;
     --letter-spacing-normal: 0;
     --letter-spacing-wide: 0.025em;
     --letter-spacing-wider: 0.05em;
-    
+
     /* Content Widths - Optimal reading */
     --content-width-narrow: 65ch;
     --content-width-default: 75ch;
@@ -101,7 +101,7 @@
 
   /* Dark mode body background */
   :root.dark body {
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 50%, rgba(77, 212, 168, 0.03) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(125, 211, 255, 0.03) 0%, transparent 50%);
     background-color: #0a0e12;
@@ -390,9 +390,22 @@
     @apply prose-pre:bg-forest-900 dark:prose-pre:bg-[#0a0e12] prose-pre:text-forest-50;
     @apply prose-blockquote:border-forest-400 dark:prose-blockquote:border-[#4dd4a8] prose-blockquote:text-forest-700 dark:prose-blockquote:text-forest-300;
     @apply prose-ul:marker:text-forest-500 dark:prose-ul:marker:text-forest-400;
-    
-    /* Optimal reading width */
+
+    /* Optimal reading width - aumenta conforme a resolução */
     max-width: var(--content-width-default);
+  }
+
+  /* Responsivo: conteúdo aproveita melhor espaço em telas maiores */
+  @media (min-width: 1280px) {
+    .markdown-content {
+      max-width: var(--content-width-wide); /* 90ch em xl */
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .markdown-content {
+      max-width: 95ch; /* Ainda mais largo em 2xl, mantendo legibilidade */
+    }
   }
 
   /* Typography hierarchy - Enterprise level */
@@ -1340,7 +1353,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 50%, rgba(77, 212, 168, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(125, 211, 255, 0.03) 0%, transparent 50%);
   pointer-events: none;
@@ -1377,9 +1390,9 @@
   @apply text-4xl md:text-5xl lg:text-6xl font-bold;
   @apply text-forest-900 dark:text-forest-50;
   @apply leading-tight tracking-tight;
-  background: linear-gradient(135deg, 
-    rgb(20, 40, 30) 0%, 
-    rgb(30, 60, 45) 50%, 
+  background: linear-gradient(135deg,
+    rgb(20, 40, 30) 0%,
+    rgb(30, 60, 45) 50%,
     rgb(40, 80, 60) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1387,9 +1400,9 @@
 }
 
 :root.dark .app-banner-title {
-  background: linear-gradient(135deg, 
-    rgb(240, 255, 250) 0%, 
-    rgb(200, 250, 230) 50%, 
+  background: linear-gradient(135deg,
+    rgb(240, 255, 250) 0%,
+    rgb(200, 250, 230) 50%,
     rgb(180, 240, 220) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
