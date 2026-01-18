@@ -285,11 +285,8 @@ input:focus-visible {
 /* Header */
 .header {
   /* Light/dark: usa variáveis CSS para adaptação */
+  /* Removido ícone de marca d'água do header */
   background: var(--bg-elevated);
-  background-image: url("../images/araponga-icon.svg");
-  background-repeat: no-repeat;
-  background-position: right clamp(4%, 6vw, 8%) center;
-  background-size: clamp(140px, 22vw, 240px);
   background-attachment: scroll; /* Melhor performance que fixed */
   border-bottom: 1px solid var(--border);
   padding: 3.5rem 0 2.5rem;
@@ -819,6 +816,7 @@ main {
   margin: 0 0 1rem;
   line-height: 1.3;
   letter-spacing: -0.02em;
+  color: var(--text); /* Garante contraste mesmo em light mode */
 }
 
 .section h3 {
@@ -836,10 +834,11 @@ main {
 }
 
 .section p {
-  color: var(--text-muted);
+  /* Cor mais escura para melhor contraste (especialmente light mode) */
+  color: var(--text);
   margin: 0 0 1rem; /* Espaçamento padrão consistente entre parágrafos */
   line-height: 1.75; /* Otimizado para leitura longa */
-  max-width: 65ch; /* Limitar largura de linha para legibilidade ideal */
+  /* Removido max-width - texto estende na direção da seta (mais largura) */
   text-align: left;
   word-spacing: normal;
   letter-spacing: normal;
