@@ -476,10 +476,11 @@ input:focus-visible {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Sem max-width - ocupa mesma largura horizontal que o parágrafo */
 }
 
 .hero p {
-  max-width: min(720px, 95%);
+  /* Removido max-width - ocupa mesma largura horizontal que o h1 */
   color: var(--text-muted);
   font-size: clamp(1rem, 0.875rem + 0.625vw, 1.125rem);
   line-height: 1.75;
