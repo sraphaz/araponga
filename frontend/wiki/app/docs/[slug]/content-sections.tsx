@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { Accordion } from "../../../components/ui/Accordion";
 import sanitizeHtml from "sanitize-html";
 
 interface Section {
