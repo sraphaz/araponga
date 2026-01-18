@@ -1,6 +1,6 @@
 # Araponga - Cursor Best Practices
 
-**Versão**: 1.1  
+**Versão**: 1.5  
 **Data**: 2025-01-20  
 **Projeto**: Araponga - Plataforma Digital Comunitária Orientada ao Território
 
@@ -199,6 +199,245 @@ export async function processMarkdownContent(filePath: string, basePath: string)
 - [ ] Estou dependendo de abstrações ou implementações concretas? (DIP)
 - [ ] Esta interface/abstração é realmente necessária agora ou é "preparação para o futuro"? (YAGNI)
 - [ ] O código ficou mais legível e fácil de entender?
+
+### ⚠️ OBRIGATÓRIO: Clean Code (Uncle Bob)
+
+**TODO código DEVE seguir os princípios de Clean Code de Robert C. Martin (Uncle Bob).**
+
+#### Nomes Significativos
+
+**Use nomes que revelem intenção:**
+- ✅ `daysSinceCreation` em vez de `d`
+- ✅ `isValidUser` em vez de `flag`
+- ✅ `calculateTotalPrice()` em vez de `calc()`
+- ✅ `userRepository` em vez de `repo`
+- ❌ Evite abreviações desnecessárias
+- ❌ Evite nomes genéricos (`data`, `info`, `temp`, `var`)
+
+**Use nomes pronunciáveis e pesquisáveis:**
+- ✅ `numberOfDays` em vez de `n`
+- ✅ `MAX_RETRY_COUNT` em vez de `42`
+- ❌ Evite nomes de uma letra (exceto em loops curtos: `i`, `j`, `k`)
+
+**Use vocabulário consistente:**
+- ✅ Use sempre o mesmo termo para o mesmo conceito
+- ✅ Se é `fetch`, use sempre `fetch` (não misture com `get`, `retrieve`, `load`)
+- ✅ Se é `user`, use sempre `user` (não misture com `account`, `client`)
+
+**Evite informações enganosas:**
+- ❌ Não use `accountList` se não for uma lista (use `accounts` ou `accountGroup`)
+- ❌ Não use `o` (letra O) ou `l` (letra L) como nomes de variáveis
+- ❌ Não use nomes que diferem apenas por um caractere (`user` vs `users`)
+
+#### Funções
+
+**Pequenas! Pequenas! Pequenas!**
+- ✅ Funções devem fazer UMA coisa. Devem fazê-la bem. Devem ser a única coisa que fazem.
+- ✅ **Máximo 20 linhas** (ideal: menos de 10)
+- ✅ Se uma função tem mais de 20 linhas, quebre em funções menores
+- ❌ Evite funções com mais de 50 linhas
+
+**Um nível de abstração por função:**
+- ✅ Todas as declarações na função devem estar no mesmo nível de abstração
+- ✅ Se você tem `getUser()`, `validateUser()`, `saveUser()` na mesma função, está misturando níveis
+
+**Nomes descritivos:**
+- ✅ O nome da função deve dizer o que ela faz
+- ✅ `calculateTotalPrice()` é melhor que `process()`
+- ✅ `isValidEmail()` é melhor que `check()`
+
+**Argumentos:**
+- ✅ **Zero argumentos** é o ideal (funções sem parâmetros são mais fáceis de testar)
+- ✅ **Um argumento** é bom
+- ✅ **Dois argumentos** é aceitável
+- ⚠️ **Três argumentos** deve ser evitado
+- ❌ **Mais de três argumentos** - considere usar um objeto/struct
+
+**Sem efeitos colaterais:**
+- ✅ Função deve fazer apenas o que o nome diz
+- ❌ Não altere variáveis globais
+- ❌ Não altere parâmetros de entrada (a menos que seja explicitamente o propósito)
+- ✅ Se precisa alterar estado, torne isso explícito no nome: `setUserActive()`, `updateUser()`
+
+**Comandos vs Consultas:**
+- ✅ Separe comandos (fazem algo) de consultas (retornam algo)
+- ✅ `setAttribute()` (comando) vs `getAttribute()` (consulta)
+- ❌ Não faça `if (setAttribute("key", "value"))` - isso mistura comando e consulta
+
+**Tratamento de Erros:**
+- ✅ Use exceções em vez de códigos de retorno
+- ✅ Trate erros primeiro (early return)
+- ✅ Não retorne `null` - use `Option<T>` ou `Result<T>`
+- ✅ Não passe `null` como argumento
+
+#### Comentários
+
+**Comentários são uma falha:**
+- ❌ **NÃO** use comentários para explicar código ruim - **reescreva o código**
+- ✅ Código bom é auto-explicativo
+- ✅ "O único comentário verdadeiramente bom é aquele que você encontrou uma forma de não escrever"
+
+**Quando comentar (raramente):**
+- ✅ Comentários legais (informação que não pode ser expressa no código)
+- ✅ Avisos de consequências (ex: `// WARNING: Esta função é O(n²), use com cuidado`)
+- ✅ Intenção (ex: `// Ordena por data mais recente primeiro para melhor UX`)
+- ✅ Clarificação (quando o código não pode ser mais claro)
+- ✅ TODO (mas resolva rápido)
+
+**Quando NÃO comentar:**
+- ❌ Comentários redundantes: `// Incrementa o contador` antes de `counter++`
+- ❌ Comentários de ruído: `// Construtor padrão`
+- ❌ Comentários obsoletos (código mudou, comentário não)
+- ❌ Comentários de código comentado (delete o código, não comente)
+
+#### Formatação
+
+**Vertical:**
+- ✅ Conceitos relacionados devem estar próximos
+- ✅ Variáveis declaradas próximas ao uso
+- ✅ Funções dependentes devem estar próximas (chamador acima do chamado)
+- ✅ Espaçamento vertical separa conceitos
+
+**Horizontal:**
+- ✅ Use indentação consistente (2 espaços para TS/JS, 4 para C#)
+- ✅ Alinhamento horizontal é desnecessário (não alinhe `=` em múltiplas linhas)
+- ✅ Linhas não devem exceder 100-120 caracteres
+
+#### Objetos e Estruturas de Dados
+
+**Abstração de dados:**
+- ✅ Exponha dados abstratos, não estruturas concretas
+- ✅ Use getters/setters para controlar acesso
+- ❌ Não exponha campos públicos diretamente
+
+**Lei de Demeter:**
+- ✅ Um objeto deve conhecer apenas seus amigos imediatos
+- ✅ `user.getAddress().getCity()` viola a lei
+- ✅ `user.getCity()` é melhor (encapsula a navegação)
+
+#### Tratamento de Erros
+
+**Use exceções em vez de códigos de retorno:**
+- ✅ `throw new NotFoundException()` em vez de retornar `null` ou `-1`
+- ✅ Use `Result<T>` pattern quando apropriado
+
+**Não retorne null:**
+- ✅ Use `Option<T>` ou `Maybe<T>` para valores opcionais
+- ✅ Use `Result<T>` para operações que podem falhar
+- ❌ Evite `return null` em métodos públicos
+
+**Não passe null:**
+- ✅ Valide entrada e lance exceção se `null`
+- ✅ Use `ArgumentNullException.ThrowIfNull()` em C#
+- ✅ Use TypeScript strict null checks
+
+**Trate erros primeiro:**
+- ✅ Early return para casos de erro
+- ✅ Reduza aninhamento com guard clauses
+
+#### Testes Limpos
+
+**As três leis do TDD:**
+1. Não escreva código de produção até que tenha escrito um teste que falhe
+2. Não escreva mais de um teste unitário do que o suficiente para falhar
+3. Não escreva mais código de produção do que o suficiente para passar no teste
+
+**Um conceito por teste:**
+- ✅ Cada teste deve verificar UMA coisa
+- ✅ Nome do teste deve deixar claro o que está sendo testado
+- ✅ `GetUserById_WhenUserExists_ReturnsUser()` é melhor que `TestGetUser()`
+
+**F.I.R.S.T. (Testes devem ser):**
+- **Fast** - Rápidos (executar em milissegundos)
+- **Independent** - Independentes (não dependem uns dos outros)
+- **Repeatable** - Repetíveis (mesmo resultado sempre)
+- **Self-Validating** - Auto-validantes (passa ou falha, sem interpretação manual)
+- **Timely** - Oportunos (escritos antes do código de produção)
+
+#### Classes
+
+**Organização:**
+- ✅ Variáveis públicas primeiro
+- ✅ Variáveis privadas depois
+- ✅ Funções públicas primeiro
+- ✅ Funções privadas depois
+
+**Classes pequenas:**
+- ✅ Uma classe deve ter UMA razão para mudar (SRP)
+- ✅ **Máximo 200 linhas** (ideal: menos de 100)
+- ✅ Se uma classe tem mais de 200 linhas, considere quebrar
+
+**Coesão:**
+- ✅ Métodos e variáveis devem estar relacionados
+- ✅ Alta coesão: métodos usam todas as variáveis da classe
+
+#### Organização
+
+**Pacotes/Módulos:**
+- ✅ Organize por funcionalidade, não por camada
+- ✅ `user/` contém tudo relacionado a usuário (model, service, repository)
+- ❌ Evite `models/`, `services/`, `repositories/` separados
+
+**Dependências:**
+- ✅ Dependências devem apontar na direção da estabilidade
+- ✅ Classes estáveis não devem depender de classes instáveis
+
+#### Design Limpo
+
+**Princípios de design:**
+- ✅ Aplicar SOLID em todos os níveis
+- ✅ DRY (Don't Repeat Yourself)
+- ✅ KISS (Keep It Simple, Stupid)
+- ✅ YAGNI (You Aren't Gonna Need It)
+
+**Boy Scout Rule:**
+- ✅ Deixe o código mais limpo do que você encontrou
+- ✅ Sempre que trabalhar em um arquivo, melhore algo pequeno
+
+#### Exemplos Práticos
+
+**❌ BAD - Viola múltiplos princípios:**
+```typescript
+function p(d: any): any {
+  let r = 0;
+  for (let i = 0; i < d.length; i++) {
+    if (d[i].price) {
+      r += d[i].price * d[i].qty;
+    }
+  }
+  return r; // Retorna 0 se vazio, mas deveria retornar null?
+}
+```
+
+**✅ GOOD - Segue Clean Code:**
+```typescript
+function calculateTotalPrice(items: CartItem[]): number {
+  if (items.length === 0) {
+    return 0;
+  }
+  
+  return items.reduce((total, item) => {
+    const itemTotal = item.price * item.quantity;
+    return total + itemTotal;
+  }, 0);
+}
+```
+
+#### Checklist Clean Code
+
+- [ ] Nomes revelam intenção?
+- [ ] Funções são pequenas (< 20 linhas)?
+- [ ] Funções fazem apenas uma coisa?
+- [ ] Argumentos são poucos (< 3)?
+- [ ] Sem efeitos colaterais?
+- [ ] Comandos separados de consultas?
+- [ ] Erros tratados com exceções/Result?
+- [ ] Não retorna null?
+- [ ] Não passa null?
+- [ ] Comentários explicam "por quê", não "o quê"?
+- [ ] Código é auto-explicativo?
+- [ ] Testes seguem F.I.R.S.T.?
+- [ ] Classes são pequenas (< 200 linhas)?
 
 ### Nomenclatura
 
@@ -632,6 +871,7 @@ Documentação:
 9. **NUNCA use cores hardcoded** - sempre variáveis CSS ou classes Tailwind configuradas
 10. **Mobile-first é obrigatório** - todo CSS deve começar com mobile, ajustar para desktop
 11. **SOLID e YAGNI/KISS são obrigatórios** - todo código deve seguir esses princípios (ver seção "Padrões de Código")
+12. **Clean Code (Uncle Bob) é obrigatório** - nomes significativos, funções pequenas, código auto-explicativo (ver seção "Padrões de Código")
 
 ---
 
@@ -639,6 +879,7 @@ Documentação:
 **Versão**: 1.4
 
 ### Changelog
+- **1.5** (2025-01-20): Adicionados padrões de Clean Code (Uncle Bob) como obrigatórios
 - **1.4** (2025-01-20): Adicionados princípios SOLID e YAGNI/KISS como obrigatórios em todo código
 - **1.3** (2025-01-20): Adicionado processo de auto-aprendizado obrigatório após revisões, reforçado lembretes de design
 - **1.2** (2025-01-20): Adicionadas regras críticas de design (cores hardcoded proibidas) após revisão completa
