@@ -506,6 +506,29 @@
     return (I18N[lang] && I18N[lang][key]) || I18N.pt[key] || key;
   }
 
+  // Only these translation keys are allowed to contain HTML and be rendered with innerHTML.
+  // All other keys will be rendered as plain text to avoid interpreting untrusted content as HTML.
+  var ALLOWED_HTML_KEYS = {
+    'ui.heroLeadHtml': true,
+    'auth.leadHtml': true,
+    'headers.leadHtml': true,
+    'openapi.leadHtml': true,
+    'quickstart.tipHtml': true,
+    'versions.leadHtml': true
+  };
+
+  function setLocalizedHtml(el, lang, key) {
+    var value = t(lang, key);
+
+    // If the key is not explicitly allowed for HTML, or if the translation
+    // falls back to the key itself, treat it as plain text.
+    if (!ALLOWED_HTML_KEYS[key] || value === key) {
+      el.textContent = value;
+    } else {
+      el.innerHTML = value;
+    }
+  }
+
   function applyI18n(lang) {
     setDocumentLang(lang);
 
@@ -518,7 +541,7 @@
     var htmlNodes = document.querySelectorAll('[data-i18n-html]');
     htmlNodes.forEach(function (el) {
       var key = el.getAttribute('data-i18n-html');
-      el.innerHTML = t(lang, key);
+      setLocalizedHtml(el, lang, key);
     });
 
     // Atualiza botões "Copiar" já renderizados
