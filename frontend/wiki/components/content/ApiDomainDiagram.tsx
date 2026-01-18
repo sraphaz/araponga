@@ -18,7 +18,7 @@ export function ApiDomainDiagram() {
 
           <div className="relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-2 border-forest-200/80 dark:border-forest-800/80">
             <Image
-              src="/araponga-api-domain-diagram.png"
+              src="/wiki/araponga-api-domain-diagram.png"
               alt="Diagrama isométrico do Domínio API Araponga - mostrando TERRITÓRIO no centro com conexões para FEED, MAP, HEALTH, FEATURES, MEMBERSHIP & GOVERNANCE, e AUTENTICAÇÃO"
               width={1200}
               height={800}

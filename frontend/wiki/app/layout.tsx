@@ -39,8 +39,8 @@ export const metadata: Metadata = {
       "Documentação completa do Araponga: visão do produto, arquitetura, desenvolvimento, onboarding e mais.",
   },
   icons: {
-    icon: "/favicon.png",
-    apple: "/icon.png"
+    icon: "/wiki/favicon.png",
+    apple: "/wiki/icon.png"
   }
 };
 
