@@ -1038,5 +1038,160 @@
     // Atualiza active link inicial baseado na posição da página
     handleScroll();
   })();
+
+  // ============================================================
+  // PROGRESSIVE DISCLOSURE NAVIGATION - 4 Níveis Hierárquicos
+  // ============================================================
+
+  // Nível 1: Phase Tabs (Tabs Principais)
+  (function initPhaseNavigation() {
+    var tabs = document.querySelectorAll('.phase-tab');
+    var panels = document.querySelectorAll('.phase-panel');
+    
+    if (tabs.length === 0 || panels.length === 0) {
+      return; // Estrutura não existe ainda, sai silenciosamente
+    }
+
+    function switchPhase(phase) {
+      // Remove active de todos
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.classList.remove('active'); });
+      
+      // Adiciona active no alvo
+      var targetTab = document.querySelector('[data-phase="' + phase + '"]');
+      var targetPanel = document.querySelector('[data-phase-panel="' + phase + '"]');
+      
+      if (targetTab && targetPanel) {
+        targetTab.classList.add('active');
+        targetPanel.classList.add('active');
+        
+        // Atualiza URL (sem reload)
+        if (history.pushState) {
+          history.pushState(null, '', '#' + phase);
+        }
+        
+        // Scroll suave para o topo do conteúdo (após header)
+        setTimeout(function() {
+          var headerHeight = document.querySelector('.header')?.offsetHeight || 200;
+          window.scrollTo({ top: headerHeight, behavior: 'smooth' });
+        }, 100);
+      }
+    }
+
+    // Click handlers para tabs
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var phase = tab.getAttribute('data-phase');
+        if (phase) {
+          switchPhase(phase);
+        }
+      });
+    });
+
+    // URL hash navigation (permite links diretos)
+    function handleHashChange() {
+      var hash = window.location.hash.replace('#', '');
+      if (hash && ['comecando', 'fundamentos', 'api-pratica', 'funcionalidades', 'avancado'].indexOf(hash) !== -1) {
+        switchPhase(hash);
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Verifica hash inicial
+    if (window.location.hash) {
+      setTimeout(handleHashChange, 100);
+    } else {
+      // Default: primeira fase ativa
+      var firstTab = tabs[0];
+      if (firstTab) {
+        var firstPhase = firstTab.getAttribute('data-phase');
+        if (firstPhase) {
+          switchPhase(firstPhase);
+        }
+      }
+    }
+  })();
+
+  // Nível 2: Section Accordions (Seções Colapsáveis)
+  (function initSectionAccordions() {
+    var accordions = document.querySelectorAll('.section-accordion-header');
+    
+    accordions.forEach(function(header) {
+      header.addEventListener('click', function() {
+        var accordion = header.closest('.section-accordion');
+        if (!accordion) return;
+        
+        var content = accordion.querySelector('.section-accordion-content');
+        var isExpanded = content && content.classList.contains('active');
+        
+        // Toggle
+        if (content) {
+          if (isExpanded) {
+            content.classList.remove('active');
+            accordion.classList.remove('expanded');
+          } else {
+            content.classList.add('active');
+            accordion.classList.add('expanded');
+          }
+        }
+      });
+    });
+  })();
+
+  // Nível 3: Expandible Details (Conteúdo Detalhado) - usa <details> nativo
+
+  // Nível 4: Side Panels (Documentação Profunda)
+  (function initSidePanels() {
+    var panelButtons = document.querySelectorAll('[data-panel]');
+    var panels = document.querySelectorAll('.side-panel');
+    var overlays = document.querySelectorAll('.panel-overlay');
+    
+    function openPanel(panelId) {
+      var panel = document.querySelector('[data-panel-id="' + panelId + '"]');
+      var overlay = document.querySelector('.panel-overlay');
+      
+      if (panel && overlay) {
+        panel.classList.add('open');
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden'; // Previne scroll da página
+      }
+    }
+
+    function closePanel() {
+      panels.forEach(function(p) { p.classList.remove('open'); });
+      overlays.forEach(function(o) { o.classList.remove('visible'); });
+      document.body.style.overflow = ''; // Restaura scroll
+    }
+
+    // Abre panel ao clicar em botão
+    panelButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var panelId = button.getAttribute('data-panel');
+        if (panelId) {
+          openPanel(panelId);
+        }
+      });
+    });
+
+    // Fecha panel ao clicar no overlay ou botão de fechar
+    overlays.forEach(function(overlay) {
+      overlay.addEventListener('click', closePanel);
+    });
+
+    document.querySelectorAll('.side-panel-close').forEach(function(closeBtn) {
+      closeBtn.addEventListener('click', closePanel);
+    });
+
+    // Fecha panel com ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var anyOpen = Array.from(panels).some(function(p) { return p.classList.contains('open'); });
+        if (anyOpen) {
+          closePanel();
+        }
+      }
+    });
+  })();
 })();
 
