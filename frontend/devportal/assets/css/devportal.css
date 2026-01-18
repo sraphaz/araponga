@@ -584,12 +584,18 @@ input:focus-visible {
 
 /* Layout */
 .layout {
-  display: block;
+  position: relative;
   padding: clamp(1rem, 2vw, 1.5rem) 0 clamp(2rem, 3vw, 3rem);
 }
 
 .layout > main {
-  margin-left: calc(256px + clamp(var(--space-lg), 3vw, var(--space-xl)));
+  margin-left: 0;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    padding-left: calc(256px + clamp(var(--space-lg), 3vw, var(--space-xl)));
+  }
 }
 
 @media (max-width: 1023px) {
@@ -630,7 +636,7 @@ main {
 .sidebar-container {
   position: fixed;
   top: 2rem;
-  left: clamp(var(--space-lg), 3vw, var(--space-xl));
+  left: clamp(1.25rem, 4vw, 2.5rem);
   width: 256px;
   min-width: 256px;
   border-right: 1px solid rgba(198, 227, 210, 0.4);
@@ -641,9 +647,10 @@ main {
   height: calc(100vh - 4rem);
   overflow-y: auto;
   overflow-x: hidden;
-  border-radius: var(--glass-radius);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid var(--glass-border);
+  box-shadow: none;
   scrollbar-width: thin;
   z-index: 100;
 }
