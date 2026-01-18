@@ -12,6 +12,7 @@
 - `docs/DESIGN_SYSTEM_IDENTIDADE_VISUAL.md` - Identidade visual completa, cores, tipografia, componentes
 - `docs/CURSOR_DESIGN_RULES.md` - Regras práticas de design (mobile-first obrigatório, variáveis CSS, escala 8px)
 - `docs/ANALISE_DESIGN_SISTEMATICA_MELHORIAS.md` - Análise detalhada e propostas de melhoria
+- `docs/REVISAO_ARTE_DESIGN_WIKI.md` - Revisão completa de conformidade (2025-01-20) - lições aprendidas sobre cores hardcoded
 
 ### Regras e Padrões
 - `docs/CURSOR_DOCUMENTATION_RULES.md` - ⚠️ OBRIGATÓRIO: Mapeamento de mudanças → documentos, checklist de documentação
@@ -453,17 +454,36 @@ Documentação:
 - Ação consciente e explícita
 - Evolução lenta e íntegra
 
+### Regras Críticas de Design (OBRIGATÓRIO)
+
+#### Cores - NUNCA Hardcoded
+- ❌ **PROIBIDO**: Cores hex/rgb diretas (`#4dd4a8`, `rgb(77, 212, 168)`)
+- ❌ **PROIBIDO**: Tailwind arbitrárias (`dark:bg-[#4dd4a8]`, `text-[#7dd3ff]`)
+- ✅ **OBRIGATÓRIO**: Variáveis CSS (`var(--accent)`, `var(--link)`)
+- ✅ **OBRIGATÓRIO**: Classes Tailwind configuradas (`dark:bg-dark-accent`, `dark:text-dark-link`)
+
+#### Mobile-First Obrigatório
+- ✅ Base CSS sem media query (mobile)
+- ✅ Ajustes com `@media (min-width: 1024px)` ou `lg:` prefix
+
+#### Variáveis CSS Obrigatórias
+- ✅ Espaçamento: usar `var(--space-8)`, `var(--space-16)`
+- ✅ Tipografia: usar `var(--font-size-3xl)`, `var(--line-height-relaxed)`
+- ✅ Glass morphism: usar `var(--glass-bg)`, `var(--glass-border)`
+
 ### O que é Bem-vindo
 - Legibilidade e redução de ruído
 - Consistência entre telas e estados
 - Hierarquia visual clara
-- Acessibilidade (contraste, foco, navegação por teclado)
+- Acessibilidade (contraste WCAG AA, foco, navegação por teclado)
+- Uso de variáveis CSS e tokens de design
 
 ### O que Evitar
 - Efeitos chamativos e distrações
 - Saturação gratuita
 - Animações celebratórias
 - Metáforas fechadas que reduzam leitura do contexto
+- **Cores hardcoded (hex/rgb ou Tailwind arbitrárias)** - use variáveis CSS ou classes configuradas
 
 ---
 
@@ -500,4 +520,9 @@ Documentação:
 ---
 
 **Última Atualização**: 2025-01-20  
-**Versão**: 1.0
+**Versão**: 1.2
+
+### Changelog
+- **1.2** (2025-01-20): Adicionadas regras críticas de design (cores hardcoded proibidas) após revisão completa
+- **1.1** (2025-01-20): Adicionada seção de arquivos de referência para contexto
+- **1.0** (2025-01-20): Versão inicial
