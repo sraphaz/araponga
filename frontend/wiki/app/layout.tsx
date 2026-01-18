@@ -59,11 +59,10 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  // Padrão: dark mode (se não houver preferência salva)
+                  // Garantia adicional: verifica novamente após DOM carregar
                   const savedTheme = localStorage.getItem('wiki-theme');
                   const theme = savedTheme || 'dark';
                   
-                  // Aplica dark mode imediatamente para evitar flash branco
                   if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
                   } else {

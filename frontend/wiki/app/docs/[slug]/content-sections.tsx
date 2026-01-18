@@ -60,7 +60,7 @@ function processContentIntoSections(html: string): Section[] {
     return [{
       title: '',
       content: html,
-      isLong: textLength > 500,
+      isLong: textLength > 300, // Reduzido de 500 para 300 para ativar progressive disclosure mais cedo
       level: 1,
     }];
   }
@@ -73,7 +73,7 @@ function processContentIntoSections(html: string): Section[] {
       sections.push({
         title: '',
         content: beforeContent,
-        isLong: textLength > 500,
+        isLong: textLength > 300, // Reduzido de 500 para 300
         level: 1,
       });
     }
@@ -94,7 +94,7 @@ function processContentIntoSections(html: string): Section[] {
     sections.push({
       title: currentMatch.title,
       content: sectionContent,
-      isLong: textLength > 500,
+      isLong: textLength > 300, // Reduzido de 500 para 300 para ativar progressive disclosure mais cedo
       level: currentMatch.level,
       id: currentMatch.id,
     });

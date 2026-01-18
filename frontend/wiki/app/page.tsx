@@ -8,6 +8,8 @@ import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
+import { Sidebar } from "../components/layout/Sidebar";
+import { MobileSidebar } from "../components/layout/MobileSidebar";
 import { FeatureCard } from "../components/ui/FeatureCard";
 import { QuickLinks } from "../components/layout/QuickLinks";
 import { ApiDomainDiagram } from "../components/content/ApiDomainDiagram";
@@ -101,8 +103,12 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <MobileSidebar />
 
-      {/* Main Content */}
+      {/* Main Content with Sidebar */}
+      <div className="flex-1 flex">
+        <Sidebar />
+        
       <main className="flex-1 container-max py-16 md:py-20">
         {onboardingDoc && (
           <div className="glass-card animation-fade-in">
@@ -198,6 +204,7 @@ export default async function HomePage() {
           </div>
         </div>
       </main>
+      </div>
 
       <Footer />
     </div>
