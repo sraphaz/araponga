@@ -238,12 +238,12 @@ Documentos sincronizados:
 - `docs/10_ARCHITECTURE_DECISIONS.md` - Decisões arquiteturais
 - `docs/22_COHESION_AND_TESTS.md` - Status de implementação
 - `docs/40_CHANGELOG.md` - Histórico de mudanças
-- `docs/backlog-api/README.md` - Backlog completo (29 fases)
+- `docs/backlog-api/README.md` - Backlog completo (número de fases calculado dinamicamente - ver `PROJECT_PHASES_CONFIG.md`)
 
 ### Estrutura de Documentação
 - `docs/00_INDEX.md` - Índice completo
 - `docs/README.md` - Visão geral
-- `docs/STATUS_FASES.md` - Status de todas as 29 fases
+- `docs/STATUS_FASES.md` - Status das fases (número calculado dinamicamente - ver `PROJECT_PHASES_CONFIG.md`)
 
 ---
 

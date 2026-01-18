@@ -1,10 +1,11 @@
 # Status das Fases - Backlog API
 
 **Última Atualização**: 2025-01-20  
-**Total de Fases**: 29  
-**Fases Completas**: 8 (28%)  
+**Total de Fases**: [Calcular dinamicamente com `node scripts/get-phase-count.mjs`]  
+**Nota**: O número total de fases é calculado automaticamente contando arquivos `FASE*.md` em `docs/backlog-api/`. Ver `docs/PROJECT_PHASES_CONFIG.md` para mais informações.  
+**Fases Completas**: 8  
 **Fases em Andamento**: 0  
-**Fases Pendentes**: 21 (72%)
+**Fases Pendentes**: [Calcular: Total - Completas - Em Andamento]
 
 ---
 

@@ -54,7 +54,7 @@
 ### Nomenclatura Obrigatória
 - ✅ Use sempre **territory** (NUNCA "place" ou "location")
 - ✅ Use **items** (NUNCA "listings") para produtos do marketplace
-- ✅ Use **29 fases** (NUNCA "24 fases") ao referenciar backlog
+- ✅ Use **número total de fases** calculado dinamicamente (ver `docs/PROJECT_PHASES_CONFIG.md`) ao referenciar backlog - NUNCA hardcode valores fixos
 - ✅ Use **membership** para vínculo usuário-território
 - ✅ Use **visitor/resident** para papéis (NUNCA "user", "member" genérico)
 
@@ -1085,7 +1085,7 @@ Documentação:
 - `docs/10_ARCHITECTURE_DECISIONS.md` - Decisões arquiteturais
 - `docs/12_DOMAIN_MODEL.md` - Modelo de domínio
 - `docs/60_API_LÓGICA_NEGÓCIO.md` - Lógica de negócio e APIs
-- `docs/backlog-api/README.md` - Backlog completo (29 fases)
+- `docs/backlog-api/README.md` - Backlog completo (ver número de fases em `docs/PROJECT_PHASES_CONFIG.md`)
 
 ### Glossário
 - `docs/05_GLOSSARY.md` - Termos e conceitos do projeto
@@ -1100,7 +1100,7 @@ Documentação:
 
 1. **Documentação desatualizada é um bug crítico**
 2. **Territory é geográfico e neutro - NUNCA coloque lógica social nele**
-3. **Sempre use "territory", "items", "29 fases" - nunca alternativas**
+3. **Sempre use "territory", "items", número dinâmico de fases - NUNCA hardcode valores fixos de fases**
 4. **Cobertura de testes >90% é obrigatória**
 5. **Sempre valide entrada e verifique autorização**
 6. **Use paginação em TODAS as listagens**

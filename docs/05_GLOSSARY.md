@@ -118,7 +118,7 @@
 
 - **"Place" ou "Location"** → Use **"Territory"** ou **"Território"**
 - **"Listings"** → Use **"Items"** ou **"Itens"**
-- **"24 fases"** → Use **"29 fases"** (backlog completo)
+- **"24 fases"** ou valores hardcoded → Use **"número total de fases"** calculado dinamicamente (ver `docs/PROJECT_PHASES_CONFIG.md`)
 - **"User" ou "Member" genérico** → Prefira **"Visitor"** ou **"Resident"** conforme contexto
 
 ### ✅ Use Sempre
@@ -127,7 +127,7 @@
 - **Items** (não "listings")
 - **Membership** (para vínculo usuário-território)
 - **Visitor/Resident** (para papéis, não "user" genérico)
-- **29 fases** (para referência ao backlog)
+- **Número total de fases** calculado dinamicamente (ver `docs/PROJECT_PHASES_CONFIG.md`) - NUNCA hardcode valores fixos
 
 ---
 
