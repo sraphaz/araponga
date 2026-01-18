@@ -115,10 +115,20 @@ async function getDocContent(fileName: string) {
     // Processa links no HTML renderizado para incluir basePath
     htmlContent = processMarkdownLinks(htmlContent, '/wiki');
 
+    // Helper para remover prefixos numéricos (00_, 01_, etc.) do nome do arquivo
+    function removeNumericPrefix(text: string): string {
+      return text.replace(/^\d+_/, "");
+    }
+
+    // Gera título: usa frontmatter title, ou remove prefixo numérico e substitui _ por espaços
+    const fileNameWithoutExt = fileName.replace(".md", "");
+    const titleWithoutPrefix = removeNumericPrefix(fileNameWithoutExt);
+    const fallbackTitle = titleWithoutPrefix.replace(/_/g, " ");
+
     return {
       content: htmlContent,
       frontMatter: data,
-      title: data.title || fileName.replace(".md", "").replace(/_/g, " "),
+      title: data.title || fallbackTitle,
     };
   } catch (error) {
     console.error(`Error reading ${fileName}:`, error);
