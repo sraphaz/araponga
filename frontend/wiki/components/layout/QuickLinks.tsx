@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { OfficialIcon } from "../ui/OfficialIcon";
+import { OfficialIcon } from "../ui/OfficialIcon";
 
 interface QuickLink {
   label: string;
   href: string;
-  icon: string;
+  icon?: string;
+  iconSrc?: string;
   external?: boolean;
   description?: string;
 }
@@ -14,14 +17,14 @@ const quickLinks: QuickLink[] = [
   {
     label: "Discord",
     href: "https://discord.gg/auwqN8Yjgw",
-    icon: "💬",
+    iconSrc: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.svg",
     external: true,
     description: "Conecte-se com o time",
   },
   {
     label: "GitHub",
     href: "https://github.com/sraphaz/araponga",
-    icon: "🔗",
+    iconSrc: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.svg",
     external: true,
     description: "Repositório do projeto",
   },
@@ -58,7 +61,19 @@ export function QuickLinks() {
                 rel="noopener noreferrer"
                 className="quick-link group"
               >
-                <span className="quick-link-icon">{link.icon}</span>
+                <span className="quick-link-icon">
+                  {link.iconSrc ? (
+                    <OfficialIcon 
+                      src={link.iconSrc} 
+                      alt={link.label} 
+                      width={24} 
+                      height={24}
+                      className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
+                    />
+                  ) : (
+                    link.icon
+                  )}
+                </span>
                 <div className="quick-link-content">
                   <span className="quick-link-label">{link.label}</span>
                   {link.description && (
@@ -81,7 +96,19 @@ export function QuickLinks() {
               </a>
             ) : (
               <Link href={link.href} className="quick-link">
-                <span className="quick-link-icon">{link.icon}</span>
+                <span className="quick-link-icon">
+                  {link.iconSrc ? (
+                    <OfficialIcon 
+                      src={link.iconSrc} 
+                      alt={link.label} 
+                      width={24} 
+                      height={24}
+                      className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
+                    />
+                  ) : (
+                    link.icon
+                  )}
+                </span>
                 <div className="quick-link-content">
                   <span className="quick-link-label">{link.label}</span>
                   {link.description && (
