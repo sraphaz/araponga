@@ -54,9 +54,8 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
 
 async function getDocContent(filePath: string) {
   try {
-    // Ajuste de caminho: de frontend/wiki para docs/ na raiz
-    // process.cwd() em dev/build é frontend/wiki, então precisa subir 2 níveis
-    const docsPath = join(process.cwd(), "..", "..", "..", "docs", filePath).replace(/\\/g, '/');
+    // Caminho: de frontend/wiki para docs/ na raiz (2 níveis acima)
+    const docsPath = join(process.cwd(), "..", "..", "docs", filePath).replace(/\\/g, '/');
     const fileContents = await readFile(docsPath, "utf8");
     const { content, data } = matter(fileContents);
 
