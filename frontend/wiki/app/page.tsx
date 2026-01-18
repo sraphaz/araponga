@@ -54,7 +54,9 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
 
 async function getDocContent(filePath: string) {
   try {
-    const docsPath = join(process.cwd(), "..", "..", "docs", filePath);
+    // Ajuste de caminho: de frontend/wiki para docs/ na raiz
+    // process.cwd() em dev/build é frontend/wiki, então precisa subir 2 níveis
+    const docsPath = join(process.cwd(), "..", "..", "..", "docs", filePath).replace(/\\/g, '/');
     const fileContents = await readFile(docsPath, "utf8");
     const { content, data } = matter(fileContents);
 
@@ -124,6 +126,29 @@ async function getDocContent(filePath: string) {
 export default async function HomePage() {
   // Carregar ONBOARDING_PUBLICO como landing
   const onboardingDoc = await getDocContent("ONBOARDING_PUBLICO.md");
+
+  // Se não conseguir carregar, mostra fallback ao invés de 404
+  if (!onboardingDoc) {
+    return (
+      <main className="container-max py-12 lg:py-16 px-4 md:px-6 lg:px-8">
+        <div className="glass-card animation-fade-in">
+          <div className="glass-card__content markdown-content">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
+              Boas-Vindas ao Araponga
+            </h1>
+            <p className="text-lg text-forest-700 dark:text-forest-300 mb-8">
+              Bem-vindo à documentação completa do Araponga.
+            </p>
+            <div className="mt-8">
+              <Link href="/docs" className="btn-primary">
+                Ver Documentação
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="container-max py-12 lg:py-16 px-4 md:px-6 lg:px-8">
