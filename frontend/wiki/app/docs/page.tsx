@@ -6,20 +6,20 @@ import { CategoryCard } from "../../components/ui/CategoryCard";
 
 // Estrutura hierárquica da documentação
 const docStructure = {
-  "🎯 Visão e Produto": [
+  "Visão e Produto": [
     { name: "Visão do Produto", path: "01_PRODUCT_VISION.md" },
     { name: "Roadmap", path: "02_ROADMAP.md" },
     { name: "Backlog", path: "03_BACKLOG.md" },
     { name: "User Stories", path: "04_USER_STORIES.md" },
     { name: "Glossário", path: "05_GLOSSARY.md" },
   ],
-  "🏗️ Arquitetura e Design": [
+  "Arquitetura e Design": [
     { name: "Decisões Arquiteturais", path: "10_ARCHITECTURE_DECISIONS.md" },
     { name: "Arquitetura de Services", path: "11_ARCHITECTURE_SERVICES.md" },
     { name: "Modelo de Domínio", path: "12_DOMAIN_MODEL.md" },
     { name: "Domain Routing", path: "13_DOMAIN_ROUTING.md" },
   ],
-  "🌱 Onboarding e Comunidade": [
+  "Onboarding e Comunidade": [
     { name: "Onboarding Público", path: "ONBOARDING_PUBLICO.md" },
     { name: "Onboarding para Desenvolvedores", path: "ONBOARDING_DEVELOPERS.md" },
     { name: "Onboarding para Analistas", path: "ONBOARDING_ANALISTAS_FUNCIONAIS.md" },
@@ -28,18 +28,18 @@ const docStructure = {
     { name: "Mentoria", path: "MENTORIA.md" },
     { name: "Priorização de Propostas", path: "PRIORIZACAO_PROPOSTAS.md" },
   ],
-  "🔧 Desenvolvimento": [
+  "Desenvolvimento": [
     { name: "Plano de Implementação", path: "20_IMPLEMENTATION_PLAN.md" },
     { name: "Revisão de Código", path: "21_CODE_REVIEW.md" },
     { name: "Coesão e Testes", path: "22_COHESION_AND_TESTS.md" },
     { name: "Implementação de Recomendações", path: "23_IMPLEMENTATION_RECOMMENDATIONS.md" },
     { name: "Estrutura do Projeto", path: "PROJECT_STRUCTURE.md" },
   ],
-  "🛡️ Segurança": [
+  "Segurança": [
     { name: "Configuração de Segurança", path: "SECURITY_CONFIGURATION.md" },
     { name: "Security Audit", path: "SECURITY_AUDIT.md" },
   ],
-  "📚 Referência": [
+  "Referência": [
     { name: "Índice Completo", path: "00_INDEX.md" },
     { name: "Changelog", path: "40_CHANGELOG.md" },
     { name: "Contribuindo", path: "41_CONTRIBUTING.md" },
@@ -62,18 +62,18 @@ export default async function DocsPage() {
 
   // Agrupar categorias por áreas semânticas para quebras visuais
   const coreCategories = [
-    "🎯 Visão e Produto",
-    "🏗️ Arquitetura e Design",
+    "Visão e Produto",
+    "Arquitetura e Design",
   ];
 
   const communityCategories = [
-    "🌱 Onboarding e Comunidade",
-    "🔧 Desenvolvimento",
+    "Onboarding e Comunidade",
+    "Desenvolvimento",
   ];
 
   const referenceCategories = [
-    "🛡️ Segurança",
-    "📚 Referência",
+    "Segurança",
+    "Referência",
   ];
 
   const categoryGroups = [

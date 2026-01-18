@@ -11,16 +11,14 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, docs }: CategoryCardProps) {
-  const emojiMatch = category.match(/^(\S+)\s/);
-  const emoji = emojiMatch ? emojiMatch[1] : "";
-  const titleWithoutEmoji = emoji ? category.replace(/^\S+\s/, "") : category;
+  // Remove emojis do título - design limpo sem excessos
+  const titleWithoutEmoji = category.replace(/^[\S\s]*?\s/, "").trim();
 
   return (
     <div className="category-card">
       <div className="category-card__content">
-        <h2 className="text-lg font-semibold text-forest-900 dark:text-forest-50 mb-4 flex items-center gap-2">
-          {emoji && <span className="text-xl opacity-80">{emoji}</span>}
-          <span>{titleWithoutEmoji}</span>
+        <h2 className="text-lg font-semibold text-forest-900 dark:text-forest-50 mb-4">
+          {titleWithoutEmoji}
         </h2>
         <ul className="space-y-2 flex-1">
           {docs.map((doc) => {
