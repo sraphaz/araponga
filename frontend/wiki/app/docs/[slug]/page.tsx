@@ -214,29 +214,6 @@ export default async function DocPage({ params }: PageProps) {
                     {doc.title}
                   </h1>
 
-                  {/* Document Metadata - Badges */}
-                  {doc.frontMatter && (doc.frontMatter.version || doc.frontMatter.date || doc.frontMatter.status) && (
-                    <div className="mb-12 pb-6 border-b-2 border-forest-200/80 dark:border-forest-800/80 flex flex-wrap gap-3">
-                      {doc.frontMatter.version && (
-                        <span className="metadata-badge">
-                          <span className="mr-2">📌</span>
-                          Versão: {doc.frontMatter.version}
-                        </span>
-                      )}
-                      {doc.frontMatter.date && (
-                        <span className="metadata-badge">
-                          <span className="mr-2">📅</span>
-                          {doc.frontMatter.date}
-                        </span>
-                      )}
-                      {doc.frontMatter.status && (
-                        <span className="metadata-badge">
-                          <span className="mr-2">✓</span>
-                          {doc.frontMatter.status}
-                        </span>
-                      )}
-                    </div>
-                  )}
 
                   {/* Document Content - Refinado com Progressive Disclosure */}
                   <ContentSections htmlContent={doc.content} />

@@ -178,20 +178,6 @@ export default async function HomePage() {
                     {onboardingDoc.title}
                   </h1>
 
-                  {/* Document Metadata - Padrão internacional discreto */}
-              {onboardingDoc.frontMatter && (onboardingDoc.frontMatter.version || onboardingDoc.frontMatter.date) && (
-                <div className="document-metadata">
-                  {onboardingDoc.frontMatter.version && (
-                    <span>v{onboardingDoc.frontMatter.version}</span>
-                  )}
-                  {onboardingDoc.frontMatter.version && onboardingDoc.frontMatter.date && (
-                    <span className="separator">·</span>
-                  )}
-                  {onboardingDoc.frontMatter.date && (
-                    <time dateTime={onboardingDoc.frontMatter.date}>{onboardingDoc.frontMatter.date}</time>
-                  )}
-                </div>
-              )}
 
               {/* Document Content - Com Progressive Disclosure */}
               <ContentSections htmlContent={onboardingDoc.content} />

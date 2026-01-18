@@ -212,20 +212,6 @@ export default async function DocPage({ params }: PageProps) {
                 {doc.title}
               </h1>
 
-              {/* Document Metadata - Padrão internacional discreto */}
-              {doc.frontMatter && (doc.frontMatter.version || doc.frontMatter.date) && (
-                <div className="document-metadata">
-                  {doc.frontMatter.version && (
-                    <span>v{doc.frontMatter.version}</span>
-                  )}
-                  {doc.frontMatter.version && doc.frontMatter.date && (
-                    <span className="separator">·</span>
-                  )}
-                  {doc.frontMatter.date && (
-                    <time dateTime={doc.frontMatter.date}>{doc.frontMatter.date}</time>
-                  )}
-                </div>
-              )}
 
               {/* Document Content - Refinado com Progressive Disclosure */}
               <ContentSections htmlContent={doc.content} />
