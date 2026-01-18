@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
 import { JetBrains_Mono } from "next/font/google";
+import { Header } from "../components/layout/Header";
+import { Sidebar } from "../components/layout/Sidebar";
+import { MobileSidebar } from "../components/layout/MobileSidebar";
+import { Footer } from "../components/layout/Footer";
 
 // Inter - Fonte moderna e sóbria para corpo de texto
 // Usada por Vercel, Stripe, Linear - transmite profissionalismo e modernidade
@@ -59,11 +63,10 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  // Padrão: dark mode (se não houver preferência salva)
+                  // Garantia adicional: verifica novamente após DOM carregar
                   const savedTheme = localStorage.getItem('wiki-theme');
                   const theme = savedTheme || 'dark';
                   
-                  // Aplica dark mode imediatamente para evitar flash branco
                   if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
                   } else {
@@ -89,7 +92,17 @@ export default function RootLayout({
             `,
           }}
         />
-        {children}
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <MobileSidebar />
+          <div className="flex-1 flex">
+            <Sidebar />
+            <div className="flex-1">
+              {children}
+            </div>
+          </div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

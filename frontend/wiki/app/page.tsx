@@ -6,8 +6,7 @@ import { remark } from "remark";
 import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
-import { Header } from "../components/layout/Header";
-import { Footer } from "../components/layout/Footer";
+// Header, Sidebar e Footer agora estão no layout.tsx raiz
 import { FeatureCard } from "../components/ui/FeatureCard";
 import { QuickLinks } from "../components/layout/QuickLinks";
 import { ApiDomainDiagram } from "../components/content/ApiDomainDiagram";
@@ -99,11 +98,7 @@ export default async function HomePage() {
   const onboardingDoc = await getDocContent("ONBOARDING_PUBLICO.md");
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-
-      {/* Main Content */}
-      <main className="flex-1 container-max py-16 md:py-20">
+    <main className="container-max py-16 md:py-20">
         {onboardingDoc && (
           <div className="glass-card animation-fade-in">
             <div className="glass-card__content">
@@ -197,9 +192,6 @@ export default async function HomePage() {
             <QuickLinks />
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+    </main>
   );
 }
