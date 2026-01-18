@@ -24,8 +24,8 @@ const sidebarSections: SidebarSection[] = [
   {
     title: "Onboarding",
     items: [
-      { title: "Desenvolvedores", href: "/docs/ONBOARDING_DEVELOPERS", description: "Comece a desenvolver" },
       { title: "Analistas Funcionais", href: "/docs/ONBOARDING_ANALISTAS_FUNCIONAIS", description: "Análise funcional e territorial" },
+      { title: "Desenvolvedores", href: "/docs/ONBOARDING_DEVELOPERS", description: "Comece a desenvolver" },
     ],
   },
   {
