@@ -65,8 +65,23 @@ async function getDocContent(filePath: string) {
 
     // Adiciona IDs aos headings para navegação (garantindo unicidade)
     let htmlContent = processedContent.toString();
-    const usedIds = new Map<string, number>(); // Rastreia IDs já usados e seus contadores
     
+    // Extrai o primeiro H1 do markdown para usar como título se não houver frontmatter title
+    let firstH1Title: string | null = null;
+    htmlContent = htmlContent.replace(
+      /<h1[^>]*>(.*?)<\/h1>/gi,
+      (match, text) => {
+        // Se ainda não capturamos o primeiro H1, usa-o como título
+        if (firstH1Title === null) {
+          firstH1Title = getTextContent(text).trim();
+        }
+        // Remove o H1 do conteúdo (não renderiza, evita duplicação)
+        return '';
+      }
+    );
+    
+    const usedIds = new Map<string, number>(); // Rastreia IDs já usados e seus contadores
+
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
@@ -78,7 +93,7 @@ async function getDocContent(filePath: string) {
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos
           .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dash
           .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
-        
+
         // Garante ID único: se já existe, adiciona sufixo numérico
         let id = baseId;
         if (usedIds.has(baseId)) {
@@ -88,7 +103,7 @@ async function getDocContent(filePath: string) {
         } else {
           usedIds.set(baseId, 0);
         }
-        
+
         return `<h${level} id="${id}">${text}</h${level}>`;
       }
     );
@@ -101,7 +116,7 @@ async function getDocContent(filePath: string) {
       return text.replace(/^\d+_/, "");
     }
 
-    // Gera título: usa frontmatter title, ou remove prefixo numérico e substitui _ por espaços
+    // Gera título: usa frontmatter title, ou primeiro H1 do markdown, ou nome do arquivo
     const fileName = filePath.split('/').pop() || '';
     const fileNameWithoutExt = fileName.replace(".md", "");
     const titleWithoutPrefix = removeNumericPrefix(fileNameWithoutExt);
@@ -110,7 +125,7 @@ async function getDocContent(filePath: string) {
     return {
       content: htmlContent,
       frontMatter: data,
-      title: data.title || fallbackTitle,
+      title: data.title || firstH1Title || fallbackTitle,
     };
   } catch (error) {
     console.error(`Error reading ${filePath}:`, error);
