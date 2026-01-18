@@ -8,7 +8,7 @@ export function ApiDomainDiagram() {
       <div className="glass-card animation-fade-in">
         <div className="glass-card__content">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-forest-900 dark:text-forest-50 mb-4">
               Visão Geral do Sistema Araponga
             </h2>
             <p className="text-lg text-forest-700 dark:text-forest-300 max-w-2xl mx-auto">
@@ -33,12 +33,12 @@ export function ApiDomainDiagram() {
                 if (fallback) fallback.style.display = 'block';
               }}
             />
-            <div 
+            <div
               className="hidden p-8 bg-forest-100 dark:bg-forest-900/50 rounded-xl text-center"
               style={{ display: 'none' }}
             >
               <p className="text-forest-600 dark:text-forest-400 mb-4">
-                📊 Diagrama do Domínio API Araponga
+                Diagrama do Domínio API Araponga
               </p>
               <p className="text-sm text-forest-500 dark:text-forest-500">
                 A imagem será carregada quando disponível em <code>/public/araponga-api-domain-diagram.png</code>

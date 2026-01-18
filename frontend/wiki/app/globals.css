@@ -23,17 +23,18 @@
     --spacing-card: 80px;
     --gradient-overlay: linear-gradient(180deg, rgba(241, 248, 244, 0.6) 0%, rgba(241, 248, 244, 0.2) 100%);
 
-    /* Design System - Typography Scale */
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
-    --font-size-5xl: 3rem;
-    --font-size-6xl: 3.75rem;
+    /* Design System - Typography Scale (Harmonic Scale 1.125) */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.5rem;      /* 24px */
+    --font-size-3xl: 1.875rem;    /* 30px */
+    --font-size-4xl: 2.25rem;     /* 36px */
+    --font-size-5xl: 3rem;        /* 48px */
+    --font-size-6xl: 3.75rem;     /* 60px */
+    --font-size-7xl: 4.5rem;      /* 72px */
 
     /* Line Heights - Optimized for reading */
     --line-height-tight: 1.25;
@@ -49,22 +50,32 @@
     --letter-spacing-wide: 0.025em;
     --letter-spacing-wider: 0.05em;
 
+    /* Spacing System (Base 8px) */
+    --spacing-xxs: 0.25rem;  /* 4px */
+    --spacing-xs: 0.5rem;    /* 8px */
+    --spacing-sm: 0.75rem;   /* 12px */
+    --spacing-md: 1rem;      /* 16px */
+    --spacing-lg: 1.5rem;    /* 24px */
+    --spacing-xl: 2rem;      /* 32px */
+    --spacing-2xl: 3rem;     /* 48px */
+    --spacing-3xl: 4rem;     /* 64px */
+
     /* Content Widths - Optimal reading */
     --content-width-narrow: 65ch;
     --content-width-default: 75ch;
     --content-width-wide: 90ch;
 
-    /* Design System - Cores de Acento e Links (conforme DESIGN_SYSTEM_IDENTIDADE_VISUAL.md) */
-    --accent: #4dd4a8;
-    --accent-hover: #5ee5b9;
-    --accent-strong: #3bc495;
+    /* Design System - Cores de Acento e Links (usando tokens unificados) */
+    --accent: var(--color-primary-400);           /* #4dd4a8 */
+    --accent-hover: var(--color-primary-500);     /* #3bc495 */
+    --accent-strong: var(--color-primary-500);    /* #3bc495 */
     --accent-subtle: rgba(77, 212, 168, 0.15);
-    --link: #7dd3ff;
-    --link-hover: #9de3ff;
+    --link: var(--color-secondary-300);           /* #7dd3ff */
+    --link-hover: var(--color-secondary-400);     /* #9de3ff */
 
     /* Dark mode colors */
-    --bg-dark: #0a0e12;
-    --border-dark: #25303a;
+    --bg-dark: var(--color-dark-950);             /* #0a0e12 */
+    --border-dark: var(--color-dark-800);         /* #1e2830 */
   }
 
   /* Dark mode - identidade visual do devportal */
@@ -178,30 +189,22 @@
     max-width: 100%;
   }
 
-  @media (min-width: 1024px) {
-    .container-max {
-      max-width: 90rem; /* 1440px - melhor aproveitamento de espaço */
-    }
-  }
+  /* Removido max-width restritivo - conteúdo usa toda largura disponível */
 
-  @media (min-width: 1536px) {
-    .container-max {
-      max-width: 96rem; /* 1536px - ainda mais espaço em telas muito grandes */
-    }
-  }
-
-  /* Glass card - Modern design refinement */
+  /* Glass card - Modern design refinement - Bordas simplificadas */
   .glass-card {
     position: relative;
     border-radius: var(--glass-radius);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
+    border-top: none; /* Removida borda superior */
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     overflow: hidden;
     transition: var(--transition-smooth);
     isolation: isolate;
+    /* Removido encadeamento de bordas - design limpo */
   }
 
   .glass-card::before {
@@ -218,11 +221,11 @@
   .glass-card:hover {
     box-shadow: var(--glass-hover-shadow);
     transform: translateY(-4px);
-    border-color: rgba(55, 123, 87, 0.3);
+    border-color: var(--accent-subtle); /* Usa token de accent com opacity */
   }
 
   :root.dark .glass-card:hover {
-    border-color: rgba(77, 212, 168, 0.3); /* Usa var(--accent) com opacity */
+    border-color: var(--accent-subtle); /* Usa token - mesmo para light e dark */
   }
 
   .glass-card:hover::before {
@@ -255,7 +258,8 @@
   .glass-card__content {
     position: relative;
     z-index: 1;
-    padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 6vw, 5rem);
+    /* Espaçamento otimizado - reduzido padding superior para menos margem */
+    padding: clamp(0.75rem, 1.5vw, 1rem) clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
   }
 
   /* Navigation refinada - Enterprise design */
@@ -277,7 +281,7 @@
     @apply bg-forest-600;
     background-color: var(--accent) !important;
     transform: translateX(-50%);
-    transition: width var(--transition-quick);
+    transition: width var(--transition-base); /* 200ms - indicador de hover */
   }
 
   .nav-link:hover::before {
@@ -293,43 +297,59 @@
   }
 
   /* Category card - Enterprise design */
-  .category-card {
-    @apply glass-card;
-  }
-
+  /* Category Card - Layout limpo sem bordas pesadas */
   .category-card {
     @apply h-full;
-    min-height: 280px;
+    /* Bordas simplificadas - sem encadeamento */
+    border-radius: var(--glass-radius);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    transition: var(--transition-smooth);
+    /* Altura automática - permite conteúdo expandir sem scroll interno */
+    display: flex;
+    flex-direction: column;
+    /* Remove min/max height para evitar scroll interno */
+  }
+
+  .category-card:hover {
+    box-shadow: var(--glass-hover-shadow);
+    transform: translateY(-2px);
+    border-color: var(--accent-subtle);
   }
 
   .category-card__content {
-    padding: 1.75rem 1.5rem;
-    height: 100%;
+    /* Padding otimizado - melhor uso do espaço */
+    padding: 1.5rem 1.25rem;
     display: flex;
     flex-direction: column;
+    flex: 1;
+    /* Removido overflow: hidden para evitar scroll interno */
   }
 
   @media (min-width: 640px) {
     .category-card__content {
-      padding: 2rem 1.75rem;
+      padding: 1.75rem 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .category-card__content {
-      padding: 2.25rem 2rem;
-      min-height: 320px;
+      padding: 2rem 1.75rem;
     }
   }
 
-  /* Doc link - Design limpo e legível */
+  /* Doc link - Design limpo e legível - Tamanho aumentado para melhor legibilidade */
   .doc-link {
-    @apply flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg;
-    @apply text-sm sm:text-base text-forest-700 dark:text-forest-300;
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg;
+    @apply text-base text-forest-700 dark:text-forest-300;
     @apply hover:text-forest-900 dark:hover:text-forest-50;
     @apply transition-colors duration-200 ease-out;
     @apply hover:bg-forest-50/80 dark:hover:bg-forest-900/60;
-    line-height: var(--line-height-relaxed);
+    line-height: var(--line-height-normal); /* 1.5 - usa token */
+    font-size: var(--font-size-base); /* 16px - legível, não pequeno */
   }
 
   .doc-link-arrow {
@@ -345,7 +365,7 @@
 
   /* Hero section - Enterprise typography */
   .hero-title {
-    @apply text-5xl md:text-6xl lg:text-7xl font-bold;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
     @apply bg-gradient-to-br from-forest-900 via-forest-800 to-forest-700;
     @apply dark:from-forest-50 dark:via-forest-100 dark:to-forest-200;
     @apply bg-clip-text text-transparent;
@@ -401,7 +421,7 @@
     border: 1.5px solid rgba(198, 227, 210, 0.6);
   }
 
-  /* Markdown content - Enterprise typography system */
+  /* Markdown content - Enterprise typography system - Layout limpo */
   .markdown-content {
     @apply prose prose-lg max-w-none;
     @apply prose-headings:font-bold prose-headings:text-forest-900 dark:prose-headings:text-forest-100;
@@ -421,19 +441,19 @@
   /* Responsivo: conteúdo aproveita melhor espaço em telas maiores */
   @media (min-width: 1280px) {
     .markdown-content {
-      max-width: var(--content-width-wide); /* 90ch em xl */
+      /* Removido max-width - conteúdo usa toda largura disponível */
     }
   }
 
   @media (min-width: 1536px) {
     .markdown-content {
-      max-width: 95ch; /* Ainda mais largo em 2xl, mantendo legibilidade */
+      /* Removido max-width - conteúdo usa toda largura disponível */
     }
   }
 
   /* Typography hierarchy - Enterprise level */
   .markdown-content h1 {
-    @apply text-5xl md:text-6xl font-bold text-forest-900 dark:text-forest-50 mb-10 mt-16;
+    @apply text-3xl md:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-0 mt-0;
     @apply pb-6 border-b-2 border-forest-200 dark:border-forest-800;
     letter-spacing: var(--letter-spacing-tight);
     line-height: var(--line-height-tight);
@@ -445,43 +465,32 @@
   }
 
   .markdown-content h2 {
-    @apply text-3xl md:text-4xl font-bold text-forest-800 dark:text-forest-100 mb-8 mt-20;
-    @apply pb-5 border-b-2 border-forest-200/80 dark:border-forest-800/80;
+    @apply text-xl md:text-2xl font-bold text-forest-800 dark:text-forest-100 mb-0 mt-10;
     font-family: var(--font-inter), system-ui, sans-serif;
-    letter-spacing: -0.035em; /* Tighter para headings grandes - sobriedade */
-    line-height: 1.2; /* Snug para impacto visual */
-    position: relative;
+    letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token */
+    line-height: var(--line-height-snug); /* 1.375 - usa token */
     scroll-margin-top: 120px;
     font-weight: 700;
     max-width: 100%; /* Headings podem usar largura completa */
     font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
-  }
-
-  .markdown-content h2::before {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 60px;
-    height: 2px;
-    @apply bg-forest-500 dark:bg-dark-accent;
-    border-radius: 1px;
+    /* Removido: bordas inferiores que espremiam conteúdo */
+    /* Removido padding abaixo do título */
   }
 
   .markdown-content h3 {
-    @apply text-2xl md:text-3xl font-semibold text-forest-700 dark:text-forest-200 mb-7 mt-14;
+    @apply text-lg md:text-xl font-semibold text-forest-700 dark:text-forest-200 mb-5 mt-8;
     font-family: var(--font-inter), system-ui, sans-serif;
-    letter-spacing: -0.025em;
-    line-height: 1.3;
+    letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token */
+    line-height: var(--line-height-normal); /* 1.5 - usa token */
     font-weight: 600;
     max-width: 100%;
     font-feature-settings: "kern" 1, "liga" 1;
   }
 
   .markdown-content h4 {
-    @apply text-xl md:text-2xl font-semibold text-forest-700 dark:text-forest-200 mb-5 mt-12;
-    letter-spacing: -0.015em;
-    line-height: 1.4;
+    @apply text-xl md:text-2xl font-semibold text-forest-700 dark:text-forest-200 mb-4 mt-6;
+    letter-spacing: var(--letter-spacing-normal); /* 0 - usa token */
+    line-height: var(--line-height-normal); /* 1.5 - usa token */
     font-weight: 600;
     max-width: 100%;
   }
@@ -499,10 +508,10 @@
   /* Paragraphs - Optimized for reading (Market standards: Vercel, Stripe, Linear) */
   .markdown-content p {
     @apply mb-6 text-forest-800 dark:text-forest-200;
-    font-size: 1.0625rem; /* 17px - ótimo para leitura prolongada */
-    line-height: 1.85; /* Generoso para reduzir fadiga visual */
-    max-width: 68ch; /* 65-70ch é ideal para leitura (padrão mercado) */
-    letter-spacing: -0.01em; /* Sutil ajuste para melhor legibilidade */
+    font-size: var(--font-size-base); /* 16px - usa token */
+    line-height: var(--line-height-relaxed); /* 1.75 - usa token */
+    /* Removido max-width - conteúdo usa toda largura disponível */
+    letter-spacing: var(--letter-spacing-normal); /* 0 - usa token */
     word-spacing: 0.05em; /* Espaçamento entre palavras */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -515,25 +524,24 @@
 
   /* Primeira linha do parágrafo - atenção visual */
   .markdown-content p:first-of-type {
-    @apply text-lg;
-    font-size: 1.125rem; /* 18px - lead paragraph */
-    line-height: 1.9;
+    font-size: var(--font-size-lg); /* 18px - usa token */
+    line-height: var(--line-height-loose); /* 2 - usa token */
   }
 
   /* Lists - Enterprise spacing and design (Market standards) */
   .markdown-content ul,
   .markdown-content ol {
     @apply mb-8 pl-8 space-y-4; /* Mais espaço entre itens para respiração */
-    max-width: 68ch; /* Mesma largura que parágrafos */
+    /* Removido max-width - conteúdo usa toda largura disponível */
   }
 
   .markdown-content li {
     @apply text-forest-800 dark:text-forest-200;
-    line-height: 1.85; /* Mesma line-height dos parágrafos */
+    line-height: var(--line-height-relaxed); /* Mesma line-height dos parágrafos - usa token */
     position: relative;
-    font-size: 1.0625rem; /* Consistente com parágrafos */
-    padding-left: 0.75rem; /* Mais espaço para respiração */
-    margin-bottom: 0.25rem; /* Espaçamento extra entre itens longos */
+    font-size: var(--font-size-base); /* Consistente com parágrafos - usa token */
+    padding-left: var(--spacing-sm); /* 12px - usa token para espaçamento */
+    margin-bottom: var(--spacing-xxs); /* 4px - usa token */
   }
 
   /* Parágrafos dentro de listas */
@@ -607,7 +615,7 @@
   /* Code blocks - Enterprise design (Market standards) */
   .markdown-content code {
     @apply bg-forest-100 dark:bg-forest-900 text-forest-900 dark:text-forest-100 px-2.5 py-1 rounded-md;
-    @apply text-[0.9375rem];
+    font-size: var(--font-size-sm); /* 14px - usa token */
     font-family: var(--font-mono), 'Menlo', 'Monaco', 'Consolas', monospace;
     @apply border border-forest-200 dark:border-forest-800;
     font-feature-settings: "kern" 1, "liga" 0;
@@ -617,7 +625,7 @@
 
   /* Code dentro de parágrafos - mais compacto */
   .markdown-content p code {
-    font-size: 0.9375rem;
+    font-size: var(--font-size-sm); /* 14px - usa token */
     padding: 0.125rem 0.375rem;
   }
 
@@ -626,9 +634,9 @@
     @apply overflow-x-auto mb-10 border border-forest-800 dark:border-dark-border;
     @apply shadow-lg;
     font-family: var(--font-mono), 'Menlo', 'Monaco', 'Consolas', monospace;
-    font-size: 0.875rem; /* 14px - padrão para code blocks */
-    line-height: 1.75;
-    margin-top: 1.5rem; /* Espaçamento antes */
+    font-size: var(--font-size-sm); /* 14px - usa token */
+    line-height: var(--line-height-relaxed); /* 1.75 - usa token */
+    margin-top: var(--spacing-lg); /* 24px - usa token */
     max-width: 100%;
     font-feature-settings: "kern" 1, "liga" 0;
   }
@@ -644,9 +652,9 @@
     @apply italic text-forest-700 dark:text-forest-300;
     @apply bg-forest-50/50 dark:bg-forest-900/30 rounded-r-xl;
     @apply shadow-sm;
-    font-size: 1.125rem; /* 18px - ligeiramente maior para destaque */
-    line-height: 1.9;
-    max-width: 68ch;
+    font-size: var(--font-size-lg); /* 18px - usa token */
+    line-height: var(--line-height-loose); /* 2 - usa token */
+    /* Removido max-width - conteúdo usa toda largura disponível */
     position: relative;
     margin-left: 0;
     margin-right: 0;
@@ -702,7 +710,7 @@
   /* Horizontal rules - Modern separators (Market standards) */
   .markdown-content hr {
     @apply my-20 border-0; /* Mais espaço - quebra visual clara */
-    max-width: 68ch;
+    /* Removido max-width - conteúdo usa toda largura disponível */
     position: relative;
     height: 1px;
     background: linear-gradient(
@@ -782,16 +790,25 @@
   }
 
   /* Metadata badge - Modern design */
-  .metadata-badge {
-    @apply inline-flex items-center px-4 py-2 rounded-full;
-    @apply bg-forest-100 dark:bg-forest-900/80 text-forest-700 dark:text-forest-200 text-sm font-medium;
-    @apply border border-forest-200/60 dark:border-forest-800/60;
-    @apply shadow-sm hover:shadow-md;
-    @apply transition-all duration-300 hover:scale-105;
-    font-size: var(--font-size-sm);
-    letter-spacing: var(--letter-spacing-wide);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  /* Document Metadata - Padrão internacional discreto (Vercel, Stripe, Linear) */
+  .document-metadata {
+    font-size: var(--font-size-sm); /* 14px - texto pequeno e discreto */
+    color: var(--text-muted); /* Cor neutra - não compete com conteúdo */
+    margin-bottom: var(--space-xl); /* 32px - espaço antes do conteúdo */
+    margin-top: calc(var(--space-sm) * -1); /* -8px - reduz espaço após título */
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm); /* 8px - espaçamento entre elementos */
+    font-variant-numeric: tabular-nums; /* Alinhamento numérico para datas */
+  }
+
+  .document-metadata .separator {
+    color: var(--text-subtle);
+    opacity: 0.5; /* Separador discreto */
+  }
+
+  .document-metadata time {
+    font-variant-numeric: tabular-nums; /* Alinhamento numérico para datas */
   }
 
   /* Footer refinado */
@@ -1063,11 +1080,11 @@
   }
 
   .markdown-content h1 {
-    @apply text-4xl mb-8 mt-12;
+    @apply text-3xl md:text-4xl mb-8 mt-12;
   }
 
   .markdown-content h2 {
-    @apply text-2xl mb-6 mt-10;
+    @apply text-xl md:text-2xl mb-6 mt-10;
   }
 
   .markdown-content p {
@@ -1088,12 +1105,7 @@
 
   .markdown-content {
     @apply prose-xl;
-  }
-}
-
-@media (min-width: 1280px) {
-  .markdown-content {
-    max-width: var(--content-width-wide);
+    /* Removido max-width restritivo - conteúdo usa toda largura disponível */
   }
 }
 
@@ -1132,7 +1144,7 @@
 
 .sidebar-chevron {
   @apply w-4 h-4 text-forest-500 dark:text-forest-400;
-  @apply transition-transform duration-300;
+  transition: transform var(--transition-slow); /* 300ms - rotação suave */
 }
 
 .sidebar-chevron-open {
@@ -1147,7 +1159,7 @@
   @apply block px-3 py-2.5 rounded-lg;
   @apply text-forest-700 dark:text-forest-300 text-sm;
   @apply hover:bg-forest-100/80 dark:hover:bg-forest-900/60;
-  @apply transition-all duration-300;
+  transition: var(--transition-slow); /* 300ms - transição suave */
   @apply border-l-2 border-transparent;
 }
 
@@ -1173,15 +1185,16 @@
   @apply opacity-75;
 }
 
-/* Table of Contents - Enterprise design */
+/* Table of Contents - Enterprise design - Margem reduzida */
 .toc-container {
-  @apply glass-card p-6;
+  @apply glass-card p-4;
   @apply sticky top-24;
+  /* Removido padding excessivo - aproveita melhor espaço */
 }
 
 .toc-header {
-  @apply flex items-center space-x-2 mb-4 pb-3;
-  @apply border-b border-forest-200/80 dark:border-forest-800/80;
+  @apply flex items-center space-x-2 mb-3 pb-2;
+  /* Removida borda inferior - design mais limpo, menos encadeamento */
 }
 
 .toc-icon {
@@ -1217,7 +1230,7 @@
   @apply w-full text-left px-3 py-2 rounded-lg;
   @apply text-sm text-forest-700 dark:text-forest-300;
   @apply hover:bg-forest-100/80 dark:hover:bg-forest-900/60;
-  @apply transition-all duration-300;
+  transition: var(--transition-slow); /* 300ms - transição suave */
   @apply border-l-2 border-transparent;
 }
 

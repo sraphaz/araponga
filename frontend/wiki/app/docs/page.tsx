@@ -6,20 +6,20 @@ import { CategoryCard } from "../../components/ui/CategoryCard";
 
 // Estrutura hierárquica da documentação
 const docStructure = {
-  "🎯 Visão e Produto": [
+  "Visão e Produto": [
     { name: "Visão do Produto", path: "01_PRODUCT_VISION.md" },
     { name: "Roadmap", path: "02_ROADMAP.md" },
     { name: "Backlog", path: "03_BACKLOG.md" },
     { name: "User Stories", path: "04_USER_STORIES.md" },
     { name: "Glossário", path: "05_GLOSSARY.md" },
   ],
-  "🏗️ Arquitetura e Design": [
+  "Arquitetura e Design": [
     { name: "Decisões Arquiteturais", path: "10_ARCHITECTURE_DECISIONS.md" },
     { name: "Arquitetura de Services", path: "11_ARCHITECTURE_SERVICES.md" },
     { name: "Modelo de Domínio", path: "12_DOMAIN_MODEL.md" },
     { name: "Domain Routing", path: "13_DOMAIN_ROUTING.md" },
   ],
-  "🌱 Onboarding e Comunidade": [
+  "Onboarding": [
     { name: "Onboarding Público", path: "ONBOARDING_PUBLICO.md" },
     { name: "Onboarding para Desenvolvedores", path: "ONBOARDING_DEVELOPERS.md" },
     { name: "Onboarding para Analistas", path: "ONBOARDING_ANALISTAS_FUNCIONAIS.md" },
@@ -28,18 +28,18 @@ const docStructure = {
     { name: "Mentoria", path: "MENTORIA.md" },
     { name: "Priorização de Propostas", path: "PRIORIZACAO_PROPOSTAS.md" },
   ],
-  "🔧 Desenvolvimento": [
+  "Desenvolvimento": [
     { name: "Plano de Implementação", path: "20_IMPLEMENTATION_PLAN.md" },
     { name: "Revisão de Código", path: "21_CODE_REVIEW.md" },
     { name: "Coesão e Testes", path: "22_COHESION_AND_TESTS.md" },
     { name: "Implementação de Recomendações", path: "23_IMPLEMENTATION_RECOMMENDATIONS.md" },
     { name: "Estrutura do Projeto", path: "PROJECT_STRUCTURE.md" },
   ],
-  "🛡️ Segurança": [
+  "Segurança": [
     { name: "Configuração de Segurança", path: "SECURITY_CONFIGURATION.md" },
     { name: "Security Audit", path: "SECURITY_AUDIT.md" },
   ],
-  "📚 Referência": [
+  "Referência": [
     { name: "Índice Completo", path: "00_INDEX.md" },
     { name: "Changelog", path: "40_CHANGELOG.md" },
     { name: "Contribuindo", path: "41_CONTRIBUTING.md" },
@@ -62,31 +62,34 @@ export default async function DocsPage() {
 
   // Agrupar categorias por áreas semânticas para quebras visuais
   const coreCategories = [
-    "🎯 Visão e Produto",
-    "🏗️ Arquitetura e Design",
+    "Visão e Produto",
+    "Arquitetura e Design",
   ];
 
   const communityCategories = [
-    "🌱 Onboarding e Comunidade",
-    "🔧 Desenvolvimento",
+    "Onboarding",
+    "Desenvolvimento",
   ];
 
   const referenceCategories = [
-    "🛡️ Segurança",
-    "📚 Referência",
+    "Segurança",
+    "Referência",
   ];
 
   const categoryGroups = [
     { title: "Fundamentos", categories: coreCategories },
-    { title: "Comunidade e Desenvolvimento", categories: communityCategories },
-    { title: "Referência e Segurança", categories: referenceCategories },
+    { title: "Desenvolvimento", categories: communityCategories },
+    { title: "Referência", categories: referenceCategories },
   ];
 
   return (
-    <main className="flex-1 container-max py-8 sm:py-12 lg:py-16">
+    <main className="flex-1 container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
+      <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_200px] xl:grid-cols-[1fr_220px] 2xl:grid-cols-[1fr_240px] gap-4 lg:gap-5 xl:gap-6">
+        {/* Main Content Column */}
+        <div>
         {/* Hero Section - Assertivo e direto */}
         <div className="mb-12 sm:mb-16 lg:mb-20 animation-fade-in">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-4 sm:mb-6 leading-tight tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-forest-900 dark:text-forest-50 mb-4 sm:mb-6 leading-tight tracking-tight">
             Documentação
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-forest-600 dark:text-forest-400 max-w-3xl leading-relaxed">
@@ -94,22 +97,23 @@ export default async function DocsPage() {
           </p>
         </div>
 
-        {/* Categories Grid - Responsivo com quebras semânticas */}
-        <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+        {/* Categories Grid - Responsivo com quebras semânticas - espaçamento otimizado */}
+        <div className="space-y-10 sm:space-y-12 lg:space-y-14">
           {categoryGroups.map((group, groupIndex) => {
             const groupCategories = Object.entries(docStructure).filter(([category]) =>
               group.categories.includes(category)
             );
 
             return (
-              <section key={group.title} className="animation-fade-in">
+              <section key={group.title} id={group.title.toLowerCase().replace(/\s+/g, '-')} className="animation-fade-in scroll-mt-24">
                 {/* Quebra semântica visual - título de grupo */}
-                <h2 className="text-2xl sm:text-3xl font-semibold text-forest-700 dark:text-forest-300 mb-8 sm:mb-10 lg:mb-12 pb-4 border-b border-forest-200 dark:border-forest-800">
+                <h2 className="text-xl sm:text-2xl font-semibold text-forest-700 dark:text-forest-300 mb-6 sm:mb-8 lg:mb-10 pb-3">
                   {group.title}
                 </h2>
 
-                {/* Grid responsivo - mobile: 1 col, tablet: 2 cols, desktop: 3 cols */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+                {/* Grid responsivo - aproveita espaço horizontal sem espremer */}
+                {/* Mobile: 1 col, Tablet: 2 cols, Desktop: 3-4 cols conforme espaço */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 xl:gap-7">
                   {groupCategories.map(([category, docs], index) => (
                     <div
                       key={category}
@@ -124,6 +128,28 @@ export default async function DocsPage() {
             );
           })}
         </div>
+        </div>
+
+        {/* TOC Column - Sticky */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-24">
+            <nav className="space-y-2" aria-label="Navegação de seções">
+              <div className="text-sm font-semibold text-forest-700 dark:text-forest-300 mb-4 pb-2 border-b border-forest-200 dark:border-forest-800">
+                Seções
+              </div>
+              {categoryGroups.map((group) => (
+                <a
+                  key={group.title}
+                  href={`#${group.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="block text-sm text-forest-600 dark:text-forest-400 hover:text-forest-900 dark:hover:text-forest-50 py-1.5 transition-colors"
+                >
+                  {group.title}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+      </div>
     </main>
   );
 }

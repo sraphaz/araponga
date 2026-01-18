@@ -184,8 +184,8 @@ export default async function DocPage({ params }: PageProps) {
   }
 
   return (
-    <main className="flex-1 py-12 px-4 md:px-8 lg:px-12">
-      <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] 2xl:grid-cols-[1fr_320px] gap-6 lg:gap-8 xl:gap-10">
+        <main className="flex-1 py-4 lg:py-6 px-4 md:px-6 lg:px-8">
+      <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] 2xl:grid-cols-[1fr_280px] gap-4 lg:gap-6 xl:gap-8">
         {/* Main Content Column */}
         <div>
           <div className="glass-card animation-fade-in">
@@ -195,46 +195,21 @@ export default async function DocPage({ params }: PageProps) {
                 <Link href="/wiki">Boas-Vindas</Link>
                 <span>›</span>
                 <Link href="/wiki/docs">Documentação</Link>
-                {slug.map((segment, index) => (
-                  <span key={index}>
+                {(slug[0]?.startsWith('ONBOARDING_') || slug.some(s => s?.startsWith('ONBOARDING_'))) && (
+                  <>
                     <span>›</span>
-                    {index === slug.length - 1 ? (
-                      <span className="text-forest-900 font-medium">{doc.title}</span>
-                    ) : (
-                      <span>{segment}</span>
-                    )}
-                  </span>
-                ))}
+                    <Link href="/wiki/docs">Onboarding</Link>
+                  </>
+                )}
+                <span>›</span>
+                <span className="text-forest-900 font-medium">{doc.title}</span>
               </nav>
 
               {/* Document Title - Hero */}
-              <h1 className="text-5xl md:text-6xl font-bold text-forest-900 dark:text-forest-50 mb-8 leading-tight">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight">
                 {doc.title}
               </h1>
 
-              {/* Document Metadata - Badges */}
-              {doc.frontMatter && (doc.frontMatter.version || doc.frontMatter.date || doc.frontMatter.status) && (
-                <div className="mb-12 pb-6 border-b-2 border-forest-200/80 dark:border-forest-800/80 flex flex-wrap gap-3">
-                  {doc.frontMatter.version && (
-                    <span className="metadata-badge">
-                      <span className="mr-2">📌</span>
-                      Versão: {doc.frontMatter.version}
-                    </span>
-                  )}
-                  {doc.frontMatter.date && (
-                    <span className="metadata-badge">
-                      <span className="mr-2">📅</span>
-                      {doc.frontMatter.date}
-                    </span>
-                  )}
-                  {doc.frontMatter.status && (
-                    <span className="metadata-badge">
-                      <span className="mr-2">✓</span>
-                      {doc.frontMatter.status}
-                    </span>
-                  )}
-                </div>
-              )}
 
               {/* Document Content - Refinado com Progressive Disclosure */}
               <ContentSections htmlContent={doc.content} />

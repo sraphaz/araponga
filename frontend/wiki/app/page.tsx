@@ -54,7 +54,19 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
 
 async function getDocContent(filePath: string) {
   try {
-    const docsPath = join(process.cwd(), "..", "..", "docs", filePath);
+    // Caminho: de frontend/wiki para docs/ na raiz (2 níveis acima)
+    // process.cwd() pode variar em dev vs build - usa __dirname como fallback
+    let basePath = process.cwd();
+
+    // Se estiver em .next (build), ajusta o caminho
+    if (basePath.includes('.next')) {
+      basePath = join(basePath, '..', '..', '..', '..');
+    } else {
+      // Em dev, frontend/wiki - vai 2 níveis acima
+      basePath = join(basePath, '..', '..');
+    }
+
+    const docsPath = join(basePath, "docs", filePath).replace(/\\/g, '/');
     const fileContents = await readFile(docsPath, "utf8");
     const { content, data } = matter(fileContents);
 
@@ -67,13 +79,12 @@ async function getDocContent(filePath: string) {
     // IMPORTANTE: Remove H1 do markdown completamente, pois já temos H1 próprio na página
     let htmlContent = processedContent.toString();
 
-    // Remove H1 do markdown completamente - não transforma em H2 para evitar duplicação
-    // O H1 já é renderizado separadamente como título da página
+    // Remove apenas o H1 (título) - mantém todo conteúdo após (incluindo parágrafos introdutórios)
+    // O H1 do markdown é removido mas o conteúdo após ele é preservado
     htmlContent = htmlContent.replace(
       /<h1[^>]*>(.*?)<\/h1>/gi,
       (match, text) => {
-        // Remove completamente o H1 - não renderiza nada
-        // O conteúdo que vem após o H1 será mantido (texto introdutório, etc)
+        // Remove apenas o H1 - conteúdo após será preservado
         return '';
       }
     );
@@ -113,10 +124,16 @@ async function getDocContent(filePath: string) {
     return {
       content: htmlContent,
       frontMatter: data,
-      title: data.title || "Araponga",
+      title: data.title || "Boas-Vindas",
     };
   } catch (error) {
     console.error(`Error reading ${filePath}:`, error);
+    const attemptedPath = join(process.cwd(), "..", "..", "docs", filePath).replace(/\\/g, '/');
+    console.error(`Attempted path: ${attemptedPath}`);
+    console.error(`Current working directory: ${process.cwd()}`);
+    console.error(`Error details:`, error);
+    // Não retorna null - sempre retorna algo para evitar 404
+    // Retorna um objeto vazio que será tratado pelo fallback
     return null;
   }
 }
@@ -125,36 +142,42 @@ export default async function HomePage() {
   // Carregar ONBOARDING_PUBLICO como landing
   const onboardingDoc = await getDocContent("ONBOARDING_PUBLICO.md");
 
+  // Se não conseguir carregar, mostra fallback ao invés de 404
+  if (!onboardingDoc) {
+    return (
+      <main className="container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
+        <div className="glass-card animation-fade-in">
+          <div className="glass-card__content markdown-content">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
+              Boas-Vindas ao Araponga
+            </h1>
+            <p className="text-lg text-forest-700 dark:text-forest-300 mb-8">
+              Bem-vindo à documentação completa do Araponga.
+            </p>
+            <div className="mt-8">
+              <Link href="/docs" className="btn-primary">
+                Ver Documentação
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
-    <main className="container-max py-16 md:py-20">
+    <main className="container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
         {onboardingDoc && (
-          <div className="max-w-6xl xl:max-w-7xl 2xl:max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] 2xl:grid-cols-[1fr_320px] gap-6 lg:gap-8 xl:gap-10">
+          <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] 2xl:grid-cols-[1fr_280px] gap-4 lg:gap-6 xl:gap-8">
             {/* Main Content Column */}
             <div>
               <div className="glass-card animation-fade-in">
                 <div className="glass-card__content markdown-content">
                   {/* Document Title - H1 para SEO, título principal da página */}
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-8 leading-tight tracking-tight">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
                     {onboardingDoc.title}
                   </h1>
 
-                  {/* Document Metadata */}
-              {onboardingDoc.frontMatter && (onboardingDoc.frontMatter.version || onboardingDoc.frontMatter.date) && (
-                <div className="mb-12 pb-6 border-b-2 border-forest-200/80 dark:border-forest-800/80 flex flex-wrap gap-3">
-                  {onboardingDoc.frontMatter.version && (
-                    <span className="metadata-badge">
-                      <span className="mr-2">📌</span>
-                      Versão: {onboardingDoc.frontMatter.version}
-                    </span>
-                  )}
-                  {onboardingDoc.frontMatter.date && (
-                    <span className="metadata-badge">
-                      <span className="mr-2">📅</span>
-                      {onboardingDoc.frontMatter.date}
-                    </span>
-                  )}
-                </div>
-              )}
 
               {/* Document Content - Com Progressive Disclosure */}
               <ContentSections htmlContent={onboardingDoc.content} />
@@ -177,17 +200,7 @@ export default async function HomePage() {
         {/* App Banner - Call to Action para Lançamento */}
         <AppBanner />
 
-        {/* Section Divider */}
-        <div className="mt-20 mb-8 relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t-2 border-forest-200/60 dark:border-forest-800/60"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-forest-50 dark:bg-forest-950 text-forest-500 dark:text-forest-400 font-medium">
-              Explorar Documentação
-            </span>
-          </div>
-        </div>
+        {/* Section Divider - sem bordas (removido) */}
 
         {/* Quick Navigation - Harmonizado com paleta Araponga */}
         <div className="grid md:grid-cols-3 gap-6">
@@ -214,17 +227,7 @@ export default async function HomePage() {
           />
         </div>
 
-        {/* Section Divider - Links Úteis */}
-        <div className="mt-16 mb-8 relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t-2 border-forest-200/60 dark:border-forest-800/60"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-forest-50 dark:bg-forest-950 text-forest-500 dark:text-forest-400 font-medium">
-              Links Úteis
-            </span>
-          </div>
-        </div>
+        {/* Section Divider - sem bordas (removido) */}
 
         {/* Quick Links Section - Página Inicial */}
         <div className="glass-card animation-fade-in">
