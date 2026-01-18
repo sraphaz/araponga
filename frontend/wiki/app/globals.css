@@ -1205,10 +1205,27 @@
 }
 
 .toc-item-active .toc-link {
-  @apply bg-forest-100 dark:bg-forest-900/80;
-  @apply border-forest-600 dark:border-[#4dd4a8];
+  @apply bg-forest-200/80 dark:bg-forest-800/90;
+  @apply border-l-4 border-forest-600 dark:border-[#4dd4a8];
   @apply text-forest-900 dark:text-forest-50;
-  @apply font-medium;
+  @apply font-semibold;
+  @apply shadow-sm;
+  @apply translate-x-1;
+  /* Adiciona indicação visual mais forte para item ativo */
+  position: relative;
+}
+
+.toc-item-active .toc-link::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  @apply bg-forest-600 dark:bg-[#4dd4a8];
+  border-radius: 0 2px 2px 0;
+  animation: slideInLeft 0.3s ease-out;
 }
 
 /* Heading links - Adicionar ícone de link em headings com ID */
