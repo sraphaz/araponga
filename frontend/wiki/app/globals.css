@@ -282,49 +282,37 @@
   /* Category card - Enterprise design */
   .category-card {
     @apply glass-card;
-    @apply hover:scale-[1.01] transition-all duration-500;
   }
 
-  .category-card h2 {
-    @apply relative inline-block;
+  .category-card__content {
+    padding: 2rem 1.75rem;
   }
 
-  .category-card h2::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    @apply bg-forest-400 dark:bg-dark-accent;
-    transition: width var(--transition-smooth);
-    border-radius: 2px;
+  @media (min-width: 1024px) {
+    .category-card__content {
+      padding: 2.5rem 2.25rem;
+    }
   }
 
-  .category-card:hover h2::after {
-    width: 100%;
-  }
-
-  /* Doc link - Enterprise design */
+  /* Doc link - Design limpo e legível */
   .doc-link {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg;
-    @apply text-sm md:text-base text-forest-700 dark:text-forest-300;
+    @apply flex items-center gap-3 px-5 py-3 rounded-lg;
+    @apply text-base text-forest-700 dark:text-forest-300;
     @apply hover:text-forest-900 dark:hover:text-forest-50;
-    @apply transition-all duration-200 ease-out;
-    @apply hover:bg-forest-50/60 dark:hover:bg-forest-900/50;
-    position: relative;
+    @apply transition-colors duration-200 ease-out;
+    @apply hover:bg-forest-50/80 dark:hover:bg-forest-900/60;
+    line-height: var(--line-height-relaxed);
   }
 
   .doc-link-arrow {
-    @apply text-forest-400 dark:text-forest-600;
-    @apply group-hover:text-forest-600 dark:group-hover:text-dark-accent;
-    @apply transition-all duration-200;
-    @apply opacity-60 group-hover:opacity-100;
-    transform: translateX(0);
+    @apply text-forest-400 dark:text-forest-500;
+    @apply transition-colors duration-200;
+    opacity: 0.7;
   }
 
   .doc-link:hover .doc-link-arrow {
-    transform: translateX(2px);
+    @apply text-forest-600 dark:text-forest-400;
+    opacity: 1;
   }
 
   /* Hero section - Enterprise typography */

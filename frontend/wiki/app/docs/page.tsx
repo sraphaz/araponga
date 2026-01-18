@@ -73,7 +73,7 @@ export default async function DocsPage() {
         </div>
 
         {/* Categories Grid - Responsivo e profissional */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
           {Object.entries(docStructure).map(([category, docs], index) => (
             <div
               key={category}
