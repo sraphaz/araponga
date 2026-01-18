@@ -14,6 +14,10 @@
 - `docs/ANALISE_DESIGN_SISTEMATICA_MELHORIAS.md` - Análise detalhada e propostas de melhoria
 - `docs/REVISAO_ARTE_DESIGN_WIKI.md` - Revisão completa de conformidade (2025-01-20) - lições aprendidas sobre cores hardcoded
 
+### Processo de Melhoria Contínua
+- `docs/PROCESSO_AUTO_APRENDIZADO_REVISOES.md` - Processo sistemático de captura e aplicação de lições aprendidas
+- `docs/LICOES_APRENDIDAS.md` - Registro de lições aprendidas de revisões técnicas
+
 ### Regras e Padrões
 - `docs/CURSOR_DOCUMENTATION_RULES.md` - ⚠️ OBRIGATÓRIO: Mapeamento de mudanças → documentos, checklist de documentação
 - `docs/10_ARCHITECTURE_DECISIONS.md` - Decisões arquiteturais (ADRs), padrões estabelecidos
@@ -516,6 +520,7 @@ Documentação:
 5. **Sempre valide entrada e verifique autorização**
 6. **Use paginação em TODAS as listagens**
 7. **Commits pequenos e focados são preferíveis**
+8. **Após revisões: capturar lições aprendidas e atualizar diretrizes** (ver `PROCESSO_AUTO_APRENDIZADO_REVISOES.md`)
 
 ---
 
