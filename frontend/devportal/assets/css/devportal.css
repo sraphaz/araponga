@@ -1089,24 +1089,74 @@ main {
 }
 
 
-/* Rationale list */
-.rationale-list {
-  margin: 0;
-  padding-left: 1.5rem;
-  display: grid;
-  gap: 0.875rem;
+/* Rationale Grid - Cards organizados para princípios arquiteturais */
+.section-subsection {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid var(--border-subtle);
 }
 
-.rationale-list li {
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.rationale-list li strong {
-  color: var(--text);
+.subsection-title {
+  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.5rem);
   font-weight: 600;
-  display: block;
-  margin-bottom: 0.25rem;
+  color: var(--text);
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-snug);
+}
+
+.rationale-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(var(--space-md), 2vw, var(--space-lg));
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (min-width: 640px) {
+  .rationale-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .rationale-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .rationale-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.rationale-card {
+  padding: clamp(1rem, 1.5vw, 1.25rem);
+  background: var(--bg-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+}
+
+.rationale-card:hover {
+  border-color: var(--accent-subtle);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.rationale-card h4 {
+  font-size: clamp(0.9375rem, 0.875rem + 0.5vw, 1.0625rem);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+  line-height: var(--line-height-snug);
+}
+
+.rationale-card p {
+  font-size: clamp(0.875rem, 0.8125rem + 0.5vw, 0.9375rem);
+  color: var(--text-muted);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
 }
 
 /* Info box / Example box - caixas informativas padronizadas */
