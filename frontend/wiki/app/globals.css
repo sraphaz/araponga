@@ -229,11 +229,11 @@
   .glass-card:hover {
     box-shadow: var(--glass-hover-shadow);
     transform: translateY(-4px);
-    border-color: rgba(55, 123, 87, 0.3);
+    border-color: var(--accent-subtle); /* Usa token de accent com opacity */
   }
 
   :root.dark .glass-card:hover {
-    border-color: rgba(77, 212, 168, 0.3); /* Usa var(--accent) com opacity */
+    border-color: var(--accent-subtle); /* Usa token - mesmo para light e dark */
   }
 
   .glass-card:hover::before {
@@ -288,7 +288,7 @@
     @apply bg-forest-600;
     background-color: var(--accent) !important;
     transform: translateX(-50%);
-    transition: width var(--transition-quick);
+    transition: width var(--transition-base); /* 200ms - indicador de hover */
   }
 
   .nav-link:hover::before {
@@ -1136,7 +1136,7 @@
 
 .sidebar-chevron {
   @apply w-4 h-4 text-forest-500 dark:text-forest-400;
-  @apply transition-transform duration-300;
+  transition: transform var(--transition-slow); /* 300ms - rotação suave */
 }
 
 .sidebar-chevron-open {
@@ -1151,7 +1151,7 @@
   @apply block px-3 py-2.5 rounded-lg;
   @apply text-forest-700 dark:text-forest-300 text-sm;
   @apply hover:bg-forest-100/80 dark:hover:bg-forest-900/60;
-  @apply transition-all duration-300;
+  transition: var(--transition-slow); /* 300ms - transição suave */
   @apply border-l-2 border-transparent;
 }
 
@@ -1221,7 +1221,7 @@
   @apply w-full text-left px-3 py-2 rounded-lg;
   @apply text-sm text-forest-700 dark:text-forest-300;
   @apply hover:bg-forest-100/80 dark:hover:bg-forest-900/60;
-  @apply transition-all duration-300;
+  transition: var(--transition-slow); /* 300ms - transição suave */
   @apply border-l-2 border-transparent;
 }
 
