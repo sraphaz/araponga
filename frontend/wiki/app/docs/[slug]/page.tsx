@@ -54,6 +54,7 @@ const slugToFile: Record<string, string> = {
   "SECURITY_AUDIT": "SECURITY_AUDIT.md",
   "40_CHANGELOG": "40_CHANGELOG.md",
   "41_CONTRIBUTING": "41_CONTRIBUTING.md",
+  "60_API_LÓGICA_NEGÓCIO": "60_API_LÓGICA_NEGÓCIO.md",
 };
 
 function processMarkdownLinks(html: string, basePath: string = '/wiki'): string {
@@ -136,7 +137,9 @@ export async function generateStaticParams() {
 
 export default async function DocPage({ params }: PageProps) {
   const { slug } = await params;
-  const fileName = slugToFile[slug] || `${slug}.md`;
+  // Decodifica o slug caso tenha sido URL-encoded (ex: %C3%93 -> Ó)
+  const decodedSlug = decodeURIComponent(slug);
+  const fileName = slugToFile[decodedSlug] || slugToFile[slug] || `${decodedSlug}.md`;
   const doc = await getDocContent(fileName);
 
   if (!doc) {
