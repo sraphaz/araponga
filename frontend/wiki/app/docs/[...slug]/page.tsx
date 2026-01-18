@@ -201,16 +201,8 @@ export default async function DocPage({ params }: PageProps) {
                     <Link href="/wiki/docs">Onboarding</Link>
                   </>
                 )}
-                {slug.map((segment, index) => (
-                  <span key={index}>
-                    <span>›</span>
-                    {index === slug.length - 1 ? (
-                      <span className="text-forest-900 font-medium">{doc.title}</span>
-                    ) : (
-                      <span>{segment}</span>
-                    )}
-                  </span>
-                ))}
+                <span>›</span>
+                <span className="text-forest-900 font-medium">{doc.title}</span>
               </nav>
 
               {/* Document Title - Hero */}
