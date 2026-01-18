@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter } from "next/font/google";
 import { JetBrains_Mono } from "next/font/google";
+import { Header } from "../components/layout/Header";
+import { Sidebar } from "../components/layout/Sidebar";
+import { MobileSidebar } from "../components/layout/MobileSidebar";
+import { Footer } from "../components/layout/Footer";
 
 // Inter - Fonte moderna e sóbria para corpo de texto
 // Usada por Vercel, Stripe, Linear - transmite profissionalismo e modernidade
