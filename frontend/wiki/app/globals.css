@@ -54,17 +54,17 @@
     --content-width-default: 75ch;
     --content-width-wide: 90ch;
 
-    /* Design System - Cores de Acento e Links (conforme DESIGN_SYSTEM_IDENTIDADE_VISUAL.md) */
-    --accent: #4dd4a8;
-    --accent-hover: #5ee5b9;
-    --accent-strong: #3bc495;
+    /* Design System - Cores de Acento e Links (usando tokens unificados) */
+    --accent: var(--color-primary-400);           /* #4dd4a8 */
+    --accent-hover: var(--color-primary-500);     /* #3bc495 */
+    --accent-strong: var(--color-primary-500);    /* #3bc495 */
     --accent-subtle: rgba(77, 212, 168, 0.15);
-    --link: #7dd3ff;
-    --link-hover: #9de3ff;
+    --link: var(--color-secondary-300);           /* #7dd3ff */
+    --link-hover: var(--color-secondary-400);     /* #9de3ff */
 
     /* Dark mode colors */
-    --bg-dark: #0a0e12;
-    --border-dark: #25303a;
+    --bg-dark: var(--color-dark-950);             /* #0a0e12 */
+    --border-dark: var(--color-dark-800);         /* #1e2830 */
   }
 
   /* Dark mode - identidade visual do devportal */

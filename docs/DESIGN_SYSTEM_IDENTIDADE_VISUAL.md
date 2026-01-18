@@ -191,20 +191,35 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 --text-subtle: #8a97a4;  /* Texto sutil */
 ```
 
-**Cores de Acento**
+**Cores de Acento (Revisadas - Alinhadas com Valores da Araponga)**
+
 ```css
---accent: #4dd4a8;        /* Verde accent principal */
---accent-hover: #5ee5b9;  /* Hover states */
---accent-strong: #3bc495; /* Estados ativos */
+/* Primary - Verde (Natureza, Território, Crescimento) */
+--color-primary-400: #4dd4a8;        /* Verde accent principal */
+--color-primary-500: #3bc495;        /* Hover e estados ativos */
 --accent-subtle: rgba(77, 212, 168, 0.15); /* Backgrounds sutis */
 
---link: #7dd3ff;          /* Azul para links */
---link-hover: #9de3ff;    /* Links hover */
+/* Secondary - Azul (Transparência, Clareza, Confiança) */
+--color-secondary-300: #7dd3ff;      /* Azul para links */
+--color-secondary-400: #9de3ff;      /* Links hover */
 
---warning: #f5c842;       /* Avisos */
---danger: #f26d6d;        /* Erros */
---success: #4dd4a8;       /* Sucesso (usa accent) */
+/* Semânticas */
+--color-warning: #f5c842;            /* Avisos */
+--color-error: #f26d6d;              /* Erros */
+--color-success: var(--color-primary-400); /* Sucesso (usa primary) */
+
+/* Compatibilidade (aliases) */
+--accent: var(--color-primary-400);
+--accent-hover: var(--color-primary-500);
+--accent-strong: var(--color-primary-500);
+--link: var(--color-secondary-300);
+--link-hover: var(--color-secondary-400);
+--warning: var(--color-warning);
+--danger: var(--color-error);
+--success: var(--color-success);
 ```
+
+**Nota:** A paleta foi revisada para refletir melhor os valores da Araponga: verde representa natureza/território, azul representa transparência/clareza. Cores são suaves e não saturadas demais, mantendo sobriedade elevada.
 
 **Uso de Cores**
 

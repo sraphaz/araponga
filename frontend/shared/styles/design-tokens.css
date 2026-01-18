@@ -1,0 +1,202 @@
+/**
+ * Design Tokens - Araponga
+ *
+ * Sistema unificado de design tokens baseado em:
+ * - Valores da Araponga (território, transparência, sobriedade)
+ * - Material Design 3
+ * - Apple Human Interface Guidelines
+ * - WCAG 2.1 (Acessibilidade)
+ *
+ * Este arquivo é a fonte única de verdade para todos os valores de design.
+ * Wiki e DevPortal devem importar e usar estes tokens.
+ */
+
+:root {
+  /* ============================================
+     COLOR SYSTEM - Paleta Baseada em Valores da Araponga
+     ============================================ */
+
+  /* Primary - Verde (Natureza, Território, Crescimento) */
+  --color-primary-50:  #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4dd4a8;   /* PRIMARY */
+  --color-primary-500: #3bc495;   /* PRIMARY HOVER */
+  --color-primary-600: #22c55e;
+  --color-primary-700: #16a34a;
+  --color-primary-800: #15803d;
+  --color-primary-900: #14532d;
+
+  /* Secondary - Azul (Transparência, Clareza, Confiança) */
+  --color-secondary-50:  #f0f9ff;
+  --color-secondary-100: #e0f2fe;
+  --color-secondary-200: #bae6fd;
+  --color-secondary-300: #7dd3ff;  /* SECONDARY */
+  --color-secondary-400: #9de3ff;  /* SECONDARY HOVER */
+  --color-secondary-500: #0ea5e9;
+  --color-secondary-600: #0284c7;
+  --color-secondary-700: #0369a1;
+  --color-secondary-800: #075985;
+  --color-secondary-900: #0c4a6e;
+
+  /* Neutros - Light Mode */
+  --color-neutral-50:  #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+
+  /* Semânticas - Estados e Feedback */
+  --color-success: var(--color-primary-400);
+  --color-success-hover: var(--color-primary-500);
+  --color-warning: #f5c842;
+  --color-warning-hover: #d97706;
+  --color-error: #f26d6d;
+  --color-error-hover: #dc2626;
+  --color-info: var(--color-secondary-300);
+  --color-info-hover: var(--color-secondary-400);
+
+  /* ============================================
+     TYPOGRAPHY SYSTEM - Escala Harmônica 1.125
+     ============================================ */
+
+  /* Font Families */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
+
+  /* Font Sizes - Escala 1.125 (minor third) */
+  --font-size-xs:   0.75rem;   /* 12px */
+  --font-size-sm:  0.875rem;   /* 14px */
+  --font-size-base: 1rem;      /* 16px - Base */
+  --font-size-lg:  1.125rem;   /* 18px */
+  --font-size-xl:  1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+  --font-size-6xl: 3.75rem;    /* 60px */
+  --font-size-7xl: 4.5rem;     /* 72px */
+
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights - Otimizados para leitura */
+  --line-height-tight:   1.25;
+  --line-height-snug:    1.375;
+  --line-height-normal:  1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose:   2;
+
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight:   -0.025em;
+  --letter-spacing-normal:  0;
+  --letter-spacing-wide:    0.025em;
+  --letter-spacing-wider:   0.05em;
+
+  /* ============================================
+     SPACING SYSTEM - Base 8px
+     ============================================ */
+
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4px */
+  --space-2:  0.5rem;   /* 8px */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.25rem;  /* 20px */
+  --space-6:  1.5rem;   /* 24px */
+  --space-8:  2rem;     /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+
+  /* Aplicação de Espaçamento */
+  --spacing-section: var(--space-16);
+  --spacing-card: var(--space-8);
+  --spacing-element: var(--space-4);
+  --spacing-grid: var(--space-6);
+
+  /* ============================================
+     BORDER RADIUS
+     ============================================ */
+
+  --radius-none: 0;
+  --radius-sm:   0.25rem;  /* 4px */
+  --radius-md:   0.5rem;   /* 8px */
+  --radius-lg:   1rem;     /* 16px */
+  --radius-xl:   1.5rem;   /* 24px */
+  --radius-2xl:  2rem;     /* 32px */
+  --radius-full: 9999px;
+
+  /* ============================================
+     SHADOWS - Material Design 3 Elevation
+     ============================================ */
+
+  --shadow-xs:   0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg:   0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl:   0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl:  0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* ============================================
+     TRANSITIONS
+     ============================================ */
+
+  --transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base:   200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-default: all var(--transition-base);
+
+  /* ============================================
+     GRID SYSTEM
+     ============================================ */
+
+  --container-xs:  100%;
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1536px;
+
+  --sidebar-width: 256px;
+}
+
+/* ============================================
+   DARK MODE TOKENS
+   ============================================ */
+
+:root.dark {
+  /* Neutros - Dark Mode */
+  --color-dark-50:  #f9fafb;
+  --color-dark-100: #f3f4f6;
+  --color-dark-200: #e5e7eb;
+  --color-dark-300: #d1d5db;
+  --color-dark-400: #9ca3af;
+  --color-dark-500: #6b7280;
+  --color-dark-600: #4b5563;
+  --color-dark-700: #374151;
+  --color-dark-800: #1e2830;
+  --color-dark-850: #141a21;
+  --color-dark-900: #0f1419;
+  --color-dark-950: #0a0e12;
+
+  /* Shadows - Dark Mode (mais pronunciadas) */
+  --shadow-dark-xs:   0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-dark-sm:   0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --shadow-dark-md:   0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-dark-lg:   0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.6);
+}
