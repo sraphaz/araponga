@@ -238,4 +238,4 @@ Sua contribuição ajuda a:
 - desenvolver novas funcionalidades  
 - alcançar mais comunidades  
 
-**PIX:** rapha.sos@gmail.com
+[Contribuir via PIX](https://geradordepix.com/pagamento/01KESFV2Q5P6V6K2JWWBY340EK)
