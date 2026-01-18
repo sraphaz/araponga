@@ -299,10 +299,11 @@ input:focus-visible {
 }
 
 .hero p {
-  max-width: 720px;
+  max-width: min(720px, 95%);
   color: var(--text-muted);
   font-size: clamp(1rem, 0.875rem + 0.625vw, 1.125rem);
-  line-height: 1.7;
+  line-height: 1.75;
+  text-align: left;
 }
 
 .hero-actions {
@@ -644,18 +645,19 @@ main {
 .card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: clamp(1.25rem, 2.75vw, 1.75rem) clamp(1.375rem, 3.25vw, 2rem); /* Padding horizontal aumentado */
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3.5vw, 2.25rem);
   border: 1px solid var(--border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px); /* Efeito blur sutil */
-  transform: translateZ(0); /* GPU acceleration */
-  will-change: transform, box-shadow; /* Otimização de performance */
-  min-width: 0; /* Permite shrink em grids */
+  backdrop-filter: blur(10px);
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  min-height: fit-content; /* Evita cards muito baixos */
+  min-height: fit-content;
+  flex: 1; /* Permite cards preencherem espaço vertical igualmente em grids */
 }
 
 .card::before {
@@ -695,12 +697,14 @@ main {
 }
 
 .card p {
-  margin: 0 0 0.75rem; /* Espaçamento padronizado entre parágrafos em cards */
+  margin: 0 0 0.875rem;
   color: var(--text-muted);
-  line-height: 1.75; /* Consistente com .section p */
+  line-height: 1.7;
   text-align: left;
   word-spacing: normal;
   letter-spacing: normal;
+  font-size: clamp(0.9375rem, 0.875rem + 0.2vw, 1rem);
+  flex: 1; /* Permite parágrafos preencherem espaço vertical em cards */
 }
 
 .card p:last-child {
@@ -879,9 +883,10 @@ main {
 /* Card content patterns */
 .card-intro {
   color: var(--text-muted);
-  margin-bottom: 1rem; /* Padronizado com .section p */
-  line-height: 1.75; /* Consistente com outros parágrafos */
+  margin-bottom: 0.875rem;
+  line-height: 1.7;
   text-align: left;
+  font-size: clamp(0.9375rem, 0.875rem + 0.2vw, 1rem);
 }
 
 
