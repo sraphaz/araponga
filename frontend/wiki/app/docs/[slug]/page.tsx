@@ -59,18 +59,30 @@ const slugToFile: Record<string, string> = {
 
 function processMarkdownLinks(html: string, basePath: string = '/wiki'): string {
   // Processa links <a href="/docs/..."> para <a href="/wiki/docs/...">
-  // Mas NÃO processa links externos ou absolutos
+  // Também processa links relativos que terminam com .md
   return html.replace(
-    /<a\s+([^>]*\s+)?href=["'](\/[^"']+)["']([^>]*)>/gi,
+    /<a\s+([^>]*\s+)?href=["']([^"']+)["']([^>]*)>/gi,
     (match, before, href, after) => {
       // Ignora se já começa com basePath ou é link externo
-      if (href.startsWith(basePath) || href.startsWith('http')) {
+      if (href.startsWith(basePath) || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
         return match;
       }
       
-      // Adiciona basePath a links relativos que começam com /
-      const newHref = `${basePath}${href}`;
-      return `<a ${before || ''}href="${newHref}"${after || ''}>`;
+      // Se é link relativo que termina com .md, converte para /wiki/docs/... (sem .md)
+      if (href.endsWith('.md')) {
+        const slug = href.replace(/^\.\/|\.md$/g, '');
+        const newHref = `${basePath}/docs/${slug}`;
+        return `<a ${before || ''}href="${newHref}"${after || ''}>`;
+      }
+      
+      // Se começa com /, adiciona basePath
+      if (href.startsWith('/')) {
+        const newHref = `${basePath}${href}`;
+        return `<a ${before || ''}href="${newHref}"${after || ''}>`;
+      }
+      
+      // Links relativos sem .md - mantém como está
+      return match;
     }
   );
 }
