@@ -83,7 +83,7 @@ export default async function DocsPage() {
   ];
 
   return (
-    <main className="flex-1 container-max py-8 sm:py-12 lg:py-16">
+    <main className="flex-1 container-max py-12 lg:py-16">
         {/* Hero Section - Assertivo e direto */}
         <div className="mb-12 sm:mb-16 lg:mb-20 animation-fade-in">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-forest-900 dark:text-forest-50 mb-4 sm:mb-6 leading-tight tracking-tight">

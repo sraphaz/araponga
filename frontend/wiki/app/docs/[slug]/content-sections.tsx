@@ -134,7 +134,12 @@ export function ContentSections({ htmlContent }: ContentSectionsProps) {
         }
         
         // Seção longa - extrai título e usa Accordion
-        // Primeira seção sem título usa "Apresentação"
+        // Se for a primeira seção na homepage e não tiver título, não renderiza (remove conteúdo do primeiro accordion)
+        if (index === 0 && !section.title) {
+          // Primeira seção sem título - não renderiza (remove conteúdo)
+          return null;
+        }
+        
         const accordionTitle = section.title || (index === 0 ? 'Apresentação' : 'Conteúdo');
         return (
           <section key={index} id={section.id} className="mb-6">
