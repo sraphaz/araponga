@@ -8,7 +8,7 @@ export function ApiDomainDiagram() {
       <div className="glass-card animation-fade-in">
         <div className="glass-card__content">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-forest-900 dark:text-forest-50 mb-4">
               Visão Geral do Sistema Araponga
             </h2>
             <p className="text-lg text-forest-700 dark:text-forest-300 max-w-2xl mx-auto">

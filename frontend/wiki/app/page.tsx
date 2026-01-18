@@ -148,7 +148,7 @@ export default async function HomePage() {
       <main className="container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
         <div className="glass-card animation-fade-in">
           <div className="glass-card__content markdown-content">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
               Boas-Vindas ao Araponga
             </h1>
             <p className="text-lg text-forest-700 dark:text-forest-300 mb-8">
@@ -174,7 +174,7 @@ export default async function HomePage() {
               <div className="glass-card animation-fade-in">
                 <div className="glass-card__content markdown-content">
                   {/* Document Title - H1 para SEO, título principal da página */}
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
+                  <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
                     {onboardingDoc.title}
                   </h1>
 
