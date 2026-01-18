@@ -580,9 +580,9 @@
 
   /* Links - Enterprise design */
   .markdown-content a {
-    @apply text-forest-600 dark:text-[#7dd3ff] hover:text-forest-900 dark:hover:text-[#9de3ff];
+    @apply text-forest-600 dark:text-dark-link hover:text-forest-900 dark:hover:text-dark-link-hover;
     @apply underline underline-offset-[0.3em] decoration-2;
-    @apply decoration-forest-300 dark:decoration-[#25303a] hover:decoration-forest-500 dark:hover:decoration-[#7dd3ff];
+    @apply decoration-forest-300 dark:decoration-dark-border hover:decoration-forest-500 dark:hover:decoration-dark-link;
     @apply font-medium transition-all duration-300;
     @apply hover:bg-forest-50 dark:hover:bg-forest-900/50 px-1.5 -mx-1.5 rounded;
     text-decoration-thickness: 1.5px;
@@ -980,7 +980,7 @@
   }
 
   .tabs-trigger {
-    @apply focus-visible:outline-2 focus-visible:outline-forest-500 dark:focus-visible:outline-[#4dd4a8] rounded-t-lg;
+    @apply focus-visible:outline-2 focus-visible:outline-forest-500 dark:focus-visible:outline-dark-accent rounded-t-lg;
     @apply hover:bg-forest-50 dark:hover:bg-forest-900/30;
   }
 
@@ -1213,7 +1213,7 @@
 
 .toc-item-active .toc-link {
   @apply bg-forest-200/80 dark:bg-forest-800/90;
-  @apply border-l-4 border-forest-600 dark:border-[#4dd4a8];
+  @apply border-l-4 border-forest-600 dark:border-dark-accent;
   @apply text-forest-900 dark:text-forest-50;
   @apply font-semibold;
   @apply shadow-sm;
@@ -1230,7 +1230,7 @@
   transform: translateY(-50%);
   width: 4px;
   height: 60%;
-  @apply bg-forest-600 dark:bg-[#4dd4a8];
+  @apply bg-forest-600 dark:bg-dark-accent;
   border-radius: 0 2px 2px 0;
   animation: slideInLeft 0.3s ease-out;
 }
@@ -1394,9 +1394,10 @@
 
 .app-banner-badge {
   @apply inline-flex items-center space-x-2 px-4 py-2 rounded-full;
-  @apply bg-[#4dd4a8]/10 dark:bg-[#4dd4a8]/20;
-  @apply border border-[#4dd4a8]/30 dark:border-[#4dd4a8]/40;
-  @apply text-[#4dd4a8] dark:text-[#5ee5b9];
+  /* Usa var(--accent) com opacity via Tailwind opacity utilities */
+  background-color: rgba(77, 212, 168, 0.1);
+  border-color: rgba(77, 212, 168, 0.3);
+  color: var(--accent);
   @apply font-semibold text-sm;
   @apply animate-pulse-slow;
 }
