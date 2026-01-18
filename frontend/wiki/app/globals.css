@@ -266,7 +266,8 @@
   .glass-card__content {
     position: relative;
     z-index: 1;
-    padding: clamp(2rem, 5vw, 4rem) clamp(2rem, 6vw, 5rem);
+    /* Padronizado: 32px-48px vertical, 32px-56px horizontal - harmonizado com DevPortal */
+    padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
   }
 
   /* Navigation refinada - Enterprise design */

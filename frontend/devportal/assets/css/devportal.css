@@ -544,7 +544,8 @@ input:focus-visible {
 .layout {
   display: grid;
   grid-template-columns: 256px minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
+  /* Padronizado: 24px-32px usando tokens - harmonizado com Wiki */
+  gap: clamp(var(--space-lg), 3vw, var(--space-xl));
   padding: clamp(2rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 4.5rem);
   align-items: start;
 }
@@ -777,14 +778,14 @@ main {
 }
 
 .section h3 {
-  font-size: clamp(var(--font-size-lg), 0.875rem + 0.625vw, var(--font-size-xl)); /* 18px-20px - usa tokens */
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem); /* 24px-30px - padronizado com Wiki */
   font-weight: 600;
   margin: 0 0 var(--space-sm); /* 8px - usa token */
-  line-height: var(--line-height-normal); /* 1.5 - usa token */
+  line-height: var(--line-height-snug); /* 1.375 - usa token para melhor hierarquia */
 }
 
 .section h4 {
-  font-size: clamp(var(--font-size-base), 0.875rem + 0.5vw, var(--font-size-lg)); /* 16px-18px - usa tokens */
+  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.5rem); /* 20px-24px - padronizado com Wiki */
   font-weight: 600;
   margin: 0 0 var(--space-sm); /* 8px - usa token */
   line-height: var(--line-height-normal); /* 1.5 - usa token */
@@ -819,7 +820,8 @@ main {
 .grid-two {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.25rem, 3vw, 2rem); /* Aumentado para melhor respiro */
+  /* Padronizado: 24px-32px - harmonizado com Wiki usando tokens */
+  gap: clamp(var(--space-lg), 3vw, var(--space-xl));
   margin-top: clamp(1rem, 2.5vw, 1.75rem);
   /* Garantir que cards não estourem */
   min-width: 0;
@@ -828,7 +830,8 @@ main {
 .model-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.25rem, 3vw, 2rem); /* Aumentado para melhor respiro */
+  /* Padronizado: 24px-32px - harmonizado com Wiki usando tokens */
+  gap: clamp(var(--space-lg), 3vw, var(--space-xl)); /* Aumentado para melhor respiro */
   margin-top: clamp(1rem, 2.5vw, 1.75rem);
   /* Garantir que cards não estourem */
   min-width: 0;
@@ -872,7 +875,8 @@ main {
   box-shadow: var(--glass-shadow);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 3.5vw, 2.25rem);
+  /* Padronizado: 32px-48px vertical, 32px-56px horizontal - harmonizado com Wiki */
+  padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
   transition: var(--transition-smooth);
   transform: translateZ(0);
   will-change: transform, box-shadow;
