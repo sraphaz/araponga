@@ -2,7 +2,7 @@
 
 ---
 
-## 🎯 Bem-vindo ao Araponga
+## Bem-vindo ao Araponga
 
 Você chegou aqui porque **entende que tecnologia pode servir à vida** e não o contrário.
 

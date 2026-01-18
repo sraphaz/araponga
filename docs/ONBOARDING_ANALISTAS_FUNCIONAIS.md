@@ -2,7 +2,7 @@
 
 ---
 
-## 🎯 Bem-vindo ao Araponga
+## Bem-vindo ao Araponga
 
 Você chegou aqui porque **observa o território** e entende que tecnologia pode servir às necessidades reais das comunidades.
 

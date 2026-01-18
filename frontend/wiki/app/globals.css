@@ -197,6 +197,7 @@
     border-radius: var(--glass-radius);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
+    border-top: none; /* Removida borda superior */
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -258,7 +259,7 @@
     position: relative;
     z-index: 1;
     /* Espaçamento otimizado - reduzido padding superior para menos margem */
-    padding: clamp(1rem, 2vw, 1.5rem) clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
+    padding: clamp(0.75rem, 1.5vw, 1rem) clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
   }
 
   /* Navigation refinada - Enterprise design */
@@ -452,7 +453,7 @@
 
   /* Typography hierarchy - Enterprise level */
   .markdown-content h1 {
-    @apply text-3xl md:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-10 mt-16;
+    @apply text-3xl md:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-0 mt-0;
     @apply pb-6 border-b-2 border-forest-200 dark:border-forest-800;
     letter-spacing: var(--letter-spacing-tight);
     line-height: var(--line-height-tight);
@@ -464,7 +465,7 @@
   }
 
   .markdown-content h2 {
-    @apply text-xl md:text-2xl font-bold text-forest-800 dark:text-forest-100 mb-6 mt-10;
+    @apply text-xl md:text-2xl font-bold text-forest-800 dark:text-forest-100 mb-0 mt-10;
     font-family: var(--font-inter), system-ui, sans-serif;
     letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token */
     line-height: var(--line-height-snug); /* 1.375 - usa token */
@@ -473,6 +474,7 @@
     max-width: 100%; /* Headings podem usar largura completa */
     font-feature-settings: "kern" 1, "liga" 1, "ss01" 1;
     /* Removido: bordas inferiores que espremiam conteúdo */
+    /* Removido padding abaixo do título */
   }
 
   .markdown-content h3 {
