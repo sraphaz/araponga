@@ -14,19 +14,32 @@ interface Section {
 function processContentIntoSections(html: string): Section[] {
   const sections: Section[] = [];
   
-  // Regex para encontrar headings com IDs
-  const headingRegex = /<h([2-4])([^>]*?)id="([^"]*)"([^>]*?)>(.*?)<\/h\1>/gi;
+  // Regex para encontrar headings - procura por qualquer h2, h3, h4
+  const headingRegex = /<h([2-4])([^>]*)>(.*?)<\/h\1>/gi;
   
   const matches: Array<{ index: number; level: number; id: string; title: string; fullMatch: string }> = [];
   let match;
   
   // Coleta todos os matches primeiro
   while ((match = headingRegex.exec(html)) !== null) {
+    const attrs = match[2] || '';
+    const idMatch = attrs.match(/id=["']([^"']+)["']/i);
+    const id = idMatch ? idMatch[1] : '';
+    const title = (match[3] || '').replace(/<[^>]*>/g, '').trim();
+    
+    // Gera ID se não existir
+    const generatedId = id || title
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dash
+      .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+    
     matches.push({
       index: match.index,
       level: parseInt(match[1]),
-      id: match[3],
-      title: match[5].replace(/<[^>]*>/g, '').trim(),
+      id: generatedId,
+      title: title,
       fullMatch: match[0],
     });
   }
