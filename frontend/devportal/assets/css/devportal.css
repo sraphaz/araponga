@@ -881,6 +881,8 @@ main {
   margin-top: clamp(1rem, 2.5vw, 1.75rem);
   /* Garantir que cards não estourem */
   min-width: 0;
+  /* Centraliza conteúdo quando há células vazias */
+  place-items: center;
 }
 
 .model-grid {
@@ -891,6 +893,8 @@ main {
   margin-top: clamp(1rem, 2.5vw, 1.75rem);
   /* Garantir que cards não estourem */
   min-width: 0;
+  /* Centraliza conteúdo quando há células vazias */
+  place-items: center;
 }
 
 @media (min-width: 640px) {
