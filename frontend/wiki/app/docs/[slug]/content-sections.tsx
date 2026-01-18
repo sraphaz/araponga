@@ -133,23 +133,24 @@ export function ContentSections({ htmlContent }: ContentSectionsProps) {
           );
         }
         
-        // Seção longa - extrai título e usa Accordion
-        // Se for a primeira seção na homepage e não tiver título, não renderiza (remove conteúdo do primeiro accordion)
-        if (index === 0 && !section.title) {
-          // Primeira seção sem título - não renderiza (remove conteúdo)
-          return null;
+        // Seção longa - renderiza como texto simples (sem accordion)
+        // Extrai título se existir, senão renderiza conteúdo diretamente
+        if (section.title) {
+          // Seção com título - heading já está no content
+          return (
+            <section key={index} id={section.id} className="mb-8">
+              <div dangerouslySetInnerHTML={{ __html: section.content }} />
+            </section>
+          );
         }
         
-        const accordionTitle = section.title || (index === 0 ? 'Apresentação' : 'Conteúdo');
+        // Seção sem título - renderiza diretamente como texto
         return (
-          <section key={index} id={section.id} className="mb-6">
-            <Accordion title={accordionTitle} defaultOpen={index <= 1}>
-              <div 
-                className="markdown-content"
-                dangerouslySetInnerHTML={{ __html: section.content }} 
-              />
-            </Accordion>
-          </section>
+          <div
+            key={index}
+            className="mb-8"
+            dangerouslySetInnerHTML={{ __html: section.content }}
+          />
         );
       })}
     </div>

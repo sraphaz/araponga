@@ -68,13 +68,12 @@ async function getDocContent(filePath: string) {
     // IMPORTANTE: Remove H1 do markdown completamente, pois já temos H1 próprio na página
     let htmlContent = processedContent.toString();
 
-    // Remove H1 do markdown completamente - não transforma em H2 para evitar duplicação
-    // O H1 já é renderizado separadamente como título da página
+    // Remove apenas o H1 (título) - mantém todo conteúdo após (incluindo parágrafos introdutórios)
+    // O H1 do markdown é removido mas o conteúdo após ele é preservado
     htmlContent = htmlContent.replace(
       /<h1[^>]*>(.*?)<\/h1>/gi,
       (match, text) => {
-        // Remove completamente o H1 - não renderiza nada
-        // O conteúdo que vem após o H1 será mantido (texto introdutório, etc)
+        // Remove apenas o H1 - conteúdo após será preservado
         return '';
       }
     );
@@ -200,17 +199,7 @@ export default async function HomePage() {
         {/* App Banner - Call to Action para Lançamento */}
         <AppBanner />
 
-        {/* Section Divider */}
-        <div className="mt-20 mb-8 relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t-2 border-forest-200/60 dark:border-forest-800/60"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-forest-50 dark:bg-forest-950 text-forest-500 dark:text-forest-400 font-medium">
-              Explorar Documentação
-            </span>
-          </div>
-        </div>
+        {/* Section Divider - sem bordas (removido) */}
 
         {/* Quick Navigation - Harmonizado com paleta Araponga */}
         <div className="grid md:grid-cols-3 gap-6">
@@ -237,17 +226,7 @@ export default async function HomePage() {
           />
         </div>
 
-        {/* Section Divider - Links Úteis */}
-        <div className="mt-16 mb-8 relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t-2 border-forest-200/60 dark:border-forest-800/60"></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-forest-50 dark:bg-forest-950 text-forest-500 dark:text-forest-400 font-medium">
-              Links Úteis
-            </span>
-          </div>
-        </div>
+        {/* Section Divider - sem bordas (removido) */}
 
         {/* Quick Links Section - Página Inicial */}
         <div className="glass-card animation-fade-in">
