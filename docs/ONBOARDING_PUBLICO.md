@@ -24,14 +24,14 @@ Abordamos questões fundamentais sobre o papel da tecnologia na vida comunitári
 
 ### Nosso compromisso
 
-Araponga é construído sobre princípios que nos diferenciam de plataformas tradicionais:
+Araponga é construído sobre princípios que nos diferenciam:
 
 - **Sem extração de dados** para publicidade
 - **Sem captura de atenção** para engajamento infinito
 - **Sem vigilância** para controle
 - **Governança transparente** com participação comunitária aberta
 
-Diferente de plataformas que operam a portas fechadas, todas as decisões, contribuições e processos no Araponga são visíveis e participativos. Comunidades veem como a plataforma evolui, quem contribui e por que decisões são tomadas.
+Todas as decisões, contribuições e processos no Araponga são visíveis e participativos. Comunidades acompanham como a plataforma evolui, quem contribui e por que decisões são tomadas.
 
 ---
 
@@ -106,14 +106,14 @@ Que formas de autonomia se abrem quando a tecnologia serve ao território?
 
 ### Transparência e Participação
 
-Diferente de outras plataformas, no Araponga **tudo é visível**:
+No Araponga **tudo é visível**:
 
-- Todas as decisões são públicas e participativas
-- Processos de desenvolvimento são transparentes
-- Comunidades participam ativamente da governança
-- Contribuições são reconhecidas e visíveis
+- Decisões públicas e participativas
+- Processos de desenvolvimento transparentes
+- Participação comunitária ativa na governança
+- Contribuições reconhecidas e visíveis
 
-Isso nos diferencia: transparência radical e participação comunitária aberta não são promessas, são realidade.
+Transparência radical e participação comunitária aberta são realidade, não promessas.
 
 ---
 
@@ -126,7 +126,7 @@ Isso nos diferencia: transparência radical e participação comunitária aberta
 - Organizar-se digitalmente mantendo autonomia
 - Fortalecer vínculos locais
 - Facilitar comunicação e organização
-- Participar ativamente da governança da plataforma
+- Participar ativamente da governança
 
 ### Para Pessoas
 
@@ -161,7 +161,7 @@ Isso nos diferencia: transparência radical e participação comunitária aberta
 
 ---
 
-## Como Participar?
+## Como Participar
 
 ### Primeiros Passos
 
@@ -170,82 +170,43 @@ Isso nos diferencia: transparência radical e participação comunitária aberta
 3. **Leia o onboarding** do seu caminho escolhido
 4. **Entre no [Discord](https://discord.gg/auwqN8Yjgw)** — Conecte-se com a comunidade
 
-### Participação Ativa
+### Participação Contínua
 
-Com o tempo, você pode:
+Com o tempo:
 
-- Configurar seu ambiente (se desenvolvedor) ou começar a observar (se analista)
-- Fazer contribuições que importam
-- Participar de discussões e decisões públicas
-- Propor melhorias baseadas em sua experiência
-
-### Crescimento na Comunidade
-
-Com experiência, você pode:
-
-- Contribuir regularmente (no seu ritmo)
-- Ajudar outros que estão começando
-- Propor melhorias e novas funcionalidades
-- Tornar-se parte ativa da governança comunitária
+- Configure seu ambiente (se desenvolvedor) ou comece a observar (se analista)
+- Faça contribuições que importam
+- Participe de discussões e decisões públicas
+- Proponha melhorias baseadas em sua experiência
+- Ajude outros que estão começando
 
 ---
 
-## Próximos Passos
-
-### Agora
-
-1. **Leia a [Visão do Produto](./01_PRODUCT_VISION.md)**
-2. **Escolha seu caminho** — Desenvolvedor ou Analista Funcional
-3. **Entre no [Discord](https://discord.gg/auwqN8Yjgw)**
-
-### Esta Semana
-
-1. **Configure seu ambiente** (se desenvolvedor) ou **comece a observar** (se analista)
-2. **Faça sua primeira contribuição** pequena
-3. **Participe de discussões** no Discord ou GitHub
-
-### Este Mês
-
-1. **Contribua regularmente** (no seu ritmo)
-2. **Ajude outros** que estão começando
-3. **Proponha melhorias** baseadas em sua experiência
-
----
-
-## Por que Participar?
+## Por que Participar
 
 ### Diferenciais do Araponga
 
-Você participa de uma experiência única:
-
-- **Transparência total**: Veja como tudo funciona, quem decide e por quê
-- **Participação real**: Sua voz importa nas decisões da plataforma
-- **Reconhecimento público**: Suas contribuições são visíveis e valorizadas
+- **Transparência total**: Como tudo funciona, quem decide e por quê
+- **Participação real**: Sua voz nas decisões da plataforma
+- **Reconhecimento público**: Contribuições visíveis e valorizadas
 - **Autonomia territorial**: Comunidades mantêm controle sobre seus espaços digitais
 
-### O que Você Precisa?
+### O que você precisa
 
 - Interesse genuíno no projeto e seus valores
 - Alinhamento com princípios (autonomia, território, transparência)
-- Vontade de contribuir respeitando seu próprio ritmo
+- Vontade de contribuir no seu próprio ritmo
 - Abertura para aprender, ensinar e co-criar
 
-### O que Você Encontra?
+### O que você encontra
 
 - Aprendizado que honra sua inteligência e saberes
-- Construção de algo que realmente importa para comunidades
+- Construção de algo que importa para comunidades
 - Conexão com pessoas que compartilham valores elevados
-- Tecnologia transformada em serviço consciente ao território
+- Tecnologia como serviço consciente ao território
 
 ---
 
-**Bem-vindo ao Araponga.**
-
-**Comece pequeno. Contribua no seu ritmo. Faça parte da transformação.**
-
----
-
-**Última Atualização**: 2025-01-20  
-**Versão**: 1.4
+**Bem-vindo ao Araponga. Comece pequeno. Contribua no seu ritmo.**
 
 **Perguntas?** Entre no [Discord](https://discord.gg/auwqN8Yjgw) ou abra uma Issue no [GitHub](https://github.com/sraphaz/araponga).

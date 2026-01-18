@@ -1,3 +1,4 @@
+import Image from "next/image";
 import GlassCard from "@/components/ui/GlassCard";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import Section from "@/components/ui/Section";
@@ -47,14 +48,36 @@ export default function Support() {
                 </div>
               </div>
               <div className="rounded-2xl border border-forest-200/60 bg-forest-50/50 p-5">
-                <p className="text-sm font-semibold text-forest-900 mb-2">Contribua via PIX</p>
-                <p className="text-base font-mono text-forest-800 break-all">rapha.sos@gmail.com</p>
+                <p className="text-sm font-semibold text-forest-900 mb-4">Contribua via PIX</p>
+                <a
+                  href="https://geradordepix.com/pagamento/01KESFV2Q5P6V6K2JWWBY340EK"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-forest-600 px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-500 focus:ring-offset-2"
+                >
+                  <span>Contribuir via PIX</span>
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
             <div className="flex">
-              <img
+              <Image
                 src="/app_banner.png"
                 alt=""
+                width={800}
+                height={600}
                 className="w-full rounded-3xl object-contain shadow-lg transition-transform duration-300 hover:scale-105"
               />
             </div>

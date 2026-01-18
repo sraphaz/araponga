@@ -24,7 +24,6 @@ const sidebarSections: SidebarSection[] = [
   {
     title: "Onboarding",
     items: [
-      { title: "Público", href: "/docs/ONBOARDING_PUBLICO", description: "Guia geral para novos membros" },
       { title: "Desenvolvedores", href: "/docs/ONBOARDING_DEVELOPERS", description: "Comece a desenvolver" },
       { title: "Analistas Funcionais", href: "/docs/ONBOARDING_ANALISTAS_FUNCIONAIS", description: "Análise funcional e territorial" },
     ],
@@ -41,7 +40,7 @@ const sidebarSections: SidebarSection[] = [
     items: [
       { title: "Visão do Produto", href: "/docs/01_PRODUCT_VISION", description: "Visão e objetivos" },
       { title: "Roadmap", href: "/docs/02_ROADMAP", description: "Planejamento e fases" },
-      { title: "Backlog", href: "/docs/backlog-api/README", description: "29 fases do backlog" },
+      { title: "Backlog", href: "/docs/backlog-api/README", description: "Backlog completo de fases" },
     ],
   },
   {
@@ -80,7 +79,7 @@ export function Sidebar() {
   const currentSection = sidebarSections.find((section) =>
     section.items.some((item) => {
       const normalizedHref = item.href.replace(/\/$/, '') || '/';
-      return normalizedPathname === normalizedHref || 
+      return normalizedPathname === normalizedHref ||
              (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
     })
   );
@@ -111,14 +110,14 @@ export function Sidebar() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              
+
               {isOpen && (
                 <ul className="sidebar-items">
                   {section.items.map((item) => {
                     // Normalizar pathname e href para comparação (remover trailing slash)
                     const normalizedPathname = pathname.replace(/\/$/, '') || '/';
                     const normalizedHref = item.href.replace(/\/$/, '') || '/';
-                    const isActive = normalizedPathname === normalizedHref || 
+                    const isActive = normalizedPathname === normalizedHref ||
                                    (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
                     return (
                       <li key={item.href}>

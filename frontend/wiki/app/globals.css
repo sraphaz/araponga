@@ -61,7 +61,7 @@
     --accent-subtle: rgba(77, 212, 168, 0.15);
     --link: #7dd3ff;
     --link-hover: #9de3ff;
-    
+
     /* Dark mode colors */
     --bg-dark: #0a0e12;
     --border-dark: #25303a;
@@ -76,7 +76,7 @@
     --watermark-opacity: 0.015;
     --body-watermark-opacity: 0.01;
     --gradient-overlay: linear-gradient(180deg, rgba(10, 14, 18, 0.8) 0%, rgba(10, 14, 18, 0.4) 100%);
-    
+
     /* Cores de acento e links em dark mode (usam mesmas variáveis) */
     /* --accent e --link já definidas no :root, funcionam em ambos os modos */
   }
@@ -132,7 +132,7 @@
     height: var(--body-watermark-size);
     max-width: 95vw;
     max-height: 95vh;
-    background-image: url("/wiki/Logo_1.png");
+    background-image: url("/wiki/icon.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -172,9 +172,22 @@
 }
 
 @layer components {
-  /* Container consistent */
+  /* Container consistent - Responsivo e otimizado */
   .container-max {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10;
+    @apply mx-auto w-full px-4 sm:px-6 lg:px-8 xl:px-10;
+    max-width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .container-max {
+      max-width: 90rem; /* 1440px - melhor aproveitamento de espaço */
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container-max {
+      max-width: 96rem; /* 1536px - ainda mais espaço em telas muito grandes */
+    }
   }
 
   /* Glass card - Modern design refinement */
@@ -223,7 +236,7 @@
     height: var(--watermark-size);
     bottom: var(--watermark-bottom);
     right: var(--watermark-right);
-    background-image: url("/wiki/Logo_1.png");
+    background-image: url("/wiki/icon.png");
     background-repeat: no-repeat;
     background-position: bottom right;
     background-size: contain;
@@ -282,49 +295,52 @@
   /* Category card - Enterprise design */
   .category-card {
     @apply glass-card;
-    @apply hover:scale-[1.01] transition-all duration-500;
   }
 
-  .category-card h2 {
-    @apply relative inline-block;
+  .category-card {
+    @apply h-full;
+    min-height: 280px;
   }
 
-  .category-card h2::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    @apply bg-forest-400 dark:bg-dark-accent;
-    transition: width var(--transition-smooth);
-    border-radius: 2px;
+  .category-card__content {
+    padding: 1.75rem 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
-  .category-card:hover h2::after {
-    width: 100%;
+  @media (min-width: 640px) {
+    .category-card__content {
+      padding: 2rem 1.75rem;
+    }
   }
 
-  /* Doc link - Enterprise design */
+  @media (min-width: 1024px) {
+    .category-card__content {
+      padding: 2.25rem 2rem;
+      min-height: 320px;
+    }
+  }
+
+  /* Doc link - Design limpo e legível */
   .doc-link {
-    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg;
-    @apply text-sm md:text-base text-forest-700 dark:text-forest-300;
+    @apply flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-lg;
+    @apply text-sm sm:text-base text-forest-700 dark:text-forest-300;
     @apply hover:text-forest-900 dark:hover:text-forest-50;
-    @apply transition-all duration-200 ease-out;
-    @apply hover:bg-forest-50/60 dark:hover:bg-forest-900/50;
-    position: relative;
+    @apply transition-colors duration-200 ease-out;
+    @apply hover:bg-forest-50/80 dark:hover:bg-forest-900/60;
+    line-height: var(--line-height-relaxed);
   }
 
   .doc-link-arrow {
-    @apply text-forest-400 dark:text-forest-600;
-    @apply group-hover:text-forest-600 dark:group-hover:text-dark-accent;
-    @apply transition-all duration-200;
-    @apply opacity-60 group-hover:opacity-100;
-    transform: translateX(0);
+    @apply text-forest-400 dark:text-forest-500;
+    @apply transition-colors duration-200;
+    opacity: 0.7;
   }
 
   .doc-link:hover .doc-link-arrow {
-    transform: translateX(2px);
+    @apply text-forest-600 dark:text-forest-400;
+    opacity: 1;
   }
 
   /* Hero section - Enterprise typography */
@@ -1394,9 +1410,9 @@
 
 .app-banner-badge {
   @apply inline-flex items-center space-x-2 px-4 py-2 rounded-full;
-  /* Usa var(--accent) com opacity via Tailwind opacity utilities */
-  background-color: rgba(77, 212, 168, 0.1);
-  border-color: rgba(77, 212, 168, 0.3);
+  /* Usa var(--accent) com opacity */
+  background-color: var(--accent-subtle);
+  border: 1px solid rgba(77, 212, 168, 0.3);
   color: var(--accent);
   @apply font-semibold text-sm;
   @apply animate-pulse-slow;

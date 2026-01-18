@@ -32,20 +32,20 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
       if (href.startsWith(basePath) || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) {
         return match;
       }
-      
+
       // Se é link relativo que termina com .md, converte para /wiki/docs/... (sem .md)
       if (href.endsWith('.md')) {
         const slug = href.replace(/^\.\/|\.md$/g, '');
         const newHref = `${basePath}/docs/${slug}`;
         return `<a ${before || ''}href="${newHref}"${after || ''}>`;
       }
-      
+
       // Se começa com /, adiciona basePath
       if (href.startsWith('/')) {
         const newHref = `${basePath}${href}`;
         return `<a ${before || ''}href="${newHref}"${after || ''}>`;
       }
-      
+
       // Links relativos sem .md - mantém como está
       return match;
     }
@@ -64,36 +64,45 @@ async function getDocContent(filePath: string) {
       .process(content);
 
     // Adiciona IDs aos headings para navegação e progressive disclosure
-    // IMPORTANTE: Também processa H1 para garantir que não haja duplicação
+    // IMPORTANTE: Remove H1 do markdown completamente, pois já temos H1 próprio na página
     let htmlContent = processedContent.toString();
-    
-    // Remove ou transforma H1 em H2 se necessário para evitar duplicação com título da página
+
+    // Remove H1 do markdown completamente - não transforma em H2 para evitar duplicação
+    // O H1 já é renderizado separadamente como título da página
     htmlContent = htmlContent.replace(
-      /<h1>(.*?)<\/h1>/gi,
+      /<h1[^>]*>(.*?)<\/h1>/gi,
       (match, text) => {
-        // Se o markdown tem H1, transforma em H2 para evitar duplicação
-        const cleanText = getTextContent(text);
-        const id = cleanText
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-+|-+$/g, '');
-        return `<h2 id="${id}">${text}</h2>`;
+        // Remove completamente o H1 - não renderiza nada
+        // O conteúdo que vem após o H1 será mantido (texto introdutório, etc)
+        return '';
       }
     );
-    
+
+    // Adiciona IDs aos headings garantindo unicidade
+    const usedIds = new Map<string, number>(); // Rastreia IDs já usados e seus contadores
+
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
         // Usa sanitize-html para remover HTML de forma segura
         const cleanText = getTextContent(text);
-        const id = cleanText
+        let baseId = cleanText
           .toLowerCase()
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos
           .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with dash
           .replace(/^-+|-+$/g, ''); // Remove leading/trailing dashes
+
+        // Garante ID único: se já existe, adiciona sufixo numérico
+        let id = baseId;
+        if (usedIds.has(baseId)) {
+          const count = (usedIds.get(baseId) || 0) + 1;
+          usedIds.set(baseId, count);
+          id = `${baseId}-${count}`;
+        } else {
+          usedIds.set(baseId, 0);
+        }
+
         return `<h${level} id="${id}">${text}</h${level}>`;
       }
     );

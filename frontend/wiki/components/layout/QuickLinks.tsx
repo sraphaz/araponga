@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { OfficialIcon } from "../ui/OfficialIcon";
 
 interface QuickLink {
   label: string;
   href: string;
-  icon: string;
+  icon?: string;
+  iconSrc?: string;
   external?: boolean;
   description?: string;
 }
@@ -14,14 +16,14 @@ const quickLinks: QuickLink[] = [
   {
     label: "Discord",
     href: "https://discord.gg/auwqN8Yjgw",
-    icon: "💬",
+    iconSrc: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.svg",
     external: true,
     description: "Conecte-se com o time",
   },
   {
     label: "GitHub",
     href: "https://github.com/sraphaz/araponga",
-    icon: "🔗",
+    iconSrc: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.svg",
     external: true,
     description: "Repositório do projeto",
   },
@@ -35,7 +37,7 @@ const quickLinks: QuickLink[] = [
   {
     label: "Dev Portal",
     href: "https://devportal.araponga.app",
-    icon: "⚡",
+    icon: "💡",
     external: true,
     description: "Documentação técnica da API",
   },
@@ -45,7 +47,7 @@ export function QuickLinks() {
   return (
     <nav className="quick-links-container" aria-label="Links rápidos">
       <div className="quick-links-header">
-        <span className="quick-links-icon">⚡</span>
+        <span className="quick-links-icon">💡</span>
         <h3 className="quick-links-title">Links Úteis</h3>
       </div>
       <ul className="quick-links-list">
@@ -58,7 +60,19 @@ export function QuickLinks() {
                 rel="noopener noreferrer"
                 className="quick-link group"
               >
-                <span className="quick-link-icon">{link.icon}</span>
+                <span className="quick-link-icon">
+                  {link.iconSrc ? (
+                    <OfficialIcon
+                      src={link.iconSrc}
+                      alt={link.label}
+                      width={24}
+                      height={24}
+                      className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
+                    />
+                  ) : (
+                    link.icon
+                  )}
+                </span>
                 <div className="quick-link-content">
                   <span className="quick-link-label">{link.label}</span>
                   {link.description && (
@@ -81,7 +95,19 @@ export function QuickLinks() {
               </a>
             ) : (
               <Link href={link.href} className="quick-link">
-                <span className="quick-link-icon">{link.icon}</span>
+                <span className="quick-link-icon">
+                  {link.iconSrc ? (
+                    <OfficialIcon
+                      src={link.iconSrc}
+                      alt={link.label}
+                      width={24}
+                      height={24}
+                      className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
+                    />
+                  ) : (
+                    link.icon
+                  )}
+                </span>
                 <div className="quick-link-content">
                   <span className="quick-link-label">{link.label}</span>
                   {link.description && (

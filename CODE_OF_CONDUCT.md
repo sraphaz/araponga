@@ -40,7 +40,7 @@ indivíduo está representando oficialmente o projeto em espaços públicos.
 ## Aplicação
 
 Casos de comportamento abusivo, assediador ou de outra forma inaceitável podem ser
-relatados para a equipe do projeto pelo e-mail: rapha.sos@gmail.com. Todas as denúncias
+relatados para a equipe do projeto pelo e-mail: suporte@araponga.app. Todas as denúncias
 serão analisadas e investigadas prontamente, de forma justa e respeitosa.
 
 ## Diretrizes de aplicação

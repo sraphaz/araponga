@@ -613,7 +613,183 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 
 ---
 
-## 8. Recursos e Referências
+## 8. Conjunto Semântico Preferencial
+
+### 8.1 Princípios de Vocabulário
+
+O vocabulário do Araponga reflete seus valores fundamentais: **território como referência**, **autonomia local**, **transparência radical** e **valorização da inteligência**. Cada termo escolhido carrega significado intencional e alinha comunicação com propósito do projeto.
+
+### 8.2 Terminologia Obrigatória
+
+#### Território e Espaço
+
+| Use | Evite | Por quê |
+|-----|-------|---------|
+| **Territory / Território** | Place, Location, Area | Território é geográfico e neutro, representa lugar físico real |
+| **Presença no Território** | Check-in, Foursquare | Enfatiza vínculo físico e continuidade, não gamificação |
+| **GeoAnchor** | Pin, Marker | Técnico e preciso, representa ancoragem geográfica |
+
+#### Papéis e Vínculos
+
+| Use | Evite | Por quê |
+|-----|-------|---------|
+| **Visitor / Visitante** | User, Member, Guest | Papel territorial específico, não genérico |
+| **Resident / Morador** | Local, Inhabitant | Enfatiza vínculo territorial aprovado |
+| **Membership / Vínculo** | Affiliation, Connection | Termo técnico preciso, representa relação User ↔ Territory |
+
+#### Conteúdo e Marketplace
+
+| Use | Evite | Por quê |
+|-----|-------|---------|
+| **Items / Itens** | Listings, Products | Termo direto, não carrega conotação comercial agressiva |
+| **Store / Loja** | Shop, Marketplace | Termo familiar e claro, sem jargão |
+| **Post** | Publication, Update | Termo simples e direto, não hierárquico |
+
+#### Governança e Moderação
+
+| Use | Evite | Por quê |
+|-----|-------|---------|
+| **Curator / Curador** | Validator, Approver | Valoriza inteligência e conhecimento, não apenas função técnica |
+| **Moderator / Moderador** | Admin, Supervisor | Termo específico, respeita autonomia territorial |
+| **Report** | Complaint, Flag | Termo neutro, focado em transparência |
+| **Sanction / Sanção** | Ban, Penalty | Termo técnico preciso, respeita processo documentado |
+
+### 8.3 Verbos e Ações Preferenciais
+
+#### Ações de Participação
+
+- **Participar** (não "aderir" ou "se juntar") — ação consciente e explícita
+- **Contribuir** (não "colaborar" genérico) — reconhece valor da contribuição
+- **Postar** (não "publicar" ou "compartilhar") — ação direta e simples
+
+#### Ações de Governança
+
+- **Validar** (não "aprovar" genérico) — enfatiza processo de verificação
+- **Moderar** (não "controlar" ou "administrar") — ação específica e transparente
+- **Curar** (não "gerenciar" ou "organizar") — valoriza inteligência e cuidado
+
+#### Ações de Descoberta
+
+- **Explorar** (não "navegar" genérico) — sugere descoberta ativa
+- **Encontrar** (não "descobrir" casual) — ação direta e consciente
+- **Conectar** (não "seguir" ou "linkar") — sugere vínculo, não consumo
+
+### 8.4 Adjetivos e Qualificadores
+
+#### Valores Positivos
+
+- **Transparente** — processos abertos e auditáveis
+- **Territorial** — ancorado ao lugar, respeitoso da geografia
+- **Comunitário** — governança local, participação coletiva
+- **Autônomo** — independente, respeitoso da autonomia local
+- **Sóbrio** — profissional, não chamativo, elegante
+- **Consciente** — atento, responsável, ético
+
+#### Evitar
+
+- ❌ "Inovador", "revolucionário" — superlativos vazios
+- ❌ "Melhor", "superior" — comparações que não agregam valor
+- ❌ "Disruptivo", "transformador" — jargão corporativo vazio
+
+### 8.5 Frases e Construções Preferenciais
+
+#### Apresentação e Introdução
+
+✅ **Preferir**:
+- "Araponga é uma infraestrutura digital onde o território vem primeiro."
+- "Construímos tecnologia que fortalece comunidades locais."
+- "Território como referência, autonomia como valor."
+
+❌ **Evitar**:
+- "Somos a melhor plataforma comunitária do mundo!"
+- "Revolucione sua comunidade conosco!"
+- "Transforme seu bairro hoje!"
+
+#### Chamadas para Ação
+
+✅ **Preferir**:
+- "Participar no território"
+- "Explorar o mapa"
+- "Contribuir com conteúdo"
+
+❌ **Evitar**:
+- "Comece agora!" (imperativo agressivo)
+- "Junte-se à revolução!" (superlativo vazio)
+- "Não perca!" (pressão desnecessária)
+
+#### Explicações e Descrições
+
+✅ **Preferir**:
+- "Território organiza contexto e governança."
+- "Transparência em processos e decisões."
+- "Autonomia territorial em moderação e regras."
+
+❌ **Evitar**:
+- "Nossa plataforma única oferece..." (possessivo corporativo)
+- "Você vai adorar..." (promessa vazia)
+- "Descubra como..." (imperativo passivo)
+
+### 8.6 Tom e Estrutura
+
+#### Estruturas Preferenciais
+
+1. **Sentenças Diretas**: Sujeito + verbo + complemento
+   - ✅ "Território organiza contexto."
+   - ❌ "É através do território que organizamos contexto."
+
+2. **Voz Ativa**: Sujeito como agente da ação
+   - ✅ "Comunidades decidem sobre moderação."
+   - ❌ "A moderação é decidida pelas comunidades."
+
+3. **Linguagem Neutra**: Preferir termos técnicos precisos
+   - ✅ "Membership representa vínculo User ↔ Territory."
+   - ❌ "O membro está vinculado ao território."
+
+#### Perguntas sobre Afirmações
+
+- ✅ **Preferir perguntas** que convidam reflexão:
+  - "Como podemos fortalecer autonomia local?"
+  - "Que impacto queremos gerar no território?"
+
+- ❌ **Evitar afirmações absolutas** que impõem valores:
+  - "Você deve participar ativamente."
+  - "Todos precisam colaborar."
+
+### 8.7 Aplicação em Contextos
+
+#### Documentação Técnica
+
+- Use termos técnicos precisos (Territory, Membership, GeoAnchor)
+- Evite sinônimos que causem confusão
+- Mantenha consistência entre código e documentação
+
+#### Comunicação com Comunidade
+
+- Use linguagem clara e direta
+- Evite jargões técnicos quando não necessário
+- Priorize termos que comunicam valores (autonomia, transparência)
+
+#### Marketing e Comunicação Externa
+
+- Enfatize valores, não superlativos
+- Use exemplos concretos, não promessas vazias
+- Conte histórias territoriais, não estatísticas corporativas
+
+### 8.8 Checklist de Validação
+
+**Antes de publicar qualquer texto:**
+
+- [ ] Usei "Territory" (não "place" ou "location")?
+- [ ] Usei "Items" (não "listings")?
+- [ ] Evitei superlativos vazios ("melhor", "único", "revolucionário")?
+- [ ] Preferi voz ativa e sentenças diretas?
+- [ ] Usei verbos de ação consciente ("participar", "contribuir")?
+- [ ] Evitei jargões corporativos ("disruptivo", "inovador")?
+- [ ] Mantive consistência com glossário e modelo de domínio?
+
+---
+
+## 9. Recursos e Referências
 
 ### 8.1 Documentação Técnica
 
@@ -648,7 +824,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 
 ---
 
-## 9. Versionamento e Evolução
+## 10. Versionamento e Evolução
 
 **Este documento é vivo** e deve evoluir conforme o projeto Araponga cresce. Mudanças significativas devem ser:
 
@@ -658,6 +834,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 4. **Validadas**: Checklist de validação executado
 
 **Versões**
+- **1.1** (2025-01-20): Adicionada seção "Conjunto Semântico Preferencial" com vocabulário e terminologia obrigatória
 - **1.0** (2025-01-20): Documento fundacional inicial
 
 **Próximas Versões**
@@ -667,7 +844,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 
 ---
 
-## 10. Contato e Suporte
+## 11. Contato e Suporte
 
 **Para questões sobre este documento:**
 - Abrir Issue no GitHub com label `design-system`

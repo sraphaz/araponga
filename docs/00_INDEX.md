@@ -80,8 +80,8 @@ Documentos sobre histórico e mudanças do projeto.
 ### 📋 Planos e Recomendações
 Documentos de planejamento e recomendações de implementação.
 
-- **[Backlog API](./backlog-api/README.md)** - Backlog completo da API com 29 fases organizadas estrategicamente
-- **[Status das Fases](./STATUS_FASES.md)** - Status detalhado de todas as 29 fases
+- **[Backlog API](./backlog-api/README.md)** - Backlog completo da API com fases organizadas estrategicamente (número de fases calculado dinamicamente - ver `PROJECT_PHASES_CONFIG.md`)
+- **[Status das Fases](./STATUS_FASES.md)** - Status detalhado das fases (número calculado dinamicamente - ver `PROJECT_PHASES_CONFIG.md`)
 - **[Recomendações de Segurança](./recommendations/RECOMENDACOES_SEGURANCA_PROXIMOS_PASSOS.md)** - Recomendações de segurança e próximos passos
 - **[Plano de Refatoração - Recomendações Pendentes](./recommendations/PLANO_REFACTOR_RECOMENDACOES_PENDENTES.md)** - Plano de implementação de recomendações pendentes
 - **[Planejamento: Preferências de Usuário](./61_USER_PREFERENCES_PLAN.md)** - Planejamento completo da funcionalidade de preferências de privacidade e configurações do usuário

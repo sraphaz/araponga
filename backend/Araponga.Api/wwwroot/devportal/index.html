@@ -46,14 +46,15 @@
       <span class="hero-tag" aria-label="Categoria" data-i18n="ui.heroTag">Araponga API • Developer Portal</span>
       <h1 data-i18n="ui.heroTitle">Infraestrutura digital comunitária orientada ao território</h1>
       <p data-i18n-html="ui.heroLeadHtml">
-        Araponga é uma plataforma <strong>territory-first</strong> que organiza contexto, visibilidade e governança através da localização geográfica. 
-        Esta infraestrutura técnica permite que comunidades construam autonomia econômica e organizacional utilizando seus próprios recursos locais. 
+        Araponga é uma plataforma <strong>territory-first</strong> que organiza contexto, visibilidade e governança através da localização geográfica.
+        Esta infraestrutura técnica permite que comunidades construam autonomia econômica e organizacional utilizando seus próprios recursos locais.
         Este portal documenta a API exatamente como implementada, oferecendo documentação completa para integração segura e previsível.
       </p>
 
       <nav class="hero-actions" aria-label="Ações rápidas">
         <a class="button" href="#quickstart" aria-label="Ir para o guia de início rápido" data-i18n="ui.quickstart">Quickstart</a>
         <a class="button secondary" href="#openapi" aria-label="Ver documentação OpenAPI" data-i18n="ui.openapi">OpenAPI</a>
+        <a class="button secondary" href="https://github.com/sraphaz/araponga" target="_blank" rel="noopener noreferrer" aria-label="Ver código no GitHub">Código (GitHub)</a>
         <a class="button secondary" href="#auth" aria-label="Ver documentação de autenticação" data-i18n="ui.auth">Autenticação</a>
         <a class="button secondary" href="#territory-session" aria-label="Ver como selecionar território" data-i18n="ui.selectTerritory">Selecionar território</a>
       </nav>
@@ -93,8 +94,8 @@
         <div>
           <h2 data-i18n="overview.title">API orientada a território com governança comunitária transparente</h2>
           <p data-i18n="overview.lead">
-            A API Araponga fornece uma base confiável para territórios, vínculos, feed, mapa, marketplace e eventos. 
-            Regras explícitas de visibilidade, validação e moderação garantem que experiências locais sejam auditáveis e evoluam com segurança. 
+            A API Araponga fornece uma base confiável para territórios, vínculos, feed, mapa, marketplace e eventos.
+            Regras explícitas de visibilidade, validação e moderação garantem que experiências locais sejam auditáveis e evoluam com segurança.
             A arquitetura suporta decisões comunitárias, economia circular local e regeneração social territorial através de ferramentas técnicas que respeitam a soberania e pertencimento dos grupos locais.
           </p>
         </div>
@@ -102,15 +103,15 @@
           <div class="card">
             <h3>Território como base estrutural</h3>
             <p>
-              Território é a unidade geográfica fundamental que separa "onde" de "quem" e "o quê". 
-              Esta separação evita que conteúdo social distorça o mapa e mantém o contexto local como primeira classe. 
+              Território é a unidade geográfica fundamental que separa "onde" de "quem" e "o quê".
+              Esta separação evita que conteúdo social distorça o mapa e mantém o contexto local como primeira classe.
               A geografia como fundamento estrutural fortalece vínculos de pertencimento e permite que comunidades gerenciem seus próprios processos de organização e economia.
             </p>
           </div>
           <div class="card">
             <h3>Governança em camadas transparentes</h3>
             <p>
-              Vínculos (visitor/resident), validações comunitárias, moderação (reports/bloqueios) e notificações formam as camadas que definem visibilidade no feed e mapa. 
+              Vínculos (visitor/resident), validações comunitárias, moderação (reports/bloqueios) e notificações formam as camadas que definem visibilidade no feed e mapa.
               Cada camada é configurável e auditável pela comunidade, garantindo transparência total e autonomia nas decisões que afetam o território.
             </p>
           </div>
@@ -338,13 +339,13 @@
             <dl class="entity-list">
               <dt><strong>TerritoryStore</strong></dt>
               <dd>Loja do morador no território.</dd>
-              
+
               <dt><strong>Item</strong></dt>
               <dd>Produto/serviço publicado pela loja (categoria, tags, preço, status).</dd>
-              
+
               <dt><strong>Cart</strong> / <strong>CartItem</strong></dt>
               <dd>Carrinho por território + itens com quantidade e notas.</dd>
-              
+
               <dt><strong>Inquiry</strong></dt>
               <dd>Mensagem de interesse em um item (inquiries enviadas/recebidas).</dd>
             </dl>
@@ -381,10 +382,10 @@
             <dl class="entity-list">
               <dt><strong>TerritoryEvent</strong></dt>
               <dd>Evento territorial com início obrigatório, fim opcional e geolocalização.</dd>
-              
+
               <dt><strong>Interest / Confirm</strong></dt>
               <dd>Estados de engajamento: marcar interesse e confirmar presença.</dd>
-              
+
               <dt><strong>Integração Feed-Mapa</strong></dt>
               <dd>Criação do evento alimenta feed e pins do mapa (mesmo território).</dd>
             </dl>
@@ -430,7 +431,7 @@
           </div>
 
           <div class="card card-full">
-            <h3>💡 Por que essa estrutura existe</h3>
+            <h3>🪄 Por que essa estrutura existe</h3>
             <ul class="rationale-list">
               <li><strong>Separação de responsabilidades:</strong> Território separado de identidade evita acoplamento social no mapa</li>
               <li><strong>Governança clara:</strong> Vínculos explicitam presença local e governança comunitária</li>
@@ -1235,11 +1236,11 @@ curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/
     string description,
     Dictionary&lt;string, string&gt;? metadata,
     CancellationToken cancellationToken);
-  
+
   Task&lt;OperationResult&lt;PayoutStatusResult&gt;&gt; GetPayoutStatusAsync(
     string payoutId,
     CancellationToken cancellationToken);
-  
+
   Task&lt;OperationResult&gt; CancelPayoutAsync(
     string payoutId,
     CancellationToken cancellationToken);
@@ -1368,7 +1369,7 @@ curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/
           <pre class="code-block"><code># Marcar interesse
 curl -X POST http://localhost:8080/api/v1/events/{eventId}/interest \
   -H "Authorization: Bearer &lt;token&gt;" \
-  
+
 # Confirmar participação
 curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
   -H "Authorization: Bearer &lt;token&gt;"</code></pre>
@@ -1585,7 +1586,7 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
               <p style="margin-bottom: 0.75rem; font-weight: 600; color: var(--text);">Upload:</p>
               <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/verification/identity/document/upload</code>
               <code style="display: block; margin-bottom: 1rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/memberships/{territoryId}/verify-residency/document/upload</code>
-              
+
               <p style="margin-bottom: 0.75rem; margin-top: 1rem; font-weight: 600; color: var(--text);">Download (SystemAdmin):</p>
               <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/evidences/{evidenceId}/download</code>
             </div>
@@ -1731,7 +1732,7 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
               <dt><strong>Validação robusta</strong></dt>
               <dd>FluentValidation em todas as camadas: contratos de API, comandos de aplicação e regras de domínio. Validações declarativas e mensagens de erro claras.</dd>
 
-              <dt><strong>Cobertura de testes superior a 90%</strong></dt>
+              <dt><strong>Cobertura de testes acima de 90%</strong></dt>
               <dd>Testes unitários, de integração e end-to-end cobrindo fluxos críticos. Testes de infraestrutura para repositórios e serviços de aplicação.</dd>
 
               <dt><strong>Testes de segurança e performance</strong></dt>
@@ -1926,7 +1927,7 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
               <strong>Fases 16, 19, 21-22:</strong> Entregas territoriais, arquitetura modular, suporte a criptomoedas e integrações externas.
             </p>
             <p style="color: var(--text-muted); margin: 0;">
-              Expansão de capacidades mantendo autonomia. Flexibilidade arquitetural para adaptação e evolução sem dependência de fornecedores únicos.
+              Expansão de capacidades mantendo autonomia. Flexibilidade arquitetural para adaptação e evolução sem dependência de fornecedores específicos.
             </p>
           </div>
 
@@ -2091,16 +2092,16 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
           console.error('openDiagramFullscreen espera um elemento IMG');
           return;
         }
-        
+
         var modal = document.getElementById('diagram-modal');
         if (!modal) {
           modal = document.createElement('div');
           modal.id = 'diagram-modal';
           modal.className = 'diagram-modal';
-          
+
           var modalContent = document.createElement('div');
           modalContent.className = 'diagram-modal-content';
-          
+
           var closeBtn = document.createElement('button');
           closeBtn.className = 'diagram-modal-close';
           closeBtn.textContent = '×';
@@ -2109,15 +2110,15 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
             modal.classList.remove('active');
             document.body.style.overflow = '';
           });
-          
+
           modal.appendChild(closeBtn);
           modal.appendChild(modalContent);
           document.body.appendChild(modal);
         }
-        
+
         var modalContent = modal.querySelector('.diagram-modal-content');
         modalContent.innerHTML = '';
-        
+
         // Criar clone da imagem SVG
         var imgClone = diagramElement.cloneNode(true);
         imgClone.style.maxWidth = '100%';
@@ -2125,11 +2126,11 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
         imgClone.style.margin = '0 auto';
         imgClone.style.display = 'block';
         imgClone.className = 'mermaid-diagram'; // Garantir que os filtros CSS sejam aplicados
-        
+
         modalContent.appendChild(imgClone);
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
+
         // Fechar com ESC
         var escHandler = function(e) {
           if (e.key === 'Escape') {
@@ -2139,7 +2140,7 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
           }
         };
         document.addEventListener('keydown', escHandler);
-        
+
         // Fechar ao clicar fora
         modal.addEventListener('click', function(e) {
           if (e.target === modal) {
@@ -2148,10 +2149,10 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
           }
         });
       }
-      
+
       // Tornar função global (para compatibilidade se houver onclick inline)
       window.openDiagramFullscreen = openDiagramFullscreen;
-      
+
       // Inicializar event listeners para todos os botões de tela cheia
       function initDiagramButtons() {
         var diagramButtons = document.querySelectorAll('.diagram-fullscreen-btn');
@@ -2169,7 +2170,7 @@ curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
           }
         });
       }
-      
+
       // Inicializar quando DOM estiver pronto
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initDiagramButtons);
