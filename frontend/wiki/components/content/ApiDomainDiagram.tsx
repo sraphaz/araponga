@@ -33,7 +33,7 @@ export function ApiDomainDiagram() {
                 if (fallback) fallback.style.display = 'block';
               }}
             />
-            <div 
+            <div
               className="hidden p-8 bg-forest-100 dark:bg-forest-900/50 rounded-xl text-center"
               style={{ display: 'none' }}
             >

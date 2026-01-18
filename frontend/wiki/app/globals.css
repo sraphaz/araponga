@@ -257,8 +257,8 @@
   .glass-card__content {
     position: relative;
     z-index: 1;
-    /* Espaçamento otimizado - mais área útil, menos padding excessivo */
-    padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
+    /* Espaçamento otimizado - reduzido padding superior para menos margem */
+    padding: clamp(1rem, 2vw, 1.5rem) clamp(2rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
   }
 
   /* Navigation refinada - Enterprise design */

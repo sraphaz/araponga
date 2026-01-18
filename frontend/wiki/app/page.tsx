@@ -145,7 +145,7 @@ export default async function HomePage() {
   // Se não conseguir carregar, mostra fallback ao invés de 404
   if (!onboardingDoc) {
     return (
-      <main className="container-max py-12 lg:py-16 px-4 md:px-6 lg:px-8">
+      <main className="container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
         <div className="glass-card animation-fade-in">
           <div className="glass-card__content markdown-content">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight tracking-tight">
@@ -166,7 +166,7 @@ export default async function HomePage() {
   }
 
   return (
-    <main className="container-max py-12 lg:py-16 px-4 md:px-6 lg:px-8">
+    <main className="container-max py-4 lg:py-6 px-4 md:px-6 lg:px-8">
         {onboardingDoc && (
           <div className="w-full mx-auto grid grid-cols-1 lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] 2xl:grid-cols-[1fr_280px] gap-4 lg:gap-6 xl:gap-8">
             {/* Main Content Column */}
