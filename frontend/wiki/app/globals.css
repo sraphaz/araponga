@@ -652,7 +652,7 @@
     @apply shadow-sm;
     font-size: var(--font-size-lg); /* 18px - usa token */
     line-height: var(--line-height-loose); /* 2 - usa token */
-    max-width: 68ch;
+    /* Removido max-width - conteúdo usa toda largura disponível */
     position: relative;
     margin-left: 0;
     margin-right: 0;
@@ -708,7 +708,7 @@
   /* Horizontal rules - Modern separators (Market standards) */
   .markdown-content hr {
     @apply my-20 border-0; /* Mais espaço - quebra visual clara */
-    max-width: 68ch;
+    /* Removido max-width - conteúdo usa toda largura disponível */
     position: relative;
     height: 1px;
     background: linear-gradient(
