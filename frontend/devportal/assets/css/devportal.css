@@ -182,9 +182,14 @@ body {
 
 /* Dark mode body background - Sincronizado com Wiki */
 :root.dark body {
+  /* Dark mode: remove bukeh, usa apenas gradients */
   background-image:
     radial-gradient(circle at 20% 50%, rgba(77, 212, 168, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(125, 211, 255, 0.03) 0%, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  background-attachment: scroll;
   background-color: var(--bg);
 }
 
@@ -279,8 +284,12 @@ input:focus-visible {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, rgba(15, 20, 25, 0.98) 0%, rgba(10, 14, 18, 0.98) 100%),
-    url("../images/araponga-icon.svg") no-repeat right clamp(4%, 6vw, 8%) center / clamp(140px, 22vw, 240px);
+  /* Light/dark: usa variáveis CSS para adaptação */
+  background: var(--bg-elevated);
+  background-image: url("../images/araponga-icon.svg");
+  background-repeat: no-repeat;
+  background-position: right clamp(4%, 6vw, 8%) center;
+  background-size: clamp(140px, 22vw, 240px);
   background-attachment: scroll; /* Melhor performance que fixed */
   border-bottom: 1px solid var(--border);
   padding: 3.5rem 0 2.5rem;
