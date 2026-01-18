@@ -6,12 +6,21 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
+import sanitizeHtml from "sanitize-html";
 import { Header } from "../../../components/layout/Header";
 import { Footer } from "../../../components/layout/Footer";
 import { Sidebar } from "../../../components/layout/Sidebar";
 import { MobileSidebar } from "../../../components/layout/MobileSidebar";
 import { TableOfContents } from "../../../components/layout/TableOfContents";
 import { ContentSections } from "./content-sections";
+
+// Helper function para extrair texto de HTML de forma segura
+function getTextContent(html: string): string {
+  return sanitizeHtml(html, {
+    allowedTags: [],
+    allowedAttributes: {},
+  });
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -81,8 +90,9 @@ async function getDocContent(fileName: string) {
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
-        const id = text
-          .replace(/<[^>]*>/g, '') // Remove HTML tags
+        // Usa sanitize-html para remover HTML de forma segura
+        const cleanText = getTextContent(text);
+        const id = cleanText
           .toLowerCase()
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos

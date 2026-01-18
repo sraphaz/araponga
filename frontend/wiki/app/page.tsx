@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 import remarkGfm from "remark-gfm";
+import sanitizeHtml from "sanitize-html";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { FeatureCard } from "../components/ui/FeatureCard";
@@ -12,6 +13,14 @@ import { QuickLinks } from "../components/layout/QuickLinks";
 import { ApiDomainDiagram } from "../components/content/ApiDomainDiagram";
 import { AppBanner } from "../components/content/AppBanner";
 import { ContentSections } from "./docs/[slug]/content-sections";
+
+// Helper function para extrair texto de HTML de forma segura
+function getTextContent(html: string): string {
+  return sanitizeHtml(html, {
+    allowedTags: [],
+    allowedAttributes: {},
+  });
+}
 
 function processMarkdownLinks(html: string, basePath: string = '/wiki'): string {
   // Processa links <a href="/docs/..."> para <a href="/wiki/docs/...">
@@ -47,8 +56,9 @@ async function getDocContent(filePath: string) {
     htmlContent = htmlContent.replace(
       /<h([2-4])>(.*?)<\/h\1>/gi,
       (match, level, text) => {
-        const id = text
-          .replace(/<[^>]*>/g, '') // Remove HTML tags
+        // Usa sanitize-html para remover HTML de forma segura
+        const cleanText = getTextContent(text);
+        const id = cleanText
           .toLowerCase()
           .normalize('NFD')
           .replace(/[\u0300-\u036f]/g, '') // Remove acentos
