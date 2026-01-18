@@ -304,13 +304,25 @@ input:focus-visible {
   left: 0;
   right: 0;
   bottom: 0;
+  /* Light mode: overlay claro (forest-50) */
+  background: linear-gradient(
+    180deg,
+    rgba(241, 248, 244, 0.95) 0%,
+    rgba(241, 248, 244, 0.8) 50%,
+    rgba(241, 248, 244, 0.95) 100%
+  );
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+:root.dark .header::before {
+  /* Dark mode: overlay escuro */
   background: linear-gradient(
     180deg,
     rgba(10, 14, 18, 0.95) 0%,
     rgba(10, 14, 18, 0.8) 50%,
     rgba(10, 14, 18, 0.95) 100%
-  ); /* Overlay gradiente mais suave */
-  pointer-events: none;
+  );
 }
 
 .container {
