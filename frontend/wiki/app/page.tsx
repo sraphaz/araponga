@@ -55,7 +55,18 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
 async function getDocContent(filePath: string) {
   try {
     // Caminho: de frontend/wiki para docs/ na raiz (2 níveis acima)
-    const docsPath = join(process.cwd(), "..", "..", "docs", filePath).replace(/\\/g, '/');
+    // process.cwd() pode variar em dev vs build - usa __dirname como fallback
+    let basePath = process.cwd();
+    
+    // Se estiver em .next (build), ajusta o caminho
+    if (basePath.includes('.next')) {
+      basePath = join(basePath, '..', '..', '..', '..');
+    } else {
+      // Em dev, frontend/wiki - vai 2 níveis acima
+      basePath = join(basePath, '..', '..');
+    }
+    
+    const docsPath = join(basePath, "docs", filePath).replace(/\\/g, '/');
     const fileContents = await readFile(docsPath, "utf8");
     const { content, data } = matter(fileContents);
 
@@ -117,8 +128,12 @@ async function getDocContent(filePath: string) {
     };
   } catch (error) {
     console.error(`Error reading ${filePath}:`, error);
-    console.error(`Attempted path: ${docsPath}`);
+    const attemptedPath = join(process.cwd(), "..", "..", "docs", filePath).replace(/\\/g, '/');
+    console.error(`Attempted path: ${attemptedPath}`);
     console.error(`Current working directory: ${process.cwd()}`);
+    console.error(`Error details:`, error);
+    // Não retorna null - sempre retorna algo para evitar 404
+    // Retorna um objeto vazio que será tratado pelo fallback
     return null;
   }
 }

@@ -28,14 +28,14 @@
       try {
         var savedTheme = localStorage.getItem('devportal-theme');
         var theme = savedTheme || 'dark';
-        
+
         // Aplica imediatamente antes do render
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
-        
+
         document.documentElement.setAttribute('data-theme', theme);
       } catch (e) {
         // Fallback: aplica dark mode em caso de erro
