@@ -887,11 +887,11 @@ main {
 .card:hover {
   box-shadow: var(--glass-hover-shadow);
   transform: translateY(-4px);
-  border-color: rgba(55, 123, 87, 0.3);
+  border-color: var(--accent-subtle); /* Usa token em vez de cor hardcoded */
 }
 
 :root.dark .card:hover {
-  border-color: rgba(77, 212, 168, 0.3);
+  border-color: var(--accent-subtle); /* Usa token - mesmo para light e dark */
 }
 
 .card:hover::before {
