@@ -22,17 +22,17 @@
   --transition-quick: 250ms cubic-bezier(0.16, 1, 0.3, 1); /* Alias para compatibilidade */
   --gradient-overlay: linear-gradient(180deg, rgba(241, 248, 244, 0.6) 0%, rgba(241, 248, 244, 0.2) 100%);
 
-  /* Paleta de cores harmoniosa e suave */
-  --bg: #0a0e12;
-  --bg-elevated: #0f1419;
-  --bg-card: #141a21;
-  --bg-muted: #1a2129;
-  --border: #25303a;
-  --border-subtle: #1e2830;
+  /* Paleta de cores - Light mode (Wiki sync) */
+  --bg: #f1f8f4; /* forest-50 - fundo claro da Wiki */
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-muted: #f1f8f4;
+  --border: #c6e3d2; /* forest-200 */
+  --border-subtle: #c6e3d2;
 
-  --text: #e8edf2;
-  --text-muted: #b8c5d2; /* Melhorado: contraste WCAG AA 4.5:1 (era #a8b5c2) */
-  --text-subtle: #8a97a4; /* Melhorado: contraste 3:1 (era #7a8794) */
+  --text: #172635; /* forest-900 */
+  --text-muted: #3d5a4f; /* forest-600 */
+  --text-subtle: #6b8a7d; /* forest-500 */
 
   /* Cores usando tokens unificados (referência para futura migração completa) */
   --accent: var(--color-primary-400, #4dd4a8);           /* Verde primário */
@@ -131,6 +131,22 @@
 
 /* Dark mode - Sincronizado com Wiki */
 :root.dark {
+  /* Paleta dark mode */
+  --bg: #0a0e12;
+  --bg-elevated: #0f1419;
+  --bg-card: #141a21;
+  --bg-muted: #1a2129;
+  --border: #25303a;
+  --border-subtle: #1e2830;
+
+  --text: #e8edf2;
+  --text-muted: #b8c5d2;
+  --text-subtle: #8a97a4;
+
+  --code-bg: #0a0e12;
+  --code-border: #1a2129;
+
+  /* Glass morphism dark */
   --glass-bg: rgba(20, 26, 33, 0.98);
   --glass-border: rgba(37, 48, 58, 0.6);
   --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -146,15 +162,22 @@
 
 body {
   margin: 0;
+  /* Light mode: usa imagem bukeh como Wiki */
   background: var(--bg);
-  background-image:
-    radial-gradient(circle at 20% 50%, rgba(77, 212, 168, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(125, 211, 255, 0.03) 0%, transparent 50%);
+  background-image: url("../images/bukeh.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text);
   line-height: var(--line-height-relaxed); /* 1.75 - usa token */
   font-size: clamp(var(--font-size-base), 0.875rem + 0.3125vw, var(--font-size-lg)); /* 16px-18px - usa tokens */
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Dark mode body background - Sincronizado com Wiki */
