@@ -37,7 +37,7 @@ const quickLinks: QuickLink[] = [
   {
     label: "Dev Portal",
     href: "https://devportal.araponga.app",
-    icon: "⚡",
+    icon: "💡",
     external: true,
     description: "Documentação técnica da API",
   },
@@ -47,7 +47,7 @@ export function QuickLinks() {
   return (
     <nav className="quick-links-container" aria-label="Links rápidos">
       <div className="quick-links-header">
-        <span className="quick-links-icon">⚡</span>
+        <span className="quick-links-icon">💡</span>
         <h3 className="quick-links-title">Links Úteis</h3>
       </div>
       <ul className="quick-links-list">
@@ -62,10 +62,10 @@ export function QuickLinks() {
               >
                 <span className="quick-link-icon">
                   {link.iconSrc ? (
-                    <OfficialIcon 
-                      src={link.iconSrc} 
-                      alt={link.label} 
-                      width={24} 
+                    <OfficialIcon
+                      src={link.iconSrc}
+                      alt={link.label}
+                      width={24}
                       height={24}
                       className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
                     />
@@ -97,10 +97,10 @@ export function QuickLinks() {
               <Link href={link.href} className="quick-link">
                 <span className="quick-link-icon">
                   {link.iconSrc ? (
-                    <OfficialIcon 
-                      src={link.iconSrc} 
-                      alt={link.label} 
-                      width={24} 
+                    <OfficialIcon
+                      src={link.iconSrc}
+                      alt={link.label}
+                      width={24}
                       height={24}
                       className="dark:invert opacity-90 group-hover:opacity-100 transition-opacity"
                     />
