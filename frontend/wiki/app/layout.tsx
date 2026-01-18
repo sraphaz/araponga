@@ -60,8 +60,8 @@ export default function RootLayout({
               (function() {
                 try {
                   const savedTheme = localStorage.getItem('wiki-theme');
-                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+                  // Padrão: dark mode (se não houver preferência salva)
+                  const theme = savedTheme || 'dark';
                   if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
                   }
