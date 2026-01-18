@@ -69,51 +69,289 @@
 
 ## 🏗️ Arquitetura e Estrutura
 
-### Clean Architecture - Separação de Camadas
+### ⚠️ OBRIGATÓRIO: Clean Architecture (Uncle Bob)
+
+**TODO código DEVE seguir os princípios de Clean Architecture por padrão.**
+
+Clean Architecture organiza código em camadas concêntricas, com dependências apontando para o centro (regras de negócio).
+
+#### Estrutura de Camadas (De Dentro para Fora)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Entities (Domain)                                      │
+│  - Regras de negócio mais puras e estáveis             │
+│  - Não dependem de NADA                                 │
+└─────────────────────────────────────────────────────────┘
+                      ↑
+┌─────────────────────────────────────────────────────────┐
+│  Use Cases (Application)                                │
+│  - Casos de uso da aplicação                           │
+│  - Depende apenas de Entities                           │
+└─────────────────────────────────────────────────────────┘
+                      ↑
+┌─────────────────────────────────────────────────────────┐
+│  Interface Adapters (Infrastructure/API)                │
+│  - Controllers, Presenters, Gateways                    │
+│  - Adapta dados entre camadas externas e internas      │
+└─────────────────────────────────────────────────────────┘
+                      ↑
+┌─────────────────────────────────────────────────────────┐
+│  Frameworks & Drivers (External)                        │
+│  - Database, Web Framework, UI, APIs externas           │
+│  - Detalhes de implementação                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+#### Implementação no Projeto
 
 ```
 backend/
-├── Araponga.Api          # API HTTP (controllers, endpoints, middlewares)
-├── Araponga.Application  # Casos de uso / regras de aplicação
-├── Araponga.Domain       # Modelo de domínio (territory, regras centrais)
-├── Araponga.Infrastructure # Persistência, integrações, adapters
-├── Araponga.Shared       # Tipos e utilitários compartilhados
+├── Araponga.Api          # Frameworks & Drivers (HTTP, Controllers)
+├── Araponga.Application  # Use Cases (Casos de uso, Services)
+├── Araponga.Domain       # Entities (Entidades, Value Objects)
+├── Araponga.Infrastructure # Interface Adapters (Repositories, External Services)
+├── Araponga.Shared       # Tipos compartilhados (DTOs comuns)
 └── Araponga.Tests        # Testes automatizados
 ```
 
-### Regras de Dependência
-- ✅ **Domain** não depende de NADA (camada mais interna)
-- ✅ **Application** depende apenas de **Domain**
-- ✅ **Infrastructure** depende de **Domain** e **Application**
-- ✅ **Api** depende de todas as outras (camada mais externa)
+#### Regra de Dependência (Rule of Dependency)
+
+**Dependências devem apontar para dentro (em direção às entidades):**
+
+- ✅ **Entities (Domain)**: Não depende de NADA (camada mais interna)
+- ✅ **Use Cases (Application)**: Depende apenas de **Entities**
+- ✅ **Interface Adapters (Infrastructure)**: Depende de **Use Cases** e **Entities**
+- ✅ **Frameworks & Drivers (Api)**: Depende de todas as outras (camada mais externa)
 - ❌ **NUNCA** importe Infrastructure ou Api em Domain ou Application
+- ❌ **NUNCA** faça dependências apontarem para fora
 
-### Organização de Código
+#### Independência
 
-#### Domain Layer
-- Entidades de domínio (ex: `Territory`, `Membership`, `Post`)
-- Value Objects (ex: `GeoAnchor`, `Address`)
-- Interfaces de repositórios (ex: `ITerritoryRepository`)
-- Exceções de domínio (ex: `TerritoryNotFoundException`)
-- **NÃO** coloque lógica de persistência aqui
+**Clean Architecture garante independência de:**
 
-#### Application Layer
-- Services (ex: `TerritoryService`, `PostCreationService`)
-- DTOs de aplicação (ex: `CreatePostRequest`, `PostResponse`)
-- Interfaces de serviços externos (ex: `IMediaStorageService`)
-- **NÃO** coloque lógica HTTP aqui
+1. **Frameworks**: Regras de negócio não dependem de .NET, Node.js, etc.
+2. **UI**: Regras de negócio não sabem se é web, mobile, console
+3. **Database**: Regras de negócio não sabem se é PostgreSQL, MongoDB, etc.
+4. **Agências Externas**: APIs externas, serviços terceiros são detalhes
 
-#### Infrastructure Layer
-- Implementações de repositórios (ex: `PostgresTerritoryRepository`)
-- Implementações de serviços externos (ex: `S3MediaStorageService`)
-- Configurações (ex: `DbContext`, `ServiceCollectionExtensions`)
-- **NÃO** coloque lógica de negócio aqui
+#### Organização por Camadas
 
-#### Api Layer
-- Controllers (ex: `TerritoriesController`, `FeedController`)
-- Middlewares (ex: `AuthenticationMiddleware`, `ErrorHandlingMiddleware`)
-- Configurações de API (ex: `Program.cs`, `Startup.cs`)
-- **NÃO** coloque lógica de negócio aqui
+##### 1. Entities (Domain Layer)
+
+**Responsabilidade**: Regras de negócio mais puras e estáveis
+
+**Contém:**
+- ✅ Entidades de domínio (ex: `Territory`, `Membership`, `Post`)
+- ✅ Value Objects (ex: `GeoAnchor`, `Address`, `Email`)
+- ✅ Interfaces de repositórios (ex: `ITerritoryRepository`) - **apenas interfaces**
+- ✅ Exceções de domínio (ex: `TerritoryNotFoundException`)
+- ✅ Regras de negócio invariantes
+
+**NÃO contém:**
+- ❌ Lógica de persistência
+- ❌ DTOs de API
+- ❌ Referências a frameworks
+- ❌ Dependências externas
+
+**Exemplo:**
+```csharp
+// ✅ GOOD - Entidade pura, sem dependências
+public class Territory
+{
+    public Guid Id { get; }
+    public string Name { get; }
+    public GeoAnchor Location { get; }
+
+    public Territory(string name, double latitude, double longitude)
+    {
+        // Validação de regras de negócio
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty");
+        
+        Name = name;
+        Location = new GeoAnchor(latitude, longitude);
+    }
+}
+```
+
+##### 2. Use Cases (Application Layer)
+
+**Responsabilidade**: Casos de uso da aplicação, orquestração
+
+**Contém:**
+- ✅ Services (ex: `TerritoryService`, `PostCreationService`)
+- ✅ Casos de uso (ex: `CreateTerritoryUseCase`, `GetNearbyTerritoriesUseCase`)
+- ✅ DTOs de aplicação (ex: `CreatePostRequest`, `PostResponse`)
+- ✅ Interfaces de serviços externos (ex: `IMediaStorageService`) - **apenas interfaces**
+
+**NÃO contém:**
+- ❌ Lógica HTTP (controllers)
+- ❌ Implementações de repositórios
+- ❌ Detalhes de banco de dados
+- ❌ Frameworks externos
+
+**Exemplo:**
+```csharp
+// ✅ GOOD - Use Case orquestra entidades via interfaces
+public class CreateTerritoryService : ICreateTerritoryService
+{
+    private readonly ITerritoryRepository _repository; // Interface, não implementação
+
+    public async Task<Result<Territory>> CreateAsync(
+        string name,
+        double latitude,
+        double longitude,
+        CancellationToken cancellationToken)
+    {
+        // Lógica de negócio usando entidades
+        var territory = new Territory(name, latitude, longitude);
+        await _repository.AddAsync(territory, cancellationToken);
+        return Result<Territory>.Success(territory);
+    }
+}
+```
+
+##### 3. Interface Adapters (Infrastructure Layer)
+
+**Responsabilidade**: Adaptar dados entre camadas externas e internas
+
+**Contém:**
+- ✅ Implementações de repositórios (ex: `PostgresTerritoryRepository : ITerritoryRepository`)
+- ✅ Implementações de serviços externos (ex: `S3MediaStorageService : IMediaStorageService`)
+- ✅ Mappers (converter entre entidades e DTOs/DB)
+- ✅ Configurações (ex: `DbContext`, `ServiceCollectionExtensions`)
+
+**NÃO contém:**
+- ❌ Lógica de negócio
+- ❌ Regras de domínio
+
+**Exemplo:**
+```csharp
+// ✅ GOOD - Implementa interface definida em Application
+public class PostgresTerritoryRepository : ITerritoryRepository
+{
+    private readonly ArapongaDbContext _context;
+
+    public async Task<Territory?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var entity = await _context.Territories.FindAsync(new object[] { id }, cancellationToken);
+        return entity?.ToDomain(); // Mapeia DB -> Domain
+    }
+}
+```
+
+##### 4. Frameworks & Drivers (Api Layer)
+
+**Responsabilidade**: Pontos de entrada, frameworks, UI
+
+**Contém:**
+- ✅ Controllers (ex: `TerritoriesController`, `FeedController`)
+- ✅ Middlewares (ex: `AuthenticationMiddleware`, `ErrorHandlingMiddleware`)
+- ✅ Configurações de API (ex: `Program.cs`, `Startup.cs`)
+- ✅ DTOs de API (ex: `CreateTerritoryDto`, `TerritoryResponse`)
+
+**NÃO contém:**
+- ❌ Lógica de negócio
+- ❌ Regras de domínio
+
+**Exemplo:**
+```csharp
+// ✅ GOOD - Controller apenas coordena, delega para Use Case
+[ApiController]
+[Route("api/territories")]
+public class TerritoriesController : ControllerBase
+{
+    private readonly ICreateTerritoryService _service;
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateTerritoryDto dto)
+    {
+        var result = await _service.CreateAsync(
+            dto.Name,
+            dto.Latitude,
+            dto.Longitude,
+            HttpContext.RequestAborted);
+        
+        return result.IsSuccess
+            ? CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value)
+            : BadRequest(result.Error);
+    }
+}
+```
+
+#### Princípios de Design que Suportam Clean Architecture
+
+**1. Dependency Rule (Regra de Dependência)**
+- ✅ Dependências apontam para dentro (em direção às entidades)
+- ✅ Código fonte aponta apenas em uma direção (para dentro)
+- ❌ Nunca apontar para fora
+
+**2. Separation of Concerns (Separação de Responsabilidades)**
+- ✅ Cada camada tem uma responsabilidade clara
+- ✅ Lógica de negócio separada de detalhes técnicos
+- ✅ UI separada de regras de negócio
+
+**3. Interface Segregation**
+- ✅ Use interfaces para desacoplar camadas
+- ✅ Camadas internas definem interfaces
+- ✅ Camadas externas implementam interfaces
+
+**4. Dependency Inversion**
+- ✅ Alto nível (Use Cases) não depende de baixo nível (Infrastructure)
+- ✅ Ambos dependem de abstrações (interfaces)
+- ✅ Inversão de dependência via DI
+
+#### Testabilidade
+
+**Clean Architecture facilita testes:**
+
+- ✅ **Testes de Entidades**: Sem dependências, testes unitários puros
+- ✅ **Testes de Use Cases**: Mock de interfaces, testes isolados
+- ✅ **Testes de Integração**: Testa adaptadores com dados reais
+- ✅ **Testes E2E**: Testa toda a pilha
+
+**Exemplo de Teste de Use Case:**
+```csharp
+[Fact]
+public async Task CreateTerritory_WhenValid_ReturnsSuccess()
+{
+    // Arrange - Mock da interface (não precisa do banco de dados)
+    var mockRepository = new Mock<ITerritoryRepository>();
+    var service = new CreateTerritoryService(mockRepository.Object);
+
+    // Act
+    var result = await service.CreateAsync("Test", 0, 0, CancellationToken.None);
+
+    // Assert
+    Assert.True(result.IsSuccess);
+    mockRepository.Verify(r => r.AddAsync(It.IsAny<Territory>(), It.IsAny<CancellationToken>()), Times.Once);
+}
+```
+
+#### Benefícios da Clean Architecture
+
+1. **Independência de Frameworks**: Trocar .NET por outro framework não afeta regras de negócio
+2. **Testabilidade**: Regras de negócio podem ser testadas sem frameworks
+3. **Independência de UI**: UI pode mudar sem afetar regras de negócio
+4. **Independência de Database**: Trocar PostgreSQL por MongoDB não afeta regras
+5. **Independência de Agências Externas**: APIs externas são detalhes
+
+#### Checklist Clean Architecture
+
+- [ ] Dependências apontam para dentro (Domain não depende de nada)?
+- [ ] Entities não têm referências a frameworks ou banco de dados?
+- [ ] Use Cases usam apenas interfaces (não implementações)?
+- [ ] Infrastructure implementa interfaces definidas em Application/Domain?
+- [ ] Controllers apenas coordenam e delegam para Use Cases?
+- [ ] Lógica de negócio está em Entities e Use Cases (não em Controllers)?
+- [ ] Testes de Use Cases usam mocks (não dependem de Infrastructure)?
+- [ ] Cada camada tem uma responsabilidade clara?
+
+#### Referências
+
+- **Clean Architecture**: Robert C. Martin (Uncle Bob)
+- **The Clean Architecture**: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 ---
 
@@ -876,9 +1114,10 @@ Documentação:
 ---
 
 **Última Atualização**: 2025-01-20  
-**Versão**: 1.5
+**Versão**: 1.6
 
 ### Changelog
+- **1.6** (2025-01-20): Expandidos princípios de Clean Architecture com detalhes completos (Uncle Bob)
 - **1.5** (2025-01-20): Adicionados padrões de Clean Code (Uncle Bob) como obrigatórios
 - **1.4** (2025-01-20): Adicionados princípios SOLID e YAGNI/KISS como obrigatórios em todo código
 - **1.3** (2025-01-20): Adicionado processo de auto-aprendizado obrigatório após revisões, reforçado lembretes de design
