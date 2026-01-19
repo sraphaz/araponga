@@ -506,6 +506,29 @@
     return (I18N[lang] && I18N[lang][key]) || I18N.pt[key] || key;
   }
 
+  // Only these translation keys are allowed to contain HTML and be rendered with innerHTML.
+  // All other keys will be rendered as plain text to avoid interpreting untrusted content as HTML.
+  var ALLOWED_HTML_KEYS = {
+    'ui.heroLeadHtml': true,
+    'auth.leadHtml': true,
+    'headers.leadHtml': true,
+    'openapi.leadHtml': true,
+    'quickstart.tipHtml': true,
+    'versions.leadHtml': true
+  };
+
+  function setLocalizedHtml(el, lang, key) {
+    var value = t(lang, key);
+
+    // If the key is not explicitly allowed for HTML, or if the translation
+    // falls back to the key itself, treat it as plain text.
+    if (!ALLOWED_HTML_KEYS[key] || value === key) {
+      el.textContent = value;
+    } else {
+      el.innerHTML = value;
+    }
+  }
+
   function applyI18n(lang) {
     setDocumentLang(lang);
 
@@ -518,7 +541,7 @@
     var htmlNodes = document.querySelectorAll('[data-i18n-html]');
     htmlNodes.forEach(function (el) {
       var key = el.getAttribute('data-i18n-html');
-      el.innerHTML = t(lang, key);
+      setLocalizedHtml(el, lang, key);
     });
 
     // Atualiza botões "Copiar" já renderizados
@@ -839,7 +862,7 @@
   (function initThemeToggle() {
     var THEME_STORAGE_KEY = 'devportal-theme';
     var themeToggle = document.getElementById('theme-toggle');
-    
+
     if (!themeToggle) {
       return;
     }
@@ -885,28 +908,96 @@
     });
   })();
 
+  // Menu Mobile Toggle
+  (function initMobileMenu() {
+    var mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    var sidebarContainer = document.querySelector('.sidebar-container');
+    var mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    var body = document.body;
+
+    if (!mobileMenuToggle || !sidebarContainer) {
+      return; // Elementos não existem, sai silenciosamente
+    }
+
+    function openMobileMenu() {
+      body.classList.add('mobile-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'true');
+      sidebarContainer.setAttribute('aria-hidden', 'false');
+      // Previne scroll do body quando menu está aberto
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      body.classList.remove('mobile-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      sidebarContainer.setAttribute('aria-hidden', 'true');
+      // Restaura scroll do body
+      body.style.overflow = '';
+    }
+
+    // Toggle menu ao clicar no botão
+    mobileMenuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Fecha menu ao clicar no overlay
+    if (mobileMenuOverlay) {
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Fecha menu ao clicar em um link da sidebar em mobile
+    var sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 1023) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    // Fecha menu com tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Fecha menu ao redimensionar para desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1023 && body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      }
+    });
+  })();
+
   // Sidebar Sections Toggle - Sincronizado com Wiki
   (function initSidebarSections() {
     var sectionToggles = document.querySelectorAll('.sidebar-section-toggle');
-    
+
     sectionToggles.forEach(function(toggle) {
       var sectionId = toggle.getAttribute('data-section');
       var items = document.querySelector('[data-section-items="' + sectionId + '"]');
-      
+
       if (!items) return;
-      
-      // Verifica se há link ativo na seção para auto-abrir
-      var hasActiveLink = items.querySelector('.sidebar-link-active');
-      if (hasActiveLink && toggle.getAttribute('aria-expanded') !== 'true') {
-        toggle.setAttribute('aria-expanded', 'true');
-        items.removeAttribute('hidden');
-        toggle.querySelector('.sidebar-chevron').classList.add('sidebar-chevron-open');
-      }
-      
+
+      // DESABILITADO: Auto-abertura de seções com link ativo
+      // Todos os menus começam fechados por padrão
+      // var hasActiveLink = items.querySelector('.sidebar-link-active');
+      // if (hasActiveLink && toggle.getAttribute('aria-expanded') !== 'true') {
+      //   toggle.setAttribute('aria-expanded', 'true');
+      //   items.removeAttribute('hidden');
+      //   toggle.querySelector('.sidebar-chevron').classList.add('sidebar-chevron-open');
+      // }
+
       toggle.addEventListener('click', function() {
         var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
         var newExpanded = !isExpanded;
-        
+
         toggle.setAttribute('aria-expanded', newExpanded);
         if (newExpanded) {
           items.removeAttribute('hidden');
@@ -914,6 +1005,38 @@
         } else {
           items.setAttribute('hidden', '');
           toggle.querySelector('.sidebar-chevron').classList.remove('sidebar-chevron-open');
+        }
+      });
+    });
+  })();
+
+  // Sidebar Submenus Toggle
+  (function initSidebarSubmenus() {
+    var submenuToggles = document.querySelectorAll('.sidebar-submenu-toggle');
+
+    submenuToggles.forEach(function(toggle) {
+      var submenuItems = toggle.nextElementSibling;
+
+      if (!submenuItems || !submenuItems.classList.contains('sidebar-submenu-items')) {
+        return;
+      }
+
+      // Todos os submenus começam fechados por padrão
+      toggle.setAttribute('aria-expanded', 'false');
+      submenuItems.setAttribute('hidden', '');
+
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        var newExpanded = !isExpanded;
+
+        toggle.setAttribute('aria-expanded', newExpanded);
+        if (newExpanded) {
+          submenuItems.removeAttribute('hidden');
+        } else {
+          submenuItems.setAttribute('hidden', '');
         }
       });
     });
@@ -927,7 +1050,26 @@
       if (href && href.startsWith('#')) {
         var id = href.substring(1);
         var section = document.getElementById(id);
-        return section ? { link: link, section: section, id: id } : null;
+        // Ignora seções escondidas ou fora dos phase-panels ativos
+        if (section) {
+          var style = window.getComputedStyle(section);
+          var isHidden = style.display === 'none' || style.visibility === 'hidden';
+
+          // Verifica se está dentro de um phase-panel
+          var parentPanel = section.closest('.phase-panel');
+          if (parentPanel) {
+            // Se está em um panel, só inclui se o panel estiver ativo
+            var isInActivePanel = parentPanel.classList.contains('active');
+            if (!isHidden && isInActivePanel) {
+              return { link: link, section: section, id: id };
+            }
+          } else {
+            // Se está fora de qualquer panel (ex: hero), inclui se não estiver escondido
+            if (!isHidden) {
+              return { link: link, section: section, id: id };
+            }
+          }
+        }
       }
       return null;
     }).filter(function(item) { return item !== null; });
@@ -958,16 +1100,17 @@
         targetLink.link.classList.add('active', 'sidebar-link-active');
         targetLink.link.setAttribute('aria-current', 'page');
         activeLink = targetLink.link;
-        
-        // Auto-abre seção se link estiver dentro de uma seção colapsada
-        var sectionContainer = targetLink.link.closest('[data-section-items]');
-        if (sectionContainer) {
-          var sectionId = sectionContainer.getAttribute('data-section-items');
-          var toggle = document.querySelector('[data-section="' + sectionId + '"]');
-          if (toggle && toggle.getAttribute('aria-expanded') !== 'true') {
-            toggle.click();
-          }
-        }
+
+        // DESABILITADO: Auto-abrir seções no scroll sync
+        // Menus devem permanecer fechados até que o usuário os abra manualmente
+        // var sectionContainer = targetLink.link.closest('[data-section-items]');
+        // if (sectionContainer) {
+        //   var sectionId = sectionContainer.getAttribute('data-section-items');
+        //   var toggle = document.querySelector('[data-section="' + sectionId + '"]');
+        //   if (toggle && toggle.getAttribute('aria-expanded') !== 'true') {
+        //     toggle.click();
+        //   }
+        // }
       }
     }
 
@@ -1037,6 +1180,80 @@
 
     // Atualiza active link inicial baseado na posição da página
     handleScroll();
+
+    // Expõe função para reinicializar quando phase-panel muda
+    window.reinitScrollSync = function() {
+      // Remove observer antigo se existir
+      if (observer && typeof observer.disconnect === 'function') {
+        observer.disconnect();
+      }
+
+      // Recoleta links e seções (incluindo apenas do phase-panel ativo)
+      navLinks = document.querySelectorAll('.sidebar-link[href^="#"], .nav a[href^="#"]');
+      sections = Array.from(navLinks).map(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var id = href.substring(1);
+          var section = document.getElementById(id);
+          if (section) {
+            var style = window.getComputedStyle(section);
+            var isHidden = style.display === 'none' || style.visibility === 'hidden';
+
+            // Verifica se está dentro de um phase-panel
+            var parentPanel = section.closest('.phase-panel');
+            if (parentPanel) {
+              var isInActivePanel = parentPanel.classList.contains('active');
+              if (!isHidden && isInActivePanel) {
+                return { link: link, section: section, id: id };
+              }
+            } else {
+              if (!isHidden) {
+                return { link: link, section: section, id: id };
+              }
+            }
+          }
+        }
+        return null;
+      }).filter(function(item) { return item !== null; });
+
+      if (sections.length === 0) {
+        return;
+      }
+
+      // Recria observer com novas seções
+      observer = new IntersectionObserver(function(entries) {
+        var visibleSections = entries
+          .filter(function(entry) { return entry.isIntersecting; })
+          .map(function(entry) {
+            var rect = entry.boundingClientRect;
+            return {
+              id: entry.target.id,
+              top: rect.top,
+              intersectionRatio: entry.intersectionRatio
+            };
+          })
+          .sort(function(a, b) {
+            if (Math.abs(a.intersectionRatio - b.intersectionRatio) > 0.1) {
+              return b.intersectionRatio - a.intersectionRatio;
+            }
+            return Math.abs(a.top) - Math.abs(b.top);
+          });
+
+        if (visibleSections.length > 0) {
+          updateActiveLink(visibleSections[0].id);
+        }
+      }, observerOptions);
+
+      // Observa todas as seções novamente
+      sections.forEach(function(item) {
+        if (item.section) {
+          observer.observe(item.section);
+        }
+      });
+
+      // Atualiza active link inicial
+      handleScroll();
+    };
   })();
 
   // ============================================================
@@ -1047,36 +1264,70 @@
   (function initPhaseNavigation() {
     var tabs = document.querySelectorAll('.phase-tab');
     var panels = document.querySelectorAll('.phase-panel');
-    
+
     if (tabs.length === 0 || panels.length === 0) {
       return; // Estrutura não existe ainda, sai silenciosamente
     }
 
     function switchPhase(phase) {
-      // Remove active de todos
+      // Remove active de todos os tabs
       tabs.forEach(function(t) { t.classList.remove('active'); });
-      panels.forEach(function(p) { p.classList.remove('active'); });
-      
+
+      // Esconde TODOS os panels primeiro (força via style inline)
+      panels.forEach(function(p) {
+        p.classList.remove('active');
+        p.style.display = 'none';
+        p.style.visibility = 'hidden';
+        p.style.opacity = '0';
+        p.style.height = '0';
+        p.style.overflow = 'hidden';
+      });
+
+      // Esconde TODAS as seções que são filhos diretos de main (fora de phase-panels)
+      var mainSections = document.querySelectorAll('main > section:not(.phase-panel):not(.phase-panels), main > .section:not(.phase-panel):not(.phase-panels)');
+      mainSections.forEach(function(section) {
+        section.style.display = 'none';
+        section.style.visibility = 'hidden';
+        section.style.height = '0';
+        section.style.overflow = 'hidden';
+        section.style.opacity = '0';
+      });
+
       // Adiciona active no alvo
       var targetTab = document.querySelector('[data-phase="' + phase + '"]');
       var targetPanel = document.querySelector('[data-phase-panel="' + phase + '"]');
-      
+
       if (targetTab && targetPanel) {
         targetTab.classList.add('active');
         targetPanel.classList.add('active');
-        
+
+        // FORÇA mostrar o panel ativo
+        targetPanel.style.display = 'block';
+        targetPanel.style.visibility = 'visible';
+        targetPanel.style.opacity = '1';
+        targetPanel.style.height = 'auto';
+        targetPanel.style.overflow = 'visible';
+
         // Atualiza URL (sem reload)
         if (history.pushState) {
           history.pushState(null, '', '#' + phase);
         }
-        
-        // Scroll suave para o topo do conteúdo (após header)
-        setTimeout(function() {
-          var headerHeight = document.querySelector('.header')?.offsetHeight || 200;
-          window.scrollTo({ top: headerHeight, behavior: 'smooth' });
-        }, 100);
+
+        // Scroll para o topo ao mudar de fase
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Reinicializa scroll sync quando phase-panel muda
+        // Permite que o menu da sidebar seja atualizado baseado no scroll
+        if (typeof window.reinitScrollSync === 'function') {
+          setTimeout(function() {
+            window.reinitScrollSync();
+          }, 200);
+        }
       }
     }
+
+    // Expõe switchPhase globalmente para uso na navegação da sidebar
+    window.switchPhase = switchPhase;
 
     // Click handlers para tabs
     tabs.forEach(function(tab) {
@@ -1097,7 +1348,34 @@
     }
 
     window.addEventListener('hashchange', handleHashChange);
-    
+
+    // FORÇA isolamento inicial: esconde todos os panels exceto o ativo
+    panels.forEach(function(p) {
+      if (!p.classList.contains('active')) {
+        p.style.display = 'none';
+        p.style.visibility = 'hidden';
+        p.style.opacity = '0';
+        p.style.height = '0';
+        p.style.overflow = 'hidden';
+      } else {
+        p.style.display = 'block';
+        p.style.visibility = 'visible';
+        p.style.opacity = '1';
+        p.style.height = 'auto';
+        p.style.overflow = 'visible';
+      }
+    });
+
+    // Esconde todas as seções que são filhos diretos de main (fora de phase-panels)
+    var mainSections = document.querySelectorAll('main > section:not(.phase-panel):not(.phase-panels), main > .section:not(.phase-panel):not(.phase-panels)');
+    mainSections.forEach(function(section) {
+      section.style.display = 'none';
+      section.style.visibility = 'hidden';
+      section.style.height = '0';
+      section.style.overflow = 'hidden';
+      section.style.opacity = '0';
+    });
+
     // Verifica hash inicial
     if (window.location.hash) {
       setTimeout(handleHashChange, 100);
@@ -1113,18 +1391,85 @@
     }
   })();
 
+  // Menu Mobile Toggle
+  (function initMobileMenu() {
+    var mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    var sidebarContainer = document.querySelector('.sidebar-container');
+    var mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    var body = document.body;
+
+    if (!mobileMenuToggle || !sidebarContainer) {
+      return; // Elementos não existem, sai silenciosamente
+    }
+
+    function openMobileMenu() {
+      body.classList.add('mobile-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'true');
+      sidebarContainer.setAttribute('aria-hidden', 'false');
+      // Previne scroll do body quando menu está aberto
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      body.classList.remove('mobile-menu-open');
+      mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      sidebarContainer.setAttribute('aria-hidden', 'true');
+      // Restaura scroll do body
+      body.style.overflow = '';
+    }
+
+    // Toggle menu ao clicar no botão
+    mobileMenuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Fecha menu ao clicar no overlay
+    if (mobileMenuOverlay) {
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Fecha menu ao clicar em um link da sidebar em mobile
+    var sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 1023) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    // Fecha menu com tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Fecha menu ao redimensionar para desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1023 && body.classList.contains('mobile-menu-open')) {
+        closeMobileMenu();
+      }
+    });
+  })();
+
   // Nível 2: Section Accordions (Seções Colapsáveis)
   (function initSectionAccordions() {
     var accordions = document.querySelectorAll('.section-accordion-header');
-    
+
     accordions.forEach(function(header) {
       header.addEventListener('click', function() {
         var accordion = header.closest('.section-accordion');
         if (!accordion) return;
-        
+
         var content = accordion.querySelector('.section-accordion-content');
         var isExpanded = content && content.classList.contains('active');
-        
+
         // Toggle
         if (content) {
           if (isExpanded) {
@@ -1146,11 +1491,11 @@
     var panelButtons = document.querySelectorAll('[data-panel]');
     var panels = document.querySelectorAll('.side-panel');
     var overlays = document.querySelectorAll('.panel-overlay');
-    
+
     function openPanel(panelId) {
       var panel = document.querySelector('[data-panel-id="' + panelId + '"]');
       var overlay = document.querySelector('.panel-overlay');
-      
+
       if (panel && overlay) {
         panel.classList.add('open');
         overlay.classList.add('visible');
@@ -1191,6 +1536,155 @@
           closePanel();
         }
       }
+    });
+  })();
+
+  // Navegação da Sidebar: Previne scroll e troca phase-panels
+  (function initSidebarNavigation() {
+    var sidebarLinks = document.querySelectorAll('.sidebar-link[href^="#"]');
+
+    // Mapeamento de seções para phase-panels
+    var sectionToPhase = {
+      'visao-geral': 'fundamentos',
+      'como-funciona': 'fundamentos',
+      'territorios': 'fundamentos',
+      'conceitos': 'fundamentos',
+      'modelo-dominio': 'api-pratica',
+      'fluxos': 'api-pratica',
+      'casos-de-uso': 'api-pratica',
+      // Cenários Práticos
+      'cenario-onboarding-usuario': 'api-pratica',
+      'cenario-publicar-midias': 'api-pratica',
+      'cenario-assets': 'api-pratica',
+      'cenario-chat': 'api-pratica',
+      'cenario-marketplace': 'api-pratica',
+      'cenario-eventos': 'api-pratica',
+      // Guia de Produção
+      'guia-producao-passo-1': 'api-pratica',
+      'guia-producao-passo-2': 'api-pratica',
+      'guia-producao-passo-3': 'api-pratica',
+      'guia-producao-passo-4': 'api-pratica',
+      // Operações
+      'operacao-auth': 'funcionalidades',
+      'operacao-territory-discovery': 'funcionalidades',
+      'operacao-marketplace-checkout': 'funcionalidades',
+      // Referência
+      'auth': 'api-pratica',
+      'territory-session': 'api-pratica',
+      'openapi': 'api-pratica',
+      'erros': 'api-pratica',
+      'casos-uso-comuns': 'api-pratica',
+      'pontos-atencao': 'api-pratica',
+      // Funcionalidades - Cenários Negócio
+      'marketplace': 'funcionalidades',
+      'payout-gestao-financeira': 'funcionalidades',
+      'eventos': 'funcionalidades',
+      'admin': 'funcionalidades',
+      // Recursos
+      'configure-ambiente': 'avancado',
+      'onboarding-analistas': 'avancado',
+      'onboarding-developers': 'avancado',
+      'capacidades-tecnicas': 'avancado',
+      'versoes': 'avancado',
+      'roadmap': 'avancado',
+      'contribuir': 'avancado'
+    };
+
+    sidebarLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var sectionId = href.substring(1);
+          var targetPhase = sectionToPhase[sectionId];
+
+          if (targetPhase) {
+            // Previne scroll padrão
+            e.preventDefault();
+
+            // Usa a função switchPhase global ou implementa localmente se necessário
+            if (window.switchPhase) {
+              window.switchPhase(targetPhase);
+
+              // Após trocar de phase-panel, rola até a seção específica
+              setTimeout(function() {
+                var targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                  var headerOffset = document.querySelector('.header') ? document.querySelector('.header').offsetHeight : 0;
+                  var elementPosition = targetSection.getBoundingClientRect().top;
+                  var offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20;
+
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }, 100);
+            } else {
+              // Fallback: implementação local
+              var tabs = document.querySelectorAll('.phase-tab');
+              var panels = document.querySelectorAll('.phase-panel');
+
+              tabs.forEach(function(t) { t.classList.remove('active'); });
+              panels.forEach(function(p) {
+                p.classList.remove('active');
+                p.style.display = 'none';
+                p.style.visibility = 'hidden';
+                p.style.opacity = '0';
+                p.style.height = '0';
+                p.style.overflow = 'hidden';
+              });
+
+              // Esconde seções fora de phase-panels
+              var mainSections = document.querySelectorAll('main > section:not(.phase-panel):not(.phase-panels), main > .section:not(.phase-panel):not(.phase-panels)');
+              mainSections.forEach(function(section) {
+                section.style.display = 'none';
+                section.style.visibility = 'hidden';
+                section.style.height = '0';
+                section.style.overflow = 'hidden';
+                section.style.opacity = '0';
+              });
+
+              var targetTab = document.querySelector('[data-phase="' + targetPhase + '"]');
+              var targetPanel = document.querySelector('[data-phase-panel="' + targetPhase + '"]');
+
+              if (targetTab && targetPanel) {
+                targetTab.classList.add('active');
+                targetPanel.classList.add('active');
+                targetPanel.style.display = 'block';
+                targetPanel.style.visibility = 'visible';
+                targetPanel.style.opacity = '1';
+                targetPanel.style.height = 'auto';
+                targetPanel.style.overflow = 'visible';
+
+                if (history.pushState) {
+                  history.pushState(null, '', '#' + targetPhase);
+                }
+              }
+            }
+
+            // Scroll suave para o topo do conteúdo (não para a seção quebrada)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Ativa o link da sidebar
+            document.querySelectorAll('.sidebar-link').forEach(function(l) {
+              l.classList.remove('active', 'sidebar-link-active');
+              l.removeAttribute('aria-current');
+            });
+            link.classList.add('active', 'sidebar-link-active');
+            link.setAttribute('aria-current', 'page');
+
+            // Abre a seção da sidebar se estiver fechada
+            var sectionContainer = link.closest('[data-section-items]');
+            if (sectionContainer) {
+              var sectionIdAttr = sectionContainer.getAttribute('data-section-items');
+              var toggle = document.querySelector('[data-section="' + sectionIdAttr + '"]');
+              if (toggle && toggle.getAttribute('aria-expanded') !== 'true') {
+                toggle.click(); // Simula o clique para abrir
+              }
+            }
+          }
+        }
+      });
     });
   })();
 })();

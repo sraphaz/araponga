@@ -1,0 +1,159 @@
+/* Sidebar Modernizada - Leve e Minimalista */
+
+.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: clamp(1.25rem, 4vw, 2.5rem);
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1rem 0.75rem;
+  padding-top: clamp(3.5rem, 8vw, 5rem); /* Acompanha a altura do header */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Contorno suave respeitando identidade visual */
+  border-right: 1px solid rgba(77, 212, 168, 0.15); /* Verde-água sutil */
+  box-shadow: 1px 0 8px rgba(77, 212, 168, 0.08); /* Sombra suave verde-água */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(198, 227, 210, 0.3) transparent;
+  z-index: 100;
+  transition: all var(--transition-base);
+}
+
+/* Contorno mais visível no dark mode */
+:root.dark .sidebar-container {
+  border-right-color: rgba(100, 150, 180, 0.2); /* Azul-céu sutil no dark */
+  box-shadow: 1px 0 12px rgba(100, 150, 180, 0.1);
+  background: rgba(10, 14, 18, 0.85);
+}
+
+/* Scrollbar suave e discreta para sidebar */
+.sidebar-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(198, 227, 210, 0.3);
+  border-radius: 3px;
+  transition: background var(--transition-base);
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(198, 227, 210, 0.5);
+}
+
+:root.dark .sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 180, 0.3);
+}
+
+:root.dark .sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 180, 0.5);
+}
+
+.sidebar-nav {
+  padding: 0;
+}
+
+.sidebar-section {
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.sidebar-section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: left;
+}
+
+.sidebar-section-toggle:hover {
+  color: var(--accent);
+  background: transparent;
+}
+
+:root.dark .sidebar-section-toggle {
+  color: #b8c5d2;
+}
+
+:root.dark .sidebar-section-toggle:hover {
+  color: var(--accent);
+  background: transparent;
+}
+
+.sidebar-items {
+  margin-top: 0.25rem;
+  padding-left: 0;
+  list-style: none;
+  display: block;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 0.4375rem 0.75rem;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  border: none;
+  margin-bottom: 0.125rem;
+}
+
+:root.dark .sidebar-link {
+  color: #b8c5d2;
+}
+
+.sidebar-link:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateX(2px);
+  padding-left: 1rem;
+}
+
+:root.dark .sidebar-link:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.sidebar-link-active {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 500;
+  border: none;
+}
+
+:root.dark .sidebar-link-active {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* Links Externos - Cores para distinção (sem ícone) */
+.sidebar-section-external {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: none;
+}
+
+.sidebar-external-divider {
+  display: none;
+}

@@ -22,6 +22,160 @@
   <meta property="twitter:description" content="Developer Portal da API Araponga: território, memberships, feed, mapa, marketplace, eventos, chat, moderação e notificações." />
   <meta property="twitter:image" content="https://devportal.araponga.app/assets/images/favicon.png" />
   <link rel="stylesheet" href="./assets/css/devportal.css" />
+  <link rel="stylesheet" href="./assets/css/content-typography.css" />
+  <style>
+    /* ============================================
+       ISOLAMENTO CRÍTICO DE CONTEÚDO
+       ============================================ */
+
+    /* REGRA 1: Esconde TODAS as seções que são filhos DIRETOS de main (fora de phase-panels) */
+    main > section:not(.phase-panel):not(.phase-panels),
+    main > .section:not(.phase-panel):not(.phase-panels) {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+    }
+
+    /* REGRA 2: Esconde seções que vêm DEPOIS de .phase-panels */
+    .phase-panels ~ section,
+    .phase-panels ~ .section {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+    }
+
+    /* REGRA 3: Esconde seções que vêm DEPOIS de footer */
+    footer ~ section,
+    footer ~ .section {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+    }
+
+    /* REGRA 4: Phase panels sem .active devem estar COMPLETAMENTE escondidos */
+    .phase-panel:not(.active) {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+    }
+
+    /* REGRA 5: Apenas o phase-panel ativo pode mostrar conteúdo */
+    .phase-panel.active {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      overflow: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* REGRA 6: Apenas seções dentro do phase-panel ativo aparecem */
+    .phase-panel.active > section,
+    .phase-panel.active > .section,
+    .phase-panel.active section,
+    .phase-panel.active .section {
+      display: block !important;
+      visibility: visible !important;
+      height: auto !important;
+      overflow: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* REGRA 7: Seções fora de phase-panel ativo são escondidas mesmo se tiverem IDs específicos */
+    section:not(.phase-panel.active section):not(.phase-panel.active .section),
+    .section:not(.phase-panel.active section):not(.phase-panel.active .section) {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    /* ============================================
+       LAYOUT E RESPONSIVIDADE COM SIDEBAR
+       ============================================ */
+
+    /* Garantir que main e header respeitam sidebar em telas grandes */
+    @media (min-width: 1024px) {
+      /* Header deve respeitar sidebar (240px width + left offset + respiro do menu) */
+      .header {
+        padding-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem) + clamp(1.25rem, 4vw, 2.5rem)) !important;
+        padding-right: clamp(1.5rem, 3vw, 2rem) !important;
+      }
+
+      .header .container {
+        margin-left: 0 !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      /* Layout e main devem respeitar sidebar (240px width + left offset + respiro do menu) */
+      .layout {
+        padding-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem) + clamp(1.25rem, 4vw, 2.5rem)) !important;
+        padding-right: clamp(1.5rem, 3vw, 2rem) !important;
+        padding-top: 0 !important;
+      }
+
+      .layout > main {
+        margin-left: 0 !important;
+        max-width: calc(100vw - 240px - (clamp(1.25rem, 4vw, 2.5rem) * 2) - clamp(1.5rem, 3vw, 2rem)) !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+
+      /* Garantir que todas as seções dentro de main respeitam o sidebar */
+      main > *:not(.sidebar-container):not(.header) {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* Phase navigation tabs também devem respeitar */
+      .phase-navigation {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* Phase panels também devem respeitar e aproveitar espaço */
+      .phase-panels {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* Seções dentro de phase-panels respeitam o layout */
+      .phase-panel.active section,
+      .phase-panel.active .section {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* Footer também deve respeitar sidebar */
+      footer {
+        margin-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem) + clamp(1.25rem, 4vw, 2.5rem)) !important;
+        max-width: calc(100% - 240px - (clamp(1.25rem, 4vw, 2.5rem) * 2)) !important;
+        padding-left: clamp(1.5rem, 3vw, 2rem) !important;
+      }
+    }
+  </style>
   <script>
     // Inicialização de tema antes do render (evita flash) - Sincronizado com Wiki
     (function() {
@@ -51,12 +205,19 @@
 </head>
 <body>
   <a class="skip-link" href="#conteudo" data-i18n="ui.skip">Pular para conteúdo</a>
+  <!-- Overlay para fechar menu mobile -->
+  <div class="mobile-menu-overlay" aria-hidden="true"></div>
 
   <header class="header" role="banner">
     <div class="container hero">
       <div class="return-banner" role="complementary">
-        <span data-i18n="ui.portalTitle">Developer Portal da API Araponga</span>
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <div class="header-actions" style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-left: auto;">
+          <!-- Botão de Menu Mobile -->
+          <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+            <svg class="mobile-menu-icon" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
           <div class="lang-switcher" aria-label="Selecionar idioma">
             <label class="lang-label" for="lang-select" data-i18n="ui.lang">Idioma</label>
             <select id="lang-select" class="lang-select">
@@ -75,7 +236,34 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           </button>
-          <a href="https://araponga.app" rel="noopener" aria-label="Voltar para o site principal do Araponga" data-i18n="ui.backHome">← Voltar para araponga.app</a>
+          <!-- Links Úteis - Externos e Internos -->
+          <div class="header-external-links">
+            <a href="#onboarding-analistas" class="header-link-icon" aria-label="Onboarding Analista Funcional" title="Onboarding Analista Funcional">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </a>
+            <a href="#onboarding-developers" class="header-link-icon" aria-label="Onboarding Desenvolvedor" title="Onboarding Desenvolvedor">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+            </a>
+            <a href="https://devportal.araponga.app/wiki/" target="_blank" rel="noopener noreferrer" class="header-link-icon" aria-label="Wiki Araponga" title="Wiki Araponga">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </a>
+            <a href="https://github.com/sraphaz/araponga" target="_blank" rel="noopener noreferrer" class="header-link-icon" aria-label="GitHub" title="GitHub">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
+            </a>
+            <a href="https://discord.gg/auwqN8Yjgw" target="_blank" rel="noopener noreferrer" class="header-link-icon" aria-label="Discord" title="Discord">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -86,79 +274,166 @@
         Esta infraestrutura técnica permite que comunidades construam autonomia econômica e organizacional utilizando seus próprios recursos locais.
         Este portal documenta a API exatamente como implementada, oferecendo documentação completa para integração segura e previsível.
       </p>
-
-      <nav class="hero-actions" aria-label="Ações rápidas">
-        <a class="button" href="#quickstart" aria-label="Ir para o guia de início rápido" data-i18n="ui.quickstart">Quickstart</a>
-        <a class="button secondary" href="#openapi" aria-label="Ver documentação OpenAPI" data-i18n="ui.openapi">OpenAPI</a>
-        <a class="button secondary" href="https://github.com/sraphaz/araponga" target="_blank" rel="noopener noreferrer" aria-label="Ver código no GitHub">Código (GitHub)</a>
-        <a class="button secondary" href="#auth" aria-label="Ver documentação de autenticação" data-i18n="ui.auth">Autenticação</a>
-        <a class="button secondary" href="#territory-session" aria-label="Ver como selecionar território" data-i18n="ui.selectTerritory">Selecionar território</a>
-      </nav>
     </div>
   </header>
 
   <div class="container layout" id="conteudo">
+    <!-- Sidebar Brand/Logo Fixo - Igual Wiki -->
+    <div class="sidebar-brand-fixed">
+      <a href="#comecando" class="sidebar-brand-link">
+        <img src="./assets/images/icon.png" alt="Araponga" class="sidebar-brand-icon" aria-hidden="true" />
+        <div class="sidebar-brand-text">
+          <h2 class="sidebar-brand-title">API Araponga</h2>
+          <p class="sidebar-brand-subtitle">Developer Portal</p>
+        </div>
+      </a>
+    </div>
+
     <nav class="sidebar-container" aria-label="Navegação do portal" role="navigation">
       <div class="sidebar-nav">
+        <!-- 1. FUNDAMENTOS - Conceitos e visão geral (entender antes de usar) -->
         <div class="sidebar-section">
-          <button class="sidebar-section-toggle" data-section="fundamentos" aria-expanded="true">
+          <button class="sidebar-section-toggle" data-section="fundamentos" aria-expanded="false">
             <span class="sidebar-section-title">Fundamentos</span>
-            <svg class="sidebar-chevron sidebar-chevron-open" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="sidebar-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <ul class="sidebar-items" data-section-items="fundamentos">
-            <li><a href="#visao-geral" class="sidebar-link" data-i18n="nav.overview"><span class="sidebar-link-title">Visão geral</span></a></li>
-            <li><a href="#como-funciona" class="sidebar-link" data-i18n="nav.howItWorks"><span class="sidebar-link-title">Como o Araponga funciona</span></a></li>
+          <ul class="sidebar-items" data-section-items="fundamentos" hidden>
+            <li><a href="#visao-geral" class="sidebar-link" data-i18n="nav.overview"><span class="sidebar-link-title">Visão Geral</span></a></li>
+            <li><a href="#como-funciona" class="sidebar-link" data-i18n="nav.howItWorks"><span class="sidebar-link-title">Como Funciona</span></a></li>
             <li><a href="#territorios" class="sidebar-link" data-i18n="nav.territories"><span class="sidebar-link-title">Territórios</span></a></li>
-            <li><a href="#conceitos" class="sidebar-link" data-i18n="nav.productConcepts"><span class="sidebar-link-title">Conceitos de produto</span></a></li>
-            <li><a href="#modelo-dominio" class="sidebar-link" data-i18n="nav.domainModel"><span class="sidebar-link-title">Modelo de domínio</span></a></li>
+            <li><a href="#conceitos" class="sidebar-link" data-i18n="nav.productConcepts"><span class="sidebar-link-title">Conceitos de Produto</span></a></li>
           </ul>
         </div>
 
+        <!-- 2. FUNCIONALIDADES - Features específicas (por ordem de uso comum) -->
         <div class="sidebar-section">
-          <button class="sidebar-section-toggle" data-section="api" aria-expanded="true">
-            <span class="sidebar-section-title">API & Fluxos</span>
-            <svg class="sidebar-chevron sidebar-chevron-open" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          <ul class="sidebar-items" data-section-items="api">
-            <li><a href="#fluxos" class="sidebar-link" data-i18n="nav.flows"><span class="sidebar-link-title">Fluxos principais</span></a></li>
-            <li><a href="#casos-de-uso" class="sidebar-link" data-i18n="nav.useCases"><span class="sidebar-link-title">Casos de uso</span></a></li>
-            <li><a href="#auth" class="sidebar-link" data-i18n="nav.jwt"><span class="sidebar-link-title">Autenticação (JWT)</span></a></li>
-            <li><a href="#territory-session" class="sidebar-link" data-i18n="nav.headers"><span class="sidebar-link-title">Território & headers</span></a></li>
-            <li><a href="#openapi" class="sidebar-link" data-i18n="nav.openapi"><span class="sidebar-link-title">OpenAPI / Explorer</span></a></li>
-            <li><a href="#erros" class="sidebar-link" data-i18n="nav.errors"><span class="sidebar-link-title">Erros & convenções</span></a></li>
-            <li><a href="#quickstart" class="sidebar-link" data-i18n="nav.quickstart"><span class="sidebar-link-title">Quickstart</span></a></li>
-            <li><a href="#onboarding-analistas" class="sidebar-link"><span class="sidebar-link-title">Onboarding Analistas Funcionais</span></a></li>
-            <li><a href="#onboarding-developers" class="sidebar-link"><span class="sidebar-link-title">Onboarding Desenvolvedores</span></a></li>
-          </ul>
-        </div>
-
-        <div class="sidebar-section">
-          <button class="sidebar-section-toggle" data-section="features" aria-expanded="true">
+          <button class="sidebar-section-toggle" data-section="features" aria-expanded="false">
             <span class="sidebar-section-title">Funcionalidades</span>
-            <svg class="sidebar-chevron sidebar-chevron-open" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="sidebar-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <ul class="sidebar-items" data-section-items="features">
-            <li><a href="#marketplace" class="sidebar-link" data-i18n="nav.marketplace"><span class="sidebar-link-title">Marketplace</span></a></li>
-            <li><a href="#payout-gestao-financeira" class="sidebar-link"><span class="sidebar-link-title">Payout & Gestão Financeira</span></a></li>
-            <li><a href="#eventos" class="sidebar-link" data-i18n="nav.events"><span class="sidebar-link-title">Eventos</span></a></li>
-            <li><a href="#admin" class="sidebar-link" data-i18n="nav.admin"><span class="sidebar-link-title">Admin & filas</span></a></li>
+          <ul class="sidebar-items" data-section-items="features" hidden>
+            <!-- Submenu: Operações -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Operações</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#operacao-auth" class="sidebar-link"><span class="sidebar-link-title">Autenticação Social</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#operacao-territory-discovery" class="sidebar-link"><span class="sidebar-link-title">Descoberta de Território</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#operacao-marketplace-checkout" class="sidebar-link"><span class="sidebar-link-title">Marketplace Checkout</span></a></li>
+              </ul>
+            </li>
+            <!-- Submenu: Cenários Negócio -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Cenários Negócio</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#marketplace" class="sidebar-link" data-i18n="nav.marketplace"><span class="sidebar-link-title">Marketplace</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#eventos" class="sidebar-link" data-i18n="nav.events"><span class="sidebar-link-title">Eventos</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#payout-gestao-financeira" class="sidebar-link"><span class="sidebar-link-title">Payout & Gestão Financeira</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#admin" class="sidebar-link" data-i18n="nav.admin"><span class="sidebar-link-title">Admin & Filas</span></a></li>
+              </ul>
+            </li>
           </ul>
         </div>
 
+        <!-- 3. API PRÁTICA - Uso prático e referência técnica -->
         <div class="sidebar-section">
-          <button class="sidebar-section-toggle" data-section="recursos" aria-expanded="true">
-            <span class="sidebar-section-title">Recursos</span>
-            <svg class="sidebar-chevron sidebar-chevron-open" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <button class="sidebar-section-toggle" data-section="api" aria-expanded="false">
+            <span class="sidebar-section-title">API Prática</span>
+            <svg class="sidebar-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <ul class="sidebar-items" data-section-items="recursos">
+          <ul class="sidebar-items" data-section-items="api" hidden>
+            <li><a href="#modelo-dominio" class="sidebar-link" data-i18n="nav.domainModel"><span class="sidebar-link-title">Modelo de Domínio</span></a></li>
+            <li><a href="#fluxos" class="sidebar-link" data-i18n="nav.flows"><span class="sidebar-link-title">Fluxos Principais</span></a></li>
+            <!-- Submenu: Cenários Práticos -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Cenários Práticos</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#cenario-onboarding-usuario" class="sidebar-link"><span class="sidebar-link-title">Onboarding Usuário</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#cenario-publicar-midias" class="sidebar-link"><span class="sidebar-link-title">Publicar conteúdo com mídias</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#cenario-assets" class="sidebar-link"><span class="sidebar-link-title">Assets territoriais</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#cenario-chat" class="sidebar-link"><span class="sidebar-link-title">Chat territorial e grupos</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#cenario-marketplace" class="sidebar-link"><span class="sidebar-link-title">Marketplace e economia local</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#cenario-eventos" class="sidebar-link"><span class="sidebar-link-title">Eventos comunitários</span></a></li>
+              </ul>
+            </li>
+            <!-- Submenu: Guia de Produção -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Guia de Produção</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#guia-producao-passo-1" class="sidebar-link"><span class="sidebar-link-title">Passo 1: Entendendo o Fluxo</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#guia-producao-passo-2" class="sidebar-link"><span class="sidebar-link-title">Passo 2: Configurar Payout</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#guia-producao-passo-3" class="sidebar-link"><span class="sidebar-link-title">Passo 3: Consultar Configuração</span></a></li>
+                <li class="sidebar-submenu-item"><a href="#guia-producao-passo-4" class="sidebar-link"><span class="sidebar-link-title">Passo 4: Consultar Saldo</span></a></li>
+              </ul>
+            </li>
+            <li><a href="#auth" class="sidebar-link" data-i18n="nav.jwt"><span class="sidebar-link-title">Autenticação</span></a></li>
+            <li><a href="#territory-session" class="sidebar-link" data-i18n="nav.headers"><span class="sidebar-link-title">Contexto e Headers</span></a></li>
+            <li><a href="#openapi" class="sidebar-link" data-i18n="nav.openapi"><span class="sidebar-link-title">OpenAPI / Explorer</span></a></li>
+            <li><a href="#erros" class="sidebar-link" data-i18n="nav.errors"><span class="sidebar-link-title">Erros & Convenções</span></a></li>
+            <li><a href="#casos-uso-comuns" class="sidebar-link"><span class="sidebar-link-title">Casos de Uso Comuns</span></a></li>
+            <li><a href="#pontos-atencao" class="sidebar-link"><span class="sidebar-link-title">Pontos de Atenção</span></a></li>
+          </ul>
+        </div>
+
+        <!-- 4. RECURSOS - Informações adicionais e avançadas -->
+        <div class="sidebar-section">
+          <button class="sidebar-section-toggle" data-section="recursos" aria-expanded="false">
+            <span class="sidebar-section-title">Recursos</span>
+            <svg class="sidebar-chevron" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <ul class="sidebar-items" data-section-items="recursos" hidden>
+            <li><a href="#configure-ambiente" class="sidebar-link"><span class="sidebar-link-title">Configure seu Ambiente</span></a></li>
+            <!-- Submenu: Onboarding Funcional -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Onboarding Funcional</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#onboarding-analistas" class="sidebar-link"><span class="sidebar-link-title">Onboarding Analista Funcional</span></a></li>
+              </ul>
+            </li>
+            <!-- Submenu: Onboarding Dev -->
+            <li class="sidebar-submenu">
+              <button class="sidebar-submenu-toggle" aria-expanded="false">
+                <span class="sidebar-link-title">Onboarding Dev</span>
+                <svg class="sidebar-chevron" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <ul class="sidebar-submenu-items" hidden>
+                <li class="sidebar-submenu-item"><a href="#onboarding-developers" class="sidebar-link"><span class="sidebar-link-title">Onboarding Desenvolvedor</span></a></li>
+              </ul>
+            </li>
             <li><a href="#capacidades-tecnicas" class="sidebar-link"><span class="sidebar-link-title">Capacidades Técnicas</span></a></li>
             <li><a href="#versoes" class="sidebar-link" data-i18n="nav.versions"><span class="sidebar-link-title">Versões</span></a></li>
             <li><a href="#roadmap" class="sidebar-link"><span class="sidebar-link-title">Roadmap</span></a></li>
@@ -169,7 +444,33 @@
     </nav>
 
     <main role="main">
-      <section class="section" id="visao-geral">
+      <!-- Phase Navigation Tabs -->
+      <div class="phase-navigation" role="tablist">
+        <button class="phase-tab active" data-phase="comecando">Começando</button>
+        <button class="phase-tab" data-phase="fundamentos">Fundamentos</button>
+        <button class="phase-tab" data-phase="funcionalidades">Funcionalidades</button>
+        <button class="phase-tab" data-phase="api-pratica">API Prática</button>
+        <button class="phase-tab" data-phase="avancado">Avançado</button>
+      </div>
+
+      <!-- Phase Panels Container -->
+      <div class="phase-panels">
+        <!-- Tab 1: Começando -->
+        <div class="phase-panel active" data-phase-panel="comecando">
+          <section class="section" id="introducao">
+            <h2>Bem-vindo ao Developer Portal</h2>
+            <p class="lead-text">
+              Este é o portal técnico da plataforma Araponga. Explore a documentação, guias e referências da API através do menu lateral e das abas acima.
+            </p>
+            <p>
+              Use o menu lateral para navegar entre diferentes seções ou clique nas abas superiores para acessar categorias principais.
+            </p>
+          </section>
+        </div>
+
+        <!-- Tab 2: Fundamentos -->
+        <div class="phase-panel" data-phase-panel="fundamentos">
+          <section class="section" id="visao-geral">
         <span class="eyebrow" data-i18n="overview.eyebrow">Visão geral</span>
         <div>
           <h2 data-i18n="overview.title">API orientada a território com governança comunitária transparente</h2>
@@ -318,8 +619,1003 @@
           </div>
         </div>
       </section>
+        </div>
 
-      <section class="section" id="modelo-dominio">
+        <!-- Tab 2: Funcionalidades -->
+        <div class="phase-panel" data-phase-panel="funcionalidades">
+          <section class="section" id="marketplace">
+            <span class="eyebrow" data-i18n="marketplace.eyebrow">Marketplace</span>
+            <h2 data-i18n="marketplace.title">Economia local territorial</h2>
+            <p data-i18n="marketplace.lead">
+              O marketplace permite criar lojas e publicar produtos/serviços (items), gerenciar carrinho de compras
+              e receber inquiries de interessados. Tudo ancorado no território. O sistema de payout territorial
+              garante que recursos financeiros permaneçam na comunidade, fortalecendo ciclos econômicos locais
+              e permitindo que comunidades construam autonomia através de suas próprias capacidades produtivas.
+            </p>
+
+            <div class="flow-step">
+              <h4>12. Criar ou atualizar loja</h4>
+              <p>
+                Moradores validados podem criar ou atualizar sua loja no território via
+                <code>POST /api/v1/stores</code>. A loja define informações de contato e visibilidade.
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/stores \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111",
+    "displayName": "Loja da Ana",
+    "description": "Produtos artesanais",
+    "contactVisibility": "Public",
+    "contact": {
+      "phone": "+5511999999999",
+      "email": "ana@exemplo.com"
+    }
+  }'</code></pre>
+            </div>
+
+            <div class="flow-step">
+              <h4>13. Criar item (produto ou serviço) com imagens</h4>
+              <p>
+                Lojas podem criar items via <code>POST /api/v1/items</code>. Items podem ser produtos
+                ou serviços, com preço fixo, negociável ou gratuito. Items podem incluir até 10 imagens através do campo <code>mediaIds</code>.
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/items \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111",
+    "storeId": "22222222-2222-2222-2222-222222222222",
+    "type": "Product",
+    "title": "Bolo de chocolate",
+    "description": "Bolo caseiro",
+    "category": "Alimentos",
+    "tags": "bolo,chocolate",
+    "pricingType": "Fixed",
+    "priceAmount": 25.00,
+    "currency": "BRL",
+    "unit": "unidade",
+    "latitude": -23.55,
+    "longitude": -46.63,
+    "mediaIds": ["dddddddd-dddd-dddd-dddd-dddddddddddd", "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"]
+  }'</code></pre>
+              <div class="info-box">
+                <strong>📸🎥🎧 Mídias em Items (Imagens, Vídeos e Áudios):</strong>
+                <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                  <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+                  <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
+                  <li><strong>Vídeos</strong>: Máximo 1 vídeo por item, até 30MB, até 30 segundos (demonstração rápida de produto). Formatos suportados: MP4</li>
+                  <li><strong>Áudios</strong>: Máximo 1 áudio por item, até 5MB, até 2 minutos (descrição de produto, demonstração de serviço). Formatos suportados: MP3, WAV, OGG</li>
+                  <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+                  <li><strong>Imagem principal</strong>: A primeira mídia do array é usada como <code>primaryImageUrl</code> (se for vídeo ou áudio, a URL é retornada)</li>
+                  <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as mídias: imagens, vídeos e áudios)</li>
+                  <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o item. Vídeos maiores que 30MB, áudios maiores que 5MB, mais de 1 vídeo ou mais de 1 áudio por item retornam erro</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>14. Buscar items</h4>
+              <p>
+                Use <code>GET /api/v1/items</code> para buscar produtos e serviços por território, categoria,
+                tags ou texto livre (<code>q</code>).
+              </p>
+              <pre class="code-block"><code>curl "http://localhost:8080/api/v1/items?territoryId=11111111-1111-1111-1111-111111111111&amp;q=bolo&amp;category=Alimentos" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+            </div>
+
+            <div class="flow-step">
+              <h4>15. Gerenciar carrinho</h4>
+              <p>
+                Usuários podem adicionar itens ao carrinho via <code>POST /api/v1/cart/items</code>,
+                atualizar quantidade via <code>PATCH /api/v1/cart/items/{id}</code> e fazer checkout via
+                <code>POST /api/v1/cart/checkout</code>.
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/cart/items \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111",
+    "itemId": "33333333-3333-3333-3333-333333333333",
+    "quantity": 2,
+    "notes": "Entregar após 18h (se possível)"
+  }'</code></pre>
+            </div>
+
+            <div class="flow-step">
+              <h4>16. Criar inquiry</h4>
+              <p>
+                Interessados podem criar inquiries diretamente em items via
+                <code>POST /api/v1/items/{id}/inquiries</code>.
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/items/{id}/inquiries \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Gostaria de mais informações"}'</code></pre>
+              <details class="sequence-diagram-toggle">
+                <summary class="sequence-diagram-summary">
+                  <span>📊 Ver Diagrama de Sequência</span>
+                </summary>
+                <div class="sequence-diagram-container">
+                  <img src="./assets/images/diagrams/marketplace-checkout.svg" alt="Diagrama de sequência: Marketplace - Fluxo completo (loja → item → carrinho → checkout → payout)" class="mermaid-diagram" data-diagram="marketplace-checkout" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
+                  <button class="diagram-fullscreen-btn" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="section" id="payout-gestao-financeira">
+            <span class="eyebrow">Payout & Gestão Financeira</span>
+            <h2>Sistema de Payout e Rastreabilidade Financeira Completa</h2>
+            <p>
+              O Araponga implementa um sistema completo de payout (transferência para vendedores) com rastreabilidade
+              financeira total. Cada centavo é rastreado, permitindo transparência total e autonomia para territórios.
+            </p>
+
+            <div class="grid-two">
+              <div class="card">
+                <h3>🎯 O que é o Sistema de Payout?</h3>
+                <p>
+                  Quando um checkout é marcado como <code>Paid</code>, o sistema automaticamente cria uma transação
+                  de vendedor e processa o payout conforme configurações do território. O vendedor recebe o valor
+                  líquido (subtotal - fees da plataforma).
+                </p>
+              </div>
+              <div class="card">
+                <h3>✨ Principais Funcionalidades</h3>
+                <ul>
+                  <li>✅ <strong>Rastreabilidade completa</strong>: Cada centavo é rastreado em <code>FinancialTransaction</code></li>
+                  <li>✅ <strong>Retenção configurável</strong>: Aguarda período configurado antes de liberar para payout</li>
+                  <li>✅ <strong>Valor mínimo/máximo</strong>: Acumula até atingir mínimo ou divide se exceder máximo</li>
+                  <li>✅ <strong>Payout automático</strong>: Background worker processa payouts automaticamente</li>
+                  <li>✅ <strong>Gestão financeira da plataforma</strong>: Saldo, receitas e despesas separadas por território</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>🚀 Guia de Produção (Passo a Passo)</strong>
+              <p style="margin-top: 0.5rem;">
+                Abaixo você encontrará um guia completo para colocar o sistema de payout em produção. O guia foi
+                projetado para ser seguido por qualquer pessoa, mesmo com conhecimento mínimo de programação.
+              </p>
+            </div>
+
+            <div class="flow-step">
+              <h4>📋 Passo 1: Entendendo o Fluxo de Payout</h4>
+              <p>
+                Quando um cliente compra algo na loja de um vendedor e o pagamento é confirmado, o seguinte acontece:
+              </p>
+              <ol style="margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Checkout pago</strong> → Sistema cria <code>SellerTransaction</code> automaticamente</li>
+                <li><strong>Valor líquido</strong> → Subtotal - Fees da plataforma = Valor para o vendedor</li>
+                <li><strong>Período de retenção</strong> → Aguarda dias configurados (ex: 7 dias)</li>
+                <li><strong>Valor mínimo</strong> → Acumula até atingir valor mínimo configurado (ex: R$ 100,00)</li>
+                <li><strong>Payout automático</strong> → Background worker processa quando todas as condições são atendidas</li>
+                <li><strong>Transferência</strong> → Dinheiro é transferido para o vendedor via gateway (Stripe, MercadoPago, etc.)</li>
+              </ol>
+            </div>
+
+            <div class="flow-step">
+              <h4>⚙️ Passo 2: Configurar Payout para um Território</h4>
+              <p>
+                Antes de usar o sistema de payout, você precisa configurar como ele funciona para cada território.
+                Essa configuração define período de retenção, valores mínimo/máximo, frequência e se requer aprovação manual.
+              </p>
+              <pre class="code-block"><code># Criar ou atualizar configuração de payout
+curl -X POST "http://localhost:8080/api/v1/territories/{territoryId}/payout-config" \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "retentionPeriodDays": 7,
+    "minimumPayoutAmountInCents": 10000,
+    "maximumPayoutAmountInCents": 5000000,
+    "frequency": "Weekly",
+    "autoPayoutEnabled": true,
+    "requiresApproval": false,
+    "currency": "BRL"
+  }'</code></pre>
+              <div class="info-box">
+                <strong>📝 Explicação dos Campos:</strong>
+                <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                  <li><code>retentionPeriodDays</code>: Quantos dias aguardar antes de liberar para payout (ex: 7 = aguarda 7 dias)</li>
+                  <li><code>minimumPayoutAmountInCents</code>: Valor mínimo em centavos para processar payout (ex: 10000 = R$ 100,00)</li>
+                  <li><code>maximumPayoutAmountInCents</code>: Valor máximo por payout - se exceder, divide em múltiplos (ex: 5000000 = R$ 50.000,00)</li>
+                  <li><code>frequency</code>: Frequência do payout automático - <code>"Daily"</code>, <code>"Weekly"</code>, <code>"Monthly"</code> ou <code>"Manual"</code></li>
+                  <li><code>autoPayoutEnabled</code>: Se <code>true</code>, processa payouts automaticamente. Se <code>false</code>, apenas manual</li>
+                  <li><code>requiresApproval</code>: Se <code>true</code>, requer aprovação manual antes de processar (ainda não implementado)</li>
+                  <li><code>currency</code>: Moeda da configuração - <code>"BRL"</code>, <code>"USD"</code>, etc.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>🔍 Passo 3: Consultar Configuração de Payout</h4>
+              <p>
+                Para ver a configuração atual de payout de um território:
+              </p>
+              <pre class="code-block"><code># Consultar configuração ativa
+curl "http://localhost:8080/api/v1/territories/{territoryId}/payout-config" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+            </div>
+
+            <div class="flow-step">
+              <h4>💰 Passo 4: Consultar Saldo do Vendedor</h4>
+              <p>
+                Vendedores podem consultar seu saldo e histórico de transações:
+              </p>
+              <pre class="code-block"><code># Consultar meu saldo como vendedor
+curl "http://localhost:8080/api/v1/territories/{territoryId}/seller-balance/me" \
+  -H "Authorization: Bearer &lt;token&gt;"
+
+# Consultar minhas transações como vendedor
+curl "http://localhost:8080/api/v1/territories/{territoryId}/seller-balance/me/transactions" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+              <div class="info-box">
+                <strong>📊 Entendendo o Saldo do Vendedor:</strong>
+                <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                  <li><code>pendingAmountInCents</code>: Valor que ainda está no período de retenção</li>
+                  <li><code>readyForPayoutAmountInCents</code>: Valor pronto para payout (após período de retenção e valor mínimo)</li>
+                  <li><code>paidAmountInCents</code>: Valor já transferido para o vendedor</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>📈 Passo 5: Gestão Financeira da Plataforma</h4>
+              <p>
+                Administradores podem consultar o saldo financeiro da plataforma (receitas de fees e despesas de payouts):
+              </p>
+              <pre class="code-block"><code># Consultar saldo da plataforma (apenas SystemAdmin ou FinancialManager)
+curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/balance" \
+  -H "Authorization: Bearer &lt;token&gt;"
+
+# Listar receitas (fees coletadas)
+curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/revenue" \
+  -H "Authorization: Bearer &lt;token&gt;"
+
+# Listar despesas (payouts processados)
+curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/expenses" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+            </div>
+
+            <div class="flow-step">
+              <h4>🔧 Passo 6: Configuração em Produção - Checklist</h4>
+              <p>
+                Para colocar o sistema de payout em produção, siga este checklist:
+              </p>
+              <div class="callout" style="margin-top: 1rem; padding: 1.5rem;">
+                <h5 style="margin-top: 0;">✅ Pré-requisitos</h5>
+                <ol style="margin-left: 1.5rem; line-height: 2;">
+                  <li><strong>Migration aplicada</strong>: Execute a migration <code>20260119000000_AddFinancialSystem.cs</code> no banco de dados</li>
+                  <li><strong>Gateway de pagamento configurado</strong>: Tenha uma conta no gateway (Stripe Connect, MercadoPago, etc.)</li>
+                  <li><strong>Background worker ativo</strong>: Certifique-se de que o <code>PayoutProcessingWorker</code> está rodando</li>
+                </ol>
+
+                <h5 style="margin-top: 1.5rem;">⚙️ Configuração Inicial</h5>
+                <ol style="margin-left: 1.5rem; line-height: 2;">
+                  <li><strong>Configure payout por território</strong>: Use <code>POST /api/v1/territories/{territoryId}/payout-config</code></li>
+                  <li><strong>Configure período de retenção</strong>: Recomendado: 7-14 dias (protege contra chargebacks)</li>
+                  <li><strong>Configure valor mínimo</strong>: Recomendado: R$ 50,00 - R$ 200,00 (reduz custos de transferência)</li>
+                  <li><strong>Configure valor máximo</strong>: Se necessário, limite por payout (ex: R$ 50.000,00)</li>
+                  <li><strong>Escolha frequência</strong>: <code>"Daily"</code> (diário), <code>"Weekly"</code> (semanal) ou <code>"Monthly"</code> (mensal)</li>
+                  <li><strong>Habilite payout automático</strong>: Defina <code>autoPayoutEnabled: true</code></li>
+                </ol>
+
+                <h5 style="margin-top: 1.5rem;">🔌 Integração com Gateway de Pagamento</h5>
+                <ol style="margin-left: 1.5rem; line-height: 2;">
+                  <li><strong>Implemente IPayoutGateway</strong>: Crie implementação para seu gateway (Stripe, MercadoPago, etc.)</li>
+                  <li><strong>Registre no DI</strong>: Substitua <code>MockPayoutGateway</code> por sua implementação real em <code>ServiceCollectionExtensions.cs</code></li>
+                  <li><strong>Configure credenciais</strong>: Adicione chaves de API do gateway em <code>appsettings.json</code> ou variáveis de ambiente</li>
+                  <li><strong>Teste em sandbox</strong>: Use ambiente de testes do gateway antes de produção</li>
+                </ol>
+
+                <h5 style="margin-top: 1.5rem;">🧪 Testes e Validação</h5>
+                <ol style="margin-left: 1.5rem; line-height: 2;">
+                  <li><strong>Teste checkout completo</strong>: Crie checkout, marque como <code>Paid</code> e verifique se <code>SellerTransaction</code> foi criada</li>
+                  <li><strong>Verifique retenção</strong>: Confirme que o valor fica em <code>pendingAmountInCents</code> durante o período de retenção</li>
+                  <li><strong>Teste valor mínimo</strong>: Crie múltiplos checkouts pequenos e confirme que só processa quando atinge o mínimo</li>
+                  <li><strong>Verifique payout automático</strong>: Aguarde o background worker processar e verifique transferência no gateway</li>
+                  <li><strong>Monitore logs</strong>: Verifique logs do <code>PayoutProcessingWorker</code> para erros ou avisos</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>🏗️ Passo 7: Implementar Gateway de Pagamento Real</h4>
+              <p>
+                O sistema vem com um <code>MockPayoutGateway</code> para desenvolvimento. Para produção, você precisa
+                implementar o <code>IPayoutGateway</code> para seu gateway de pagamento preferido (Stripe Connect, MercadoPago, etc.).
+              </p>
+              <div class="info-box">
+                <strong>📝 Exemplo: Interface IPayoutGateway</strong>
+                <pre class="code-block" style="margin-top: 0.5rem; background: #0a0e12;"><code>public interface IPayoutGateway
+{
+  Task&lt;OperationResult&lt;PayoutResult&gt;&gt; CreatePayoutAsync(
+    long amountInCents,
+    string currency,
+    string sellerAccountId,
+    string description,
+    Dictionary&lt;string, string&gt;? metadata,
+    CancellationToken cancellationToken);
+
+  Task&lt;OperationResult&lt;PayoutStatusResult&gt;&gt; GetPayoutStatusAsync(
+    string payoutId,
+    CancellationToken cancellationToken);
+
+  Task&lt;OperationResult&gt; CancelPayoutAsync(
+    string payoutId,
+    CancellationToken cancellationToken);
+}</code></pre>
+                <p style="margin-top: 1rem;">
+                  Você precisa implementar os 3 métodos acima para seu gateway de pagamento. Veja o exemplo de
+                  <code>MockPayoutGateway</code> em <code>backend/Araponga.Infrastructure/Payments/MockPayoutGateway.cs</code>
+                  como referência.
+                </p>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>🔄 Passo 8: Como Funciona o Background Worker</h4>
+              <p>
+                O <code>PayoutProcessingWorker</code> verifica payouts pendentes a cada 5 minutos e processa automaticamente
+                conforme a frequência configurada:
+              </p>
+              <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Daily</strong>: Processa payouts todos os dias (quando o worker roda)</li>
+                <li><strong>Weekly</strong>: Processa payouts toda segunda-feira às 00:00 UTC</li>
+                <li><strong>Monthly</strong>: Processa payouts no dia 1 de cada mês às 00:00 UTC</li>
+                <li><strong>Manual</strong>: Não processa automaticamente - apenas quando chamado manualmente via API</li>
+              </ul>
+              <p style="margin-top: 1rem;">
+                O worker está configurado automaticamente quando você roda a API. Não precisa fazer nada extra para ativá-lo.
+              </p>
+            </div>
+
+            <div class="flow-step">
+              <h4>📊 Passo 9: Monitoramento e Troubleshooting</h4>
+              <p>
+                Para monitorar o sistema de payout em produção:
+              </p>
+              <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Logs do Worker</strong>: Procure por <code>PayoutProcessingWorker</code> nos logs para ver processamento</li>
+                <li><strong>Transações Financeiras</strong>: Consulte <code>GET /api/v1/territories/{territoryId}/platform-financial/revenue</code> para receitas</li>
+                <li><strong>Transações de Despesa</strong>: Consulte <code>GET /api/v1/territories/{territoryId}/platform-financial/expenses</code> para payouts</li>
+                <li><strong>Status de Payouts</strong>: Use <code>UpdatePayoutStatusAsync</code> para atualizar status do gateway periodicamente</li>
+              </ul>
+            </div>
+
+            <div class="grid-two" style="margin-top: 2rem;">
+              <div class="card">
+                <h3>🎯 Casos de Uso Comuns</h3>
+                <ul style="line-height: 1.8;">
+                  <li><strong>Vendedor quer saber quando receberá</strong>: Consulte <code>/seller-balance/me</code> para ver valores pendentes e prontos para payout</li>
+                  <li><strong>Processar payout manualmente</strong>: Use <code>ProcessPendingPayoutsAsync</code> do <code>SellerPayoutService</code> via API admin</li>
+                  <li><strong>Ver histórico de transações</strong>: Consulte <code>/seller-balance/me/transactions</code> para ver todas as transações do vendedor</li>
+                  <li><strong>Auditar receitas da plataforma</strong>: Use endpoints de <code>/platform-financial</code> para ver fees coletadas</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>⚠️ Pontos de Atenção</h3>
+                <ul style="line-height: 1.8;">
+                  <li><strong>Período de retenção</strong>: Protege contra chargebacks - não configure muito curto</li>
+                  <li><strong>Valor mínimo</strong>: Reduz custos de transferência - configure baseado no custo do gateway</li>
+                  <li><strong>Valor máximo</strong>: Limita exposição a risco - configure se necessário</li>
+                  <li><strong>Moedas diferentes</strong>: Cada território pode ter configuração em moeda diferente</li>
+                  <li><strong>Testes primeiro</strong>: Sempre teste com valores pequenos antes de produção</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>📚 Documentação Técnica Completa</strong>
+              <p style="margin-top: 0.5rem;">
+                Para detalhes técnicos completos, consulte:
+                <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/FASE7.md">docs/backlog-api/FASE7.md</a>
+              </p>
+            </div>
+          </section>
+
+          <section class="section" id="eventos">
+            <span class="eyebrow" data-i18n="events.eyebrow">Eventos</span>
+            <h2 data-i18n="events.title">Eventos territoriais com data/hora e localização</h2>
+            <p data-i18n="events.lead">
+              Eventos são criados por moradores e aparecem no feed e no mapa. Eles têm data/hora de início
+              (obrigatória) e fim (opcional), além de geolocalização obrigatória.
+            </p>
+
+            <div class="flow-step">
+              <h4>17. Criar evento com imagem de capa e imagens adicionais</h4>
+              <p>
+                Use <code>POST /api/v1/events</code> para criar eventos. O evento automaticamente gera um post
+                no feed e aparece no mapa. Eventos podem incluir uma imagem de capa (<code>coverMediaId</code>) e
+                até 10 imagens adicionais (<code>additionalMediaIds</code>).
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/events \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -H "X-Session-Id: session-123" \
+  -d '{
+    "territoryId": "11111111-1111-1111-1111-111111111111",
+    "title": "Feira de artesanato",
+    "description": "Feira mensal no centro",
+    "startsAtUtc": "2024-12-15T10:00:00Z",
+    "endsAtUtc": "2024-12-15T18:00:00Z",
+    "latitude": -23.55,
+    "longitude": -46.63,
+    "locationLabel": "Praça Central",
+    "coverMediaId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "additionalMediaIds": ["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"]
+  }'</code></pre>
+              <div class="info-box">
+                <strong>📸🎥🎧 Mídias em Eventos (Imagens, Vídeos e Áudios):</strong>
+                <ul style="margin-top: 0.5rem; line-height: 1.8;">
+                  <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
+                  <li><strong>Mídia de capa</strong>: Use <code>coverMediaId</code> para definir a mídia principal do evento (imagem, vídeo ou áudio, opcional). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
+                  <li><strong>Mídias adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 5 mídias adicionais (imagens, vídeos ou áudios). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
+                  <li><strong>Vídeos</strong>: Máximo 1 vídeo por evento (em capa ou adicionais), até 100MB, até 2 minutos. Formatos suportados: MP4</li>
+                  <li><strong>Áudios</strong>: Máximo 1 áudio por evento (em capa ou adicionais), até 20MB, até 10 minutos (promoção de eventos, trilhas sonoras). Formatos suportados: MP3, WAV, OGG</li>
+                  <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 6 mídias no total: 1 capa + 5 adicionais, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
+                  <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code> (pode conter URLs de vídeos e áudios)</li>
+                  <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário e <code>coverMediaId</code> não pode estar em <code>additionalMediaIds</code>. Vídeos maiores que 100MB, áudios maiores que 20MB, mais de 1 vídeo ou mais de 1 áudio por evento retornam erro</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flow-step">
+              <h4>18. Interesse e confirmação em eventos</h4>
+              <p>
+                Usuários podem marcar interesse via <code>POST /api/v1/events/{eventId}/interest</code> e confirmar participação via
+                <code>POST /api/v1/events/{eventId}/confirm</code>.
+              </p>
+              <pre class="code-block"><code># Marcar interesse
+curl -X POST http://localhost:8080/api/v1/events/{eventId}/interest \
+  -H "Authorization: Bearer &lt;token&gt;" \
+
+# Confirmar participação
+curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+            </div>
+          </section>
+
+          <section class="section" id="admin">
+            <span class="eyebrow" data-i18n="admin.eyebrow">Admin & Filas</span>
+            <h2 data-i18n="admin.title">Sistema de Filas e Administração</h2>
+            <p data-i18n-html="admin.leadHtml">
+              O sistema de filas (<code>WorkQueue</code>) permite processar tarefas que requerem revisão humana ou
+              decisões administrativas. Ele é usado para aprovação de pedidos de moradia quando não há curadores,
+              validação de evidências de residência, triagem de reports de moderação e outras tarefas que precisam
+              de intervenção humana.
+            </p>
+            <div class="grid-two">
+              <div class="card">
+                <h3>🎯 O que é o Sistema de Filas?</h3>
+                <p>
+                  O <code>WorkQueue</code> é uma fila genérica de tarefas que requerem revisão humana. Ele permite
+                  que administradores e curadores processem tarefas pendentes de forma organizada e auditável.
+                </p>
+              </div>
+              <div class="card">
+                <h3>✨ Principais Funcionalidades</h3>
+                <ul>
+                  <li>✅ <strong>Filas por território</strong>: Cada território tem sua própria fila de tarefas</li>
+                  <li>✅ <strong>Tipos de tarefa</strong>: JoinRequest, ResidencyVerification, ModerationCase, etc.</li>
+                  <li>✅ <strong>Status de tarefa</strong>: Pending, InProgress, Completed, Rejected</li>
+                  <li>✅ <strong>Atribuição</strong>: Tarefas podem ser atribuídas a curadores ou administradores</li>
+                  <li>✅ <strong>Auditoria</strong>: Todas as ações são registradas e auditáveis</li>
+                </ul>
+              </div>
+            </div>
+            <div class="flow-step">
+              <h4>19. Listar tarefas pendentes</h4>
+              <p>
+                Use <code>GET /api/v1/work-queue</code> para listar tarefas pendentes. Você pode filtrar por
+                território, tipo de tarefa e status.
+              </p>
+              <pre class="code-block"><code>curl "http://localhost:8080/api/v1/work-queue?territoryId=11111111-1111-1111-1111-111111111111&amp;status=Pending" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+            </div>
+            <div class="flow-step">
+              <h4>20. Processar tarefa</h4>
+              <p>
+                Use <code>POST /api/v1/work-queue/{id}/process</code> para processar uma tarefa. Você pode
+                aprovar, rejeitar ou adiar a tarefa.
+              </p>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/work-queue/{id}/process \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "Approve",
+    "notes": "Aprovado após verificação"
+  }'</code></pre>
+            </div>
+            <div class="callout">
+              <strong>📚 Documentação Completa:</strong>
+              Documentação completa: <a href="https://github.com/sraphaz/araponga/blob/main/docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md" rel="noopener">docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md</a>
+            </div>
+          </section>
+
+          <!-- Operações - Páginas Dedicadas com Diagramas -->
+          <section class="section" id="operacao-auth">
+            <span class="eyebrow">Operação</span>
+            <h2>Autenticação Social</h2>
+            <p class="lead-text">
+              Use <code>POST /api/v1/auth/social</code> com <code>Provider</code>, <code>ExternalId</code>, <code>DisplayName</code>
+              e <strong>CPF</strong> ou <strong>ForeignDocument</strong>. A resposta traz o token JWT.
+            </p>
+            <div class="flow-step">
+              <h4>Endpoint</h4>
+              <pre class="code-block"><code>POST /api/v1/auth/social</code></pre>
+              <h4>Exemplo de Requisição</h4>
+              <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/auth/social \
+  -H "Content-Type: application/json" \
+  -d '{
+    "provider": "google",
+    "externalId": "abc-123",
+    "displayName": "Ana Souza",
+    "cpf": "12345678900",
+    "email": "ana@exemplo.com"
+  }'</code></pre>
+              <h4>Diagrama de Sequência</h4>
+              <details class="sequence-diagram-toggle">
+                <summary class="sequence-diagram-summary">
+                  <span>📊 Ver Diagrama de Sequência</span>
+                </summary>
+                <div class="sequence-diagram-container">
+                  <img src="./assets/images/diagrams/auth.svg" alt="Diagrama de sequência: Autenticação" class="mermaid-diagram" data-diagram="auth" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
+                  <button class="diagram-fullscreen-btn" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="section" id="operacao-territory-discovery">
+            <span class="eyebrow">Operação</span>
+            <h2>Descoberta de Território</h2>
+            <p class="lead-text">
+              Descubra territórios próximos usando geolocalização ou liste todos os territórios disponíveis.
+            </p>
+            <div class="flow-step">
+              <h4>Endpoints</h4>
+              <ul class="card-list">
+                <li><strong>Territórios próximos:</strong> <code>GET /api/v1/territories/nearby?lat=-23.55&lng=-46.63</code></li>
+                <li><strong>Listar todos:</strong> <code>GET /api/v1/territories</code></li>
+              </ul>
+              <h4>Exemplo de Requisição</h4>
+              <pre class="code-block"><code>curl "http://localhost:8080/api/v1/territories/nearby?lat=-23.55&lng=-46.63" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+              <h4>Diagrama de Sequência</h4>
+              <details class="sequence-diagram-toggle">
+                <summary class="sequence-diagram-summary">
+                  <span>📊 Ver Diagrama de Sequência</span>
+                </summary>
+                <div class="sequence-diagram-container">
+                  <img src="./assets/images/diagrams/territory-discovery.svg" alt="Diagrama de sequência: Descoberta de Território" class="mermaid-diagram" data-diagram="territory-discovery" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
+                  <button class="diagram-fullscreen-btn" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="section" id="operacao-marketplace-checkout">
+            <span class="eyebrow">Operação</span>
+            <h2>Marketplace Checkout</h2>
+            <p class="lead-text">
+              Fluxo completo de marketplace: criar loja, adicionar itens, gerenciar carrinho, fazer checkout e processar payout.
+            </p>
+            <div class="flow-step">
+              <h4>Fluxo Completo</h4>
+              <ol class="card-list" style="list-style-type: decimal;">
+                <li><strong>Criar loja:</strong> <code>POST /api/v1/stores</code></li>
+                <li><strong>Adicionar itens:</strong> <code>POST /api/v1/items</code></li>
+                <li><strong>Adicionar ao carrinho:</strong> <code>POST /api/v1/cart/items</code></li>
+                <li><strong>Checkout:</strong> <code>POST /api/v1/cart/checkout</code></li>
+                <li><strong>Marcar como pago:</strong> <code>PATCH /api/v1/cart/checkout/{id}/status</code> (Status: Paid)</li>
+                <li><strong>Payout automático:</strong> Sistema processa payout conforme configuração</li>
+              </ol>
+              <h4>Diagrama de Sequência</h4>
+              <details class="sequence-diagram-toggle">
+                <summary class="sequence-diagram-summary">
+                  <span>📊 Ver Diagrama de Sequência</span>
+                </summary>
+                <div class="sequence-diagram-container">
+                  <img src="./assets/images/diagrams/marketplace-checkout.svg" alt="Diagrama de sequência: Marketplace - Fluxo completo (loja → item → carrinho → checkout → payout)" class="mermaid-diagram" data-diagram="marketplace-checkout" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
+                  <button class="diagram-fullscreen-btn" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
+                </div>
+              </details>
+            </div>
+          </section>
+        </div>
+
+        <!-- Tab 5: Avançado -->
+        <div class="phase-panel" data-phase-panel="avancado">
+          <section class="section" id="capacidades-tecnicas">
+        <span class="eyebrow">Fundações Técnicas</span>
+        <h2>Qualidade, Performance e Observabilidade</h2>
+        <p class="lead-text">
+          A API Araponga foi construída sobre uma base sólida de práticas de engenharia moderna.
+          Arquitetura limpa, testes abrangentes e observabilidade completa garantem confiabilidade,
+          manutenibilidade e escalabilidade para comunidades em produção.
+        </p>
+
+        <div class="model-grid spaced">
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">✓</span>
+              <h3>Qualidade de Código</h3>
+            </div>
+            <p class="card-intro">
+              Engenharia de software orientada a qualidade e confiabilidade, com foco em
+              manutenibilidade a longo prazo e evolução segura da plataforma.
+            </p>
+            <dl class="entity-list">
+              <dt><strong>Paginação padronizada</strong></dt>
+              <dd>15 endpoints críticos implementam paginação completa com <code>PaginatedResult&lt;T&gt;</code>, garantindo performance consistente em grandes volumes de dados.</dd>
+
+              <dt><strong>Validação robusta</strong></dt>
+              <dd>FluentValidation em todas as camadas: contratos de API, comandos de aplicação e regras de domínio. Validações declarativas e mensagens de erro claras.</dd>
+
+              <dt><strong>Cobertura de testes acima de 90%</strong></dt>
+              <dd>Testes unitários, de integração e end-to-end cobrindo fluxos críticos. Testes de infraestrutura para repositórios e serviços de aplicação.</dd>
+
+              <dt><strong>Testes de segurança e performance</strong></dt>
+              <dd>Testes automatizados de vulnerabilidades comuns, validação de autorização e testes de carga para endpoints críticos.</dd>
+
+              <dt><strong>Refatoração completa de services</strong></dt>
+              <dd>Arquitetura limpa com Single Responsibility Principle. Services focados, testáveis e desacoplados, facilitando manutenção e evolução.</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">⚡</span>
+              <h3>Performance & Escalabilidade</h3>
+            </div>
+            <p class="card-intro">
+              Otimizações arquiteturais e técnicas avançadas para garantir baixa latência
+              e capacidade de crescimento com o aumento da demanda.
+            </p>
+            <dl class="entity-list">
+              <dt><strong>Concorrência otimista</strong></dt>
+              <dd>RowVersion em entidades críticas previne condições de corrida e garante consistência de dados em operações concorrentes.</dd>
+
+              <dt><strong>Cache distribuído</strong></dt>
+              <dd>Redis para cache de sessões, configurações e dados frequentemente acessados, reduzindo carga no banco de dados.</dd>
+
+              <dt><strong>Processamento assíncrono</strong></dt>
+              <dd>Event Bus com padrão Outbox/Inbox para processamento confiável de eventos, notificações e operações em background.</dd>
+
+              <dt><strong>Read replicas</strong></dt>
+              <dd>Suporte nativo para leitura distribuída, permitindo escalar consultas independentemente de operações de escrita.</dd>
+
+              <dt><strong>Deployment multi-instância</strong></dt>
+              <dd>Arquitetura stateless permite escalonamento horizontal sem compartilhamento de estado entre instâncias.</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">📊</span>
+              <h3>Observabilidade</h3>
+            </div>
+            <p class="card-intro">
+              Visibilidade completa sobre o comportamento da plataforma em produção,
+              permitindo detecção proativa de problemas e otimização contínua.
+            </p>
+            <dl class="entity-list">
+              <dt><strong>Logs estruturados</strong></dt>
+              <dd>Serilog com Seq para logs centralizados, pesquisáveis e estruturados. Contexto enriquecido para debugging eficiente.</dd>
+
+              <dt><strong>Métricas Prometheus</strong></dt>
+              <dd>Métricas de negócio e infraestrutura expostas em formato Prometheus para monitoramento e alertas baseados em thresholds.</dd>
+
+              <dt><strong>Distributed tracing</strong></dt>
+              <dd>OpenTelemetry para rastreamento de requisições através de serviços, facilitando identificação de gargalos e dependências.</dd>
+
+              <dt><strong>Dashboards e alertas</strong></dt>
+              <dd>Grafana para visualização de métricas e alertas configuráveis para eventos críticos e degradação de performance.</dd>
+
+              <dt><strong>Runbook e troubleshooting</strong></dt>
+              <dd>Documentação operacional detalhada para incidentes comuns, facilitando resolução rápida e consistente de problemas.</dd>
+            </dl>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">🔒</span>
+              <h3>Segurança</h3>
+            </div>
+            <p class="card-intro">
+              Múltiplas camadas de proteção para garantir integridade de dados, privacidade
+              dos usuários e resistência a ataques comuns.
+            </p>
+            <dl class="entity-list">
+              <dt><strong>Autenticação multi-fator</strong></dt>
+              <dd>2FA via TOTP (Time-based One-Time Password) para proteção adicional de contas sensíveis e operações críticas.</dd>
+
+              <dt><strong>Sanitização avançada</strong></dt>
+              <dd>Validação e sanitização rigorosa de inputs em todas as camadas, prevenindo injeção de código e XSS.</dd>
+
+              <dt><strong>Proteção CSRF</strong></dt>
+              <dd>Anti-forgery tokens para prevenir requisições cross-site não autorizadas em operações de estado.</dd>
+
+              <dt><strong>Security headers</strong></dt>
+              <dd>Content Security Policy (CSP), HTTP Strict Transport Security (HSTS) e outros headers de segurança configurados adequadamente.</dd>
+
+              <dt><strong>Auditoria completa</strong></dt>
+              <dd>Log de todas as ações críticas (mudanças de role, moderação, configurações) para rastreabilidade e compliance.</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="callout highlight">
+          <p>
+            <strong>Qualidade em produção:</strong> A API Araponga segue rigorosamente os princípios de engenharia de software
+            de alto padrão, com foco em confiabilidade, manutenibilidade e escalabilidade. Todas as decisões arquiteturais
+            foram documentadas e são continuamente revisadas para garantir evolução segura e sustentável da plataforma.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <span class="eyebrow">Visão Futura</span>
+        <div>
+          <h2>Roadmap e Direcionamento</h2>
+          <p class="lead-text space-bottom">
+            O Araponga evolui de forma consciente e sustentável, priorizando funcionalidades que
+            fortalecem a organização comunitária local. O roadmap de 28 fases desenha um caminho
+            gradual em direção a maior autonomia territorial, economia circular e regeneração social.
+            Cada fase expande capacidades técnicas que, em conjunto, permitem que comunidades
+            construam e sustentem seus próprios sistemas de organização, economia e cuidado territorial.
+            Abaixo estão as direções planejadas e oportunidades de contribuição.
+          </p>
+        </div>
+
+        <div class="model-grid spaced">
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">1️⃣</span>
+              <h3>Onda 1: MVP Essencial</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 8-11:</strong> Infraestrutura de mídia, perfil completo, mídias em conteúdo e edição. Base sólida para comunicação rica e expressão comunitária.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">2️⃣</span>
+              <h3>Onda 2: Comunicação e Governança</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 13-14:</strong> Conector de e-mail e governança comunitária com votação. Ferramentas para decisão coletiva e participação democrática.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">3️⃣</span>
+              <h3>Onda 3: Soberania Territorial</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 17-18:</strong> Gamificação harmoniosa e saúde territorial com monitoramento. Engajamento sustentável e cuidado com o território através de mecânicas conscientes.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">4️⃣</span>
+              <h3>Onda 4: Economia Local</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 20, 23-24:</strong> Moeda territorial, compra coletiva e trocas comunitárias. Economia circular e autonomia financeira territorial fortalecendo redes locais.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">5️⃣</span>
+              <h3>Onda 5: Conformidade e Inteligência</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 12, 15:</strong> Otimizações finais e inteligência artificial integrada. Performance e capacidades avançadas mantendo os princípios do projeto.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">6️⃣</span>
+              <h3>Onda 6: Diferenciais</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 16, 19, 21-22:</strong> Entregas territoriais, arquitetura modular, suporte a criptomoedas e integrações externas. Flexibilidade arquitetural mantendo autonomia.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">7️⃣</span>
+              <h3>Onda 7: Autonomia Digital e Economia Circular</h3>
+            </div>
+            <p class="card-intro">
+              <strong>Fases 25-28:</strong> Hub de serviços digitais, chat com IA, consumo consciente, negociação territorial, assinatura coletiva e banco de sementes. Autonomia digital completa e soberania alimentar territorial.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">🎯</span>
+              <h3>Direcionamento e Princípios</h3>
+            </div>
+            <p class="card-intro">
+              Princípios fundamentais que guiam a evolução do Araponga através das 28 fases.
+            </p>
+            <ul class="card-list">
+              <li><strong>Território-first:</strong> Todas as funcionalidades fortalecem o vínculo com o território físico e organização comunitária local.</li>
+              <li><strong>Governança transparente:</strong> Regras explícitas, auditáveis e evolutivas, com separação clara entre governança global e territorial.</li>
+              <li><strong>Baixa excitação, alto cuidado:</strong> Interface e funcionalidades que promovem foco, clareza e continuidade, sem manipulação algorítmica.</li>
+              <li><strong>Qualidade sobre velocidade:</strong> Cobertura de testes >90%, validações robustas, arquitetura limpa e documentação atualizada.</li>
+            </ul>
+            <p class="card-divider">
+              <strong>📊 Visão completa:</strong> Consulte o <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/ROADMAP_VISUAL.md">Roadmap Visual</a>
+              e a <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/RESUMO_EXECUTIVO_ESTRATEGICO.md">Estratégia Executiva</a>
+              para detalhes completos das 28 fases e suas correlações.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contribuir">
+        <span class="eyebrow">Contribuição</span>
+        <div>
+          <h2>Contribua com o Araponga</h2>
+          <p class="lead-text space-bottom">
+            O Araponga é um projeto comunitário de código aberto. Contribuições são bem-vindas e
+            essenciais para fortalecer a plataforma e alcançar comunidades ao redor do mundo.
+          </p>
+        </div>
+
+        <div class="model-grid spaced-sm">
+          <div class="card">
+            <h3>💻 Para Desenvolvedores</h3>
+            <p class="card-intro">
+              Contribua com código, testes, documentação e melhorias técnicas.
+            </p>
+            <ul class="card-list">
+              <li><strong>Implementar funcionalidades</strong> alinhadas ao roadmap</li>
+              <li><strong>Melhorar cobertura de testes</strong> e qualidade de código</li>
+              <li><strong>Documentar APIs</strong> e exemplos de uso</li>
+              <li><strong>Otimizar performance</strong> e escalabilidade</li>
+              <li><strong>Revisar Pull Requests</strong> e sugerir melhorias</li>
+            </ul>
+            <p class="card-divider">
+              <strong>🛠️ Setup local:</strong> .NET 8, PostgreSQL + PostGIS, Redis (opcional).
+              Consulte <a href="https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+              para detalhes técnicos e padrões de código.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>📚 Formas de Contribuição</h3>
+            <p class="card-intro">
+              Existem várias formas de contribuir, independente do nível técnico.
+            </p>
+            <ul class="card-list">
+              <li><strong>Relatar bugs</strong> e propor melhorias via Issues</li>
+              <li><strong>Validar fluxos</strong> e testar funcionalidades em desenvolvimento</li>
+              <li><strong>Ajustar documentação</strong> e melhorar exemplos práticos</li>
+              <li><strong>Sugerir features</strong> alinhadas à visão do produto</li>
+              <li><strong>Traduzir conteúdo</strong> para outros idiomas</li>
+              <li><strong>Compartilhar casos de uso</strong> e experiências reais</li>
+            </ul>
+            <p class="card-divider">
+              <strong>📖 Documentação:</strong> Consulte <a href="https://github.com/sraphaz/araponga/blob/main/docs/">docs/</a>
+              para visão de produto, arquitetura, decisões técnicas e guias de implementação.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon-header">
+              <span class="icon">💚</span>
+              <h3>Contribuição Financeira via PIX</h3>
+            </div>
+            <p class="card-intro">
+              Ajude a sustentar o projeto Araponga com uma contribuição financeira. Sua doação apoia o desenvolvimento contínuo e a manutenção da plataforma.
+            </p>
+            <p style="color: var(--text-muted); margin: 1rem 0;">
+              Contribuições são investidas diretamente em infraestrutura, ferramentas de desenvolvimento e melhorias da plataforma.
+            </p>
+            <p class="card-divider" style="margin-top: 1.5rem;">
+              <a href="https://geradordepix.com/pagamento/01KESFV2Q5P6V6K2JWWBY340EK" target="_blank" rel="noopener noreferrer" class="button" style="width: 100%; text-align: center; justify-content: center;">
+                <strong>💰 Contribuir via PIX</strong>
+              </a>
+            </p>
+            <p style="margin-top: 1rem; color: var(--text-subtle); font-size: 0.875em; text-align: center;">
+              Qualquer valor faz diferença para o crescimento do projeto
+            </p>
+          </div>
+        </div>
+
+        <div class="callout highlight">
+          <p>
+            <strong>Próximos passos:</strong> Explore o repositório, abra uma Issue para discussão ou
+            envie um Pull Request. Todas as contribuições seguem o
+            <a href="https://github.com/sraphaz/araponga/blob/main/CODE_OF_CONDUCT.md" style="color: var(--link);">Código de Conduta</a>
+            e passam por revisão cuidadosa para manter os altos padrões de qualidade do projeto.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="versoes">
+        <span class="eyebrow" data-i18n="versions.eyebrow">Versões & compatibilidade</span>
+        <h2 data-i18n="versions.title">Versionamento</h2>
+        <p data-i18n-html="versions.leadHtml">
+          A API atual utiliza prefixo <code>/api/v1</code>. Mudanças compatíveis devem manter o contrato dentro
+          dessa versão. Para evolução maior, a estratégia recomendada é introduzir um novo prefixo.
+        </p>
+        <div class="callout">
+          Consulte o changelog do repositório em <a href="https://github.com/sraphaz/araponga/blob/main/docs/40_CHANGELOG.md">docs/40_CHANGELOG.md</a> para histórico.
+        </div>
+      </section>
+
+      <section class="section" id="configure-ambiente">
+        <span class="eyebrow">Configure seu Ambiente</span>
+        <h2>Configure seu Ambiente - Guia Rápido</h2>
+        <p class="lead-text">
+          Este guia rápido ajuda você a configurar seu ambiente para começar a usar a API Araponga em poucos passos.
+        </p>
+        <div class="flow-step">
+          <h3 data-i18n="quickstart.title">Quickstart - Copie e cole (5–10 comandos)</h3>
+        <div class="grid-two">
+          <div class="card">
+            <h3 data-i18n="quickstart.bashTitle">Bash (Linux/macOS/Git Bash)</h3>
+            <pre class="code-block"><code># 1) Rodar API
+ASPNETCORE_ENVIRONMENT=Development dotnet run --project backend/Araponga.Api --urls http://localhost:8080
+
+# 2) Autenticação social (gera token)
+curl -X POST http://localhost:8080/api/v1/auth/social \
+  -H "Content-Type: application/json" \
+  -d '{"provider":"google","externalId":"abc-123","displayName":"Ana","cpf":"12345678900"}'
+
+# 3) Descobrir território
+curl http://localhost:8080/api/v1/territories
+
+# 4) Selecionar território (X-Session-Id)
+curl -X POST http://localhost:8080/api/v1/territories/selection \
+  -H "Content-Type: application/json" \
+  -H "X-Session-Id: session-123" \
+  -d '{"territoryId":"11111111-1111-1111-1111-111111111111"}'</code></pre>
+          </div>
+          <div class="card">
+            <h3 data-i18n="quickstart.powershellTitle">PowerShell (Windows)</h3>
+            <pre class="code-block"><code># 1) Rodar API
+$env:ASPNETCORE_ENVIRONMENT="Development"
+dotnet run --project backend/Araponga.Api --urls "http://localhost:8080"
+
+# 2) Autenticação social (gera token)
+curl.exe -X POST "http://localhost:8080/api/v1/auth/social" `
+  -H "Content-Type: application/json" `
+  -d "{\"provider\":\"google\",\"externalId\":\"abc-123\",\"displayName\":\"Ana\",\"cpf\":\"12345678900\"}"
+
+# 3) Descobrir território
+curl.exe "http://localhost:8080/api/v1/territories"
+
+# 4) Selecionar território (X-Session-Id)
+curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
+  -H "Content-Type: application/json" `
+  -H "X-Session-Id: session-123" `
+  -d "{\"territoryId\":\"11111111-1111-1111-1111-111111111111\"}"</code></pre>
+          </div>
+        </div>
+        <div class="callout">
+          <span data-i18n-html="quickstart.tipHtml"><strong>Dica:</strong> este portal tem fonte única em <code>backend/Araponga.Api/wwwroot/devportal</code> (HTML/CSS/JS/OpenAPI). O deploy do GitHub Pages publica exatamente essa pasta.</span>
+        </div>
+      </section>
+        </div>
+
+        <!-- Tab 3: API Prática -->
+        <div class="phase-panel" data-phase-panel="api-pratica">
+          <section class="section" id="modelo-dominio">
         <span class="eyebrow" data-i18n="domain.eyebrow">Modelo de domínio</span>
         <h2 data-i18n="domain.title">Entidades principais e relacionamentos</h2>
         <div class="callout">
@@ -481,7 +1777,7 @@
               <dd>Mensagens com paginação por cursor (beforeCreatedAt / beforeMessageId). Suporta imagens (1 por mensagem, máx. 5MB) e áudios curtos (1 por mensagem, máx. 2MB, até 60s). Vídeos não permitidos.</dd>
 
               <dt><strong>Participants</strong></dt>
-              <dd>Participantes, papéis e “read state” (marcar como lido).</dd>
+              <dd>Participantes, papéis e "read state" (marcar como lido).</dd>
             </dl>
           </div>
 
@@ -545,10 +1841,9 @@
             </div>
           </div>
         </div>
-        </div>
       </section>
 
-      <section class="section" id="fluxos">
+        <section class="section" id="fluxos">
         <span class="eyebrow" data-i18n="flows.eyebrow">Fluxos principais</span>
         <h2 data-i18n="flows.title">Sequências orientadas a produto e API</h2>
 
@@ -1024,144 +2319,7 @@ curl -X POST http://localhost:8080/api/v1/chat/conversations/{conversationId}/me
         </div>
       </section>
 
-      <section class="section" id="marketplace">
-        <span class="eyebrow" data-i18n="marketplace.eyebrow">Marketplace</span>
-        <h2 data-i18n="marketplace.title">Economia local territorial</h2>
-        <p data-i18n="marketplace.lead">
-          O marketplace permite criar lojas e publicar produtos/serviços (items), gerenciar carrinho de compras
-          e receber inquiries de interessados. Tudo ancorado no território. O sistema de payout territorial
-          garante que recursos financeiros permaneçam na comunidade, fortalecendo ciclos econômicos locais
-          e permitindo que comunidades construam autonomia através de suas próprias capacidades produtivas.
-        </p>
-
-        <div class="flow-step">
-          <h4>12. Criar ou atualizar loja</h4>
-          <p>
-            Moradores validados podem criar ou atualizar sua loja no território via
-            <code>POST /api/v1/stores</code>. A loja define informações de contato e visibilidade.
-          </p>
-          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/stores \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "territoryId": "11111111-1111-1111-1111-111111111111",
-    "displayName": "Loja da Ana",
-    "description": "Produtos artesanais",
-    "contactVisibility": "Public",
-    "contact": {
-      "phone": "+5511999999999",
-      "email": "ana@exemplo.com"
-    }
-  }'</code></pre>
-        </div>
-
-        <div class="flow-step">
-          <h4>13. Criar item (produto ou serviço) com imagens</h4>
-          <p>
-            Lojas podem criar items via <code>POST /api/v1/items</code>. Items podem ser produtos
-            ou serviços, com preço fixo, negociável ou gratuito. Items podem incluir até 10 imagens através do campo <code>mediaIds</code>.
-          </p>
-          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/items \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "territoryId": "11111111-1111-1111-1111-111111111111",
-    "storeId": "22222222-2222-2222-2222-222222222222",
-    "type": "Product",
-    "title": "Bolo de chocolate",
-    "description": "Bolo caseiro",
-    "category": "Alimentos",
-    "tags": "bolo,chocolate",
-    "pricingType": "Fixed",
-    "priceAmount": 25.00,
-    "currency": "BRL",
-    "unit": "unidade",
-    "latitude": -23.55,
-    "longitude": -46.63,
-    "mediaIds": ["dddddddd-dddd-dddd-dddd-dddddddddddd", "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"]
-  }'</code></pre>
-          <div class="info-box">
-            <strong>📸🎥🎧 Mídias em Items (Imagens, Vídeos e Áudios):</strong>
-            <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
-              <li><strong>Associar ao item</strong>: Inclua os <code>mediaIds</code> no array ao criar o item (máximo 10 mídias: imagens, vídeos e/ou áudios)</li>
-              <li><strong>Vídeos</strong>: Máximo 1 vídeo por item, até 30MB, até 30 segundos (demonstração rápida de produto). Formatos suportados: MP4</li>
-              <li><strong>Áudios</strong>: Máximo 1 áudio por item, até 5MB, até 2 minutos (descrição de produto, demonstração de serviço). Formatos suportados: MP3, WAV, OGG</li>
-              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 10 mídias no total, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
-              <li><strong>Imagem principal</strong>: A primeira mídia do array é usada como <code>primaryImageUrl</code> (se for vídeo ou áudio, a URL é retornada)</li>
-              <li><strong>Resposta</strong>: O <code>ItemResponse</code> inclui <code>primaryImageUrl</code> e <code>imageUrls</code> (array com todas as mídias: imagens, vídeos e áudios)</li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário que está criando o item. Vídeos maiores que 30MB, áudios maiores que 5MB, mais de 1 vídeo ou mais de 1 áudio por item retornam erro</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="flow-step">
-          <h4>14. Buscar items</h4>
-          <p>
-            Use <code>GET /api/v1/items</code> para buscar produtos e serviços por território, categoria,
-            tags ou texto livre (<code>q</code>).
-          </p>
-          <pre class="code-block"><code>curl "http://localhost:8080/api/v1/items?territoryId=11111111-1111-1111-1111-111111111111&amp;q=bolo&amp;category=Alimentos" \
-  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
-        </div>
-
-        <div class="flow-step">
-          <h4>15. Gerenciar carrinho</h4>
-          <p>
-            Usuários podem adicionar itens ao carrinho via <code>POST /api/v1/cart/items</code>,
-            atualizar quantidade via <code>PATCH /api/v1/cart/items/{id}</code> e fazer checkout via
-            <code>POST /api/v1/cart/checkout</code>.
-          </p>
-          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/cart/items \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "territoryId": "11111111-1111-1111-1111-111111111111",
-    "itemId": "33333333-3333-3333-3333-333333333333",
-    "quantity": 2,
-    "notes": "Entregar após 18h (se possível)"
-  }'</code></pre>
-        </div>
-
-        <div class="flow-step">
-          <h4>16. Criar inquiry</h4>
-          <p>
-            Interessados podem criar inquiries diretamente em items via
-            <code>POST /api/v1/items/{id}/inquiries</code>.
-          </p>
-          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/items/{id}/inquiries \
-  -H "Authorization: Bearer &lt;token&gt;" \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Gostaria de mais informações"}'</code></pre>
-          <details class="sequence-diagram-toggle">
-            <summary class="sequence-diagram-summary">
-              <span>📊 Ver Diagrama de Sequência</span>
-            </summary>
-            <div class="sequence-diagram-container">
-              <img src="./assets/images/diagrams/marketplace-checkout.svg" alt="Diagrama de sequência: Marketplace - Fluxo completo (loja → item → carrinho → checkout → payout)" class="mermaid-diagram" data-diagram="marketplace-checkout" style="max-width: 100%; height: auto; display: block; margin: 1rem 0;" />
-              <button class="diagram-fullscreen-btn" aria-label="Abrir diagrama em tela cheia">⛶ Tela Cheia</button>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <section class="section" id="payout-gestao-financeira">
-        <span class="eyebrow">Payout & Gestão Financeira</span>
-        <h2>Sistema de Payout e Rastreabilidade Financeira Completa</h2>
-        <p>
-          O Araponga implementa um sistema completo de payout (transferência para vendedores) com rastreabilidade
-          financeira total. Cada centavo é rastreado, permitindo transparência total e autonomia para territórios.
-        </p>
-
         <div class="grid-two">
-          <div class="card">
-            <h3>🎯 O que é o Sistema de Payout?</h3>
-            <p>
-              Quando um checkout é marcado como <code>Paid</code>, o sistema automaticamente cria uma transação
-              de vendedor e processa o payout conforme configurações do território. O vendedor recebe o valor
-              líquido (subtotal - fees da plataforma).
-            </p>
-          </div>
           <div class="card">
             <h3>✨ Principais Funcionalidades</h3>
             <ul>
@@ -1417,65 +2575,290 @@ curl "http://localhost:8080/api/v1/territories/{territoryId}/platform-financial/
         </div>
       </section>
 
-      <section class="section" id="eventos">
-        <span class="eyebrow" data-i18n="events.eyebrow">Eventos</span>
-        <h2 data-i18n="events.title">Eventos territoriais com data/hora e localização</h2>
-        <p data-i18n="events.lead">
-          Eventos são criados por moradores e aparecem no feed e no mapa. Eles têm data/hora de início
-          (obrigatória) e fim (opcional), além de geolocalização obrigatória.
+      <!-- Cenários Práticos - Páginas Dedicadas -->
+      <section class="section" id="cenario-onboarding-usuario">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Onboarding Usuário</h2>
+        <p class="lead-text">
+          Primeira jornada: autenticação, descoberta de território e vínculo inicial.
         </p>
-
         <div class="flow-step">
-          <h4>17. Criar evento com imagem de capa e imagens adicionais</h4>
-          <p>
-            Use <code>POST /api/v1/events</code> para criar eventos. O evento automaticamente gera um post
-            no feed e aparece no mapa. Eventos podem incluir uma imagem de capa (<code>coverMediaId</code>) e
-            até 10 imagens adicionais (<code>additionalMediaIds</code>).
-          </p>
-          <pre class="code-block"><code>curl -X POST http://localhost:8080/api/v1/events \
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Autenticar:</strong> <code>POST /api/v1/auth/social</code> (obtém JWT)</li>
+            <li><strong>Descobrir território:</strong> <code>GET /api/v1/territories/nearby?lat=-23.55&lng=-46.63</code></li>
+            <li><strong>Selecionar território:</strong> <code>POST /api/v1/territories/selection</code> + header <code>X-Session-Id</code></li>
+            <li><strong>Declarar vínculo:</strong> <code>POST /api/v1/memberships/{territoryId}/enter-visitor</code></li>
+            <li><strong>Verificar membership:</strong> <code>GET /api/v1/memberships/{territoryId}/me</code></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="cenario-publicar-midias">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Publicar conteúdo com mídias</h2>
+        <p class="lead-text">
+          Criar post com até 10 imagens e âncoras geográficas opcionais.
+        </p>
+        <div class="flow-step">
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Upload de mídias:</strong> <code>POST /api/v1/media/upload</code> (obtém <code>mediaIds</code>)</li>
+            <li><strong>Criar post:</strong> <code>POST /api/v1/feed</code> com <code>mediaIds</code> (até 10 imagens)</li>
+            <li><strong>GeoAnchors automáticos:</strong> derivados de mídias quando disponíveis</li>
+            <li><strong>Visualizar no mapa:</strong> <code>GET /api/v1/map/pins?types=post</code></li>
+            <li><strong>Ver no feed:</strong> <code>GET /api/v1/feed/paged</code></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="cenario-assets">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Assets territoriais com geolocalização</h2>
+        <p class="lead-text">
+          Recursos territoriais (rios, trilhas, nascentes) sempre com geolocalização obrigatória.
+        </p>
+        <div class="flow-step">
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Criar asset:</strong> <code>POST /api/v1/assets</code> (geo obrigatória em <code>geoAnchors</code>)</li>
+            <li><strong>Tipos disponíveis:</strong> <code>river</code>, <code>trail</code>, <code>spring</code>, <code>lookout</code>, <code>sanctuary</code></li>
+            <li><strong>Apenas moradores verificados ou curadores:</strong> podem criar/editar/arquivar</li>
+            <li><strong>Visualizar no mapa:</strong> <code>GET /api/v1/map/pins?types=asset&assetTypes=river,trail</code></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="cenario-chat">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Chat territorial e grupos</h2>
+        <p class="lead-text">
+          Conversas territoriais, grupos e mensagens diretas com suporte a mídias.
+        </p>
+        <div class="flow-step">
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Criar conversa:</strong> <code>POST /api/v1/chat/conversations</code></li>
+            <li><strong>Enviar mensagem:</strong> <code>POST /api/v1/chat/conversations/{id}/messages</code></li>
+            <li><strong>Mensagem com imagem:</strong> incluir <code>mediaId</code> no payload</li>
+            <li><strong>Listar conversas:</strong> <code>GET /api/v1/chat/conversations</code></li>
+            <li><strong>Histórico:</strong> <code>GET /api/v1/chat/conversations/{id}/messages</code></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="cenario-marketplace">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Marketplace e economia local</h2>
+        <p class="lead-text">
+          Lojas, produtos/serviços, carrinho e checkout com até 10 imagens por item. Economia circular
+          territorial que mantém recursos na comunidade.
+        </p>
+        <div class="flow-step">
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Criar loja:</strong> <code>POST /api/v1/stores</code></li>
+            <li><strong>Adicionar itens:</strong> <code>POST /api/v1/items</code> com <code>mediaIds</code> (até 10 imagens)</li>
+            <li><strong>Carrinho:</strong> <code>POST /api/v1/cart/items</code></li>
+            <li><strong>Checkout:</strong> <code>POST /api/v1/cart/checkout</code></li>
+            <li><strong>Consultar itens:</strong> <code>GET /api/v1/items</code> (paginação incluída)</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="cenario-eventos">
+        <span class="eyebrow">Cenário Prático</span>
+        <h2>Eventos comunitários com mídias</h2>
+        <p class="lead-text">
+          Eventos territoriais com data/hora, geolocalização obrigatória e imagens.
+        </p>
+        <div class="flow-step">
+          <h4>Fluxo Completo</h4>
+          <ol class="card-list" style="list-style-type: decimal;">
+            <li><strong>Criar evento:</strong> <code>POST /api/v1/events</code> (geo obrigatória)</li>
+            <li><strong>Imagens:</strong> <code>coverMediaId</code> e <code>additionalMediaIds</code> (até 10)</li>
+            <li><strong>Marcar interesse:</strong> <code>POST /api/v1/events/{id}/interest</code></li>
+            <li><strong>Confirmar presença:</strong> <code>POST /api/v1/events/{id}/confirm</code></li>
+            <li><strong>Aparece no feed e mapa:</strong> eventos aparecem em ambos os contextos</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Páginas Dedicadas - Casos de Uso Comuns e Pontos de Atenção -->
+      <section class="section" id="casos-uso-comuns">
+        <span class="eyebrow">Referência</span>
+        <h2>Casos de Uso Comuns</h2>
+        <p class="lead-text">
+          Casos de uso frequentes e soluções práticas para tarefas comuns na API.
+        </p>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Vendedor quer saber quando receberá</h3>
+            <p>
+              Consulte <code>/seller-balance/me</code> para ver valores pendentes e prontos para payout.
+            </p>
+            <pre class="code-block"><code>GET /api/v1/territories/{territoryId}/seller-balance/me
+Authorization: Bearer &lt;token&gt;</code></pre>
+          </div>
+          <div class="card">
+            <h3>Processar payout manualmente</h3>
+            <p>
+              Use <code>ProcessPendingPayoutsAsync</code> do <code>SellerPayoutService</code> via API admin.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Ver histórico de transações</h3>
+            <p>
+              Consulte <code>/seller-balance/me/transactions</code> para ver todas as transações do vendedor.
+            </p>
+            <pre class="code-block"><code>GET /api/v1/territories/{territoryId}/seller-balance/me/transactions
+Authorization: Bearer &lt;token&gt;</code></pre>
+          </div>
+          <div class="card">
+            <h3>Auditar receitas da plataforma</h3>
+            <p>
+              Use endpoints de <code>/platform-financial</code> para ver fees coletadas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pontos-atencao">
+        <span class="eyebrow">Referência</span>
+        <h2>Pontos de Atenção</h2>
+        <p class="lead-text">
+          Considerações importantes e melhores práticas para usar a API com segurança e eficiência.
+        </p>
+        <div class="grid-two">
+          <div class="card">
+            <h3>Período de retenção</h3>
+            <p>
+              Protege contra chargebacks - não configure muito curto. Recomendado: 7-14 dias.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Valor mínimo</h3>
+            <p>
+              Reduz custos de transferência - configure baseado no custo do gateway. Recomendado: R$ 50,00 - R$ 200,00.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Valor máximo</h3>
+            <p>
+              Limita exposição a risco - configure se necessário. Exemplo: R$ 50.000,00 por payout.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Moedas diferentes</h3>
+            <p>
+              Cada território pode ter configuração em moeda diferente. Configure conforme necessário.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Testes primeiro</h3>
+            <p>
+              Sempre teste com valores pequenos antes de produção para validar fluxo completo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guia de Produção - Páginas Dedicadas -->
+      <section class="section" id="guia-producao-passo-1">
+        <span class="eyebrow">Guia de Produção</span>
+        <h2>Passo 1: Entendendo o Fluxo de Payout</h2>
+        <p class="lead-text">
+          Quando um cliente compra algo na loja de um vendedor e o pagamento é confirmado, o seguinte acontece:
+        </p>
+        <div class="flow-step">
+          <ol style="margin-left: 1.5rem; line-height: 1.8;">
+            <li><strong>Checkout pago</strong> → Sistema cria <code>SellerTransaction</code> automaticamente</li>
+            <li><strong>Valor líquido</strong> → Subtotal - Fees da plataforma = Valor para o vendedor</li>
+            <li><strong>Período de retenção</strong> → Aguarda dias configurados (ex: 7 dias)</li>
+            <li><strong>Valor mínimo</strong> → Acumula até atingir valor mínimo configurado (ex: R$ 100,00)</li>
+            <li><strong>Payout automático</strong> → Background worker processa quando todas as condições são atendidas</li>
+            <li><strong>Transferência</strong> → Dinheiro é transferido para o vendedor via gateway (Stripe, MercadoPago, etc.)</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="guia-producao-passo-2">
+        <span class="eyebrow">Guia de Produção</span>
+        <h2>Passo 2: Configurar Payout para um Território</h2>
+        <p class="lead-text">
+          Antes de usar o sistema de payout, você precisa configurar como ele funciona para cada território.
+          Essa configuração define período de retenção, valores mínimo/máximo, frequência e se requer aprovação manual.
+        </p>
+        <div class="flow-step">
+          <h4>Endpoint</h4>
+          <pre class="code-block"><code>POST /api/v1/territories/{territoryId}/payout-config</code></pre>
+          <h4>Exemplo de Requisição</h4>
+          <pre class="code-block"><code>curl -X POST "http://localhost:8080/api/v1/territories/{territoryId}/payout-config" \
   -H "Authorization: Bearer &lt;token&gt;" \
   -H "Content-Type: application/json" \
-  -H "X-Session-Id: session-123" \
   -d '{
-    "territoryId": "11111111-1111-1111-1111-111111111111",
-    "title": "Feira de artesanato",
-    "description": "Feira mensal no centro",
-    "startsAtUtc": "2024-12-15T10:00:00Z",
-    "endsAtUtc": "2024-12-15T18:00:00Z",
-    "latitude": -23.55,
-    "longitude": -46.63,
-    "locationLabel": "Praça Central",
-    "coverMediaId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-    "additionalMediaIds": ["aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"]
+    "retentionPeriodDays": 7,
+    "minimumPayoutAmountInCents": 10000,
+    "maximumPayoutAmountInCents": 5000000,
+    "frequency": "Weekly",
+    "autoPayoutEnabled": true,
+    "requiresApproval": false,
+    "currency": "BRL"
   }'</code></pre>
           <div class="info-box">
-            <strong>📸🎥🎧 Mídias em Eventos (Imagens, Vídeos e Áudios):</strong>
+            <strong>📝 Explicação dos Campos:</strong>
             <ul style="margin-top: 0.5rem; line-height: 1.8;">
-              <li><strong>Upload de mídia</strong>: Primeiro, faça upload via <code>POST /api/v1/media/upload</code> para obter o <code>mediaId</code> (aceita imagens JPEG/PNG/WebP, vídeos MP4 e áudios MP3/WAV/OGG)</li>
-              <li><strong>Mídia de capa</strong>: Use <code>coverMediaId</code> para definir a mídia principal do evento (imagem, vídeo ou áudio, opcional). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
-              <li><strong>Mídias adicionais</strong>: Use <code>additionalMediaIds</code> para incluir até 5 mídias adicionais (imagens, vídeos ou áudios). Formatos: JPEG, PNG, WebP (imagens), MP4 (vídeos) ou MP3, WAV, OGG (áudios)</li>
-              <li><strong>Vídeos</strong>: Máximo 1 vídeo por evento (em capa ou adicionais), até 100MB, até 2 minutos. Formatos suportados: MP4</li>
-              <li><strong>Áudios</strong>: Máximo 1 áudio por evento (em capa ou adicionais), até 20MB, até 10 minutos (promoção de eventos, trilhas sonoras). Formatos suportados: MP3, WAV, OGG</li>
-              <li><strong>Imagens</strong>: Múltiplas imagens permitidas (até 6 mídias no total: 1 capa + 5 adicionais, combinando imagens, vídeos e áudios). Formatos suportados: JPEG, PNG, WebP</li>
-              <li><strong>Resposta</strong>: O <code>EventResponse</code> inclui <code>coverImageUrl</code> e <code>additionalImageUrls</code> (pode conter URLs de vídeos e áudios)</li>
-              <li><strong>Validação</strong>: Todas as mídias devem pertencer ao usuário e <code>coverMediaId</code> não pode estar em <code>additionalMediaIds</code>. Vídeos maiores que 100MB, áudios maiores que 20MB, mais de 1 vídeo ou mais de 1 áudio por evento retornam erro</li>
+              <li><code>retentionPeriodDays</code>: Quantos dias aguardar antes de liberar para payout (ex: 7 = aguarda 7 dias)</li>
+              <li><code>minimumPayoutAmountInCents</code>: Valor mínimo em centavos para processar payout (ex: 10000 = R$ 100,00)</li>
+              <li><code>maximumPayoutAmountInCents</code>: Valor máximo por payout - se exceder, divide em múltiplos (ex: 5000000 = R$ 50.000,00)</li>
+              <li><code>frequency</code>: Frequência do payout automático - <code>"Daily"</code>, <code>"Weekly"</code>, <code>"Monthly"</code> ou <code>"Manual"</code></li>
+              <li><code>autoPayoutEnabled</code>: Se <code>true</code>, processa payouts automaticamente. Se <code>false</code>, apenas manual</li>
+              <li><code>requiresApproval</code>: Se <code>true</code>, requer aprovação manual antes de processar (ainda não implementado)</li>
+              <li><code>currency</code>: Moeda da configuração - <code>"BRL"</code>, <code>"USD"</code>, etc.</li>
             </ul>
           </div>
         </div>
+      </section>
 
+      <section class="section" id="guia-producao-passo-3">
+        <span class="eyebrow">Guia de Produção</span>
+        <h2>Passo 3: Consultar Configuração de Payout</h2>
+        <p class="lead-text">
+          Para ver a configuração atual de payout de um território:
+        </p>
         <div class="flow-step">
-          <h4>18. Interesse e confirmação em eventos</h4>
-          <p>
-            Usuários podem marcar interesse via <code>POST /api/v1/events/{eventId}/interest</code> e confirmar participação via
-            <code>POST /api/v1/events/{eventId}/confirm</code>.
-          </p>
-          <pre class="code-block"><code># Marcar interesse
-curl -X POST http://localhost:8080/api/v1/events/{eventId}/interest \
-  -H "Authorization: Bearer &lt;token&gt;" \
-
-# Confirmar participação
-curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
+          <h4>Endpoint</h4>
+          <pre class="code-block"><code>GET /api/v1/territories/{territoryId}/payout-config</code></pre>
+          <h4>Exemplo de Requisição</h4>
+          <pre class="code-block"><code>curl "http://localhost:8080/api/v1/territories/{territoryId}/payout-config" \
   -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+        </div>
+      </section>
+
+      <section class="section" id="guia-producao-passo-4">
+        <span class="eyebrow">Guia de Produção</span>
+        <h2>Passo 4: Consultar Saldo do Vendedor</h2>
+        <p class="lead-text">
+          Vendedores podem consultar seu saldo e histórico de transações:
+        </p>
+        <div class="flow-step">
+          <h4>Endpoints</h4>
+          <pre class="code-block"><code># Consultar meu saldo como vendedor
+GET /api/v1/territories/{territoryId}/seller-balance/me
+
+# Consultar minhas transações como vendedor
+GET /api/v1/territories/{territoryId}/seller-balance/me/transactions</code></pre>
+          <h4>Exemplo de Requisição</h4>
+          <pre class="code-block"><code>curl "http://localhost:8080/api/v1/territories/{territoryId}/seller-balance/me" \
+  -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+          <div class="info-box">
+            <strong>📊 Entendendo o Saldo do Vendedor:</strong>
+            <ul style="margin-top: 0.5rem; line-height: 1.8;">
+              <li><code>pendingAmountInCents</code>: Valor que ainda está no período de retenção</li>
+              <li><code>readyForPayoutAmountInCents</code>: Valor pronto para payout (após período de retenção e valor mínimo)</li>
+              <li><code>paidAmountInCents</code>: Valor já transferido para o vendedor</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -1583,135 +2966,6 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
         </div>
       </section>
 
-      <section class="section" id="admin">
-        <span class="eyebrow" data-i18n="admin.eyebrow">Admin</span>
-        <h2 data-i18n="admin.title">Governança, Papéis Administrativos e Evidências</h2>
-        <p class="lead-text" style="margin-bottom: 2rem;">
-          A API Araponga implementa uma arquitetura de governança em camadas com papéis administrativos
-          bem definidos, permitindo validações e decisões com rastreabilidade completa. A governança
-          combina responsabilidades territoriais (curadores e moderadores) com supervisão global (SystemAdmin).
-        </p>
-
-        <div class="model-grid spaced">
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">👤</span>
-              <h3>Papéis Administrativos</h3>
-            </div>
-            <p class="card-intro">
-              Governança em camadas: SystemAdmin (global), Curators (territorial) e FinancialManager (planejado).
-            </p>
-            <ul class="card-list">
-              <li><strong>SystemAdmin</strong>: Acesso irrestrito global. Configurações do sistema, verificações de identidade, filas de trabalho globais e auditoria.</li>
-              <li><strong>Curator</strong>: Morador verificado com permissões territoriais. Aprova pedidos de moradia, valida entidades do mapa e modera conteúdo.</li>
-              <li><strong>FinancialManager</strong> <em>(Roadmap)</em>: Gestão financeira territorial planejada para configuração de taxas, visualização de saldos e relatórios.</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">⚙️</span>
-              <h3>System Config</h3>
-            </div>
-            <p class="card-intro">
-              Configurações globais calibráveis para governança, validações e thresholds do sistema.
-            </p>
-            <div style="margin-top: 1rem;">
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/system-configs</code>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/system-configs/{key}</code>
-              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">PUT /api/v1/admin/system-configs/{key}</code>
-            </div>
-            <p class="card-divider">
-              <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite ajustar configurações críticas como thresholds de verificação, políticas de presença e parâmetros de governança.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">📦</span>
-              <h3>Media Storage Config</h3>
-            </div>
-            <p class="card-intro">
-              Configuração explícita e aberta do provedor de blob storage para mídias (Local, S3, AzureBlob) via painel administrativo.
-            </p>
-            <div style="margin-top: 1rem;">
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/active</code>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config</code>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/media-storage-config/{configId}</code>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config</code>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">PUT /api/v1/admin/media-storage-config/{configId}</code>
-              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/admin/media-storage-config/{configId}/activate</code>
-            </div>
-            <p class="card-divider" style="margin-top: 1rem;">
-              <strong>Permissão:</strong> <code>SystemAdmin</code> apenas. Permite configurar provedores de storage sem editar <code>appsettings.json</code>.
-            </p>
-            <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-subtle); border-radius: var(--radius-sm);">
-              <strong>📦 Providers Suportados:</strong>
-              <ul style="margin-top: 0.5rem; line-height: 1.8;">
-                <li><strong>Local</strong>: Armazenamento em disco local (desenvolvimento/testes). Configuração: <code>BasePath</code></li>
-                <li><strong>S3</strong>: Amazon S3 (produção recomendado). Configuração: <code>BucketName</code>, <code>Region</code>, <code>AccessKeyId</code>, <code>Prefix</code> (opcional)</li>
-                <li><strong>AzureBlob</strong>: Azure Blob Storage (produção). Configuração: <code>ConnectionString</code>, <code>ContainerName</code>, <code>Prefix</code> (opcional)</li>
-              </ul>
-              <p style="margin-top: 0.75rem; font-size: 0.875em; color: var(--text-muted);">
-                <strong>Segurança:</strong> Secrets (AccessKeyId, ConnectionString) são mascarados nas respostas (mostram apenas últimos caracteres ou host). Use o painel administrativo para configurar storage sem expor credenciais no código.
-              </p>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">📋</span>
-              <h3>Work Queue</h3>
-            </div>
-            <p class="card-intro">
-              Filas genéricas para revisão humana de verificações, moderação e curadoria.
-            </p>
-            <div style="margin-top: 1rem;">
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/work-items</code>
-              <p style="margin: 0.5rem 0; font-size: 0.9em; color: var(--text-subtle);">← SystemAdmin (global)</p>
-              <code style="display: block; margin-top: 1rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/territories/{territoryId}/work-items</code>
-              <p style="margin: 0.5rem 0; font-size: 0.9em; color: var(--text-subtle);">← Curator (territorial)</p>
-            </div>
-            <p class="card-divider">
-              <strong>Uso:</strong> WorkItems representam tarefas que requerem decisão humana: verificação de identidade, aprovação de moradia, validação de entidades do mapa, moderação de conteúdo.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">📄</span>
-              <h3>Evidências & Documentos</h3>
-            </div>
-            <p class="card-intro">
-              Upload seguro de evidências documentais e download por proxy com auditoria completa.
-            </p>
-            <div style="margin-top: 1rem;">
-              <p style="margin-bottom: 0.75rem; font-weight: 600; color: var(--text);">Upload:</p>
-              <code style="display: block; margin-bottom: 0.5rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/verification/identity/document/upload</code>
-              <code style="display: block; margin-bottom: 1rem; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">POST /api/v1/memberships/{territoryId}/verify-residency/document/upload</code>
-
-              <p style="margin-bottom: 0.75rem; margin-top: 1rem; font-weight: 600; color: var(--text);">Download (SystemAdmin):</p>
-              <code style="display: block; padding: 0.5rem; background: var(--accent-subtle); border-radius: var(--radius-sm); font-size: 0.875em;">GET /api/v1/admin/evidences/{evidenceId}/download</code>
-            </div>
-            <p class="card-divider">
-              <strong>Segurança:</strong> Upload seguro com validação de tipo e tamanho. Download via proxy sem URLs públicas, com autorização e auditoria de acesso.
-            </p>
-          </div>
-        </div>
-
-        <div class="callout" style="background: var(--accent-subtle); border-left: 3px solid var(--accent);">
-          <p style="margin: 0; color: var(--text);">
-            <strong>Separação de responsabilidades:</strong> SystemAdmin opera em nível global (configurações do sistema,
-            verificações globais, bootstrap). Curators e Moderators operam em nível territorial (aprovam moradores,
-            validam entidades, moderam conteúdo). FinancialManager (roadmap) operará em nível territorial para gestão financeira.
-          </p>
-        </div>
-
-        <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.95em;">
-          Documentação completa: <a href="https://github.com/sraphaz/araponga/blob/main/docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md" rel="noopener">docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md</a>
-        </p>
-      </section>
-
       <section class="section" id="openapi">
         <span class="eyebrow" data-i18n="openapi.eyebrow">OpenAPI</span>
         <h2 data-i18n="openapi.title">API Explorer (Swagger UI local)</h2>
@@ -1757,55 +3011,6 @@ curl -X POST http://localhost:8080/api/v1/events/{eventId}/confirm \
           <strong>Status da API:</strong> <code>GET /liveness</code> responde <code>{"status": "ok"}</code> e
           <code>GET /readiness</code> responde <code>{"status": "ready"}</code>. Logs seguem a configuração
           padrão de <code>Logging</code> no <code>appsettings.json</code>.
-        </div>
-      </section>
-
-      <section class="section" id="quickstart">
-        <span class="eyebrow" data-i18n="quickstart.eyebrow">Quickstart</span>
-        <h2 data-i18n="quickstart.title">Copie e cole (5–10 comandos)</h2>
-        <div class="grid-two">
-          <div class="card">
-            <h3 data-i18n="quickstart.bashTitle">Bash (Linux/macOS/Git Bash)</h3>
-            <pre class="code-block"><code># 1) Rodar API
-ASPNETCORE_ENVIRONMENT=Development dotnet run --project backend/Araponga.Api --urls http://localhost:8080
-
-# 2) Autenticação social (gera token)
-curl -X POST http://localhost:8080/api/v1/auth/social \
-  -H "Content-Type: application/json" \
-  -d '{"provider":"google","externalId":"abc-123","displayName":"Ana","cpf":"12345678900"}'
-
-# 3) Descobrir território
-curl http://localhost:8080/api/v1/territories
-
-# 4) Selecionar território (X-Session-Id)
-curl -X POST http://localhost:8080/api/v1/territories/selection \
-  -H "Content-Type: application/json" \
-  -H "X-Session-Id: session-123" \
-  -d '{"territoryId":"11111111-1111-1111-1111-111111111111"}'</code></pre>
-          </div>
-          <div class="card">
-            <h3 data-i18n="quickstart.powershellTitle">PowerShell (Windows)</h3>
-            <pre class="code-block"><code># 1) Rodar API
-$env:ASPNETCORE_ENVIRONMENT="Development"
-dotnet run --project backend/Araponga.Api --urls "http://localhost:8080"
-
-# 2) Autenticação social (gera token)
-curl.exe -X POST "http://localhost:8080/api/v1/auth/social" `
-  -H "Content-Type: application/json" `
-  -d "{\"provider\":\"google\",\"externalId\":\"abc-123\",\"displayName\":\"Ana\",\"cpf\":\"12345678900\"}"
-
-# 3) Descobrir território
-curl.exe "http://localhost:8080/api/v1/territories"
-
-# 4) Selecionar território (X-Session-Id)
-curl.exe -X POST "http://localhost:8080/api/v1/territories/selection" `
-  -H "Content-Type: application/json" `
-  -H "X-Session-Id: session-123" `
-  -d "{\"territoryId\":\"11111111-1111-1111-1111-111111111111\"}"</code></pre>
-          </div>
-        </div>
-        <div class="callout">
-          <span data-i18n-html="quickstart.tipHtml"><strong>Dica:</strong> este portal tem fonte única em <code>backend/Araponga.Api/wwwroot/devportal</code> (HTML/CSS/JS/OpenAPI). O deploy do GitHub Pages publica exatamente essa pasta.</span>
         </div>
       </section>
 
@@ -2344,348 +3549,39 @@ dotnet test</code></pre>
         </div>
       </section>
 
-      <section class="section" id="capacidades-tecnicas">
-        <span class="eyebrow">Fundações Técnicas</span>
-        <h2>Qualidade, Performance e Observabilidade</h2>
-        <p class="lead-text">
-          A API Araponga foi construída sobre uma base sólida de práticas de engenharia moderna.
-          Arquitetura limpa, testes abrangentes e observabilidade completa garantem confiabilidade,
-          manutenibilidade e escalabilidade para comunidades em produção.
-        </p>
-
-        <div class="model-grid spaced">
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">✓</span>
-              <h3>Qualidade de Código</h3>
-            </div>
-            <p class="card-intro">
-              Engenharia de software orientada a qualidade e confiabilidade, com foco em
-              manutenibilidade a longo prazo e evolução segura da plataforma.
-            </p>
-            <dl class="entity-list">
-              <dt><strong>Paginação padronizada</strong></dt>
-              <dd>15 endpoints críticos implementam paginação completa com <code>PaginatedResult&lt;T&gt;</code>, garantindo performance consistente em grandes volumes de dados.</dd>
-
-              <dt><strong>Validação robusta</strong></dt>
-              <dd>FluentValidation em todas as camadas: contratos de API, comandos de aplicação e regras de domínio. Validações declarativas e mensagens de erro claras.</dd>
-
-              <dt><strong>Cobertura de testes acima de 90%</strong></dt>
-              <dd>Testes unitários, de integração e end-to-end cobrindo fluxos críticos. Testes de infraestrutura para repositórios e serviços de aplicação.</dd>
-
-              <dt><strong>Testes de segurança e performance</strong></dt>
-              <dd>Testes automatizados de vulnerabilidades comuns, validação de autorização e testes de carga para endpoints críticos.</dd>
-
-              <dt><strong>Refatoração completa de services</strong></dt>
-              <dd>Arquitetura limpa com Single Responsibility Principle. Services focados, testáveis e desacoplados, facilitando manutenção e evolução.</dd>
-            </dl>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">⚡</span>
-              <h3>Performance & Escalabilidade</h3>
-            </div>
-            <p class="card-intro">
-              Otimizações arquiteturais e técnicas avançadas para garantir baixa latência
-              e capacidade de crescimento com o aumento da demanda.
-            </p>
-            <dl class="entity-list">
-              <dt><strong>Concorrência otimista</strong></dt>
-              <dd>RowVersion em entidades críticas previne condições de corrida e garante consistência de dados em operações concorrentes.</dd>
-
-              <dt><strong>Cache distribuído</strong></dt>
-              <dd>Redis para cache de sessões, configurações e dados frequentemente acessados, reduzindo carga no banco de dados.</dd>
-
-              <dt><strong>Processamento assíncrono</strong></dt>
-              <dd>Event Bus com padrão Outbox/Inbox para processamento confiável de eventos, notificações e operações em background.</dd>
-
-              <dt><strong>Read replicas</strong></dt>
-              <dd>Suporte nativo para leitura distribuída, permitindo escalar consultas independentemente de operações de escrita.</dd>
-
-              <dt><strong>Deployment multi-instância</strong></dt>
-              <dd>Arquitetura stateless permite escalonamento horizontal sem compartilhamento de estado entre instâncias.</dd>
-            </dl>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">📊</span>
-              <h3>Observabilidade</h3>
-            </div>
-            <p class="card-intro">
-              Visibilidade completa sobre o comportamento da plataforma em produção,
-              permitindo detecção proativa de problemas e otimização contínua.
-            </p>
-            <dl class="entity-list">
-              <dt><strong>Logs estruturados</strong></dt>
-              <dd>Serilog com Seq para logs centralizados, pesquisáveis e estruturados. Contexto enriquecido para debugging eficiente.</dd>
-
-              <dt><strong>Métricas Prometheus</strong></dt>
-              <dd>Métricas de negócio e infraestrutura expostas em formato Prometheus para monitoramento e alertas baseados em thresholds.</dd>
-
-              <dt><strong>Distributed tracing</strong></dt>
-              <dd>OpenTelemetry para rastreamento de requisições através de serviços, facilitando identificação de gargalos e dependências.</dd>
-
-              <dt><strong>Dashboards e alertas</strong></dt>
-              <dd>Grafana para visualização de métricas e alertas configuráveis para eventos críticos e degradação de performance.</dd>
-
-              <dt><strong>Runbook e troubleshooting</strong></dt>
-              <dd>Documentação operacional detalhada para incidentes comuns, facilitando resolução rápida e consistente de problemas.</dd>
-            </dl>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">🔒</span>
-              <h3>Segurança</h3>
-            </div>
-            <p class="card-intro">
-              Múltiplas camadas de proteção para garantir integridade de dados, privacidade
-              dos usuários e resistência a ataques comuns.
-            </p>
-            <dl class="entity-list">
-              <dt><strong>Autenticação multi-fator</strong></dt>
-              <dd>2FA via TOTP (Time-based One-Time Password) para proteção adicional de contas sensíveis e operações críticas.</dd>
-
-              <dt><strong>Sanitização avançada</strong></dt>
-              <dd>Validação e sanitização rigorosa de inputs em todas as camadas, prevenindo injeção de código e XSS.</dd>
-
-              <dt><strong>Proteção CSRF</strong></dt>
-              <dd>Anti-forgery tokens para prevenir requisições cross-site não autorizadas em operações de estado.</dd>
-
-              <dt><strong>Security headers</strong></dt>
-              <dd>Content Security Policy (CSP), HTTP Strict Transport Security (HSTS) e outros headers de segurança configurados adequadamente.</dd>
-
-              <dt><strong>Auditoria completa</strong></dt>
-              <dd>Log de todas as ações críticas (mudanças de role, moderação, configurações) para rastreabilidade e compliance.</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="callout highlight">
-          <p>
-            <strong>Qualidade em produção:</strong> A API Araponga segue rigorosamente os princípios de engenharia de software
-            de alto padrão, com foco em confiabilidade, manutenibilidade e escalabilidade. Todas as decisões arquiteturais
-            foram documentadas e são continuamente revisadas para garantir evolução segura e sustentável da plataforma.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="roadmap">
-        <span class="eyebrow">Visão Futura</span>
-        <div>
-          <h2>Roadmap e Direcionamento</h2>
-          <p class="lead-text space-bottom">
-            O Araponga evolui de forma consciente e sustentável, priorizando funcionalidades que
-            fortalecem a organização comunitária local. O roadmap de 28 fases desenha um caminho
-            gradual em direção a maior autonomia territorial, economia circular e regeneração social.
-            Cada fase expande capacidades técnicas que, em conjunto, permitem que comunidades
-            construam e sustentem seus próprios sistemas de organização, economia e cuidado territorial.
-            Abaixo estão as direções planejadas e oportunidades de contribuição.
-          </p>
-        </div>
-
-        <div class="model-grid spaced">
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">1️⃣</span>
-              <h3>Onda 1: MVP Essencial</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 8-11:</strong> Infraestrutura de mídia, perfil completo, mídias em conteúdo e edição. Base sólida para comunicação rica e expressão comunitária.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">2️⃣</span>
-              <h3>Onda 2: Comunicação e Governança</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 13-14:</strong> Conector de e-mail e governança comunitária com votação. Ferramentas para decisão coletiva e participação democrática.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">3️⃣</span>
-              <h3>Onda 3: Soberania Territorial</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 17-18:</strong> Gamificação harmoniosa e saúde territorial com monitoramento. Engajamento sustentável e cuidado com o território através de mecânicas conscientes.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">4️⃣</span>
-              <h3>Onda 4: Economia Local</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 20, 23-24:</strong> Moeda territorial, compra coletiva e trocas comunitárias. Economia circular e autonomia financeira territorial fortalecendo redes locais.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">5️⃣</span>
-              <h3>Onda 5: Conformidade e Inteligência</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 12, 15:</strong> Otimizações finais e inteligência artificial integrada. Performance e capacidades avançadas mantendo os princípios do projeto.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">6️⃣</span>
-              <h3>Onda 6: Diferenciais</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 16, 19, 21-22:</strong> Entregas territoriais, arquitetura modular, suporte a criptomoedas e integrações externas. Flexibilidade arquitetural mantendo autonomia.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">7️⃣</span>
-              <h3>Onda 7: Autonomia Digital e Economia Circular</h3>
-            </div>
-            <p class="card-intro">
-              <strong>Fases 25-28:</strong> Hub de serviços digitais, chat com IA, consumo consciente, negociação territorial, assinatura coletiva e banco de sementes. Autonomia digital completa e soberania alimentar territorial.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">🎯</span>
-              <h3>Direcionamento e Princípios</h3>
-            </div>
-            <p class="card-intro">
-              Princípios fundamentais que guiam a evolução do Araponga através das 28 fases.
-            </p>
-            <ul class="card-list">
-              <li><strong>Território-first:</strong> Todas as funcionalidades fortalecem o vínculo com o território físico e organização comunitária local.</li>
-              <li><strong>Governança transparente:</strong> Regras explícitas, auditáveis e evolutivas, com separação clara entre governança global e territorial.</li>
-              <li><strong>Baixa excitação, alto cuidado:</strong> Interface e funcionalidades que promovem foco, clareza e continuidade, sem manipulação algorítmica.</li>
-              <li><strong>Qualidade sobre velocidade:</strong> Cobertura de testes >90%, validações robustas, arquitetura limpa e documentação atualizada.</li>
-            </ul>
-            <p class="card-divider">
-              <strong>📊 Visão completa:</strong> Consulte o <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/ROADMAP_VISUAL.md">Roadmap Visual</a>
-              e a <a href="https://github.com/sraphaz/araponga/blob/main/docs/backlog-api/RESUMO_EXECUTIVO_ESTRATEGICO.md">Estratégia Executiva</a>
-              para detalhes completos das 28 fases e suas correlações.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="contribuir">
-        <span class="eyebrow">Contribuição</span>
-        <div>
-          <h2>Contribua com o Araponga</h2>
-          <p class="lead-text space-bottom">
-            O Araponga é um projeto comunitário de código aberto. Contribuições são bem-vindas e
-            essenciais para fortalecer a plataforma e alcançar comunidades ao redor do mundo.
-          </p>
-        </div>
-
-        <div class="model-grid spaced-sm">
-          <div class="card">
-            <h3>💻 Para Desenvolvedores</h3>
-            <p class="card-intro">
-              Contribua com código, testes, documentação e melhorias técnicas.
-            </p>
-            <ul class="card-list">
-              <li><strong>Implementar funcionalidades</strong> alinhadas ao roadmap</li>
-              <li><strong>Melhorar cobertura de testes</strong> e qualidade de código</li>
-              <li><strong>Documentar APIs</strong> e exemplos de uso</li>
-              <li><strong>Otimizar performance</strong> e escalabilidade</li>
-              <li><strong>Revisar Pull Requests</strong> e sugerir melhorias</li>
-            </ul>
-            <p class="card-divider">
-              <strong>🛠️ Setup local:</strong> .NET 8, PostgreSQL + PostGIS, Redis (opcional).
-              Consulte <a href="https://github.com/sraphaz/araponga/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
-              para detalhes técnicos e padrões de código.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>📚 Formas de Contribuição</h3>
-            <p class="card-intro">
-              Existem várias formas de contribuir, independente do nível técnico.
-            </p>
-            <ul class="card-list">
-              <li><strong>Relatar bugs</strong> e propor melhorias via Issues</li>
-              <li><strong>Validar fluxos</strong> e testar funcionalidades em desenvolvimento</li>
-              <li><strong>Ajustar documentação</strong> e melhorar exemplos práticos</li>
-              <li><strong>Sugerir features</strong> alinhadas à visão do produto</li>
-              <li><strong>Traduzir conteúdo</strong> para outros idiomas</li>
-              <li><strong>Compartilhar casos de uso</strong> e experiências reais</li>
-            </ul>
-            <p class="card-divider">
-              <strong>📖 Documentação:</strong> Consulte <a href="https://github.com/sraphaz/araponga/blob/main/docs/">docs/</a>
-              para visão de produto, arquitetura, decisões técnicas e guias de implementação.
-            </p>
-          </div>
-
-          <div class="card">
-            <div class="card-icon-header">
-              <span class="icon">💚</span>
-              <h3>Contribuição Financeira via PIX</h3>
-            </div>
-            <p class="card-intro">
-              Ajude a sustentar o projeto Araponga com uma contribuição financeira. Sua doação apoia o desenvolvimento contínuo e a manutenção da plataforma.
-            </p>
-            <p style="color: var(--text-muted); margin: 1rem 0;">
-              Contribuições são investidas diretamente em infraestrutura, ferramentas de desenvolvimento e melhorias da plataforma.
-            </p>
-            <p class="card-divider" style="margin-top: 1.5rem;">
-              <a href="https://geradordepix.com/pagamento/01KESFV2Q5P6V6K2JWWBY340EK" target="_blank" rel="noopener noreferrer" class="button" style="width: 100%; text-align: center; justify-content: center;">
-                <strong>💰 Contribuir via PIX</strong>
-              </a>
-            </p>
-            <p style="margin-top: 1rem; color: var(--text-subtle); font-size: 0.875em; text-align: center;">
-              Qualquer valor faz diferença para o crescimento do projeto
-            </p>
-          </div>
-        </div>
-
-        <div class="callout highlight">
-          <p>
-            <strong>Próximos passos:</strong> Explore o repositório, abra uma Issue para discussão ou
-            envie um Pull Request. Todas as contribuições seguem o
-            <a href="https://github.com/sraphaz/araponga/blob/main/CODE_OF_CONDUCT.md" style="color: var(--link);">Código de Conduta</a>
-            e passam por revisão cuidadosa para manter os altos padrões de qualidade do projeto.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" id="versoes">
-        <span class="eyebrow" data-i18n="versions.eyebrow">Versões & compatibilidade</span>
-        <h2 data-i18n="versions.title">Versionamento</h2>
-        <p data-i18n-html="versions.leadHtml">
-          A API atual utiliza prefixo <code>/api/v1</code>. Mudanças compatíveis devem manter o contrato dentro
-          dessa versão. Para evolução maior, a estratégia recomendada é introduzir um novo prefixo.
-        </p>
-        <div class="callout">
-          Consulte o changelog do repositório em <a href="https://github.com/sraphaz/araponga/blob/main/docs/40_CHANGELOG.md">docs/40_CHANGELOG.md</a> para histórico.
-        </div>
-      </section>
-
       <footer class="footer" role="contentinfo">
         <div class="footer-content">
-          <div class="footer-brand">
-            <img src="./assets/images/icon.png" alt="Araponga" class="footer-icon" aria-hidden="true" />
-            <div>
-              <p class="footer-title">Araponga API</p>
-              <p class="footer-subtitle">Developer Portal</p>
+          <div class="text-center space-y-6">
+            <div class="footer-links-center">
+              <a
+                href="https://araponga.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link"
+              >
+                <span>Site Oficial</span>
+              </a>
+              <span class="footer-link-divider">•</span>
+              <a
+                href="https://github.com/sraphaz/araponga"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link"
+              >
+                <span>Contribuir no GitHub</span>
+              </a>
+              <span class="footer-link-divider">•</span>
+              <a
+                href="https://discord.gg/auwqN8Yjgw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link"
+              >
+                <span>Discord da Comunidade</span>
+              </a>
             </div>
-          </div>
-          <div class="footer-links">
-            <p>
-              Portal disponível em <a href="https://devportal.araponga.app" rel="noopener">https://devportal.araponga.app</a>.
-              Para contribuir, consulte o <a href="https://github.com/sraphaz/araponga" rel="noopener">repositório</a> e a documentação técnica local.
+            <p class="footer-tagline">
+              Território como referência • Comunidade como prioridade • Tecnologia servindo a Vida
             </p>
           </div>
         </div>
@@ -2694,6 +3590,7 @@ dotnet test</code></pre>
   </div>
 
   <script src="./assets/js/devportal.js"></script>
+  <script src="./assets/js/toc.js"></script>
   <script>
     // Inicialização de event listeners para botões de tela cheia (SVGs pré-renderizados)
     (function() {

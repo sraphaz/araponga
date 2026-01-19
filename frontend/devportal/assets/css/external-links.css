@@ -1,0 +1,106 @@
+/* Header External Links - Navegação Estratégica no Header Direito */
+.header-external-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  margin-left: auto;
+}
+
+.header-external-links a {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-base);
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 6px;
+  opacity: 0.85;
+}
+
+.header-external-links a:hover {
+  color: var(--accent);
+  background: var(--color-water-green-light);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+:root.dark .header-external-links a:hover {
+  background: var(--color-sky-blue-light);
+}
+
+.header-link-with-icon {
+  gap: 0.5rem;
+}
+
+.header-link-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  flex-shrink: 0;
+}
+
+.header-external-links a:hover .header-link-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.header-link-divider {
+  display: none;
+}
+
+/* Links Externos Sidebar - Navegação Estratégica (Sutil e Leve) */
+.sidebar-section-external {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: none;
+}
+
+.sidebar-external-divider {
+  display: none;
+}
+
+/* Links Externos - Diferenciação leve e moderna */
+.sidebar-link-external {
+  position: relative;
+  padding-left: 0.75rem;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ícone genérico ↗ apenas para links sem ícone específico */
+.sidebar-link-external:not(.sidebar-link-icon-github):not(.sidebar-link-icon-discord):not(.sidebar-link-icon-araponga)::after {
+  content: '↗';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  opacity: 0.4;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  font-weight: 600;
+}
+
+.sidebar-link-external:not(.sidebar-link-icon-github):not(.sidebar-link-icon-discord):not(.sidebar-link-icon-araponga):hover::after {
+  opacity: 0.7;
+  transform: translateY(-50%) translate(1px, -1px);
+}
+
+.sidebar-link-external:hover {
+  padding-left: 1rem;
+  transform: translateX(2px);
+  opacity: 1;
+}
+
+:root.dark .sidebar-link-external:not(.sidebar-link-icon-github):not(.sidebar-link-icon-discord):not(.sidebar-link-icon-araponga)::after {
+  opacity: 0.3;
+}
+
+:root.dark .sidebar-link-external:not(.sidebar-link-icon-github):not(.sidebar-link-icon-discord):not(.sidebar-link-icon-araponga):hover::after {
+  opacity: 0.6;
+}
