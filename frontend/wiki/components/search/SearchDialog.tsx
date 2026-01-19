@@ -19,19 +19,36 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  // Carrega índice de busca
+  // Carrega índice de busca (asset estático para export estático)
   useEffect(() => {
     if (isOpen && index.length === 0) {
       setLoading(true);
-      fetch('/api/search')
-        .then(res => res.json())
+      // Em export estático, carrega do arquivo JSON estático ao invés da API
+      fetch('/wiki/search-index.json')
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`Failed to load search index: ${res.status}`);
+          }
+          return res.json();
+        })
         .then(data => {
           setIndex(data.index || []);
           setLoading(false);
         })
         .catch(err => {
           console.error('Error loading search index:', err);
-          setLoading(false);
+          // Em caso de erro, tenta fallback para API (se disponível em dev)
+          fetch('/api/search')
+            .then(res => res.ok ? res.json() : Promise.reject(res))
+            .then(data => {
+              setIndex(data.index || []);
+              setLoading(false);
+            })
+            .catch(() => {
+              console.warn('Search index not available - search will be empty');
+              setIndex([]);
+              setLoading(false);
+            });
         });
     }
   }, [isOpen, index.length]);

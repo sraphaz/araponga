@@ -34,6 +34,8 @@ jobs:
         working-directory: frontend/wiki
         run: |
           npm ci
+          # Gera índice de busca antes do build
+          npm run generate-search-index
           NEXT_EXPORT=true npm run build
         continue-on-error: true
 
@@ -71,7 +73,7 @@ jobs:
             echo "📦 Copiando Wiki para dist/wiki/..."
             mkdir -p dist/wiki
             cp -R frontend/wiki/out/. dist/wiki/
-            
+
             # Verificar se index.html do Wiki foi copiado
             if [ ! -f "dist/wiki/index.html" ]; then
               echo "⚠️  Wiki index.html não encontrado, mas continuando..."

@@ -3,14 +3,14 @@
  * Indexa documentos Markdown da pasta docs/
  */
 
-import { readdir, readFile } from 'fs/promises';
+import { readFile } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkHtml from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import { getTextContent } from './markdown';
-import { getTitleFromFileName } from './file-utils';
+import { getTitleFromFileName, getAllMarkdownFiles } from './file-utils';
 
 export interface WikiSearchItem {
   id: string;
@@ -22,19 +22,21 @@ export interface WikiSearchItem {
 }
 
 /**
- * Gera índice de busca para todos os documentos da Wiki
+ * Gera índice de busca para todos os documentos da Wiki (recursivo)
+ * Indexa arquivos .md em docs/ e subpastas (ex: docs/api/)
  */
 export async function generateWikiIndex(): Promise<WikiSearchItem[]> {
   const docsPath = join(process.cwd(), '..', '..', 'docs');
   const index: WikiSearchItem[] = [];
 
   try {
-    const files = await readdir(docsPath);
-    const mdFiles = files.filter(file => file.endsWith('.md'));
+    // Usa getAllMarkdownFiles para indexar recursivamente
+    const allMdFiles = await getAllMarkdownFiles(docsPath);
 
-    for (const file of mdFiles) {
+    for (const relativePath of allMdFiles) {
       try {
-        const filePath = join(docsPath, file);
+        // relativePath já está sem .md, precisa adicionar de volta para ler
+        const filePath = join(docsPath, relativePath + '.md');
         const fileContents = await readFile(filePath, 'utf8');
         const { content, data } = matter(fileContents);
 
@@ -47,20 +49,21 @@ export async function generateWikiIndex(): Promise<WikiSearchItem[]> {
         const htmlContent = processedContent.toString();
         const textContent = getTextContent(htmlContent);
 
-        // Determina categoria baseado no nome do arquivo
-        const category = getCategoryFromFileName(file);
-        const slug = file.replace(/\.md$/, '');
+        // Determina categoria baseado no caminho do arquivo
+        const category = getCategoryFromPath(relativePath);
+        // Slug é o caminho relativo sem .md (já está sem .md em relativePath)
+        const slug = relativePath.replace(/\\/g, '/'); // Normaliza separadores de caminho
 
         index.push({
           id: slug,
-          title: (data.title as string) || getTitleFromFileName(file),
+          title: (data.title as string) || getTitleFromFileName(relativePath.split(/[/\\]/).pop() || ''),
           content: textContent.substring(0, 500), // Primeiros 500 caracteres para busca
           url: `/wiki/docs/${slug}`,
           category,
           description: data.description as string | undefined,
         });
       } catch (error) {
-        console.error(`Error indexing ${file}:`, error);
+        console.error(`Error indexing ${relativePath}:`, error);
       }
     }
   } catch (error) {
@@ -71,9 +74,17 @@ export async function generateWikiIndex(): Promise<WikiSearchItem[]> {
 }
 
 /**
- * Determina categoria do documento baseado no nome do arquivo
+ * Determina categoria do documento baseado no caminho do arquivo
  */
-function getCategoryFromFileName(fileName: string): string {
+function getCategoryFromPath(filePath: string): string {
+  // Se está em subpasta api/, é API
+  if (filePath.startsWith('api/')) {
+    return 'API';
+  }
+
+  // Extrai nome do arquivo
+  const fileName = filePath.split(/[/\\]/).pop() || '';
+
   if (fileName.startsWith('00_')) return 'Referência';
   if (fileName.startsWith('01_') || fileName.startsWith('02_') || fileName.startsWith('03_') || fileName.startsWith('04_') || fileName.startsWith('05_')) {
     return 'Visão e Produto';
