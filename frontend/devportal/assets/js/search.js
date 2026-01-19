@@ -129,43 +129,81 @@ function setupSearch() {
 }
 
 /**
- * Cria dialog de busca
+ * Cria dialog de busca (XSS-safe)
+ * Usa DOM APIs ao invés de innerHTML para evitar vulnerabilidades XSS
  */
 function createSearchDialog() {
   const dialog = document.createElement('div');
   dialog.id = 'search-dialog';
   dialog.className = 'search-dialog';
-  dialog.innerHTML = `
-    <div class="search-dialog-overlay"></div>
-    <div class="search-dialog-content">
-      <div class="search-dialog-header">
-        <input
-          id="search-input"
-          type="text"
-          placeholder="Buscar no DevPortal... (Cmd/Ctrl + K)"
-          autocomplete="off"
-        />
-        <button class="search-dialog-close" aria-label="Fechar busca">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-      <div id="search-results" class="search-dialog-results"></div>
-    </div>
-  `;
 
+  // Overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'search-dialog-overlay';
+  overlay.addEventListener('click', closeSearch);
+  dialog.appendChild(overlay);
+
+  // Content container
+  const content = document.createElement('div');
+  content.className = 'search-dialog-content';
+
+  // Header
+  const header = document.createElement('div');
+  header.className = 'search-dialog-header';
+
+  const input = document.createElement('input');
+  input.id = 'search-input';
+  input.type = 'text';
+  input.placeholder = 'Buscar no DevPortal... (Cmd/Ctrl + K)';
+  input.setAttribute('autocomplete', 'off');
+  header.appendChild(input);
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'search-dialog-close';
+  closeBtn.setAttribute('aria-label', 'Fechar busca');
+  closeBtn.addEventListener('click', closeSearch);
+
+  // SVG de fechar (criado de forma segura)
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', '20');
+  svg.setAttribute('height', '20');
+  svg.setAttribute('viewBox', '0 0 20 20');
+  svg.setAttribute('fill', 'none');
+
+  const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path1.setAttribute('d', 'M15 5L5 15');
+  path1.setAttribute('stroke', 'currentColor');
+  path1.setAttribute('stroke-width', '2');
+  path1.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path1);
+
+  const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path2.setAttribute('d', 'M5 5l10 10');
+  path2.setAttribute('stroke', 'currentColor');
+  path2.setAttribute('stroke-width', '2');
+  path2.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path2);
+
+  closeBtn.appendChild(svg);
+  header.appendChild(closeBtn);
+
+  content.appendChild(header);
+
+  // Results container
+  const resultsContainer = document.createElement('div');
+  resultsContainer.id = 'search-results';
+  resultsContainer.className = 'search-dialog-results';
+  content.appendChild(resultsContainer);
+
+  dialog.appendChild(content);
   document.body.appendChild(dialog);
-
-  // Event listeners
-  dialog.querySelector('.search-dialog-overlay').addEventListener('click', closeSearch);
-  dialog.querySelector('.search-dialog-close').addEventListener('click', closeSearch);
 
   return dialog;
 }
 
 /**
- * Cria trigger de busca
+ * Cria trigger de busca (XSS-safe)
+ * Usa DOM APIs ao invés de innerHTML para evitar vulnerabilidades XSS
  */
 function createSearchTrigger() {
   const header = document.querySelector('header');
@@ -173,14 +211,40 @@ function createSearchTrigger() {
 
   const trigger = document.createElement('button');
   trigger.className = 'search-trigger';
-  trigger.innerHTML = `
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10zM13 13l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <span>Buscar</span>
-    <kbd>⌘K</kbd>
-  `;
   trigger.addEventListener('click', openSearch);
+
+  // SVG de busca (criado de forma segura)
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', '16');
+  svg.setAttribute('height', '16');
+  svg.setAttribute('viewBox', '0 0 16 16');
+  svg.setAttribute('fill', 'none');
+
+  const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path1.setAttribute('d', 'M7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z');
+  path1.setAttribute('stroke', 'currentColor');
+  path1.setAttribute('stroke-width', '2');
+  path1.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path1);
+
+  const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path2.setAttribute('d', 'M13 13l-3-3');
+  path2.setAttribute('stroke', 'currentColor');
+  path2.setAttribute('stroke-width', '2');
+  path2.setAttribute('stroke-linecap', 'round');
+  svg.appendChild(path2);
+
+  trigger.appendChild(svg);
+
+  // Span de texto
+  const span = document.createElement('span');
+  span.textContent = 'Buscar';
+  trigger.appendChild(span);
+
+  // KBD
+  const kbd = document.createElement('kbd');
+  kbd.textContent = '⌘K';
+  trigger.appendChild(kbd);
 
   const nav = header.querySelector('nav');
   if (nav) {
