@@ -338,7 +338,7 @@ input:focus-visible {
   border-radius: var(--radius);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
@@ -468,10 +468,10 @@ input:focus-visible {
 
 .hero h1 {
   font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-  font-weight: 700;
+  font-weight: 500; /* Medium - alinhado com Wiki */
   line-height: 1.2;
   margin: 0.5rem 0 1rem;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token da Wiki */
   background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -485,24 +485,6 @@ input:focus-visible {
   font-size: clamp(1rem, 0.875rem + 0.625vw, 1.125rem);
   line-height: 1.75;
   text-align: left;
-}
-
-.hero-actions {
-  margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.875rem;
-}
-
-/* Melhorar destaque dos CTAs */
-.hero-actions .button {
-  min-height: 48px; /* Tamanho mínimo touch-friendly */
-  padding: 1rem 2rem; /* Mais padding */
-  font-size: 1rem;
-}
-
-.hero-actions .button:first-child {
-  box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 .button {
@@ -593,8 +575,31 @@ input:focus-visible {
 }
 
 @media (min-width: 1024px) {
+  /* Header deve respeitar sidebar */
+  .header {
+    padding-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem));
+    padding-right: clamp(1.5rem, 3vw, 2rem);
+    padding-top: 0;
+  }
+
+  .header .container {
+    margin-left: 0;
+    max-width: 100%;
+    padding-left: 0;
+  }
+
+  /* Layout deve respeitar sidebar */
   .layout {
-    padding-left: calc(256px + clamp(var(--space-lg), 3vw, var(--space-xl)));
+    padding-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem));
+    padding-right: clamp(1.5rem, 3vw, 2rem);
+    padding-top: 0;
+  }
+
+  /* Footer deve respeitar sidebar */
+  .footer {
+    margin-left: calc(240px + clamp(1.25rem, 4vw, 2.5rem));
+    max-width: calc(100% - 240px - clamp(1.25rem, 4vw, 2.5rem));
+    padding-left: clamp(1.5rem, 3vw, 2rem);
   }
 }
 
@@ -608,6 +613,65 @@ main {
   min-width: 0;
   width: 100%;
   max-width: var(--content-max);
+}
+
+/* Em telas grandes, aproveitar melhor o espaço disponível */
+@media (min-width: 1024px) {
+  main {
+    max-width: calc(100vw - 240px - clamp(1.25rem, 4vw, 2.5rem) - clamp(1.5rem, 3vw, 2rem));
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .phase-panels {
+    max-width: 100%;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: clamp(1.25rem, 2vw, 2rem);
+    padding-bottom: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  /* Grids e cards aproveitam melhor o espaço horizontal */
+  .grid-two,
+  .grid-three,
+  .model-grid {
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    width: 100%;
+  }
+
+  /* Cards em grids aproveitam melhor o espaço */
+  .grid-two .card,
+  .grid-three .card {
+    min-width: 0; /* Permite que cards encolham se necessário */
+  }
+
+  /* Phase navigation ocupa toda largura */
+  .phase-navigation {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Conteúdo de texto aproveita melhor largura */
+  .section p,
+  .section ul,
+  .section ol {
+    max-width: 100%;
+  }
+
+  /* Code blocks aproveitam melhor o espaço */
+  .code-block {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 /* Aumentar amplitude em telas maiores mantendo limite claro */
@@ -635,33 +699,147 @@ main {
 /* Sidebar - Sincronizado com Wiki */
 .sidebar-container {
   position: fixed;
-  top: 2rem;
+  top: 0;
   left: clamp(1.25rem, 4vw, 2.5rem);
-  width: 256px;
-  min-width: 256px;
-  border-right: 1px solid rgba(198, 227, 210, 0.4);
-  background: var(--glass-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: 1rem;
-  height: calc(100vh - 4rem);
+  width: 240px;
+  min-width: 240px;
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1rem 0.75rem;
+  padding-top: clamp(3.5rem, 8vw, 5rem); /* Acompanha a altura do header */
+  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
+  /* Contorno suave respeitando identidade visual */
+  border-right: 1px solid rgba(77, 212, 168, 0.08); /* Verde-água muito sutil */
+  box-shadow: 1px 0 4px rgba(77, 212, 168, 0.04); /* Sombra muito suave */
   border-radius: 0;
-  border: none;
-  border-right: 1px solid var(--glass-border);
-  box-shadow: none;
   scrollbar-width: thin;
+  scrollbar-color: rgba(198, 227, 210, 0.3) transparent;
   z-index: 100;
+  transition: all var(--transition-base);
 }
 
 :root.dark .sidebar-container {
-  border-right-color: rgba(37, 48, 58, 0.6);
+  border-right-color: rgba(100, 150, 180, 0.12); /* Azul-céu muito sutil no dark */
+  box-shadow: 1px 0 6px rgba(100, 150, 180, 0.06); /* Sombra muito suave */
+  background: rgba(10, 14, 18, 0.85);
+}
+
+/* Scrollbar suave para sidebar */
+.sidebar-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(198, 227, 210, 0.3);
+  border-radius: 3px;
+  transition: background var(--transition-base);
+}
+
+.sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(198, 227, 210, 0.5);
+}
+
+:root.dark .sidebar-container::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 180, 0.3);
+}
+
+:root.dark .sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 180, 0.5);
+}
+
+/* Botão de Menu Mobile */
+.mobile-menu-toggle {
+  display: none; /* Escondido por padrão em desktop */
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.5rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.mobile-menu-toggle:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.mobile-menu-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 @media (max-width: 1023px) {
+  /* Mostra botão de menu mobile */
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  /* Esconde sidebar por padrão em mobile */
   .sidebar-container {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    z-index: 1000;
+    background: var(--bg-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    padding: 1rem 0.75rem;
+    padding-top: 4rem; /* Espaço para o botão de fechar */
+  }
+
+  /* Mostra sidebar quando .mobile-menu-open está no body */
+  body.mobile-menu-open .sidebar-container {
+    display: block;
+  }
+
+  /* Overlay escuro quando menu está aberto */
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+  }
+
+  body.mobile-menu-open .mobile-menu-overlay {
+    display: block;
+  }
+
+  /* Ajusta layout para mobile sem sidebar */
+  .layout {
+    padding-left: clamp(1.5rem, 3vw, 2rem) !important;
+    padding-right: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .header {
+    padding-left: clamp(1.5rem, 3vw, 2rem) !important;
+    padding-right: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  footer {
+    margin-left: 0 !important;
+    max-width: 100% !important;
+    padding-left: clamp(1.5rem, 3vw, 2rem) !important;
   }
 }
 
@@ -774,6 +952,89 @@ main {
   display: block;
 }
 
+/* Submenus - Estrutura aninhada */
+.sidebar-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-submenu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-slow);
+  border-left: 2px solid transparent;
+  margin-bottom: 0.25rem;
+}
+
+:root.dark .sidebar-submenu-toggle {
+  color: #b8c5d2;
+}
+
+.sidebar-submenu-toggle:hover {
+  background: rgba(77, 212, 168, 0.1);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  transform: translateX(4px);
+}
+
+:root.dark .sidebar-submenu-toggle:hover {
+  background: rgba(20, 26, 33, 0.6);
+}
+
+.sidebar-submenu-toggle .sidebar-chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-base);
+  opacity: 0.7;
+}
+
+.sidebar-submenu-toggle[aria-expanded="true"] .sidebar-chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-submenu-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.sidebar-submenu-items[hidden] {
+  display: none;
+}
+
+.sidebar-submenu-item {
+  padding-left: 0;
+}
+
+.sidebar-submenu-item .sidebar-link {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-subtle);
+}
+
+:root.dark .sidebar-submenu-item .sidebar-link {
+  color: #9aabb8;
+}
+
+.sidebar-submenu-item .sidebar-link:hover {
+  background: rgba(77, 212, 168, 0.08);
+  transform: translateX(2px);
+}
+
 /* Compatibilidade com .nav para scroll sync */
 .nav {
   display: none;
@@ -789,16 +1050,18 @@ main {
 
 /* Sections */
 .section {
-  padding: clamp(1.5rem, 2.5vw, 2.5rem) 0; /* Padding reduzido */
+  padding: clamp(1rem, 1.5vw, 1.75rem) 0; /* Padding reduzido para aproveitar espaço */
   border-bottom: 1px solid var(--border-subtle);
   scroll-margin-top: var(--space-2xl); /* 48px - usa token para melhor scroll-spy */
   position: relative;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Reduzir padding em seções com grids (menos conteúdo denso) */
 .section:has(.model-grid),
 .section:has(.grid-two) {
-  padding: clamp(1rem, 2vw, 2rem) 0; /* Menos espaço em seções de cards */
+  padding: clamp(0.75rem, 1.5vw, 1.5rem) 0; /* Menos espaço em seções de cards */
 }
 
 .section::after {
@@ -832,37 +1095,46 @@ main {
 }
 
 .section h2 {
-  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
-  font-weight: 700;
+  font-size: var(--font-size-2xl); /* 24px - usa token da Wiki */
+  font-weight: 500; /* Medium - alinhado com Wiki */
   margin: 0 0 1rem;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: var(--line-height-snug); /* 1.375 - usa token da Wiki */
+  letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token da Wiki */
   color: var(--text); /* Garante contraste mesmo em light mode */
+  text-align: left; /* Alinhamento à esquerda - fidelidade com Wiki */
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1; /* Alinhado com Wiki */
 }
 
 .section h3 {
-  font-size: clamp(1.5rem, 1.25rem + 1vw, 1.875rem); /* 24px-30px - padronizado com Wiki */
-  font-weight: 600;
+  font-size: var(--font-size-xl); /* 20px - usa token da Wiki */
+  font-weight: 500; /* Medium - alinhado com Wiki */
   margin: 0 0 var(--space-sm); /* 8px - usa token */
-  line-height: var(--line-height-snug); /* 1.375 - usa token para melhor hierarquia */
+  line-height: var(--line-height-normal); /* 1.5 - usa token da Wiki */
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
+  font-feature-settings: "kern" 1, "liga" 1; /* Alinhado com Wiki */
 }
 
 .section h4 {
-  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.5rem); /* 20px-24px - padronizado com Wiki */
-  font-weight: 600;
+  font-size: var(--font-size-lg); /* 18px - usa token da Wiki */
+  font-weight: 400; /* Normal - alinhado com Wiki */
   margin: 0 0 var(--space-sm); /* 8px - usa token */
-  line-height: var(--line-height-normal); /* 1.5 - usa token */
+  line-height: var(--line-height-normal); /* 1.5 - usa token da Wiki */
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
 }
 
 .section p {
   /* Cor mais escura para melhor contraste (especialmente light mode) */
   color: var(--text);
   margin: 0 0 1rem; /* Espaçamento padrão consistente entre parágrafos */
-  line-height: 1.75; /* Otimizado para leitura longa */
+  font-size: var(--font-size-base); /* 16px - usa token da Wiki */
+  line-height: var(--line-height-relaxed); /* 1.75 - usa token da Wiki */
   /* Removido max-width - texto estende na direção da seta (mais largura) */
   text-align: left;
-  word-spacing: normal;
-  letter-spacing: normal;
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
+  word-spacing: 0.05em; /* Alinhado com Wiki */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .section p:last-child {
@@ -976,21 +1248,25 @@ main {
 .card h3 {
   margin: 0 0 clamp(0.75rem, 1.5vw, 1rem);
   color: var(--text);
-  font-size: clamp(0.9375rem, 0.875rem + 0.5vw, 1.0625rem);
-  font-weight: 600;
-  line-height: var(--line-height-snug);
+  font-size: var(--font-size-xl); /* 20px - usa token da Wiki */
+  font-weight: 500; /* Medium - alinhado com Wiki */
+  line-height: var(--line-height-normal); /* 1.5 - usa token da Wiki */
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
+  font-feature-settings: "kern" 1, "liga" 1; /* Alinhado com Wiki */
 }
 
 .card p {
   margin: 0 0 0.875rem;
   color: var(--text-muted);
-  line-height: 1.7;
+  font-size: var(--font-size-base); /* 16px - usa token da Wiki */
+  line-height: var(--line-height-relaxed); /* 1.75 - usa token da Wiki */
   text-align: left;
-  word-spacing: normal;
-  letter-spacing: normal;
-  font-size: clamp(0.9375rem, 0.875rem + 0.2vw, 1rem);
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
+  word-spacing: 0.05em; /* Alinhado com Wiki */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   flex: 1; /* Permite parágrafos preencherem espaço vertical em cards */
-  /* Remove restrições de largura - texto ocupa espaço livremente */
   max-width: 100%;
 }
 
@@ -1009,7 +1285,9 @@ main {
 
 .card li {
   margin: 0.5rem 0;
-  line-height: 1.6;
+  font-size: var(--font-size-base); /* 16px - usa token da Wiki */
+  line-height: var(--line-height-relaxed); /* 1.75 - usa token da Wiki */
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
 }
 
 /* Entity list (definition list) */
@@ -1058,12 +1336,13 @@ main {
 }
 
 .subsection-title {
-  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.5rem);
-  font-weight: 600;
+  font-size: var(--font-size-2xl); /* 24px - usa token da Wiki (mesmo que h2) */
+  font-weight: 500; /* Medium - alinhado com Wiki */
   color: var(--text);
   margin: 0 0 clamp(1rem, 2vw, 1.5rem);
-  letter-spacing: var(--letter-spacing-tight);
-  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight); /* -0.025em - usa token da Wiki */
+  line-height: var(--line-height-snug); /* 1.375 - usa token da Wiki */
+  font-feature-settings: "kern" 1, "liga" 1, "ss01" 1; /* Alinhado com Wiki */
 }
 
 .rationale-grid {
@@ -1180,7 +1459,7 @@ main {
   text-align: left;
   line-height: 1.75;
   word-spacing: normal;
-  letter-spacing: normal;
+
   /* Border esquerda para destaque (pode ser sobrescrito por inline styles) */
   border-left: 4px solid var(--link);
 }
@@ -1313,15 +1592,18 @@ main {
 }
 
 .lead-text {
-  font-size: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
-  line-height: 1.75;
-  font-weight: 400; /* Peso normal para texto longo */
-  color: var(--text); /* Mais visível que muted */
-  margin: 0 0 1rem; /* Espaçamento padrão consistente */
+  font-size: var(--font-size-xl); /* 20px - usa token da Wiki (similar ao h3) */
+  line-height: var(--line-height-relaxed); /* 1.75 - usa token da Wiki */
+  font-weight: 400; /* Normal - alinhado com Wiki */
+  color: var(--text);
+  margin: 0 0 1rem;
   text-align: left;
   max-width: 100%;
-  word-spacing: normal;
-  letter-spacing: normal;
+  letter-spacing: var(--letter-spacing-normal); /* 0 - usa token da Wiki */
+  word-spacing: 0.05em; /* Alinhado com Wiki */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .lead-text:last-child {
@@ -1342,9 +1624,10 @@ main {
   border: 1px solid var(--code-border);
   color: #d4e4f0;
   font-family: "JetBrains Mono", "Fira Code", "SF Mono", "Monaco", "Cascadia Code", "Roboto Mono", ui-monospace, monospace;
-  font-size: clamp(0.875rem, 0.8125rem + 0.3125vw, 0.9375rem); /* Melhorado de 0.8125rem base */
-  line-height: 1.7; /* Melhorado de 1.6 */
-  letter-spacing: 0.01em; /* Melhor separação de caracteres */
+  font-size: var(--font-size-sm); /* 14px - usa token da Wiki */
+  line-height: var(--line-height-relaxed); /* 1.75 - usa token da Wiki */
+  letter-spacing: 0.01em; /* Mantido para código (monospace) */
+  font-feature-settings: "kern" 1, "liga" 0; /* Alinhado com Wiki (liga desabilitado para código) */
   margin: 1.5rem 0;
   position: relative;
   /* Gradiente de fade no scroll horizontal */
@@ -1401,8 +1684,12 @@ code {
   background: var(--bg-muted);
   padding: 0.125rem 0.375rem;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: var(--font-size-sm); /* 14px - usa token da Wiki */
   color: var(--accent);
+  font-family: var(--font-mono), 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-feature-settings: "kern" 1, "liga" 0; /* Alinhado com Wiki */
+  letter-spacing: 0.01em;
+  line-height: 1.6;
 }
 
 pre code {
@@ -1496,7 +1783,7 @@ pre code {
   line-height: 1.75;
   padding-right: clamp(0.5rem, 2vw, 1rem);
   word-spacing: normal;
-  letter-spacing: normal;
+
 }
 
 
@@ -1591,7 +1878,7 @@ pre code {
   align-items: center;
   justify-content: center;
   min-width: 64px;
-  font-weight: 700;
+  font-weight: 500; /* Medium - alinhado com Wiki */
   font-size: 0.75rem;
   padding: 0.375rem 0.625rem;
   border-radius: var(--radius-sm);
@@ -1734,11 +2021,6 @@ pre code {
 }
 
 @media (max-width: 600px) {
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .button {
     justify-content: center;
     width: 100%;
@@ -1842,8 +2124,8 @@ pre code {
 
 /* Footer */
 .footer {
-  margin-top: clamp(4rem, 8vw, 6rem);
-  padding: clamp(2rem, 4vw, 3rem) 0;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(0.75rem, 1.5vw, 1rem) 0;
   border-top: 1px solid var(--border);
   background: var(--bg-elevated);
 }
@@ -1884,6 +2166,121 @@ pre code {
   margin: 0.25rem 0 0;
   font-size: clamp(0.875rem, 0.9375rem + 0.2vw, 1rem);
   color: var(--text-muted);
+}
+
+/* Header External Links - Apenas ícones */
+.header-external-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.header-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.header-link-icon:hover {
+  color: var(--accent);
+  background: var(--accent-subtle);
+  transform: scale(1.1);
+}
+
+.header-link-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* Footer External Links */
+.footer-external-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-base);
+}
+
+.footer-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.footer-link-divider {
+  color: var(--text-subtle);
+  opacity: 0.5;
+}
+
+/* Footer Padrão Wiki - Genérico */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 4vw, 3rem);
+}
+
+.footer-content .text-center {
+  text-align: center;
+}
+
+.footer-content .space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.footer-title {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: var(--line-height-relaxed);
+  color: var(--text);
+  margin: 0;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-links-center {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: var(--font-size-sm);
+}
+
+.footer-tagline {
+  font-size: var(--font-size-xs);
+  color: var(--text-subtle);
+  margin-top: 2rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Ajuste do sidebar-nav para compensar logo fixo */
+@media (min-width: 1024px) {
+  .sidebar-container {
+    padding-top: calc(clamp(3.5rem, 8vw, 5rem) + 80px) !important; /* Altura do header + logo fixo */
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar-container {
+    padding-top: clamp(3.5rem, 8vw, 5rem) !important; /* Apenas altura do header quando logo está escondido */
+  }
 }
 
 .footer-links {
@@ -2374,7 +2771,6 @@ pre code {
 /* Print styles */
 @media print {
   .nav,
-  .hero-actions,
   .button {
     display: none;
   }
@@ -2392,3 +2788,757 @@ pre code {
   }
 }
 
+/* ============================================================
+   PROGRESSIVE DISCLOSURE NAVIGATION - 4 Níveis Hierárquicos
+   ============================================================ */
+
+/* Nível 1: Phase Tabs (Tabs Principais) */
+.phase-navigation {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-bottom: 0.5rem;
+}
+
+.phase-navigation::-webkit-scrollbar {
+  height: 4px;
+}
+
+.phase-navigation::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 2px;
+}
+
+/* ============================================
+   ISOLAMENTO DE CONTEÚDO - Phase Panels
+   ============================================ */
+
+/* Phase panels inativos devem estar escondidos por padrão */
+.phase-panel:not(.active) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Phase panel ativo deve estar visível */
+.phase-panel.active {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+/* Esconde todas as seções que são filhos diretos de main (fora de phase-panels) */
+main > section:not(.phase-panel):not(.phase-panels),
+main > .section:not(.phase-panel):not(.phase-panels) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+}
+
+/* Esconde seções que vêm depois de phase-panels */
+.phase-panels ~ section,
+.phase-panels ~ .section {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+}
+
+.phase-tab {
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1rem, 2vw, 1.5rem);
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition-base);
+  color: var(--text-muted);
+  font-size: clamp(0.875rem, 0.8125rem + 0.5vw, 0.9375rem);
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
+  min-width: fit-content;
+}
+
+.phase-tab:hover {
+  color: var(--text);
+  background: var(--bg-muted);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.phase-tab.active {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.phase-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Nível 2: Phase Panels (Conteúdo por Tab) */
+.phase-panels {
+  position: relative;
+}
+
+.phase-panel {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  transform: translateY(10px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.phase-panel.active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+  transform: translateY(0);
+}
+
+/* Nível 3: Section Accordions (Seções Colapsáveis) */
+.section-accordion {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  background: var(--bg);
+  transition: var(--transition-base);
+}
+
+.section-accordion:hover {
+  border-color: var(--accent-subtle);
+}
+
+.section-accordion.expanded {
+  border-color: var(--accent-subtle);
+}
+
+.section-accordion-header {
+  width: 100%;
+  padding: clamp(1rem, 1.5vw, 1.25rem) clamp(1.25rem, 2vw, 1.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: var(--text);
+  font-size: clamp(1rem, 0.9375rem + 0.5vw, 1.125rem);
+  font-weight: 600;
+  transition: var(--transition-base);
+}
+
+.section-accordion-header:hover {
+  background: var(--bg-muted);
+}
+
+.section-accordion-header .chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-base);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.section-accordion.expanded .chevron {
+  transform: rotate(180deg);
+}
+
+.section-accordion-content {
+  padding: 0 clamp(1.25rem, 2vw, 1.5rem) clamp(1.25rem, 2vw, 1.5rem);
+  display: none;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-smooth), opacity var(--transition-base), padding var(--transition-base);
+}
+
+.section-accordion-content.active {
+  display: block;
+  opacity: 1;
+  max-height: 5000px;
+  padding-top: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+/* Nível 4: Expandible Details (Conteúdo Detalhado) */
+.content-section {
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--border-subtle);
+  padding-left: clamp(1rem, 1.5vw, 1.5rem);
+  transition: var(--transition-base);
+}
+
+.content-section[open] {
+  border-left-color: var(--accent);
+}
+
+.content-section summary {
+  cursor: pointer;
+  padding: clamp(0.75rem, 1vw, 1rem) 0;
+  font-weight: 600;
+  color: var(--text);
+  font-size: clamp(0.9375rem, 0.875rem + 0.5vw, 1rem);
+  list-style: none;
+  transition: var(--transition-base);
+}
+
+.content-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.content-section summary::marker {
+  display: none;
+}
+
+.content-section summary:hover {
+  color: var(--accent);
+}
+
+.content-section .detail-content {
+  padding-bottom: clamp(1rem, 1.5vw, 1.5rem);
+  margin-top: clamp(0.5rem, 1vw, 1rem);
+}
+
+/* Nível 5: Side Panels (Documentação Profunda) */
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(600px, 90vw);
+  height: 100vh;
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform var(--transition-smooth);
+  z-index: 1000;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+}
+
+.side-panel.open {
+  transform: translateX(0);
+}
+
+.side-panel-header {
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--bg-elevated);
+  z-index: 10;
+}
+
+.side-panel-title {
+  font-size: clamp(1.125rem, 1rem + 0.75vw, 1.25rem);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.side-panel-close {
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-panel-close:hover {
+  background: var(--bg-muted);
+  color: var(--text);
+}
+
+.side-panel-content {
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+  backdrop-filter: blur(2px);
+}
+
+.panel-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.panel-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(0.625rem, 1vw, 0.75rem) clamp(1rem, 1.5vw, 1.25rem);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: clamp(0.875rem, 0.8125rem + 0.5vw, 0.9375rem);
+}
+
+.panel-button:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 1023px) {
+  .phase-navigation {
+    margin-left: 0;
+  }
+
+  .side-panel {
+    width: 100vw;
+  }
+}
+
+/* ============================================
+   SIDEBAR BRAND FIXO (Logo e Título) - Igual Wiki
+   ============================================ */
+.sidebar-brand-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--bg-elevated);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: 100%;
+  max-width: 280px;
+  border-bottom: 1px solid rgba(198, 227, 210, 0.1);
+  transition: all var(--transition-base);
+}
+
+:root.dark .sidebar-brand-fixed {
+  border-bottom-color: rgba(100, 150, 180, 0.1);
+}
+
+/* Responsivo: Esconde logo fixo em telas pequenas */
+@media (max-width: 1023px) {
+  .sidebar-brand-fixed {
+    display: none;
+  }
+}
+
+/* Responsivo: Reduz tamanho em telas médias */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .sidebar-brand-fixed {
+    max-width: 240px;
+    padding: 0.75rem clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .sidebar-brand-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .sidebar-brand-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .sidebar-brand-subtitle {
+    font-size: 0.625rem;
+  }
+}
+
+.sidebar-brand {
+  padding: 1rem 0.75rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(198, 227, 210, 0.2);
+}
+
+:root.dark .sidebar-brand {
+  border-bottom-color: rgba(100, 150, 180, 0.2);
+}
+
+.sidebar-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform var(--transition-base);
+}
+
+.sidebar-brand-link:hover {
+  transform: scale(1.02);
+}
+
+.sidebar-brand-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  object-fit: contain;
+  transition: transform var(--transition-base);
+}
+
+.sidebar-brand-link:hover .sidebar-brand-icon {
+  transform: scale(1.1) rotate(3deg);
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.sidebar-brand-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  color: var(--text);
+  margin: 0;
+  transition: color var(--transition-base);
+}
+
+.sidebar-brand-subtitle {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.sidebar-brand-link:hover .sidebar-brand-title {
+  color: var(--accent);
+}
+
+/* ============================================
+   QUICK LINKS - Igual Wiki (com hovers)
+   ============================================ */
+.sidebar-quick-links {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(198, 227, 210, 0.2);
+}
+
+:root.dark .sidebar-quick-links {
+  border-top-color: rgba(100, 150, 180, 0.2);
+}
+
+.quick-links-container {
+  padding: 0 0.75rem;
+}
+
+.quick-links-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.quick-links-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin: 0;
+}
+
+.quick-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.quick-links-item {
+  list-style: none;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  color: var(--text);
+  transition: all var(--transition-base);
+  width: 100%;
+}
+
+.quick-link:hover {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  transform: translateX(0.25rem);
+}
+
+.quick-link-icon {
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+.quick-link-icon svg {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+  fill: currentColor;
+}
+
+.quick-link:hover .quick-link-icon {
+  transform: scale(1.1);
+}
+
+.quick-link-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.quick-link-label {
+  font-weight: 500;
+}
+
+.quick-link-description {
+  font-size: var(--font-size-xs);
+  color: var(--text-subtle);
+  margin-top: 0.125rem;
+  opacity: 0.75;
+}
+
+.quick-link-external-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-subtle);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.quick-link:hover .quick-link-external-icon {
+  opacity: 1;
+}
+
+/* ============================================
+   Table of Contents (TOC) - Similar à Wiki
+   ============================================ */
+
+.toc-container {
+  background: var(--bg-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  padding: 0.75rem;
+  position: sticky;
+  top: clamp(3.5rem, 8vw, 5rem); /* Alinha com o título do header */
+  max-height: calc(100vh - clamp(3.5rem, 8vw, 5rem) - 2rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(198, 227, 210, 0.3) transparent;
+}
+
+.toc-container::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.toc-container::-webkit-scrollbar-thumb {
+  background-color: rgba(198, 227, 210, 0.3);
+  border-radius: 3px;
+}
+
+.toc-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(198, 227, 210, 0.5);
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.toc-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-item {
+  list-style: none;
+  position: relative;
+}
+
+.toc-item-level-2 {
+  padding-left: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.toc-item-level-2:first-child {
+  margin-top: 0;
+}
+
+.toc-item-level-3 {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.125rem;
+  position: relative;
+}
+
+.toc-item-level-4 {
+  padding-left: 2rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+  position: relative;
+}
+
+/* Contorno sutil para agrupar sub-itens */
+.toc-item-level-3:not(.toc-group-start)::before,
+.toc-item-level-4:not(.toc-group-start)::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(198, 227, 210, 0.3);
+  opacity: 1;
+}
+
+:root.dark .toc-item-level-3:not(.toc-group-start)::before,
+:root.dark .toc-item-level-4:not(.toc-group-start)::before {
+  background: rgba(100, 150, 180, 0.5);
+}
+
+.toc-item-level-3:not(.toc-group-start),
+.toc-item-level-4:not(.toc-group-start) {
+  padding-left: 1.25rem;
+}
+
+/* Espaçamento entre grupos (nível 2) */
+.toc-item-level-2:not(:first-child) {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(198, 227, 210, 0.3);
+}
+
+:root.dark .toc-item-level-2:not(:first-child) {
+  border-top-color: rgba(100, 150, 180, 0.5);
+}
+
+.toc-link {
+  width: 100%;
+  text-align: left;
+  padding: 0.375rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  display: block;
+}
+
+.toc-link:hover {
+  transform: translateX(2px);
+  color: var(--text);
+  background: var(--bg-subtle);
+}
+
+.toc-item-active .toc-link {
+  background: rgba(77, 212, 168, 0.15);
+  color: var(--accent);
+  font-weight: 600;
+  transform: translateX(2px);
+}
+
+/* Layout com TOC - grid similar à Wiki */
+.phase-panel-with-toc {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .phase-panel-with-toc {
+    grid-template-columns: 1fr 280px;
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .phase-panel-with-toc {
+    grid-template-columns: 1fr 300px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .phase-panel-with-toc {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+.phase-panel-content {
+  /* Conteúdo principal */
+}
+
+.phase-panel-toc {
+  /* TOC na coluna direita */
+}
+
+/* Scroll margin para headings com IDs (compensar sticky header) */
+.section h2[id],
+.section h3[id],
+.section h4[id] {
+  scroll-margin-top: 100px;
+}

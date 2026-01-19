@@ -1,0 +1,281 @@
+/* Sistema de Cores Inteligente - Profundidade e Separação de Contexto */
+/* Paleta: Verde Água → Azul Céu → Verde Musgo (transições sutis) */
+
+:root {
+  /* Cores Base - Paleta Harmônica */
+  --color-water-green: #4dd4a8;      /* Verde água - brilhante, primário */
+  --color-sky-blue: #7dd3ff;         /* Azul céu - luminoso, secundário */
+  --color-moss-green: #6b8a7d;       /* Verde musgo - profundo, terciário */
+
+  /* Variações com Luminosidade Adequada (Light Mode) */
+  --color-water-green-light: rgba(77, 212, 168, 0.15);  /* Água sutil */
+  --color-water-green-medium: rgba(77, 212, 168, 0.25); /* Água médio */
+  --color-water-green-strong: #3bc495;                  /* Água forte */
+
+  --color-sky-blue-light: rgba(125, 211, 255, 0.15);    /* Céu sutil */
+  --color-sky-blue-medium: rgba(125, 211, 255, 0.25);   /* Céu médio */
+  --color-sky-blue-strong: #5ab8e0;                     /* Céu forte */
+
+  --color-moss-green-light: rgba(107, 138, 125, 0.15);  /* Musgo sutil */
+  --color-moss-green-medium: rgba(107, 138, 125, 0.25); /* Musgo médio */
+  --color-moss-green-strong: #5a7a6d;                   /* Musgo forte */
+
+  /* Gradientes de Transição Sutil */
+  --gradient-water-to-sky: linear-gradient(135deg, var(--color-water-green-light), var(--color-sky-blue-light));
+  --gradient-sky-to-moss: linear-gradient(135deg, var(--color-sky-blue-light), var(--color-moss-green-light));
+  --gradient-moss-to-water: linear-gradient(135deg, var(--color-moss-green-light), var(--color-water-green-light));
+}
+
+:root.dark {
+  /* Variações para Dark Mode - Luminosidade Adequada */
+  --color-water-green-light: rgba(77, 212, 168, 0.12);  /* Água sutil dark */
+  --color-water-green-medium: rgba(77, 212, 168, 0.20); /* Água médio dark */
+  --color-water-green-strong: #5ae5b8;                  /* Água forte dark */
+
+  --color-sky-blue-light: rgba(125, 211, 255, 0.12);    /* Céu sutil dark */
+  --color-sky-blue-medium: rgba(125, 211, 255, 0.20);   /* Céu médio dark */
+  --color-sky-blue-strong: #7cd1ff;                     /* Céu forte dark */
+
+  --color-moss-green-light: rgba(100, 150, 180, 0.12);  /* Musgo sutil dark (azulado) */
+  --color-moss-green-medium: rgba(100, 150, 180, 0.20); /* Musgo médio dark */
+  --color-moss-green-strong: #6496b4;                   /* Musgo forte dark */
+}
+
+/* Sidebar - Separação de Contexto por Cores */
+
+/* Seção 1: Fundamentos - Verde Água (contexto base) */
+.sidebar-section:nth-child(1) .sidebar-section-toggle {
+  color: var(--color-moss-green);
+  transition: color var(--transition-slow);
+}
+
+.sidebar-section:nth-child(1) .sidebar-section-toggle:hover {
+  color: var(--color-water-green-strong);
+}
+
+.sidebar-section:nth-child(1) .sidebar-link {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.sidebar-section:nth-child(1) .sidebar-link:hover {
+  color: var(--color-water-green-strong);
+  border-left-color: var(--color-water-green-medium);
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+.sidebar-section:nth-child(1) .sidebar-link-active {
+  color: var(--color-water-green-strong);
+  border-left-color: var(--color-water-green-strong);
+}
+
+/* Seção 2: API & Fluxos - Azul Céu (transição para prático) */
+.sidebar-section:nth-child(2) .sidebar-section-toggle {
+  color: var(--color-moss-green);
+  transition: color var(--transition-slow);
+}
+
+.sidebar-section:nth-child(2) .sidebar-section-toggle:hover {
+  color: var(--color-sky-blue-strong);
+}
+
+.sidebar-section:nth-child(2) .sidebar-link {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.sidebar-section:nth-child(2) .sidebar-link:hover {
+  color: var(--color-sky-blue-strong);
+  border-left-color: var(--color-sky-blue-medium);
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+.sidebar-section:nth-child(2) .sidebar-link-active {
+  color: var(--color-sky-blue-strong);
+  border-left-color: var(--color-sky-blue-strong);
+}
+
+/* Seção 3: Funcionalidades - Verde Água → Azul Céu (meio-termo) */
+.sidebar-section:nth-child(3) .sidebar-section-toggle {
+  color: var(--color-moss-green);
+  transition: color var(--transition-slow);
+}
+
+.sidebar-section:nth-child(3) .sidebar-section-toggle:hover {
+  color: var(--color-water-green-strong);
+}
+
+.sidebar-section:nth-child(3) .sidebar-link {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.sidebar-section:nth-child(3) .sidebar-link:hover {
+  color: var(--color-sky-blue-strong);
+  border-left-color: var(--color-sky-blue-medium);
+  background: var(--gradient-water-to-sky);
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+.sidebar-section:nth-child(3) .sidebar-link-active {
+  color: var(--color-water-green-strong);
+  border-left-color: var(--color-sky-blue-medium);
+}
+
+/* Seção 4: Recursos - Verde Musgo (contexto profundo) */
+.sidebar-section:nth-child(4) .sidebar-section-toggle {
+  color: var(--color-moss-green);
+  transition: color var(--transition-slow);
+}
+
+.sidebar-section:nth-child(4) .sidebar-section-toggle:hover {
+  color: var(--color-moss-green-strong);
+}
+
+.sidebar-section:nth-child(4) .sidebar-link {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.sidebar-section:nth-child(4) .sidebar-link:hover {
+  color: var(--color-moss-green-strong);
+  border-left-color: var(--color-moss-green-medium);
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+.sidebar-section:nth-child(4) .sidebar-link-active {
+  color: var(--color-moss-green-strong);
+  border-left-color: var(--color-moss-green-strong);
+}
+
+/* Links Externos - Transição Verde Musgo → Verde Água */
+.sidebar-section-external .sidebar-section-toggle {
+  color: var(--color-moss-green);
+}
+
+.sidebar-section-external .sidebar-link-external {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  opacity: 0.85;
+}
+
+.sidebar-section-external .sidebar-link-external:hover {
+  color: var(--color-water-green-strong);
+  border-left-color: var(--color-water-green-medium);
+  background: var(--gradient-moss-to-water);
+  opacity: 1;
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+
+/* Profundidade Visual - Indicador de Contexto */
+.sidebar-section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: transparent;
+  transition: background var(--transition-slow);
+  opacity: 0;
+}
+
+.sidebar-section:hover::before {
+  opacity: 1;
+}
+
+.sidebar-section:nth-child(1):hover::before {
+  background: linear-gradient(to bottom,
+    var(--color-water-green-light),
+    var(--color-water-green-medium),
+    var(--color-water-green-light)
+  );
+}
+
+.sidebar-section:nth-child(2):hover::before {
+  background: linear-gradient(to bottom,
+    var(--color-sky-blue-light),
+    var(--color-sky-blue-medium),
+    var(--color-sky-blue-light)
+  );
+}
+
+.sidebar-section:nth-child(3):hover::before {
+  background: var(--gradient-water-to-sky);
+}
+
+.sidebar-section:nth-child(4):hover::before {
+  background: linear-gradient(to bottom,
+    var(--color-moss-green-light),
+    var(--color-moss-green-medium),
+    var(--color-moss-green-light)
+  );
+}
+
+/* Links Externos - Usar cores para distinção + ícones para serviços conhecidos */
+.sidebar-link-external {
+  color: var(--color-moss-green);
+  border-left: 2px solid transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ícones para GitHub, Discord e Araponga - manter visíveis */
+.sidebar-link-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  color: inherit;
+}
+
+.sidebar-link-external:hover .sidebar-link-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Cores específicas para ícones (harmonia com paleta) */
+.sidebar-link-icon-github .sidebar-link-icon {
+  color: var(--color-moss-green);
+}
+
+.sidebar-link-icon-github:hover .sidebar-link-icon {
+  color: var(--color-sky-blue-strong);
+}
+
+.sidebar-link-icon-discord .sidebar-link-icon {
+  color: var(--color-moss-green);
+}
+
+.sidebar-link-icon-discord:hover .sidebar-link-icon {
+  color: var(--color-sky-blue-strong);
+}
+
+.sidebar-link-icon-araponga .sidebar-link-icon {
+  color: var(--color-moss-green);
+}
+
+.sidebar-link-icon-araponga:hover .sidebar-link-icon {
+  color: var(--color-water-green-strong);
+}
+
+/* Remover ícone genérico ↗ - manter apenas ícones específicos */
+.sidebar-link-external:not(.sidebar-link-icon-github):not(.sidebar-link-icon-discord):not(.sidebar-link-icon-araponga)::after {
+  display: none;
+}
