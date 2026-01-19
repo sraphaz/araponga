@@ -728,7 +728,7 @@ main {
   box-shadow: var(--elevation-1);
   border-radius: 0;
   scrollbar-width: thin;
-  scrollbar-color: rgba(198, 227, 210, 0.3) transparent;
+  scrollbar-color: var(--accent-subtle) transparent;
   z-index: 100;
   transition: all var(--transition-base);
 }
