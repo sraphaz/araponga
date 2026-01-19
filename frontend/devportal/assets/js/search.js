@@ -14,10 +14,10 @@ function generateDevPortalIndex() {
 
     const h2 = section.querySelector('h2');
     const title = h2 ? h2.textContent.trim() : '';
-    
+
     // Extrai texto de toda a seção
     const content = section.textContent || '';
-    
+
     // Determina categoria baseado na estrutura
     const category = getCategoryFromSection(section);
 
@@ -88,7 +88,7 @@ function setupSearch() {
   // Busca quando query muda
   let searchTimeout;
   const searchInput = searchDialog.querySelector('#search-input');
-  
+
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim();
 
@@ -220,31 +220,63 @@ function closeSearch() {
 }
 
 /**
- * Mostra resultados da busca
+ * Mostra resultados da busca (XSS-safe)
+ * Usa DOM APIs ao invés de innerHTML para evitar vulnerabilidades XSS
  */
 function showResults(results) {
   const resultsContainer = document.getElementById('search-results');
   if (!resultsContainer) return;
 
+  // Limpar container de forma segura
+  while (resultsContainer.firstChild) {
+    resultsContainer.removeChild(resultsContainer.firstChild);
+  }
+
   if (results.length === 0) {
-    resultsContainer.innerHTML = '<div class="search-empty">Digite para buscar...</div>';
+    const emptyDiv = document.createElement('div');
+    emptyDiv.className = 'search-empty';
+    emptyDiv.textContent = 'Digite para buscar...';
+    resultsContainer.appendChild(emptyDiv);
     return;
   }
 
-  resultsContainer.innerHTML = results
-    .map(
-      (result) => `
-    <a href="${result.url}" class="search-result">
-      <div class="search-result-icon">📄</div>
-      <div class="search-result-content">
-        <h3>${result.title}</h3>
-        ${result.category ? `<span class="search-result-category">${result.category}</span>` : ''}
-      </div>
-      <div class="search-result-arrow">→</div>
-    </a>
-  `
-    )
-    .join('');
+  // Criar elementos DOM de forma segura (XSS-safe)
+  results.forEach((result) => {
+    const link = document.createElement('a');
+    link.href = result.url;
+    link.className = 'search-result';
+
+    // Ícone
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'search-result-icon';
+    iconDiv.textContent = '📄';
+    link.appendChild(iconDiv);
+
+    // Conteúdo
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'search-result-content';
+
+    const h3 = document.createElement('h3');
+    h3.textContent = result.title; // textContent é XSS-safe
+    contentDiv.appendChild(h3);
+
+    if (result.category) {
+      const categorySpan = document.createElement('span');
+      categorySpan.className = 'search-result-category';
+      categorySpan.textContent = result.category; // textContent é XSS-safe
+      contentDiv.appendChild(categorySpan);
+    }
+
+    link.appendChild(contentDiv);
+
+    // Seta
+    const arrowDiv = document.createElement('div');
+    arrowDiv.className = 'search-result-arrow';
+    arrowDiv.textContent = '→';
+    link.appendChild(arrowDiv);
+
+    resultsContainer.appendChild(link);
+  });
 }
 
 // Inicializa busca quando DOM estiver pronto
