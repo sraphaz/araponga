@@ -1097,7 +1097,7 @@ main {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border-radius: var(--glass-radius);
   padding: clamp(1rem, 2vw, 1.5rem) clamp(1.5rem, 3vw, 2rem);
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--elevation-2);
   /* Sem borda explícita - translúcido sem roubar espaço */
   margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }

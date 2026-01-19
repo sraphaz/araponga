@@ -212,7 +212,7 @@
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-top: none; /* Removida borda superior */
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--elevation-2);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     overflow: hidden;
@@ -233,7 +233,7 @@
   }
 
   .glass-card:hover {
-    box-shadow: var(--glass-hover-shadow);
+    box-shadow: var(--elevation-3);
     transform: translateY(-4px);
     border-color: var(--accent-subtle); /* Usa token de accent com opacity */
   }
@@ -318,7 +318,7 @@
     border-radius: var(--glass-radius);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
+    box-shadow: var(--elevation-2);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     transition: var(--transition-smooth);
@@ -329,7 +329,7 @@
   }
 
   .category-card:hover {
-    box-shadow: var(--glass-hover-shadow);
+    box-shadow: var(--elevation-3);
     transform: translateY(-2px);
     border-color: var(--accent-subtle);
   }
