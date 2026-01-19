@@ -8,8 +8,8 @@ import { URL } from 'url';
 
 // Normaliza BASE_URL para garantir que sempre termine com /wiki
 const rawBaseUrl = process.env.WIKI_URL || 'https://devportal.araponga.app/wiki';
-const BASE_URL = rawBaseUrl.endsWith('/wiki') 
-  ? rawBaseUrl 
+const BASE_URL = rawBaseUrl.endsWith('/wiki')
+  ? rawBaseUrl
   : rawBaseUrl.replace(/\/$/, '') + '/wiki';
 const TIMEOUT = 10000;
 
