@@ -91,7 +91,7 @@
 }
 
 :root.dark .sidebar-section-toggle {
-  color: #b8c5d2;
+  color: var(--text-muted);
 }
 
 :root.dark .sidebar-section-toggle:hover {
@@ -120,7 +120,7 @@
 }
 
 :root.dark .sidebar-link {
-  color: #b8c5d2;
+  color: var(--text-muted);
 }
 
 .sidebar-link:hover {

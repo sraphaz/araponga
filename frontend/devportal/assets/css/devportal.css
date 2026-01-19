@@ -724,8 +724,8 @@ main {
   overflow-y: auto;
   overflow-x: hidden;
   /* Contorno suave respeitando identidade visual */
-  border-right: 1px solid rgba(77, 212, 168, 0.08); /* Verde-água muito sutil */
-  box-shadow: 1px 0 4px rgba(77, 212, 168, 0.04); /* Sombra muito suave */
+  border-right: 1px solid var(--accent-subtle);
+  box-shadow: var(--elevation-1);
   border-radius: 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(198, 227, 210, 0.3) transparent;
@@ -734,8 +734,8 @@ main {
 }
 
 :root.dark .sidebar-container {
-  border-right-color: rgba(100, 150, 180, 0.12); /* Azul-céu muito sutil no dark */
-  box-shadow: 1px 0 6px rgba(100, 150, 180, 0.06); /* Sombra muito suave */
+  border-right-color: var(--accent-subtle);
+  box-shadow: var(--elevation-1);
   background: rgba(10, 14, 18, 0.85);
 }
 
