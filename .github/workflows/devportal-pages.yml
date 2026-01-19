@@ -54,6 +54,18 @@ jobs:
           fi
           echo "✅ index.html encontrado em dist/"
 
+          # Verificar se assets foram copiados
+          if [ ! -d "dist/assets" ]; then
+            echo "❌ ERRO: assets não encontrado em dist/"
+            ls -la dist/
+            exit 1
+          fi
+          echo "✅ assets encontrado em dist/"
+          
+          # Verificar estrutura de assets
+          echo "📁 Estrutura de assets:"
+          ls -la dist/assets/ | head -10
+
           # Copiar Wiki para subpasta /wiki (se build foi bem-sucedido)
           if [ -d "frontend/wiki/out" ]; then
             mkdir -p dist/wiki
