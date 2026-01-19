@@ -75,7 +75,8 @@ function generateBreadcrumbs() {
 }
 
 /**
- * Cria componente de breadcrumbs
+ * Cria componente de breadcrumbs (XSS-safe)
+ * Usa DOM APIs ao invés de innerHTML para evitar vulnerabilidades XSS
  */
 function createBreadcrumbs() {
   const breadcrumbs = generateBreadcrumbs();
@@ -83,25 +84,53 @@ function createBreadcrumbs() {
 
   if (!container || breadcrumbs.length <= 1) {
     // Sem breadcrumbs se só tem Home ou não há container
-    if (container) container.innerHTML = '';
+    if (container) {
+      // Limpar container de forma segura
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+    }
     return;
   }
 
-  container.innerHTML = `
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <ol class="breadcrumbs-list">
-        ${breadcrumbs
-          .map(
-            (crumb, index) => `
-          <li class="breadcrumbs-item">
-            ${index < breadcrumbs.length - 1 ? `<a href="${crumb.href}" class="breadcrumbs-link">${crumb.label}</a>` : `<span class="breadcrumbs-current" aria-current="page">${crumb.label}</span>`}
-          </li>
-        `
-          )
-          .join('')}
-      </ol>
-    </nav>
-  `;
+  // Limpar container de forma segura
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+
+  // Criar elementos DOM de forma segura (XSS-safe)
+  const nav = document.createElement('nav');
+  nav.className = 'breadcrumbs';
+  nav.setAttribute('aria-label', 'Breadcrumb');
+
+  const ol = document.createElement('ol');
+  ol.className = 'breadcrumbs-list';
+
+  breadcrumbs.forEach((crumb, index) => {
+    const li = document.createElement('li');
+    li.className = 'breadcrumbs-item';
+
+    if (index < breadcrumbs.length - 1) {
+      // Criar link de forma segura
+      const link = document.createElement('a');
+      link.href = crumb.href;
+      link.className = 'breadcrumbs-link';
+      link.textContent = crumb.label; // textContent é XSS-safe
+      li.appendChild(link);
+    } else {
+      // Criar span atual de forma segura
+      const span = document.createElement('span');
+      span.className = 'breadcrumbs-current';
+      span.setAttribute('aria-current', 'page');
+      span.textContent = crumb.label; // textContent é XSS-safe
+      li.appendChild(span);
+    }
+
+    ol.appendChild(li);
+  });
+
+  nav.appendChild(ol);
+  container.appendChild(nav);
 }
 
 /**
