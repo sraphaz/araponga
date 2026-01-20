@@ -755,7 +755,7 @@
 
   /* Horizontal rules - Modern separators (Market standards) */
   .markdown-content hr {
-    @apply my-20 border-0; /* Mais espaço - quebra visual clara */
+    @apply my-10 border-0; /* Espaçamento reduzido pela metade (2.5rem) */
     /* Removido max-width - conteúdo usa toda largura disponível */
     position: relative;
     height: 1px;
