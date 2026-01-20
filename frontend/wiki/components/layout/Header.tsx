@@ -32,9 +32,9 @@ export function Header() {
             <SearchTrigger />
             {/* Links de navegação - apenas ícones, ocultos em mobile, visíveis em desktop */}
             <div className="hidden lg:flex items-center gap-3">
-              <Link 
-                href="/docs" 
-                className="header-link-icon" 
+              <Link
+                href="/docs"
+                className="header-link-icon"
                 aria-label="Todos os Docs"
                 title="Todos os Docs"
               >
@@ -43,7 +43,9 @@ export function Header() {
                 </svg>
               </Link>
               <a
-                href="/"
+                href="https://devportal.araponga.app"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="header-link-icon"
                 aria-label="DevPortal - Referência de API"
                 title="DevPortal - Referência de API"
