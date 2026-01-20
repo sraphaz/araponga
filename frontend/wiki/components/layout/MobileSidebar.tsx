@@ -1,9 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { QuickLinks } from "./QuickLinks";
 
 interface MobileSidebarSection {
   title: string;
@@ -213,12 +212,8 @@ export function MobileSidebar() {
             </div>
           ))}
         </nav>
-
-        {/* Quick Links Section */}
-        <div className="p-4 pt-6 border-t border-forest-200 dark:border-forest-800">
-          <QuickLinks />
-        </div>
       </aside>
     </>
   );
 }
+
