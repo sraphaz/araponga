@@ -430,12 +430,12 @@ backend/Araponga.Tests/
 
 #### Features BDD Obrigatórias para Esta Fase
 
-- [ ] `Feature: Upload de Mídia` - Fluxo completo de upload (imagens, vídeos, áudios)
-- [ ] `Feature: Validação de Mídia` - Validações de tamanho, tipo e quantidade
-- [ ] `Feature: Mídias em Posts` - Integração de mídias em posts (até 10 mídias)
-- [ ] `Feature: Mídias em Eventos` - Integração de mídias em eventos (capa + adicionais)
-- [ ] `Feature: Mídias em Marketplace` - Integração de mídias em items
-- [ ] `Feature: Mídias em Chat` - Envio de imagens/áudios no chat
+- [x] `Feature: Upload de Mídia` - Fluxo completo de upload (imagens, vídeos, áudios) - **implementado**
+- [x] `Feature: Validação de Mídia` - Validações de tamanho, tipo e quantidade - **implementado**
+- [x] `Feature: Mídias em Posts` - Integração de mídias em posts (até 10 mídias) - **implementado**
+- [x] `Feature: Mídias em Eventos` - Integração de mídias em eventos (capa + adicionais) - **implementado**
+- [x] `Feature: Mídias em Marketplace` - Integração de mídias em items - **implementado**
+- [x] `Feature: Mídias em Chat` - Envio de imagens/áudios no chat - **implementado**
 
 **Exemplo de Feature**:
 ```gherkin
