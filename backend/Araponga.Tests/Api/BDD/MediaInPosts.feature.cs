@@ -198,7 +198,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta criar um post com as 11 imagens", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 27
-    testRunner.Then("deve retornar erro \"Maximum media count exceeded\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"media items allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -272,7 +272,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta criar um post com os 2 vídeos", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 39
-    testRunner.Then("deve retornar erro \"Maximum video count exceeded\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"video\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

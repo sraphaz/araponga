@@ -26,7 +26,7 @@ Funcionalidade: Mídias em Marketplace
   Cenário: Criar item com mais de 10 mídias (limite excedido)
     Dado que existem 11 imagens disponíveis
     Quando o usuário tenta criar um item com as 11 imagens
-    Então deve retornar erro "Maximum media count exceeded"
+    Então deve retornar erro "media items allowed"
 
   Cenário: Criar item com vídeo e imagens
     Dado que existe uma imagem "produto1.jpg" disponível

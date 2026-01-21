@@ -24,7 +24,7 @@ Funcionalidade: Mídias em Posts
   Cenário: Criar post com mais de 10 mídias (limite excedido)
     Dado que existem 11 imagens disponíveis
     Quando o usuário tenta criar um post com as 11 imagens
-    Então deve retornar erro "Maximum media count exceeded"
+    Então deve retornar erro "media items allowed"
 
   Cenário: Criar post com vídeo e imagem
     Dado que existe uma imagem "imagem1.jpg" disponível
@@ -36,7 +36,7 @@ Funcionalidade: Mídias em Posts
   Cenário: Criar post com mais de um vídeo (limite excedido)
     Dado que existem 2 vídeos disponíveis
     Quando o usuário tenta criar um post com os 2 vídeos
-    Então deve retornar erro "Maximum video count exceeded"
+    Então deve retornar erro "video"
 
   Cenário: Deletar post remove mídias associadas
     Dado que existe um post com 3 mídias

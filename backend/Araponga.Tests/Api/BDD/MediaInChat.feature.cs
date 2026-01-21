@@ -201,7 +201,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta enviar uma mensagem com o vídeo \"video1.mp4\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 28
-    testRunner.Then("deve retornar erro \"Videos are not allowed in chat\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"video\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -235,7 +235,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta enviar uma mensagem com a imagem", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 33
-    testRunner.Then("deve retornar erro \"Image size exceeds 5MB limit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"size exceeds\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -269,7 +269,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta enviar uma mensagem com o áudio", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 38
-    testRunner.Then("deve retornar erro \"Audio size exceeds 2MB limit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"size exceeds\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

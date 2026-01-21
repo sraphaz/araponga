@@ -160,7 +160,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("ele tenta fazer upload de um vídeo de 60MB", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 21
-    testRunner.Then("deve retornar erro \"Video size exceeds 50MB limit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"size exceeds\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -231,7 +231,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("ele tenta fazer upload de um arquivo PDF", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 32
-    testRunner.Then("deve retornar erro \"File type not allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"not allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

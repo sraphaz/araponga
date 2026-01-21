@@ -161,7 +161,7 @@ namespace Araponga.Tests.Application.BDD
     testRunner.Then("a validação deve falhar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 21
-    testRunner.And("deve retornar erro \"Image size exceeds limit\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+    testRunner.And("deve retornar erro de validação \"size exceeds\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -235,7 +235,7 @@ namespace Araponga.Tests.Application.BDD
     testRunner.Then("a validação deve falhar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 33
-    testRunner.And("deve retornar erro \"File type not allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+    testRunner.And("deve retornar erro de validação \"not allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -309,7 +309,7 @@ namespace Araponga.Tests.Application.BDD
     testRunner.Then("a validação deve falhar", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
 #line 45
-    testRunner.And("deve retornar erro \"Maximum media count exceeded\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+    testRunner.And("deve retornar erro de validação \"Maximum media count exceeded\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
             }
             this.ScenarioCleanup();

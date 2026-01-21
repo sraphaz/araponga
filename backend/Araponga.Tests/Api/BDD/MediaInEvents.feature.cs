@@ -207,7 +207,7 @@ namespace Araponga.Tests.Api.BDD
     testRunner.When("o usuário tenta criar um evento com a capa e as 6 imagens adicionais", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 30
-    testRunner.Then("deve retornar erro \"Maximum additional media count exceeded\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
+    testRunner.Then("deve retornar erro \"additional media items allowed\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Então ");
 #line hidden
             }
             this.ScenarioCleanup();

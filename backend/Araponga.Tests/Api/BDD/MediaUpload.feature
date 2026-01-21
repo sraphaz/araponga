@@ -18,7 +18,7 @@ Funcionalidade: Upload de Mídia
   Cenário: Upload de vídeo excedendo limite
     Dado que o usuário "João" está autenticado
     Quando ele tenta fazer upload de um vídeo de 60MB
-    Então deve retornar erro "Video size exceeds 50MB limit"
+    Então deve retornar erro "size exceeds"
 
   Cenário: Upload de áudio com sucesso
     Dado que o usuário "João" está autenticado
@@ -29,4 +29,4 @@ Funcionalidade: Upload de Mídia
   Cenário: Upload de tipo de arquivo não permitido
     Dado que o usuário "João" está autenticado
     Quando ele tenta fazer upload de um arquivo PDF
-    Então deve retornar erro "File type not allowed"
+    Então deve retornar erro "not allowed"

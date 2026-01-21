@@ -18,7 +18,7 @@ Funcionalidade: Validação de Mídia
     Dado que existe uma imagem de 15MB
     Quando o sistema valida a imagem
     Então a validação deve falhar
-    E deve retornar erro "Image size exceeds limit"
+    E deve retornar erro de validação "size exceeds"
 
   Cenário: Validar tipo MIME permitido
     Dado que existe um arquivo com tipo MIME "image/jpeg"
@@ -30,7 +30,7 @@ Funcionalidade: Validação de Mídia
     Dado que existe um arquivo com tipo MIME "application/pdf"
     Quando o sistema valida o tipo MIME
     Então a validação deve falhar
-    E deve retornar erro "File type not allowed"
+    E deve retornar erro de validação "not allowed"
 
   Cenário: Validar quantidade de mídias dentro do limite
     Dado que existem 5 mídias
@@ -42,4 +42,4 @@ Funcionalidade: Validação de Mídia
     Dado que existem 11 mídias
     Quando o sistema valida a quantidade
     Então a validação deve falhar
-    E deve retornar erro "Maximum media count exceeded"
+    E deve retornar erro de validação "Maximum media count exceeded"

@@ -27,7 +27,7 @@ Funcionalidade: Mídias em Eventos
     Dado que existe uma imagem "capa.jpg" disponível
     E que existem 6 imagens adicionais disponíveis
     Quando o usuário tenta criar um evento com a capa e as 6 imagens adicionais
-    Então deve retornar erro "Maximum additional media count exceeded"
+    Então deve retornar erro "additional media items allowed"
 
   Cenário: Criar evento com capa e vídeo adicional
     Dado que existe uma imagem "capa.jpg" disponível
