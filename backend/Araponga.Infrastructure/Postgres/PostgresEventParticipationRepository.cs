@@ -66,16 +66,16 @@ public sealed class PostgresEventParticipationRepository : IEventParticipationRe
             .Select(group => new
             {
                 EventId = group.Key,
-                Interested = group.Count(p => p.Status == EventParticipationStatus.Interested),
-                Confirmed = group.Count(p => p.Status == EventParticipationStatus.Confirmed)
+                Interested = (long)group.Count(p => p.Status == EventParticipationStatus.Interested),
+                Confirmed = (long)group.Count(p => p.Status == EventParticipationStatus.Confirmed)
             })
             .ToListAsync(cancellationToken);
 
         return counts
             .Select(item => new EventParticipationCounts(
                 item.EventId,
-                item.Interested > maxInt32 ? maxInt32 : item.Interested,
-                item.Confirmed > maxInt32 ? maxInt32 : item.Confirmed))
+                item.Interested > maxInt32 ? maxInt32 : (int)item.Interested,
+                item.Confirmed > maxInt32 ? maxInt32 : (int)item.Confirmed))
             .ToList();
     }
 

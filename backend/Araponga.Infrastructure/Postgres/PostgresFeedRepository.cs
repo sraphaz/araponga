@@ -139,14 +139,14 @@ public sealed class PostgresFeedRepository : IFeedRepository
             .AsNoTracking()
             .Where(like => postIds.Contains(like.PostId))
             .GroupBy(like => like.PostId)
-            .Select(g => new { PostId = g.Key, Count = g.Count() })
+            .Select(g => new { PostId = g.Key, Count = (long)g.Count() })
             .ToDictionaryAsync(x => x.PostId, x => x.Count > maxInt32 ? maxInt32 : (int)x.Count, cancellationToken);
 
         var shareCounts = await _dbContext.PostShares
             .AsNoTracking()
             .Where(share => postIds.Contains(share.PostId))
             .GroupBy(share => share.PostId)
-            .Select(g => new { PostId = g.Key, Count = g.Count() })
+            .Select(g => new { PostId = g.Key, Count = (long)g.Count() })
             .ToDictionaryAsync(x => x.PostId, x => x.Count > maxInt32 ? maxInt32 : (int)x.Count, cancellationToken);
 
         var result = new Dictionary<Guid, PostCounts>();
@@ -176,7 +176,7 @@ public sealed class PostgresFeedRepository : IFeedRepository
             .Skip(skip)
             .Take(take)
             .ToListAsync(cancellationToken);
-        
+
         return records.Select(record => record.ToDomain()).ToList();
     }
 
