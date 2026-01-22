@@ -27,17 +27,44 @@ while ((match = mermaidRegex.exec(htmlContent)) !== null) {
   const diagramId = match[1];
   const diagramCode = match[2].trim();
   
-  // Limpar código: remover entidades HTML e tags XML
-  const cleanedCode = diagramCode
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&#x27;/g, "'")
-    .replace(/&#39;/g, "'")
-    .replace(/<\/?[a-z][^>]*>/gi, '') // Remove tags XML/HTML
-    .replace(/<\/[a-zA-Z][^>]*$/gm, '') // Remove tags incompletas no final da linha
-    .trim();
+  // Limpar código: remover entidades HTML e tags XML de forma segura
+  // Usar uma função de desescape que processa todas as entidades de uma vez
+  function unescapeHtmlEntities(text) {
+    // Criar um elemento temporário para usar o parser nativo do navegador/Node
+    // Isso evita problemas de double escaping
+    const entityMap = {
+      '&lt;': '<',
+      '&gt;': '>',
+      '&quot;': '"',
+      '&amp;': '&',
+      '&#x27;': "'",
+      '&#39;': "'",
+      '&#x2F;': '/',
+      '&#x60;': '`',
+      '&#x3D;': '='
+    };
+    
+    // Processar em ordem reversa para evitar re-substituições
+    // Começar com &amp; primeiro para evitar double unescape
+    let result = text;
+    result = result.replace(/&amp;/g, '&');
+    result = result.replace(/&lt;/g, '<');
+    result = result.replace(/&gt;/g, '>');
+    result = result.replace(/&quot;/g, '"');
+    result = result.replace(/&#x27;/g, "'");
+    result = result.replace(/&#39;/g, "'");
+    result = result.replace(/&#x2F;/g, '/');
+    result = result.replace(/&#x60;/g, '`');
+    result = result.replace(/&#x3D;/g, '=');
+    
+    // Remover tags XML/HTML após desescapar
+    result = result.replace(/<\/?[a-z][^>]*>/gi, '');
+    result = result.replace(/<\/[a-zA-Z][^>]*$/gm, '');
+    
+    return result;
+  }
+  
+  const cleanedCode = unescapeHtmlEntities(diagramCode).trim();
   
   diagrams.push({
     id: diagramId,
