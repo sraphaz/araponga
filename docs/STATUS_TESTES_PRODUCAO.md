@@ -2,7 +2,7 @@
 
 ## 📊 Resumo Atual dos Testes
 
-**Data**: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+**Data**: Verificar com `dotnet test` no backend/Araponga.Tests
 
 ### Resultados da Suite Completa
 
