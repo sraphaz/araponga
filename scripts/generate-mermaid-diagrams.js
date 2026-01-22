@@ -27,19 +27,11 @@ while ((match = mermaidRegex.exec(htmlContent)) !== null) {
   const diagramId = match[1];
   const diagramCode = match[2].trim();
 
-  // Limpar código: remover entidades HTML e tags XML de forma segura
-  // Usar uma função de desescape que processa todas as entidades de uma vez
-  // Isso evita problemas de double escaping
+  // Limpar código: remover entidades HTML e caracteres de tag de forma segura
+  // Decodificar entidades primeiro; em seguida remover < e > para evitar injeção de tags
   function unescapeHtmlEntities(text) {
-    // Primeiro, remover tags XML/HTML antes de processar entidades
-    // Isso evita que tags contenham entidades que seriam processadas incorretamente
-    let result = text.replace(/<\/?[a-z][^>]*>/gi, '');
-    result = result.replace(/<\/[a-zA-Z][^>]*$/gm, '');
-    
-    // Agora processar entidades HTML de forma segura usando uma única regex
-    // com callback para evitar double unescaping
-    // A regex captura todas as entidades conhecidas de uma vez
-    result = result.replace(/&(?:amp|lt|gt|quot|#x27|#39|#x2F|#x60|#x3D);/g, (match) => {
+    // Primeiro, processar entidades HTML de forma segura (uma única regex + callback evita double unescaping)
+    let result = text.replace(/&(?:amp|lt|gt|quot|#x27|#39|#x2F|#x60|#x3D);/g, (match) => {
       switch (match) {
         case '&amp;': return '&';
         case '&lt;': return '<';
@@ -52,7 +44,9 @@ while ((match = mermaidRegex.exec(htmlContent)) !== null) {
         default: return match; // Se não reconhecer, mantém original para evitar corrupção
       }
     });
-    
+    // Em seguida, remover todos os caracteres de início/fim de tag (< e >)
+    // Garante que nenhuma tag (ex.: <script>) permaneça após o desescape; código Mermaid puro, não HTML
+    result = result.replace(/[<>]/g, '');
     return result;
   }
 
