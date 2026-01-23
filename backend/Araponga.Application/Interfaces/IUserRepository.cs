@@ -22,14 +22,6 @@ public interface IUserRepository
     Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
     /// <summary>
-    /// Busca um usuário pelo email.
-    /// </summary>
-    /// <param name="email">Email do usuário.</param>
-    /// <param name="cancellationToken">Token de cancelamento.</param>
-    /// <returns>Usuário encontrado ou null se não existir.</returns>
-    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
-
-    /// <summary>
     /// Adiciona um novo usuário ao repositório.
     /// </summary>
     /// <param name="user">Usuário a ser adicionado.</param>
@@ -42,7 +34,7 @@ public interface IUserRepository
     /// <param name="user">Usuário com dados atualizados.</param>
     /// <param name="cancellationToken">Token de cancelamento.</param>
     Task UpdateAsync(User user, CancellationToken cancellationToken);
-    
+
     /// <summary>
     /// Busca múltiplos usuários pelos seus IDs em uma única operação (batch).
     /// </summary>
