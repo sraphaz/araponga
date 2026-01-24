@@ -5,6 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Araponga.Infrastructure.Email;
 
+/// <summary>
+/// Logging email sender for development/testing.
+/// All sensitive data (email addresses) is intentionally excluded from logs.
+/// Security fixes applied on 2026-01-24.
+/// </summary>
 public sealed class LoggingEmailSender : IEmailSender
 {
     private readonly ILogger<LoggingEmailSender> _logger;
