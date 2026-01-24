@@ -1,4 +1,6 @@
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
 using Araponga.Application.Models;
@@ -215,20 +217,22 @@ public sealed class SmtpEmailSender : IEmailSender
 
     private static string MaskEmail(string email)
     {
-        if (string.IsNullOrEmpty(email) || email.Length < 3)
+        if (string.IsNullOrWhiteSpace(email))
             return "***";
 
-        var parts = email.Split('@');
-        if (parts.Length != 2)
+        // Use a non-reversible hash of the email to prevent log forging and PII exposure
+        // Remove control characters first to prevent log injection
+        var sanitized = new string(email.Where(c => !char.IsControl(c)).ToArray()).Trim();
+        
+        if (string.IsNullOrEmpty(sanitized))
             return "***";
 
-        var localPart = parts[0];
-        var domain = parts[1];
+        // Generate SHA-256 hash of the email
+        var emailBytes = Encoding.UTF8.GetBytes(sanitized);
+        var hashBytes = SHA256.HashData(emailBytes);
+        var hashHex = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
 
-        var maskedLocal = localPart.Length > 1
-            ? localPart[0] + new string('*', Math.Max(1, localPart.Length - 2)) + localPart[^1]
-            : "***";
-
-        return $"{maskedLocal}@{domain}";
+        // Return hash prefix for correlation without exposing the email
+        return $"email#{hashHex.Substring(0, 8)}";
     }
 }
