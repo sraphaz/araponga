@@ -272,7 +272,7 @@ public sealed class VotingPerformanceTests
                 "ThemePrioritization",
                 "Distributed Votes Test",
                 "Test with many options",
-                Enumerable.Range(1, 20).Select(i => $"Option{i}").ToArray(), // 20 opções
+                Enumerable.Range(1, 10).Select(i => $"Option{i}").ToArray(), // 10 opções (máximo permitido)
                 "AllMembers",
                 null,
                 null));
@@ -302,7 +302,7 @@ public sealed class VotingPerformanceTests
         for (int i = 0; i < voteCount; i++)
         {
             var userId = Guid.NewGuid();
-            var optionIndex = random.Next(1, 21); // 20 opções
+            var optionIndex = random.Next(1, 11); // 10 opções
             var option = $"Option{optionIndex}";
 
             var vote = new Vote(
@@ -331,7 +331,7 @@ public sealed class VotingPerformanceTests
             $"GetResults levou {stopwatch.ElapsedMilliseconds}ms para {voteCount} votos distribuídos, esperado < {maxMilliseconds}ms");
 
         // Validar que todas as opções têm resultados
-        Assert.True(results.Results.Count >= 15, // Pelo menos 15 das 20 opções devem ter votos
+        Assert.True(results.Results.Count >= 8, // Pelo menos 8 das 10 opções devem ter votos
             $"Resultados devem incluir múltiplas opções, mas apenas {results.Results.Count} opções têm votos");
     }
 }

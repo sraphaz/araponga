@@ -724,6 +724,14 @@ public sealed class GovernanceIntegrationTests
         var voting = await createResponse.Content.ReadFromJsonAsync<VotingResponse>();
         Assert.NotNull(voting);
 
+        // Abrir votação para poder fechá-la (não há endpoint para isso)
+        var dataStore = factory.GetDataStore();
+        var domainVoting = dataStore.Votings.FirstOrDefault(v => v.Id == voting.Id);
+        if (domainVoting != null)
+        {
+            domainVoting.Open();
+        }
+
         // Criar curador
         var curatorToken = await LoginForTokenAsync(client, "google", "test-security-curator-close");
         SetAuthHeader(client, curatorToken);
