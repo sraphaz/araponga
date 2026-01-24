@@ -135,134 +135,213 @@ backend/
 
 **[Índice Completo da Documentação](./docs/00_INDEX.md)** — Navegação estruturada
 
+### Fases e Roadmap
+- [**Backlog de Fases (1-29)** →  `docs/backlog-api/`](./docs/backlog-api/) — **29 fases planejadas, 14.5 implementadas**
+- [Roadmap Completo](./docs/02_ROADMAP.md) — Visão de longo prazo
+- [Estrutura da Documentação](./docs/STRUCTURE.md) — Onde encontrar cada documento
+
 ### Visão e Produto
-- [Visão do Produto](./docs/01_PRODUCT_VISION.md)
-- [Roadmap](./docs/02_ROADMAP.md)
-- [Backlog](./docs/03_BACKLOG.md)
-- [User Stories](./docs/04_USER_STORIES.md)
-- [Glossário](./docs/05_GLOSSARY.md)
+- [Visão do Produto](./docs/01_PRODUCT_VISION.md) — Princípios e valores
+- [Glossário](./docs/05_GLOSSARY.md) — Terminologia do projeto
 
 ### Arquitetura
 - [Decisões Arquiteturais (ADRs)](./docs/10_ARCHITECTURE_DECISIONS.md)
 - [Arquitetura de Services](./docs/11_ARCHITECTURE_SERVICES.md)
 - [Modelo de Domínio](./docs/12_DOMAIN_MODEL.md)
-- [Domain Routing](./docs/13_DOMAIN_ROUTING.md)
 
 ### Desenvolvimento
+- [Guia de Desenvolvimento](./docs/DEVELOPMENT.md) — Setup local e padrões
+- [Configuração e Setup](./docs/SETUP.md) — Instalar e rodar o projeto
+- [API Documentation](./docs/API.md) — Endpoints principais
 - [Plano de Implementação](./docs/20_IMPLEMENTATION_PLAN.md)
-- [Revisão de Código](./docs/21_CODE_REVIEW.md)
 - [Análise de Coesão e Testes](./docs/22_COHESION_AND_TESTS.md)
-- [Implementação de Recomendações](./docs/23_IMPLEMENTATION_RECOMMENDATIONS.md)
 
-### Operações
-- [Moderação](./docs/30_MODERATION.md)
-- [Admin e Observabilidade](./docs/31_ADMIN_OBSERVABILITY.md)
-- [Rastreabilidade](./docs/32_TRACEABILITY.md)
+### Operações e Segurança
+- [Documentação de Segurança](./docs/SECURITY_CONFIGURATION.md) — Configuração segura
+- [Avaliação para Produção](./docs/50_PRODUCAO_AVALIACAO_COMPLETA.md) — Checklist
+- [Governance System](./docs/GOVERNANCE_SYSTEM.md) — Votação e moderação
+- [Community Moderation](./docs/COMMUNITY_MODERATION.md) — Políticas de moderação
+- [Voting System](./docs/VOTING_SYSTEM.md) — Sistema de votação
 
-### Produção e Deploy
-- [Avaliação Completa para Produção](./docs/50_PRODUCAO_AVALIACAO_COMPLETA.md)
-- [Plano de Requisitos Desejáveis](./docs/51_PRODUCAO_PLANO_DESEJAVEIS.md)
+### Frontend e Wiki
+- [Wiki Frontend](./frontend/wiki) — Documentação interativa com Next.js
+- [Developer Portal](./frontend/devportal) — Portal público (GitHub Pages)
 
 ---
 
-## Estado Atual do Projeto
+## 🚀 Estado do Projeto - 29 Fases de Desenvolvimento
 
-### Funcionalidades Implementadas
+O Araponga está em **desenvolvimento ativo** com **14+ fases implementadas** e validadas. O projeto segue um modelo de desenvolvimento disciplinado com foco em arquitetura sólida.
 
-#### Core
-- ✅ Backend estruturado com Clean Architecture
-- ✅ Autenticação social com JWT e gestão de usuários
+### 📊 Progresso do Desenvolvimento
+
+| Fases | Status | Descrição |
+|-------|--------|-----------|
+| **Fases 1-14** | ✅ **IMPLEMENTADAS** | Core features, feed, marketplace, governança, segurança |
+| **Fase 14.5** | ✅ **IMPLEMENTADA** | Verificação de aderência, melhorias de performance, refinamentos |
+| **Fases 15-29** | 📋 **PLANEJADAS** | Futuras evoluções (veja roadmap completo) |
+
+**Total de fases planejadas**: 29  
+**Fases implementadas**: 14.5  
+**Progresso**: ~50% do roadmap
+
+---
+
+### ✅ Funcionalidades Implementadas (Fases 1-14.5)
+
+#### Fase 1: Infraestrutura e Autenticação
+- ✅ Backend com Clean Architecture
+- ✅ Autenticação social (Google, Apple, Facebook) com JWT
+- ✅ Gestão de usuários com perfil completo
+- ✅ Segurança: validação de JWT, secret management, HTTPS/HSTS obrigatório
+
+#### Fase 2: Territórios e Descoberta
+- ✅ Territórios como entidades geográficas neutras
 - ✅ Descoberta e seleção de territórios
-- ✅ Vínculos (morador e visitante) com regras de visibilidade
-- ✅ Feature flags por território
-- ✅ Chat territorial: canais (público/moradores) + grupos com aprovação por curadoria
-- ✅ Chat com suporte a envio de imagens (1 imagem por mensagem, máx. 5MB)
+- ✅ Caracterização do território (tags, informações geográficas)
+- ✅ Memberships: morador vs visitante com regras de visibilidade
 
-#### Feed e Social
-- ✅ Feed territorial com criação, interações (like, comment, share) e moderação
-- ✅ Feed pessoal e feed do território
-- ✅ Posts com GeoAnchors (georreferenciamento)
+#### Fase 3: Vínculos e Visibilidade
+- ✅ Sistema de vínculos territoriais com papéis diferenciados
+- ✅ Regras de visibilidade baseadas em membership
+- ✅ Perfis públicos de usuários com validação de acesso
+
+#### Fase 4: Feed Territorial e Posts
+- ✅ Feed cronológico por território (sem algoritmos manipulativos)
+- ✅ Criação de posts com georreferenciamento (GeoAnchors)
 - ✅ Posts com múltiplas imagens (até 10 por post)
-- ✅ Paginação completa em todos os endpoints de listagem (15 endpoints paginados)
-- ✅ Otimizações de performance (batch operations, cache invalidation)
+- ✅ Interações: likes, comentários, shares
+- ✅ Paginação eficiente com cursor-based pagination
 
-#### Mapa
-- ✅ Mapa territorial com entidades (MapEntity) e relações
-- ✅ Pins integrados (MapEntity + GeoAnchors de posts e assets)
-- ✅ Visualização de entidades do território no mapa
+#### Fase 5: Chat Territorial
+- ✅ Chat com canais (público/moradores) e grupos
+- ✅ Aprovação de entrada em canais por curadoria
+- ✅ Suporte a envio de imagens em mensagens (1 imagem/msg, máx. 5MB)
+- ✅ Notificações de chat em tempo real
 
-#### Marketplace
+#### Fase 6-9: Mapa, Eventos, Alertas
+- ✅ Mapa territorial com MapEntity (estabelecimentos, órgãos, espaços)
+- ✅ Pins integrados com GeoAnchors de posts
+- ✅ Eventos comunitários com participações e RSVP
+- ✅ Alertas de saúde pública e comunicação emergencial
+
+#### Fase 10: Mídia Avançada e Armazenamento
+- ✅ Sistema completo de mídia com 3 provedores (Local, S3, Azure Blob)
+- ✅ Upload de imagens, vídeos e documentos com validação
+- ✅ Cache de URLs com Redis/Memory Cache
+- ✅ Georreferenciamento de assets (Territory Assets)
+- ✅ Configuração por território de provedores de mídia
+
+#### Fase 11: Marketplace Territorial
 - ✅ Stores (lojas/comércios) por território
-- ✅ Items (produtos e serviços) com busca e filtros
-- ✅ Items com múltiplas imagens (até 10 por item)
-- ✅ Cart e Checkout
-- ✅ Inquiries (consultas de compra)
-- ✅ Platform Fees (taxas configuráveis por território)
+- ✅ Items (produtos/serviços) com busca full-text
+- ✅ Cart e checkout com sistema de inquiries
+- ✅ Platform Fees configuráveis por território
+- ✅ Ratings de stores e items
+- ✅ Seller Balance e transações
 
-#### Eventos
-- ✅ Eventos comunitários por território
-- ✅ Participações em eventos
-- ✅ Eventos com georreferenciamento
-- ✅ Eventos com imagem de capa e imagens adicionais (até 10 no total)
-
-#### Alertas e Saúde
-- ✅ Alertas de saúde pública (Health Alerts)
-- ✅ Comunicação emergencial por território
-
-#### Assets e Mídia
-- ✅ Recursos compartilhados do território (Territory Assets)
-- ✅ Validação e georreferenciamento de assets
-- ✅ Sistema completo de mídia (armazenamento local, S3, Azure Blob)
-- ✅ Upload, download e gestão de mídias (imagens, vídeos, documentos)
-- ✅ Cache de URLs de mídia com suporte a Redis e Memory Cache
-
-#### Moderação
-- ✅ Reports de posts e usuários
+#### Fase 12: Moderação e Segurança
+- ✅ Reports de posts e usuários com categorização
 - ✅ Bloqueios de usuários
 - ✅ Sanções territoriais e globais
 - ✅ Moderação automática por threshold
+- ✅ Logs de auditoria completos
 
-#### Notificações
-- ✅ Notificações in-app com outbox e inbox persistido
-- ✅ Sistema confiável de entrega de notificações
+#### Fase 13: Notificações Avançadas
+- ✅ Notificações in-app com outbox pattern
+- ✅ Inbox persistido com estado
+- ✅ Sistema confiável de entrega
+- ✅ Configuração por usuário de tipos de notificação
 
-#### Segurança e Produção
-- ✅ JWT secret via variáveis de ambiente (obrigatório, mínimo 32 caracteres)
-- ✅ HTTPS obrigatório em produção com HSTS
-- ✅ Rate limiting completo (proteção contra DDoS e abuso):
-  - Auth endpoints: 5 req/min
-  - Feed endpoints: 100 req/min
-  - Write endpoints: 30 req/min
-- ✅ Security headers em todas as respostas (X-Frame-Options, CSP, etc.)
-- ✅ Validação completa de input (14 validators FluentValidation)
-- ✅ Testes de segurança abrangentes (SQL injection, XSS, CSRF, path traversal, etc.)
+#### Fase 14: Governança Comunitária
+- ✅ Interesses do usuário (personalização de feed)
+- ✅ Sistema de votação comunitária (5 tipos)
+- ✅ Moderação dinâmica definida pela comunidade
+- ✅ Caracterização do território via votação
+- ✅ Regras de convivência configuráveis
+- ✅ Histórico de participação no perfil do usuário
+
+#### Fase 14.5: Refinamentos e Validação
+- ✅ Métricas de connection pooling em tempo real (ObservableGauge)
+- ✅ Tags explícitas em posts (filtro avançado)
+- ✅ Configuração avançada de notificações
+- ✅ Verificação de aderência entre código e documentação
+- ✅ Reorganização e limpeza da documentação
+
+---
+
+### 🔒 Segurança e Confiabilidade (Cross-Phase)
+
+- ✅ JWT com secret de 32+ caracteres via variáveis de ambiente
+- ✅ HTTPS obrigatório com HSTS em produção
+- ✅ Rate limiting com proteção contra DDoS/abuso:
+  - Auth: 5 req/min
+  - Feed: 100 req/min
+  - Escrita: 30 req/min
+- ✅ Security headers (X-Frame-Options, CSP, X-Content-Type-Options, etc.)
+- ✅ 14 validadores FluentValidation
+- ✅ Testes de segurança: SQL injection, XSS, CSRF, path traversal, etc.
 - ✅ CORS configurado com validação em produção
-- ✅ Health checks completos (liveness e readiness)
-- ✅ Logging estruturado (Serilog)
-- ✅ Connection pooling e retry policies
-- ✅ Índices de banco para performance
-- ✅ Cache invalidation automático em 9 services críticos
-- ✅ CacheMetricsService para monitoramento de cache hit/miss
-- ✅ Constantes centralizadas (redução de duplicação - 100% completo)
+- ✅ Connection pooling com retry policies
+- ✅ Índices de banco para performance crítica
+- ✅ Cache invalidation automático em 9 services
+- ✅ Logging estruturado com Serilog
+- ✅ Health checks (liveness + readiness)
 
-#### Testes
-- ✅ Testes automatizados (unidade, integração, E2E)
-- ✅ 371/371 testes passando (100%)
-- ✅ Cobertura de testes ~50% (aumentada, objetivo >90%)
-- ✅ Testes de segurança (14 testes: autenticação, autorização, injection, CSRF, etc.)
-- ✅ Testes de performance (7 testes com SLAs definidos)
-- ✅ Testes de services (ReportService, JoinRequestService, CacheMetrics)
-- ✅ CacheMetricsService com métricas de hit/miss
-- ✅ CI configurado com builds reprodutíveis (`packages.lock.json`)
+---
 
-### Em Planejamento
+### 🧪 Testes (Fases 1-14.5)
 
-- Frontend e experiências móveis
-- Friends (círculo interno) e stories exclusivos
-- Admin/observabilidade com dashboards avançados
-- GeoAnchor avançado / memórias / galeria
+- ✅ **798 testes** passando (100%)
+- ✅ Testes de unidade, integração e E2E
+- ✅ 14 testes de segurança
+- ✅ 7 testes de performance com SLAs
+- ✅ Cobertura ~50% (objetivo >90%)
+- ✅ CI configurado com builds reprodutíveis
 
-O projeto está em evolução ativa, com foco em solidez antes de escala.
+---
+
+### 📋 Fases 15-29: Próximas Evoluções (Planejadas)
+
+| Fase | Foco | Estimativa |
+|------|------|-----------|
+| **15-18** | Admin/Observabilidade avançada, friends/stories, otimizações | Q2-Q3 2025 |
+| **19-22** | Economias locais, moedas, trocas avançadas | Q3-Q4 2025 |
+| **23-26** | Governança distribuída, DAOs, participação ampliada | Q4 2025-Q1 2026 |
+| **27-29** | Integrações regenerativas, dados soberados, escalabilidade | Q1-Q2 2026 |
+
+**Roadmap completo**: [`docs/02_ROADMAP.md`](./docs/02_ROADMAP.md)
+
+---
+
+### 📈 Métricas do Projeto
+
+| Métrica | Valor |
+|---------|-------|
+| **Linhas de código** | ~40.000+ |
+| **Endpoints de API** | 150+ |
+| **Testes automatizados** | 798 (100% passando) |
+| **Cobertura de testes** | ~50% (meta: >90%) |
+| **Camadas de arquitetura** | 5 (Domain, Application, Infrastructure, API, Tests) |
+| **Serviços de domínio** | 25+ |
+| **Repositórios** | 20+ |
+| **Migrations do BD** | 40+ |
+| **Security validators** | 14 |
+| **Fases planejadas** | 29 |
+| **Fases implementadas** | 14.5 |
+| **Progresso do roadmap** | ~50% |
+
+---
+
+### 🎯 Próximos Passos Imediatos
+
+1. **Frontend**: Começar desenvolvimento da interface (Vue/React)
+2. **Performance**: Aumentar cobertura de testes para >90%
+3. **Documentação**: Manter wiki sincronizado com código
+4. **Admin Dashboard**: Ferramentas de observabilidade para moderadores
+5. **Escalabilidade**: Preparar para múltiplos territórios/usuários em produção
+
+O projeto está em **evolução disciplinada**, com foco em solidez e escalabilidade antes de crescimento agressivo.
 
 ---
 
