@@ -1,11 +1,11 @@
-# Fase 48: Banco de Sementes e Mudas Territorial
+# Fase 30: Mobile Avançado
 
-**Duração**: 3 semanas (21 dias úteis)  
-**Prioridade**: 🟢 MÉDIA (Recursos compartilhados)  
-**Depende de**: Fase 6 (Marketplace), Fase 14 (Governança)  
-**Estimativa Total**: 120 horas  
+**Duração**: 2 semanas (14 dias úteis)  
+**Prioridade**: 🟡 ALTA (Experiência mobile otimizada)  
+**Depende de**: Fase 9 (Push tokens), Sistema de Notificações  
+**Estimativa Total**: 56 horas  
 **Status**: ⏳ Pendente  
-**Nota**: Renumerada de Fase 29 para Fase 48, reposicionada para Onda 10 (Diferenciação Avançada). Fase 30 agora é Mobile Avançado.
+**Nota**: Renumerada de Fase 29 para Fase 30 (Onda 6: Autonomia Digital).
 
 ---
 
@@ -72,7 +72,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ### Semana 1: Analytics e Deep Linking
 
-#### 29.1 Analytics Mobile Avançado
+#### 30.1 Analytics Mobile Avançado
 **Estimativa**: 12 horas (1.5 dias)  
 **Status**: ❌ Não implementado
 
@@ -108,7 +108,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ---
 
-#### 29.2 Deep Linking Avançado
+#### 30.2 Deep Linking Avançado
 **Estimativa**: 16 horas (2 dias)  
 **Status**: ❌ Não implementado
 
@@ -155,7 +155,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ### Semana 2: Background Tasks e Push Refinados
 
-#### 29.3 Background Tasks Otimizados
+#### 30.3 Background Tasks Otimizados
 **Estimativa**: 12 horas (1.5 dias)  
 **Status**: ❌ Não implementado
 
@@ -202,7 +202,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ---
 
-#### 29.4 Push Notifications Refinados
+#### 30.4 Push Notifications Refinados
 **Estimativa**: 16 horas (2 dias)  
 **Status**: ❌ Não implementado
 
@@ -253,7 +253,19 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ---
 
-## ✅ Critérios de Sucesso da Fase
+## 📊 Resumo da Fase 30
+
+| Tarefa | Estimativa | Status | Prioridade |
+|--------|------------|--------|------------|
+| Analytics Mobile | 12h | ❌ Pendente | 🔴 Alta |
+| Deep Linking Avançado | 16h | ❌ Pendente | 🔴 Alta |
+| Background Tasks | 12h | ❌ Pendente | 🔴 Alta |
+| Push Notifications | 16h | ❌ Pendente | 🔴 Alta |
+| **Total** | **56h (14 dias)** | | |
+
+---
+
+## ✅ Critérios de Sucesso da Fase 30
 
 ### Funcionalidades
 - ✅ Analytics mobile funcionando completamente
@@ -272,7 +284,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 - ✅ Testes de integração: todos passando
 - ✅ Testes de performance: dentro dos limites
 - ✅ Documentação atualizada
-- Considerar **Testcontainers + PostgreSQL** para testes de integração (analytics mobile, push, deep linking) com banco real (estratégia na Fase 19; [TESTCONTAINERS_POSTGRES_IMPACTO](../../TESTCONTAINERS_POSTGRES_IMPACTO.md)).
+- Considerar **Testcontainers + PostgreSQL** para testes de integração (analytics mobile, push, deep linking) com banco real (estratégia na Fase 43; [TESTCONTAINERS_POSTGRES_IMPACTO](../../TESTCONTAINERS_POSTGRES_IMPACTO.md)).
 
 ---
 
@@ -310,7 +322,7 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ---
 
-## 🚀 Próximos Passos (Pós-Fase 29)
+## 🚀 Próximos Passos (Pós-Fase 30)
 
 1. **Analytics Avançado**:
    - Funnels de conversão
@@ -334,7 +346,6 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 
 ---
 
-**Versão**: 1.0  
-**Criado em**: 2025-01-20  
-**Status**: ⏳ Pendente  
-**Ver**: [Priorização Estratégica](../35_PRIORIZACAO_ESTRATEGICA_API_FRONTEND.md) para ordem otimizada
+**Status**: ⏳ **FASE 30 PENDENTE**  
+**Depende de**: Fase 9, Sistema de Notificações  
+**Crítico para**: Experiência Mobile Otimizada

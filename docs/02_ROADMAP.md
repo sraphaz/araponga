@@ -63,39 +63,7 @@ O MVP do Araponga foi concluído com sucesso, estabelecendo uma base técnica ro
 
 O roadmap estratégico foi reorganizado com base em análise comparativa de mercado e padrões de investimento, priorizando funcionalidades que elevam o Araponga ao nível de plataformas líderes. As fases foram reorganizadas em ondas estratégicas com foco em valor entregue e convergência de mercado.
 
-### Onda 1: Fundação de Governança e Sustentabilidade (Mês 0-3) 🔴 CRÍTICO
-
-**Objetivo**: Implementar base de governança participativa e sustentabilidade financeira.
-
-| Fase | Título | Prioridade | Duração | Status |
-|------|--------|------------|---------|--------|
-| **Fase 14** | Governança Comunitária e Votação | 🔴 P0 | 21 dias | ⏳ Planejado |
-| **Fase 15** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
-| **Fase 14.8** | Finalização Completa das Fases 1-15 | 🔴 P0 | 20 dias | ⏳ Novo ⭐ NOVA |
-| **Fase 37** | Dashboard de Métricas Comunitárias | 🟡 P1 | 14 dias | ⏳ Novo |
-
-**Resultado Esperado**: Governança participativa funcional, aumento de engajamento sem complexidade de blockchain. Base completa das fases 1-15 finalizada.
-
-**Referência**: [Estratégia de Convergência - Fase 1](./39_ESTRATEGIA_CONVERGENCIA_MERCADO.md#fase-1-fundação-de-governança-mês-0-3) | [Fase 14.8](./backlog-api/FASE14_8.md)
-
----
-
-### Onda 2: Sustentabilidade Financeira (Mês 3-6) 🔴 CRÍTICO
-
-**Objetivo**: Aumentar receitas recorrentes e capacidade de monetização de eventos.
-
-| Fase | Título | Prioridade | Duração | Status |
-|------|--------|------------|---------|--------|
-| **Fase 13** | Conector de Envio de Emails | 🔴 P0 | 14 dias | ⏳ Planejado |
-| **Fase 38** | Ticketing para Eventos | 🟡 P1 | 21 dias | ⏳ Novo |
-
-**Resultado Esperado**: Sustentabilidade financeira melhorada através de receitas recorrentes e monetização de eventos.
-
-**Referência**: [Estratégia de Convergência - Fase 2](./39_ESTRATEGIA_CONVERGENCIA_MERCADO.md#fase-2-sustentabilidade-financeira-mês-3-6)
-
----
-
-### Onda 3: Essencial Pós-MVP (Mês 0-6) 🔴 CRÍTICO
+### Onda 1: MVP Essencial (Mês 0-3) 🔴 CRÍTICO
 
 **Objetivo**: Completar funcionalidades essenciais para MVP completo.
 
@@ -104,20 +72,41 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | **Fase 9** | Perfil de Usuário Completo | 🔴 P0 | 21 dias | ⏳ Planejado |
 | **Fase 10** | Mídias Avançadas (Vídeos, Áudios) | 🔴 P0 | 25 dias | ⏳ Planejado |
 | **Fase 11** | Edição e Gestão | 🟡 P1 | 15 dias | ⏳ Planejado |
+| **Fase 12** | Otimizações Finais | 🟡 P1 | 28 dias | ⏳ Planejado |
 
 **Resultado Esperado**: MVP completo com todas as funcionalidades essenciais.
 
 ---
 
-### Onda 4: Economia Local (Mês 6-9) 🔴 CRÍTICO
+### Onda 2: Governança e Sustentabilidade (Mês 0-6) 🔴 CRÍTICO
+
+**Objetivo**: Implementar base de governança participativa e sustentabilidade financeira.
+
+| Fase | Título | Prioridade | Duração | Status |
+|------|--------|------------|---------|--------|
+| **Fase 13** | Conector de Envio de Emails | 🔴 P0 | 14 dias | ⏳ Planejado |
+| **Fase 14** | Governança Comunitária e Votação | 🔴 P0 | 21 dias | ⏳ Planejado |
+| **Fase 15** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
+| **Fase 16** | Finalização Completa das Fases 1-15 | 🔴 P0 | 20 dias | ⏳ Novo ⭐ NOVA (renumerada de 14.8) |
+
+**Resultado Esperado**: Governança participativa funcional, aumento de engajamento sem complexidade de blockchain. Base completa das fases 1-15 finalizada.
+
+**Referência**: [Estratégia de Convergência - Fase 1](./39_ESTRATEGIA_CONVERGENCIA_MERCADO.md#fase-1-fundação-de-governança-mês-0-3) | [Fase 14.8](./backlog-api/FASE14_8.md)
+
+---
+
+
+---
+
+### Onda 3: Economia Local (Mês 6-9) 🔴 CRÍTICO
 
 **Objetivo**: Implementar funcionalidades de economia local que geram valor imediato.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 24** | Sistema de Compra Coletiva | 🔴 P0 | 28 dias | ⏳ Planejado ⬆️ **P1→P0** |
-| **Fase 25** | Sistema de Hospedagem Territorial | 🔴 P0 | 56 dias | ⏳ Novo ⬆️ **P1→P0** |
-| **Fase 26** | Sistema de Demandas e Ofertas | 🔴 P0 | 21 dias | ⏳ Novo ⬆️ **P1→P0** ⭐ NOVA |
+| **Fase 17** | Sistema de Compra Coletiva | 🔴 P0 | 28 dias | ⏳ Planejado ⬆️ **P1→P0** |
+| **Fase 18** | Sistema de Hospedagem Territorial | 🔴 P0 | 56 dias | ⏳ Novo ⬆️ **P1→P0** |
+| **Fase 19** | Sistema de Demandas e Ofertas | 🔴 P0 | 21 dias | ⏳ Novo ⬆️ **P1→P0** ⭐ NOVA |
 
 **Resultado Esperado**: Economia local funcional com compras coletivas, hospedagem e demandas/ofertas, gerando valor imediato com pagamentos convencionais.
 
@@ -127,17 +116,17 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 4.5: Preparação Web3 (Mês 12+) 🟡 ALTA
+### Onda 7: Preparação Web3 (Mês 12+) 🟡 ALTA
 
 **Objetivo**: Preparar infraestrutura técnica para integração blockchain quando houver demanda.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 16** | Avaliação e Escolha de Blockchain | 🟡 P1 | 14 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 17** | Camada de Abstração Blockchain | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 18** | Integração Wallet (WalletConnect) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 19** | Smart Contracts Básicos | 🟡 P1 | 45 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 36** | Suporte a Criptomoedas | 🟡 P1 | 28 dias | ⏳ Planejado |
+| **Fase 31** | Avaliação e Escolha de Blockchain | 🟡 P1 | 14 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 32** | Camada de Abstração Blockchain | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 33** | Integração Wallet (WalletConnect) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 34** | Smart Contracts Básicos | 🟡 P1 | 45 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 35** | Suporte a Criptomoedas | 🟡 P1 | 28 dias | ⏳ Planejado |
 
 **Resultado Esperado**: Base técnica sólida para Web3, permitindo implementação de DAO quando houver demanda real.
 
@@ -147,15 +136,15 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 5: DAO e Tokenização (Mês 18+) 🟡 ALTA
+### Onda 8: DAO e Tokenização (Mês 18+) 🟡 ALTA
 
 **Objetivo**: Implementar DAO completa com tokens on-chain quando houver demanda.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 20** | Tokens On-chain (ERC-20) | 🟡 P1 | 60 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 21** | Governança Tokenizada | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
-| **Fase 39** | Proof of Presence On-chain | 🟡 P1 | 30 dias | ⏳ Novo |
+| **Fase 36** | Tokens On-chain (ERC-20) | 🟡 P1 | 60 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 37** | Governança Tokenizada | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 38** | Proof of Presence On-chain | 🟡 P1 | 30 dias | ⏳ Novo |
 
 **Resultado Esperado**: DAO completa e competitiva, alinhada com padrões de mercado, quando houver demanda real.
 
@@ -165,30 +154,31 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 4.6: Economia Local Completa (Mês 9-12) 🟡 ALTA
+### Onda 4: Economia Local Completa (Mês 9-12) 🟡 ALTA
 
 **Objetivo**: Completar funcionalidades de economia local e circular.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 27** | Sistema de Trocas Comunitárias | 🟡 P1 | 21 dias | ⏳ Planejado |
-| **Fase 28** | Sistema de Entregas Territoriais | 🟡 P1 | 28 dias | ⏳ Planejado ⬇️ Reposicionada |
-| **Fase 29** | Sistema de Moeda Territorial | 🟡 P1 | 35 dias | ⏳ Planejado ⬇️ Reposicionada |
+| **Fase 20** | Sistema de Trocas Comunitárias | 🟡 P1 | 21 dias | ⏳ Planejado ⭐ Renumerada (era 24) |
+| **Fase 21** | Sistema de Entregas Territoriais | 🟡 P1 | 28 dias | ⏳ Planejado ⭐ Renumerada (era 28) |
+| **Fase 22** | Sistema de Moeda Territorial | 🟡 P1 | 35 dias | ⏳ Planejado ⭐ Renumerada (era 20) |
 
 **Resultado Esperado**: Economia local completa com compras coletivas, hospedagem, demandas/ofertas, trocas, entregas e moeda territorial.
 
 **Justificativa**: Priorizar serviços que funcionam com pagamentos atuais, criando ecossistema robusto antes de implementar moeda territorial virtual.
 
-### Onda 7: Autonomia Digital (Mês 12-18) 🟡 ALTA
+### Onda 6: Autonomia Digital (Mês 12-18) 🟡 ALTA
 
 **Objetivo**: Implementar funcionalidades de autonomia digital e serviços.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 30** | Hub de Serviços Digitais Base | 🟡 P1 | 21 dias | ⏳ Planejado |
-| **Fase 31** | Chat com IA e Consumo Consciente | 🟡 P1 | 14 dias | ⏳ Planejado |
-| **Fase 32** | Negociação Territorial | 🟡 P1 | 28 dias | ⏳ Planejado |
-| **Fase 33** | Banco de Sementes e Mudas | 🟡 P1 | 21 dias | ⏳ Planejado |
+| **Fase 26** | Hub de Serviços Digitais | 🟡 P1 | 21 dias | ⏳ Planejado ⭐ Renumerada (era 25) |
+| **Fase 27** | Chat com IA | 🟡 P1 | 14 dias | ⏳ Planejado ⭐ Renumerada (era 26) |
+| **Fase 28** | Negociação Territorial | 🟡 P1 | 28 dias | ⏳ Planejado ⭐ Renumerada (era 27) |
+| **Fase 30** | Mobile Avançado | 🟡 P1 | 14 dias | ⏳ Planejado ⭐ Renumerada (era 29) |
+| **Fase 48** | Banco de Sementes e Mudas | 🟢 P2 | 21 dias | ⏳ Planejado ⭐ Renumerada (era 28, 29) |
 
 **Resultado Esperado**: Economia circular funcional com compras coletivas, hospedagem territorial, trocas, entregas e recursos compartilhados. Autonomia digital com serviços digitais integrados. Moeda territorial implementada após ecossistema robusto de serviços.
 
@@ -198,15 +188,16 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 8: Diferenciação e Expansão (Mês 12-18) 🟢 MÉDIA
+### Onda 10: Extensões e Diferenciação (Mês 18+) 🟢 MÉDIA
 
 **Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 42** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
-| **Fase 43** | Rental System | 🟢 P2 | 45 dias | ⏳ Novo |
-| **Fase 29** | Suporte Mobile Avançado | 🟡 P1 | 14 dias | ⏳ Planejado |
+| **Fase 44** | Integrações Externas | 🟢 P2 | 35 dias | ⏳ Planejado ⭐ Renumerada (era 22) |
+| **Fase 45** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
+| **Fase 46** | Rental System | 🟢 P2 | 45 dias | ⏳ Novo |
+| **Fase 48** | Banco de Sementes | 🟢 P2 | 21 dias | ⏳ Planejado ⭐ Renumerada (era 28, 29) |
 
 **Resultado Esperado**: Plataforma completa e diferenciada, com funcionalidades avançadas.
 
@@ -214,43 +205,26 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 5: Conformidade e Inteligência (Mês 6-18) 🟡 IMPORTANTE
+### Onda 5: Conformidade e Soberania (Mês 6-12) 🟡 ALTA
 
-**Objetivo**: Otimizações finas, inteligência artificial e conformidade.
-
-| Fase | Título | Prioridade | Duração | Status |
-|------|--------|------------|---------|--------|
-| **Fase 12** | Otimizações Finais | 🟡 P1 | 28 dias | ⏳ Planejado |
-| **Fase 22** | Inteligência Artificial | 🟡 P1 | 28 dias | ⏳ Planejado |
-| **Fase 40** | Agente IA (Versão Básica) | 🟡 P1 | 90 dias | ⏳ Novo ⬇️ Reposicionada |
-
-### Onda 6: Soberania Territorial (Mês 6-12) 🟡 ALTA
-
-**Objetivo**: Implementar funcionalidades de saúde territorial (gamificação vem depois).
+**Objetivo**: Implementar funcionalidades de inteligência artificial, saúde territorial e métricas.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 23** | Saúde Territorial e Monitoramento | 🟡 P1 | 35 dias | ⏳ Planejado |
+| **Fase 23** | Inteligência Artificial | 🟡 P1 | 28 dias | ⏳ Planejado ⭐ Renumerada (era 15) |
+| **Fase 24** | Saúde Territorial e Monitoramento | 🟡 P1 | 35 dias | ⏳ Planejado ⭐ Renumerada (era 18) |
+| **Fase 25** | Dashboard de Métricas | 🟡 P1 | 14 dias | ⏳ Novo |
 
-**Nota**: Gamificação (Fase 41) foi movida para Onda 10, depois de funcionalidades core.
+**Nota**: Gamificação (Fase 42) foi movida para Onda 9, depois de funcionalidades core.
 
-### Onda 9: Otimizações e Extensões (Mês 6-18) 🟡 IMPORTANTE
+### Onda 9: Gamificação e Diferenciação (Mês 18+) 🟡 ALTA
 
-**Objetivo**: Otimizações finais e extensões avançadas.
-
-| Fase | Título | Prioridade | Duração | Status |
-|------|--------|------------|---------|--------|
-| **Fase 35** | Arquitetura Modular | 🟡 P1 | 35 dias | ⏳ Planejado ⬇️ Reposicionada (P2 → P1) |
-| **Fase 43** | Integrações Externas | 🟢 P2 | 35 dias | ⏳ Planejado |
-
-### Onda 10: Gamificação e Incentivos (Mês 18+) 🟢 BAIXA
-
-**Objetivo**: Implementar gamificação como decoração/incentivo (DEPOIS de funcionalidades core).
+**Objetivo**: Implementar gamificação e diferenciação (DEPOIS de funcionalidades core).
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 41** | Gamificação Harmoniosa | 🟡 P1 | 28 dias | ⏳ Planejado ⬇️ Reposicionada |
-| **Fase 42** | Proof of Sweat (Tradicional) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ Reposicionada |
+| **Fase 42** | Gamificação Harmoniosa | 🟡 P1 | 28 dias | ⏳ Planejado ⭐ Renumerada (era 17) |
+| **Fase 43** | Arquitetura Modular | 🟡 P1 | 35 dias | ⏳ Planejado ⭐ Renumerada (era 19) |
 
 **Resultado Esperado**: Gamificação implementada DEPOIS de funcionalidades que enriquecem o produto, servindo como incentivo para uso de funcionalidades já implementadas.
 
@@ -268,9 +242,9 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 | Prioridade | Descrição | Timeline | Fases (Ordem Sequencial) |
 |------------|-----------|----------|--------------------------|
-| 🔴 **P0 - Crítico** | Valor imediato e funcionalidades essenciais | 0-12 meses | 9-10, 13-15, 24-26 |
-| 🟡 **P1 - Alta** | Importante, incluindo Web3 quando houver demanda | 0-18 meses | 11-12, 16-23, 27-42 |
-| 🟢 **P2 - Média** | Desejável, mas não bloqueante | 12-24 meses | 43-45 |
+| 🔴 **P0 - Crítico** | Valor imediato e funcionalidades essenciais | 0-12 meses | 9-10, 13-16, 17-19 |
+| 🟡 **P1 - Alta** | Importante, incluindo Web3 quando houver demanda | 0-18 meses | 11-12, 20-30, 31-42 |
+| 🟢 **P2 - Média** | Desejável, mas não bloqueante | 12-24 meses | 43-48 |
 
 **Nota**: Blockchain (Fases 16-21) foi reposicionada de P0 para P1 considerando contexto brasileiro. Ver [Reavaliação Blockchain Prioridade](./REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)
 
@@ -281,11 +255,11 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | Marco | Prazo | Funcionalidades | Impacto |
 |-------|-------|-----------------|---------|
 | **Governança Básica** | Mês 3 | Votação (Fase 14) + Subscriptions (Fase 15) | Alto |
-| **Economia Local** | Mês 6 | Compra Coletiva (Fase 24) + Hospedagem (Fase 25) + Demandas/Ofertas (Fase 26) | Crítico |
-| **Sustentabilidade** | Mês 6 | Subscriptions (Fase 15) + Ticketing (Fase 38) | Médio-Alto |
-| **Web3 Ready** | Mês 12+ | Blockchain (Fases 16-19) + Wallets (Fase 18) | Médio (quando houver demanda) |
-| **DAO Completa** | Mês 18+ | Tokens (Fase 20) + Governança Tokenizada (Fase 21) | Médio (quando houver demanda) |
-| **Diferenciação** | Mês 18+ | Learning Hub (Fase 44) + Rental System (Fase 45) + IA (Fase 22, 40) | Médio |
+| **Economia Local** | Mês 6 | Compra Coletiva (Fase 17) + Hospedagem (Fase 18) + Demandas/Ofertas (Fase 19) | Crítico |
+| **Sustentabilidade** | Mês 6 | Subscriptions (Fase 15) + Ticketing (Fase 39) | Médio-Alto |
+| **Web3 Ready** | Mês 12+ | Blockchain (Fases 31-34) + Wallets (Fase 33) | Médio (quando houver demanda) |
+| **DAO Completa** | Mês 18+ | Tokens (Fase 36) + Governança Tokenizada (Fase 37) | Médio (quando houver demanda) |
+| **Diferenciação** | Mês 18+ | Learning Hub (Fase 46) + Rental System (Fase 47) + IA (Fase 23, 40) | Médio |
 
 ---
 
@@ -299,7 +273,14 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 ---
 
 **Última Atualização**: 2026-01-25  
-**Versão**: 3.1  
-**Status**: ✅ MVP Completo | 📊 Estratégia Atualizada | 🔄 Fases Organizadas por Prioridade
+**Versão**: 3.2 - Numeração Coerente  
+**Status**: ✅ MVP Completo | 📊 Estratégia Atualizada | 🔄 Numeração Coerente
 
-**Nota**: As fases foram reorganizadas em ordem sequencial de prioridade de implementação. Ver [Ordem de Fases por Prioridade](./ORDEM_FASES_POR_PRIORIDADE.md) e [Mapeamento de Renumeração](./MAPEAMENTO_RENUMERACAO_FASES.md) para detalhes.
+**Nota Importante**: As fases foram reorganizadas para garantir **coerência na numeração**: fases com números menores são implementadas antes de fases com números maiores. A **Fase 14.8** foi renumerada para **Fase 16** (depois de Fase 15), e todas as fases subsequentes foram renumeradas para manter a sequência coerente.
+
+**Referências**: 
+- [Mapa Completo das Fases](./backlog-api/MAPA_FASES.md) ⭐ NOVO - Mapa centralizado
+- [Guia de Reorganização](./backlog-api/GUIA_REORGANIZACAO_FASES.md) ⭐ NOVO - Guia passo-a-passo
+- [Reorganização Numeração Coerente](./REORGANIZACAO_NUMERACAO_COERENTE.md)
+- [Ordem de Fases por Prioridade](./ORDEM_FASES_POR_PRIORIDADE.md)
+- [Mapeamento de Renumeração](./MAPEAMENTO_RENUMERACAO_FASES.md)
