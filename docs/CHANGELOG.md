@@ -9,6 +9,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Alterado - Fase 12 Documentação (2026-01-25)
+
+- ✅ **FASE12.md**: status atualizado para ~98%; "Resumo da Fase 10" e "Critérios da Fase 10" corrigidos para Fase 12; tabelas de implementação alinhadas.
+- ✅ **FASE12_RESULTADOS.md**: documento completo com métricas finais, referências, links para FASE12/README/MAPA_FASES/02_ROADMAP e implementação (compression, testes Analytics, FeatureFlag, MediaStorageConfig, UserPreferences).
+- ✅ **README.md**, **MAPA_FASES.md**, **02_ROADMAP.md**, **backlog-api/README.md**: Fase 12 atualizada para ~98%; inclusão de Response Compression (gzip/brotli) na descrição.
+
+---
+
 ### Adicionado - Fase 14: Governança Comunitária e Sistema de Votação (2025-01-21)
 
 #### Funcionalidades
