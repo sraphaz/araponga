@@ -34,6 +34,19 @@
 
 **Total Phase 7**: 66 testes (26 + 40 novos)
 
+### ✅ Serviços Menores - Edge Cases Adicionados (2026-01-24)
+
+| Serviço | Arquivo | Testes | Status |
+|---------|---------|--------|--------|
+| SystemConfigCacheService | `SystemConfigCacheServiceEdgeCasesTests.cs` | 14 testes | ✅ Completo |
+| EmailQueueService | `EmailQueueServiceEdgeCasesTests.cs` | 15 testes | ✅ Completo |
+| EmailTemplateService | `EmailTemplateServiceEdgeCasesTests.cs` | 16 testes | ✅ Completo |
+| PasswordResetService | `PasswordResetServiceEdgeCasesTests.cs` | 12 testes | ✅ Completo |
+| TerritoryCharacterizationService | `TerritoryCharacterizationServiceEdgeCasesTests.cs` | 12 testes | ✅ Completo |
+| UserMediaPreferencesService | `UserMediaPreferencesServiceEdgeCasesTests.cs` | 11 testes | ✅ Completo |
+
+**Total Novos Testes**: 70 testes de edge cases para serviços menores
+
 ---
 
 ## 📊 Status Phase 8: Infrastructure Layer - Repositórios e Storage
@@ -221,14 +234,14 @@
 
 ---
 
-**Status**: ✅ **PHASES 7, 8 e 9 COMPLETAS E VALIDADAS**  
+**Status**: ✅ **PHASES 7, 8 e 9 COMPLETAS E VALIDADAS + NOVOS TESTES DE EDGE CASES**  
 **Build Status**: ✅ **0 erros de compilação**  
-**Test Status**: ✅ **1488/1508 testes passando (98.7%), 20 pulados, 0 falhando**  
-**Cobertura de Código**: **45.72% linhas, 38.2% branches, 48.31% métodos** (análise realizada em 2026-01-24)  
-**Nota**: A cobertura medida inclui todo o código do projeto (incluindo infraestrutura HTTP, migrations, configuração).  
-**Cobertura Real em Camadas de Negócio**: 
-- Domain Layer: ~85-90% (estimada)
-- Application Layer: ~75-85% (estimada)
+**Test Status**: ✅ **1762/1791 testes passando (98.4%), 20 pulados, 9 falhando (não relacionados aos novos testes)**  
+**Cobertura de Código Geral**: **34.51% linhas, 38.14% branches** (análise realizada em 2026-01-24)  
+**Nota**: A cobertura geral inclui todo o código do projeto (incluindo infraestrutura HTTP, migrations, configuração).  
+**Cobertura Real em Camadas de Negócio** (análise focada realizada em 2026-01-24): 
+- **Domain Layer**: **82.23% linhas, 74.39% branches** ✅ (meta: 90%+)
+- **Application Layer**: **66.37% linhas, 50.39% branches** ⚠️ (meta: 90%+, gap: ~24%)
 - Infrastructure (crítica): ~50-60% (estimada)
 
 **Gap para 90%**: ~110-160 testes adicionais focados em camadas de negócio.  
@@ -254,4 +267,29 @@ Ver análise detalhada: [`docs/ANALISE_COBERTURA_GAP.md`](./ANALISE_COBERTURA_GA
 ### 📈 Total Geral
 - **268 testes** criados nas Phases 7, 8 e 9
 - **112 testes** da Phase 6
-- **Total acumulado**: 380+ testes de edge cases
+- **70 testes** adicionados para serviços menores (2026-01-24)
+- **Total acumulado**: 450+ testes de edge cases
+
+### 📊 Análise de Cobertura Atualizada (2026-01-24)
+
+#### Domain Layer
+- **Cobertura de Linhas**: 82.23% ✅
+- **Cobertura de Branches**: 74.39% ✅
+- **Status**: Próximo da meta de 90%
+- **Gap**: ~8% linhas, ~16% branches
+
+#### Application Layer
+- **Cobertura de Linhas**: 66.37% ⚠️
+- **Cobertura de Branches**: 50.39% ⚠️
+- **Status**: Abaixo da meta de 90%
+- **Gap**: ~24% linhas, ~40% branches
+- **Observação**: Com os 70 novos testes de edge cases, espera-se aumento na cobertura
+
+#### Próximos Passos Recomendados
+1. **Application Layer**: Focar em aumentar cobertura de branches (atualmente 50.39%)
+2. **Domain Layer**: Aumentar cobertura de branches para 90%+
+3. **Análise Detalhada**: Identificar métodos/classes específicas com baixa cobertura
+
+**Ver análise detalhada do gap para 90%**:
+- [`RESUMO_GAP_90_PORCENTO.md`](./RESUMO_GAP_90_PORCENTO.md) - Resumo executivo
+- [`PLANO_90_PORCENTO_COBERTURA_DETALHADO.md`](./PLANO_90_PORCENTO_COBERTURA_DETALHADO.md) - Plano completo

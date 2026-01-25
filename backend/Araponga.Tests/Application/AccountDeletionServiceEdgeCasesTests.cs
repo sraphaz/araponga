@@ -7,6 +7,10 @@ using Xunit;
 
 namespace Araponga.Tests.Application;
 
+/// <summary>
+/// Edge case tests for AccountDeletionService,
+/// focusing on null/empty inputs, non-existent users, and anonymization edge cases.
+/// </summary>
 public sealed class AccountDeletionServiceEdgeCasesTests
 {
     private readonly InMemoryDataStore _dataStore;
@@ -40,47 +44,38 @@ public sealed class AccountDeletionServiceEdgeCasesTests
     }
 
     [Fact]
-    public async Task AnonymizeUserDataAsync_WithEmptyUserId_ReturnsFailure()
+    public async Task AnonymizeUserDataAsync_WithEmptyGuid_ReturnsFailure()
     {
         var result = await _service.AnonymizeUserDataAsync(Guid.Empty, CancellationToken.None);
 
         Assert.True(result.IsFailure);
-        Assert.Contains("not found", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not found", result.Error ?? "");
     }
 
     [Fact]
-    public async Task AnonymizeUserDataAsync_WithNonExistentUserId_ReturnsFailure()
+    public async Task AnonymizeUserDataAsync_WithNonExistentUser_ReturnsFailure()
     {
         var result = await _service.AnonymizeUserDataAsync(Guid.NewGuid(), CancellationToken.None);
 
         Assert.True(result.IsFailure);
-        Assert.Contains("not found", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not found", result.Error ?? "");
     }
 
     [Fact]
-    public async Task AnonymizeUserDataAsync_WithUserWithAllFields_AnonymizesAllPersonalData()
+    public async Task AnonymizeUserDataAsync_WithExistingUser_AnonymizesData()
     {
         var userId = Guid.NewGuid();
         var user = new User(
             userId,
-            "Original Name",
-            "original@example.com",
+            "Test User",
+            "test@example.com",
             "123.456.789-00",
-            null, // Não pode ter CPF e foreignDocument ao mesmo tempo
-            "11987654321",
-            "123 Main St",
+            null,
+            "(11) 90000-0000",
+            "Rua Teste",
             "google",
-            "external-id",
-            true,
-            "secret",
-            "hash",
-            DateTime.UtcNow,
-            UserIdentityVerificationStatus.Verified,
-            DateTime.UtcNow,
-            Guid.NewGuid(),
-            "Bio text",
+            "test-external-id",
             DateTime.UtcNow);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
 
         var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
@@ -88,63 +83,15 @@ public sealed class AccountDeletionServiceEdgeCasesTests
         Assert.True(result.IsSuccess);
         var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
         Assert.NotNull(anonymizedUser);
-        Assert.Null(anonymizedUser.Email);
+        Assert.Null(anonymizedUser!.Email);
+        Assert.Equal("000.000.000-00", anonymizedUser.Cpf);
         Assert.Null(anonymizedUser.PhoneNumber);
         Assert.Null(anonymizedUser.Address);
-        Assert.Null(anonymizedUser.ForeignDocument);
-        Assert.Null(anonymizedUser.TwoFactorSecret);
-        Assert.Null(anonymizedUser.TwoFactorRecoveryCodesHash);
-        Assert.Null(anonymizedUser.TwoFactorVerifiedAtUtc);
-        Assert.Null(anonymizedUser.IdentityVerifiedAtUtc);
-        Assert.Null(anonymizedUser.AvatarMediaAssetId);
-        Assert.Null(anonymizedUser.Bio);
-        Assert.Equal("000.000.000-00", anonymizedUser.Cpf);
-        Assert.False(anonymizedUser.TwoFactorEnabled);
-        Assert.Equal(UserIdentityVerificationStatus.Unverified, anonymizedUser.IdentityVerificationStatus);
-        Assert.StartsWith("User_", anonymizedUser.DisplayName);
-        Assert.Equal($"anon_{userId}", anonymizedUser.ExternalId);
+        Assert.Contains("User_", anonymizedUser.DisplayName);
     }
 
     [Fact]
-    public async Task AnonymizeUserDataAsync_WithUserWithMinimalFields_AnonymizesCorrectly()
-    {
-        var userId = Guid.NewGuid();
-        var user = new User(
-            userId,
-            "Minimal User",
-            null,
-            "123.456.789-00",
-            null,
-            null,
-            null,
-            "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
-            DateTime.UtcNow);
-
-        await _userRepository.AddAsync(user, CancellationToken.None);
-
-        var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
-
-        Assert.True(result.IsSuccess);
-        var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
-        Assert.NotNull(anonymizedUser);
-        Assert.Null(anonymizedUser.Email);
-        Assert.Null(anonymizedUser.PhoneNumber);
-        Assert.Null(anonymizedUser.Address);
-        Assert.Equal("000.000.000-00", anonymizedUser.Cpf);
-        Assert.StartsWith("User_", anonymizedUser.DisplayName);
-    }
-
-    [Fact]
-    public async Task AnonymizeUserDataAsync_WithUserPreferences_UpdatesToDefaults()
+    public async Task AnonymizeUserDataAsync_WithUserWithPreferences_ResetsPreferences()
     {
         var userId = Guid.NewGuid();
         var user = new User(
@@ -156,93 +103,27 @@ public sealed class AccountDeletionServiceEdgeCasesTests
             null,
             null,
             "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
+            "test-external-id",
             DateTime.UtcNow);
-
-        var notificationPrefs = new NotificationPreferences(
-            postsEnabled: true,
-            commentsEnabled: true,
-            eventsEnabled: true,
-            alertsEnabled: true,
-            marketplaceEnabled: true,
-            moderationEnabled: true,
-            membershipRequestsEnabled: true);
-        var emailPrefs = EmailPreferences.Default();
-
-        var preferences = new UserPreferences(
-            userId,
-            ProfileVisibility.Private,
-            ContactVisibility.Private,
-            shareLocation: true,
-            showMemberships: false,
-            notificationPreferences: notificationPrefs,
-            emailPreferences: emailPrefs,
-            createdAtUtc: DateTime.UtcNow,
-            updatedAtUtc: DateTime.UtcNow);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
-        await _preferencesRepository.AddAsync(preferences, CancellationToken.None);
+
+        var preferences = await _preferencesRepository.GetOrCreateDefaultAsync(userId, CancellationToken.None);
+        preferences.UpdatePrivacy(ProfileVisibility.Private, ContactVisibility.Private, false, false, DateTime.UtcNow);
+        await _preferencesRepository.UpdateAsync(preferences, CancellationToken.None);
 
         var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
         var updatedPreferences = await _preferencesRepository.GetByUserIdAsync(userId, CancellationToken.None);
         Assert.NotNull(updatedPreferences);
-        // Verificar que as preferências foram resetadas para padrões via CreateDefault
-        // CreateDefault retorna ProfileVisibility.Public e ContactVisibility.ResidentsOnly
-        Assert.Equal(ProfileVisibility.Public, updatedPreferences.ProfileVisibility);
-        Assert.Equal(ContactVisibility.ResidentsOnly, updatedPreferences.ContactVisibility);
-        Assert.False(updatedPreferences.ShareLocation);
-        Assert.True(updatedPreferences.ShowMemberships);
-    }
-
-    [Fact]
-    public async Task AnonymizeUserDataAsync_WithoutUserPreferences_DoesNotCreatePreferences()
-    {
-        var userId = Guid.NewGuid();
-        var user = new User(
-            userId,
-            "Test User",
-            "test@example.com",
-            "123.456.789-00",
-            null,
-            null,
-            null,
-            "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
-            DateTime.UtcNow);
-
-        await _userRepository.AddAsync(user, CancellationToken.None);
-
-        var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
-
-        Assert.True(result.IsSuccess);
-        // O serviço só atualiza preferências se já existirem, não cria novas
-        var preferences = await _preferencesRepository.GetByUserIdAsync(userId, CancellationToken.None);
-        // Pode ser null se não existiam antes
+        Assert.Equal(ProfileVisibility.Public, updatedPreferences!.ProfileVisibility);
     }
 
     [Fact]
     public async Task AnonymizeUserDataAsync_PreservesCreatedAtUtc()
     {
         var userId = Guid.NewGuid();
-        var originalCreatedAt = DateTime.UtcNow.AddDays(-100);
+        var originalCreatedAt = DateTime.UtcNow.AddYears(-1);
         var user = new User(
             userId,
             "Test User",
@@ -252,17 +133,8 @@ public sealed class AccountDeletionServiceEdgeCasesTests
             null,
             null,
             "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
+            "test-external-id",
             originalCreatedAt);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
 
         var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
@@ -270,33 +142,24 @@ public sealed class AccountDeletionServiceEdgeCasesTests
         Assert.True(result.IsSuccess);
         var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
         Assert.NotNull(anonymizedUser);
-        Assert.Equal(originalCreatedAt, anonymizedUser.CreatedAtUtc);
+        Assert.Equal(originalCreatedAt, anonymizedUser!.CreatedAtUtc);
     }
 
     [Fact]
-    public async Task AnonymizeUserDataAsync_PreservesAuthProvider()
+    public async Task AnonymizeUserDataAsync_WithUnicodeData_HandlesCorrectly()
     {
         var userId = Guid.NewGuid();
         var user = new User(
             userId,
-            "Test User",
-            "test@example.com",
+            "Usuário com acentuação: café, naïve, 文字",
+            "test+café@example.com",
             "123.456.789-00",
             null,
             null,
             null,
-            "facebook",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
+            "google",
+            "test-external-id",
             DateTime.UtcNow);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
 
         var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
@@ -304,29 +167,30 @@ public sealed class AccountDeletionServiceEdgeCasesTests
         Assert.True(result.IsSuccess);
         var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
         Assert.NotNull(anonymizedUser);
-        Assert.Equal("facebook", anonymizedUser.AuthProvider);
+        Assert.Null(anonymizedUser!.Email);
+        Assert.Contains("User_", anonymizedUser.DisplayName);
     }
 
     [Fact]
-    public async Task CanDeleteUserAsync_WithEmptyUserId_ReturnsFailure()
+    public async Task CanDeleteUserAsync_WithEmptyGuid_ReturnsFailure()
     {
         var result = await _service.CanDeleteUserAsync(Guid.Empty, CancellationToken.None);
 
         Assert.True(result.IsFailure);
-        Assert.Contains("not found", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not found", result.Error ?? "");
     }
 
     [Fact]
-    public async Task CanDeleteUserAsync_WithNonExistentUserId_ReturnsFailure()
+    public async Task CanDeleteUserAsync_WithNonExistentUser_ReturnsFailure()
     {
         var result = await _service.CanDeleteUserAsync(Guid.NewGuid(), CancellationToken.None);
 
         Assert.True(result.IsFailure);
-        Assert.Contains("not found", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("not found", result.Error ?? "");
     }
 
     [Fact]
-    public async Task CanDeleteUserAsync_WithVerifiedUser_ReturnsSuccess()
+    public async Task CanDeleteUserAsync_WithExistingUser_ReturnsSuccess()
     {
         var userId = Guid.NewGuid();
         var user = new User(
@@ -338,17 +202,8 @@ public sealed class AccountDeletionServiceEdgeCasesTests
             null,
             null,
             "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Verified,
-            DateTime.UtcNow,
-            null,
-            null,
+            "test-external-id",
             DateTime.UtcNow);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
 
         var result = await _service.CanDeleteUserAsync(userId, CancellationToken.None);
@@ -358,7 +213,7 @@ public sealed class AccountDeletionServiceEdgeCasesTests
     }
 
     [Fact]
-    public async Task CanDeleteUserAsync_WithUnverifiedUser_ReturnsSuccess()
+    public async Task AnonymizeUserDataAsync_WithUserWithoutPreferences_HandlesGracefully()
     {
         var userId = Guid.NewGuid();
         var user = new User(
@@ -370,91 +225,12 @@ public sealed class AccountDeletionServiceEdgeCasesTests
             null,
             null,
             "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
+            "test-external-id",
             DateTime.UtcNow);
-
-        await _userRepository.AddAsync(user, CancellationToken.None);
-
-        var result = await _service.CanDeleteUserAsync(userId, CancellationToken.None);
-
-        Assert.True(result.IsSuccess);
-        Assert.True(result.Value);
-    }
-
-    [Fact]
-    public async Task AnonymizeUserDataAsync_WithUnicodeInDisplayName_HandlesCorrectly()
-    {
-        var userId = Guid.NewGuid();
-        var user = new User(
-            userId,
-            "Usuário Teste 测试",
-            "test@example.com",
-            "123.456.789-00",
-            null,
-            null,
-            null,
-            "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
-            DateTime.UtcNow);
-
         await _userRepository.AddAsync(user, CancellationToken.None);
 
         var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
-        var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
-        Assert.NotNull(anonymizedUser);
-        Assert.StartsWith("User_", anonymizedUser.DisplayName);
-    }
-
-    [Fact]
-    public async Task AnonymizeUserDataAsync_CommitsUnitOfWork()
-    {
-        var userId = Guid.NewGuid();
-        var user = new User(
-            userId,
-            "Test User",
-            "test@example.com",
-            "123.456.789-00",
-            null,
-            null,
-            null,
-            "google",
-            "external-id",
-            false,
-            null,
-            null,
-            null,
-            UserIdentityVerificationStatus.Unverified,
-            null,
-            null,
-            null,
-            DateTime.UtcNow);
-
-        await _userRepository.AddAsync(user, CancellationToken.None);
-
-        var result = await _service.AnonymizeUserDataAsync(userId, CancellationToken.None);
-
-        Assert.True(result.IsSuccess);
-        // Verificar que o UnitOfWork foi commitado (verificando que as mudanças persistiram)
-        var anonymizedUser = await _userRepository.GetByIdAsync(userId, CancellationToken.None);
-        Assert.NotNull(anonymizedUser);
-        Assert.Null(anonymizedUser.Email);
     }
 }

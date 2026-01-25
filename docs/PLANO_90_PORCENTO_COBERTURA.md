@@ -1,20 +1,29 @@
 # 🎯 Plano para Atingir 90% de Cobertura em Todas as Camadas
 
-**Status Atual**: ~79% média geral  
+**Última Atualização**: 2026-01-24  
+**Status Atual** (medido): 
+- Domain Layer: **82.23% linhas, 74.39% branches**
+- Application Layer: **66.37% linhas, 50.39% branches**
+
 **Meta**: 90%+ em todas as camadas  
-**Gap**: ~11 pontos percentuais  
-**Estimativa**: 140-190 testes adicionais
+**Gap**: 
+- Domain: ~8% linhas, ~16% branches
+- Application: ~24% linhas, ~40% branches
+
+**Estimativa**: 360-500 testes adicionais (ver plano detalhado)
 
 ---
 
-## 📊 Situação Atual
+## 📊 Situação Atual (Medida em 2026-01-24)
 
-| Camada | Cobertura Atual | Meta | Gap | Prioridade |
-|--------|----------------|------|-----|------------|
-| Domain Layer | ~85% | 90%+ | 5% | 🟡 Média |
-| Application Layer | ~75% | 90%+ | 15% | 🔴 Alta |
-| Infrastructure Layer | ~75% | 90%+ | 15% | 🔴 Alta |
-| API Layer | ~80% | 90%+ | 10% | 🟡 Média |
+| Camada | Cobertura Linhas | Cobertura Branches | Meta | Gap Linhas | Gap Branches | Prioridade |
+|--------|------------------|-------------------|------|------------|--------------|------------|
+| Domain Layer | 82.23% | 74.39% | 90%+ | ~8% | ~16% | 🟡 Média |
+| Application Layer | 66.37% | 50.39% | 90%+ | ~24% | ~40% | 🔴 Alta |
+| Infrastructure Layer | ~75% (estimada) | ~75% (estimada) | 90%+ | ~15% | ~15% | 🔴 Alta |
+| API Layer | ~80% (estimada) | ~80% (estimada) | 90%+ | ~10% | ~10% | 🟡 Média |
+
+**Nota**: Application Layer tem gap significativo, especialmente em branches (50.39%). Prioridade máxima.
 
 ---
 

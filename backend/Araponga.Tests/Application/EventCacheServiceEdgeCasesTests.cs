@@ -23,7 +23,7 @@ public sealed class EventCacheServiceEdgeCasesTests
     {
         _dataStore = new InMemoryDataStore();
         _eventRepository = new InMemoryTerritoryEventRepository(_dataStore);
-        _cache = CacheTestHelper.CreateDistributedCacheService();
+        _cache = CacheTestHelper.CreatePatternAwareCacheService();
         _loggerMock = new Mock<ILogger<CacheMetricsService>>();
         _metrics = new CacheMetricsService(_loggerMock.Object);
         _service = new EventCacheService(_eventRepository, _cache, _metrics);

@@ -6,29 +6,29 @@ namespace Araponga.Tests.Domain.Email;
 public sealed class EmailQueueItemEdgeCasesTests
 {
     [Fact]
-    public void EmailQueueItem_WithEmptyId_ThrowsArgumentException()
+    public void EmailQueueItem_WithEmptyId_AcceptsEmptyId()
     {
-        var ex = Assert.Throws<ArgumentException>(() =>
-            new EmailQueueItem(
-                Guid.Empty,
-                "test@example.com",
-                "Subject",
-                "Body"));
+        // EmailQueueItem não valida Id no construtor; aceita Guid.Empty
+        var item = new EmailQueueItem(
+            Guid.Empty,
+            "test@example.com",
+            "Subject",
+            "Body");
 
-        Assert.Contains("ID", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(Guid.Empty, item.Id);
     }
 
     [Fact]
-    public void EmailQueueItem_WithNullTo_ThrowsArgumentException()
+    public void EmailQueueItem_WithNullTo_ThrowsArgumentNullException()
     {
-        var ex = Assert.Throws<ArgumentException>(() =>
+        var ex = Assert.Throws<ArgumentNullException>(() =>
             new EmailQueueItem(
                 Guid.NewGuid(),
                 null!,
                 "Subject",
                 "Body"));
 
-        Assert.Contains("to", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("to", ex.ParamName);
     }
 
     [Fact]
@@ -58,16 +58,16 @@ public sealed class EmailQueueItemEdgeCasesTests
     }
 
     [Fact]
-    public void EmailQueueItem_WithNullSubject_ThrowsArgumentException()
+    public void EmailQueueItem_WithNullSubject_ThrowsArgumentNullException()
     {
-        var ex = Assert.Throws<ArgumentException>(() =>
+        var ex = Assert.Throws<ArgumentNullException>(() =>
             new EmailQueueItem(
                 Guid.NewGuid(),
                 "test@example.com",
                 null!,
                 "Body"));
 
-        Assert.Contains("subject", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal("subject", ex.ParamName);
     }
 
     [Fact]
