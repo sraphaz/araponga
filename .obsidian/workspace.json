@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "4ae54515c7644708",
+    "type": "split",
+    "children": [
+      {
+        "id": "96f832b67fb706c0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "be97693e2b0e2b23",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nova aba"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "00578f564c776d0b",
+    "type": "split",
+    "children": [
+      {
+        "id": "d7143b798a5513ef",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "31009ecc518ddd9c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "8382de0dd225f263",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "101bb0407fc109e3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4ad4ae456bc43b76",
+    "type": "split",
+    "children": [
+      {
+        "id": "0bbc03bddeaa9944",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c7bbbb074a1e7b7e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "977761322c8602b1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "f25ca695b3d4acf5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "d5f63fa8fe175af1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "b345fcc6b291c9df",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false,
+      "obsidian-kanban:Criar um novo quadro": false
+    }
+  },
+  "active": "be97693e2b0e2b23",
+  "lastOpenFiles": [
+    "docs/RELEASE_MVP_ESSENCIAL.md",
+    "docs/backlog-api/FASE12_STATUS_COMPLETO.md",
+    "RESUMO_IMPLEMENTACAO_FASES_9_12.md",
+    "backend/Araponga.Tests/bin/Debug/net8.0/packages.lock.json",
+    "RESUMO_IMPLEMENTACAO_MVP.md",
+    "backend/Araponga.Tests/bin/Debug/net8.0/reqnroll.json",
+    "backend/Araponga.Tests/bin/Debug/net8.0/Araponga.Application.pdb",
+    "backend/Araponga.Tests/bin/Debug/net8.0/Araponga.Api.exe",
+    "backend/Araponga.Tests/bin/Debug/net8.0/Araponga.Api.runtimeconfig.json",
+    "backend/Araponga.Tests/bin/Debug/net8.0/Araponga.Shared.dll",
+    "backend/Araponga.Tests/bin/Debug/net8.0/xunit.assert.dll",
+    "backend/Araponga.Tests/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll",
+    "backend/Araponga.Tests/bin/Debug/net8.0/CucumberExpressions.dll",
+    "backend/Araponga.Tests/bin/Debug/net8.0/System.Text.Json.dll",
+    "docs/backlog-api/FASE48.md",
+    "docs/backlog-api/FASE43.md",
+    "docs/backlog-api/GUIA_REORGANIZACAO_FASES.md",
+    "docs/backlog-api/MAPA_FASES.md",
+    "Kanban sem título 1.md",
+    "docs/backlog-api/FASE44.md",
+    "Sem título 1.canvas",
+    "Kanban sem título.md",
+    "docs/backlog-api/REORGANIZACAO_ESTRATEGICA_FINAL.md",
+    "docs/backlog-api/README.md",
+    "docs/00_INDEX.md",
+    "Sem título.canvas",
+    "design/Archtecture/C4_Components.md",
+    "docs/backlog-api/FASE3.md",
+    "docs/backlog-api/FASE2.md",
+    "docs/backlog-api/FASE1_5.md",
+    "docs/backlog-api/FASE1.md",
+    "docs/prs/README.md",
+    "docs/backlog-api/ROADMAP_VISUAL.md",
+    "docs/backlog-api/ESTRUTURA_DOCUMENTOS.md",
+    "docs/02_ROADMAP.md"
+  ]
+}
