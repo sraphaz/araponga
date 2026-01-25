@@ -95,7 +95,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 3: Essencial Pós-MVP (Mês 0-6) 🔴 CRÍTICO
+### Onda 1: MVP Essencial (Mês 0-3) 🔴 CRÍTICO
 
 **Objetivo**: Completar funcionalidades essenciais para MVP completo.
 
@@ -104,12 +104,13 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | **Fase 9** | Perfil de Usuário Completo | 🔴 P0 | 21 dias | ⏳ Planejado |
 | **Fase 10** | Mídias Avançadas (Vídeos, Áudios) | 🔴 P0 | 25 dias | ⏳ Planejado |
 | **Fase 11** | Edição e Gestão | 🟡 P1 | 15 dias | ⏳ Planejado |
+| **Fase 12** | Otimizações Finais | 🟡 P1 | 28 dias | ⏳ Planejado |
 
 **Resultado Esperado**: MVP completo com todas as funcionalidades essenciais.
 
 ---
 
-### Onda 4: Economia Local (Mês 6-9) 🔴 CRÍTICO
+### Onda 3: Economia Local (Mês 6-9) 🔴 CRÍTICO
 
 **Objetivo**: Implementar funcionalidades de economia local que geram valor imediato.
 
@@ -127,7 +128,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 4.5: Preparação Web3 (Mês 12+) 🟡 ALTA
+### Onda 7: Preparação Web3 (Mês 12+) 🟡 ALTA
 
 **Objetivo**: Preparar infraestrutura técnica para integração blockchain quando houver demanda.
 
@@ -147,7 +148,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 5: DAO e Tokenização (Mês 18+) 🟡 ALTA
+### Onda 8: DAO e Tokenização (Mês 18+) 🟡 ALTA
 
 **Objetivo**: Implementar DAO completa com tokens on-chain quando houver demanda.
 
@@ -165,7 +166,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 4.6: Economia Local Completa (Mês 9-12) 🟡 ALTA
+### Onda 4: Economia Local Completa (Mês 9-12) 🟡 ALTA
 
 **Objetivo**: Completar funcionalidades de economia local e circular.
 
@@ -179,7 +180,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 **Justificativa**: Priorizar serviços que funcionam com pagamentos atuais, criando ecossistema robusto antes de implementar moeda territorial virtual.
 
-### Onda 7: Autonomia Digital (Mês 12-18) 🟡 ALTA
+### Onda 6: Autonomia Digital (Mês 12-18) 🟡 ALTA
 
 **Objetivo**: Implementar funcionalidades de autonomia digital e serviços.
 
@@ -199,14 +200,14 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ---
 
-### Onda 8: Diferenciação e Expansão (Mês 12-18) 🟢 MÉDIA
+### Onda 10: Diferenciação Avançada (Mês 18+) 🟢 MÉDIA
 
 **Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 45** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
-| **Fase 46** | Rental System | 🟢 P2 | 45 dias | ⏳ Novo |
+| **Fase 46** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
+| **Fase 47** | Rental System | 🟢 P2 | 45 dias | ⏳ Novo |
 
 **Resultado Esperado**: Plataforma completa e diferenciada, com funcionalidades avançadas.
 
