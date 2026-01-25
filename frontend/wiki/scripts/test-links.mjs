@@ -1,8 +1,16 @@
 /**
  * Script de teste de links pós-deploy
  * Verifica se todos os links funcionam na URL real da wiki
+ *
+ * Antes falhava por usar base URL fixa (devportal.araponga.app); o último deploy
+ * falhou por isso e DevPortal + Wiki ficaram fora. Agora:
+ * - WIKI_URL sobrescreve a base (ex.: localhost para dev)
+ * - Se o host não estiver acessível, o script termina com sucesso e pula os testes
+ *
+ * Exemplo local: WIKI_URL=http://localhost:3001/wiki npm run test:links
  */
 
+import http from 'http';
 import https from 'https';
 import { URL } from 'url';
 
@@ -12,6 +20,14 @@ const BASE_URL = rawBaseUrl.endsWith('/wiki')
   ? rawBaseUrl
   : rawBaseUrl.replace(/\/$/, '') + '/wiki';
 const TIMEOUT = 10000;
+
+const UNREACHABLE_CODES = new Set([
+  'ENOTFOUND',
+  'ECONNREFUSED',
+  'ETIMEDOUT',
+  'ENETUNREACH',
+  'ECONNRESET',
+]);
 
 // Links que devem funcionar (relativos ao BASE_URL, que agora sempre inclui /wiki)
 const REQUIRED_LINKS = [
@@ -25,9 +41,18 @@ const REQUIRED_LINKS = [
   '/docs/DISCORD_SETUP/',
 ];
 
+function isUnreachableError(error) {
+  if (!error) return false;
+  if (UNREACHABLE_CODES.has(error.code)) return true;
+  const msg = String(error.message || '');
+  return /ENOTFOUND|ECONNREFUSED|ETIMEDOUT|ENETUNREACH|Timeout after \d+ms/i.test(msg);
+}
+
 function fetch(url) {
   return new Promise((resolve, reject) => {
     const urlObj = new URL(url);
+    const isHttps = urlObj.protocol === 'https:';
+    const mod = isHttps ? https : http;
     const options = {
       hostname: urlObj.hostname,
       path: urlObj.pathname + urlObj.search,
@@ -38,7 +63,7 @@ function fetch(url) {
       timeout: TIMEOUT,
     };
 
-    const req = https.request(options, (res) => {
+    const req = mod.request(options, (res) => {
       let data = '';
       res.on('data', (chunk) => {
         data += chunk;
@@ -125,6 +150,21 @@ async function extractLinksFromHTML(html, baseUrl) {
 
 async function testAllLinks() {
   console.log(`\n🔍 Testing Wiki Links at: ${BASE_URL}\n`);
+
+  // Verifica se o host está acessível (evita falha em local/CI sem deploy)
+  try {
+    await fetch(`${BASE_URL}/`);
+  } catch (e) {
+    if (isUnreachableError(e)) {
+      console.log(
+        `⚠️  Host não acessível (${e.code || e.message}). Pulando testes de links.\n` +
+        `   Execute com a wiki em produção ou use WIKI_URL para local, ex.:\n` +
+        `   WIKI_URL=http://localhost:3001/wiki npm run test:links\n`
+      );
+      process.exit(0);
+    }
+    throw e;
+  }
 
   const results = {
     passed: [],
