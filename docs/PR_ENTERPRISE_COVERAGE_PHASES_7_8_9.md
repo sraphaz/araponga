@@ -15,7 +15,7 @@ Este PR implementa **268 testes de edge cases** cobrindo as camadas Application,
 - ✅ **268 testes de edge cases** implementados e passando (100%)
 - ✅ **1488/1508 testes totais passando** (98.7% de taxa de sucesso)
 - ✅ **Zero regressions** introduzidas
-- ✅ **Cobertura estimada**: ~85-90% (aguardando análise de cobertura de código)
+- ✅ **Cobertura de código**: 34.42% linhas, 37.86% branches, 47.72% métodos (análise realizada)
 - ✅ **Build succeeds** (0 erros de compilação)
 
 ## 🎯 Fases Implementadas

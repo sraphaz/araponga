@@ -300,7 +300,7 @@ O Araponga está em **desenvolvimento ativo** com **14+ fases implementadas** e 
 - ✅ 14 testes de segurança
 - ✅ 7 testes de performance com SLAs
 - ✅ **268 novos testes de edge cases** (Phases 7-9) - **100% passando**
-- ✅ **Cobertura estimada**: ~85-90% (aguardando análise de cobertura de código para validação final)
+- ✅ **Cobertura de código**: 34.42% linhas, 37.86% branches, 47.72% métodos (análise realizada em 2026-01-24)
 - ✅ CI configurado com builds reprodutíveis
 
 **Enterprise-Level Test Coverage**:
