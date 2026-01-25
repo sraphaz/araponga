@@ -5,7 +5,7 @@
 **Depende de**: Fase 6 (Pagamentos), Fase 7 (Payout)  
 **Estimativa Total**: 360 horas  
 **Status**: ⏳ Pendente  
-**Nota**: Este arquivo precisa ser atualizado - Fase 15 agora é Subscriptions (renumerada para Fase 31 na Onda 6). Fase 23 é IA.
+**Nota**: Esta fase está na Onda 1 (Fundação de Governança e Sustentabilidade), antes da Fase 16 (Finalização). O conteúdo deste arquivo precisa ser reescrito para Subscriptions (atualmente contém conteúdo de IA).
 
 ---
 

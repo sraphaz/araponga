@@ -189,7 +189,6 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | **Fase 27** | Chat com IA e Consumo Consciente | 🟡 P1 | 14 dias | ⏳ Planejado |
 | **Fase 28** | Negociação Territorial | 🟡 P1 | 28 dias | ⏳ Planejado |
 | **Fase 30** | Mobile Avançado | 🟡 P1 | 14 dias | ⏳ Planejado |
-| **Fase 31** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo (movida de Fase 15) |
 | **Fase 48** | Banco de Sementes e Mudas | 🟢 P2 | 21 dias | ⏳ Planejado (movida para Onda 10) |
 
 **Resultado Esperado**: Economia circular funcional com compras coletivas, hospedagem territorial, trocas, entregas e recursos compartilhados. Autonomia digital com serviços digitais integrados. Moeda territorial implementada após ecossistema robusto de serviços.
@@ -282,9 +281,9 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 | Marco | Prazo | Funcionalidades | Impacto |
 |-------|-------|-----------------|---------|
-| **Governança Básica** | Mês 3 | Votação (Fase 14) + Subscriptions (Fase 31) | Alto |
+| **Governança Básica** | Mês 3 | Votação (Fase 14) + Subscriptions (Fase 15) | Alto |
 | **Economia Local** | Mês 6 | Compra Coletiva (Fase 17) + Hospedagem (Fase 18) + Demandas/Ofertas (Fase 19) | Crítico |
-| **Sustentabilidade** | Mês 6 | Subscriptions (Fase 31) + Ticketing (Fase 39) | Médio-Alto |
+| **Sustentabilidade** | Mês 6 | Subscriptions (Fase 15) + Ticketing (Fase 39) | Médio-Alto |
 | **Web3 Ready** | Mês 12+ | Blockchain (Fases 31-34) + Wallets (Fase 33) | Médio (quando houver demanda) |
 | **DAO Completa** | Mês 18+ | Tokens (Fase 36) + Governança Tokenizada (Fase 37) | Médio (quando houver demanda) |
 | **Diferenciação** | Mês 18+ | Learning Hub (Fase 45) + Rental System (Fase 46) + IA (Fase 23, 40) | Médio |
