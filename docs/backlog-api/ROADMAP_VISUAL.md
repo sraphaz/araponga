@@ -1,177 +1,379 @@
 # Roadmap Visual Estratégico
 
-**Data**: 2025-01-13  
-**Versão**: Estratégica Final
+**Data**: 2026-01-25  
+**Versão**: 3.2 - Numeração Coerente Atualizada  
+**Última Atualização**: 2026-01-25  
+**Nota**: Numeração reorganizada para garantir que fases menores sejam implementadas antes de fases maiores.  
+**Referências**: [Mapa Completo das Fases](./MAPA_FASES.md) | [Guia de Reorganização](./GUIA_REORGANIZACAO_FASES.md)
 
 ---
 
-## 🎯 Visão Geral das 6 Ondas
+## 🎯 Visão Geral das Ondas Estratégicas
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    ONDA 1: MVP ESSENCIAL (65d)                   │
+│        ONDA 1: MVP ESSENCIAL (61d) 🔴 CRÍTICO                    │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 9   │→ │ Fase 10  │→ │ Fase 11  │                     │
+│  │ Perfil   │  │ Mídias   │  │ Edição   │                     │
+│  │ (21d)    │  │ (25d)    │  │ (15d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│                                                                 │
+│  Resultado: MVP completo com funcionalidades essenciais         │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│        ONDA 2: GOVERNANÇA E SUSTENTABILIDADE (100d) 🔴 CRÍTICO │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 13  │→ │ Fase 14  │→ │ Fase 15  │                     │
+│  │ Emails   │  │ Governança│ │ Subscriptions│                   │
+│  │ (14d)    │  │ (21d)    │  │ (45d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│                            │                                    │
+│                            ▼                                    │
+│                    ┌──────────┐                                 │
+│                    │ Fase 16  │                                 │
+│                    │ Finalização│                               │
+│                    │ (20d)    │                                 │
+│                    └──────────┘                                 │
+│                                                                 │
+│  Resultado: Governança + Sustentabilidade + Base Completa      │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│        ONDA 3: ECONOMIA LOCAL (105d) 🔴 CRÍTICO                  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 17  │  │ Fase 18  │  │ Fase 19  │                     │
+│  │ Compra   │  │ Hospedagem│ │ Demandas │                     │
+│  │ Coletiva │  │ Territorial│ │ Ofertas  │                     │
+│  │ (28d)    │  │ (56d)    │  │ (21d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│                                                                 │
+│  Resultado: Economia local funcional (valor imediato)          │
+│  ⬆️ Priorizadas de P1 para P0 (contexto brasileiro)            │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│     ONDA 4: ECONOMIA LOCAL COMPLETA (84d) 🟡 ALTA              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 20  │  │ Fase 21  │  │ Fase 22  │                     │
+│  │ Trocas   │  │ Entregas │  │ Moeda    │                     │
+│  │ (21d)    │  │ (28d)    │  │ (35d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│                                                                 │
+│  Resultado: Economia local completa                            │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│     ONDA 5: CONFORMIDADE E SOBERANIA (98d) 🟡 ALTA              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 23  │  │ Fase 24  │  │ Fase 25  │                     │
+│  │ IA       │  │ Saúde    │  │ Dashboard│                     │
+│  │ (28d)    │  │ (35d)    │  │ (14d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│                                                                 │
+│  Resultado: Conformidade e soberania territorial               │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│     ONDA 6: AUTONOMIA DIGITAL (77d) 🟡 ALTA                    │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 26  │  │ Fase 27  │  │ Fase 28  │                     │
+│  │ Hub      │  │ Chat IA  │  │ Negociação│                     │
+│  │ (21d)    │  │ (14d)    │  │ (28d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│  ┌──────────┐                                                  │
+│  │ Fase 30  │                                                  │
+│  │ Mobile   │                                                  │
+│  │ (14d)    │                                                  │
+│  └──────────┘                                                  │
+│                                                                 │
+│  Resultado: Autonomia digital completa                         │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            │ (Paralelo - Mês 12+)
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│        ONDA 7: PREPARAÇÃO WEB3 (147d) 🟡 ALTA                   │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
-│  │ Fase 8   │→ │ Fase 9   │  │ Fase 10  │→ │ Fase 11  │       │
-│  │ Mídia    │  │ Perfil   │  │ Mídias   │  │ Edição   │       │
-│  │ (15d)    │  │ (15d)    │  │ (20d)    │  │ (15d)    │       │
+│  │ Fase 31  │→ │ Fase 32  │→ │ Fase 33  │→ │ Fase 34  │       │
+│  │ Avaliação│  │ Abstração│  │ Wallet   │  │ Smart    │       │
+│  │ Blockchain│ │ Blockchain│ │ (30d)    │  │ Contracts│       │
+│  │ (14d)    │  │ (30d)    │  │          │  │ (45d)    │       │
 │  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│  ┌──────────┐                                                  │
+│  │ Fase 35  │                                                  │
+│  │ Cripto   │                                                  │
+│  │ (28d)    │                                                  │
+│  └──────────┘                                                  │
 │                                                                 │
-│  Resultado: MVP completo (90% transição de usuários)          │
-└─────────────────────────────────────────────────────────────────┘
-                            │
-                            │ (Paralelo)
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│          ONDA 2: COMUNICAÇÃO E GOVERNANÇA (21d)                 │
-│  ┌──────────┐              ┌──────────┐                        │
-│  │ Fase 13  │              │ Fase 14  │                        │
-│  │ Emails   │              │ Governança│                        │
-│  │ (14d)    │              │ (21d)    │                        │
-│  └──────────┘              └──────────┘                        │
-│                                                                 │
-│  Resultado: Comunicação + Governança comunitária               │
+│  Resultado: Base técnica Web3 (quando houver demanda)          │
+│  ⬇️ Reposicionadas de P0 para P1 (contexto brasileiro)        │
 └─────────────────────────────────────────────────────────────────┘
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│       ONDA 3: SOBERANIA TERRITORIAL (63d)                       │
-│  ┌──────────┐              ┌──────────┐                        │
-│  │ Fase 18  │              │ Fase 17  │                        │
-│  │ Saúde    │              │ Gamificação│                      │
-│  │ (35d)    │              │ (28d)    │                        │
-│  └──────────┘              └──────────┘                        │
-│                                                                 │
-│  Resultado: Soberania territorial completa                     │
-└─────────────────────────────────────────────────────────────────┘
-                            │
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│          ONDA 4: ECONOMIA LOCAL (84d)                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐                       │
-│  │ Fase 20  │→ │ Fase 23 │  │ Fase 24  │                       │
-│  │ Moeda    │  │ Compra   │  │ Trocas   │                       │
-│  │ (35d)    │  │ (28d)    │  │ (21d)    │                       │
-│  └──────────┘  └──────────┘  └──────────┘                       │
-│                                                                 │
-│  Resultado: Economia local completa (circular)                 │
-└─────────────────────────────────────────────────────────────────┘
-                            │
-                            │ (Paralelo)
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│     ONDA 5: CONFORMIDADE E INTELIGÊNCIA (49d)                   │
-│  ┌──────────┐              ┌──────────┐                        │
-│  │ Fase 12  │              │ Fase 15  │                        │
-│  │ LGPD     │              │ IA       │                        │
-│  │ (28d)    │              │ (28d)    │                        │
-│  └──────────┘              └──────────┘                        │
-│                                                                 │
-│  Resultado: Conformidade + IA                                  │
-└─────────────────────────────────────────────────────────────────┘
-                            │
-                            │ (Paralelo)
-                            ▼
-┌─────────────────────────────────────────────────────────────────┐
-│          ONDA 6: DIFERENCIAIS (98d)                              │
+│        ONDA 8: DAO E TOKENIZAÇÃO (231d) 🟡 ALTA                 │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
-│  │ Fase 16  │  │ Fase 22  │  │ Fase 21  │  │ Fase 19  │       │
-│  │ Entregas │  │ Integrações│ │ Crypto   │  │ Arquitetura│     │
-│  │ (28d)    │  │ (35d)    │  │ (28d)    │  │ (35d)    │       │
+│  │ Fase 36  │→ │ Fase 37  │  │ Fase 38  │  │ Fase 39  │       │
+│  │ Tokens   │  │ Governança│ │ Proof    │  │ Ticketing│       │
+│  │ On-chain │  │ Tokenizada│ │ Presence │  │ (21d)    │       │
+│  │ (60d)    │  │ (30d)    │  │ (30d)    │  │          │       │
 │  └──────────┘  └──────────┘  └──────────┘  └──────────┘       │
+│  ┌──────────┐                                                  │
+│  │ Fase 40  │                                                  │
+│  │ Agente IA│                                                  │
+│  │ (90d)    │                                                  │
+│  └──────────┘                                                  │
 │                                                                 │
-│  Resultado: Diferenciais + Escalabilidade                      │
+│  Resultado: DAO completa (quando houver demanda)               │
+│  ⬇️ Reposicionadas de P0 para P1 (contexto brasileiro)        │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            │ (Paralelo - Mês 18+)
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│        ONDA 9: GAMIFICAÇÃO E INCENTIVOS (58d) 🟡 ALTA          │
+│  ┌──────────┐              ┌──────────┐                        │
+│  │ Fase 42  │              │ Fase 43  │                        │
+│  │ Gamificação│            │ Proof    │                        │
+│  │ (28d)    │              │ Sweat    │                        │
+│  └──────────┘              │ (30d)    │                        │
+│                            └──────────┘                        │
+│                                                                 │
+│  Resultado: Gamificação e incentivos (decoração)                │
+│  ⬇️ Reposicionada para depois de funcionalidades core          │
+└─────────────────────────────────────────────────────────────────┘
+                            │
+                            │ (Paralelo - Mês 18+)
+                            ▼
+┌─────────────────────────────────────────────────────────────────┐
+│        ONDA 10: DIFERENCIAÇÃO AVANÇADA (196d) 🟢 MÉDIA          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                     │
+│  │ Fase 44  │  │ Fase 45  │  │ Fase 46  │                     │
+│  │ Arquitetura│ │ Integrações│ │ Learning │                     │
+│  │ Modular  │  │ (35d)    │  │ Hub      │                     │
+│  │ (35d)    │  │          │  │ (60d)    │                     │
+│  └──────────┘  └──────────┘  └──────────┘                     │
+│  ┌──────────┐  ┌──────────┐                                   │
+│  │ Fase 47  │  │ Fase 48  │                                   │
+│  │ Rental   │  │ Sementes │                                   │
+│  │ System   │  │ (21d)    │                                   │
+│  │ (45d)    │  │          │                                   │
+│  └──────────┘  └──────────┘                                   │
+│                                                                 │
+│  Resultado: Diferenciação avançada + Recursos compartilhados    │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📊 Timeline Otimizada
+## 📊 Timeline Estratégica Atualizada (Numeração Coerente)
 
-### Semanas 1-13: MVP e Comunicação (86 dias)
+### Mês 0-3: MVP Essencial (61 dias) 🔴 CRÍTICO
 
-**Fases Ativas**:
-- Fase 8: Infraestrutura Mídia (semanas 1-3)
-- Fase 9: Perfil Completo (semanas 4-5)
-- Fase 10: Mídias em Conteúdo (semanas 6-9)
-- Fase 11: Edição e Gestão (semanas 10-11)
-- **Fase 13**: Conector de Emails (semanas 1-3) - **PARALELO**
-- **Fase 14**: Governança/Votação (semanas 4-7) - **PARALELO**
+**Onda 1: MVP Essencial**
+- Fase 9: Perfil Completo (21 dias)
+- Fase 10: Mídias Avançadas (25 dias)
+- Fase 11: Edição e Gestão (15 dias)
 
-**Resultado**: MVP completo + Comunicação + Governança
+**Resultado**: MVP completo com funcionalidades essenciais
 
 ---
 
-### Semanas 14-22: Soberania Territorial (63 dias)
+### Mês 0-6: Governança e Sustentabilidade (100 dias) 🔴 CRÍTICO
 
-**Fases Ativas**:
-- Fase 18: Saúde Territorial (semanas 14-20)
-- Fase 17: Gamificação Harmoniosa (semanas 15-21) - **PARALELO**
+**Onda 2: Governança e Sustentabilidade**
+- Fase 13: Conector de Emails (14 dias)
+- Fase 14: Governança/Votação (21 dias)
+- **Fase 15**: Subscriptions & Recurring Payments (45 dias) 🔴 P0
+- **Fase 16**: Finalização Completa (20 dias) ⭐ Renumerada (era 14.8)
 
-**Resultado**: Soberania territorial completa
+**Resultado**: Governança + Sustentabilidade + Base completa
 
 ---
 
-### Semanas 23-34: Economia Local (84 dias)
+### Mês 6-9: Economia Local (105 dias) 🔴 CRÍTICO
 
-**Fases Ativas**:
-- Fase 20: Moeda Territorial (semanas 23-29)
-- Fase 23: Compra Coletiva (semanas 30-33)
-- Fase 24: Sistema de Trocas (semanas 30-33) - **PARALELO**
+**Onda 3: Economia Local**
+- Fase 17: Compra Coletiva (28 dias) ⬆️ **P1→P0** ⭐ Renumerada (era 24)
+- Fase 18: Hospedagem Territorial (56 dias) ⬆️ **P1→P0** ⭐ Renumerada (era 25)
+- Fase 19: Demandas e Ofertas (21 dias) ⬆️ **P1→P0** ⭐ Renumerada (era 26)
+
+**Resultado**: Economia local funcional com valor imediato
+
+---
+
+### Mês 9-12: Economia Local Completa (84 dias) 🟡 ALTA
+
+**Onda 4: Economia Local Completa**
+- Fase 20: Trocas Comunitárias (21 dias) ⭐ Renumerada (era 24)
+- Fase 21: Entregas Territoriais (28 dias) ⭐ Renumerada (era 28)
+- Fase 22: Moeda Territorial (35 dias) ⭐ Renumerada (era 20)
 
 **Resultado**: Economia local completa
 
 ---
 
-### Semanas 14-20: Conformidade e IA (49 dias) - PARALELO
+### Mês 6-12: Conformidade e Soberania (77 dias) 🟡 ALTA
 
-**Fases Ativas**:
-- Fase 12: Otimizações Finais (semanas 14-19) - **PARALELO**
-- Fase 15: Inteligência Artificial (semanas 15-20) - **PARALELO**
+**Onda 5: Conformidade e Soberania**
+- Fase 23: Inteligência Artificial (28 dias) ⭐ Renumerada (era 15)
+- Fase 24: Saúde Territorial (35 dias) ⭐ Renumerada (era 18)
+- Fase 25: Dashboard Métricas (14 dias) ⭐ Nova (criar conteúdo)
 
-**Resultado**: Conformidade + IA
+**Resultado**: Conformidade e soberania territorial
 
 ---
 
-### Semanas 8-34: Diferenciais (98 dias) - PARALELO
+### Mês 12-18: Autonomia Digital (77 dias) 🟡 ALTA
 
-**Fases Ativas**:
-- Fase 16: Entregas Territoriais (semanas 8-11) - **PARALELO**
-- Fase 22: Integrações Externas (semanas 19-25) - **PARALELO**
-- Fase 21: Criptomoedas (semanas 26-29) - **OPCIONAL**
-- Fase 19: Arquitetura Modular (semanas 30-36) - **FUTURO**
+**Onda 6: Autonomia Digital**
+- Fase 26: Hub Serviços Digitais (21 dias) ⭐ Renumerada (era 25)
+- Fase 27: Chat com IA (14 dias) ⭐ Renumerada (era 26)
+- Fase 28: Negociação Territorial (28 dias) ⭐ Renumerada (era 27)
+- Fase 30: Mobile Avançado (14 dias) ⭐ Renumerada (era 29)
 
-**Resultado**: Diferenciais + Escalabilidade
+**Resultado**: Autonomia digital completa
+
+---
+
+### Mês 12+: Preparação Web3 (147 dias) 🟡 ALTA
+
+**Onda 7: Preparação Web3**
+- Fase 31: Avaliação Blockchain (14 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 16)
+- Fase 32: Abstração Blockchain (30 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 17)
+- Fase 33: Integração Wallet (30 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 18)
+- Fase 34: Smart Contracts (45 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 19)
+- Fase 35: Criptomoedas (28 dias) ⭐ Renumerada (era 21)
+
+**Resultado**: Base técnica Web3 (quando houver demanda)
+
+---
+
+### Mês 18+: DAO e Tokenização (231 dias) 🟡 ALTA
+
+**Onda 8: DAO e Tokenização**
+- Fase 36: Tokens On-chain (60 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 20)
+- Fase 37: Governança Tokenizada (30 dias) ⬇️ **P0→P1** ⭐ Renumerada (era 21)
+- Fase 38: Proof of Presence On-chain (30 dias) ⭐ Renumerada (era 39)
+- Fase 39: Ticketing Eventos (21 dias) ⭐ Renumerada (era 38)
+- Fase 40: Agente IA (90 dias) ⭐ Renumerada (era 40)
+
+**Resultado**: DAO completa (quando houver demanda)
+
+---
+
+### Mês 18+: Gamificação e Diferenciação (93 dias) 🟡 ALTA
+
+**Onda 9: Gamificação e Diferenciação**
+- Fase 42: Gamificação Harmoniosa (28 dias) ⭐ Renumerada (era 17)
+- Fase 43: Arquitetura Modular (35 dias) ⭐ Renumerada (era 19)
+
+**Resultado**: Gamificação e diferenciação (decoração)
+
+**Nota**: Reposicionada para depois de funcionalidades core
+
+---
+
+### Mês 18+: Extensões e Diferenciação (161 dias) 🟢 MÉDIA
+
+**Onda 10: Extensões e Diferenciação**
+- Fase 44: Integrações Externas (35 dias) ⭐ Renumerada (era 22)
+- Fase 45: Learning Hub (60 dias) ⭐ Nova
+- Fase 46: Rental System (45 dias) ⭐ Nova
+- **Fase 48**: Banco de Sementes e Mudas (21 dias) ⬇️ Movida da Onda 6, Renumerada (era 28, 29)
+
+**Resultado**: Diferenciação avançada + Recursos compartilhados
 
 ---
 
 ## 🎯 Valor Entregue por Período
 
-### Período 1: Semanas 1-13 (86 dias)
-**Valor**: 40% do valor total  
-**Funcionalidades**: MVP completo, comunicação, governança
+### Período 1: Mês 0-3 (86 dias)
+**Valor**: 35% do valor total  
+**Funcionalidades**: MVP completo, governança, sustentabilidade, base completa
 
-### Período 2: Semanas 14-22 (63 dias)
-**Valor**: 25% do valor total  
-**Funcionalidades**: Soberania territorial
+### Período 2: Mês 6-9 (105 dias)
+**Valor**: 30% do valor total  
+**Funcionalidades**: Economia local (valor imediato)
 
-### Período 3: Semanas 23-34 (84 dias)
-**Valor**: 25% do valor total  
+### Período 3: Mês 9-12 (84 dias)
+**Valor**: 15% do valor total  
 **Funcionalidades**: Economia local completa
 
-### Período 4: Semanas 14-34 (147 dias) - Paralelo
+### Período 4: Mês 12-18 (paralelo)
 **Valor**: 10% do valor total  
-**Funcionalidades**: Conformidade, IA, diferenciais
+**Funcionalidades**: Web3 preparação, DAO (quando houver demanda)
+
+### Período 5: Mês 6-18 (paralelo)
+**Valor**: 8% do valor total  
+**Funcionalidades**: Soberania, autonomia, diferenciação
+
+### Período 6: Mês 18+ (paralelo)
+**Valor**: 2% do valor total  
+**Funcionalidades**: Gamificação, diferenciação avançada
 
 ---
 
-## ✅ Principais Benefícios
+## ✅ Principais Mudanças do Replanejamento
 
-1. **Soberania Primeiro**: Saúde e gamificação antes de economia
-2. **Economia Circular**: Moeda → Compra → Trocas (sequência lógica)
-3. **Paralelização**: 55% mais rápido
-4. **Valor Rápido**: 90% do valor em 47 semanas
-5. **Dependências Otimizadas**: Sequência que reduz bloqueios
+### Priorização Atualizada
+
+1. ✅ **Economia Local P0**: Compra Coletiva, Hospedagem, Demandas/Ofertas
+2. ✅ **Blockchain P1**: Web3 quando houver demanda (contexto brasileiro)
+3. ✅ **Gamificação Depois**: Decoração e incentivo, não core
+4. ✅ **Fase 14.8 Crítica**: Sistema de Políticas de Termos (requisito legal)
+
+### Benefícios
+
+1. ✅ **Valor Imediato**: Economia local gera valor agora
+2. ✅ **Contexto Brasileiro**: Pagamentos convencionais primeiro
+3. ✅ **Web3 Depois**: Blockchain quando houver demanda real
+4. ✅ **Base Completa**: Fase 14.8 completa gaps críticos
+5. ✅ **Coesão**: Eliminação de duplicidades
 
 ---
 
-**Status**: ✅ **ROADMAP ESTRATÉGICO COMPLETO**
+## 📊 Resumo de Ondas (Numeração Coerente)
+
+| Onda | Fases | Duração | Prioridade | Foco |
+|------|-------|---------|------------|------|
+| **1** | 9, 10, 11 | 61d | 🔴 P0 | MVP Essencial |
+| **2** | 13, 14, 15, 16 | 100d | 🔴 P0 | Governança + Sustentabilidade |
+| **3** | 17, 18, 19 | 105d | 🔴 P0 | Economia Local (valor imediato) |
+| **4** | 20, 21, 22 | 84d | 🟡 P1 | Economia Local Completa |
+| **5** | 23, 24, 25 | 77d | 🟡 P1 | Conformidade e Soberania |
+| **6** | 26, 27, 28, 30 | 77d | 🟡 P1 | Autonomia Digital |
+| **7** | 31, 32, 33, 34, 35 | 147d | 🟡 P1 | Web3 (quando houver demanda) |
+| **8** | 36, 37, 38, 39, 40 | 231d | 🟡 P1 | DAO (quando houver demanda) |
+| **9** | 42, 43 | 58d | 🟡 P1 | Gamificação (depois) |
+| **10** | 44, 45, 46, 47, 48 | 196d | 🟢 P2 | Diferenciação Avançada + Recursos |
+
+---
+
+## 🔄 Mudanças Estratégicas
+
+### Antes vs. Depois
+
+**Antes**:
+- Blockchain como P0 (crítico)
+- Economia Local como P1
+- Gamificação cedo no roadmap
+
+**Depois**:
+- **Economia Local como P0** (valor imediato)
+- **Blockchain como P1** (quando houver demanda)
+- **Gamificação depois** (decoração e incentivo)
+
+---
+
+**Status**: ✅ **ROADMAP VISUAL ATUALIZADO - NUMERAÇÃO COERENTE**  
+**Última Atualização**: 2026-01-25  
+**Nota**: Numeração reorganizada para garantir que fases menores sejam implementadas antes de fases maiores  
+**Referência**: [Roadmap Estratégico](../02_ROADMAP.md) | [Reorganização Numeração Coerente](../REORGANIZACAO_NUMERACAO_COERENTE.md) | [Reavaliação Blockchain](../REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)

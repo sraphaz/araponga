@@ -84,6 +84,18 @@ Esta pasta contém a documentação detalhada de todos os Pull Requests implemen
   - Lazy loading e renderização sob demanda
   - Tema personalizado alinhado ao devportal
 
+### 📋 Planejamento Estratégico
+
+- **[PR_REPLANEJAMENTO_ROADMAP_FASES.md](./PR_REPLANEJAMENTO_ROADMAP_FASES.md)** ⭐ NOVO  
+  Replanejamento completo do roadmap e fases (2026-01-25)
+  - Reavaliação de prioridades blockchain (P0 → P1)
+  - Nova funcionalidade: Sistema de Hospedagem Territorial (Fase 30)
+  - Nova funcionalidade: Sistema de Demandas e Ofertas (Fase 31)
+  - Fase complementar: Fase 14.8 (Finalização completa das fases 1-15)
+  - Reorganização estratégica: Gamificação reposicionada
+  - Renumeração por prioridade de implementação
+  - Validação de implementação das fases 1-14.5
+
 - **[PR_FIX_GITHUB_PAGES_TIMEOUT.md](./PR_FIX_GITHUB_PAGES_TIMEOUT.md)**  
   Correção de timeout no deploy do GitHub Pages
 
