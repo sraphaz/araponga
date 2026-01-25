@@ -188,9 +188,9 @@
 ### Mês 0-6: Governança e Sustentabilidade (83 dias) 🔴 CRÍTICO
 
 **Onda 2: Governança e Sustentabilidade**
-- Fase 12: Otimizações Finais (28 dias)
 - Fase 13: Conector de Emails (14 dias)
 - Fase 14: Governança/Votação (21 dias)
+- **Fase 15**: Subscriptions & Recurring Payments (45 dias) 🔴 P0
 - **Fase 16**: Finalização Completa (20 dias) ⭐ Renumerada (era 14.8)
 
 **Resultado**: Governança + Sustentabilidade + Base completa
