@@ -102,7 +102,7 @@ public sealed class UserActivityService
         CancellationToken cancellationToken)
     {
         var checkouts = await _checkoutRepository.ListByUserAsync(userId, cancellationToken);
-        
+
         var purchases = checkouts
             .Where(c => c.Status == Domain.Marketplace.CheckoutStatus.Paid)
             .OrderByDescending(c => c.CreatedAtUtc)
@@ -151,7 +151,7 @@ public sealed class UserActivityService
 
         // Buscar checkouts das lojas do usuário
         var allCheckouts = await _checkoutRepository.ListAllAsync(cancellationToken);
-        
+
         var sales = allCheckouts
             .Where(c => storeIds.Contains(c.StoreId) && c.Status == Domain.Marketplace.CheckoutStatus.Paid)
             .OrderByDescending(c => c.CreatedAtUtc)
@@ -180,19 +180,44 @@ public sealed class UserActivityService
     /// <summary>
     /// Gets event participations by the user.
     /// </summary>
-    public Task<PagedResult<UserParticipationActivity>> GetUserParticipationsAsync(
+    public async Task<PagedResult<UserParticipationActivity>> GetUserParticipationsAsync(
         Guid userId,
         PaginationParameters pagination,
         CancellationToken cancellationToken)
     {
-        // Buscar participações do usuário
-        // Por enquanto, retornar lista vazia
-        // TODO: Implementar quando houver método ListByUserAsync no repositório
-        return Task.FromResult(new PagedResult<UserParticipationActivity>(
-            Array.Empty<UserParticipationActivity>(),
+        var participations = await _participationRepository.GetByUserIdAsync(userId, cancellationToken);
+
+        var totalCount = participations.Count;
+        var pagedParticipations = participations
+            .OrderByDescending(p => p.CreatedAtUtc)
+            .Skip(pagination.Skip)
+            .Take(pagination.Take)
+            .ToList();
+
+        // Buscar eventos para obter título e data (otimizado: buscar todos de uma vez)
+        var eventIds = pagedParticipations.Select(p => p.EventId).Distinct().ToList();
+        var events = await _eventRepository.ListByIdsAsync(eventIds, cancellationToken);
+        var eventDict = events.ToDictionary(e => e.Id);
+
+        var activities = pagedParticipations
+            .Select(p =>
+            {
+                var evt = eventDict.GetValueOrDefault(p.EventId);
+                return new UserParticipationActivity(
+                    p.EventId,
+                    evt?.TerritoryId ?? Guid.Empty,
+                    evt?.Title ?? "Evento não encontrado",
+                    evt?.StartsAtUtc ?? DateTime.UtcNow,
+                    p.Status.ToString(),
+                    p.CreatedAtUtc);
+            })
+            .ToList();
+
+        return new PagedResult<UserParticipationActivity>(
+            activities,
             pagination.PageNumber,
             pagination.PageSize,
-            0));
+            totalCount);
     }
 
     /// <summary>
