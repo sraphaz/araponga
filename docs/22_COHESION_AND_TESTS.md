@@ -10,9 +10,9 @@ Este documento avalia a coesão entre as funcionalidades implementadas e a espec
 
 ## Status Atual dos Testes (Fase 2 + Enterprise Coverage Phases 7-9)
 
-- **Total de Testes**: **1508 testes** (1488 passando, 20 pulados, 0 falhando)
-- **Taxa de Sucesso**: **98.7%** (1488/1508 testes executados)
-- **Cobertura de Código**: **~85-90% estimada** (aguardando análise de cobertura de código para validação final)
+- **Total de Testes**: **1578 testes** (1556 passando, 20 pulados, 2 falhando em performance)
+- **Taxa de Sucesso**: **98.6%** (1556/1578 testes executados)
+- **Cobertura de Código**: **45.72% linhas, 38.2% branches, 48.31% métodos** (análise realizada em 2026-01-24)
 - **Testes de Segurança**: 14 testes implementados ✅
 - **Testes de Performance**: 7 testes com SLAs definidos ✅
 - **Enterprise-Level Edge Cases (Phases 7-9)**: **268 novos testes - 100% passando** ✅
@@ -25,7 +25,7 @@ Este documento avalia a coesão entre as funcionalidades implementadas e a espec
   - CacheMetricsServiceTests: 5 testes
   - Outros: 70+ testes (Alerts, Assets, Marketplace, Territories, Events, Security, Performance)
 
-**Status**: ✅ **Testes criados, corrigidos e validados - 1488/1508 testes passando (98.7%)**
+**Status**: ✅ **Testes criados, corrigidos e validados - 1556/1578 testes passando (98.6%)**
 
 Ver documentação completa: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`](./ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md)
 - **Estrutura de Testes**:
