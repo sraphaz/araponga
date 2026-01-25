@@ -91,7 +91,29 @@ npm run type-check
 
 # Lint
 npm run lint
+
+# Testar links da wiki (requer wiki em produção ou local)
+npm run test:links
 ```
+
+### Teste de links (`test:links`)
+
+O script `scripts/test-links.mjs` valida se os links principais da wiki respondem corretamente (ex.: `/`, `/docs/`, onboarding, etc.). Ele faz requisições HTTP ao host configurado.
+
+**Causa das falhas antigas**: o script usava **caminho base fixo** (`https://devportal.araponga.app/wiki`). Em local ou CI sem deploy, esse host não resolve → `ENOTFOUND`. O último deploy falhou por isso; **DevPortal e Wiki ficaram fora** até a correção. Agora a base é configurável via `WIKI_URL` e, se o host estiver inacessível, os testes são pulados (exit 0).
+
+**Comportamento**:
+
+- **Host acessível** (ex.: `devportal.araponga.app` em produção): executa os testes e falha se algum link estiver quebrado.
+- **Host inacessível** (local sem deploy, DNS não configurado, `ENOTFOUND`, etc.): o script **termina com sucesso** (exit 0), exibe um aviso e **pula** os testes. Assim, `npm ci` e `npm run test:links` não quebram em ambiente local ou em CI antes do deploy.
+
+**Testar localmente** (com a wiki rodando em `http://localhost:3001`):
+
+```bash
+WIKI_URL=http://localhost:3001/wiki npm run test:links
+```
+
+O workflow **DevPortal Pages** (`.github/workflows/devportal-pages.yml`) roda `test:links` após o deploy, com `WIKI_URL=https://devportal.araponga.app/wiki`.
 
 ## 🌐 Deploy e Domínio
 
@@ -117,6 +139,10 @@ O wiki é servido como subpasta do DevPortal:
 - **CNAME**: Já configurado para `devportal.araponga.app` → `sraphaz.github.io`
 
 ## 🐛 Troubleshooting
+
+### Deploy falhou / DevPortal e Wiki fora
+
+**Contexto**: O último deploy falhou por causa do `test:links` (caminhos fixos). DevPortal e Wiki ficaram fora até a correção. O script agora usa `WIKI_URL`, pula os testes quando o host está inacessível e não bloqueia mais o pipeline. Faça push dos commits com a correção e dispare o workflow **DevPortal Pages** para subir os sites de novo.
 
 ### Build Falha
 

@@ -20,7 +20,13 @@ npm run build
 
 # Iniciar servidor de produção
 npm start
+
+# Testar links da wiki (pós-deploy)
+npm run test:links
+# Local: WIKI_URL=http://localhost:3001/wiki npm run test:links
 ```
+
+**Nota**: `test:links` valida links via HTTP. Antes falhava por base URL fixa; agora use `WIKI_URL` para local e o script pula os testes se o host não estiver acessível. Ver [CI_CD.md](./CI_CD.md#teste-de-links-testlinks) para detalhes.
 
 ## 📁 Estrutura
 

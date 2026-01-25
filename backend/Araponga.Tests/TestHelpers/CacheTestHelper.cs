@@ -20,4 +20,13 @@ public static class CacheTestHelper
         var logger = NullLogger<RedisCacheService>.Instance;
         return new RedisCacheService(null, memoryCache, logger);
     }
+
+    /// <summary>
+    /// Cria um cache que implementa RemoveByPatternAsync (prefix matching).
+    /// Use em testes que validam invalidação por pattern (ex.: EventCacheService).
+    /// </summary>
+    public static IDistributedCacheService CreatePatternAwareCacheService()
+    {
+        return new PatternAwareTestCacheService();
+    }
 }
