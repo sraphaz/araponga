@@ -5,7 +5,7 @@
 **Nota**: O número total de fases é calculado automaticamente contando arquivos `FASE*.md` em `docs/backlog-api/`. Ver `docs/PROJECT_PHASES_CONFIG.md` para mais informações.  
 **Fases Completas**: 8  
 **Fases em Andamento**: 2 (Fase 12 - 85% completo, Fase 13 - MVP recuperacao)  
-**Fases Complementares**: 1 (Fase 14.5)  
+**Fases Complementares**: 2 (Fase 14.5, Fase 14.8)  
 **Fases Pendentes**: [Calcular: Total - Completas - Em Andamento - Complementares]
 
 ---
@@ -38,8 +38,9 @@
 | Fase | Nome | Prioridade | Status | Dependências |
 |------|------|------------|--------|--------------|
 | **14.5** | **Itens Faltantes e Complementos Fases 1-14** | 🟡 Importante | ⏳ Pendente | Fases 1-14 (parcialmente implementadas) |
+| **14.8** | **Finalização Completa das Fases 1-15** | 🔴 Crítica | ⏳ Pendente | Fases 1-15 (gaps restantes) ⭐ NOVA |
 
-**Nota**: A Fase 1.5 foi consolidada na Fase 14.5 para centralizar todas as pendências.
+**Nota**: A Fase 1.5 foi consolidada na Fase 14.5 para centralizar todas as pendências. A Fase 14.8 consolida todos os gaps restantes das fases 1-15, incluindo Sistema de Políticas de Termos (requisito legal).
 
 ---
 

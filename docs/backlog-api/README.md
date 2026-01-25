@@ -2,10 +2,13 @@
 ## Planejamento Estratégico de Desenvolvimento
 
 **Data de Criação**: 2025-01-13  
-**Última Revisão**: 2025-01-20  
+**Última Revisão**: 2026-01-25  
 **Objetivo**: Backlog completo da API - Elevar a aplicação de 7.4-8.0/10 para 10/10 em todas as categorias e convergir com padrões de mercado  
-**Estimativa Total**: 450 dias sequenciais / ~220 dias com paralelização (incluindo novas fases estratégicas)  
+**Estimativa Total**: 495 dias sequenciais / ~241 dias com paralelização (incluindo novas fases estratégicas + Fase 30 Hospedagem)  
 **Status Atual**: 9.3/10 (após implementação das fases 1-8, incluindo FASE8 com funcionalidades extras)  
+**Total de Fases Documentadas**: 32 fases (1-29 originais + 30 Hospedagem + 31 Demandas/Ofertas + 14.8 Finalização)
+
+**Nota**: O roadmap estratégico menciona fases 31-44 conceituais (Proof of Sweat, Subscriptions, Web3, DAO, etc.), mas sem documentos detalhados. A Fase 30 (Hospedagem) é a primeira fase nova com documento completo.  
 **⭐ Estratégia de Convergência**: Ver [Estratégia de Convergência de Mercado](../39_ESTRATEGIA_CONVERGENCIA_MERCADO.md) | [Mapa de Funcionalidades](../38_MAPA_FUNCIONALIDADES_MERCADO.md)
 
 ---
@@ -22,7 +25,7 @@ backlog-api/
 ├── NORMALIZACAO_COMPLETA.md           # Documentação da normalização
 ├── RESUMO_NORMALIZACAO.md             # Resumo da normalização
 │
-├── FASE1.md até FASE29.md             # Documentos de fases (29 fases)
+├── FASE1.md até FASE31.md             # Documentos de fases (31 fases)
 │
 ├── RESUMO_*.md                        # Resumos executivos
 ├── REORGANIZACAO_*.md                 # Documentos de reorganização
@@ -70,7 +73,7 @@ backlog-api/
 
 ---
 
-## 📄 Fases (1-29)
+## 📄 Fases (1-31)
 
 ### Fases Completas (1-8) ✅
 
@@ -86,8 +89,9 @@ backlog-api/
 ### Fases Complementares (Itens Faltantes)
 
 - **[FASE14_5.md](./FASE14_5.md)** - Itens Faltantes e Complementos Fases 1-14 (30-40 dias) 🟡 Importante
+- **[FASE14_8.md](./FASE14_8.md)** - Finalização Completa das Fases 1-15 (15-20 dias) 🔴 Crítica ⭐ NOVA
 
-**Nota**: A Fase 1.5 foi consolidada na Fase 14.5 para centralizar todas as pendências das fases 1-14.
+**Nota**: A Fase 1.5 foi consolidada na Fase 14.5 para centralizar todas as pendências das fases 1-14. A Fase 14.8 consolida todos os gaps restantes das fases 1-15, incluindo Sistema de Políticas de Termos (requisito legal).
 
 ### Onda 1: MVP Essencial (65 dias) 🔴 CRÍTICO
 - **[FASE9.md](./FASE9.md)** - Perfil de Usuário Completo (15 dias) 🔴 Crítica
@@ -99,39 +103,57 @@ backlog-api/
 - **[FASE13.md](./FASE13.md)** - Conector de Envio de Emails (14 dias) 🔴 Crítica
 - **[FASE14.md](./FASE14.md)** - Governança Comunitária e Votação (21 dias) 🔴 Crítica
 
-### Onda 3: Soberania Territorial (63 dias) 🔴 ALTA
+### Onda 3: Soberania Territorial (35 dias) 🔴 ALTA
 
 - **[FASE18.md](./FASE18.md)** - Saúde Territorial e Monitoramento (35 dias) 🔴 Alta
-- **[FASE17.md](./FASE17.md)** - Sistema de Gamificação Harmoniosa (28 dias) 🟡 Importante
+- ⚠️ **Gamificação movida para Onda 10** (depois de funcionalidades core)
 
-### Onda 4: Economia Local (84 dias) 🔴 ALTA
+### Onda 4: Economia Local (105 dias) 🔴 CRÍTICO
 
-- **[FASE20.md](./FASE20.md)** - Sistema de Moeda Territorial (35 dias) 🟡 Alta
-- **[FASE23.md](./FASE23.md)** - Sistema de Compra Coletiva (28 dias) 🔴 Alta
+- **[FASE23.md](./FASE23.md)** - Sistema de Compra Coletiva (28 dias) 🔴 Crítica ⬆️ **P1→P0**
+- **[FASE30.md](./FASE30.md)** - Sistema de Hospedagem Territorial (56 dias) 🔴 Crítica ⬆️ **P1→P0**
+- **[FASE31.md](./FASE31.md)** - Sistema de Demandas e Ofertas (21 dias) 🔴 Crítica ⬆️ **P1→P0** ⭐ NOVA
+
+**Justificativa**: Considerando contexto brasileiro, economia local gera valor imediato com pagamentos convencionais (PIX, cartão), sem necessidade de blockchain.
+
+**Referência**: [Reavaliação Blockchain Prioridade](../REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)
+
+### Onda 4.6: Economia Local Completa (84 dias) 🟡 ALTA
+
 - **[FASE24.md](./FASE24.md)** - Sistema de Trocas Comunitárias (21 dias) 🟡 Alta
+- **[FASE16.md](./FASE16.md)** - Sistema de Entregas Territoriais (28 dias) 🟡 Alta ⬇️ Reposicionada
+- **[FASE20.md](./FASE20.md)** - Sistema de Moeda Territorial (35 dias) 🟡 Alta ⬇️ Reposicionada
 
-### Onda 5: Conformidade e Inteligência (49 dias) 🟡 IMPORTANTE
+### Onda 5: Conformidade e Inteligência (146 dias) 🟡 IMPORTANTE
 
 - **[FASE12.md](./FASE12.md)** - Otimizações Finais (28 dias) 🟡 Importante
 - **[FASE15.md](./FASE15.md)** - Inteligência Artificial (28 dias) 🟡 Importante
+- **Fase 44** - Agente IA (Versão Básica) (90 dias) 🟡 P1 ⬇️ Reposicionada
 
-### Onda 6: Diferenciais (98 dias) 🟢 OPCIONAL
+### Onda 6: Diferenciais (70 dias) 🟢 OPCIONAL
 
-- **[FASE16.md](./FASE16.md)** - Sistema de Entregas Territoriais (28 dias) 🟡 Importante
 - **[FASE22.md](./FASE22.md)** - Integrações Externas (35 dias) 🟡 Importante
-- **[FASE21.md](./FASE21.md)** - Suporte a Criptomoedas (28 dias) 🟢 Opcional
-- **[FASE19.md](./FASE19.md)** - Arquitetura Modular (35 dias) 🟢 Futuro
+- **[FASE19.md](./FASE19.md)** - Arquitetura Modular (35 dias) 🟡 Importante ⬇️ Reposicionada (P2 → P1)
 
-### Onda 7: Autonomia Digital e Economia Circular (84 dias) 🔴 ALTA
+### Onda 7: Autonomia Digital (84 dias) 🔴 ALTA
 
 - **[FASE25.md](./FASE25.md)** - Hub de Serviços Digitais Base (21 dias) 🔴 Alta
 - **[FASE26.md](./FASE26.md)** - Chat com IA e Consumo Consciente (14 dias) 🔴 Alta
 - **[FASE27.md](./FASE27.md)** - Negociação Territorial e Assinatura Coletiva (28 dias) 🔴 Alta
 - **[FASE28.md](./FASE28.md)** - Banco de Sementes e Mudas Territorial (21 dias) 🟡 Alta
 
-### Onda 8: Mobile Avançado (14 dias) 🟡 ALTA
+### Onda 8: Diferenciação (119 dias) 🟢 MÉDIA
 
+- **[FASE42.md](./FASE42.md)** - Learning Hub (60 dias) 🟢 P2
+- **[FASE43.md](./FASE43.md)** - Rental System (45 dias) 🟢 P2
 - **[FASE29.md](./FASE29.md)** - Suporte Mobile Avançado (14 dias) 🟡 Alta
+
+### Onda 10: Gamificação e Incentivos (58 dias) 🟢 BAIXA
+
+- **[FASE17.md](./FASE17.md)** - Sistema de Gamificação Harmoniosa (28 dias) 🟡 Importante ⬇️ Reposicionada
+- **Fase 31** - Proof of Sweat (30 dias) 🟡 P1 ⬇️ Reposicionada (ou consolidar com Fase 17)
+
+**Justificativa**: Gamificação vem DEPOIS de funcionalidades que enriquecem o produto, servindo como decoração/incentivo para uso de funcionalidades já implementadas.
 
 ---
 
@@ -149,10 +171,12 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 |------|--------|------------|---------|--------|
 | **Fase 14** | Governança Comunitária e Votação | 🔴 P0 | 21 dias | ✅ Implementado |
 | **Fase 14.5** | Governança — Itens Faltantes | 🟡 P1 | 8–10 dias | ⏳ Planejado |
-| **Fase 30** | Proof of Sweat (Tradicional) | 🔴 P0 | 30 dias | ⏳ Novo |
-| **Fase 31** | Dashboard de Métricas Comunitárias | 🟡 P1 | 14 dias | ⏳ Novo |
+| **Fase 15** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
+| **Fase 37** | Dashboard de Métricas Comunitárias | 🟡 P1 | 14 dias | ⏳ Novo |
 
 **Resultado**: Governança participativa funcional, aumento de engajamento sem complexidade de blockchain.
+
+**Nota**: Proof of Sweat (Fase 42) foi reposicionada para P1, depois de funcionalidades core.
 
 ### Onda 0.5: Sustentabilidade Financeira (80 dias) 🔴 CRÍTICO
 
@@ -160,48 +184,56 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 32** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
-| **Fase 33** | Ticketing para Eventos | 🟡 P1 | 21 dias | ⏳ Novo |
+| **Fase 33** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
+| **Fase 34** | Ticketing para Eventos | 🟡 P1 | 21 dias | ⏳ Novo |
 | **Fase 13** | Conector de Emails | 🔴 P0 | 14 dias | 🚧 Em andamento |
 
 **Resultado**: Sustentabilidade financeira melhorada através de receitas recorrentes e monetização de eventos.
 
-### Onda 0.6: Preparação Web3 (119 dias) 🔴 CRÍTICO
+### Onda 0.6: Preparação Web3 (147 dias) 🟡 ALTA
 
-**Objetivo**: Preparar infraestrutura técnica para integração blockchain e DAO completa.
-
-| Fase | Título | Prioridade | Duração | Status |
-|------|--------|------------|---------|--------|
-| **Fase 34** | Avaliação e Escolha de Blockchain | 🔴 P0 | 14 dias | ⏳ Novo |
-| **Fase 35** | Camada de Abstração Blockchain | 🔴 P0 | 30 dias | ⏳ Novo |
-| **Fase 36** | Integração Wallet (WalletConnect) | 🔴 P0 | 30 dias | ⏳ Novo |
-| **Fase 37** | Smart Contracts Básicos | 🔴 P0 | 45 dias | ⏳ Novo |
-
-**Resultado**: Base técnica sólida para Web3, permitindo implementação de DAO completa.
-
-### Onda 0.7: DAO e Tokenização (155 dias) 🔴 CRÍTICO
-
-**Objetivo**: Implementar DAO completa com tokens on-chain e governança descentralizada.
+**Objetivo**: Preparar infraestrutura técnica para integração blockchain quando houver demanda.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 38** | Tokens On-chain (ERC-20) | 🔴 P0 | 60 dias | ⏳ Novo |
-| **Fase 39** | Governança Tokenizada | 🔴 P0 | 30 dias | ⏳ Novo |
-| **Fase 20** | Moeda Territorial (Integração Web3) | 🟡 P1 | 35 dias | ⏳ Planejado |
-| **Fase 40** | Proof of Presence On-chain | 🟡 P1 | 30 dias | ⏳ Novo |
+| **Fase 16** | Avaliação e Escolha de Blockchain | 🟡 P1 | 14 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 17** | Camada de Abstração Blockchain | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 18** | Integração Wallet (WalletConnect) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 19** | Smart Contracts Básicos | 🟡 P1 | 45 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 36** | Suporte a Criptomoedas | 🟡 P1 | 28 dias | ⏳ Planejado |
 
-**Resultado**: DAO completa e competitiva, alinhada com padrões de mercado.
+**Resultado**: Base técnica sólida para Web3, permitindo implementação de DAO quando houver demanda real.
 
-### Onda 0.8: Diferenciação (230 dias) 🟢 MÉDIA
+**Justificativa**: Adoção brasileira de blockchain ainda é baixa. Web3 pode ser adicionado depois quando houver demanda real, priorizando funcionalidades que geram valor imediato.
+
+**Referência**: [Reavaliação Blockchain Prioridade](../REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)
+
+### Onda 0.7: DAO e Tokenização (155 dias) 🟡 ALTA
+
+**Objetivo**: Implementar DAO completa com tokens on-chain quando houver demanda.
+
+| Fase | Título | Prioridade | Duração | Status |
+|------|--------|------------|---------|--------|
+| **Fase 20** | Tokens On-chain (ERC-20) | 🟡 P1 | 60 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 21** | Governança Tokenizada | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 29** | Moeda Territorial (Integração Web3) | 🟡 P1 | 35 dias | ⏳ Planejado |
+| **Fase 39** | Proof of Presence On-chain | 🟡 P1 | 30 dias | ⏳ Novo |
+
+**Resultado**: DAO completa e competitiva, alinhada com padrões de mercado, quando houver demanda real.
+
+**Justificativa**: Adoção brasileira de blockchain ainda é baixa. DAO pode ser implementada depois quando houver demanda real, priorizando funcionalidades que geram valor imediato.
+
+**Referência**: [Reavaliação Blockchain Prioridade](../REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)
+
+### Onda 0.8: Diferenciação (119 dias) 🟢 MÉDIA
 
 **Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 41** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
-| **Fase 42** | Booking System | 🟢 P2 | 45 dias | ⏳ Novo |
-| **Fase 43** | Agente IA (Versão Básica) | 🟢 P2 | 90 dias | ⏳ Novo |
-| **Fase 26** | Chat com IA e Consumo Consciente | 🟢 P2 | 14 dias | ⏳ Planejado |
+| **Fase 44** | Learning Hub | 🟢 P2 | 60 dias | ⏳ Novo |
+| **Fase 45** | Rental System | 🟢 P2 | 45 dias | ⏳ Novo |
+| **Fase 31** | Chat com IA e Consumo Consciente | 🟡 P1 | 14 dias | ⏳ Planejado |
 
 **Resultado**: Plataforma completa e diferenciada, com funcionalidades avançadas.
 
@@ -244,8 +276,8 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 |------|---------|------------|--------|
 | **Fase 14: Governança/Votação** | 21 dias | 🔴 P0 | ✅ Implementado |
 | **Fase 14.5: Itens Faltantes** | 8–10 dias | 🟡 P1 | ⏳ Pendente |
-| **Fase 30: Proof of Sweat** | 30 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 31: Dashboard Métricas** | 14 dias | 🟡 P1 | ⏳ Novo |
+| **Fase 15: Subscriptions** | 45 dias | 🔴 P0 | ⏳ Novo |
+| **Fase 37: Dashboard Métricas** | 14 dias | 🟡 P1 | ⏳ Novo |
 
 **Resultado**: Governança participativa funcional, aumento de engajamento sem complexidade de blockchain.
 
@@ -259,8 +291,8 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 32: Subscriptions** | 45 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 33: Ticketing** | 21 dias | 🟡 P1 | ⏳ Novo |
+| **Fase 15: Subscriptions** | 45 dias | 🔴 P0 | ⏳ Novo |
+| **Fase 38: Ticketing** | 21 dias | 🟡 P1 | ⏳ Novo |
 | **Fase 13: Emails** | 14 dias | 🔴 P0 | 🚧 Em andamento |
 
 **Resultado**: Sustentabilidade financeira melhorada através de receitas recorrentes.
@@ -290,10 +322,10 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 34: Avaliação Blockchain** | 14 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 35: Abstração Blockchain** | 30 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 36: Integração Wallet** | 30 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 37: Smart Contracts** | 45 dias | 🔴 P0 | ⏳ Novo |
+| **Fase 16: Avaliação Blockchain** | 14 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 17: Abstração Blockchain** | 30 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 18: Integração Wallet** | 30 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 19: Smart Contracts** | 45 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
 
 **Resultado**: Base técnica sólida para Web3.
 
@@ -307,10 +339,10 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 38: Tokens On-chain** | 60 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 39: Governança Tokenizada** | 30 dias | 🔴 P0 | ⏳ Novo |
-| **Fase 20: Moeda Territorial (Web3)** | 35 dias | 🟡 P1 | ⏳ Planejado |
-| **Fase 40: Proof of Presence On-chain** | 30 dias | 🟡 P1 | ⏳ Novo |
+| **Fase 20: Tokens On-chain** | 60 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 21: Governança Tokenizada** | 30 dias | 🟡 P1 | ⏳ Novo ⬇️ **P0→P1** |
+| **Fase 29: Moeda Territorial (Web3)** | 35 dias | 🟡 P1 | ⏳ Planejado |
+| **Fase 39: Proof of Presence On-chain** | 30 dias | 🟡 P1 | ⏳ Novo |
 
 **Resultado**: DAO completa e competitiva, alinhada com padrões de mercado.
 
@@ -331,24 +363,25 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 ---
 
-### Onda 3: Economia Circular (Mês 12-18) 🟡 ALTA
+### Onda 4.6: Economia Local Completa (Mês 9-12) 🟡 ALTA
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 20: Moeda Territorial** | 35 dias | 🟡 Alta | ⏳ Pendente |
-| **Fase 23: Compra Coletiva** | 28 dias | 🔴 Alta | ⏳ Pendente |
-| **Fase 24: Sistema de Trocas** | 21 dias | 🟡 Alta | ⏳ Pendente |
+| **Fase 27: Trocas Comunitárias** | 21 dias | 🟡 Alta | ⏳ Pendente |
+| **Fase 28: Entregas Territoriais** | 28 dias | 🟡 Alta | ⏳ Pendente |
+| **Fase 29: Moeda Territorial** | 35 dias | 🟡 Alta | ⏳ Pendente |
 
-**Justificativa**: Moeda é base para economia circular; compra coletiva e trocas completam economia local
+**Justificativa**: Completar economia local com trocas, entregas e moeda territorial (depois de serviços robustos)
 
 ---
 
-### Onda 4: Otimizações e Inteligência (Mês 6-18) 🟡 IMPORTANTE
+### Onda 5: Conformidade e Inteligência (Mês 6-18) 🟡 IMPORTANTE
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
 | **Fase 12: Otimizações Finais** | 28 dias | 🟡 P1 | ⏳ Pendente |
 | **Fase 15: Inteligência Artificial** | 28 dias | 🟡 P1 | ⏳ Pendente |
+| **Fase 44: Agente IA (Versão Básica)** | 90 dias | 🟡 P1 | ⏳ Novo ⬇️ Reposicionada |
 
 **Paralelização**: Pode executar em paralelo com outras ondas
 
@@ -360,22 +393,19 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 41: Learning Hub** | 60 dias | 🟢 P2 | ⏳ Novo |
-| **Fase 42: Booking System** | 45 dias | 🟢 P2 | ⏳ Novo |
-| **Fase 43: Agente IA (Básico)** | 90 dias | 🟢 P2 | ⏳ Novo |
+| **Fase 42: Learning Hub** | 60 dias | 🟢 P2 | ⏳ Novo |
+| **Fase 43: Rental System** | 45 dias | 🟢 P2 | ⏳ Novo |
 
 **Referência**: [Estratégia de Convergência - Fase 5](../39_ESTRATEGIA_CONVERGENCIA_MERCADO.md#fase-5-diferenciação-mês-12-18)
 
 ---
 
-### Onda 5: Extensões (Mês 6-18) 🟢 OPCIONAL
+### Onda 9: Otimizações e Extensões (Mês 6-18) 🟡 IMPORTANTE
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
-| **Fase 16: Entregas Territoriais** | 28 dias | 🟢 P2 | ⏳ Pendente |
+| **Fase 19: Arquitetura Modular** | 35 dias | 🟡 P1 | ⏳ Pendente ⬇️ Reposicionada (P2 → P1) |
 | **Fase 22: Integrações Externas** | 35 dias | 🟢 P2 | ⏳ Pendente |
-| **Fase 21: Criptomoedas** | 28 dias | 🟢 P2 | ⏳ Pendente |
-| **Fase 19: Arquitetura Modular** | 35 dias | 🟢 P2 | ⏳ Pendente |
 
 **Paralelização**: Pode executar em paralelo com outras ondas
 
@@ -386,6 +416,8 @@ Com base em análise comparativa com plataformas líderes de mercado (ex: Closer
 ### Resumo Executivo
 
 O backlog foi expandido com novas fases estratégicas identificadas através de análise comparativa de mercado (Closer.earth e padrões de investimento). As novas fases priorizam funcionalidades essenciais para competir no mercado de investimento, especialmente governança descentralizada (DAO), tokenização e Web3.
+
+**Nota**: Considerando contexto brasileiro, as fases de blockchain/Web3 foram reposicionadas de P0 para P1, priorizando funcionalidades de economia local que geram valor imediato com pagamentos convencionais. Ver [Reavaliação Blockchain Prioridade](../REAVALIACAO_BLOCKCHAIN_PRIORIDADE.md)
 
 **Referência**: [Estratégia de Convergência de Mercado](../39_ESTRATEGIA_CONVERGENCIA_MERCADO.md) | [Mapa de Funcionalidades](../38_MAPA_FUNCIONALIDADES_MERCADO.md)
 
@@ -409,11 +441,12 @@ O backlog foi expandido com novas fases estratégicas identificadas através de 
 
 | Marco | Prazo | Funcionalidades | Impacto |
 |-------|-------|-----------------|---------|
-| **Governança Básica** | Mês 3 | Votação + Proof of Sweat | Alto |
-| **Sustentabilidade** | Mês 6 | Subscriptions + Ticketing | Médio-Alto |
-| **Web3 Ready** | Mês 9 | Blockchain + Wallets | Alto |
-| **DAO Completa** | Mês 12 | Tokens + Governança Tokenizada | Crítico |
-| **Diferenciação** | Mês 18 | Learning + Booking + IA | Médio |
+| **Governança Básica** | Mês 3 | Votação (Fase 14) + Subscriptions (Fase 15) | Alto |
+| **Economia Local** | Mês 6 | Compra Coletiva (Fase 24) + Hospedagem (Fase 25) + Demandas/Ofertas (Fase 26) | Crítico |
+| **Sustentabilidade** | Mês 6 | Subscriptions (Fase 15) + Ticketing (Fase 38) | Médio-Alto |
+| **Web3 Ready** | Mês 12+ | Blockchain (Fases 16-19) + Wallets (Fase 18) | Médio (quando houver demanda) |
+| **DAO Completa** | Mês 18+ | Tokens (Fase 20) + Governança Tokenizada (Fase 21) | Médio (quando houver demanda) |
+| **Diferenciação** | Mês 18+ | Learning Hub (Fase 44) + Rental System (Fase 45) + IA (Fase 22, 40) | Médio |
 
 ### Priorização Atualizada
 

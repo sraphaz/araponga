@@ -136,7 +136,7 @@ backend/
 **[Índice Completo da Documentação](./docs/00_INDEX.md)** — Navegação estruturada
 
 ### Fases e Roadmap
-- [**Backlog de Fases (1-29)** →  `docs/backlog-api/`](./docs/backlog-api/) — **29 fases planejadas, 14.5 implementadas**
+- [**Backlog de Fases (1-31 + 14.5, 14.8)** →  `docs/backlog-api/`](./docs/backlog-api/) — **32 fases planejadas, 14.5 implementadas, 14.8 pendente**
 - [Roadmap Completo](./docs/02_ROADMAP.md) — Visão de longo prazo
 - [Estrutura da Documentação](./docs/STRUCTURE.md) — Onde encontrar cada documento
 
@@ -179,11 +179,13 @@ O Araponga está em **desenvolvimento ativo** com **14+ fases implementadas** e 
 |-------|--------|-----------|
 | **Fases 1-14** | ✅ **IMPLEMENTADAS** | Core features, feed, marketplace, governança, segurança |
 | **Fase 14.5** | ✅ **IMPLEMENTADA** | Verificação de aderência, melhorias de performance, refinamentos |
-| **Fases 15-29** | 📋 **PLANEJADAS** | Futuras evoluções (veja roadmap completo) |
+| **Fase 14.8** | ⏳ **PENDENTE** | Finalização completa das fases 1-15 (Sistema de Políticas de Termos, validações) ⭐ NOVA |
+| **Fases 15-31** | 📋 **PLANEJADAS** | Futuras evoluções (veja roadmap completo) |
 
-**Total de fases planejadas**: 29  
+**Total de fases planejadas**: 32 (incluindo 14.5 e 14.8)  
 **Fases implementadas**: 14.5  
-**Progresso**: ~50% do roadmap
+**Fase 14.8 pendente**: Finalização completa antes de Fase 15  
+**Progresso**: ~45% do roadmap
 
 ---
 
@@ -380,13 +382,42 @@ dotnet run --project backend/Araponga.Api
 
 A API estará disponível em `http://localhost:5000` (ou porta configurada).
 
-### Postgres (docker compose, recomendado)
+### Postgres (docker compose, básico)
 
 ```bash
 docker compose up --build
 ```
 
 Isso sobe a API e o PostgreSQL em containers Docker.
+
+### Ambiente Completo Docker (desenvolvimento/pré-produção, recomendado)
+
+Para um ambiente completo com PostgreSQL, Redis, MinIO e API:
+
+```powershell
+# 1. Configurar variáveis de ambiente
+cp .env.example .env
+# Edite .env e configure JWT_SIGNINGKEY (obrigatório!)
+
+# 2. Iniciar ambiente completo
+.\scripts\docker-dev.ps1 up -Build
+
+# Ou usando docker-compose diretamente:
+docker-compose -f docker-compose.dev.yml up -d --build
+```
+
+**Serviços incluídos:**
+- PostgreSQL 16 com PostGIS
+- Redis 7 (cache distribuído)
+- MinIO (storage S3-compatible)
+- API Araponga
+
+**Endpoints:**
+- API: http://localhost:8080
+- Swagger: http://localhost:8080/swagger
+- MinIO Console: http://localhost:9001 (minioadmin/minioadmin)
+
+Veja a [documentação completa do ambiente Docker](./docs/DOCKER_DEV_ENVIRONMENT.md) para mais detalhes.
 
 ### Migrations (Postgres)
 
