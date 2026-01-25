@@ -1,10 +1,11 @@
-# Fase 28: Banco de Sementes e Mudas Territorial
+# Fase 48: Banco de Sementes e Mudas Territorial
 
-**Duração**: 4 semanas (28 dias úteis)  
-**Prioridade**: 🟡 MÉDIA-ALTA (Soberania alimentar e economia circular)  
-**Depende de**: TerritoryAsset (existe), Marketplace (existe), Fase 17 (Gamificação), WorkQueue (existe)  
-**Estimativa Total**: 144-180 horas  
-**Status**: ⏳ Pendente
+**Duração**: 3 semanas (21 dias úteis)  
+**Prioridade**: 🟢 MÉDIA (Soberania alimentar e economia circular)  
+**Depende de**: TerritoryAsset (existe), Marketplace (existe), Fase 42 (Gamificação), WorkQueue (existe)  
+**Estimativa Total**: 120 horas  
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 28 para Fase 48, reposicionada para Onda 10 (Diferenciação Avançada). Referências atualizadas: Fase 17→42.
 
 ---
 
@@ -37,7 +38,7 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - ✅ Alertas existe (alertas territoriais)
 - ✅ Postagens existe (posts no feed)
 - ✅ Chat existe (comunicação)
-- ✅ Gamificação planejada (Fase 17)
+- ✅ Gamificação planejada (Fase 42)
 - ❌ Não existe sistema de banco de sementes
 - ❌ Não existe catalogação de sementes
 - ❌ Não existe rastreabilidade de sementes
@@ -248,7 +249,7 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
   - [ ] Criar WorkItem ao receber doação
   - [ ] Type = `SEED_DONATION_REVIEW`
   - [ ] Curadores revisam via WorkQueue
-- [ ] Integração com Gamificação (Fase 17):
+- [ ] Integração com Gamificação (Fase 42):
   - [ ] Doação aceita gera contribuição
   - [ ] `ContributionType.SeedDonation` (+10 pontos)
   - [ ] Variedade rara: +25 pontos
@@ -574,7 +575,7 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - ✅ Integração com TerritoryAsset funcionando
 - ✅ Integração com Marketplace funcionando
 - ✅ Integração com WorkQueue funcionando
-- ✅ Integração com Gamificação (Fase 17) funcionando
+- ✅ Integração com Gamificação (Fase 42) funcionando
 - ✅ Integração com Notificações funcionando
 - ✅ Integração com Alertas funcionando
 - ✅ Integração com Postagens funcionando
@@ -588,7 +589,7 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - **TerritoryAsset**: Base para SeedBank
 - **Marketplace**: Trocas de sementes
 - **WorkQueue**: Revisão de doações
-- **Fase 17**: Gamificação (contribuições por sementes)
+- **Fase 42**: Gamificação (contribuições por sementes)
 - **Events**: Eventos de troca (já existe)
 - **Notificações**: Alertas e notificações (já existe)
 - **Alertas**: Alertas territoriais (já existe)
@@ -622,7 +623,7 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - Doações geram contribuições
 - Plantios bem-sucedidos geram contribuições
 - Eventos geram contribuições
-- Integração com ContributionService (Fase 17)
+- Integração com ContributionService (Fase 42)
 
 **Notificações e Alertas**:
 - Novos tipos de notificação
@@ -637,5 +638,5 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 ---
 
 **Status**: ⏳ **FASE 28 PENDENTE**  
-**Depende de**: TerritoryAsset, Marketplace, WorkQueue, Fase 17  
+**Depende de**: TerritoryAsset, Marketplace, WorkQueue, Fase 42  
 **Crítico para**: Soberania Alimentar e Economia Circular

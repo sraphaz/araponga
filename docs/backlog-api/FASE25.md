@@ -1,10 +1,11 @@
-# Fase 25: Hub de Serviços Digitais Base
+# Fase 26: Hub de Serviços Digitais Base
 
 **Duração**: 3 semanas (21 dias úteis)  
-**Prioridade**: 🔴 ALTA (Base para autonomia digital)  
+**Prioridade**: 🟡 ALTA (Base para autonomia digital)  
 **Depende de**: Fase 1 (Segurança), Fase 9 (UserPreferences)  
 **Estimativa Total**: 96-120 horas  
-**Status**: ⏳ Pendente
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 25 para Fase 26 (Onda 6: Autonomia Digital). Fase 25 agora é Dashboard Métricas.
 
 ---
 

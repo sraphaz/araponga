@@ -1,10 +1,11 @@
-# Fase 27: Negociação Territorial e Assinatura Coletiva de Serviços Digitais
+# Fase 28: Negociação Territorial e Assinatura Coletiva de Serviços Digitais
 
 **Duração**: 3 semanas (21 dias úteis)  
-**Prioridade**: 🔴 ALTA (Economia de escala e inclusão)  
-**Depende de**: Fase 25 (Serviços Digitais Base), Fase 20 (TerritoryFund), Fase 14 (Votação)  
+**Prioridade**: 🟡 ALTA (Economia de escala e inclusão)  
+**Depende de**: Fase 26 (Serviços Digitais Base), Fase 22 (Moeda Territorial), Fase 14 (Votação)  
 **Estimativa Total**: 120-144 horas  
-**Status**: ⏳ Pendente
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 27 para Fase 28 (Onda 6: Autonomia Digital). Referências atualizadas: Fase 25→26, Fase 20→22.
 
 ---
 
@@ -29,8 +30,8 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 ## 📋 Contexto e Requisitos
 
 ### Estado Atual
-- ✅ Fase 25 (Serviços Digitais Base) fornece infraestrutura
-- ✅ Fase 20 (TerritoryFund) fornece fundos territoriais
+- ✅ Fase 26 (Serviços Digitais Base) fornece infraestrutura
+- ✅ Fase 22 (Moeda Territorial) fornece fundos territoriais
 - ✅ Fase 14 (Votação) fornece governança comunitária
 - ✅ Feature flags territoriais funcionando
 - ❌ Territórios não podem negociar serviços

@@ -1,11 +1,12 @@
-# Fase 18: Saúde Territorial e Monitoramento
+# Fase 24: Saúde Territorial e Monitoramento
 
 **Duração**: 5 semanas (35 dias úteis)  
-**Prioridade**: 🔴 ALTA (Soberania territorial e autonomia comunitária)  
+**Prioridade**: 🟡 ALTA (Soberania territorial e autonomia comunitária)  
 **Depende de**: Fase 9 (Perfil de Usuário)  
-**Integra com**: Fase 17 (Gamificação) - pode ser desenvolvido em paralelo  
+**Integra com**: Fase 42 (Gamificação) - pode ser desenvolvido em paralelo  
 **Estimativa Total**: 200 horas  
-**Status**: ⏳ Pendente
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 18 para Fase 24 (Onda 5: Conformidade e Soberania). Fase 18 agora é Hospedagem Territorial.
 
 ---
 
@@ -17,14 +18,14 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - Integra sensores físicos para monitoramento automatizado
 - Calcula indicadores de saúde territorial
 - Organiza ações territoriais (mutirões, plantio, coleta, manutenção)
-- **Gamifica atividades territoriais** (integração com Fase 17)
-- **Gera moeda territorial** por atividades (integração com Fase 20)
+- **Gamifica atividades territoriais** (integração com Fase 42)
+- **Gera moeda territorial** por atividades (integração com Fase 22)
 
 **Princípios**:
 - ✅ **Colaboração Comunitária**: Observações e ações são comunitárias
 - ✅ **Transparência**: Dados de saúde são públicos (ou para moradores)
 - ✅ **Ação Local**: Foco em ações que melhoram o território
-- ✅ **Gamificação Harmoniosa**: Atividades geram contribuições e moeda
+- ✅ **Gamificação Harmoniosa**: Atividades geram contribuições e moeda (Fase 42)
 - ✅ **Autonomia**: Comunidades decidem o que monitorar e como agir
 
 ---
@@ -51,7 +52,7 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - ✅ Status: OPEN, UNDER_REVIEW, CONFIRMED, RESOLVED, REJECTED
 - ✅ Confirmações colaborativas (outros usuários podem confirmar)
 - ✅ Relacionamento com recursos naturais (`NATURAL_ASSET`)
-- ✅ **Gamificação**: Observação confirmada gera contribuição (Fase 17)
+- ✅ **Gamificação**: Observação confirmada gera contribuição (Fase 42)
 
 #### 2. Sistema de Sensores
 - ✅ Registrar sensores físicos (pluviômetro, qualidade do ar, nível de água, etc.)
@@ -59,7 +60,7 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - ✅ Status: ACTIVE, MAINTENANCE, RETIRED
 - ✅ Leituras automáticas (via API externa ou manual)
 - ✅ Relacionamento com métricas de saúde
-- ✅ **Gamificação**: Leitura confirmada gera contribuição (Fase 17)
+- ✅ **Gamificação**: Leitura confirmada gera contribuição (Fase 42)
 
 #### 3. Indicadores de Saúde Territorial
 - ✅ Calcular indicadores agregados (diário, semanal, mensal)
@@ -74,15 +75,15 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - ✅ Participação de usuários
 - ✅ Status: PLANNED, IN_PROGRESS, DONE, CANCELLED
 - ✅ Relacionamento com observações (ação responde a observação)
-- ✅ **Gamificação**: Participação gera contribuição (Fase 17)
-- ✅ **Moeda**: Participação pode gerar moeda territorial (Fase 20)
+- ✅ **Gamificação**: Participação gera contribuição (Fase 42)
+- ✅ **Moeda**: Participação pode gerar moeda territorial (Fase 22)
 
 #### 5. Atividades Específicas
 - ✅ **Coleta de Resíduos**: Reportar coleta (tipo, volume, localização)
 - ✅ **Plantio**: Reportar plantio (espécie, quantidade, localização)
 - ✅ **Manutenção de Recursos Naturais**: Reportar manutenção (tipo, recurso)
-- ✅ **Gamificação**: Cada atividade gera contribuição e pontos (Fase 17)
-- ✅ **Moeda**: Cada atividade pode gerar moeda territorial (Fase 20)
+- ✅ **Gamificação**: Cada atividade gera contribuição e pontos (Fase 42)
+- ✅ **Moeda**: Cada atividade pode gerar moeda territorial (Fase 22)
 
 ---
 

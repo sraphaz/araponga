@@ -1,10 +1,11 @@
-# Fase 26: Chat com IA e Consumo Consciente
+# Fase 27: Chat com IA e Consumo Consciente
 
 **Duração**: 2 semanas (14 dias úteis)  
-**Prioridade**: 🔴 ALTA (Valor diferenciado e autonomia)  
-**Depende de**: Fase 25 (Serviços Digitais Base), Chat (existe)  
+**Prioridade**: 🟡 ALTA (Valor diferenciado e autonomia)  
+**Depende de**: Fase 26 (Serviços Digitais Base), Chat (existe)  
 **Estimativa Total**: 64-80 horas  
-**Status**: ⏳ Pendente
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 26 para Fase 27 (Onda 6: Autonomia Digital).
 
 ---
 
@@ -31,7 +32,7 @@ Implementar **IA integrada ao chat** que permite:
 
 ### Estado Atual
 - ✅ Sistema de chat implementado (canais, grupos, DM)
-- ✅ Fase 25 (Serviços Digitais Base) fornece infraestrutura
+- ✅ Fase 26 (Serviços Digitais Base) fornece infraestrutura
 - ✅ UserPreferences existe (Fase 9)
 - ✅ Feature flags territoriais funcionando
 - ❌ IA não está integrada ao chat

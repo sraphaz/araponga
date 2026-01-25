@@ -1,10 +1,11 @@
-# Fase 21: Suporte a Criptomoedas (Crypto Ready)
+# Fase 35: Suporte a Criptomoedas (Crypto Ready)
 
 **Duração**: 4 semanas (28 dias úteis)  
-**Prioridade**: 🟢 MÉDIA  
+**Prioridade**: 🟡 MÉDIA  
 **Bloqueia**: Aceitar pagamentos em criptomoedas  
 **Estimativa Total**: 152 horas  
-**Status**: ⏳ Pendente
+**Status**: ⏳ Pendente  
+**Nota**: Renumerada de Fase 21 para Fase 35 (Onda 7: Web3 Preparação). Fase 21 agora é Entregas Territoriais.
 
 ---
 
