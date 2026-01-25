@@ -87,7 +87,7 @@
 | **26** | Hub Serviços Digitais | 🟡 P1 | 21d | 30 | Renumerada |
 | **27** | Chat com IA | 🟡 P1 | 14d | 31 | Renumerada |
 | **28** | Negociação Territorial | 🟡 P1 | 28d | 32 | Renumerada |
-| **29** | Banco de Sementes | 🟡 P1 | 21d | 33 | Renumerada |
+| **48** | Banco de Sementes | 🟢 P2 | 21d | 29 | ⬇️ Movida para Onda 10, Renumerada |
 | **30** | Mobile Avançado | 🟡 P1 | 14d | 34 | Renumerada |
 
 ---
@@ -148,7 +148,7 @@
 | 30 | Hub Digital | **26** | Renumerada |
 | 31 | Chat IA | **27** | Renumerada |
 | 32 | Negociação | **28** | Renumerada |
-| 33 | Sementes | **29** | Renumerada |
+| 29 | Sementes | **48** | ⬇️ Movida para Onda 10, Renumerada |
 | 34 | Mobile | **30** | Renumerada |
 | 16 | Blockchain Avaliação | **31** | ⬇️ P0→P1, Renumerada |
 | 17 | Blockchain Abstração | **32** | ⬇️ P0→P1, Renumerada |
@@ -198,11 +198,10 @@
 - Fase 24: Saúde
 - Fase 25: Dashboard
 
-### Onda 6: Autonomia Digital (Fases 26-30)
+### Onda 6: Autonomia Digital (Fases 26-28, 30)
 - Fase 26: Hub Digital
 - Fase 27: Chat IA
 - Fase 28: Negociação
-- Fase 29: Sementes
 - Fase 30: Mobile
 
 ### Onda 7: Web3 Preparação (Fases 31-35)
@@ -238,10 +237,12 @@
 ✅ **Fases 17-19**: Sequencial (17→18→19)  
 ✅ **Fases 20-22**: Sequencial (20→21→22)  
 ✅ **Fases 23-25**: Sequencial (23→24→25)  
-✅ **Fases 26-30**: Sequencial (26→27→28→29→30)  
+✅ **Fases 26-28, 30**: Sequencial (26→27→28→30)  
+✅ **Fase 48**: Banco de Sementes (Onda 10)  
 ✅ **Fases 31-35**: Sequencial (31→32→33→34→35)  
 ✅ **Fases 36-40**: Sequencial (36→37→38→39→40)  
-✅ **Fases 41-46**: Sequencial (41→42→43→44→45→46)  
+✅ **Fases 42-43**: Sequencial (42→43) - Gamificação  
+✅ **Fases 44-48**: Sequencial (44→45→46→47→48) - Diferenciação  
 
 **Resultado**: ✅ **COERÊNCIA GARANTIDA**
 
