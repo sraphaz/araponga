@@ -334,9 +334,10 @@ Ver documentação completa: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`]
 |---------|-------|
 | **Linhas de código** | ~40.000+ |
 | **Endpoints de API** | 150+ |
-| **Testes automatizados** | 1508 (1488 passando, 20 pulados, 0 falhando) |
-| **Cobertura de testes** | ~85-90% estimada (aguardando análise de cobertura para validação final) |
-| **Taxa de sucesso** | 98.7% (1488/1508 testes executados) |
+| **Testes automatizados** | 1550 (1528 passando, 20 pulados, 2 falhando em performance) |
+| **Cobertura de testes** | 45.63% linhas, 37.93% branches, 48.13% métodos (análise realizada em 2026-01-24) |
+| **Taxa de sucesso** | 98.6% (1528/1550 testes executados) |
+| **Novos testes (2026-01-24)** | 42 edge cases (WorkItem: 30, AccountDeletionService: 14) |
 | **Camadas de arquitetura** | 5 (Domain, Application, Infrastructure, API, Tests) |
 | **Serviços de domínio** | 25+ |
 | **Repositórios** | 20+ |
