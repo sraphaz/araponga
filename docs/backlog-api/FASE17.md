@@ -189,7 +189,7 @@ Implementar sistema de **gamificação harmoniosa** que:
     - Post alinhado + alta qualidade: 9.4 pontos (5 * 1.5 * 1.25)
 - [ ] Integração com `InterestFilterService` (Fase 14):
   - [ ] Calcular alinhamento com interesses do território
-- [ ] Integração com `AIService` (Fase 15, opcional):
+- [ ] Integração com `AIService` (Fase 23, opcional):
   - [ ] Avaliar qualidade do conteúdo (opcional, não bloqueante)
 - [ ] Atualizar `UserContributionStats` automaticamente:
   - [ ] Ao registrar contribuição: atualizar stats
@@ -314,7 +314,7 @@ Implementar sistema de **gamificação harmoniosa** que:
 **Status**: ❌ Não implementado (opcional)
 
 **Tarefas**:
-- [ ] Integração com `AIService` (Fase 15, opcional):
+- [ ] Integração com `AIService` (Fase 23, opcional):
   - [ ] Avaliar qualidade do conteúdo (posts, eventos)
   - [ ] Score de qualidade: 0.0 - 1.0
   - [ ] Multiplicador: 1.0 + (qualityScore * 0.25) → máximo 1.25x
@@ -587,7 +587,7 @@ Implementar sistema de **gamificação harmoniosa** que:
 
 - **Fase 9**: Perfil de Usuário (estatísticas)
 - **Fase 14**: Governança e Interesses (alinhamento com interesses)
-- **Opcional**: Fase 15 (IA) - Avaliação de qualidade
+- **Opcional**: Fase 23 (IA) - Avaliação de qualidade
 
 ---
 

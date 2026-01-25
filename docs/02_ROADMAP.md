@@ -72,7 +72,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | **Fase 14** | Governança Comunitária e Votação | 🔴 P0 | 21 dias | ⏳ Planejado |
 | **Fase 15** | Subscriptions & Recurring Payments | 🔴 P0 | 45 dias | ⏳ Novo |
 | **Fase 16** | Finalização Completa das Fases 1-15 | 🔴 P0 | 20 dias | ⏳ Novo ⭐ NOVA (renumerada de 14.8) |
-| **Fase 37** | Dashboard de Métricas Comunitárias | 🟡 P1 | 14 dias | ⏳ Novo |
+| **Fase 25** | Dashboard de Métricas Comunitárias | 🟡 P1 | 14 dias | ⏳ Novo |
 
 **Resultado Esperado**: Governança participativa funcional, aumento de engajamento sem complexidade de blockchain. Base completa das fases 1-15 finalizada.
 
@@ -87,7 +87,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
 | **Fase 13** | Conector de Envio de Emails | 🔴 P0 | 14 dias | ⏳ Planejado |
-| **Fase 38** | Ticketing para Eventos | 🟡 P1 | 21 dias | ⏳ Novo |
+| **Fase 39** | Ticketing para Eventos | 🟡 P1 | 21 dias | ⏳ Novo |
 
 **Resultado Esperado**: Sustentabilidade financeira melhorada através de receitas recorrentes e monetização de eventos.
 
@@ -222,7 +222,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 |------|--------|------------|---------|--------|
 | **Fase 12** | Otimizações Finais | 🟡 P1 | 28 dias | ⏳ Planejado |
 | **Fase 23** | Inteligência Artificial | 🟡 P1 | 28 dias | ⏳ Planejado |
-| **Fase 40** | Agente IA (Versão Básica) | 🟡 P1 | 90 dias | ⏳ Novo ⬇️ Reposicionada |
+| **Fase 40** | Agente IA (Versão Básica) | 🟡 P1 | 90 dias | ⏳ Novo ⬇️ Reposicionada (Onda 8)
 
 ### Onda 6: Soberania Territorial (Mês 6-12) 🟡 ALTA
 
@@ -235,14 +235,14 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 **Nota**: Gamificação (Fase 42) foi movida para Onda 10, depois de funcionalidades core.
 
-### Onda 9: Otimizações e Extensões (Mês 6-18) 🟡 IMPORTANTE
+### Onda 9: Gamificação e Incentivos (Mês 18+) 🟡 ALTA
 
-**Objetivo**: Otimizações finais e extensões avançadas.
+**Objetivo**: Implementar gamificação como decoração/incentivo (DEPOIS de funcionalidades core).
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
-| **Fase 43** | Arquitetura Modular | 🟡 P1 | 35 dias | ⏳ Planejado ⬇️ Reposicionada (P2 → P1) |
-| **Fase 44** | Integrações Externas | 🟢 P2 | 35 dias | ⏳ Planejado |
+| **Fase 42** | Gamificação Harmoniosa | 🟡 P1 | 28 dias | ⏳ Planejado ⬇️ Reposicionada |
+| **Fase 43** | Proof of Sweat (Tradicional) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ Reposicionada |
 
 ### Onda 10: Gamificação e Incentivos (Mês 18+) 🟢 BAIXA
 
@@ -251,7 +251,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|
 | **Fase 42** | Gamificação Harmoniosa | 🟡 P1 | 28 dias | ⏳ Planejado ⬇️ Reposicionada |
-| **Fase 43** | Proof of Sweat (Tradicional) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ Reposicionada |
+| **Fase 43** | Proof of Sweat (Tradicional) | 🟡 P1 | 30 dias | ⏳ Novo ⬇️ Reposicionada (Onda 9) |
 
 **Resultado Esperado**: Gamificação implementada DEPOIS de funcionalidades que enriquecem o produto, servindo como incentivo para uso de funcionalidades já implementadas.
 
