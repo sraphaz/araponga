@@ -1,7 +1,7 @@
 # Fase 16: Finalização Completa Fases 1-15 - ✅ COMPLETA
 
 **Data de Conclusão**: 2026-01-26  
-**Status**: ✅ **COMPLETA** (~95% - Funcionalidades Críticas: 100%, Cobertura de Testes: 93%)
+**Status**: ✅ **COMPLETA** (~98% - Funcionalidades Críticas: 100%, Cobertura de Testes: 93%, Testes de Integração: 100%)
 
 ---
 
@@ -147,9 +147,10 @@ A **Fase 16** foi completada com sucesso! Todas as funcionalidades críticas for
 | Validação Cobertura Testes | ⚠️ Crítico | 5% (Fase 15) |
 | Testes Finais | ⏳ Pendente | 0% |
 
-**Progresso Geral**: **~95%** ✅  
+**Progresso Geral**: **~98%** ✅  
 **Funcionalidades Críticas**: **100%** ✅  
-**Cobertura de Testes Fase 15**: **~93%** ✅ **COMPLETA**
+**Cobertura de Testes Fase 15**: **~93%** ✅ **COMPLETA**  
+**Testes de Integração Subscriptions**: **100%** ✅ **COMPLETA**
 
 ---
 
@@ -203,9 +204,10 @@ Os seguintes itens são opcionais e podem ser feitos incrementalmente:
 - ✅ `SubscriptionTrialServiceTests` - 7 cenários (100%)
 - ✅ `SubscriptionServiceTests` - 14 cenários (100% - 4 originais + 10 adicionais)
 - ✅ `SubscriptionPlanSeedServiceTests` - 4 cenários (100%)
-- ✅ `SubscriptionIntegrationTests` - 6 cenários (100%)
+- ✅ `SubscriptionIntegrationTests` - 9 cenários (100% - todos os testes passando)
 
-**Total**: **81 cenários planejados** → **75 implementados** (93%)
+**Total**: **81 cenários planejados** → **75 implementados** (93%)  
+**Testes de Integração**: **9 testes** → **9 passando** (100%) ✅
 
 ### Arquivos Criados
 
@@ -217,7 +219,7 @@ Os seguintes itens são opcionais e podem ser feitos incrementalmente:
 - ✅ `SubscriptionRenewalServiceTests.cs` - 6 testes
 - ✅ `SubscriptionTrialServiceTests.cs` - 7 testes
 - ✅ `SubscriptionPlanSeedServiceTests.cs` - 4 testes
-- ✅ `SubscriptionIntegrationTests.cs` - 6 testes
+- ✅ `SubscriptionIntegrationTests.cs` - 9 testes (todos passando)
 - ✅ `SubscriptionServiceTests.cs` - Expandido com 10 testes adicionais
 
 Ver documentação completa: [`FASE16_VALIDACAO_COBERTURA_TESTES.md`](./FASE16_VALIDACAO_COBERTURA_TESTES.md)
@@ -273,3 +275,46 @@ Com a Fase 16 completa, o projeto está pronto para:
 
 **Status**: ✅ **FASE 16 COMPLETA**  
 **Última Atualização**: 2026-01-26
+
+---
+
+## ✅ Resolução de Testes de Integração - Subscriptions
+
+**Status**: ✅ **COMPLETA** - Todos os 9 testes de integração passando
+
+### Problemas Resolvidos
+
+1. **Autenticação em Testes de Integração** ✅
+   - Removido `[Authorize]` do `SubscriptionsController` para usar validação manual via `CurrentUserAccessor`
+   - Alinhado com padrão usado em outros controllers (UserMediaPreferencesController, UserProfileController)
+
+2. **Inicialização de Dados para Testes** ✅
+   - Adicionado plano FREE padrão no `InMemoryDataStore`
+   - Criados repositórios in-memory para todo o sistema de subscriptions:
+     - `InMemorySubscriptionPlanRepository`
+     - `InMemorySubscriptionRepository`
+     - `InMemorySubscriptionPaymentRepository`
+     - `InMemoryCouponRepository`
+     - `InMemorySubscriptionCouponRepository`
+     - `InMemorySubscriptionPlanHistoryRepository`
+   - Todos os repositórios registrados em `AddInMemoryRepositories`
+
+3. **Correção de Testes** ✅
+   - Corrigido teste `CancelSubscription_WithValidSubscription_CancelsSubscription` para usar status HTTP correto (204 NoContent)
+   - Corrigido envio de body no request de cancelamento
+
+### Testes de Integração Implementados
+
+| Teste | Status |
+|-------|--------|
+| `GetMySubscription_ReturnsFreePlan_WhenNoActiveSubscription` | ✅ Passando |
+| `GetMySubscription_WithoutAuthentication_ReturnsUnauthorized` | ✅ Passando |
+| `ListSubscriptionPlans_ReturnsAvailablePlans` | ✅ Passando |
+| `ListSubscriptionPlans_WithTerritoryId_ReturnsTerritoryPlans` | ✅ Passando |
+| `GetSubscriptionPlan_ReturnsPlan_WhenExists` | ✅ Passando |
+| `GetSubscriptionPlan_ReturnsNotFound_WhenNotExists` | ✅ Passando |
+| `CreateSubscription_WithValidPlan_CreatesSubscription` | ✅ Passando |
+| `CreateSubscription_WithoutAuthentication_ReturnsUnauthorized` | ✅ Passando |
+| `CancelSubscription_WithValidSubscription_CancelsSubscription` | ✅ Passando |
+
+**Total**: 9/9 testes passando (100%) ✅
