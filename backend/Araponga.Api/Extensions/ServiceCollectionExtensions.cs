@@ -72,6 +72,26 @@ public static class ServiceCollectionExtensions
         services.AddScoped<UserPreferencesService>();
         services.AddScoped<UserProfileService>();
         services.AddScoped<UserProfileStatsService>();
+
+        // Subscription services
+        services.AddScoped<SubscriptionService>();
+        services.AddScoped<CouponService>();
+        services.AddScoped<SubscriptionPlanAdminService>();
+        services.AddScoped<SubscriptionCapabilityService>();
+        services.AddScoped<SubscriptionPlanSeedService>();
+        services.AddScoped<SubscriptionTrialService>();
+        services.AddScoped<SubscriptionRenewalService>();
+        services.AddScoped<SubscriptionAnalyticsService>();
+        services.AddScoped<StripeWebhookService>();
+        services.AddScoped<MercadoPagoWebhookService>();
+        services.AddScoped<Araponga.Application.Interfaces.ISubscriptionGatewayFactory, Araponga.Infrastructure.Payments.SubscriptionGatewayFactory>();
+        
+        // Subscription gateways (registrar ambos como ISubscriptionGateway)
+        services.AddScoped<Araponga.Application.Interfaces.ISubscriptionGateway, Araponga.Infrastructure.Payments.StripeSubscriptionService>();
+        services.AddScoped<Araponga.Application.Interfaces.ISubscriptionGateway, Araponga.Infrastructure.Payments.MercadoPagoSubscriptionService>();
+        
+        // Manter compatibilidade com IStripeSubscriptionService
+        services.AddScoped<Araponga.Application.Interfaces.IStripeSubscriptionService, Araponga.Infrastructure.Payments.StripeSubscriptionService>();
         services.AddScoped<UserInterestService>();
         services.AddScoped<VotingService>();
         services.AddScoped<TerritoryModerationService>();
@@ -180,6 +200,7 @@ public static class ServiceCollectionExtensions
             services.AddPostgresRepositories(configuration);
             services.AddHostedService<OutboxDispatcherWorker>();
             services.AddHostedService<Araponga.Infrastructure.Background.PayoutProcessingWorker>();
+            services.AddHostedService<Araponga.Infrastructure.Background.SubscriptionRenewalWorker>();
             services.AddHostedService<Araponga.Infrastructure.Email.EmailQueueWorker>();
             services.AddHostedService<Araponga.Infrastructure.Email.EventReminderWorker>();
         }
@@ -339,6 +360,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITermsAcceptanceRepository, PostgresTermsAcceptanceRepository>();
         services.AddScoped<IPrivacyPolicyRepository, PostgresPrivacyPolicyRepository>();
         services.AddScoped<IPrivacyPolicyAcceptanceRepository, PostgresPrivacyPolicyAcceptanceRepository>();
+
+        // Subscriptions
+        services.AddScoped<ISubscriptionPlanRepository, PostgresSubscriptionPlanRepository>();
+        services.AddScoped<ISubscriptionRepository, PostgresSubscriptionRepository>();
+        services.AddScoped<ISubscriptionPaymentRepository, PostgresSubscriptionPaymentRepository>();
+        services.AddScoped<ICouponRepository, PostgresCouponRepository>();
+        services.AddScoped<ISubscriptionCouponRepository, PostgresSubscriptionCouponRepository>();
+        services.AddScoped<ISubscriptionPlanHistoryRepository, PostgresSubscriptionPlanHistoryRepository>();
 
         // Push Notifications
         services.AddScoped<IUserDeviceRepository, PostgresUserDeviceRepository>();
