@@ -501,6 +501,7 @@ public sealed class SubscriptionAnalyticsServiceTests
             paymentDate,
             paymentDate.AddMonths(1),
             null,
+            null,
             null);
     }
 }
