@@ -46,18 +46,6 @@ export const metadata: Metadata = {
     icon: "/wiki/favicon.png",
     apple: "/wiki/icon.png"
   },
-  // CSP via meta tag (funciona com static export)
-  other: {
-    'Content-Security-Policy': [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Necessário para theme init script
-      "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: https:",
-      "font-src 'self' data:",
-      "connect-src 'self'",
-      "frame-ancestors 'none'",
-    ].join('; '),
-  },
 };
 
 export default function RootLayout({
@@ -67,6 +55,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`scroll-smooth dark ${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <head>
+        {/* CSP via meta tag (funciona com static export) */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none';"
+        />
+      </head>
       <body className="antialiased font-sans">
         <Script
           id="theme-init"
