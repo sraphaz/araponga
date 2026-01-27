@@ -27,7 +27,7 @@ public sealed class SubscriptionAnalyticsService
     }
 
     /// <summary>
-    /// Calcula o MRR (Monthly Recurring Revenue).
+    /// Calcula o MRR (Monthly Recurring Revenue) para um período específico.
     /// </summary>
     public async Task<decimal> GetMRRAsync(
         DateTime? startDate = null,
@@ -37,6 +37,8 @@ public sealed class SubscriptionAnalyticsService
         var start = startDate ?? DateTime.UtcNow.AddMonths(-1);
         var end = endDate ?? DateTime.UtcNow;
 
+        // Buscar todas as assinaturas ativas para filtrar por período
+        // Nota: O repositório não suporta filtro por data diretamente, então filtramos em memória
         var activeSubscriptions = await _subscriptionRepository.ListAsync(
             userId: null,
             territoryId: null,

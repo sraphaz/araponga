@@ -267,6 +267,7 @@ public sealed class SubscriptionService
                     return Result<Subscription>.Failure($"Failed to update subscription in {gateway.GatewayName}: {gatewayResult.Error}");
                 }
 
+                // Atualizar o PlanId primeiro para garantir que a assinatura está vinculada ao novo plano
                 subscription.UpdatePlan(newPlanId);
                 subscription.UpdateStripeIds(
                     gatewayResult.Value!.GatewaySubscriptionId,
