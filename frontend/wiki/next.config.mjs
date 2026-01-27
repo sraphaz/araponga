@@ -25,26 +25,12 @@ const nextConfig = {
   // Asset prefix também precisa do basePath
   assetPrefix: '/wiki',
   // Headers para CSP - permite scripts inline necessários para theme init
+  // Nota: Headers não funcionam com static export, mas podem ser configurados no servidor web
+  // Para GitHub Pages, o CSP pode ser configurado via meta tag ou servidor web
   async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Necessário para theme init script
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https:",
-              "font-src 'self' data:",
-              "connect-src 'self'",
-              "frame-ancestors 'none'",
-            ].join('; '),
-          },
-        ],
-      },
-    ];
+    // Headers não são aplicados em static export, mas mantemos para referência
+    // O CSP será aplicado via meta tag no layout.tsx ou pelo servidor web
+    return [];
   },
 };
 
