@@ -24,6 +24,11 @@ const nextConfig = {
   trailingSlash: true,
   // Asset prefix também precisa do basePath
   assetPrefix: '/wiki',
+  // Desabilita prefetch automático para evitar duplicação de basePath
+  // Bug conhecido do Next.js: https://github.com/vercel/next.js/issues/73427
+  experimental: {
+    optimizePackageImports: [],
+  },
 };
 
 export default nextConfig;

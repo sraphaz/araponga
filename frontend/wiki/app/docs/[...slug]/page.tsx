@@ -284,13 +284,13 @@ export default async function DocPage({ params }: PageProps) {
             <div className="glass-card__content">
               {/* Breadcrumb Refinado */}
               <nav className="breadcrumb mb-8">
-                <Link href="/">Boas-Vindas</Link>
+                <Link href="/" prefetch={false}>Boas-Vindas</Link>
                 <span>›</span>
-                <Link href="/docs">Documentação</Link>
+                <Link href="/docs" prefetch={false}>Documentação</Link>
                 {(slug[0]?.startsWith('ONBOARDING_') || slug.some(s => s?.startsWith('ONBOARDING_'))) && (
                   <>
                     <span>›</span>
-                    <Link href="/docs">Onboarding</Link>
+                    <Link href="/docs" prefetch={false}>Onboarding</Link>
                   </>
                 )}
                 <span>›</span>
