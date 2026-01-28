@@ -41,6 +41,17 @@ public static class ArapongaMetrics
         "count",
         "Total number of join requests created");
 
+    // Module Registration Metrics
+    public static readonly Counter<long> ModuleRegistrationAttempts = Meter.CreateCounter<long>(
+        "araponga.modules.registration.attempts",
+        "count",
+        "Total number of module registration attempts");
+
+    public static readonly Counter<long> ModuleRegistrationFailures = Meter.CreateCounter<long>(
+        "araponga.modules.registration.failures",
+        "count",
+        "Total number of module registration failures");
+
     // Cache Metrics
     public static readonly Counter<long> CacheHits = Meter.CreateCounter<long>(
         "araponga.cache.hits",
