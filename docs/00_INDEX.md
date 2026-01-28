@@ -39,6 +39,11 @@ Documentos sobre moderação, observabilidade e operações.
 
 - **[Moderação e Reports](./30_MODERATION.md)** - Sistema de moderação e reports
 - **[Admin e Observabilidade](./31_ADMIN_OBSERVABILITY.md)** - Administração e observabilidade do sistema
+- **[Logs e Monitoramento - Arquitetura](./LOGS_MONITORAMENTO_ARQUITETURA.md)** 📊 ⭐ - Documentação completa sobre logs e monitoramento considerando arquitetura monolito e evolução para multicluster, incluindo interface web para produção
+- **[Monitoramento](./MONITORING.md)** - Dashboards e alertas configurados
+- **[Métricas](./METRICS.md)** - Lista completa de métricas coletadas
+- **[Troubleshooting](./TROUBLESHOOTING.md)** - Soluções para problemas comuns
+- **[Runbook](./RUNBOOK.md)** - Runbook de operações
 - **[Rastreabilidade](./32_TRACEABILITY.md)** - Rastreabilidade de requisitos e funcionalidades
 - **[System Config, Work Queue e Evidências](./33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md)** - Configurações globais, fila genérica e evidências documentais (P0)
 - **[API - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO.md)** - Documento índice (reorganizado em 22 subdocumentos - ver [índice completo](./api/60_API_LÓGICA_NEGÓCIO_INDEX.md))
@@ -172,6 +177,11 @@ Documentação detalhada de todos os Pull Requests implementados.
 **Operações:**
 - Moderação → `30_MODERATION.md`
 - Observabilidade → `31_ADMIN_OBSERVABILITY.md`
+- Logs e Monitoramento → `LOGS_MONITORAMENTO_ARQUITETURA.md`
+- Monitoramento → `MONITORING.md`
+- Métricas → `METRICS.md`
+- Troubleshooting → `TROUBLESHOOTING.md`
+- Runbook → `RUNBOOK.md`
 - API BFF → `AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`
 - Contrato BFF → `BFF_API_CONTRACT.yaml`
 - Exemplo Flutter → `BFF_FLUTTER_EXAMPLE.md`

@@ -260,5 +260,25 @@ Observabilidade completa com métricas, logs e tracing.
 
 ---
 
+## 🖥️ Interface Web de Monitoramento (Expansão Futura)
+
+**Status**: ⏳ Planejado
+
+A Fase 4 implementou observabilidade completa (logs, métricas, tracing). Uma **expansão futura** adicionará uma interface web integrada para monitoramento e auxílio à produção.
+
+**Funcionalidades Planejadas**:
+- ✅ Dashboard principal com status geral
+- ✅ Visualizador de logs em tempo real
+- ✅ Métricas e dashboards interativos
+- ✅ Health checks visuais
+- ✅ Troubleshooting assistido
+
+**Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](../LOGS_MONITORAMENTO_ARQUITETURA.md)
+
+**Estimativa**: 4 semanas (160 horas)
+
+---
+
 **Status**: ✅ **FASE 4 100% COMPLETA**  
-**Próxima Fase**: Fase 5 - Segurança Avançada
+**Próxima Fase**: Fase 5 - Segurança Avançada  
+**Expansão Futura**: Interface Web de Monitoramento (ver [`LOGS_MONITORAMENTO_ARQUITETURA.md`](../LOGS_MONITORAMENTO_ARQUITETURA.md))
