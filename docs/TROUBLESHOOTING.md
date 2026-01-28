@@ -229,6 +229,24 @@ psql -h localhost -U araponga -d araponga
 
 ## 🔗 Links Relacionados
 
+- **Arquitetura de Logs e Monitoramento**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md) - Documentação completa sobre logs e monitoramento em diferentes arquiteturas, incluindo interface web
 - [RUNBOOK.md](./RUNBOOK.md) - Runbook de operações
 - [INCIDENT_PLAYBOOK.md](./INCIDENT_PLAYBOOK.md) - Playbook de incidentes
 - [MONITORING.md](./MONITORING.md) - Dashboards e alertas
+- [FASE4.md](./backlog-api/FASE4.md) - Fase 4: Observabilidade e Monitoramento
+
+---
+
+## 🖥️ Interface Web de Troubleshooting
+
+A aplicação possui uma **interface web integrada** para troubleshooting em `/admin/monitoring/troubleshooting`.
+
+**Funcionalidades**:
+- ✅ Diagnóstico automático de problemas comuns
+- ✅ Sugestões de solução
+- ✅ Comandos úteis (links para health, métricas, logs)
+- ✅ Guia de resolução interativo
+
+**Acesso**: `https://api.araponga.com/admin/monitoring/troubleshooting` (requer autenticação e autorização)
+
+**Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md)

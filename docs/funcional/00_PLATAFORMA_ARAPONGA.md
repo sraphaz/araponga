@@ -239,6 +239,12 @@ flowchart TB
 - **Elementos Técnicos**: SystemConfig, SystemPermission, WorkQueue
 - **Documentação**: [Admin](funcional/14_ADMIN.md)
 
+#### 16. **Conexões e Círculo de Amigos**
+- **Responsabilidade**: Sistema de conexões pessoais e priorização de feed
+- **Função de Negócio**: Permitir que moradores e visitantes se conectem e priorizem conteúdo de conexões no feed
+- **Elementos Técnicos**: UserConnection, ConnectionPrivacySettings, priorização de feed
+- **Documentação**: [Conexões e Círculo de Amigos](funcional/23_CONEXOES_CIRCULO_AMIGOS.md)
+
 ---
 
 ## 💼 Funções de Negócio
@@ -263,6 +269,7 @@ flowchart TB
 - **Acessar conteúdo exclusivo** para moradores
 - **Criar lojas** no marketplace (após verificação)
 - **Acessar chat de moradores**
+- **Conectar-se com outros usuários** e priorizar conteúdo de conexões no feed
 
 ### Para Comunidades e Territórios
 
@@ -435,6 +442,9 @@ Ação Auditada
 - [12 - Subscriptions](funcional/12_SUBSCRIPTIONS.md)
 - [13 - Governança e Votação](funcional/13_GOVERNANCA_VOTACAO.md)
 - [14 - Admin](funcional/14_ADMIN.md)
+
+#### Rede Social Territorial
+- [23 - Conexões e Círculo de Amigos](funcional/23_CONEXOES_CIRCULO_AMIGOS.md)
 
 ### Funcionalidades Futuras (Planejadas)
 
