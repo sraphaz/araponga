@@ -47,6 +47,13 @@ Documentos sobre moderação, observabilidade e operações.
 - **[Sistema de Mídia](./MEDIA_SYSTEM.md)** - Documentação técnica do sistema de mídia (armazenamento, processamento, APIs)
 - **[Planejamento: Preferências de Usuário](./61_USER_PREFERENCES_PLAN.md)** - Planejamento completo da funcionalidade de preferências de privacidade e configurações do usuário
 
+### Fases Técnicas
+Documentação técnica das fases de implementação: Instalador, Modularização, BFF e Frontend.
+
+- **[Índice de Documentação Técnica](./TECNICO_INDEX.md)** ⭐ - Índice completo de todas as fases técnicas
+- **[Instalador Visual](./TECNICO_INSTALADOR_VISUAL.md)** 🛠️ - Sistema de instalação e configuração visual (15 passos, Monolito/Multi-Cluster, módulos, feature flags)
+- **[Modularização](./TECNICO_MODULARIZACAO.md)** 🧩 - Arquitetura modular e organização por domínios (15 módulos, feature flags, dependências)
+
 ### Backend for Frontend (BFF)
 Documentação da API BFF que expõe operações em forma de jornadas (user journeys), criando uma camada de abstração entre interfaces visuais e o backend.
 
@@ -149,6 +156,13 @@ Documentação detalhada de todos os Pull Requests implementados.
 - Arquitetura de Services → `11_ARCHITECTURE_SERVICES.md`
 - Modelo de Domínio → `12_DOMAIN_MODEL.md`
 
+**Fases Técnicas:**
+- Índice de Documentação Técnica → `TECNICO_INDEX.md`
+- Instalador Visual → `TECNICO_INSTALADOR_VISUAL.md`
+- Modularização → `TECNICO_MODULARIZACAO.md`
+- Backend for Frontend (BFF) → `AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`
+- Frontend Flutter → `24_FLUTTER_FRONTEND_PLAN.md`
+
 **Desenvolvimento:**
 - Plano de Implementação → `20_IMPLEMENTATION_PLAN.md`
 - Revisão de Código → `21_CODE_REVIEW.md`
@@ -177,6 +191,7 @@ Todos os arquivos na raiz seguem o padrão:
 - `40-49`: Histórico e Mudanças
 - `50-59`: Produção e Deploy
 - `60-69`: API e Funcionalidades
+- `TECNICO_*`: Fases Técnicas (Instalador, Modularização, BFF, Frontend)
 
 ### Pastas Organizacionais
 Documentos adicionais são organizados em pastas:

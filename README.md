@@ -158,6 +158,15 @@ backend/
 - [Plano de Implementação](./docs/20_IMPLEMENTATION_PLAN.md)
 - [Análise de Coesão e Testes](./docs/22_COHESION_AND_TESTS.md)
 
+### Fases Técnicas
+Documentação técnica das fases de implementação: Instalador, Modularização, BFF e Frontend.
+
+- **[Índice de Documentação Técnica](./docs/TECNICO_INDEX.md)** ⭐ — Índice completo de todas as fases técnicas
+- **[Instalador Visual](./docs/TECNICO_INSTALADOR_VISUAL.md)** 🛠️ — Sistema de instalação e configuração visual (15 passos, Monolito/Multi-Cluster, módulos, feature flags)
+- **[Modularização](./docs/TECNICO_MODULARIZACAO.md)** 🧩 — Arquitetura modular e organização por domínios (15 módulos, feature flags, dependências)
+- **[Backend for Frontend (BFF)](./docs/AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md)** 🔌 — Camada de abstração para interfaces (jornadas, contratos, exemplos)
+- **[Frontend Flutter](./docs/24_FLUTTER_FRONTEND_PLAN.md)** 📱 — Planejamento completo do app mobile (arquitetura, stack, funcionalidades, UX/UI)
+
 ### Operações e Segurança
 - [Documentação de Segurança](./docs/SECURITY_CONFIGURATION.md) — Configuração segura
 - [Avaliação para Produção](./docs/50_PRODUCAO_AVALIACAO_COMPLETA.md) — Checklist
