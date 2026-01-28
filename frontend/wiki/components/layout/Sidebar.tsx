@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface SidebarSection {
   title: string;
@@ -65,27 +65,44 @@ export function Sidebar() {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set(["Início"]));
 
   const toggleSection = (title: string) => {
-    const newOpen = new Set(openSections);
-    if (newOpen.has(title)) {
-      newOpen.delete(title);
-    } else {
-      newOpen.add(title);
-    }
-    setOpenSections(newOpen);
+    setOpenSections((prev) => {
+      const newOpen = new Set(prev);
+      if (newOpen.has(title)) {
+        newOpen.delete(title);
+      } else {
+        newOpen.add(title);
+      }
+      return newOpen;
+    });
   };
 
   // Auto-open section if current path matches (normalizado)
-  const normalizedPathname = (pathname || '/').replace(/\/$/, '') || '/';
-  const currentSection = sidebarSections.find((section) =>
-    section.items.some((item) => {
-      const normalizedHref = item.href.replace(/\/$/, '') || '/';
-      return normalizedPathname === normalizedHref ||
-             (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
-    })
-  );
-  if (currentSection && !openSections.has(currentSection.title)) {
-    setOpenSections(new Set([...openSections, currentSection.title]));
-  }
+  // Movido para useEffect para evitar atualização de estado durante render
+  useEffect(() => {
+    try {
+      const normalizedPathname = (pathname || '/').replace(/\/$/, '') || '/';
+      const currentSection = sidebarSections.find((section) =>
+        section.items.some((item) => {
+          const normalizedHref = item.href.replace(/\/$/, '') || '/';
+          return normalizedPathname === normalizedHref ||
+                 (normalizedHref !== '/' && normalizedPathname.startsWith(normalizedHref + '/'));
+        })
+      );
+      if (currentSection) {
+        setOpenSections((prev) => {
+          if (!prev.has(currentSection.title)) {
+            const newSet = new Set(prev);
+            newSet.add(currentSection.title);
+            return newSet;
+          }
+          return prev;
+        });
+      }
+    } catch (error) {
+      // Silenciosamente ignora erros para não quebrar o render
+      console.error('[Sidebar] Error in useEffect:', error);
+    }
+  }, [pathname]);
 
   return (
     <aside className="sidebar-container">
@@ -114,29 +131,48 @@ export function Sidebar() {
               {isOpen && (
                 <ul className="sidebar-items">
                   {section.items.map((item) => {
-                    // Normalizar pathname e href para comparação (remover trailing slash)
-                    const normalizedPathname = pathname.replace(/\/$/, '') || '/';
-                    const normalizedHref = item.href.replace(/\/$/, '') || '/';
-                    // Lógica mais precisa: /docs só é ativo em /docs exatamente, não em /docs/qualquer-coisa
-                    // Para outras rotas, permite sub-rotas (ex: /docs/ONBOARDING_DEVELOPERS)
-                    const isActive = normalizedPathname === normalizedHref ||
-                                   (normalizedHref !== '/' &&
-                                    normalizedHref !== '/docs' && // Exceção: /docs só é ativo em /docs
-                                    normalizedPathname.startsWith(normalizedHref + '/'));
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          prefetch={false}
-                          className={`sidebar-link ${isActive ? "sidebar-link-active" : ""}`}
-                        >
-                          <span className="sidebar-link-title">{item.title}</span>
-                          {item.description && (
-                            <span className="sidebar-link-description">{item.description}</span>
-                          )}
-                        </Link>
-                      </li>
-                    );
+                    try {
+                      // Normalizar pathname e href para comparação (remover trailing slash)
+                      const normalizedPathname = (pathname || '/').replace(/\/$/, '') || '/';
+                      const normalizedHref = item.href.replace(/\/$/, '') || '/';
+                      // Lógica mais precisa: /docs só é ativo em /docs exatamente, não em /docs/qualquer-coisa
+                      // Para outras rotas, permite sub-rotas (ex: /docs/ONBOARDING_DEVELOPERS)
+                      const isActive = normalizedPathname === normalizedHref ||
+                                     (normalizedHref !== '/' &&
+                                      normalizedHref !== '/docs' && // Exceção: /docs só é ativo em /docs
+                                      normalizedPathname.startsWith(normalizedHref + '/'));
+                      return (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            prefetch={false}
+                            className={`sidebar-link ${isActive ? "sidebar-link-active" : ""}`}
+                          >
+                            <span className="sidebar-link-title">{item.title}</span>
+                            {item.description && (
+                              <span className="sidebar-link-description">{item.description}</span>
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    } catch (error) {
+                      // Fallback: renderiza link sem highlight se houver erro
+                      console.error('[Sidebar] Error rendering link:', error);
+                      return (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            prefetch={false}
+                            className="sidebar-link"
+                          >
+                            <span className="sidebar-link-title">{item.title}</span>
+                            {item.description && (
+                              <span className="sidebar-link-description">{item.description}</span>
+                            )}
+                          </Link>
+                        </li>
+                      );
+                    }
                   })}
                 </ul>
               )}
