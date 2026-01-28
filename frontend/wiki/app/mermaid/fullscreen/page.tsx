@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function MermaidFullscreenPage() {
+function MermaidFullscreenContent() {
   const searchParams = useSearchParams();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -287,5 +287,17 @@ export default function MermaidFullscreenPage() {
         />
       </div>
     </div>
+  );
+}
+
+export default function MermaidFullscreenPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-forest-950 flex items-center justify-center">
+        <div className="text-forest-300">Carregando diagrama...</div>
+      </div>
+    }>
+      <MermaidFullscreenContent />
+    </Suspense>
   );
 }
