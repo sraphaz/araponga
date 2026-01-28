@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "npm run generate-search-index && next build",
+    "build": "npm run fix-utf8 && npm run generate-search-index && next build",
+    "fix-utf8": "node scripts/fix-utf8.mjs",
     "generate-search-index": "node scripts/generate-search-index.mjs",
     "start": "next start -p 3001",
     "lint": "next lint || true",
@@ -50,6 +51,7 @@
   },
   "overrides": {
     "glob": "^10.0.0",
-    "inflight": "npm:@isaacs/inflight@^1.0.6"
+    "inflight": "npm:@isaacs/inflight@^1.0.6",
+    "lodash-es": "^4.17.23"
   }
 }

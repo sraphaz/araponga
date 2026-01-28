@@ -127,6 +127,7 @@ export function Sidebar() {
                       <li key={item.href}>
                         <Link
                           href={item.href}
+                          prefetch={false}
                           className={`sidebar-link ${isActive ? "sidebar-link-active" : ""}`}
                         >
                           <span className="sidebar-link-title">{item.title}</span>

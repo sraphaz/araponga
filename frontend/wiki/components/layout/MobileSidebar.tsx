@@ -146,6 +146,7 @@ export function MobileSidebar() {
           <div className="flex flex-col space-y-2 pt-2 border-t border-forest-200/80 dark:border-forest-800/80">
             <Link
               href="/docs"
+              prefetch={false}
               onClick={() => setIsOpen(false)}
               className="px-3 py-2 rounded-lg text-sm text-forest-700 dark:text-forest-300 hover:bg-forest-100/80 dark:hover:bg-forest-900/60 transition-colors"
             >
@@ -188,17 +189,18 @@ export function MobileSidebar() {
                                  (normalizedHref !== '/' &&
                                   normalizedHref !== '/docs' && // Exceção: /docs só é ativo em /docs
                                   normalizedPathname.startsWith(normalizedHref + '/'));
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block px-3 py-2.5 rounded-lg text-sm transition-all duration-300 ${
-                          isActive
-                            ? "bg-forest-100 dark:bg-forest-900/80 text-forest-900 dark:text-forest-50 font-medium"
-                            : "text-forest-700 dark:text-forest-300 hover:bg-forest-100/80 dark:hover:bg-forest-900/60"
-                        }`}
-                      >
+                    return (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          prefetch={false}
+                          onClick={() => setIsOpen(false)}
+                          className={`block px-3 py-2.5 rounded-lg text-sm transition-all duration-300 ${
+                            isActive
+                              ? "bg-forest-100 dark:bg-forest-900/80 text-forest-900 dark:text-forest-50 font-medium"
+                              : "text-forest-700 dark:text-forest-300 hover:bg-forest-100/80 dark:hover:bg-forest-900/60"
+                          }`}
+                        >
                         <span className="block">{item.title}</span>
                         {item.description && (
                           <span className="block text-xs mt-1 text-forest-500 dark:text-forest-400 opacity-75">
