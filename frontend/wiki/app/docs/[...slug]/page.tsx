@@ -11,7 +11,6 @@ import { TableOfContents } from "../../../components/layout/TableOfContents";
 import { ContentSections } from "../[slug]/content-sections";
 import { YamlDownloadButton } from "../../../components/YamlDownloadButton";
 import { MermaidContent } from "../../../components/content/MermaidContent";
-import { MermaidContent } from "../../../components/content/MermaidContent";
 
 // Helper function para extrair texto de HTML de forma segura
 function getTextContent(html: string): string {
