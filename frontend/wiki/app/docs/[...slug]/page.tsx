@@ -9,6 +9,7 @@ import remarkGfm from "remark-gfm";
 import sanitizeHtml from "sanitize-html";
 import { TableOfContents } from "../../../components/layout/TableOfContents";
 import { ContentSections } from "../[slug]/content-sections";
+import { YamlDownloadButton } from "../../../components/YamlDownloadButton";
 
 // Helper function para extrair texto de HTML de forma segura
 function getTextContent(html: string): string {
@@ -16,6 +17,11 @@ function getTextContent(html: string): string {
     allowedTags: [],
     allowedAttributes: {},
   });
+}
+
+// Helper para remover prefixos numéricos (00_, 01_, etc.) do nome do arquivo
+function removeNumericPrefix(text: string): string {
+  return text.replace(/^\d+_/, "");
 }
 
 interface PageProps {
@@ -55,6 +61,15 @@ function processMarkdownLinks(html: string, basePath: string = '/wiki'): string 
 async function getDocContent(filePath: string) {
   try {
     const docsPath = join(process.cwd(), "..", "..", "docs", filePath);
+    
+    // Verifica se o arquivo existe antes de tentar ler (evita logs de erro desnecessários)
+    try {
+      await stat(docsPath);
+    } catch {
+      // Arquivo não existe - retorna null silenciosamente (pode ser YAML)
+      return null;
+    }
+    
     const fileContents = await readFile(docsPath, "utf8");
     const { content, data } = matter(fileContents);
 
@@ -111,11 +126,6 @@ async function getDocContent(filePath: string) {
     // Processa links no HTML renderizado para incluir basePath
     htmlContent = processMarkdownLinks(htmlContent, '/wiki');
 
-    // Helper para remover prefixos numéricos (00_, 01_, etc.) do nome do arquivo
-    function removeNumericPrefix(text: string): string {
-      return text.replace(/^\d+_/, "");
-    }
-
     // Gera título: usa frontmatter title, ou primeiro H1 do markdown, ou nome do arquivo
     const fileName = filePath.split('/').pop() || '';
     const fileNameWithoutExt = fileName.replace(".md", "");
@@ -127,8 +137,48 @@ async function getDocContent(filePath: string) {
       frontMatter: data,
       title: data.title || firstH1Title || fallbackTitle,
     };
-  } catch (error) {
-    console.error(`Error reading ${filePath}:`, error);
+  } catch (error: any) {
+    // Só loga erro se não for ENOENT (arquivo não encontrado é esperado)
+    if (error?.code !== 'ENOENT') {
+      console.error(`Error reading ${filePath}:`, error);
+    }
+    return null;
+  }
+}
+
+async function getYamlContent(filePath: string) {
+  try {
+    const docsPath = join(process.cwd(), "..", "..", "docs", filePath);
+    
+    // Verifica se o arquivo existe antes de tentar ler (evita logs de erro desnecessários)
+    try {
+      await stat(docsPath);
+    } catch {
+      // Arquivo não existe - retorna null silenciosamente
+      return null;
+    }
+    
+    const fileContents = await readFile(docsPath, "utf8");
+    
+    const fileName = filePath.split('/').pop() || '';
+    const fileNameWithoutExt = fileName.replace(/\.(yaml|yml)$/, "");
+    const titleWithoutPrefix = removeNumericPrefix(fileNameWithoutExt);
+    const fallbackTitle = titleWithoutPrefix.replace(/_/g, " ");
+
+    // Não precisa fazer escape manual - React já faz escape automaticamente ao renderizar
+    // O conteúdo será renderizado dentro de <code> que React escapa automaticamente
+
+    return {
+      content: fileContents,
+      title: fallbackTitle,
+      isYaml: true,
+      fileName: fileName,
+    };
+  } catch (error: any) {
+    // Só loga erro se não for ENOENT (arquivo não encontrado é esperado)
+    if (error?.code !== 'ENOENT') {
+      console.error(`Error reading YAML file ${filePath}:`, error);
+    }
     return null;
   }
 }
@@ -149,9 +199,9 @@ async function getAllDocsRecursive(basePath: string = ''): Promise<string[]> {
         // Recursivamente busca em subdiretórios
         const subFiles = await getAllDocsRecursive(fullPath);
         files.push(...subFiles);
-      } else if (entry.isFile() && entry.name.endsWith('.md')) {
-        // Adiciona arquivo (sem extensão .md para o slug)
-        const relativePath = fullPath.replace(/\.md$/, '');
+      } else if (entry.isFile() && (entry.name.endsWith('.md') || entry.name.endsWith('.yaml') || entry.name.endsWith('.yml'))) {
+        // Adiciona arquivo (sem extensão para o slug)
+        const relativePath = fullPath.replace(/\.(md|yaml|yml)$/, '');
         files.push(relativePath);
       }
     }
@@ -182,11 +232,25 @@ export default async function DocPage({ params }: PageProps) {
       return segment;
     }
   });
-  const filePath = `${decodedSlug.join('/')}.md`.replace(/\\/g, '/');
-
-  const doc = await getDocContent(filePath);
-
+  
+  // Tenta primeiro como .md, depois como .yaml/.yml
+  let filePath = `${decodedSlug.join('/')}.md`.replace(/\\/g, '/');
+  let doc = await getDocContent(filePath);
+  let yamlDoc = null;
+  
+  // Se não encontrou como .md, tenta como YAML
   if (!doc) {
+    const yamlFilePath = `${decodedSlug.join('/')}.yaml`.replace(/\\/g, '/');
+    yamlDoc = await getYamlContent(yamlFilePath);
+    
+    // Se não encontrou .yaml, tenta .yml
+    if (!yamlDoc) {
+      const ymlFilePath = `${decodedSlug.join('/')}.yml`.replace(/\\/g, '/');
+      yamlDoc = await getYamlContent(ymlFilePath);
+    }
+  }
+
+  if (!doc && !yamlDoc) {
     notFound();
   }
 
@@ -209,17 +273,30 @@ export default async function DocPage({ params }: PageProps) {
                   </>
                 )}
                 <span>›</span>
-                <span className="text-forest-900 font-medium">{doc.title}</span>
+                <span className="text-forest-900 font-medium">{doc?.title || yamlDoc?.title}</span>
               </nav>
 
               {/* Document Title - Hero */}
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-forest-900 dark:text-forest-50 mb-6 leading-tight">
-                {doc.title}
+                {doc?.title || yamlDoc?.title}
               </h1>
 
+              {/* Botão de Download para YAML */}
+              {yamlDoc && (
+                <YamlDownloadButton fileName={yamlDoc.fileName} content={yamlDoc.content} />
+              )}
 
               {/* Document Content - Refinado com Progressive Disclosure */}
-              <ContentSections htmlContent={doc.content} />
+              {doc && <ContentSections htmlContent={doc.content} />}
+              
+              {/* YAML Content com syntax highlighting */}
+              {yamlDoc && (
+                <div className="markdown-content">
+                  <pre className="bg-forest-900 dark:bg-dark-bg text-forest-50 p-6 rounded-2xl overflow-x-auto mb-10 border border-forest-800 dark:border-dark-border shadow-lg">
+                    <code className="language-yaml">{yamlDoc.content}</code>
+                  </pre>
+                </div>
+              )}
             </div>
           </div>
 
