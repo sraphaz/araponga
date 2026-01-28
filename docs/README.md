@@ -146,6 +146,15 @@ backend/
 - [Análise de Coesão e Testes](./22_COHESION_AND_TESTS.md)
 - [Implementação de Recomendações](./23_IMPLEMENTATION_RECOMMENDATIONS.md)
 
+### Fases Técnicas
+Documentação técnica das fases de implementação: Instalador, Modularização, BFF e Frontend.
+
+- **[Índice de Documentação Técnica](./TECNICO_INDEX.md)** ⭐ - Índice completo de todas as fases técnicas
+- **[Instalador Visual](./TECNICO_INSTALADOR_VISUAL.md)** 🛠️ - Sistema de instalação e configuração visual (15 passos, Monolito/Multi-Cluster, módulos, feature flags)
+- **[Modularização](./TECNICO_MODULARIZACAO.md)** 🧩 - Arquitetura modular e organização por domínios (15 módulos, feature flags, dependências)
+- **[Backend for Frontend (BFF)](./AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md)** 🔌 - Camada de abstração para interfaces (jornadas, contratos, exemplos)
+- **[Frontend Flutter](./24_FLUTTER_FRONTEND_PLAN.md)** 📱 - Planejamento completo do app mobile (arquitetura, stack, funcionalidades, UX/UI)
+
 ### Operações
 - [Moderação](./30_MODERATION.md)
 - [Admin e Observabilidade](./31_ADMIN_OBSERVABILITY.md)

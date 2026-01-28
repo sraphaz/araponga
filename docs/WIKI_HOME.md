@@ -236,6 +236,16 @@ Colabore no código e propostas:
 - **[Modelo de Domínio](https://github.com/sraphaz/araponga/blob/main/docs/12_DOMAIN_MODEL.md)** - Estrutura de dados
 - **[API - Lógica de Negócio](https://github.com/sraphaz/araponga/blob/main/docs/60_API_LÓGICA_NEGÓCIO.md)** - Funcionalidades e APIs
 
+### Fases Técnicas
+
+Documentação técnica das fases de implementação: Instalador, Modularização, BFF e Frontend.
+
+- **[Índice de Documentação Técnica](https://github.com/sraphaz/araponga/blob/main/docs/TECNICO_INDEX.md)** ⭐ - Índice completo de todas as fases técnicas
+- **[Instalador Visual](https://github.com/sraphaz/araponga/blob/main/docs/TECNICO_INSTALADOR_VISUAL.md)** 🛠️ - Sistema de instalação e configuração visual
+- **[Modularização](https://github.com/sraphaz/araponga/blob/main/docs/TECNICO_MODULARIZACAO.md)** 🧩 - Arquitetura modular e organização por domínios
+- **[Backend for Frontend (BFF)](https://github.com/sraphaz/araponga/blob/main/docs/AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md)** 🔌 - Camada de abstração para interfaces
+- **[Frontend Flutter](https://github.com/sraphaz/araponga/blob/main/docs/24_FLUTTER_FRONTEND_PLAN.md)** 📱 - Planejamento completo do app mobile
+
 ### Contribuição
 
 - **[Contribuindo](https://github.com/sraphaz/araponga/blob/main/docs/41_CONTRIBUTING.md)** - Guia geral de contribuição

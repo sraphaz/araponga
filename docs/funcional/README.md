@@ -93,10 +93,18 @@ Cada documento funcional contém:
 
 ## 🔗 Documentação Técnica Relacionada
 
+### API e Arquitetura
 - **[API - Lógica de Negócio](api/60_API_LÓGICA_NEGÓCIO_INDEX.md)** - Documentação técnica completa da API
 - **[Modelo de Domínio](12_DOMAIN_MODEL.md)** - Entidades e relacionamentos
 - **[Arquitetura](10_ARCHITECTURE_DECISIONS.md)** - Decisões arquiteturais
 - **[Roadmap](02_ROADMAP.md)** - Planejamento de desenvolvimento
+
+### Fases Técnicas
+- **[Índice de Documentação Técnica](../TECNICO_INDEX.md)** ⭐ - Índice completo de todas as fases técnicas
+- **[Instalador Visual](../TECNICO_INSTALADOR_VISUAL.md)** 🛠️ - Sistema de instalação e configuração
+- **[Modularização](../TECNICO_MODULARIZACAO.md)** 🧩 - Arquitetura modular e organização por domínios
+- **[Backend for Frontend (BFF)](../AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md)** 🔌 - Camada de abstração para interfaces
+- **[Frontend Flutter](../24_FLUTTER_FRONTEND_PLAN.md)** 📱 - Planejamento completo do app mobile
 
 ---
 
