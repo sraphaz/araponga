@@ -180,6 +180,8 @@ As seguintes métricas são coletadas automaticamente via `prometheus-net.AspNet
 
 ## 🔗 Links Relacionados
 
+- **Arquitetura de Logs e Monitoramento**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md) - Documentação completa sobre logs e monitoramento em diferentes arquiteturas
 - [MONITORING.md](./MONITORING.md) - Dashboards e monitoramento
 - [RUNBOOK.md](./RUNBOOK.md) - Runbook de operações
 - [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Troubleshooting comum
+- [FASE4.md](./backlog-api/FASE4.md) - Fase 4: Observabilidade e Monitoramento

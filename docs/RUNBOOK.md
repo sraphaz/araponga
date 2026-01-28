@@ -189,8 +189,33 @@ env | grep -E "JWT|CORS|ConnectionStrings" > env_backup.txt
 
 ---
 
+## 🖥️ Interface Web de Monitoramento
+
+A aplicação possui uma **interface web integrada** para monitoramento e auxílio à produção.
+
+**Acesso**: `https://api.araponga.com/admin/monitoring` (requer autenticação e autorização)
+
+**Funcionalidades**:
+- ✅ Dashboard principal com status geral
+- ✅ Visualizador de logs em tempo real
+- ✅ Métricas e dashboards interativos
+- ✅ Health checks visuais
+- ✅ Troubleshooting assistido
+
+**Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md)
+
+---
+
 ## 🔗 Links Relacionados
 
+- **Arquitetura de Logs e Monitoramento**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md) - Documentação completa sobre logs e monitoramento em diferentes arquiteturas, incluindo interface web
 - [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Troubleshooting comum
 - [INCIDENT_PLAYBOOK.md](./INCIDENT_PLAYBOOK.md) - Playbook de incidentes
 - [METRICS.md](./METRICS.md) - Métricas disponíveis
+- [MONITORING.md](./MONITORING.md) - Dashboards e alertas
+- [FASE4.md](./backlog-api/FASE4.md) - Fase 4: Observabilidade e Monitoramento
+
+---
+
+**Última Atualização**: 2026-01-28  
+**Status**: 📋 Runbook Completo - Atualizado com Interface Web

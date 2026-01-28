@@ -1,6 +1,85 @@
 # Monitoramento do Araponga
 
-Este documento descreve dashboards e alertas configurados para monitoramento do Araponga.
+**Data**: 2026-01-28  
+**Status**: 📋 Documentação Atualizada  
+**Versão**: 2.0
+
+Este documento descreve dashboards e alertas configurados para monitoramento do Araponga, considerando arquitetura monolito e evolução para multicluster.
+
+**⚠️ IMPORTANTE**: Para documentação completa sobre logs e monitoramento em diferentes arquiteturas (monolito, APIs modulares, microserviços) e interface web, ver [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md).
+
+---
+
+## 🖥️ Interface Web de Monitoramento
+
+A aplicação possui uma **interface web integrada** para monitoramento e auxílio à produção, acessível em `/admin/monitoring`.
+
+### Acesso
+
+- **URL**: `https://api.araponga.com/admin/monitoring`
+- **Autenticação**: Obrigatória (Bearer token)
+- **Autorização**: Apenas `SystemAdmin` ou `Curator` (configurável)
+
+### Funcionalidades
+
+1. **Dashboard Principal** (`/admin/monitoring`)
+   - Status geral do sistema
+   - Métricas principais (request rate, error rate, latência)
+   - Health checks visuais
+   - Alertas ativos
+   - Logs recentes
+
+2. **Visualizador de Logs** (`/admin/monitoring/logs`)
+   - Logs em tempo real (SignalR)
+   - Filtros (nível, componente, período, busca)
+   - Estatísticas (contagem por nível, top 10 erros)
+   - Exportação (JSON, CSV)
+
+3. **Métricas e Dashboards** (`/admin/monitoring/metrics`)
+   - Gráficos em tempo real
+   - Métricas de negócio e sistema
+   - Dashboards customizáveis
+
+4. **Health Checks** (`/admin/monitoring/health`)
+   - Status detalhado de dependências
+   - Tempo de resposta
+   - Histórico de falhas
+
+5. **Troubleshooting** (`/admin/monitoring/troubleshooting`)
+   - Diagnóstico automático
+   - Comandos úteis
+   - Guia de resolução
+
+**Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md)
+
+---
+
+## 📊 Monitoramento por Arquitetura
+
+### Monolito (Fase 1)
+
+- ✅ Logs em arquivo local + Seq (opcional)
+- ✅ Métricas em `/metrics` (Prometheus)
+- ✅ Interface web integrada
+- ✅ Health checks em `/health`
+
+### APIs Modulares (Fase 2)
+
+- ✅ Logs centralizados no Seq (agregação de todas as APIs)
+- ✅ Métricas agregadas no Prometheus
+- ✅ Interface web no Gateway (agregação)
+- ✅ Correlation ID compartilhado
+
+### Microserviços (Fase 3)
+
+- ✅ Logs centralizados no Seq (todos os serviços)
+- ✅ Métricas agregadas no Prometheus
+- ✅ Tracing distribuído (Jaeger/Tempo)
+- ✅ Interface web no Gateway (agregação global)
+
+**Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md)
+
+---
 
 ## 📊 Dashboards
 
@@ -179,6 +258,8 @@ datasources:
 
 ## 🔗 Links Relacionados
 
+- **Arquitetura de Logs e Monitoramento**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md) - Documentação completa sobre logs e monitoramento em diferentes arquiteturas
 - [METRICS.md](./METRICS.md) - Lista completa de métricas
 - [RUNBOOK.md](./RUNBOOK.md) - Runbook de operações
 - [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Troubleshooting comum
+- [FASE4.md](./backlog-api/FASE4.md) - Fase 4: Observabilidade e Monitoramento
