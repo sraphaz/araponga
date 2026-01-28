@@ -1,0 +1,16 @@
+{
+  "id": "ocean",
+  "name": "Ocean",
+  "author": "MermaidLens",
+  "version": "1.0.0",
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#00CFFF",
+      "background": "#001F3F",
+      "textColor": "#E0F7FF",
+      "lineColor": "#6AE3D9",
+      "fontFamily": "Inter"
+    }
+  }
+}

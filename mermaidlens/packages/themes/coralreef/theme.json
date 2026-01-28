@@ -1,0 +1,16 @@
+{
+  "id": "coralreef",
+  "name": "Coral Reef",
+  "author": "MermaidLens",
+  "version": "1.0.0",
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#FF7A59",
+      "background": "#2B0F1A",
+      "textColor": "#FFE9E2",
+      "lineColor": "#FFB199",
+      "fontFamily": "Inter"
+    }
+  }
+}

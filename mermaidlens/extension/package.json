@@ -1,0 +1,53 @@
+{
+  "name": "mermaidlens-extension",
+  "displayName": "MermaidLens",
+  "description": "Inline Mermaid diagrams for Markdown preview with themes and presets.",
+  "version": "0.1.0",
+  "publisher": "mermaidlens",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onCommand:mermaidlens.refresh"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mermaidlens.refresh",
+        "title": "MermaidLens: Refresh Preview"
+      }
+    ],
+    "configuration": {
+      "title": "MermaidLens",
+      "properties": {
+        "mermaidlens.theme": {
+          "type": "string",
+          "default": "ocean",
+          "description": "Theme id to use for Mermaid rendering."
+        },
+        "mermaidlens.preset": {
+          "type": "string",
+          "default": "architecture",
+          "description": "Preset id to apply to Mermaid directives."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@mermaidlens/core": "0.1.0",
+    "markdown-it": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^13.0.7",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "mermaidlens",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*",
+    "extension"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "rimraf extension/dist packages/**/dist coverage",
+    "test": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5",
+    "vitest": "^1.4.0"
+  }
+}

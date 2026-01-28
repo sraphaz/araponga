@@ -1,0 +1,11 @@
+{
+  "id": "architecture",
+  "label": "Architecture Blueprint",
+  "directives": {
+    "flowchart": {
+      "curve": "basis",
+      "nodeSpacing": 50,
+      "rankSpacing": 70
+    }
+  }
+}

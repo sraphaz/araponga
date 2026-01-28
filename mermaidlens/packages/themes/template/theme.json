@@ -1,0 +1,16 @@
+{
+  "id": "my-theme-id",
+  "name": "My Theme Name",
+  "author": "Your Name",
+  "version": "1.0.0",
+  "mermaid": {
+    "theme": "base",
+    "themeVariables": {
+      "primaryColor": "#4C9AFF",
+      "background": "#0B1020",
+      "textColor": "#F5F7FF",
+      "lineColor": "#8FB9FF",
+      "fontFamily": "Inter"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "sequence-clean",
+  "label": "Sequence Clean",
+  "directives": {
+    "sequence": {
+      "mirrorActors": false,
+      "messageFontWeight": 500,
+      "noteFontWeight": 500
+    }
+  }
+}
