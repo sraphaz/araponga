@@ -1,4 +1,4 @@
-using Araponga.Infrastructure.Postgres;
+using Araponga.Infrastructure.Shared.Postgres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -6,9 +6,9 @@ namespace Araponga.Api.HealthChecks;
 
 public sealed class DatabaseHealthCheck : IHealthCheck
 {
-    private readonly ArapongaDbContext _dbContext;
+    private readonly SharedDbContext _dbContext;
 
-    public DatabaseHealthCheck(ArapongaDbContext dbContext)
+    public DatabaseHealthCheck(SharedDbContext dbContext)
     {
         _dbContext = dbContext;
     }

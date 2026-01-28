@@ -296,11 +296,12 @@ if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnor
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Configure connection pool metrics after infrastructure is registered
+// Nota: ConnectionPoolMetricsService usa SharedDbContext para métricas (todos os DbContexts compartilham a mesma connection string)
 if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
 {
     builder.Services.AddSingleton<ConnectionPoolMetricsService>(sp =>
     {
-        var dbContext = sp.GetRequiredService<ArapongaDbContext>();
+        var dbContext = sp.GetRequiredService<Araponga.Infrastructure.Shared.Postgres.SharedDbContext>();
         var logger = sp.GetRequiredService<ILogger<ConnectionPoolMetricsService>>();
         return new ConnectionPoolMetricsService(dbContext, logger);
     });

@@ -6,14 +6,15 @@ namespace Araponga.Infrastructure.Postgres;
 
 /// <summary>
 /// Serviço para coletar métricas de connection pool em tempo real.
+/// Usa DbContext genérico pois todos os DbContexts modulares compartilham a mesma connection string.
 /// </summary>
 public sealed class ConnectionPoolMetricsService
 {
-    private readonly ArapongaDbContext _dbContext;
+    private readonly DbContext _dbContext;
     private readonly ILogger<ConnectionPoolMetricsService> _logger;
 
     public ConnectionPoolMetricsService(
-        ArapongaDbContext dbContext,
+        DbContext dbContext,
         ILogger<ConnectionPoolMetricsService> logger)
     {
         _dbContext = dbContext;
