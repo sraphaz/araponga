@@ -19,12 +19,12 @@ export function MermaidDiagram({ code, id }: MermaidDiagramProps) {
         // Carrega Mermaid dinamicamente
         const mermaid = (await import("mermaid")).default;
         
-        // Configuração do Mermaid no estilo do devportal
+        // Configuraï¿½ï¿½o do Mermaid no estilo do devportal
         mermaid.initialize({
           startOnLoad: false,
           theme: "dark",
           themeVariables: {
-            primaryColor: "#4dd4a8", // Verde água do devportal
+            primaryColor: "#4dd4a8", // Verde ï¿½gua do devportal
             primaryTextColor: "#ffffff",
             primaryBorderColor: "#4dd4a8",
             lineColor: "#7dd3ff", // Azul claro do devportal
@@ -62,7 +62,7 @@ export function MermaidDiagram({ code, id }: MermaidDiagramProps) {
           fontFamily: "var(--font-inter), system-ui, sans-serif",
         });
 
-        // Gera ID único se não fornecido
+        // Gera ID ï¿½nico se nï¿½o fornecido
         const diagramId = id || `mermaid-${Math.random().toString(36).substr(2, 9)}`;
         
         // Renderiza o diagrama usando a API moderna do Mermaid

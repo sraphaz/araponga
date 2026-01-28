@@ -51,7 +51,7 @@ export function MermaidContent({ htmlContent }: MermaidContentProps) {
       }
     }
 
-    // Se não encontrou nenhum bloco Mermaid, retorna todo o conteúdo como HTML
+    // Se nï¿½o encontrou nenhum bloco Mermaid, retorna todo o conteï¿½do como HTML
     if (result.length === 0) {
       result.push({ type: "html", content: htmlContent });
     }
