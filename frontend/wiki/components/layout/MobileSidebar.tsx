@@ -146,6 +146,7 @@ export function MobileSidebar() {
           <div className="flex flex-col space-y-2 pt-2 border-t border-forest-200/80 dark:border-forest-800/80">
             <Link
               href="/docs"
+              prefetch={false}
               onClick={() => setIsOpen(false)}
               className="px-3 py-2 rounded-lg text-sm text-forest-700 dark:text-forest-300 hover:bg-forest-100/80 dark:hover:bg-forest-900/60 transition-colors"
             >
