@@ -116,91 +116,91 @@ A plataforma Araponga é organizada em **domínios funcionais** que trabalham de
 - **Responsabilidade**: Gerenciar identidade única do usuário, autenticação e verificação
 - **Função de Negócio**: Garantir que cada pessoa tenha uma identidade verificada e segura
 - **Elementos Técnicos**: User, AuthProvider, UserIdentityVerificationStatus, 2FA
-- **Documentação**: [Autenticação e Identidade](./01_AUTENTICACAO_IDENTIDADE.md)
+- **Documentação**: [Autenticação e Identidade](funcional/01_AUTENTICACAO_IDENTIDADE.md)
 
 #### 2. **Territórios**
 - **Responsabilidade**: Representar lugares físicos reais de forma neutra
 - **Função de Negócio**: Criar e gerenciar territórios geográficos como unidades centrais
 - **Elementos Técnicos**: Territory, GeoAnchor, fronteiras geográficas
-- **Documentação**: [Territórios e Memberships](./02_TERRITORIOS_MEMBERSHIPS.md)
+- **Documentação**: [Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)
 
 #### 3. **Memberships (Vínculos)**
 - **Responsabilidade**: Gerenciar relação entre usuários e territórios
 - **Função de Negócio**: Definir papéis (Visitor/Resident) e permissões territoriais
 - **Elementos Técnicos**: TerritoryMembership, MembershipRole, MembershipCapability, MembershipSettings
-- **Documentação**: [Territórios e Memberships](./02_TERRITORIOS_MEMBERSHIPS.md)
+- **Documentação**: [Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)
 
 #### 4. **Feed Comunitário**
 - **Responsabilidade**: Publicações e timeline territorial
 - **Função de Negócio**: Compartilhar informações relevantes ao território
 - **Elementos Técnicos**: Post, PostGeoAnchor, Media (imagens, vídeos, áudios), visibilidade
-- **Documentação**: [Feed Comunitário](./03_FEED_COMUNITARIO.md)
+- **Documentação**: [Feed Comunitário](funcional/03_FEED_COMUNITARIO.md)
 
 #### 5. **Eventos**
 - **Responsabilidade**: Organizar eventos comunitários por território
 - **Função de Negócio**: Facilitar encontros e atividades locais
 - **Elementos Técnicos**: Event, participação, georreferenciamento, mídias (capa + adicionais)
-- **Documentação**: [Eventos](./04_EVENTOS.md)
+- **Documentação**: [Eventos](funcional/04_EVENTOS.md)
 
 #### 6. **Mapa Territorial**
 - **Responsabilidade**: Visualização geográfica de conteúdos
 - **Função de Negócio**: Explorar publicações e eventos espacialmente
 - **Elementos Técnicos**: MapEntity, MapEntityRelation, pins geográficos
-- **Documentação**: [Mapa Territorial](./05_MAPA_TERRITORIAL.md)
+- **Documentação**: [Mapa Territorial](funcional/05_MAPA_TERRITORIAL.md)
 
 #### 7. **Marketplace**
 - **Responsabilidade**: Sistema de trocas locais integrado ao território
 - **Função de Negócio**: Facilitar economia local e trocas comunitárias
 - **Elementos Técnicos**: Store, StoreItem, Cart, Checkout, pagamentos, mídias (imagens, vídeos, áudios)
-- **Documentação**: [Marketplace](./06_MARKETPLACE.md)
+- **Documentação**: [Marketplace](funcional/06_MARKETPLACE.md)
 
 #### 8. **Chat**
 - **Responsabilidade**: Comunicação territorial (canais, grupos, DM)
 - **Função de Negócio**: Facilitar comunicação comunitária
 - **Elementos Técnicos**: ChatConversation, ChatMessage, ConversationParticipant
-- **Documentação**: [Chat](./07_CHAT.md)
+- **Documentação**: [Chat](funcional/07_CHAT.md)
 
 #### 9. **Alertas**
 - **Responsabilidade**: Alertas de saúde pública e comunicação emergencial
 - **Função de Negócio**: Comunicar informações urgentes e importantes
 - **Elementos Técnicos**: Alert, notificações prioritárias
-- **Documentação**: [Alertas](./08_ALERTAS.md)
+- **Documentação**: [Alertas](funcional/08_ALERTAS.md)
 
 #### 10. **Assets (Recursos Territoriais)**
 - **Responsabilidade**: Recursos compartilhados do território
 - **Função de Negócio**: Compartilhar documentos, mídias e recursos comunitários
 - **Elementos Técnicos**: Asset, geolocalização obrigatória
-- **Documentação**: [Assets](./09_ASSETS.md)
+- **Documentação**: [Assets](funcional/09_ASSETS.md)
 
 #### 11. **Moderação**
 - **Responsabilidade**: Manter qualidade e segurança do conteúdo
 - **Função de Negócio**: Proteger comunidade de abusos e conteúdo inadequado
 - **Elementos Técnicos**: Report, Sanction, WorkItem, automações
-- **Documentação**: [Moderação](./10_MODERACAO.md)
+- **Documentação**: [Moderação](funcional/10_MODERACAO.md)
 
 #### 12. **Notificações**
 - **Responsabilidade**: Sistema confiável de notificações in-app
 - **Função de Negócio**: Informar usuários sobre eventos relevantes
 - **Elementos Técnicos**: OutboxMessage, UserNotification, inbox persistido
-- **Documentação**: [Notificações](./11_NOTIFICACOES.md)
+- **Documentação**: [Notificações](funcional/11_NOTIFICACOES.md)
 
 #### 13. **Subscriptions**
 - **Responsabilidade**: Sistema de assinaturas recorrentes
 - **Função de Negócio**: Sustentabilidade financeira da plataforma
 - **Elementos Técnicos**: Subscription, Plan, pagamentos recorrentes
-- **Documentação**: [Subscriptions](./12_SUBSCRIPTIONS.md)
+- **Documentação**: [Subscriptions](funcional/12_SUBSCRIPTIONS.md)
 
 #### 14. **Governança e Votação**
 - **Responsabilidade**: Decisões coletivas e governança participativa
 - **Função de Negócio**: Permitir que comunidades decidam coletivamente
 - **Elementos Técnicos**: Vote, Proposal, governança territorial
-- **Documentação**: [Governança e Votação](./13_GOVERNANCA_VOTACAO.md)
+- **Documentação**: [Governança e Votação](funcional/13_GOVERNANCA_VOTACAO.md)
 
 #### 15. **Admin e Configuração**
 - **Responsabilidade**: Administração do sistema e configurações globais
 - **Função de Negócio**: Gerenciar plataforma e territórios
 - **Elementos Técnicos**: SystemConfig, SystemPermission, WorkQueue
-- **Documentação**: [Admin](./14_ADMIN.md)
+- **Documentação**: [Admin](funcional/14_ADMIN.md)
 
 ---
 
@@ -368,54 +368,54 @@ Ação Auditada
 ## 📚 Navegação da Documentação
 
 ### Índice Completo
-- **[README - Índice Completo](./README.md)** - Navegação estruturada de toda a documentação funcional
+- **[README - Índice Completo](funcional/README.md)** - Navegação estruturada de toda a documentação funcional
 
 ### Documento Central
-- **[00 - Plataforma Araponga](./00_PLATAFORMA_ARAPONGA.md)** ← Você está aqui
+- **[00 - Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** ← Você está aqui
 
 ### Documentação por Funcionalidade
 
 #### Identidade e Vínculos
-- [01 - Autenticação e Identidade](./01_AUTENTICACAO_IDENTIDADE.md)
-- [02 - Territórios e Memberships](./02_TERRITORIOS_MEMBERSHIPS.md)
+- [01 - Autenticação e Identidade](funcional/01_AUTENTICACAO_IDENTIDADE.md)
+- [02 - Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)
 
 #### Conteúdo e Interação
-- [03 - Feed Comunitário](./03_FEED_COMUNITARIO.md)
-- [04 - Eventos](./04_EVENTOS.md)
-- [05 - Mapa Territorial](./05_MAPA_TERRITORIAL.md)
+- [03 - Feed Comunitário](funcional/03_FEED_COMUNITARIO.md)
+- [04 - Eventos](funcional/04_EVENTOS.md)
+- [05 - Mapa Territorial](funcional/05_MAPA_TERRITORIAL.md)
 
 #### Economia e Comunicação
-- [06 - Marketplace](./06_MARKETPLACE.md)
-- [07 - Chat](./07_CHAT.md)
-- [08 - Alertas](./08_ALERTAS.md)
+- [06 - Marketplace](funcional/06_MARKETPLACE.md)
+- [07 - Chat](funcional/07_CHAT.md)
+- [08 - Alertas](funcional/08_ALERTAS.md)
 
 #### Recursos e Gestão
-- [09 - Assets](./09_ASSETS.md)
-- [10 - Moderação](./10_MODERACAO.md)
-- [11 - Notificações](./11_NOTIFICACOES.md)
+- [09 - Assets](funcional/09_ASSETS.md)
+- [10 - Moderação](funcional/10_MODERACAO.md)
+- [11 - Notificações](funcional/11_NOTIFICACOES.md)
 
 #### Sustentabilidade e Governança
-- [12 - Subscriptions](./12_SUBSCRIPTIONS.md)
-- [13 - Governança e Votação](./13_GOVERNANCA_VOTACAO.md)
-- [14 - Admin](./14_ADMIN.md)
+- [12 - Subscriptions](funcional/12_SUBSCRIPTIONS.md)
+- [13 - Governança e Votação](funcional/13_GOVERNANCA_VOTACAO.md)
+- [14 - Admin](funcional/14_ADMIN.md)
 
 ### Funcionalidades Futuras (Planejadas)
 
 > **⚠️ Nota**: As funcionalidades abaixo estão **planejadas** mas **ainda não implementadas**.
 
 #### Economia Local
-- [15 - Compra Coletiva](./15_COMPRA_COLETIVA.md) ⏳ Planejada
-- [16 - Hospedagem Territorial](./16_HOSPEDAGEM_TERRITORIAL.md) ⏳ Planejada
-- [17 - Demandas e Ofertas](./17_DEMANDAS_OFERTAS.md) ⏳ Planejada
-- [18 - Trocas Comunitárias](./18_TROCAS_COMUNITARIAS.md) ⏳ Planejada
-- [19 - Moeda Territorial](./19_MOEDA_TERRITORIAL.md) ⏳ Planejada
+- [15 - Compra Coletiva](funcional/15_COMPRA_COLETIVA.md) ⏳ Planejada
+- [16 - Hospedagem Territorial](funcional/16_HOSPEDAGEM_TERRITORIAL.md) ⏳ Planejada
+- [17 - Demandas e Ofertas](funcional/17_DEMANDAS_OFERTAS.md) ⏳ Planejada
+- [18 - Trocas Comunitárias](funcional/18_TROCAS_COMUNITARIAS.md) ⏳ Planejada
+- [19 - Moeda Territorial](funcional/19_MOEDA_TERRITORIAL.md) ⏳ Planejada
 
 #### Web3 e DAO
-- [20 - Web3 e Blockchain](./20_WEB3_BLOCKCHAIN.md) ⏳ Planejada
-- [21 - DAO e Tokenização](./21_DAO_TOKENIZACAO.md) ⏳ Planejada
+- [20 - Web3 e Blockchain](funcional/20_WEB3_BLOCKCHAIN.md) ⏳ Planejada
+- [21 - DAO e Tokenização](funcional/21_DAO_TOKENIZACAO.md) ⏳ Planejada
 
 #### Extensões
-- [22 - Learning Hub](./22_LEARNING_HUB.md) ⏳ Planejada
+- [22 - Learning Hub](funcional/22_LEARNING_HUB.md) ⏳ Planejada
 
 ---
 
@@ -431,19 +431,19 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 - **Status**: ⏳ Planejado (Fase 17)
 - **Objetivo**: Organizar compras coletivas de alimentos e produtos locais
 - **Função de Negócio**: Conectar produtores locais com consumidores, organizar rodadas de compra, integrar com votação para decisões coletivas
-- **Documentação**: [Compra Coletiva](./15_COMPRA_COLETIVA.md)
+- **Documentação**: [Compra Coletiva](funcional/15_COMPRA_COLETIVA.md)
 
 #### Hospedagem Territorial
 - **Status**: ⏳ Planejado (Fase 18)
 - **Objetivo**: Sistema de hospedagem territorial (alternativa local ao Airbnb)
 - **Função de Negócio**: Moradores validados cadastram propriedades, visitantes solicitam estadias, agenda de disponibilidade, pagamentos com escrow
-- **Documentação**: [Hospedagem Territorial](./16_HOSPEDAGEM_TERRITORIAL.md)
+- **Documentação**: [Hospedagem Territorial](funcional/16_HOSPEDAGEM_TERRITORIAL.md)
 
 #### Demandas e Ofertas
 - **Status**: ⏳ Planejado (Fase 19)
 - **Objetivo**: Sistema bidirecional de demandas (procura) e ofertas (suprimento)
 - **Função de Negócio**: Moradores cadastram necessidades, outros fazem ofertas, negociação antes de aceitar
-- **Documentação**: [Demandas e Ofertas](./17_DEMANDAS_OFERTAS.md)
+- **Documentação**: [Demandas e Ofertas](funcional/17_DEMANDAS_OFERTAS.md)
 
 ### Onda 4: Economia Local Completa
 
@@ -451,7 +451,7 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 - **Status**: ⏳ Planejado (Fase 20)
 - **Objetivo**: Sistema de trocas diretas de itens e serviços
 - **Função de Negócio**: Troca de item/serviço por outro, sem necessariamente usar moeda
-- **Documentação**: [Trocas Comunitárias](./18_TROCAS_COMUNITARIAS.md)
+- **Documentação**: [Trocas Comunitárias](funcional/18_TROCAS_COMUNITARIAS.md)
 
 #### Entregas Territoriais
 - **Status**: ⏳ Planejado (Fase 21)
@@ -463,7 +463,7 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 - **Status**: ⏳ Planejado (Fase 22)
 - **Objetivo**: Moeda virtual específica do território
 - **Função de Negócio**: Facilitar economia circular local, preparação para tokens on-chain
-- **Documentação**: [Moeda Territorial](./19_MOEDA_TERRITORIAL.md)
+- **Documentação**: [Moeda Territorial](funcional/19_MOEDA_TERRITORIAL.md)
 
 ### Onda 6: Autonomia Digital
 
@@ -483,13 +483,13 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 - **Status**: ⏳ Planejado (Fases 31-35)
 - **Objetivo**: Preparar infraestrutura para Web3
 - **Função de Negócio**: Camada de abstração blockchain, wallets, smart contracts básicos
-- **Documentação**: [Web3 e Blockchain](./20_WEB3_BLOCKCHAIN.md)
+- **Documentação**: [Web3 e Blockchain](funcional/20_WEB3_BLOCKCHAIN.md)
 
 #### DAO e Tokenização
 - **Status**: ⏳ Planejado (Fases 36-40)
 - **Objetivo**: Governança descentralizada com tokens on-chain
 - **Função de Negócio**: Tokens ERC-20, votações on-chain, proof of presence on-chain
-- **Documentação**: [DAO e Tokenização](./21_DAO_TOKENIZACAO.md)
+- **Documentação**: [DAO e Tokenização](funcional/21_DAO_TOKENIZACAO.md)
 
 ### Onda 10: Extensões e Diferenciação
 
@@ -497,7 +497,7 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 - **Status**: ⏳ Planejado (Fase 45)
 - **Objetivo**: Plataforma de cursos e conhecimento territorial
 - **Função de Negócio**: Cursos locais, certificações, monetização de conhecimento
-- **Documentação**: [Learning Hub](./22_LEARNING_HUB.md)
+- **Documentação**: [Learning Hub](funcional/22_LEARNING_HUB.md)
 
 #### Rental System
 - **Status**: ⏳ Planejado (Fase 46)
