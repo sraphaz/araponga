@@ -88,7 +88,9 @@ public sealed class FeedController : ControllerBase
             return Unauthorized();
         }
 
-        var effectivePrioritize = prioritizeConnections && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsEnabled);
+        var effectivePrioritize = prioritizeConnections
+            && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsEnabled)
+            && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsFeedPrioritize);
 
         var posts = await _feedService.ListForTerritoryAsync(
             resolvedTerritoryId.Value,
@@ -163,7 +165,9 @@ public sealed class FeedController : ControllerBase
             return Unauthorized();
         }
 
-        var effectivePrioritize = prioritizeConnections && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsEnabled);
+        var effectivePrioritize = prioritizeConnections
+            && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsEnabled)
+            && _featureGuard.IsEnabled(resolvedTerritoryId.Value, FeatureFlag.ConnectionsFeedPrioritize);
 
         var pagination = new PaginationParameters(pageNumber, pageSize);
         var pagedResult = await _feedService.ListForTerritoryPagedAsync(

@@ -63,6 +63,25 @@ public sealed class ConnectionService
         if (settings.WhoCanAddMe == ConnectionRequestPolicy.Disabled)
             return Result<UserConnection>.Failure("Este usuário não aceita novas conexões.");
 
+        if (settings.WhoCanAddMe == ConnectionRequestPolicy.ResidentsOnly)
+        {
+            var requesterMemberships = await _membershipRepository.ListByUserAsync(requesterUserId, cancellationToken);
+            var targetMemberships = await _membershipRepository.ListByUserAsync(targetUserId, cancellationToken);
+            var requesterTerritoryIds = requesterMemberships.Select(m => m.TerritoryId).ToHashSet();
+            var shareTerritory = targetMemberships.Any(m => requesterTerritoryIds.Contains(m.TerritoryId));
+            if (!shareTerritory)
+                return Result<UserConnection>.Failure("Este usuário só aceita solicitações de moradores do mesmo território.");
+        }
+
+        if (settings.WhoCanAddMe == ConnectionRequestPolicy.ConnectionsOnly)
+        {
+            var targetAccepted = await _connectionRepository.GetAcceptedConnectionsAsync(targetUserId, cancellationToken);
+            var targetAlreadyAddedRequester = targetAccepted.Any(c =>
+                c.RequesterUserId == targetUserId && c.TargetUserId == requesterUserId);
+            if (!targetAlreadyAddedRequester)
+                return Result<UserConnection>.Failure("Este usuário só aceita solicitações de pessoas que ele já adicionou.");
+        }
+
         var connection = UserConnection.CreatePending(
             Guid.NewGuid(),
             requesterUserId,
