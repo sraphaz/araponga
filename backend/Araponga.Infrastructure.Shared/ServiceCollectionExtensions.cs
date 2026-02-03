@@ -1,4 +1,3 @@
-using Araponga.Application.Interfaces;
 using Araponga.Infrastructure.Shared.Postgres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +12,7 @@ public static class ServiceCollectionExtensions
         var connectionString = configuration.GetConnectionString("Postgres")
             ?? throw new InvalidOperationException("Postgres connection string is required");
 
-        // Registrar SharedDbContext
+        // Registrar SharedDbContext (disponível para uso direto; IUnitOfWork é registrado na API como ArapongaDbContext)
         services.AddDbContext<SharedDbContext>(options =>
             options.UseNpgsql(connectionString, npgsqlOptions =>
             {
@@ -23,9 +22,6 @@ public static class ServiceCollectionExtensions
                     errorCodesToAdd: null);
                 npgsqlOptions.CommandTimeout(30);
             }));
-
-        // Registrar SharedDbContext como IUnitOfWork também
-        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<SharedDbContext>());
 
         return services;
     }

@@ -255,6 +255,9 @@ public static class ServiceCollectionExtensions
                         errorCodesToAdd: null);
                     npgsqlOptions.CommandTimeout(30);
                 }));
+
+            // IUnitOfWork = ArapongaDbContext para que CommitAsync persista as alterações dos repositórios da Infrastructure principal (Territory, User, JoinRequest, etc.). Módulos usam seus próprios DbContexts.
+            services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ArapongaDbContext>());
         }
         else
         {

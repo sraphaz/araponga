@@ -1,3 +1,4 @@
+using Araponga.Application.Common;
 using Araponga.Application.Interfaces;
 using Araponga.Domain.Feed;
 using Araponga.Domain.Membership;
@@ -96,16 +97,7 @@ public sealed class PostFilterService
         CancellationToken cancellationToken)
     {
         var filtered = await FilterPostsAsync(posts, territoryId, userId, mapEntityId, assetId, cancellationToken);
-
-        const int maxInt32 = int.MaxValue;
-        var count = filtered.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = filtered
-            .OrderByDescending(p => p.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new Common.PagedResult<CommunityPost>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var ordered = filtered.OrderByDescending(p => p.CreatedAtUtc).ToList();
+        return ordered.ToPagedResult(pagination);
     }
 }

@@ -101,16 +101,8 @@ public sealed class InquiryService
         CancellationToken cancellationToken)
     {
         var inquiries = await _inquiryRepository.ListByUserAsync(userId, cancellationToken);
-        const int maxInt32 = int.MaxValue;
-        var count = inquiries.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = inquiries
-            .OrderByDescending(i => i.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new Common.PagedResult<ItemInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var ordered = inquiries.OrderByDescending(i => i.CreatedAtUtc).ToList();
+        return ordered.ToPagedResult(pagination);
     }
 
     public async Task<Common.PagedResult<ItemInquiry>> ListReceivedInquiriesPagedAsync(
@@ -126,15 +118,7 @@ public sealed class InquiryService
 
         var storeIds = stores.Select(s => s.Id).ToList();
         var inquiries = await _inquiryRepository.ListByStoreIdsAsync(storeIds, cancellationToken);
-        const int maxInt32 = int.MaxValue;
-        var count = inquiries.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = inquiries
-            .OrderByDescending(i => i.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new Common.PagedResult<ItemInquiry>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var ordered = inquiries.OrderByDescending(i => i.CreatedAtUtc).ToList();
+        return ordered.ToPagedResult(pagination);
     }
 }

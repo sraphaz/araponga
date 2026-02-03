@@ -191,16 +191,8 @@ public sealed class ReportService
         CancellationToken cancellationToken)
     {
         var reports = await _reportRepository.ListAsync(territoryId, targetType, status, fromUtc, toUtc, cancellationToken);
-        const int maxInt32 = int.MaxValue;
-        var count = reports.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = reports
-            .OrderByDescending(r => r.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new PagedResult<ModerationReport>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var ordered = reports.OrderByDescending(r => r.CreatedAtUtc).ToList();
+        return ordered.ToPagedResult(pagination);
     }
 
     private async Task EvaluatePostThresholdAsync(

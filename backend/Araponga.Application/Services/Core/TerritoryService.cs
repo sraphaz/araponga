@@ -121,16 +121,7 @@ public sealed class TerritoryService
             .Where(t => t.Status == TerritoryStatus.Active)
             .OrderBy(t => t.Name)
             .ToList();
-
-        const int maxInt32 = int.MaxValue;
-        var count = activeTerritories.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = activeTerritories
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new PagedResult<Territory>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return activeTerritories.ToPagedResult(pagination);
     }
 
     public async Task<PagedResult<Territory>> SearchPagedAsync(
@@ -169,16 +160,7 @@ public sealed class TerritoryService
         var activeTerritories = territories
             .Where(t => t.Status == TerritoryStatus.Active)
             .ToList();
-
-        const int maxInt32 = int.MaxValue;
-        var count = activeTerritories.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = activeTerritories
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new PagedResult<Territory>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return activeTerritories.ToPagedResult(pagination);
     }
 
     private async Task<IReadOnlyList<Territory>> FilterActiveAsync(Task<IReadOnlyList<Territory>> task)

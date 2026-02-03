@@ -195,18 +195,10 @@ public sealed class JoinRequestService
                 requesterLookup.GetValueOrDefault(request.RequesterUserId, string.Empty),
                 request.Message,
                 request.CreatedAtUtc))
-            .ToList();
-
-        const int maxInt32 = int.MaxValue;
-        var count = incomingRequests.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = incomingRequests
             .OrderByDescending(r => r.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
             .ToList();
 
-        return new PagedResult<IncomingJoinRequest>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        return incomingRequests.ToPagedResult(pagination);
     }
 
     public async Task<TerritoryJoinRequest?> GetByIdAsync(Guid requestId, CancellationToken cancellationToken)

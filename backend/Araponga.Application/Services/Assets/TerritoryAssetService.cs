@@ -76,16 +76,8 @@ public sealed class TerritoryAssetService
             cancellationToken);
 
         var details = await BuildAssetDetailsAsync(territoryId, assets, cancellationToken);
-        const int maxInt32 = int.MaxValue;
-        var count = details.Count;
-        var totalCount = count > maxInt32 ? maxInt32 : count;
-        var pagedItems = details
-            .OrderByDescending(d => d.Asset.CreatedAtUtc)
-            .Skip(pagination.Skip)
-            .Take(pagination.Take)
-            .ToList();
-
-        return new PagedResult<TerritoryAssetDetails>(pagedItems, pagination.PageNumber, pagination.PageSize, totalCount);
+        var ordered = details.OrderByDescending(d => d.Asset.CreatedAtUtc).ToList();
+        return ordered.ToPagedResult(pagination);
     }
 
     public async Task<TerritoryAssetDetails?> GetByIdAsync(Guid assetId, CancellationToken cancellationToken)
