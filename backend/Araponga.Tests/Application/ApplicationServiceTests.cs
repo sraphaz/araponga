@@ -441,7 +441,8 @@ public sealed class ApplicationServiceTests
             blockerId,
             null,
             null,
-            false,
+            filterByInterests: false,
+            prioritizeConnections: false,
             CancellationToken.None);
 
         Assert.Empty(posts);
@@ -915,7 +916,8 @@ public sealed class ApplicationServiceTests
             Guid.NewGuid(),
             entityId,
             null,
-            false,
+            filterByInterests: false,
+            prioritizeConnections: false,
             CancellationToken.None);
 
         Assert.Contains(filtered, item => item.MapEntityId == entityId);
@@ -1118,6 +1120,7 @@ public sealed class ApplicationServiceTests
             null,
             pagination,
             filterByInterests: false,
+            prioritizeConnections: false,
             CancellationToken.None);
 
         Assert.Equal(10, page1.Items.Count);
@@ -1134,6 +1137,7 @@ public sealed class ApplicationServiceTests
             null,
             pagination2,
             filterByInterests: false,
+            prioritizeConnections: false,
             CancellationToken.None);
 
         Assert.Equal(10, page2.Items.Count);

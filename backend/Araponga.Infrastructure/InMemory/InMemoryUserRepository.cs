@@ -77,4 +77,20 @@ public sealed class InMemoryUserRepository : IUserRepository
 
         return Task.FromResult(user);
     }
+
+    public Task<IReadOnlyList<User>> SearchByDisplayNameAsync(string? query, IReadOnlyCollection<Guid>? restrictToUserIds, int limit, CancellationToken cancellationToken)
+    {
+        var source = restrictToUserIds is { Count: > 0 }
+            ? _dataStore.Users.Where(u => restrictToUserIds.Contains(u.Id))
+            : _dataStore.Users.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(query))
+        {
+            var q = query.Trim();
+            source = source.Where(u => u.DisplayName.Contains(q, StringComparison.OrdinalIgnoreCase));
+        }
+
+        var list = source.OrderBy(u => u.DisplayName).Take(limit).ToList();
+        return Task.FromResult<IReadOnlyList<User>>(list);
+    }
 }
