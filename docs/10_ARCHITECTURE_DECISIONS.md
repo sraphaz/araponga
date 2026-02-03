@@ -228,6 +228,33 @@ Este documento registra decisões arquiteturais importantes tomadas durante o de
 
 ---
 
+## ADR-011: BFF como Aplicação Separada (Fase 2)
+
+**Status**: Aceito  
+**Data**: 2026  
+**Contexto**: A documentação do projeto prevê um Backend for Frontend (BFF) para reduzir chamadas de rede e expor jornadas formatadas para UI. Após a Fase 1 (BFF como módulo interno na API), evoluiu-se para a Fase 2: o BFF **não é um módulo interno** — é **outra aplicação**.
+
+**Decisão**: O BFF é uma **aplicação separada** (`Araponga.Api.Bff`):
+- Projeto próprio: `backend/Araponga.Api.Bff`, deployável de forma independente
+- Expõe as mesmas rotas de jornada sob `/api/v2/journeys` (onboarding, feed, events, marketplace), encaminhando as requisições para a API principal (`Araponga.Api`)
+- Configuração `Bff:ApiBaseUrl` na aplicação BFF aponta para a URL da API
+- O frontend consome o BFF; o BFF faz proxy (e futuramente pode orquestrar chamadas à API v1 diretamente)
+- A API principal continua expondo `/api/v2/journeys` para atender as requisições encaminhadas pelo BFF (ou consumo direto em cenários legados)
+- **Cache quando necessário**: respostas GET 2xx podem ser cacheadas em memória no BFF (`Bff:EnableCache`, `Bff:CacheTtlSeconds`, `Bff:CacheTtlByPath`) para reduzir chamadas à API; chave inclui path, query e autorização (respostas por usuário). Header de resposta `X-Bff-Cache: HIT` ou `MISS` indica origem.
+
+**Consequências**:
+- ✅ BFF e API são aplicações distintas (deploy, escala e evolução independentes)
+- ✅ Frontend fala apenas com o BFF; a API pode ficar interna à rede
+- ✅ Mesma autenticação JWT: o BFF repassa o token à API
+- ✅ Cache no BFF reduz carga na API em leituras repetidas (GET)
+- ⚠️ Latência adicional de uma hop HTTP entre BFF e API (aceitável na maioria dos cenários)
+
+**Referências**:
+- [Avaliação BFF](docs/AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md)
+- [Contrato OpenAPI BFF](docs/BFF_API_CONTRACT.yaml)
+
+---
+
 ## Referências
 
 - [Product Vision](./01_PRODUCT_VISION.md)

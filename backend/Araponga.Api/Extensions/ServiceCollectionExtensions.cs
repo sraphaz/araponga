@@ -1,4 +1,6 @@
 using Araponga.Api.Security;
+using Araponga.Api.Services.Journeys;
+using Araponga.Api.Services.Journeys.Backend;
 using Araponga.Application.Interfaces;
 using Araponga.Application.Interfaces.Connections;
 using Araponga.Application.Interfaces.Media;
@@ -153,6 +155,15 @@ public static class ServiceCollectionExtensions
             return new Araponga.Application.Services.EmailTemplateService(logger, templatesPath);
         });
         services.AddScoped<Araponga.Application.Services.EmailQueueService>();
+
+        // BFF Backends (usados pela API que ainda expõe /api/v2/journeys; o BFF é app separada que faz proxy para estes endpoints)
+        services.AddScoped<IFeedJourneyBackend, InProcessFeedJourneyBackend>();
+        services.AddScoped<IOnboardingJourneyBackend, InProcessOnboardingJourneyBackend>();
+        services.AddScoped<IEventsJourneyBackend, InProcessEventsJourneyBackend>();
+        // BFF Journey services (v2 - expostos pela API; o app BFF encaminha para aqui)
+        services.AddScoped<IFeedJourneyService, FeedJourneyService>();
+        services.AddScoped<IOnboardingJourneyService, OnboardingJourneyService>();
+        services.AddScoped<IEventJourneyService, EventJourneyService>();
 
         // Policies services
         services.AddScoped<TermsOfServiceService>();
