@@ -74,4 +74,144 @@ Authorization: Bearer {{token}}
 
 {"territoryId": "{{territoryId}}", "message": null}
 
+### --- Auth: login (POST, sem cache) ---
+POST {{Araponga.Bff_HostAddress}}/api/v2/journeys/auth/login
+Content-Type: application/json
+
+{"email": "user@example.com", "password": "***"}
+
+### --- Auth: refresh (POST) ---
+POST {{Araponga.Bff_HostAddress}}/api/v2/journeys/auth/refresh
+Content-Type: application/json
+
+{"refreshToken": "{{refreshToken}}"}
+
+### --- Me: perfil (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/me/profile
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Me: preferências (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/me/preferences
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Me: atividade (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/me
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Connections: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/connections
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Connections: pendentes (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/connections/pending
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Connections: solicitar (POST) ---
+POST {{Araponga.Bff_HostAddress}}/api/v2/journeys/connections/request
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{"targetUserId": "{{targetUserId}}"}
+
+### --- Territories: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/territories
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Territories: paginado (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/territories/paged?pageNumber=1&pageSize=20
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Territories: detalhe (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/territories/{{territoryId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Territories: entrar (POST) ---
+POST {{Araponga.Bff_HostAddress}}/api/v2/journeys/territories/{{territoryId}}/enter
+Authorization: Bearer {{token}}
+
+### --- Membership: me (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/membership/me
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Membership: become-resident (POST) ---
+POST {{Araponga.Bff_HostAddress}}/api/v2/journeys/membership/{{territoryId}}/become-resident
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{}
+
+### --- Map: entidades (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/map/entities?territoryId={{territoryId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Map: pins (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/map/pins?territoryId={{territoryId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Assets: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/assets?territoryId={{territoryId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Assets: paginado (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/assets/paged?pageNumber=1&pageSize=20
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Media: info (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/media/{{mediaId}}/info
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Subscription-plans: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/subscription-plans
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Subscriptions: me (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/subscriptions/me
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Notifications: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/notifications
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Marketplace-v1: carrinho (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/marketplace-v1/cart
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Moderation: work-items (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/moderation/{{territoryId}}/work-items
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Chat: conversa (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/chat/conversations/{{conversationId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Alerts: lista (GET cacheável) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/alerts?territoryId={{territoryId}}
+Accept: application/json
+Authorization: Bearer {{token}}
+
+### --- Admin: cache-metrics (GET cacheável, requer admin) ---
+GET {{Araponga.Bff_HostAddress}}/api/v2/journeys/admin/cache-metrics
+Accept: application/json
+Authorization: Bearer {{token}}
+
 ###

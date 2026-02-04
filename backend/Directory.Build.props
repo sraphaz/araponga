@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Fix CVE-2024-43483: .NET components susceptible to hash flooding. Patched in 8.0.10+. -->
+    <RuntimeFrameworkVersion Condition="'$(TargetFramework)' == 'net8.0'">8.0.13</RuntimeFrameworkVersion>
+  </PropertyGroup>
+</Project>

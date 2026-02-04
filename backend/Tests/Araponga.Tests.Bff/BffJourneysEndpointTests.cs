@@ -27,19 +27,35 @@ public sealed class BffJourneysEndpointTests : IClassFixture<WebApplicationFacto
     }
 
     [Fact]
-    public async Task GetBffJourneys_ReturnsAllFourJourneys()
+    public async Task GetBffJourneys_ReturnsAllTwentyJourneys()
     {
         var response = await _client.GetAsync("/bff/journeys");
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadFromJsonAsync<BffJourneysResponse>();
         Assert.NotNull(json);
         Assert.NotNull(json.Journeys);
-        Assert.Equal(4, json.Journeys.Count);
+        Assert.Equal(20, json.Journeys.Count);
         var names = json.Journeys.Select(j => j.Journey).ToHashSet();
         Assert.Contains("onboarding", names);
         Assert.Contains("feed", names);
         Assert.Contains("events", names);
         Assert.Contains("marketplace", names);
+        Assert.Contains("auth", names);
+        Assert.Contains("me", names);
+        Assert.Contains("connections", names);
+        Assert.Contains("territories", names);
+        Assert.Contains("membership", names);
+        Assert.Contains("map", names);
+        Assert.Contains("assets", names);
+        Assert.Contains("media", names);
+        Assert.Contains("subscription-plans", names);
+        Assert.Contains("subscriptions", names);
+        Assert.Contains("notifications", names);
+        Assert.Contains("marketplace-v1", names);
+        Assert.Contains("moderation", names);
+        Assert.Contains("chat", names);
+        Assert.Contains("alerts", names);
+        Assert.Contains("admin", names);
     }
 
     [Fact]
@@ -54,7 +70,23 @@ public sealed class BffJourneysEndpointTests : IClassFixture<WebApplicationFacto
             ["onboarding"] = 2,
             ["feed"] = 3,
             ["events"] = 3,
-            ["marketplace"] = 3
+            ["marketplace"] = 3,
+            ["auth"] = 4,
+            ["me"] = 9,
+            ["connections"] = 10,
+            ["territories"] = 5,
+            ["membership"] = 6,
+            ["map"] = 7,
+            ["assets"] = 7,
+            ["media"] = 4,
+            ["subscription-plans"] = 2,
+            ["subscriptions"] = 8,
+            ["notifications"] = 3,
+            ["marketplace-v1"] = 11,
+            ["moderation"] = 3,
+            ["chat"] = 6,
+            ["alerts"] = 3,
+            ["admin"] = 6
         };
         foreach (var j in json.Journeys!)
         {

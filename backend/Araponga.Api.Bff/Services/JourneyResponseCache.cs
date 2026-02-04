@@ -63,6 +63,9 @@ public sealed class JourneyResponseCache : IJourneyResponseCache
             return false;
         if (statusCode < 200 || statusCode >= 300)
             return false;
+        var normalized = pathAndQuery.TrimStart('/');
+        if (normalized.StartsWith("auth/", StringComparison.OrdinalIgnoreCase) || normalized.Equals("auth", StringComparison.OrdinalIgnoreCase))
+            return false;
         return true;
     }
 

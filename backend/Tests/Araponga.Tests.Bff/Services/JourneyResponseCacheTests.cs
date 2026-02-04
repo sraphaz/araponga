@@ -54,6 +54,16 @@ public sealed class JourneyResponseCacheTests
         Assert.True(cache.ShouldCache("GET", "feed/territory-feed", statusCode));
     }
 
+    [Theory]
+    [InlineData("auth")]
+    [InlineData("auth/login")]
+    [InlineData("auth/refresh")]
+    public void ShouldCache_WhenPathIsAuth_ReturnsFalse(string pathAndQuery)
+    {
+        var cache = CreateCache(new BffOptions { EnableCache = true });
+        Assert.False(cache.ShouldCache("GET", pathAndQuery, 200));
+    }
+
     [Fact]
     public void GetTtlSeconds_WhenNoPathConfig_ReturnsDefault()
     {
