@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0.13 AS build
+# SDK: tag 8.0.13 não existe no MCR; usar 8.0 (latest 8.0.x)
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copiar solução e todo o backend para garantir que todos os projetos (incl. módulos) existam no restore
@@ -10,8 +11,8 @@ RUN dotnet restore Araponga.sln
 WORKDIR /src/backend/Araponga.Api
 RUN dotnet publish -c Release -o /app/publish --no-restore
 
-# Runtime 8.0.10+ required for CVE-2024-43483 (hash flooding) fix
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.13
+# Runtime: 8.0.10+ contém fix CVE-2024-43483 (hash flooding). Tag 8.0 resolve para última patch.
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://0.0.0.0:8080
