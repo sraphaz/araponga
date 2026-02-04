@@ -1,14 +1,13 @@
 using Araponga.Application.Interfaces;
 using Araponga.Application.Services;
 using Araponga.Domain.Membership;
-using Araponga.Domain.Users;
 using Araponga.Modules.Moderation.Application.Interfaces;
 using Araponga.Modules.Moderation.Domain.Work;
 using Araponga.Infrastructure.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Araponga.Tests.Application;
+namespace Araponga.Tests.Modules.Moderation.Application;
 
 public sealed class WorkQueueServiceTests
 {
@@ -22,33 +21,15 @@ public sealed class WorkQueueServiceTests
         services.AddScoped<IAuditLogger, InMemoryAuditLogger>();
         services.AddScoped<IUnitOfWork, InMemoryUnitOfWork>();
         services.AddScoped<WorkQueueService>();
-
         var sp = services.BuildServiceProvider();
         var svc = sp.GetRequiredService<WorkQueueService>();
-
         var actor = Guid.NewGuid();
         var territoryId = Guid.NewGuid();
         var subjectId = Guid.NewGuid();
-
-        var result = await svc.EnqueueAsync(
-            WorkItemType.ResidencyVerification,
-            territoryId,
-            actor,
-            requiredSystemPermission: null,
-            requiredCapability: MembershipCapabilityType.Curator,
-            subjectType: "MEMBERSHIP",
-            subjectId: subjectId,
-            payloadJson: null,
-            CancellationToken.None);
-
+        var result = await svc.EnqueueAsync(WorkItemType.ResidencyVerification, territoryId, actor, null, MembershipCapabilityType.Curator, "MEMBERSHIP", subjectId, null, CancellationToken.None);
         Assert.True(result.IsSuccess);
         Assert.NotNull(result.Value);
-
-        Assert.Contains(dataStore.AuditEntries, e =>
-            e.Action == "work_item.created" &&
-            e.ActorUserId == actor &&
-            e.TerritoryId == territoryId &&
-            e.TargetId == result.Value!.Id);
+        Assert.Contains(dataStore.AuditEntries, e => e.Action == "work_item.created" && e.ActorUserId == actor && e.TerritoryId == territoryId && e.TargetId == result.Value!.Id);
     }
 
     [Fact]
@@ -61,31 +42,13 @@ public sealed class WorkQueueServiceTests
         services.AddScoped<IAuditLogger, InMemoryAuditLogger>();
         services.AddScoped<IUnitOfWork, InMemoryUnitOfWork>();
         services.AddScoped<WorkQueueService>();
-
         var sp = services.BuildServiceProvider();
         var svc = sp.GetRequiredService<WorkQueueService>();
-
         var actor = Guid.NewGuid();
         var territoryId = Guid.NewGuid();
-
-        var created = await svc.EnqueueAsync(
-            WorkItemType.ModerationCase,
-            territoryId,
-            actor,
-            requiredSystemPermission: null,
-            requiredCapability: MembershipCapabilityType.Moderator,
-            subjectType: "REPORT",
-            subjectId: Guid.NewGuid(),
-            payloadJson: null,
-            CancellationToken.None);
-
+        var created = await svc.EnqueueAsync(WorkItemType.ModerationCase, territoryId, actor, null, MembershipCapabilityType.Moderator, "REPORT", Guid.NewGuid(), null, CancellationToken.None);
         var complete = await svc.CompleteAsync(created.Value!.Id, actor, WorkItemOutcome.Approved, "done", CancellationToken.None);
         Assert.True(complete.IsSuccess);
-
-        Assert.Contains(dataStore.AuditEntries, e =>
-            e.Action == "work_item.completed" &&
-            e.ActorUserId == actor &&
-            e.TargetId == created.Value!.Id);
+        Assert.Contains(dataStore.AuditEntries, e => e.Action == "work_item.completed" && e.ActorUserId == actor && e.TargetId == created.Value!.Id);
     }
 }
-

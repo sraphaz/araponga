@@ -7,4 +7,9 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Araponga.Application\Araponga.Application.csproj" />
+    <ProjectReference Include="..\..\Araponga.Infrastructure\Araponga.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

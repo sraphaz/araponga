@@ -1,10 +1,8 @@
 using System.Net;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Araponga.Api;
-using Araponga.Api.Contracts.Auth;
 using Araponga.Api.Contracts.Subscriptions;
 using Araponga.Domain.Subscriptions;
+using Araponga.Tests.ApiSupport;
 using Xunit;
 
 namespace Araponga.Tests.Modules.Subscriptions.Api;
@@ -14,32 +12,14 @@ namespace Araponga.Tests.Modules.Subscriptions.Api;
 /// </summary>
 public sealed class SubscriptionIntegrationTests
 {
-    private static async Task<string> LoginForTokenAsync(HttpClient client, string provider, string externalId, string email)
-    {
-        var response = await client.PostAsJsonAsync(
-            "api/v1/auth/social",
-            new SocialLoginRequest(
-                provider,
-                externalId,
-                "Test User",
-                "123.456.789-00",
-                null,
-                null,
-                null,
-                email));
-        response.EnsureSuccessStatusCode();
-        var payload = await response.Content.ReadFromJsonAsync<SocialLoginResponse>();
-        return payload!.Token;
-    }
-
     [Fact]
     public async Task GetMySubscription_ReturnsFreePlan_WhenNoActiveSubscription()
     {
         using var factory = new ApiFactory();
         using var client = factory.CreateClient();
 
-        var token = await LoginForTokenAsync(client, "google", "test-sub-free", "test@araponga.com");
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var token = await AuthTestHelper.LoginForTokenAsync(client, "google", "test-sub-free", "test@araponga.com");
+        AuthTestHelper.SetAuthHeader(client, token);
 
         var response = await client.GetAsync("api/v1/subscriptions/me");
 
@@ -135,8 +115,8 @@ public sealed class SubscriptionIntegrationTests
         using var factory = new ApiFactory();
         using var client = factory.CreateClient();
 
-        var token = await LoginForTokenAsync(client, "google", "test-sub-create", "test@araponga.com");
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var token = await AuthTestHelper.LoginForTokenAsync(client, "google", "test-sub-create", "test@araponga.com");
+        AuthTestHelper.SetAuthHeader(client, token);
 
         // Primeiro, listar planos para obter um ID válido
         var listResponse = await client.GetAsync("api/v1/subscription-plans");
@@ -191,8 +171,8 @@ public sealed class SubscriptionIntegrationTests
         using var factory = new ApiFactory();
         using var client = factory.CreateClient();
 
-        var token = await LoginForTokenAsync(client, "google", "test-sub-cancel", "test@araponga.com");
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var token = await AuthTestHelper.LoginForTokenAsync(client, "google", "test-sub-cancel", "test@araponga.com");
+        AuthTestHelper.SetAuthHeader(client, token);
 
         // Obter assinatura atual
         var getResponse = await client.GetAsync("api/v1/subscriptions/me");

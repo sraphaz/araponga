@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notificati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subscriptions", "Subscriptions", "{ED00000D-000D-000D-000D-00000000000D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Subscriptions", "backend\Araponga.Modules.Subscriptions\Araponga.Modules.Subscriptions\Araponga.Modules.Subscriptions.csproj", "{S1000001-0001-0001-0001-000000000001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Subscriptions", "backend\Araponga.Modules.Subscriptions\Araponga.Modules.Subscriptions.csproj", "{S1000001-0001-0001-0001-000000000001}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connections", "Connections", "{E000000E-000E-000E-000E-00000000000E}"
 EndProject
@@ -49,25 +49,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Shared", "backend\Araponga.Shared\Araponga.Shared.csproj", "{461CFFE6-62DA-4977-9C88-F1D79ABB728D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Feed", "backend\Araponga.Modules.Feed\Araponga.Modules.Feed\Araponga.Modules.Feed.csproj", "{B1C2D3E4-F5A6-8901-BCDE-F12345678901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Feed", "backend\Araponga.Modules.Feed\Araponga.Modules.Feed.csproj", "{B1C2D3E4-F5A6-8901-BCDE-F12345678901}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Admin.Infrastructure", "backend\Araponga.Modules.Admin.Infrastructure\Araponga.Modules.Admin.Infrastructure.csproj", "{3B4EB21F-0D75-49DA-8535-9A857246EE59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Alerts", "backend\Araponga.Modules.Alerts\Araponga.Modules.Alerts\Araponga.Modules.Alerts.csproj", "{A7000001-0001-0001-0001-000000000001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Alerts", "backend\Araponga.Modules.Alerts\Araponga.Modules.Alerts.csproj", "{A7000001-0001-0001-0001-000000000001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Assets", "backend\Araponga.Modules.Assets\Araponga.Modules.Assets\Araponga.Modules.Assets.csproj", "{A6000001-0006-0006-0006-000000000006}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Assets", "backend\Araponga.Modules.Assets\Araponga.Modules.Assets.csproj", "{A6000001-0006-0006-0006-000000000006}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Chat", "backend\Araponga.Modules.Chat\Araponga.Modules.Chat\Araponga.Modules.Chat.csproj", "{C7000001-0001-0001-0001-000000000001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Chat", "backend\Araponga.Modules.Chat\Araponga.Modules.Chat.csproj", "{C7000001-0001-0001-0001-000000000001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Events", "backend\Araponga.Modules.Events\Araponga.Modules.Events\Araponga.Modules.Events.csproj", "{EE000001-0001-0001-0001-000000000001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Events", "backend\Araponga.Modules.Events\Araponga.Modules.Events.csproj", "{EE000001-0001-0001-0001-000000000001}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Map", "backend\Araponga.Modules.Map\Araponga.Modules.Map\Araponga.Modules.Map.csproj", "{M9000001-0009-0009-0009-000000000009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Map", "backend\Araponga.Modules.Map\Araponga.Modules.Map.csproj", "{M9000001-0009-0009-0009-000000000009}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Marketplace", "backend\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace.csproj", "{MK000001-000A-000A-000A-00000000000A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Marketplace", "backend\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace.csproj", "{MK000001-000A-000A-000A-00000000000A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Moderation", "backend\Araponga.Modules.Moderation\Araponga.Modules.Moderation\Araponga.Modules.Moderation.csproj", "{MD000001-000B-000B-000B-00000000000B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Moderation", "backend\Araponga.Modules.Moderation\Araponga.Modules.Moderation.csproj", "{MD000001-000B-000B-000B-00000000000B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Notifications", "backend\Araponga.Modules.Notifications\Araponga.Modules.Notifications\Araponga.Modules.Notifications.csproj", "{EF000001-0001-0001-0001-000000000001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Modules.Notifications", "backend\Araponga.Modules.Notifications\Araponga.Modules.Notifications.csproj", "{EF000001-0001-0001-0001-000000000001}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Api.Bff", "backend\Araponga.Api.Bff\Araponga.Api.Bff.csproj", "{A87D44E5-C2A2-432B-B173-44023D8A9790}"
 EndProject
@@ -86,6 +86,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Tests.Modules.Marketplace", "backend\Tests\Araponga.Tests.Modules.Marketplace\Araponga.Tests.Modules.Marketplace.csproj", "{F5000005-0005-0005-0005-000000000005}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Tests.Modules.Moderation", "backend\Tests\Araponga.Tests.Modules.Moderation\Araponga.Tests.Modules.Moderation.csproj", "{F6000006-0006-0006-0006-000000000006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Tests.Bff", "backend\Tests\Araponga.Tests.Bff\Araponga.Tests.Bff.csproj", "{F7000007-0007-0007-0007-000000000007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Araponga.Tests.ApiSupport", "backend\Tests\Araponga.Tests.ApiSupport\Araponga.Tests.ApiSupport.csproj", "{F8000008-0008-0008-0008-000000000008}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -200,6 +204,14 @@ Global
 		{F6000006-0006-0006-0006-000000000006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6000006-0006-0006-0006-000000000006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6000006-0006-0006-0006-000000000006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7000007-0007-0007-0007-000000000007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7000007-0007-0007-0007-000000000007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7000007-0007-0007-0007-000000000007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7000007-0007-0007-0007-000000000007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8000008-0008-0008-0008-000000000008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8000008-0008-0008-0008-000000000008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8000008-0008-0008-0008-000000000008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8000008-0008-0008-0008-000000000008}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E1000001-0001-0001-0001-000000000001} = {41B63377-3DEA-40A5-8273-847E18B68483}
@@ -244,5 +256,7 @@ Global
 		{F4000004-0004-0004-0004-000000000004} = {T1000001-0001-0001-0001-000000000001}
 		{F5000005-0005-0005-0005-000000000005} = {T1000001-0001-0001-0001-000000000001}
 		{F6000006-0006-0006-0006-000000000006} = {T1000001-0001-0001-0001-000000000001}
+		{F7000007-0007-0007-0007-000000000007} = {T1000001-0001-0001-0001-000000000001}
+		{F8000008-0008-0008-0008-000000000008} = {T1000001-0001-0001-0001-000000000001}
 	EndGlobalSection
 EndGlobal

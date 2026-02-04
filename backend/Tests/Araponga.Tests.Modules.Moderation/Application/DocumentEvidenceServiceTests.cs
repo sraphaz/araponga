@@ -6,7 +6,7 @@ using Araponga.Infrastructure.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Araponga.Tests.Application;
+namespace Araponga.Tests.Modules.Moderation.Application;
 
 public sealed class DocumentEvidenceServiceTests
 {
@@ -64,4 +64,3 @@ public sealed class DocumentEvidenceServiceTests
         }
     }
 }
-

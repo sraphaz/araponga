@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using Araponga.Application.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Araponga.Tests.TestHelpers;
+namespace Araponga.Tests.Shared.TestHelpers;
 
 /// <summary>
 /// Cache de teste que implementa RemoveByPatternAsync via prefix matching.

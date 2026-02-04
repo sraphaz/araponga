@@ -87,13 +87,15 @@ Use o helper compartilhado para login e headers:
 
 SessionId é definido automaticamente por `SetupAuthenticatedClient`. Para session específica use `SetupAuthenticatedClient(client, token, "minha-session")`.
 
-**Local**: `Araponga.Tests/TestHelpers/AuthTestHelper.cs`. O módulo Subscriptions mantém seu próprio `LoginForTokenAsync` local.
+**Local:** A implementação compartilhada está em **Araponga.Tests.ApiSupport** (`AuthTestHelper` e `BaseApiFactory`). O Core e o módulo Subscriptions referenciam ApiSupport; no Core, `Araponga.Tests.TestHelpers.AuthTestHelper` é um facade que repassa para ApiSupport (compatibilidade).
 
 ### 4. Convenções de nomenclatura
 
 - **\*IntegrationTests**: fluxos que cruzam vários endpoints ou serviços.
 - **\*ControllerTests**: foco em um controller ou recurso.
 - **\*EdgeCasesTests**: cenários de borda (Domain e Application).
+
+Módulos sem projeto de teste dedicado (Feed, Events, Notifications, Chat, Alerts) são cobertos por **Araponga.Tests** (integração e serviços). Para adicionar testes específicos do módulo, criar **Araponga.Tests.Modules.\<Nome\>** seguindo o padrão de Connections ou Subscriptions.
 
 ### 5. TestIds e dados pré-populados
 
@@ -125,14 +127,18 @@ public class MyTests : IClassFixture<ApiFactory>
 
 **IMPORTANTE**: Mesmo usando `IClassFixture`, cada instância do `ApiFactory` cria seu próprio `InMemoryDataStore` isolado. O uso de fixture é intencional em testes de **Performance** (StressTests, LoadTests, etc.) para reduzir custo de subir a API; nos demais testes prefira `using var factory = new ApiFactory()` por teste.
 
-**ApiFactory duplicado**: O módulo Subscriptions possui seu próprio `ApiFactory` (versão enxuta). Manter em sincronia com o Core (variáveis de ambiente: JWT, RateLimiting, Persistence) quando alterar configuração de testes. Ver ADR-019.
+**ApiSupport:** O projeto **Araponga.Tests.ApiSupport** centraliza `BaseApiFactory` (env vars: JWT, RateLimiting, Persistence, InMemory) e `AuthTestHelper`. Araponga.Tests e Araponga.Tests.Modules.Subscriptions usam essa base; assim a configuração de testes fica em um só lugar. Ver ADR-019.
 
 ## Estrutura de Testes (por projeto)
 
 - **Araponga.Tests**: testes do **Core** — Api, Application, Domain, Infrastructure, Bff, Performance. Projeto principal.
 - **Araponga.Tests.Shared**: compartilhado entre projetos de teste (ex.: `TestIds`). Referenciado por Core e por testes de módulos.
-- **Araponga.Tests.Modules.Connections**: testes do módulo **Connections** (círculo de amigos) — Domain, Application e fluxos de notificação.
-- **Araponga.Tests.Modules.Subscriptions**: testes do módulo **Subscriptions** — Application (serviços, webhooks, cupons), Api (integração) e Performance. Outros módulos podem ganhar `Araponga.Tests.Modules.*` no futuro.
+- **Araponga.Tests.Modules.Connections**: testes do módulo **Connections** — Domain, Application e fluxos de notificação.
+- **Araponga.Tests.Modules.Moderation**: testes do módulo **Moderation** — Domain e Application (DocumentEvidence, WorkQueue, Verification, ReportCreatedWorkItem).
+- **Araponga.Tests.Modules.Marketplace**: testes do módulo **Marketplace** — Domain e Application (Cart, Store, Inquiry, Rating, PlatformFee, SellerPayout, MarketplaceSearch, MarketplaceService, TerritoryPayoutConfig).
+- **Araponga.Tests.Modules.Subscriptions**: testes do módulo **Subscriptions** — Application, Api (integração) e Performance. Outros módulos podem ganhar `Araponga.Tests.Modules.*` no futuro.
+
+**Separação por módulo:** Testes que exercitam apenas um módulo (sem ApiFactory ou helpers pesados do Core) devem preferir o projeto do módulo quando existir. Ver [backend/docs/TEST_SEPARATION_BY_MODULE.md](../../docs/TEST_SEPARATION_BY_MODULE.md). para mapeamento e critérios.
 
 Detalhes em [ADR-013: Estrutura de testes em níveis](../../docs/10_ARCHITECTURE_DECISIONS.md).
 

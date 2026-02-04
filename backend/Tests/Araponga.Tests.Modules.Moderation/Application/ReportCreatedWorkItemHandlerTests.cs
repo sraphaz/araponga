@@ -6,7 +6,7 @@ using Araponga.Infrastructure.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Araponga.Tests.Application;
+namespace Araponga.Tests.Modules.Moderation.Application;
 
 public sealed class ReportCreatedWorkItemHandlerTests
 {
@@ -35,4 +35,3 @@ public sealed class ReportCreatedWorkItemHandlerTests
         Assert.Contains(items, w => w.SubjectType == "REPORT" && w.SubjectId == reportId);
     }
 }
-

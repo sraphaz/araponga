@@ -9,7 +9,7 @@ using Araponga.Infrastructure.Shared.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Araponga.Tests.Application;
+namespace Araponga.Tests.Modules.Moderation.Application;
 
 public sealed class VerificationQueueServiceTests
 {
@@ -115,4 +115,3 @@ public sealed class VerificationQueueServiceTests
         Assert.Equal(WorkItemOutcome.Approved, updatedItem.Outcome);
     }
 }
-

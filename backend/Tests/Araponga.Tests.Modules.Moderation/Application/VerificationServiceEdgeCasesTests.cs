@@ -9,7 +9,7 @@ using Araponga.Infrastructure.InMemory;
 using Araponga.Infrastructure.Shared.InMemory;
 using Xunit;
 
-namespace Araponga.Tests.Application;
+namespace Araponga.Tests.Modules.Moderation.Application;
 
 /// <summary>
 /// Edge case tests for VerificationQueueService,

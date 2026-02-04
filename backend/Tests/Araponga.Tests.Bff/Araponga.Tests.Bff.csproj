@@ -14,11 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Araponga.Application\Araponga.Application.csproj" />
-    <ProjectReference Include="..\..\Araponga.Infrastructure\Araponga.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Araponga.Infrastructure.Shared\Araponga.Infrastructure.Shared.csproj" />
-    <ProjectReference Include="..\..\Araponga.Modules.Map\Araponga.Modules.Map.csproj" />
-    <ProjectReference Include="..\Araponga.Tests.Shared\Araponga.Tests.Shared.csproj" />
+    <ProjectReference Include="..\..\Araponga.Api.Bff\Araponga.Api.Bff.csproj" />
   </ItemGroup>
 
 </Project>

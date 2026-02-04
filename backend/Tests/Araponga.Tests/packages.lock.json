@@ -1980,8 +1980,21 @@
       "araponga.shared": {
         "type": "Project"
       },
+      "araponga.tests.apisupport": {
+        "type": "Project",
+        "dependencies": {
+          "Araponga.Api": "[1.0.0, )",
+          "Araponga.Infrastructure": "[1.0.0, )",
+          "Araponga.Infrastructure.Shared": "[1.0.0, )",
+          "Microsoft.AspNetCore.Mvc.Testing": "[8.0.11, )"
+        }
+      },
       "araponga.tests.shared": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "Araponga.Application": "[1.0.0, )",
+          "Araponga.Infrastructure": "[1.0.0, )"
+        }
       }
     }
   }

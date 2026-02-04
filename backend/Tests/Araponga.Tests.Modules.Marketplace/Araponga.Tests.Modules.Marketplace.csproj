@@ -19,7 +19,7 @@
     <ProjectReference Include="..\..\Araponga.Application\Araponga.Application.csproj" />
     <ProjectReference Include="..\..\Araponga.Infrastructure\Araponga.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Araponga.Infrastructure.Shared\Araponga.Infrastructure.Shared.csproj" />
-    <ProjectReference Include="..\..\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace.csproj" />
+    <ProjectReference Include="..\..\Araponga.Modules.Marketplace\Araponga.Modules.Marketplace.csproj" />
     <ProjectReference Include="..\Araponga.Tests.Shared\Araponga.Tests.Shared.csproj" />
   </ItemGroup>
 
