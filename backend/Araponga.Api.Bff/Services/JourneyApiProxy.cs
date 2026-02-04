@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using Araponga.Bff.Journeys;
 using Microsoft.Extensions.Options;
 
 namespace Araponga.Bff.Services;
@@ -31,14 +32,26 @@ public sealed class JourneyApiProxy : IJourneyApiProxy
         _options = options;
     }
 
+    /// <summary>Constrói a URI de destino na API (para testes e diagnóstico).</summary>
+    public static string BuildForwardUri(string baseUrl, string pathAndQuery, string? queryString = null)
+    {
+        var path = pathAndQuery.TrimStart('/');
+        var (apiPathBase, relativePath) = ResolveApiPath(path);
+        var qs = queryString ?? "";
+        if (qs.Length > 0 && !qs.StartsWith('?'))
+            qs = "?" + qs;
+        return string.IsNullOrEmpty(relativePath)
+            ? $"{baseUrl.TrimEnd('/')}/{apiPathBase}{qs}"
+            : $"{baseUrl.TrimEnd('/')}/{apiPathBase}/{relativePath}{qs}";
+    }
+
     public async Task<HttpResponseMessage> ForwardAsync(
         HttpRequest request,
         string pathAndQuery,
         CancellationToken cancellationToken = default)
     {
         var baseUrl = _options.Value.ApiBaseUrl?.TrimEnd('/') ?? "";
-        var path = pathAndQuery.TrimStart('/');
-        var uri = $"{baseUrl}/api/v2/journeys/{path}{request.QueryString}";
+        var uri = BuildForwardUri(baseUrl, pathAndQuery, request.QueryString.ToString());
         var requestMessage = new HttpRequestMessage(MapMethod(request.Method), uri);
 
         foreach (var header in request.Headers)
@@ -61,6 +74,20 @@ public sealed class JourneyApiProxy : IJourneyApiProxy
         }
 
         return await _httpClient.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>Resolve path relativo ao BFF (ex: feed/territory-feed, auth/login) para (path base na API, path relativo).</summary>
+    private static (string apiPathBase, string relativePath) ResolveApiPath(string pathAndQuery)
+    {
+        var path = pathAndQuery.TrimStart('/');
+        if (string.IsNullOrEmpty(path))
+            return (BffJourneyRegistry.GetApiPathBase(""), "");
+
+        var slash = path.IndexOf('/');
+        var journeyName = slash < 0 ? path : path[..slash];
+        var relativePath = slash < 0 ? "" : path[(slash + 1)..].TrimEnd('/');
+        var apiPathBase = BffJourneyRegistry.GetApiPathBase(journeyName);
+        return (apiPathBase, relativePath);
     }
 
     private static HttpMethod MapMethod(string method)
