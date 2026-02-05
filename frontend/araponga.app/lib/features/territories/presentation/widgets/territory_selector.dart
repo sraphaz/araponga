@@ -24,12 +24,12 @@ class TerritorySelector extends ConsumerWidget {
         if (list.isEmpty) {
           return Center(
             child: Padding(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(AppConstants.spacingLg),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.terrain_outlined, size: 48, color: Theme.of(context).colorScheme.onSurfaceVariant),
-                  const SizedBox(height: 16),
+                  Icon(Icons.terrain_outlined, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                  const SizedBox(height: AppConstants.spacingMd),
                   Text(AppLocalizations.of(context)!.noTerritoryAvailable, style: Theme.of(context).textTheme.titleMedium, textAlign: TextAlign.center),
                 ],
               ),
@@ -37,13 +37,13 @@ class TerritorySelector extends ConsumerWidget {
           );
         }
         return ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingMd, vertical: AppConstants.spacingSm),
           itemCount: list.length,
           itemBuilder: (context, index) {
             final t = list[index];
             final isSelected = selectedId == t.id;
             return Card(
-              margin: const EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: AppConstants.spacingSm),
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundColor: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.surfaceContainerHighest,
@@ -77,7 +77,11 @@ class TerritorySelector extends ConsumerWidget {
             padding: const EdgeInsets.all(AppConstants.spacingMd),
             child: Row(
               children: [
-                const ShimmerBox(width: 40, height: 40, borderRadius: BorderRadius.all(Radius.circular(20))),
+                ShimmerBox(
+                  width: AppConstants.avatarSizeSm,
+                  height: AppConstants.avatarSizeSm,
+                  borderRadius: BorderRadius.circular(AppConstants.avatarSizeSm / 2),
+                ),
                 const SizedBox(width: AppConstants.spacingMd),
                 Expanded(
                   child: Column(
@@ -96,12 +100,12 @@ class TerritorySelector extends ConsumerWidget {
       ),
       error: (err, _) => Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppConstants.spacingLg),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.wifi_off, size: 48, color: Theme.of(context).colorScheme.error),
-              const SizedBox(height: 16),
+              Icon(Icons.wifi_off, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.error),
+              const SizedBox(height: AppConstants.spacingMd),
               Text(err.toString().replaceFirst('ApiException: ', ''), textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyMedium),
             ],
           ),

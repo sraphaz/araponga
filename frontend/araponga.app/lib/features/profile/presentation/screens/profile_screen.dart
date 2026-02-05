@@ -82,7 +82,7 @@ class ProfileScreen extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 48, color: Theme.of(context).colorScheme.error),
+                Icon(Icons.error_outline, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.error),
                 const SizedBox(height: AppConstants.spacingMd),
                 Text(
                   err is ApiException ? (err as ApiException).userMessage : AppLocalizations.of(context)!.errorLoad,
@@ -126,8 +126,8 @@ class ProfileScreen extends ConsumerWidget {
           children: [
             Center(
               child: Container(
-                width: 40,
-                height: 4,
+                width: AppConstants.avatarSizeSm,
+                height: AppConstants.spacingXs,
                 margin: const EdgeInsets.only(bottom: AppConstants.spacingMd),
                 decoration: BoxDecoration(
                   color: Theme.of(ctx).colorScheme.onSurfaceVariant.withOpacity(0.4),
@@ -216,7 +216,7 @@ class _ProfileBody extends StatelessWidget {
         children: [
           const SizedBox(height: AppConstants.spacingLg),
           CircleAvatar(
-            radius: 48,
+            radius: AppConstants.avatarRadiusProfile,
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             backgroundImage: profile.avatarUrl != null && profile.avatarUrl!.isNotEmpty
                 ? NetworkImage(profile.avatarUrl!)
@@ -278,7 +278,9 @@ class _ProfileBody extends StatelessWidget {
             leading: Icon(Icons.logout, color: Theme.of(context).colorScheme.error),
             title: Text(
               l10n.logout,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
             ),
             onTap: onLogout,
           ),

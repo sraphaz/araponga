@@ -105,11 +105,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   const SizedBox(height: AppConstants.spacingLg),
                   FilledButton(
                     onPressed: auth.isLoading ? null : _submit,
-                    child: auth.isLoading
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                    child:                     auth.isLoading
+                        ? SizedBox(
+                            height: AppConstants.loadingIndicatorSize,
+                            width: AppConstants.loadingIndicatorSize,
+                            child: const CircularProgressIndicator(strokeWidth: 2),
                           )
                         : Text(AppLocalizations.of(context)!.login),
                   ),

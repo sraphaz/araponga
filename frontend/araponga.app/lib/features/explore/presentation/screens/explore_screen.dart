@@ -19,7 +19,12 @@ class ExploreScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            padding: const EdgeInsets.fromLTRB(
+              AppConstants.spacingMd,
+              AppConstants.spacingMd,
+              AppConstants.spacingMd,
+              AppConstants.spacingSm,
+            ),
             child: Text(
               AppLocalizations.of(context)!.territories,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -31,7 +36,9 @@ class ExploreScreen extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingMd),
             child: Text(
               AppLocalizations.of(context)!.territoriesSubtitle,
-              style: const TextStyle(fontSize: 13),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
             ),
           ),
           const SizedBox(height: AppConstants.spacingSm),

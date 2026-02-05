@@ -1,96 +1,62 @@
 import 'package:flutter/material.dart';
 
+import 'app_design_tokens.dart';
 import '../config/constants.dart';
 
-/// Tema Ará: clean, leve, harmônico. Fundo escuro como padrão para conforto visual.
-/// Usa [AppConstants] para radius e espaçamento (26_FLUTTER_DESIGN_GUIDELINES).
+/// Tema Ará: clean, leve, harmônico. Fundo escuro como padrão.
+/// Cores e componentes vêm de [AppDesignTokens] para manutenção em um só lugar.
+/// Ver docs/DESIGN_SYSTEM.md.
 class AppTheme {
   AppTheme._();
 
-  static const Color _primary = Color(0xFF81C784);
-  static const Color _surfaceDark = Color(0xFF121212);
-  static const Color _surfaceVariant = Color(0xFF1E1E1E);
-  static const Color _onSurfaceDark = Color(0xFFE8E8E8);
-  static const Color _onSurfaceVariant = Color(0xFFB0B0B0);
-  static const Color _outline = Color(0xFF404040);
-
-  /// Tema claro (opcional).
-  static ThemeData get light {
+  static ThemeData _baseTheme(Brightness brightness) {
+    final isDark = brightness == Brightness.dark;
+    final colors = isDark ? AppColors.dark : AppColors.light;
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
-      colorScheme: ColorScheme.light(
-        primary: const Color(0xFF1B5E20),
-        surface: const Color(0xFFFAFAFA),
-        onSurface: const Color(0xFF1C1C1C),
+      brightness: brightness,
+      colorScheme: ColorScheme(
+        brightness: brightness,
+        primary: colors.primary,
+        onPrimary: isDark ? AppDesignTokens.onSurfaceDark : Colors.white,
+        secondary: colors.primary,
+        onSecondary: isDark ? AppDesignTokens.onSurfaceDark : Colors.white,
+        surface: colors.surface,
+        onSurface: colors.onSurface,
+        surfaceContainerHighest: colors.surfaceContainer,
+        onSurfaceVariant: colors.onSurfaceVariant,
+        outline: colors.outline,
+        error: Colors.red.shade400,
+        onError: Colors.white,
       ),
-      appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-      ),
-      snackBarTheme: SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
-        contentTextStyle: const TextStyle(fontSize: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusSm),
-        ),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          minimumSize: const Size(88, AppConstants.minTouchTargetSize),
-          padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingLg, vertical: AppConstants.spacingSm),
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          minimumSize: const Size(64, AppConstants.minTouchTargetSize),
-          padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingMd),
-        ),
-      ),
-    );
-  }
-
-  /// Tema escuro (padrão): fundo escuro, conteúdo leve e harmônico.
-  static ThemeData get dark {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      colorScheme: ColorScheme.dark(
-        primary: _primary,
-        surface: _surfaceDark,
-        onSurface: _onSurfaceDark,
-        surfaceContainerHighest: _surfaceVariant,
-        onSurfaceVariant: _onSurfaceVariant,
-        outline: _outline,
-      ),
-      scaffoldBackgroundColor: _surfaceDark,
-      appBarTheme: const AppBarTheme(
+      extensions: [colors],
+      appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
-        scrolledUnderElevation: 0.5,
-        backgroundColor: _surfaceDark,
-        foregroundColor: _onSurfaceDark,
+        scrolledUnderElevation: isDark ? 0.5 : 0,
+        backgroundColor: colors.surface,
+        foregroundColor: colors.onSurface,
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      scaffoldBackgroundColor: colors.surface,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: _primary,
-        unselectedItemColor: _onSurfaceVariant,
-        backgroundColor: _surfaceDark,
+        selectedItemColor: colors.primary,
+        unselectedItemColor: colors.onSurfaceVariant,
+        backgroundColor: colors.surface,
       ),
       cardTheme: CardTheme(
-        color: _surfaceVariant,
+        color: colors.surfaceContainer,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusMd),
+          borderRadius: BorderRadius.circular(AppDesignTokens.radiusCard),
         ),
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
-        contentTextStyle: const TextStyle(fontSize: 15),
+        insetPadding: AppDesignTokens.snackBarInsets,
+        contentTextStyle: const TextStyle(fontSize: AppDesignTokens.fontSizeSnackBar),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppConstants.radiusSm),
+          borderRadius: BorderRadius.circular(AppDesignTokens.radiusSnackBar),
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
@@ -102,7 +68,10 @@ class AppTheme {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           minimumSize: const Size(88, AppConstants.minTouchTargetSize),
-          padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingLg, vertical: AppConstants.spacingSm),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppConstants.spacingLg,
+            vertical: AppConstants.spacingSm,
+          ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -111,6 +80,20 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingMd),
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppConstants.spacingMd,
+          vertical: AppConstants.spacingSm,
+        ),
+        filled: true,
+      ),
     );
   }
+
+  /// Tema claro.
+  static ThemeData get light => _baseTheme(Brightness.light);
+
+  /// Tema escuro (padrão).
+  static ThemeData get dark => _baseTheme(Brightness.dark);
 }

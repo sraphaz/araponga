@@ -8,6 +8,10 @@ Documentação interna do app Flutter (frontend/araponga.app).
 |-----------|----------|
 | [NEXT_STEPS.md](NEXT_STEPS.md) | Estado atual, princípios e próximos passos priorizados (Fase 1–3). |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Arquitetura: BFF (Dio), estado (Riverpod), rotas (go_router), i18n, design. |
+| [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) | **Manutenção do design:** onde alterar cores, espaçamento, tema (um lugar só). |
+| [BEST_PRACTICES.md](BEST_PRACTICES.md) | Avaliação por boas práticas e checklist de consistência para PRs. |
+| [CI_CD_AND_TESTS.md](CI_CD_AND_TESTS.md) | CI/CD do app, testes e artefatos (Android, iOS). |
+| [MAPA_PINS.md](MAPA_PINS.md) | Mapa e pins: estado atual e recomendação de componente (google_maps_flutter / flutter_map). |
 
 ## Documentação do repositório
 

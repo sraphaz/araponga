@@ -87,7 +87,10 @@ flutter run
 ## Documentação
 
 - **[docs/NEXT_STEPS.md](docs/NEXT_STEPS.md)** – Próximos passos e estado atual.
-- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** – Arquitetura (BFF, providers, rotas, i18n).
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** – Arquitetura (BFF, providers, rotas, i18n, design).
+- **[docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md)** – Manutenção do design (onde alterar cores, espaçamento, tema).
+- **[docs/BEST_PRACTICES.md](docs/BEST_PRACTICES.md)** – Avaliação por boas práticas e checklist para PRs.
+- **[docs/CI_CD_AND_TESTS.md](docs/CI_CD_AND_TESTS.md)** – Estado do CI/CD e testes (app no CI, primeiros testes, CD).
 
 Documentação do repositório (planos, design, API):
 

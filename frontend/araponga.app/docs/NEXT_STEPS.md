@@ -173,6 +173,12 @@ Alinhado à **proposta do projeto** (território-first, comunidade-first, interf
 
 ---
 
+## CI/CD e testes
+
+- Estado atual do CI/CD e prioridades (app Flutter no CI, primeiros testes, CD do app): **[CI_CD_AND_TESTS.md](CI_CD_AND_TESTS.md)**.
+
+---
+
 ## Referências
 
 - [24_FLUTTER_FRONTEND_PLAN](../../../docs/24_FLUTTER_FRONTEND_PLAN.md) – Stack, estrutura, funcionalidades.

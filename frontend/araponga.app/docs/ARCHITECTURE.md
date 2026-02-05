@@ -37,10 +37,12 @@ Guards: sem token não acessa /home nem /onboarding; com token sem território n
 
 ## Design e UX
 
-- **AppConstants:** espaçamento, radius, animação, minTouchTargetSize (44), keys de storage.
-- **AppTheme:** Material 3 dark (padrão) e light; SnackBar floating, botões com altura mínima 44.
+- **AppConstants** (`core/config/constants.dart`): espaçamento, radius, animação, minTouchTargetSize (44), keys de storage.
+- **AppDesignTokens** (`core/theme/app_design_tokens.dart`): **fonte única de cores e tokens visuais**; alterar aqui reflete em todo o app. Inclui paleta dark/light e ThemeExtension **AppColors** (`context.appColors`).
+- **AppTheme:** monta ThemeData a partir de AppDesignTokens e AppConstants; Material 3 dark (padrão) e light; SnackBar floating, botões 44pt, inputDecorationTheme.
 - **Widgets reutilizáveis:** ShimmerBox/FeedSkeleton/ProfileSkeleton, showSuccessSnackBar/showErrorSnackBar.
-- Feed: skeleton no loading inicial; animação de entrada (fade + slide) nos itens.
+- Feed: skeleton no loading; animação de entrada (fade + slide) nos itens.
+- **Manutenção:** ver [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) para onde alterar cores, espaçamento e tema.
 
 ## Dependências principais
 

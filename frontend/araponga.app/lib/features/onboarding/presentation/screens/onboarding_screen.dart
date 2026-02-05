@@ -157,7 +157,7 @@ class _SuggestedList extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(vertical: AppConstants.spacingLg),
         child: Column(
           children: [
-            Icon(Icons.error_outline, size: 48, color: Theme.of(context).colorScheme.error),
+            Icon(Icons.error_outline, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.error),
             const SizedBox(height: AppConstants.spacingMd),
             Text(
               err.toString().replaceFirst('ApiException: ', ''),
@@ -203,7 +203,7 @@ class _TerritorySuggestionCard extends StatelessWidget {
         ),
         title: Text(name, style: Theme.of(context).textTheme.titleSmall),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 4),
+          padding: const EdgeInsets.only(top: AppConstants.spacingXs),
           child: Text(
             subtitle,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -212,7 +212,7 @@ class _TerritorySuggestionCard extends StatelessWidget {
           ),
         ),
         trailing: onTap != null
-            ? Icon(Icons.arrow_forward_ios, size: 14, color: Theme.of(context).colorScheme.onSurfaceVariant)
+            ? Icon(Icons.arrow_forward_ios, size: AppConstants.iconSizeSm, color: Theme.of(context).colorScheme.onSurfaceVariant)
             : null,
         onTap: onTap,
       ),

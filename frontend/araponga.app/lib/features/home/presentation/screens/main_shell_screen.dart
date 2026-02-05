@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/config/constants.dart';
 import '../../../../core/geo/geo_location_provider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../feed/presentation/screens/feed_screen.dart';
@@ -88,13 +89,13 @@ class _PlaceholderScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.construction, size: 48, color: Theme.of(context).colorScheme.primary),
-          const SizedBox(height: 16),
+          Icon(Icons.construction, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.primary),
+          const SizedBox(height: AppConstants.spacingMd),
           Text(
             label,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: AppConstants.spacingSm),
           Text(
             AppLocalizations.of(context)!.comingSoon,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(

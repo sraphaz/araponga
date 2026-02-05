@@ -80,10 +80,10 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
                 ? null
                 : _submit,
             child: _submitting
-                ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                ? SizedBox(
+                    width: AppConstants.iconSizeMd,
+                    height: AppConstants.iconSizeMd,
+                    child: const CircularProgressIndicator(strokeWidth: 2),
                   )
                 : Text(AppLocalizations.of(context)!.createPost),
           ),
@@ -98,7 +98,7 @@ class _CreatePostScreenState extends ConsumerState<CreatePostScreen> {
                   children: [
                     Icon(
                       Icons.terrain_outlined,
-                      size: 64,
+                      size: AppConstants.avatarSizeLg,
                       color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
                     ),
                     const SizedBox(height: AppConstants.spacingLg),

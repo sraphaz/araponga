@@ -121,7 +121,7 @@ class _FeedList extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.article_outlined,
-                    size: 64,
+                    size: AppConstants.avatarSizeLg,
                     color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
                   ),
                   const SizedBox(height: AppConstants.spacingMd),
@@ -248,7 +248,7 @@ class _ErrorView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.wifi_off, size: 48, color: Theme.of(context).colorScheme.error),
+            Icon(Icons.wifi_off, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.error),
             const SizedBox(height: AppConstants.spacingMd),
             Text(msg, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: AppConstants.spacingMd),
