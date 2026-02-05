@@ -1,0 +1,47 @@
+name: araponga_app
+description: Araponga - app mobile território-first e comunidade-first. Interface tipo Instagram, conectado ao BFF.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # Navegação
+  go_router: ^14.2.0
+  # Estado
+  flutter_riverpod: ^2.4.9
+  # HTTP e BFF (Dio: interceptors, retry, 429)
+  dio: ^5.4.0
+  # Persistência
+  shared_preferences: ^2.2.2
+  flutter_secure_storage: ^9.0.0
+  # UI
+  cached_network_image: ^3.3.1
+  # Geolocalização (convergência com território observado)
+  geolocator: ^13.0.2
+  # Mapa (open source: OpenStreetMap; opcionalmente tiles Mapbox)
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  # Utilitários (faixa compatível com flutter_localizations em Flutter 3.x e 4.x)
+  intl: ">=0.19.0 <0.21.0"
+  # Login social
+  google_sign_in: ^6.2.2
+  sign_in_button: ^4.0.1
+  firebase_core: ^3.8.0
+  firebase_auth: ^5.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/images/

@@ -1,12 +1,12 @@
-using Araponga.Domain.Assets;
+using Araponga.Modules.Assets.Domain;
+using Araponga.Modules.Map.Domain;
 using Araponga.Domain.Chat;
 using Araponga.Domain.Email;
 using Araponga.Domain.Events;
 using Araponga.Domain.Feed;
 using Araponga.Domain.Financial;
 using Araponga.Domain.Health;
-using Araponga.Domain.Map;
-using Araponga.Domain.Marketplace;
+using Araponga.Modules.Marketplace.Domain;
 using Araponga.Domain.Media;
 using Araponga.Domain.Membership;
 using Araponga.Domain.Policies;
@@ -34,7 +34,8 @@ public static class PostgresMappers
             State = territory.State,
             Latitude = territory.Latitude,
             Longitude = territory.Longitude,
-            CreatedAtUtc = territory.CreatedAtUtc
+            CreatedAtUtc = territory.CreatedAtUtc,
+            RadiusKm = territory.RadiusKm
         };
     }
 
@@ -50,7 +51,8 @@ public static class PostgresMappers
             record.State,
             record.Latitude,
             record.Longitude,
-            record.CreatedAtUtc);
+            record.CreatedAtUtc,
+            record.RadiusKm);
     }
 
     public static UserRecord ToRecord(this User user)
@@ -481,7 +483,7 @@ public static class PostgresMappers
                 // Se falhar ao deserializar, tags permanece null
             }
         }
-        
+
         return new CommunityPost(
             record.Id,
             record.TerritoryId,
@@ -607,30 +609,6 @@ public static class PostgresMappers
             record.Status,
             record.Visibility,
             confirmationCount,
-            record.CreatedAtUtc);
-    }
-
-    public static PostGeoAnchorRecord ToRecord(this PostGeoAnchor anchor)
-    {
-        return new PostGeoAnchorRecord
-        {
-            Id = anchor.Id,
-            PostId = anchor.PostId,
-            Latitude = anchor.Latitude,
-            Longitude = anchor.Longitude,
-            Type = anchor.Type,
-            CreatedAtUtc = anchor.CreatedAtUtc
-        };
-    }
-
-    public static PostGeoAnchor ToDomain(this PostGeoAnchorRecord record)
-    {
-        return new PostGeoAnchor(
-            record.Id,
-            record.PostId,
-            record.Latitude,
-            record.Longitude,
-            record.Type,
             record.CreatedAtUtc);
     }
 
@@ -875,7 +853,7 @@ public static class PostgresMappers
             record.UpdatedByUserId);
     }
 
-    public static WorkItemRecord ToRecord(this Araponga.Domain.Work.WorkItem item)
+    public static WorkItemRecord ToRecord(this Araponga.Modules.Moderation.Domain.Work.WorkItem item)
     {
         return new WorkItemRecord
         {
@@ -897,9 +875,9 @@ public static class PostgresMappers
         };
     }
 
-    public static Araponga.Domain.Work.WorkItem ToDomain(this WorkItemRecord record)
+    public static Araponga.Modules.Moderation.Domain.Work.WorkItem ToDomain(this WorkItemRecord record)
     {
-        return new Araponga.Domain.Work.WorkItem(
+        return new Araponga.Modules.Moderation.Domain.Work.WorkItem(
             record.Id,
             record.Type,
             record.Status,
@@ -917,7 +895,7 @@ public static class PostgresMappers
             record.CompletionNotes);
     }
 
-    public static DocumentEvidenceRecord ToRecord(this Araponga.Domain.Evidence.DocumentEvidence evidence)
+    public static DocumentEvidenceRecord ToRecord(this Araponga.Modules.Moderation.Domain.Evidence.DocumentEvidence evidence)
     {
         return new DocumentEvidenceRecord
         {
@@ -935,9 +913,9 @@ public static class PostgresMappers
         };
     }
 
-    public static Araponga.Domain.Evidence.DocumentEvidence ToDomain(this DocumentEvidenceRecord record)
+    public static Araponga.Modules.Moderation.Domain.Evidence.DocumentEvidence ToDomain(this DocumentEvidenceRecord record)
     {
-        return new Araponga.Domain.Evidence.DocumentEvidence(
+        return new Araponga.Modules.Moderation.Domain.Evidence.DocumentEvidence(
             record.Id,
             record.UserId,
             record.TerritoryId,
@@ -1475,6 +1453,102 @@ public static class PostgresMappers
             record.OwnerId,
             record.DisplayOrder,
             record.CreatedAtUtc);
+    }
+
+    private static readonly JsonSerializerOptions MediaConfigJsonOptions = new() { PropertyNameCaseInsensitive = true };
+
+    public static TerritoryMediaConfigRecord ToRecord(this TerritoryMediaConfig config)
+    {
+        return new TerritoryMediaConfigRecord
+        {
+            TerritoryId = config.TerritoryId,
+            PostsJson = JsonSerializer.Serialize(config.Posts, MediaConfigJsonOptions),
+            EventsJson = JsonSerializer.Serialize(config.Events, MediaConfigJsonOptions),
+            MarketplaceJson = JsonSerializer.Serialize(config.Marketplace, MediaConfigJsonOptions),
+            ChatJson = JsonSerializer.Serialize(config.Chat, MediaConfigJsonOptions),
+            UpdatedAtUtc = config.UpdatedAtUtc,
+            UpdatedByUserId = config.UpdatedByUserId
+        };
+    }
+
+    public static TerritoryMediaConfig ToDomain(this TerritoryMediaConfigRecord record)
+    {
+        return new TerritoryMediaConfig
+        {
+            TerritoryId = record.TerritoryId,
+            Posts = JsonSerializer.Deserialize<MediaContentConfig>(record.PostsJson, MediaConfigJsonOptions) ?? new MediaContentConfig(),
+            Events = JsonSerializer.Deserialize<MediaContentConfig>(record.EventsJson, MediaConfigJsonOptions) ?? new MediaContentConfig(),
+            Marketplace = JsonSerializer.Deserialize<MediaContentConfig>(record.MarketplaceJson, MediaConfigJsonOptions) ?? new MediaContentConfig(),
+            Chat = JsonSerializer.Deserialize<MediaChatConfig>(record.ChatJson, MediaConfigJsonOptions) ?? new MediaChatConfig(),
+            UpdatedAtUtc = record.UpdatedAtUtc,
+            UpdatedByUserId = record.UpdatedByUserId
+        };
+    }
+
+    public static UserMediaPreferencesRecord ToRecord(this UserMediaPreferences preferences)
+    {
+        return new UserMediaPreferencesRecord
+        {
+            UserId = preferences.UserId,
+            ShowImages = preferences.ShowImages,
+            ShowVideos = preferences.ShowVideos,
+            ShowAudio = preferences.ShowAudio,
+            AutoPlayVideos = preferences.AutoPlayVideos,
+            AutoPlayAudio = preferences.AutoPlayAudio,
+            UpdatedAtUtc = preferences.UpdatedAtUtc
+        };
+    }
+
+    public static UserMediaPreferences ToDomain(this UserMediaPreferencesRecord record)
+    {
+        return new UserMediaPreferences
+        {
+            UserId = record.UserId,
+            ShowImages = record.ShowImages,
+            ShowVideos = record.ShowVideos,
+            ShowAudio = record.ShowAudio,
+            AutoPlayVideos = record.AutoPlayVideos,
+            AutoPlayAudio = record.AutoPlayAudio,
+            UpdatedAtUtc = record.UpdatedAtUtc
+        };
+    }
+
+    private static readonly JsonSerializerOptions MediaStorageSettingsJsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    public static MediaStorageConfigRecord ToRecord(this MediaStorageConfig config)
+    {
+        return new MediaStorageConfigRecord
+        {
+            Id = config.Id,
+            Provider = (int)config.Provider,
+            SettingsJson = JsonSerializer.Serialize(config.Settings, MediaStorageSettingsJsonOptions),
+            IsActive = config.IsActive,
+            Description = config.Description,
+            CreatedAtUtc = config.CreatedAtUtc,
+            CreatedByUserId = config.CreatedByUserId,
+            UpdatedAtUtc = config.UpdatedAtUtc,
+            UpdatedByUserId = config.UpdatedByUserId
+        };
+    }
+
+    public static MediaStorageConfig ToDomain(this MediaStorageConfigRecord record)
+    {
+        var settings = JsonSerializer.Deserialize<MediaStorageSettings>(record.SettingsJson, MediaStorageSettingsJsonOptions)
+            ?? new MediaStorageSettings();
+        return new MediaStorageConfig(
+            record.Id,
+            (MediaStorageProvider)record.Provider,
+            settings,
+            record.IsActive,
+            record.Description,
+            record.CreatedAtUtc,
+            record.CreatedByUserId,
+            record.UpdatedAtUtc,
+            record.UpdatedByUserId);
     }
 
     // -----------------------
@@ -2083,10 +2157,10 @@ public static class PostgresMappers
             record.ValidUntil,
             record.MaxUses,
             record.StripeCouponId);
-        
+
         // Restaurar estado do banco
         coupon.RestoreState(record.UsedCount, record.IsActive, record.CreatedAtUtc, record.UpdatedAtUtc);
-        
+
         return coupon;
     }
 

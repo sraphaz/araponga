@@ -1,11 +1,10 @@
-using Araponga.Application.Interfaces;
 using Araponga.Infrastructure.Postgres.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Araponga.Infrastructure.Postgres;
 
-public sealed class ArapongaDbContext : DbContext, IUnitOfWork
+public sealed class ArapongaDbContext : DbContext
 {
     private IDbContextTransaction? _currentTransaction;
 
@@ -39,14 +38,12 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
     public DbSet<EventParticipationRecord> EventParticipations => Set<EventParticipationRecord>();
     public DbSet<MapEntityRecord> MapEntities => Set<MapEntityRecord>();
     public DbSet<MapEntityRelationRecord> MapEntityRelations => Set<MapEntityRelationRecord>();
-    public DbSet<PostGeoAnchorRecord> PostGeoAnchors => Set<PostGeoAnchorRecord>();
     public DbSet<HealthAlertRecord> HealthAlerts => Set<HealthAlertRecord>();
     public DbSet<PostLikeRecord> PostLikes => Set<PostLikeRecord>();
     public DbSet<PostShareRecord> PostShares => Set<PostShareRecord>();
     public DbSet<TerritoryAssetRecord> TerritoryAssets => Set<TerritoryAssetRecord>();
     public DbSet<AssetGeoAnchorRecord> AssetGeoAnchors => Set<AssetGeoAnchorRecord>();
     public DbSet<AssetValidationRecord> AssetValidations => Set<AssetValidationRecord>();
-    public DbSet<PostAssetRecord> PostAssets => Set<PostAssetRecord>();
     public DbSet<ActiveTerritoryRecord> ActiveTerritories => Set<ActiveTerritoryRecord>();
     public DbSet<FeatureFlagRecord> FeatureFlags => Set<FeatureFlagRecord>();
     public DbSet<AuditEntryRecord> AuditEntries => Set<AuditEntryRecord>();
@@ -87,6 +84,9 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
     // Media
     public DbSet<MediaAssetRecord> MediaAssets => Set<MediaAssetRecord>();
     public DbSet<MediaAttachmentRecord> MediaAttachments => Set<MediaAttachmentRecord>();
+    public DbSet<TerritoryMediaConfigRecord> TerritoryMediaConfigs => Set<TerritoryMediaConfigRecord>();
+    public DbSet<UserMediaPreferencesRecord> UserMediaPreferences => Set<UserMediaPreferencesRecord>();
+    public DbSet<MediaStorageConfigRecord> MediaStorageConfigs => Set<MediaStorageConfigRecord>();
 
     // Policies
     public DbSet<TermsOfServiceRecord> TermsOfServices => Set<TermsOfServiceRecord>();
@@ -180,6 +180,7 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.Property(t => t.Latitude).HasColumnType("double precision");
             entity.Property(t => t.Longitude).HasColumnType("double precision");
             entity.Property(t => t.CreatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.Property(t => t.RadiusKm).HasColumnType("double precision");
             entity.HasIndex(t => t.Name);
             entity.HasIndex(t => t.City);
             entity.HasIndex(t => t.State);
@@ -550,17 +551,6 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.HasIndex(r => r.EntityId);
         });
 
-        modelBuilder.Entity<PostGeoAnchorRecord>(entity =>
-        {
-            entity.ToTable("post_geo_anchors");
-            entity.HasKey(a => a.Id);
-            entity.Property(a => a.Type).HasMaxLength(120).IsRequired();
-            entity.Property(a => a.Latitude).HasColumnType("double precision");
-            entity.Property(a => a.Longitude).HasColumnType("double precision");
-            entity.Property(a => a.CreatedAtUtc).HasColumnType("timestamp with time zone");
-            entity.HasIndex(a => a.PostId);
-        });
-
         modelBuilder.Entity<HealthAlertRecord>(entity =>
         {
             entity.ToTable("health_alerts");
@@ -606,13 +596,6 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.HasKey(a => new { a.AssetId, a.UserId });
             entity.Property(a => a.CreatedAtUtc).HasColumnType("timestamp with time zone");
             entity.HasIndex(a => a.UserId);
-        });
-
-        modelBuilder.Entity<PostAssetRecord>(entity =>
-        {
-            entity.ToTable("post_assets");
-            entity.HasKey(p => new { p.PostId, p.AssetId });
-            entity.HasIndex(p => p.AssetId);
         });
 
         modelBuilder.Entity<PostLikeRecord>(entity =>
@@ -1150,6 +1133,35 @@ public sealed class ArapongaDbContext : DbContext, IUnitOfWork
             entity.HasIndex(a => new { a.OwnerType, a.OwnerId });
             entity.HasIndex(a => a.MediaAssetId);
             entity.HasIndex(a => new { a.OwnerType, a.OwnerId, a.DisplayOrder });
+        });
+
+        modelBuilder.Entity<TerritoryMediaConfigRecord>(entity =>
+        {
+            entity.ToTable("territory_media_configs");
+            entity.HasKey(c => c.TerritoryId);
+            entity.Property(c => c.PostsJson).HasColumnType("jsonb").IsRequired();
+            entity.Property(c => c.EventsJson).HasColumnType("jsonb").IsRequired();
+            entity.Property(c => c.MarketplaceJson).HasColumnType("jsonb").IsRequired();
+            entity.Property(c => c.ChatJson).HasColumnType("jsonb").IsRequired();
+            entity.Property(c => c.UpdatedAtUtc).HasColumnType("timestamp with time zone");
+        });
+
+        modelBuilder.Entity<UserMediaPreferencesRecord>(entity =>
+        {
+            entity.ToTable("user_media_preferences");
+            entity.HasKey(p => p.UserId);
+            entity.Property(p => p.UpdatedAtUtc).HasColumnType("timestamp with time zone");
+        });
+
+        modelBuilder.Entity<MediaStorageConfigRecord>(entity =>
+        {
+            entity.ToTable("media_storage_configs");
+            entity.HasKey(c => c.Id);
+            entity.Property(c => c.SettingsJson).HasColumnType("jsonb").IsRequired();
+            entity.Property(c => c.Description).HasMaxLength(1000);
+            entity.Property(c => c.CreatedAtUtc).HasColumnType("timestamp with time zone").IsRequired();
+            entity.Property(c => c.UpdatedAtUtc).HasColumnType("timestamp with time zone");
+            entity.HasIndex(c => c.IsActive);
         });
 
         modelBuilder.Entity<TermsOfServiceRecord>(entity =>

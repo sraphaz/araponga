@@ -103,6 +103,7 @@ if (builder.Environment.IsProduction() && jwtSigningKey.Length < 32)
 var jwtSection = builder.Configuration.GetSection("Jwt");
 builder.Services.Configure<JwtOptions>(jwtSection);
 builder.Services.Configure<PresencePolicyOptions>(builder.Configuration.GetSection("PresencePolicy"));
+builder.Services.Configure<Araponga.Api.Configuration.ClientCredentialsOptions>(builder.Configuration.GetSection("ClientCredentials"));
 builder.Services.Configure<PasswordResetOptions>(builder.Configuration.GetSection("Auth:PasswordReset"));
 
 // CORS Configuration
@@ -209,7 +210,7 @@ builder.Services.AddRateLimiter(options =>
         // Try to get authenticated user ID first, fallback to IP
         var userId = context.User?.FindFirst("sub")?.Value;
         var partitionKey = userId ?? context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
-        
+
         return RateLimitPartition.GetFixedWindowLimiter(
             partitionKey: partitionKey,
             factory: _ => new FixedWindowRateLimiterOptions
@@ -220,7 +221,7 @@ builder.Services.AddRateLimiter(options =>
                 QueueLimit = builder.Configuration.GetValue<int>("RateLimiting:QueueLimit", 0)
             });
     });
-    
+
     // Auth endpoints - stricter limits (5 req/min)
     options.AddFixedWindowLimiter("auth", limiterOptions =>
     {
@@ -229,7 +230,7 @@ builder.Services.AddRateLimiter(options =>
         limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         limiterOptions.QueueLimit = 0;
     });
-    
+
     // Feed endpoints - moderate limits (100 req/min)
     options.AddFixedWindowLimiter("feed", limiterOptions =>
     {
@@ -238,7 +239,7 @@ builder.Services.AddRateLimiter(options =>
         limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         limiterOptions.QueueLimit = 10;
     });
-    
+
     // Read operations - moderate limits (100 req/min)
     options.AddFixedWindowLimiter("read", limiterOptions =>
     {
@@ -247,7 +248,7 @@ builder.Services.AddRateLimiter(options =>
         limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         limiterOptions.QueueLimit = 10;
     });
-    
+
     // Write operations - stricter limits (30 req/min)
     options.AddFixedWindowLimiter("write", limiterOptions =>
     {
@@ -256,18 +257,18 @@ builder.Services.AddRateLimiter(options =>
         limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
         limiterOptions.QueueLimit = 5;
     });
-    
+
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     options.OnRejected = async (context, cancellationToken) =>
     {
         context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
-        
+
         // Add rate limit headers
         if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
         {
             context.HttpContext.Response.Headers.Append("Retry-After", retryAfter.TotalSeconds.ToString());
         }
-        
+
         await context.HttpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
             Title = "Too Many Requests",
@@ -295,16 +296,7 @@ if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnor
 // Infrastructure (repositories, unit of work, etc.) - must be called before adding database health check
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Configure connection pool metrics after infrastructure is registered
-if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
-{
-    builder.Services.AddSingleton<ConnectionPoolMetricsService>(sp =>
-    {
-        var dbContext = sp.GetRequiredService<ArapongaDbContext>();
-        var logger = sp.GetRequiredService<ILogger<ConnectionPoolMetricsService>>();
-        return new ConnectionPoolMetricsService(dbContext, logger);
-    });
-}
+// ConnectionPoolMetricsService é registrado em AddInfrastructure quando Postgres
 
 // Add database health check after infrastructure is registered
 if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
@@ -336,6 +328,13 @@ builder.Services.AddAuthentication(options =>
 })
 .AddScheme<AuthenticationSchemeOptions, JwtAuthenticationHandler>(
     "Bearer", _ => { });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("SystemAdmin", policy =>
+        policy.Requirements.Add(new Araponga.Api.Security.SystemAdminRequirement()));
+});
+builder.Services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Araponga.Api.Security.SystemAdminAuthorizationHandler>();
 
 // Response Compression (gzip/brotli)
 builder.Services.AddResponseCompression(options =>
@@ -420,6 +419,23 @@ builder.Services.AddSwaggerGen(c =>
             Name = "MIT",
         }
     });
+    c.SwaggerDoc("v2", new OpenApiInfo
+    {
+        Title = "Araponga API - Jornadas (v2)",
+        Version = "v2",
+        Description =
+            "Endpoints de jornadas (onboarding, feed, eventos). " +
+            "O frontend pode consumir via aplicação BFF (Araponga.Api.Bff), que é uma aplicação separada que encaminha para esta API. " +
+            "Base path: /api/v2/journeys.",
+        Contact = new OpenApiContact
+        {
+            Name = "Araponga (maintainers)",
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT",
+        }
+    });
 
     // Tags organizadas no Swagger
     c.TagActionsBy(api =>
@@ -448,7 +464,7 @@ builder.Services.AddHsts(options =>
     options.Preload = true;
     options.IncludeSubDomains = true;
     options.MaxAge = TimeSpan.FromDays(365);
-    
+
     // Only in production
     if (!builder.Environment.IsDevelopment() && !builder.Environment.IsEnvironment("Testing"))
     {
@@ -457,6 +473,38 @@ builder.Services.AddHsts(options =>
 });
 
 var app = builder.Build();
+
+// Aplicar migrações do Postgres quando Persistence:ApplyMigrations = true (ex.: Docker dev)
+var applyMigrations = builder.Configuration.GetValue<bool>("Persistence:ApplyMigrations");
+if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase) && applyMigrations)
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    const int maxRetries = 10;
+    const int delaySeconds = 3;
+    for (int attempt = 1; attempt <= maxRetries; attempt++)
+    {
+        try
+        {
+            using (var scope = app.Services.CreateScope())
+            {
+                var mainDb = scope.ServiceProvider.GetRequiredService<ArapongaDbContext>();
+                mainDb.Database.Migrate();
+            }
+            logger.LogInformation("ArapongaDbContext migrations applied successfully.");
+            break;
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "Attempt {Attempt}/{Max} failed to apply migrations (waiting {Delay}s before retry)", attempt, maxRetries, delaySeconds);
+            if (attempt == maxRetries)
+            {
+                logger.LogError(ex, "Failed to apply ArapongaDbContext migrations after {Max} attempts. Ensure Postgres is running and connection string is correct.", maxRetries);
+                throw;
+            }
+            Thread.Sleep(TimeSpan.FromSeconds(delaySeconds));
+        }
+    }
+}
 
 // Configure connection pool metrics if using Postgres
 if (string.Equals(persistenceProvider, "Postgres", StringComparison.OrdinalIgnoreCase))
@@ -510,6 +558,7 @@ app.UseExceptionHandler(errorApp =>
             ConflictException => StatusCodes.Status409Conflict,
             ArgumentException => StatusCodes.Status400BadRequest,
             InvalidOperationException => StatusCodes.Status409Conflict,
+            Araponga.Application.Exceptions.DomainException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
 
@@ -534,7 +583,7 @@ app.UseExceptionHandler(errorApp =>
 
         context.Response.StatusCode = statusCode;
         context.Response.ContentType = "application/json";
-        
+
         // Serializar manualmente para garantir que path e traceId sejam propriedades diretas
         var response = new Dictionary<string, object?>
         {
@@ -545,7 +594,7 @@ app.UseExceptionHandler(errorApp =>
             ["traceId"] = context.TraceIdentifier,
             ["path"] = feature?.Path
         };
-        
+
         await context.Response.WriteAsJsonAsync(response);
     });
 });
@@ -558,6 +607,7 @@ if (app.Environment.IsDevelopment())
     {
         c.DocumentTitle = "Araponga API Docs";
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Araponga API v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Araponga API - Jornadas v2");
         c.DisplayRequestDuration();
     });
 }
