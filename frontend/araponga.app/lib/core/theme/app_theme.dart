@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// Prefix para evitar "CardThemeData isn't defined" em ambientes CI (Flutter 3.24.x).
-import 'package:flutter/material.dart' as material show CardThemeData;
 
 import 'app_design_tokens.dart';
 import '../config/constants.dart';
@@ -46,7 +44,7 @@ class AppTheme {
         unselectedItemColor: colors.onSurfaceVariant,
         backgroundColor: colors.surface,
       ),
-      cardTheme: material.CardThemeData(
+      cardTheme: CardThemeData(
         color: colors.surfaceContainer,
         elevation: 0,
         shape: RoundedRectangleBorder(
