@@ -197,7 +197,6 @@ class _FeedListState extends State<_FeedList> {
   @override
   Widget build(BuildContext context) {
     final items = widget.items;
-    final onRetry = widget.onRetry;
     final hasMore = widget.hasMore;
     final isLoadingMore = widget.isLoadingMore;
     final onLoadMore = widget.onLoadMore;

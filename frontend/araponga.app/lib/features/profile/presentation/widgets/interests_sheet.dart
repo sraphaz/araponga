@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/config/constants.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../data/repositories/me_profile_repository.dart';
 import '../providers/me_profile_provider.dart';
 
 /// Sheet: lista de interesses, adicionar e remover (GET/POST/DELETE me/interests).

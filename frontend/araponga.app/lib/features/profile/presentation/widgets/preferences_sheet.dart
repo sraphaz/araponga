@@ -17,7 +17,6 @@ class PreferencesSheet extends ConsumerStatefulWidget {
 
 class _PreferencesSheetState extends ConsumerState<PreferencesSheet> {
   NotificationPrefs? _prefs;
-  bool _loading = false;
   bool _saving = false;
 
   @override
