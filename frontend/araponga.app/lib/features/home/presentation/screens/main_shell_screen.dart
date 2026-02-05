@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/config/constants.dart';
 import '../../../../core/geo/geo_location_provider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../feed/presentation/screens/feed_screen.dart';

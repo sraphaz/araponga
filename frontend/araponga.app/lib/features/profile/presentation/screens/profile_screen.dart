@@ -113,7 +113,7 @@ class ProfileScreen extends ConsumerWidget {
                 Icon(Icons.error_outline, size: AppConstants.iconSizeLg, color: Theme.of(context).colorScheme.error),
                 const SizedBox(height: AppConstants.spacingMd),
                 Text(
-                  err is ApiException ? (err as ApiException).userMessage : AppLocalizations.of(context)!.errorLoad,
+                  err is ApiException ? err.userMessage : AppLocalizations.of(context)!.errorLoad,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
@@ -255,7 +255,7 @@ class ProfileScreen extends ConsumerWidget {
                     }
                   } catch (e) {
                     if (ctx.mounted) {
-                      showErrorSnackBar(ctx, e is ApiException ? (e as ApiException).userMessage : 'Erro ao salvar');
+                      showErrorSnackBar(ctx, e is ApiException ? e.userMessage : 'Erro ao salvar');
                     }
                   }
                 },
