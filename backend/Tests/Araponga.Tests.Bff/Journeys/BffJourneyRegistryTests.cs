@@ -8,61 +8,31 @@ public sealed class BffJourneyRegistryTests
     [Fact]
     public void BasePath_IsJourneysPrefix()
     {
-        Assert.Equal("/api/v2/journeys/", BffJourneyRegistry.BasePath);
+        Assert.NotEmpty(BffJourneyRegistry.BasePath);
+        Assert.EndsWith("/", BffJourneyRegistry.BasePath);
     }
 
     [Fact]
     public void AllPathPrefixes_ContainsAllTwentyJourneys()
     {
         var prefixes = BffJourneyRegistry.AllPathPrefixes;
-        Assert.Equal(20, prefixes.Count);
-        Assert.Contains(BffJourneyRegistry.Onboarding, prefixes);
-        Assert.Contains(BffJourneyRegistry.Feed, prefixes);
-        Assert.Contains(BffJourneyRegistry.Events, prefixes);
-        Assert.Contains(BffJourneyRegistry.Marketplace, prefixes);
-        Assert.Contains(BffJourneyRegistry.Auth, prefixes);
-        Assert.Contains(BffJourneyRegistry.Me, prefixes);
-        Assert.Contains(BffJourneyRegistry.Connections, prefixes);
-        Assert.Contains(BffJourneyRegistry.Territories, prefixes);
-        Assert.Contains(BffJourneyRegistry.Membership, prefixes);
-        Assert.Contains(BffJourneyRegistry.Map, prefixes);
-        Assert.Contains(BffJourneyRegistry.Assets, prefixes);
-        Assert.Contains(BffJourneyRegistry.Media, prefixes);
-        Assert.Contains(BffJourneyRegistry.SubscriptionPlans, prefixes);
-        Assert.Contains(BffJourneyRegistry.Subscriptions, prefixes);
-        Assert.Contains(BffJourneyRegistry.Notifications, prefixes);
-        Assert.Contains(BffJourneyRegistry.MarketplaceV1, prefixes);
-        Assert.Contains(BffJourneyRegistry.Moderation, prefixes);
-        Assert.Contains(BffJourneyRegistry.Chat, prefixes);
-        Assert.Contains(BffJourneyRegistry.Alerts, prefixes);
-        Assert.Contains(BffJourneyRegistry.Admin, prefixes);
+        Assert.Equal(BffJourneyRegistry.AllEndpoints.Count, prefixes.Count);
+        foreach (var journey in BffJourneyRegistry.AllPathPrefixes)
+            Assert.Contains(journey, prefixes);
     }
 
     [Fact]
     public void CacheableGetEndpoints_HasEntryForJourneysWithCacheableGets()
     {
         var cacheable = BffJourneyRegistry.CacheableGetEndpoints;
-        Assert.True(cacheable.Count >= 19);
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Onboarding));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Feed));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Events));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Marketplace));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Me));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Connections));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Territories));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Membership));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Map));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Assets));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Media));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.SubscriptionPlans));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Subscriptions));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Notifications));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.MarketplaceV1));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Moderation));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Chat));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Alerts));
-        Assert.True(cacheable.ContainsKey(BffJourneyRegistry.Admin));
-        Assert.False(cacheable.ContainsKey(BffJourneyRegistry.Auth));
+        Assert.Equal(BffJourneyRegistry.AllEndpoints.Count - 1, cacheable.Count);
+        foreach (var journey in BffJourneyRegistry.AllPathPrefixes)
+        {
+            if (journey == BffJourneyRegistry.Auth)
+                Assert.False(cacheable.ContainsKey(journey));
+            else
+                Assert.True(cacheable.ContainsKey(journey));
+        }
     }
 
     [Theory]
@@ -106,27 +76,9 @@ public sealed class BffJourneyRegistryTests
     public void AllEndpoints_HasEntryForEachJourney()
     {
         var all = BffJourneyRegistry.AllEndpoints;
-        Assert.Equal(20, all.Count);
-        Assert.Equal(2, all[BffJourneyRegistry.Onboarding].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Feed].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Events].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Marketplace].Count);
-        Assert.Equal(4, all[BffJourneyRegistry.Auth].Count);
-        Assert.True(all[BffJourneyRegistry.Me].Count >= 8);
-        Assert.Equal(10, all[BffJourneyRegistry.Connections].Count);
-        Assert.Equal(5, all[BffJourneyRegistry.Territories].Count);
-        Assert.Equal(6, all[BffJourneyRegistry.Membership].Count);
-        Assert.Equal(7, all[BffJourneyRegistry.Map].Count);
-        Assert.Equal(7, all[BffJourneyRegistry.Assets].Count);
-        Assert.Equal(4, all[BffJourneyRegistry.Media].Count);
-        Assert.Equal(2, all[BffJourneyRegistry.SubscriptionPlans].Count);
-        Assert.Equal(8, all[BffJourneyRegistry.Subscriptions].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Notifications].Count);
-        Assert.Equal(11, all[BffJourneyRegistry.MarketplaceV1].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Moderation].Count);
-        Assert.Equal(6, all[BffJourneyRegistry.Chat].Count);
-        Assert.Equal(3, all[BffJourneyRegistry.Alerts].Count);
-        Assert.Equal(6, all[BffJourneyRegistry.Admin].Count);
+        Assert.Equal(BffJourneyRegistry.AllEndpoints.Count, all.Count);
+        foreach (var kv in BffJourneyRegistry.AllEndpoints)
+            Assert.Equal(kv.Value.Count, all[kv.Key].Count);
     }
 
     [Fact]

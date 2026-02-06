@@ -131,7 +131,14 @@ public sealed class JourneyProxyMiddleware
                     bodyPreview = Encoding.UTF8.GetString(bytes);
                     if (bodyPreview.Length > bodyPreviewLength)
                         bodyPreview = bodyPreview[..bodyPreviewLength] + "...";
-                    response.Content = new ByteArrayContent(bytes);
+                    var newContent = new ByteArrayContent(bytes);
+                    foreach (var h in response.Content.Headers)
+                    {
+                        if (h.Key.Equals("Content-Length", StringComparison.OrdinalIgnoreCase))
+                            continue;
+                        newContent.Headers.TryAddWithoutValidation(h.Key, h.Value);
+                    }
+                    response.Content = newContent;
                     _logger.LogWarning(
                         "API error body | StatusCode={StatusCode} Path={Path} CorrelationId={CorrelationId} BodyPreview={BodyPreview}",
                         statusCode, pathForLog, correlationIdForLog, SanitizeForLog(bodyPreview));

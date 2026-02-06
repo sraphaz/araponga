@@ -54,15 +54,17 @@ public sealed class JourneyApiProxy : IJourneyApiProxy
         var uri = BuildForwardUri(baseUrl, pathAndQuery, request.QueryString.ToString());
         var requestMessage = new HttpRequestMessage(MapMethod(request.Method), uri);
 
-        // Ler corpo com buffer de tamanho fixo (Content-Length) para evitar exceção do FileBufferingReadStream
-        // ao usar CopyToAsync ("content would exceed Content-Length")
+        // Corpo: buffer até 2MB; acima disso ou chunked (sem Content-Length) encaminha em stream para não regredir uploads.
+        const int maxBufferedBodyBytes = 2 * 1024 * 1024;
         byte[]? bodyBytes = null;
-        var contentLength = request.ContentLength.GetValueOrDefault();
-        if (contentLength > 0 && contentLength <= 2 * 1024 * 1024 && request.Body.CanRead) // máx 2MB
+        var contentLength = request.ContentLength;
+        var methodHasBody = string.Equals(request.Method, "GET", StringComparison.OrdinalIgnoreCase) == false;
+
+        if (contentLength is > 0 and <= maxBufferedBodyBytes && request.Body.CanRead)
         {
             if (request.Body.CanSeek)
                 request.Body.Position = 0;
-            var buf = new byte[contentLength];
+            var buf = new byte[contentLength.Value];
             var offset = 0;
             while (offset < buf.Length)
             {
@@ -71,6 +73,17 @@ public sealed class JourneyApiProxy : IJourneyApiProxy
                 offset += read;
             }
             bodyBytes = offset > 0 ? (offset == buf.Length ? buf : buf.AsSpan(0, offset).ToArray()) : null;
+        }
+        else if (request.Body.CanRead && methodHasBody && (contentLength is null or 0 or > maxBufferedBodyBytes))
+        {
+            // Chunked ou corpo > 2MB: encaminhar stream (evita corpo vazio na API)
+            if (request.Body.CanSeek)
+                request.Body.Position = 0;
+            requestMessage.Content = new StreamContent(request.Body);
+            if (request.ContentType is not null)
+                requestMessage.Content.Headers.ContentType = MediaTypeHeaderValue.Parse(request.ContentType);
+            if (contentLength is > 0)
+                requestMessage.Content.Headers.ContentLength = contentLength;
         }
 
         foreach (var header in request.Headers)
@@ -87,7 +100,7 @@ public sealed class JourneyApiProxy : IJourneyApiProxy
             requestMessage.Content.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
         }
 
-        if (bodyBytes is { Length: > 0 })
+        if (bodyBytes is { Length: > 0 } && requestMessage.Content == null)
         {
             requestMessage.Content = new ByteArrayContent(bodyBytes);
             if (request.ContentType is not null)
