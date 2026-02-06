@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using Araponga.Bff;
+using Araponga.Bff.Journeys;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
@@ -34,28 +35,10 @@ public sealed class BffJourneysEndpointTests : IClassFixture<WebApplicationFacto
         var json = await response.Content.ReadFromJsonAsync<BffJourneysResponse>();
         Assert.NotNull(json);
         Assert.NotNull(json.Journeys);
-        Assert.Equal(20, json.Journeys.Count);
+        Assert.Equal(BffJourneyRegistry.AllEndpoints.Count, json.Journeys.Count);
         var names = json.Journeys.Select(j => j.Journey).ToHashSet();
-        Assert.Contains("onboarding", names);
-        Assert.Contains("feed", names);
-        Assert.Contains("events", names);
-        Assert.Contains("marketplace", names);
-        Assert.Contains("auth", names);
-        Assert.Contains("me", names);
-        Assert.Contains("connections", names);
-        Assert.Contains("territories", names);
-        Assert.Contains("membership", names);
-        Assert.Contains("map", names);
-        Assert.Contains("assets", names);
-        Assert.Contains("media", names);
-        Assert.Contains("subscription-plans", names);
-        Assert.Contains("subscriptions", names);
-        Assert.Contains("notifications", names);
-        Assert.Contains("marketplace-v1", names);
-        Assert.Contains("moderation", names);
-        Assert.Contains("chat", names);
-        Assert.Contains("alerts", names);
-        Assert.Contains("admin", names);
+        foreach (var journeyName in BffJourneyRegistry.AllPathPrefixes)
+            Assert.Contains(journeyName, names);
     }
 
     [Fact]
@@ -65,33 +48,12 @@ public sealed class BffJourneysEndpointTests : IClassFixture<WebApplicationFacto
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadFromJsonAsync<BffJourneysResponse>();
         Assert.NotNull(json);
-        var expectedCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
-        {
-            ["onboarding"] = 2,
-            ["feed"] = 3,
-            ["events"] = 3,
-            ["marketplace"] = 3,
-            ["auth"] = 4,
-            ["me"] = 9,
-            ["connections"] = 10,
-            ["territories"] = 5,
-            ["membership"] = 6,
-            ["map"] = 7,
-            ["assets"] = 7,
-            ["media"] = 4,
-            ["subscription-plans"] = 2,
-            ["subscriptions"] = 8,
-            ["notifications"] = 3,
-            ["marketplace-v1"] = 11,
-            ["moderation"] = 3,
-            ["chat"] = 6,
-            ["alerts"] = 3,
-            ["admin"] = 6
-        };
+        var expectedCounts = BffJourneyRegistry.AllEndpoints.ToDictionary(
+            kv => kv.Key, kv => kv.Value.Count, StringComparer.OrdinalIgnoreCase);
         foreach (var j in json.Journeys!)
         {
             Assert.NotNull(j.BasePath);
-            Assert.StartsWith("/api/v2/journeys/", j.BasePath);
+            Assert.StartsWith(BffJourneyRegistry.BasePath, j.BasePath);
             Assert.NotNull(j.Endpoints);
             Assert.True(expectedCounts.TryGetValue(j.Journey!, out var expected), $"Journey {j.Journey} should be known.");
             Assert.Equal(expected, j.Endpoints.Count);

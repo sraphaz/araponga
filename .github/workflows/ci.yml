@@ -40,6 +40,8 @@ jobs:
             --collect:"XPlat Code Coverage" \
             --results-directory:"${{ runner.temp }}/test-results" \
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+      - name: Test BFF
+        run: dotnet test backend/Tests/Araponga.Tests.Bff/Araponga.Tests.Bff.csproj --no-build --configuration Release --verbosity normal
       - name: Coverage summary
         run: |
           F=$(find "${{ runner.temp }}/test-results" -name "coverage.cobertura.xml" 2>/dev/null | head -1)
@@ -53,13 +55,20 @@ jobs:
             printf "| Lines | %.1f%% |\n" $(echo "$LR" | awk '{print $1*100}') >> $GITHUB_STEP_SUMMARY
             printf "| Branches | %.1f%% |\n" $(echo "$BR" | awk '{print $1*100}') >> $GITHUB_STEP_SUMMARY
           fi
+      - name: Find coverage file
+        id: coverage
+        run: |
+          F=$(find "${{ runner.temp }}/test-results" -name "coverage.cobertura.xml" 2>/dev/null | head -1)
+          echo "path=${F:-}" >> $GITHUB_OUTPUT
+      # Para branches protegidas/PRs o Codecov pode exigir token: adicione CODECOV_TOKEN em Settings > Secrets.
       - name: Upload Coverage Reports
         uses: codecov/codecov-action@v4
-        if: success()
+        if: success() && steps.coverage.outputs.path != ''
         with:
-          files: ${{ runner.temp }}/test-results/**/coverage.cobertura.xml
+          files: ${{ steps.coverage.outputs.path }}
           fail_ci_if_error: false
           flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
       - name: Security Scan (Trivy)
         uses: aquasecurity/trivy-action@master
         with:
@@ -69,6 +78,8 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
+          # Ignora artefatos de build .NET (deps.json em bin/obj); dependências são controladas por csproj/Directory.Build.props.
+          skip-dirs: '**/bin,**/obj'
       - name: Upload Trivy results to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
         if: always()
