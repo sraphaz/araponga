@@ -42,15 +42,17 @@ public sealed class BffRequestLoggingMiddleware
         var correlationId = context.Items[CorrelationIdMiddleware.CorrelationIdItemKey]?.ToString() ?? "unknown";
         var contentLength = context.Request.ContentLength ?? 0;
 
-        // Sanitizar para evitar log injection
-        var sanitizedPath = Sanitize(path);
-        var sanitizedQuery = query.Length > 200 ? query[..200] + "..." : Sanitize(query);
+        // Sanitizar para evitar log injection (method, path, query e correlationId podem vir do cliente)
+        var sanitizedMethod = SanitizeForLog(method);
+        var sanitizedPath = SanitizeForLog(path);
+        var sanitizedQuery = query.Length > 200 ? SanitizeForLog(query[..200]) + "..." : SanitizeForLog(query);
+        var sanitizedCorrelationId = SanitizeForLog(correlationId);
 
         if (opts.LogIncomingRequest)
         {
             _logger.LogInformation(
                 "BFF Request started | Method={Method} Path={Path} Query={Query} ContentLength={ContentLength} CorrelationId={CorrelationId}",
-                method, sanitizedPath, sanitizedQuery, contentLength, correlationId);
+                sanitizedMethod, sanitizedPath, sanitizedQuery, contentLength, sanitizedCorrelationId);
         }
 
         if (opts.LogRequestBodyMaxLength > 0 && contentLength > 0 && contentLength < 50_000)
@@ -64,11 +66,11 @@ public sealed class BffRequestLoggingMiddleware
                 var max = opts.LogRequestBodyMaxLength;
                 var toLog = bodyPreview.Length > max ? bodyPreview[..max] + "..." : bodyPreview;
                 if (!string.IsNullOrWhiteSpace(toLog))
-                    _logger.LogInformation("BFF Request body | CorrelationId={CorrelationId} Body={Body}", correlationId, Sanitize(toLog));
+                    _logger.LogInformation("BFF Request body | CorrelationId={CorrelationId} Body={Body}", sanitizedCorrelationId, SanitizeForLog(toLog));
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "BFF Request body read failed | CorrelationId={CorrelationId}", correlationId);
+                _logger.LogWarning(ex, "BFF Request body read failed | CorrelationId={CorrelationId}", sanitizedCorrelationId);
                 context.Request.Body.Position = 0;
             }
         }
@@ -85,14 +87,20 @@ public sealed class BffRequestLoggingMiddleware
                 var statusCode = context.Response.StatusCode;
                 _logger.LogInformation(
                     "BFF Request completed | Method={Method} Path={Path} StatusCode={StatusCode} DurationMs={DurationMs} CorrelationId={CorrelationId}",
-                    method, sanitizedPath, statusCode, stopwatch.ElapsedMilliseconds, correlationId);
+                    sanitizedMethod, sanitizedPath, statusCode, stopwatch.ElapsedMilliseconds, sanitizedCorrelationId);
             }
         }
     }
 
-    private static string Sanitize(string? value)
+    /// <summary>Remove caracteres de controle e newlines para evitar log injection.</summary>
+    private static string SanitizeForLog(string? value)
     {
         if (string.IsNullOrEmpty(value)) return "";
-        return value.Replace("\r", "").Replace("\n", "").Trim();
+        var sb = new StringBuilder(value.Length);
+        foreach (var c in value)
+        {
+            if (c >= ' ' && c != '\u007f') sb.Append(c);
+        }
+        return sb.ToString().Trim();
     }
 }

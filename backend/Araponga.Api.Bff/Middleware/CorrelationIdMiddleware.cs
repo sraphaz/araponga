@@ -27,10 +27,24 @@ public sealed class CorrelationIdMiddleware
         context.Response.Headers[CorrelationIdHeader] = correlationId;
         context.Items[CorrelationIdItemKey] = correlationId;
 
+        // Sanitize for logging only (correlationId can come from client header — log injection)
+        var correlationIdForLog = SanitizeForLog(correlationId);
         using (context.RequestServices.GetRequiredService<ILogger<CorrelationIdMiddleware>>()
-            .BeginScope(new Dictionary<string, object> { ["CorrelationId"] = correlationId }))
+            .BeginScope(new Dictionary<string, object> { ["CorrelationId"] = correlationIdForLog }))
         {
             await _next(context);
         }
+    }
+
+    /// <summary>Remove control chars and newlines to prevent log injection from user-provided X-Correlation-ID.</summary>
+    private static string SanitizeForLog(string? value)
+    {
+        if (string.IsNullOrEmpty(value)) return "";
+        var sb = new System.Text.StringBuilder(value.Length);
+        foreach (var c in value)
+        {
+            if (c >= ' ' && c != '\u007f') sb.Append(c);
+        }
+        return sb.ToString().Trim();
     }
 }

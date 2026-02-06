@@ -60,11 +60,17 @@ public sealed class JourneyProxyMiddleware
         var correlationId = context.Items[CorrelationIdMiddleware.CorrelationIdItemKey]?.ToString() ?? "unknown";
         var opts = _options.Value;
 
+        // Sanitize user- and API-derived values before logging (log injection)
+        var methodForLog = SanitizeForLog(method);
+        var pathForLog = SanitizeForLog(pathAndQuery);
+        var uriForLog = SanitizeForLog(forwardUri);
+        var correlationIdForLog = SanitizeForLog(correlationId);
+
         if (opts.LogForwardToApi)
         {
             _logger.LogInformation(
                 "BFF Forward to API | Method={Method} Path={Path} Uri={Uri} CorrelationId={CorrelationId}",
-                method, pathAndQuery, forwardUri, correlationId);
+                methodForLog, pathForLog, uriForLog, correlationIdForLog);
         }
 
         var stopwatch = Stopwatch.StartNew();
@@ -78,7 +84,7 @@ public sealed class JourneyProxyMiddleware
             stopwatch.Stop();
             _logger.LogError(ex,
                 "BFF Proxy error | Method={Method} Path={Path} Uri={Uri} DurationMs={DurationMs} CorrelationId={CorrelationId} Message={Message}",
-                method, pathAndQuery, forwardUri, stopwatch.ElapsedMilliseconds, correlationId, ex.Message);
+                methodForLog, pathForLog, uriForLog, stopwatch.ElapsedMilliseconds, correlationIdForLog, SanitizeForLog(ex.Message));
             context.Response.StatusCode = 502;
             var apiBase = _options.Value.ApiBaseUrl ?? "http://localhost:8080";
             var isPrematureClose = ex.Message.Contains("prematurely", StringComparison.OrdinalIgnoreCase) ||
@@ -104,14 +110,14 @@ public sealed class JourneyProxyMiddleware
             {
                 _logger.LogInformation(
                     "BFF Forward completed | Method={Method} Path={Path} ApiStatusCode={StatusCode} DurationMs={DurationMs} CorrelationId={CorrelationId}",
-                    method, pathAndQuery, statusCode, stopwatch.ElapsedMilliseconds, correlationId);
+                    methodForLog, pathForLog, statusCode, stopwatch.ElapsedMilliseconds, correlationIdForLog);
             }
 
             if (statusCode >= 400)
             {
                 _logger.LogWarning(
                     "API returned error | StatusCode={StatusCode} Method={Method} Path={Path} Uri={Uri} CorrelationId={CorrelationId}",
-                    statusCode, method, pathAndQuery, forwardUri, correlationId);
+                    statusCode, methodForLog, pathForLog, uriForLog, correlationIdForLog);
             }
 
             // Log response body for any 4xx/5xx so the console shows the real API error (e.g. error, detail) for diagnosis.
@@ -128,7 +134,7 @@ public sealed class JourneyProxyMiddleware
                     response.Content = new ByteArrayContent(bytes);
                     _logger.LogWarning(
                         "API error body | StatusCode={StatusCode} Path={Path} CorrelationId={CorrelationId} BodyPreview={BodyPreview}",
-                        statusCode, pathAndQuery, correlationId, bodyPreview);
+                        statusCode, pathForLog, correlationIdForLog, SanitizeForLog(bodyPreview));
                 }
                 catch { /* ignore */ }
             }
@@ -197,5 +203,17 @@ public sealed class JourneyProxyMiddleware
         var bytes = Encoding.UTF8.GetBytes(raw);
         var hash = SHA256.HashData(bytes);
         return Convert.ToHexString(hash).ToLowerInvariant();
+    }
+
+    /// <summary>Remove control chars and newlines to prevent log injection from path, URI, API body, etc.</summary>
+    private static string SanitizeForLog(string? value)
+    {
+        if (string.IsNullOrEmpty(value)) return "";
+        var sb = new StringBuilder(value.Length);
+        foreach (var c in value)
+        {
+            if (c >= ' ' && c != '\u007f') sb.Append(c);
+        }
+        return sb.ToString().Trim();
     }
 }

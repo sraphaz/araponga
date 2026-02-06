@@ -4,7 +4,7 @@
     <RuntimeFrameworkVersion Condition="'$(TargetFramework)' == 'net8.0'">8.0.12</RuntimeFrameworkVersion>
   </PropertyGroup>
   <ItemGroup>
-    <!-- CVE-2024-43483: força versão corrigida em todos os projetos; evita 8.0.0 transitivo (hash flooding). -->
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.0" />
+    <!-- CVE-2024-43483: força 8.0.1 em todos os projetos (evita 8.0.0 transitivo; 8.0.1 compatível com DI 8.x). -->
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.1" />
   </ItemGroup>
 </Project>
