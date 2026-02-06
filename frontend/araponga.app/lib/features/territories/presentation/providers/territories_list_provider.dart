@@ -32,7 +32,7 @@ List<dynamic> _extractItemsFromResponse(dynamic data) {
   // Lista no root (ex.: algum proxy)
   if (data is List) return data;
   if (data is! Map<String, dynamic>) return [];
-  final map = data as Map<String, dynamic>;
+  final map = data;
   // Wrapper tipo { "data": { "items": [...] } }
   final inner = map['data'];
   if (inner is Map<String, dynamic>) {

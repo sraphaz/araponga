@@ -110,7 +110,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final hasGeo = geo != null;
     final l10n = AppLocalizations.of(context)!;
     final suggestedAsync = hasGeo
-        ? ref.watch(suggestedTerritoriesProvider((lat: geo!.latitude, lng: geo.longitude)))
+        ? ref.watch(suggestedTerritoriesProvider((lat: geo.latitude, lng: geo.longitude)))
         : const AsyncValue<List<TerritorySuggestion>>.data([]);
     final nearestSuggestion = suggestedAsync.valueOrNull?.isNotEmpty == true
         ? suggestedAsync.valueOrNull!.first
@@ -220,8 +220,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               const SizedBox(height: AppConstants.spacingLg),
               // Mapa: contorno do território selecionado na lista (ou o mais próximo se nenhum selecionado)
               _OnboardingMap(
-                centerLat: hasGeo ? geo!.latitude : _defaultCenterLat,
-                centerLng: hasGeo ? geo!.longitude : _defaultCenterLng,
+                centerLat: hasGeo ? geo.latitude : _defaultCenterLat,
+                centerLng: hasGeo ? geo.longitude : _defaultCenterLng,
                 showUserMarker: hasGeo,
                 displayedTerritoryId: _selectedTerritoryId ?? nearestSuggestion?.id,
               ),
@@ -255,7 +255,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 ),
                 const SizedBox(height: AppConstants.spacingSm),
                 _SuggestedList(
-                  latitude: geo!.latitude,
+                  latitude: geo.latitude,
                   longitude: geo.longitude,
                   selectedTerritoryId: _selectedTerritoryId,
                   onSelectTerritory: (t) => setState(() => _selectedTerritoryId = t.id),
