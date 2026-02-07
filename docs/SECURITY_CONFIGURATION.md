@@ -1,4 +1,4 @@
-# Configuração de Segurança - Araponga
+# Configuração de Segurança - Arah
 
 **Última atualização**: 2025-01-15  
 **Versão**: 1.1
@@ -28,8 +28,8 @@ JWT__SIGNINGKEY=seu-secret-forte-aqui-minimo-32-caracteres-aleatorios
 
 # CORS Origins - OBRIGATÓRIO
 # Não pode ser wildcard (*) em produção
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+Cors__AllowedOrigins__0=https://app.Arah.com
+Cors__AllowedOrigins__1=https://www.Arah.com
 ```
 
 ### Desenvolvimento
@@ -161,8 +161,8 @@ options.AddFixedWindowLimiter("auth", limiterOptions =>
 {
   "Cors": {
     "AllowedOrigins": [
-      "https://app.araponga.com",
-      "https://www.araponga.com"
+      "https://app.Arah.com",
+      "https://www.Arah.com"
     ]
   }
 }
@@ -170,8 +170,8 @@ options.AddFixedWindowLimiter("auth", limiterOptions =>
 
 Ou via variáveis de ambiente:
 ```bash
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+Cors__AllowedOrigins__0=https://app.Arah.com
+Cors__AllowedOrigins__1=https://www.Arah.com
 ```
 
 ### Desenvolvimento
@@ -269,17 +269,17 @@ O CSP é configurado dinamicamente:
 
 ```bash
 # Verificar security headers
-curl -I https://api.araponga.com/api/v1/territories
+curl -I https://api.Arah.com/api/v1/territories
 
 # Verificar rate limiting
 for i in {1..6}; do
-  curl -X POST https://api.araponga.com/api/v1/auth/social
+  curl -X POST https://api.Arah.com/api/v1/auth/social
 done
 
 # Verificar CORS
-curl -H "Origin: https://app.araponga.com" \
+curl -H "Origin: https://app.Arah.com" \
      -H "Access-Control-Request-Method: POST" \
-     -X OPTIONS https://api.araponga.com/api/v1/feed
+     -X OPTIONS https://api.Arah.com/api/v1/feed
 ```
 
 ---
@@ -304,7 +304,7 @@ export JWT__SIGNINGKEY="seu-secret-aqui"
 ```json
 {
   "Cors": {
-    "AllowedOrigins": ["https://app.araponga.com"]
+    "AllowedOrigins": ["https://app.Arah.com"]
   }
 }
 ```
@@ -357,7 +357,7 @@ A aplicação inclui uma suíte completa de testes de segurança (14 testes) que
 - ✅ CORS
 - ✅ Security headers
 
-**Arquivo**: `backend/Araponga.Tests/Api/SecurityTests.cs`
+**Arquivo**: `backend/Arah.Tests/Api/SecurityTests.cs`
 
 ---
 

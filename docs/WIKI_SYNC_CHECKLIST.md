@@ -34,8 +34,8 @@ O script `script-sync-wiki.ps1` ajusta automaticamente os seguintes formatos de 
 - `./ONBOARDING_ANALISTAS_FUNCIONAIS.md` → `[Onboarding Analistas Funcionais](Onboarding-Analistas-Funcionais)`
 
 ### Links Absolutos do GitHub
-- `https://github.com/sraphaz/araponga/blob/main/docs/ONBOARDING_PUBLICO.md` → `[Onboarding Público](Onboarding-Público)`
-- `https://github.com/sraphaz/araponga/blob/main/docs/CARTILHA_COMPLETA.md` → `[Cartilha Completa](Cartilha-Completa)`
+- `https://github.com/sraphaz/Arah/blob/main/docs/ONBOARDING_PUBLICO.md` → `[Onboarding Público](Onboarding-Público)`
+- `https://github.com/sraphaz/Arah/blob/main/docs/CARTILHA_COMPLETA.md` → `[Cartilha Completa](Cartilha-Completa)`
 
 ---
 

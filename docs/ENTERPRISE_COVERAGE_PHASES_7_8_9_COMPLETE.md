@@ -114,7 +114,7 @@
 ## 📁 Estrutura de Arquivos Criados
 
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Application/
 │   ├── EventServiceEdgeCasesTests.cs              ✅ (12 testes)
 │   ├── FinancialServiceEdgeCasesTests.cs           ✅ (10 testes)

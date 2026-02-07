@@ -65,7 +65,7 @@ A Fase 10 foi **100% implementada e documentada**. Todas as funcionalidades prin
 7. ✅ `docs/backlog-api/FASE10.md` - Status atualizado
 8. ✅ `docs/00_INDEX.md` - Referências atualizadas
 9. ✅ `README.md` - Funcionalidades atualizadas
-10. ✅ `backend/Araponga.Api/wwwroot/devportal/index.html` - Conteúdo atualizado
+10. ✅ `backend/Arah.Api/wwwroot/devportal/index.html` - Conteúdo atualizado
 
 ### DevPortal Atualizado ✅
 - ✅ Seção de Feed com exemplos de mídias
@@ -233,10 +233,10 @@ A Fase 10 foi **100% implementada e documentada**. Todas as funcionalidades prin
 - **DevPortal**: `docs/backlog-api/implementacoes/FASE10_ATUALIZACAO_DEVPORTAL.md`
 
 ### Código
-- **Posts**: `backend/Araponga.Api/Controllers/FeedController.cs`
-- **Eventos**: `backend/Araponga.Api/Controllers/EventsController.cs`
-- **Marketplace**: `backend/Araponga.Api/Controllers/ItemsController.cs`
-- **Chat**: `backend/Araponga.Api/Controllers/ChatController.cs`
+- **Posts**: `backend/Arah.Api/Controllers/FeedController.cs`
+- **Eventos**: `backend/Arah.Api/Controllers/EventsController.cs`
+- **Marketplace**: `backend/Arah.Api/Controllers/ItemsController.cs`
+- **Chat**: `backend/Arah.Api/Controllers/ChatController.cs`
 
 ---
 

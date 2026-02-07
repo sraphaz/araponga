@@ -7,7 +7,7 @@
 Para subir API, BFF, seeds e app Flutter em poucos passos:
 
 - **Stack**: na raiz do repositório, execute `.\scripts\run-local-stack.ps1` (PowerShell). O script sobe API (Docker), BFF e aplica os seeds Camburi e Boiçucanga. Use `-ResetDatabase` para recriar o banco.
-- **App**: em outro terminal, `cd frontend/araponga.app` e `flutter run`.
+- **App**: em outro terminal, `cd frontend/Arah.app` e `flutter run`.
 
 Documentação completa (getting started, release estável, o que falta no app): **[STABLE_RELEASE_APP_ONBOARDING.md](./STABLE_RELEASE_APP_ONBOARDING.md)**.
 
@@ -24,11 +24,11 @@ Documentação completa (getting started, release estável, o que falta no app):
 
 ```
 backend/
-  ├── Araponga.Api/          # Controllers e endpoints
-  ├── Araponga.Application/  # Application services
-  ├── Araponga.Domain/       # Domain models
-  ├── Araponga.Infrastructure/ # Database e externos
-  └── Araponga.Tests/        # Testes
+  ├── Arah.Api/          # Controllers e endpoints
+  ├── Arah.Application/  # Application services
+  ├── Arah.Domain/       # Domain models
+  ├── Arah.Infrastructure/ # Database e externos
+  └── Arah.Tests/        # Testes
 
 frontend/
   ├── wiki/                  # Documentação interativa
@@ -40,10 +40,10 @@ frontend/
 
 ```bash
 # Build
-dotnet build Araponga.sln
+dotnet build Arah.sln
 
 # Testes
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 
 # Wiki local
 cd frontend/wiki

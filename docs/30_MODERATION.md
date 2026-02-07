@@ -1,7 +1,7 @@
 # Moderação e Reports
 
 ## Escopo
-A moderação do Araponga é **território-first**, com capacidade de sanções **territoriais** e **globais**.
+A moderação do Arah é **território-first**, com capacidade de sanções **territoriais** e **globais**.
 O MVP implementa fluxos essenciais e automações simples baseadas em thresholds.
 
 ## Fluxos de report

@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Text;
-using Araponga.Bff.Services;
+using Arah.Bff.Services;
 using Microsoft.Extensions.Options;
 
-namespace Araponga.Bff.Middleware;
+namespace Arah.Bff.Middleware;
 
 /// <summary>
 /// Logging estruturado de todas as requisições no BFF: entrada (método, path, query, body opcional)

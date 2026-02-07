@@ -377,7 +377,7 @@ Content-Type: application/json
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"]
+  "redirectUris": ["Arah://callback"]
 }
 ```
 

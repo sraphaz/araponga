@@ -1,8 +1,8 @@
-# Araponga
+# Arah
 
 **Plataforma digital comunitária orientada ao território**
 
-Araponga é uma infraestrutura digital onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar.
+Arah é uma infraestrutura digital onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar.
 
 Nossa abordagem é fundamentalmente diferente:
 
@@ -14,7 +14,7 @@ Nossa abordagem é fundamentalmente diferente:
 
 ---
 
-## Por que o Araponga existe
+## Por que o Arah existe
 
 Abordamos questões fundamentais sobre o papel da tecnologia na vida comunitária:
 
@@ -24,18 +24,18 @@ Abordamos questões fundamentais sobre o papel da tecnologia na vida comunitári
 
 ### Nosso compromisso
 
-Araponga é construído sobre princípios que nos diferenciam:
+Arah é construído sobre princípios que nos diferenciam:
 
 - **Sem extração de dados** para publicidade
 - **Sem captura de atenção** para engajamento infinito
 - **Sem vigilância** para controle
 - **Governança transparente** com participação comunitária aberta
 
-Todas as decisões, contribuições e processos no Araponga são visíveis e participativos. Comunidades acompanham como a plataforma evolui, quem contribui e por que decisões são tomadas.
+Todas as decisões, contribuições e processos no Arah são visíveis e participativos. Comunidades acompanham como a plataforma evolui, quem contribui e por que decisões são tomadas.
 
 ---
 
-## O que o Araponga oferece
+## O que o Arah oferece
 
 ### Feed Comunitário
 
@@ -85,7 +85,7 @@ Uma **linha do tempo organizada por território**, não algoritmos:
 
 ### Território como Referência
 
-No Araponga, o **território** é um lugar físico real:
+No Arah, o **território** é um lugar físico real:
 
 - Tem nome, localização e fronteira geográfica
 - Existe **antes do app** e continua existindo sem usuários
@@ -106,7 +106,7 @@ Que formas de autonomia se abrem quando a tecnologia serve ao território?
 
 ### Transparência e Participação
 
-No Araponga **tudo é visível**:
+No Arah **tudo é visível**:
 
 - Decisões públicas e participativas
 - Processos de desenvolvimento transparentes
@@ -121,7 +121,7 @@ Transparência radical e participação comunitária aberta são realidade, não
 
 ### Para Comunidades
 
-**Comunidades** usam o Araponga para:
+**Comunidades** usam o Arah para:
 
 - Organizar-se digitalmente mantendo autonomia
 - Fortalecer vínculos locais
@@ -130,7 +130,7 @@ Transparência radical e participação comunitária aberta são realidade, não
 
 ### Para Pessoas
 
-**Pessoas** encontram no Araponga:
+**Pessoas** encontram no Arah:
 
 - Conexão com o lugar onde vivem
 - Participação em comunidades locais
@@ -184,7 +184,7 @@ Com o tempo:
 
 ## Por que Participar
 
-### Diferenciais do Araponga
+### Diferenciais do Arah
 
 - **Transparência total**: Como tudo funciona, quem decide e por quê
 - **Participação real**: Sua voz nas decisões da plataforma
@@ -207,6 +207,6 @@ Com o tempo:
 
 ---
 
-**Bem-vindo ao Araponga. Comece pequeno. Contribua no seu ritmo.**
+**Bem-vindo ao Arah. Comece pequeno. Contribua no seu ritmo.**
 
-**Perguntas?** Entre no [Discord](https://discord.gg/auwqN8Yjgw) ou abra uma Issue no [GitHub](https://github.com/sraphaz/araponga).
+**Perguntas?** Entre no [Discord](https://discord.gg/auwqN8Yjgw) ou abra uma Issue no [GitHub](https://github.com/sraphaz/Arah).

@@ -20,7 +20,7 @@ Caracteres acentuados em português estavam aparecendo incorretamente no Develop
 
 Ambos os arquivos foram re-salvos garantindo encoding UTF-8 sem BOM:
 - `docs/devportal/index.html`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 ### 2. Melhorar Configuração do Servidor
 
@@ -53,8 +53,8 @@ app.UseStaticFiles(new StaticFileOptions
 ## Arquivos Modificados
 
 - `docs/devportal/index.html` - Re-salvo com UTF-8
-- `backend/Araponga.Api/wwwroot/devportal/index.html` - Re-salvo com UTF-8
-- `backend/Araponga.Api/Program.cs` - Melhorada configuração de Content-Type
+- `backend/Arah.Api/wwwroot/devportal/index.html` - Re-salvo com UTF-8
+- `backend/Arah.Api/Program.cs` - Melhorada configuração de Content-Type
 
 ## Testes
 

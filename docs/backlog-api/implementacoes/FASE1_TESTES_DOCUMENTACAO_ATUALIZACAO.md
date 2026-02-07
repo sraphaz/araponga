@@ -22,16 +22,16 @@ Este documento descreve as atualizações realizadas em **testes** e **documenta
 - ✅ Validação de JWT secret ajustada para permitir appsettings.json em ambiente de testes
 
 #### Arquivos Modificados
-- `backend/Araponga.Tests/appsettings.json` (criado)
-- `backend/Araponga.Tests/Api/ApiFactory.cs` (atualizado)
-- `backend/Araponga.Api/Program.cs` (ajustado para aceitar appsettings.json em testes)
+- `backend/Arah.Tests/appsettings.json` (criado)
+- `backend/Arah.Tests/Api/ApiFactory.cs` (atualizado)
+- `backend/Arah.Api/Program.cs` (ajustado para aceitar appsettings.json em testes)
 
 ---
 
 ### 2. Novos Testes de Segurança ✅
 
 #### Arquivo Criado
-- `backend/Araponga.Tests/Api/SecurityTests.cs`
+- `backend/Arah.Tests/Api/SecurityTests.cs`
 
 #### Testes Implementados
 
@@ -167,7 +167,7 @@ Este documento descreve as atualizações realizadas em **testes** e **documenta
 
 ---
 
-### 6. Araponga.Tests/README.md ✅
+### 6. Arah.Tests/README.md ✅
 
 #### Adicionado
 - ✅ Seção "🔒 Configuração de Segurança para Testes"
@@ -180,18 +180,18 @@ Este documento descreve as atualizações realizadas em **testes** e **documenta
 ## 📊 Resumo de Arquivos
 
 ### Arquivos Criados (3)
-1. `backend/Araponga.Tests/appsettings.json` - Configuração para testes
-2. `backend/Araponga.Tests/Api/SecurityTests.cs` - Novos testes de segurança (11 testes)
+1. `backend/Arah.Tests/appsettings.json` - Configuração para testes
+2. `backend/Arah.Tests/Api/SecurityTests.cs` - Novos testes de segurança (11 testes)
 3. `docs/SECURITY_CONFIGURATION.md` - Guia completo de configuração
 
 ### Arquivos Modificados (7)
-1. `backend/Araponga.Tests/Api/ApiFactory.cs` - Configuração de JWT para testes
-2. `backend/Araponga.Api/Program.cs` - Ajuste para aceitar appsettings.json em testes
+1. `backend/Arah.Tests/Api/ApiFactory.cs` - Configuração de JWT para testes
+2. `backend/Arah.Api/Program.cs` - Ajuste para aceitar appsettings.json em testes
 3. `SECURITY.md` - Adicionada seção completa de segurança
 4. `docs/60_API_LÓGICA_NEGÓCIO.md` - Informações de rate limiting e segurança
 5. `README.md` - Seção de segurança atualizada
 6. `docs/00_INDEX.md` - Nova seção de segurança
-7. `backend/Araponga.Tests/README.md` - Configuração de segurança para testes
+7. `backend/Arah.Tests/README.md` - Configuração de segurança para testes
 
 ---
 

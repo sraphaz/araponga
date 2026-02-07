@@ -2,13 +2,13 @@
 
 **Data**: 2026-01-25  
 **Status**: 📋 Proposta  
-**Referência**: Airbnb (adaptado aos princípios do Araponga)
+**Referência**: Airbnb (adaptado aos princípios do Arah)
 
 ---
 
 ## 📋 Resumo Executivo
 
-Esta proposta detalha a implementação do domínio de **Hospedagem** no Araponga, inspirada no modelo do Airbnb mas adaptada aos princípios territoriais e comunitários da plataforma. A implementação reutiliza infraestrutura existente (notificações, pagamentos, aprovação humana) e introduz conceitos específicos de hospedagem (propriedades privadas, agenda, papéis contextuais).
+Esta proposta detalha a implementação do domínio de **Hospedagem** no Arah, inspirada no modelo do Airbnb mas adaptada aos princípios territoriais e comunitários da plataforma. A implementação reutiliza infraestrutura existente (notificações, pagamentos, aprovação humana) e introduz conceitos específicos de hospedagem (propriedades privadas, agenda, papéis contextuais).
 
 ---
 
@@ -37,7 +37,7 @@ Esta proposta detalha a implementação do domínio de **Hospedagem** no Arapong
 
 ## 🏗️ Arquitetura Proposta
 
-### Camada de Domínio (`Araponga.Domain/Hosting/`)
+### Camada de Domínio (`Arah.Domain/Hosting/`)
 
 #### 1. Property (Propriedade)
 ```csharp
@@ -846,7 +846,7 @@ TerritoryMembership (1) ──< (N) HostingRole (via MembershipId)
 
 ### Risco 2: Confusão com Marketplace
 **Mitigação**:
-- Domínio completamente separado (`Araponga.Domain/Hosting/`)
+- Domínio completamente separado (`Arah.Domain/Hosting/`)
 - Nomenclatura distinta (Property ≠ Store, StayRequest ≠ Checkout)
 - Documentação clara das diferenças
 

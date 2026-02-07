@@ -84,5 +84,5 @@ Write-Info "Rodando flutter doctor (pode baixar Dart SDK na primeira vez)..."
 & (Join-Path $InstallPath "bin\flutter.bat") doctor -v
 Write-Host ""
 Write-Ok "Pronto. Abra um NOVO terminal para usar o comando 'flutter'."
-Write-Host "  Depois: cd frontend\araponga.app && flutter pub get && .\scripts\run-app-local.ps1"
+Write-Host "  Depois: cd frontend\arah.app && flutter pub get && .\scripts\run-app-local.ps1"
 Write-Host ""

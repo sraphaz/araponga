@@ -27,7 +27,7 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
 | **Territórios** | Raio em km (`RadiusKm`), geo-convergência bypass, ajustes de domínio e controllers. |
 | **Feed** | API e jornada BFF de feed; controller de jornada e DI. |
 | **Segurança** | CVE-2024-43483: `Microsoft.Extensions.Caching.Memory` 9.0.0 no BFF; `DependencyInjection` 8.0.1 em Tests.Modules.Moderation. |
-| **Testes** | Caminho correto `backend/Tests/Araponga.Tests`; projetos BFF e ApiSupport; testes por módulo (Moderation, Marketplace, etc.). |
+| **Testes** | Caminho correto `backend/Tests/Arah.Tests`; projetos BFF e ApiSupport; testes por módulo (Moderation, Marketplace, etc.). |
 | **Warnings** | Resolução de NU1603, CS8601, xUnit2002, ASP0019 onde aplicável. |
 
 ### BFF (Backend for Frontend)
@@ -40,7 +40,7 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
 | **CORS** | CORS configurado para origens localhost (qualquer porta), permitindo Flutter web. |
 | **Docs** | Documentação do retry 429 e uso de constantes nomeadas. |
 
-### App Flutter (`frontend/araponga.app`)
+### App Flutter (`frontend/Arah.app`)
 
 | Área | Alteração |
 |------|------------|
@@ -56,8 +56,8 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
 
 | Área | Alteração |
 |------|------------|
-| **Dockerfile (raiz)** | COPY e WORKDIR alinhados ao layout real: `backend/Araponga.Api`, `backend/Araponga.Application`, módulos em `backend/Araponga.Modules.*`; imagens base `sdk:8.0` e `aspnet:8.0`. |
-| **CI** | `dotnet-version: '8.0.x'` (8.0.12 não disponível no install script); testes em `backend/Tests/Araponga.Tests`. |
+| **Dockerfile (raiz)** | COPY e WORKDIR alinhados ao layout real: `backend/Arah.Api`, `backend/Arah.Application`, módulos em `backend/Arah.Modules.*`; imagens base `sdk:8.0` e `aspnet:8.0`. |
+| **CI** | `dotnet-version: '8.0.x'` (8.0.12 não disponível no install script); testes em `backend/Tests/Arah.Tests`. |
 | **CD** | Ajustes para Flutter (package name, project name). |
 
 ### Scripts e operações
@@ -76,7 +76,7 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
 | **LOCAL_CHANGES_PENDENTES** | Atualizado (ex.: .NET 8.0.12 onde aplicável). |
 | **RELEASE.md** | Passos para release e versionamento. |
 | **backend/docs** | IMPROVEMENTS, BACKEND_LAYERS, TEST_SEPARATION, README (BFF, testes, fronteiras). |
-| **frontend/araponga.app/docs** | GOOGLE_SIGNIN_ANDROID_SETUP, RUN_LOCAL, NEXT_STEPS, ARCHITECTURE, entre outros. |
+| **frontend/Arah.app/docs** | GOOGLE_SIGNIN_ANDROID_SETUP, RUN_LOCAL, NEXT_STEPS, ARCHITECTURE, entre outros. |
 
 ---
 
@@ -87,7 +87,7 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
    - Verificar `http://localhost:8080/health` e `http://localhost:5001`.  
 
 2. **App Flutter (web)**  
-   - `cd frontend\araponga.app` e `flutter run -d chrome --dart-define=BFF_BASE_URL=http://localhost:5001`.  
+   - `cd frontend\Arah.app` e `flutter run -d chrome --dart-define=BFF_BASE_URL=http://localhost:5001`.  
    - Tela de login: “Entrar com Google” (em web exige `GOOGLE_SIGN_IN_CLIENT_ID`); login por e-mail (dev) deve funcionar.  
 
 3. **App Flutter (Android)**  
@@ -117,6 +117,6 @@ Esta PR incorpora correções de CI/CD (Flutter package name, Dockerfile), login
 ## Referências
 
 - [CVE-2024-43483](https://nvd.nist.gov/vuln/detail/CVE-2024-43483) – Microsoft.Extensions.Caching.Memory
-- [GOOGLE_SIGNIN_ANDROID_SETUP](frontend/araponga.app/docs/GOOGLE_SIGNIN_ANDROID_SETUP.md) – Setup Android (SHA-1, Firebase, Gradle)
-- [RUN_LOCAL](frontend/araponga.app/docs/RUN_LOCAL.md) – Rodar app e BFF localmente
+- [GOOGLE_SIGNIN_ANDROID_SETUP](frontend/Arah.app/docs/GOOGLE_SIGNIN_ANDROID_SETUP.md) – Setup Android (SHA-1, Firebase, Gradle)
+- [RUN_LOCAL](frontend/Arah.app/docs/RUN_LOCAL.md) – Rodar app e BFF localmente
 - [ADR-011 BFF](docs/10_ARCHITECTURE_DECISIONS.md) – BFF como aplicação separada

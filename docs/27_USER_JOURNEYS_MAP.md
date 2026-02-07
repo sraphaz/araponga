@@ -1,4 +1,4 @@
-# Mapa Completo de Jornadas do Usuário - Araponga Flutter App
+# Mapa Completo de Jornadas do Usuário - Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -25,7 +25,7 @@
 
 ### Definição de Jornada
 
-Uma **jornada do usuário** no Araponga é uma sequência de interações que um usuário realiza para alcançar um objetivo específico dentro da plataforma, considerando:
+Uma **jornada do usuário** no Arah é uma sequência de interações que um usuário realiza para alcançar um objetivo específico dentro da plataforma, considerando:
 
 - **Papel do usuário**: VISITOR, RESIDENT, CURATOR, MODERATOR, EVENT_ORGANIZER, SYSTEM_ADMIN
 - **Módulo/Funcionalidade**: Auth, Territórios, Feed, Mapa, Eventos, Marketplace, Chat, etc.
@@ -56,11 +56,11 @@ Cada jornada será documentada com:
 
 #### Cena 1: Descoberta e Download
 
-**Contexto**: Maria ouviu sobre o Araponga de uma amiga que mencionou uma plataforma para organização comunitária local.
+**Contexto**: Maria ouviu sobre o Arah de uma amiga que mencionou uma plataforma para organização comunitária local.
 
 **Ações**:
-1. Maria busca "Araponga" na App Store/Google Play
-2. Encontra o app com ícone verde (referência ao pássaro araponga)
+1. Maria busca "Arah" na App Store/Google Play
+2. Encontra o app com ícone verde (referência ao pássaro Arah)
 3. Lê descrição: "Plataforma comunitária orientada a território"
 4. Vê screenshots mostrando feed local, mapa integrado, eventos
 5. **Decisão**: Baixa o app
@@ -72,12 +72,12 @@ Cada jornada será documentada com:
 #### Cena 2: Primeiro Acesso e Onboarding
 
 **Tela 1: Splash Screen**
-- Logo do Araponga centralizado
+- Logo do Arah centralizado
 - Background com gradiente verde suave
 - Transição suave (fade-in, 800ms)
 
 **Tela 2: Boas-vindas (se primeiro acesso)**
-- **Título**: "Bem-vinda ao Araponga"
+- **Título**: "Bem-vinda ao Arah"
 - **Subtítulo**: "Conecte-se com seu território, fortaleça sua comunidade"
 - **Ilustração**: Mapa com pins, pessoas se reunindo
 - **CTA**: "Começar" (botão verde floresta)
@@ -2070,7 +2070,7 @@ Gerenciar Usuários → Configurar Sistema → Work Queue Global
 
 ### Documentação Existente: 95% Completa ✅
 
-A documentação do projeto Araponga é **extremamente completa e bem estruturada**. Os principais documentos cobrem:
+A documentação do projeto Arah é **extremamente completa e bem estruturada**. Os principais documentos cobrem:
 
 1. ✅ Visão do produto e roadmap
 2. ✅ Arquitetura e decisões técnicas
@@ -2111,13 +2111,13 @@ Este documento (`27_USER_JOURNEYS_MAP.md`) complementa perfeitamente a documenta
 - ✅ Análise completa da documentação existente
 - ✅ Recomendações para desenvolvimento
 
-A documentação do projeto Araponga está **pronta para suportar o desenvolvimento completo do app Flutter**, com apenas algumas melhorias complementares recomendadas.
+A documentação do projeto Arah está **pronta para suportar o desenvolvimento completo do app Flutter**, com apenas algumas melhorias complementares recomendadas.
 
 ---
 
 **Versão**: 1.0  
 **Última Atualização**: 2025-01-20  
-**Autor**: Sistema de Documentação Araponga
+**Autor**: Sistema de Documentação Arah
 
 ---
 

@@ -75,63 +75,63 @@ Implementação completa do sistema de payout (transferência para vendedores), 
 ## 📁 Arquivos Criados
 
 ### Modelos de Domínio (12 arquivos)
-- `backend/Araponga.Domain/Financial/FinancialTransaction.cs`
-- `backend/Araponga.Domain/Financial/TransactionType.cs`
-- `backend/Araponga.Domain/Financial/TransactionStatus.cs`
-- `backend/Araponga.Domain/Financial/TransactionStatusHistory.cs`
-- `backend/Araponga.Domain/Marketplace/SellerBalance.cs`
-- `backend/Araponga.Domain/Marketplace/SellerTransaction.cs`
-- `backend/Araponga.Domain/Marketplace/SellerTransactionStatus.cs`
-- `backend/Araponga.Domain/Marketplace/TerritoryPayoutConfig.cs`
-- `backend/Araponga.Domain/Financial/PlatformFinancialBalance.cs`
-- `backend/Araponga.Domain/Financial/PlatformRevenueTransaction.cs`
-- `backend/Araponga.Domain/Financial/PlatformExpenseTransaction.cs`
-- `backend/Araponga.Domain/Financial/ReconciliationRecord.cs`
+- `backend/Arah.Domain/Financial/FinancialTransaction.cs`
+- `backend/Arah.Domain/Financial/TransactionType.cs`
+- `backend/Arah.Domain/Financial/TransactionStatus.cs`
+- `backend/Arah.Domain/Financial/TransactionStatusHistory.cs`
+- `backend/Arah.Domain/Marketplace/SellerBalance.cs`
+- `backend/Arah.Domain/Marketplace/SellerTransaction.cs`
+- `backend/Arah.Domain/Marketplace/SellerTransactionStatus.cs`
+- `backend/Arah.Domain/Marketplace/TerritoryPayoutConfig.cs`
+- `backend/Arah.Domain/Financial/PlatformFinancialBalance.cs`
+- `backend/Arah.Domain/Financial/PlatformRevenueTransaction.cs`
+- `backend/Arah.Domain/Financial/PlatformExpenseTransaction.cs`
+- `backend/Arah.Domain/Financial/ReconciliationRecord.cs`
 
 ### Repositórios (18 arquivos - 9 Postgres + 9 InMemory)
-- `backend/Araponga.Application/Interfaces/IFinancialTransactionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITransactionStatusHistoryRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISellerBalanceRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISellerTransactionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryPayoutConfigRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPlatformFinancialBalanceRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPlatformRevenueTransactionRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPlatformExpenseTransactionRepository.cs`
-- `backend/Araponga.Application/Interfaces/IReconciliationRecordRepository.cs`
+- `backend/Arah.Application/Interfaces/IFinancialTransactionRepository.cs`
+- `backend/Arah.Application/Interfaces/ITransactionStatusHistoryRepository.cs`
+- `backend/Arah.Application/Interfaces/ISellerBalanceRepository.cs`
+- `backend/Arah.Application/Interfaces/ISellerTransactionRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryPayoutConfigRepository.cs`
+- `backend/Arah.Application/Interfaces/IPlatformFinancialBalanceRepository.cs`
+- `backend/Arah.Application/Interfaces/IPlatformRevenueTransactionRepository.cs`
+- `backend/Arah.Application/Interfaces/IPlatformExpenseTransactionRepository.cs`
+- `backend/Arah.Application/Interfaces/IReconciliationRecordRepository.cs`
 - (+ implementações Postgres e InMemory)
 
 ### Serviços (4 arquivos)
-- `backend/Araponga.Application/Services/SellerPayoutService.cs`
-- `backend/Araponga.Application/Services/TerritoryPayoutConfigService.cs`
-- `backend/Araponga.Application/Interfaces/IPayoutGateway.cs`
-- `backend/Araponga.Infrastructure/Payments/MockPayoutGateway.cs`
+- `backend/Arah.Application/Services/SellerPayoutService.cs`
+- `backend/Arah.Application/Services/TerritoryPayoutConfigService.cs`
+- `backend/Arah.Application/Interfaces/IPayoutGateway.cs`
+- `backend/Arah.Infrastructure/Payments/MockPayoutGateway.cs`
 
 ### Controllers (3 arquivos)
-- `backend/Araponga.Api/Controllers/TerritoryPayoutConfigController.cs`
-- `backend/Araponga.Api/Controllers/SellerBalanceController.cs`
-- `backend/Araponga.Api/Controllers/PlatformFinancialController.cs`
+- `backend/Arah.Api/Controllers/TerritoryPayoutConfigController.cs`
+- `backend/Arah.Api/Controllers/SellerBalanceController.cs`
+- `backend/Arah.Api/Controllers/PlatformFinancialController.cs`
 
 ### Contratos de API (7 arquivos)
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs`
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs`
-- `backend/Araponga.Api/Contracts/Payout/SellerBalanceResponse.cs`
-- `backend/Araponga.Api/Contracts/Payout/SellerTransactionResponse.cs`
-- `backend/Araponga.Api/Contracts/Payout/PlatformFinancialBalanceResponse.cs`
-- `backend/Araponga.Api/Contracts/Payout/PlatformRevenueTransactionResponse.cs`
-- `backend/Araponga.Api/Contracts/Payout/PlatformExpenseTransactionResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs`
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/SellerBalanceResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/SellerTransactionResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/PlatformFinancialBalanceResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/PlatformRevenueTransactionResponse.cs`
+- `backend/Arah.Api/Contracts/Payout/PlatformExpenseTransactionResponse.cs`
 
 ### Background Worker (1 arquivo)
-- `backend/Araponga.Infrastructure/Background/PayoutProcessingWorker.cs`
+- `backend/Arah.Infrastructure/Background/PayoutProcessingWorker.cs`
 
 ### Testes (5 arquivos)
-- `backend/Araponga.Tests/Domain/SellerBalanceTests.cs`
-- `backend/Araponga.Tests/Domain/SellerTransactionTests.cs`
-- `backend/Araponga.Tests/Domain/TerritoryPayoutConfigTests.cs`
-- `backend/Araponga.Tests/Application/TerritoryPayoutConfigServiceTests.cs`
-- `backend/Araponga.Tests/Api/PayoutControllerTests.cs`
+- `backend/Arah.Tests/Domain/SellerBalanceTests.cs`
+- `backend/Arah.Tests/Domain/SellerTransactionTests.cs`
+- `backend/Arah.Tests/Domain/TerritoryPayoutConfigTests.cs`
+- `backend/Arah.Tests/Application/TerritoryPayoutConfigServiceTests.cs`
+- `backend/Arah.Tests/Api/PayoutControllerTests.cs`
 
 ### Migrations (1 arquivo)
-- `backend/Araponga.Infrastructure/Postgres/Migrations/20260119000000_AddFinancialSystem.cs` (9 tabelas)
+- `backend/Arah.Infrastructure/Postgres/Migrations/20260119000000_AddFinancialSystem.cs` (9 tabelas)
 
 ### Documentação (3 arquivos)
 - `docs/validation/VALIDACAO_SEGURANCA_PAYOUT_FASE7.md`
@@ -139,22 +139,22 @@ Implementação completa do sistema de payout (transferência para vendedores), 
 - `docs/backlog-api/FASE7.md` (atualizado)
 
 ### Developer Portal (1 arquivo)
-- `backend/Araponga.Api/wwwroot/devportal/index.html` (atualizado com seção de Payout)
+- `backend/Arah.Api/wwwroot/devportal/index.html` (atualizado com seção de Payout)
 
 ---
 
 ## 🔄 Arquivos Modificados
 
-- `backend/Araponga.Application/Interfaces/ICheckoutRepository.cs` (adicionado GetByIdAsync)
-- `backend/Araponga.Application/Interfaces/ISellerTransactionRepository.cs` (adicionado GetByPayoutIdAsync)
-- `backend/Araponga.Infrastructure/Postgres/PostgresCheckoutRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryCheckoutRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionado DbSets)
-- `backend/Araponga.Infrastructure/Postgres/PostgresMappers.cs` (adicionados mappers)
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs` (adicionadas listas)
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` (registros de DI)
+- `backend/Arah.Application/Interfaces/ICheckoutRepository.cs` (adicionado GetByIdAsync)
+- `backend/Arah.Application/Interfaces/ISellerTransactionRepository.cs` (adicionado GetByPayoutIdAsync)
+- `backend/Arah.Infrastructure/Postgres/PostgresCheckoutRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryCheckoutRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionado DbSets)
+- `backend/Arah.Infrastructure/Postgres/PostgresMappers.cs` (adicionados mappers)
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs` (adicionadas listas)
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` (registros de DI)
 - `docs/40_CHANGELOG.md` (atualizado)
 
 ---
@@ -269,7 +269,7 @@ dotnet ef database update
 - **Validação de Segurança**: `docs/validation/VALIDACAO_SEGURANCA_PAYOUT_FASE7.md`
 - **Resumo de Testes**: `docs/TESTES_FASE7_RESUMO.md`
 - **Changelog**: `docs/40_CHANGELOG.md`
-- **Developer Portal**: `backend/Araponga.Api/wwwroot/devportal/index.html`
+- **Developer Portal**: `backend/Arah.Api/wwwroot/devportal/index.html`
 
 ---
 
@@ -286,4 +286,4 @@ dotnet ef database update
 **Status**: ✅ **PRONTO PARA REVIEW E MERGE**
 
 **URL para criar PR no GitHub**:  
-https://github.com/sraphaz/araponga/pull/new/feature/fase7-payout-gestao-financeira
+https://github.com/sraphaz/Arah/pull/new/feature/fase7-payout-gestao-financeira

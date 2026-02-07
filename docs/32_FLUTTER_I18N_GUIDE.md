@@ -1,4 +1,4 @@
-# Guia de Internacionalização (i18n) - Araponga Flutter App
+# Guia de Internacionalização (i18n) - Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -27,7 +27,7 @@
 
 ### Objetivo
 
-Este documento especifica a **estratégia completa de internacionalização (i18n)** para o app Flutter Araponga, permitindo suporte a múltiplos idiomas e localizações (formatação de datas, números, moedas).
+Este documento especifica a **estratégia completa de internacionalização (i18n)** para o app Flutter Arah, permitindo suporte a múltiplos idiomas e localizações (formatação de datas, números, moedas).
 
 ### Idiomas Iniciais
 
@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Araponga',
+      title: 'Arah',
       
       // Suportar localizações
       localizationsDelegates: const [
@@ -168,12 +168,12 @@ output-localization-file: app_localizations.dart
 ```json
 {
   "@@locale": "pt-BR",
-  "appName": "Araponga",
+  "appName": "Arah",
   "@appName": {
     "description": "Nome do aplicativo"
   },
   
-  "welcomeMessage": "Bem-vinda ao Araponga",
+  "welcomeMessage": "Bem-vinda ao Arah",
   "@welcomeMessage": {
     "description": "Mensagem de boas-vindas"
   },
@@ -373,9 +373,9 @@ output-localization-file: app_localizations.dart
 ```json
 {
   "@@locale": "en-US",
-  "appName": "Araponga",
+  "appName": "Arah",
   
-  "welcomeMessage": "Welcome to Araponga",
+  "welcomeMessage": "Welcome to Arah",
   "discoverYourTerritory": "Discover your territory",
   "allowLocation": "Allow Location",
   "continueWithoutLocation": "Continue without Location",
@@ -664,7 +664,7 @@ testWidgets('should display localized text', (WidgetTester tester) async {
     ),
   );
   
-  expect(find.text('Bem-vinda ao Araponga'), findsOneWidget);
+  expect(find.text('Bem-vinda ao Arah'), findsOneWidget);
   
   // en-US
   await tester.pumpWidget(
@@ -676,7 +676,7 @@ testWidgets('should display localized text', (WidgetTester tester) async {
     ),
   );
   
-  expect(find.text('Welcome to Araponga'), findsOneWidget);
+  expect(find.text('Welcome to Arah'), findsOneWidget);
 });
 ```
 

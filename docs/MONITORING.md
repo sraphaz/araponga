@@ -1,10 +1,10 @@
-# Monitoramento do Araponga
+# Monitoramento do Arah
 
 **Data**: 2026-01-28  
 **Status**: 📋 Documentação Atualizada  
 **Versão**: 2.0
 
-Este documento descreve dashboards e alertas configurados para monitoramento do Araponga, considerando arquitetura monolito e evolução para multicluster.
+Este documento descreve dashboards e alertas configurados para monitoramento do Arah, considerando arquitetura monolito e evolução para multicluster.
 
 **⚠️ IMPORTANTE**: Para documentação completa sobre logs e monitoramento em diferentes arquiteturas (monolito, APIs modulares, microserviços) e interface web, ver [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md).
 
@@ -16,7 +16,7 @@ A aplicação possui uma **interface web integrada** para monitoramento e auxíl
 
 ### Acesso
 
-- **URL**: `https://api.araponga.com/admin/monitoring`
+- **URL**: `https://api.Arah.com/admin/monitoring`
 - **Autenticação**: Obrigatória (Bearer token)
 - **Autorização**: Apenas `SystemAdmin` ou `Curator` (configurável)
 
@@ -124,13 +124,13 @@ rate(http_response_size_bytes[5m])
 **Queries Prometheus**:
 ```promql
 # Posts criados por hora
-rate(araponga.posts.created[1h]) * 3600
+rate(Arah.posts.created[1h]) * 3600
 
 # Eventos criados por hora
-rate(araponga.events.created[1h]) * 3600
+rate(Arah.events.created[1h]) * 3600
 
 # Membros criados por hora
-rate(araponga.memberships.created[1h]) * 3600
+rate(Arah.memberships.created[1h]) * 3600
 ```
 
 ---
@@ -150,14 +150,14 @@ rate(araponga.memberships.created[1h]) * 3600
 **Queries Prometheus**:
 ```promql
 # Cache Hit Rate
-rate(araponga.cache.hits[5m]) / (rate(araponga.cache.hits[5m]) + rate(araponga.cache.misses[5m]))
+rate(Arah.cache.hits[5m]) / (rate(Arah.cache.hits[5m]) + rate(Arah.cache.misses[5m]))
 
 # Conflitos de Concorrência
-rate(araponga.concurrency.conflicts[5m])
+rate(Arah.concurrency.conflicts[5m])
 
 # Eventos Processados vs Falhados
-rate(araponga.events.processed[5m])
-rate(araponga.events.failed[5m])
+rate(Arah.events.processed[5m])
+rate(Arah.events.failed[5m])
 ```
 
 ---
@@ -180,7 +180,7 @@ rate(araponga.events.failed[5m])
 
 #### Banco de Dados Indisponível
 - **Nome**: `DatabaseDown`
-- **Condição**: `up{job="araponga"} == 0` ou health check falhando
+- **Condição**: `up{job="Arah"} == 0` ou health check falhando
 - **Severidade**: Critical
 - **Ação**: Verificar conexão e status do banco
 
@@ -190,13 +190,13 @@ rate(araponga.events.failed[5m])
 
 #### Muitos Eventos Falhando
 - **Nome**: `HighEventFailureRate`
-- **Condição**: `rate(araponga.events.failed[5m]) > 5`
+- **Condição**: `rate(Arah.events.failed[5m]) > 5`
 - **Severidade**: Warning
 - **Ação**: Verificar dead letter queue e logs de eventos
 
 #### Cache Hit Rate Baixo
 - **Nome**: `LowCacheHitRate`
-- **Condição**: `rate(araponga.cache.hits[5m]) / (rate(araponga.cache.hits[5m]) + rate(araponga.cache.misses[5m])) < 0.7`
+- **Condição**: `rate(Arah.cache.hits[5m]) / (rate(Arah.cache.hits[5m]) + rate(Arah.cache.misses[5m])) < 0.7`
 - **Severidade**: Warning
 - **Ação**: Revisar estratégia de cache e TTLs
 
@@ -206,7 +206,7 @@ rate(araponga.events.failed[5m])
 
 #### Muitos Conflitos de Concorrência
 - **Nome**: `HighConcurrencyConflicts`
-- **Condição**: `rate(araponga.concurrency.conflicts[5m]) > 10`
+- **Condição**: `rate(Arah.concurrency.conflicts[5m]) > 10`
 - **Severidade**: Warning
 - **Ação**: Investigar operações concorrentes e otimizar
 

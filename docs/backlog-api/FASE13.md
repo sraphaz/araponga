@@ -57,9 +57,9 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Criar modelo `EmailTemplateData` para dados de template
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IEmailSender.cs`
-- `backend/Araponga.Application/Models/EmailMessage.cs`
-- `backend/Araponga.Application/Models/EmailTemplateData.cs`
+- `backend/Arah.Application/Interfaces/IEmailSender.cs`
+- `backend/Arah.Application/Models/EmailMessage.cs`
+- `backend/Arah.Application/Models/EmailTemplateData.cs`
 
 **Critérios de Sucesso**:
 - ✅ Interface criada
@@ -89,11 +89,11 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Logging de envios
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
-- `backend/Araponga.Infrastructure/Email/EmailConfiguration.cs`
+- `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
+- `backend/Arah.Infrastructure/Email/EmailConfiguration.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (registrar serviço)
+- `backend/Arah.Api/Program.cs` (registrar serviço)
 
 **Critérios de Sucesso**:
 - ✅ Envio SMTP funcionando
@@ -119,7 +119,7 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Logging de envios
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Email/SendGridEmailSender.cs`
+- `backend/Arah.Infrastructure/Email/SendGridEmailSender.cs`
 
 **Critérios de Sucesso**:
 - ✅ Envio SendGrid funcionando
@@ -147,14 +147,14 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Internacionalização (i18n) de templates
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- `backend/Araponga.Application/Interfaces/IEmailTemplateService.cs`
-- `backend/Araponga.Api/Templates/Email/welcome.html`
-- `backend/Araponga.Api/Templates/Email/password-reset.html`
-- `backend/Araponga.Api/Templates/Email/event-reminder.html`
-- `backend/Araponga.Api/Templates/Email/marketplace-order.html`
-- `backend/Araponga.Api/Templates/Email/alert-critical.html`
-- `backend/Araponga.Api/Templates/Email/_layout.html`
+- `backend/Arah.Application/Services/EmailTemplateService.cs`
+- `backend/Arah.Application/Interfaces/IEmailTemplateService.cs`
+- `backend/Arah.Api/Templates/Email/welcome.html`
+- `backend/Arah.Api/Templates/Email/password-reset.html`
+- `backend/Arah.Api/Templates/Email/event-reminder.html`
+- `backend/Arah.Api/Templates/Email/marketplace-order.html`
+- `backend/Arah.Api/Templates/Email/alert-critical.html`
+- `backend/Arah.Api/Templates/Email/_layout.html`
 
 **Critérios de Sucesso**:
 - ✅ Templates funcionando
@@ -184,16 +184,16 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Rate limiting (máx. X emails por minuto)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Email/EmailQueueItem.cs`
-- `backend/Araponga.Application/Interfaces/IEmailQueueRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresEmailQueueRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryEmailQueueRepository.cs`
-- `backend/Araponga.Application/Services/EmailQueueService.cs`
-- `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
+- `backend/Arah.Domain/Email/EmailQueueItem.cs`
+- `backend/Arah.Application/Interfaces/IEmailQueueRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresEmailQueueRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryEmailQueueRepository.cs`
+- `backend/Arah.Application/Services/EmailQueueService.cs`
+- `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionar DbSet)
-- `backend/Araponga.Api/Program.cs` (registrar worker)
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionar DbSet)
+- `backend/Arah.Api/Program.cs` (registrar worker)
 
 **Critérios de Sucesso**:
 - ✅ Queue funcionando
@@ -220,11 +220,11 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Priorização: emails apenas para notificações críticas/importantes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
-- `backend/Araponga.Application/Services/EmailNotificationMapper.cs` (novo)
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+- `backend/Arah.Application/Services/EmailNotificationMapper.cs` (novo)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/EmailNotificationMapper.cs`
+- `backend/Arah.Application/Services/EmailNotificationMapper.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração funcionando
@@ -251,10 +251,10 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Validação: não enviar email se usuário optou out
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Users/NotificationPreferences.cs` (adicionar EmailPreferences)
-- `backend/Araponga.Application/Services/UserPreferencesService.cs`
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddEmailPreferences.cs`
+- `backend/Arah.Domain/Users/NotificationPreferences.cs` (adicionar EmailPreferences)
+- `backend/Arah.Application/Services/UserPreferencesService.cs`
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddEmailPreferences.cs`
 
 **Critérios de Sucesso**:
 - ✅ Preferências funcionando
@@ -291,14 +291,14 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
   - [ ] Dados: tipo de alerta, descrição, ações
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AuthService.cs`
-- `backend/Araponga.Api/Controllers/AuthController.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/CartService.cs`
-- `backend/Araponga.Application/Services/AlertService.cs`
+- `backend/Arah.Application/Services/AuthService.cs`
+- `backend/Arah.Api/Controllers/AuthController.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/CartService.cs`
+- `backend/Arah.Application/Services/AlertService.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/BackgroundJobs/EventReminderJob.cs`
+- `backend/Arah.Application/BackgroundJobs/EventReminderJob.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os casos de uso funcionando
@@ -330,10 +330,10 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Atualizar `docs/CHANGELOG.md`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Infrastructure/Email/SmtpEmailSenderTests.cs`
-- `backend/Araponga.Tests/Application/EmailTemplateServiceTests.cs`
-- `backend/Araponga.Tests/Application/EmailQueueServiceTests.cs`
-- `backend/Araponga.Tests/Integration/EmailIntegrationTests.cs`
+- `backend/Arah.Tests/Infrastructure/Email/SmtpEmailSenderTests.cs`
+- `backend/Arah.Tests/Application/EmailTemplateServiceTests.cs`
+- `backend/Arah.Tests/Application/EmailQueueServiceTests.cs`
+- `backend/Arah.Tests/Integration/EmailIntegrationTests.cs`
 - `docs/EMAIL_SYSTEM.md`
 
 **Critérios de Sucesso**:
@@ -394,19 +394,19 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
 - [ ] Documentação
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Configuration/PresencePolicyConfig.cs`
-- `backend/Araponga.Application/Interfaces/Configuration/IPresencePolicyConfigRepository.cs`
-- `backend/Araponga.Application/Services/Configuration/PresencePolicyConfigService.cs`
-- `backend/Araponga.Api/Controllers/PresencePolicyConfigController.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresPresencePolicyConfigRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryPresencePolicyConfigRepository.cs`
-- `backend/Araponga.Tests/Api/PresencePolicyConfigIntegrationTests.cs`
+- `backend/Arah.Domain/Configuration/PresencePolicyConfig.cs`
+- `backend/Arah.Application/Interfaces/Configuration/IPresencePolicyConfigRepository.cs`
+- `backend/Arah.Application/Services/Configuration/PresencePolicyConfigService.cs`
+- `backend/Arah.Api/Controllers/PresencePolicyConfigController.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresPresencePolicyConfigRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryPresencePolicyConfigRepository.cs`
+- `backend/Arah.Tests/Api/PresencePolicyConfigIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AccessEvaluator.cs` (ou serviço de presença equivalente)
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Application/Services/AccessEvaluator.cs` (ou serviço de presença equivalente)
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Critérios de Sucesso**:
 - ✅ Políticas configuráveis por território
@@ -460,12 +460,12 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
     "Smtp": {
       "Host": "smtp.gmail.com",
       "Port": 587,
-      "Username": "noreply@araponga.com",
+      "Username": "noreply@Arah.com",
       "Password": "[secret]",
       "EnableSsl": true
     },
-    "FromAddress": "noreply@araponga.com",
-    "FromName": "Araponga"
+    "FromAddress": "noreply@Arah.com",
+    "FromName": "Arah"
   }
 }
 ```
@@ -478,8 +478,8 @@ Implementar um **conector de envio de emails** para que a plataforma possa envia
     "SendGrid": {
       "ApiKey": "[secret]"
     },
-    "FromAddress": "noreply@araponga.com",
-    "FromName": "Araponga"
+    "FromAddress": "noreply@Arah.com",
+    "FromName": "Arah"
   }
 }
 ```

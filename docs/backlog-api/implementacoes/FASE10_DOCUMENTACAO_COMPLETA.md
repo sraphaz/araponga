@@ -153,7 +153,7 @@ Após a Fase 10, os seguintes schemas devem incluir novos campos:
 
 1. **Rodar aplicação e verificar OpenAPI**:
    ```bash
-   cd backend/Araponga.Api
+   cd backend/Arah.Api
    dotnet run
    # Acessar http://localhost:5000/swagger/v1/swagger.json
    ```

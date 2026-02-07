@@ -26,7 +26,7 @@ Permitir áudio além de imagens e vídeos em Posts, Eventos e Marketplace, mant
 - **OGG**: Open source, boa compressão
 - **AAC/M4A**: Apple, boa qualidade
 
-### Regras para Araponga
+### Regras para Arah
 
 #### Posts
 - **Duração**: Até 5 minutos (podcasts curtos, narrações, depoimentos)

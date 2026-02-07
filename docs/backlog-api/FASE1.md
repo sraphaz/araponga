@@ -30,7 +30,7 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Documentar processo de configuração
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs` (linhas 40-47)
+- `backend/Arah.Api/Program.cs` (linhas 40-47)
 
 **Critérios de Sucesso**:
 - ✅ Secret não está em código ou appsettings.json
@@ -51,7 +51,7 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Aplicar limiters em todos os controllers críticos
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs` (linhas 78-112)
+- `backend/Arah.Api/Program.cs` (linhas 78-112)
 - Todos os controllers (11 controllers)
 
 **Critérios de Sucesso**:
@@ -74,10 +74,10 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Criar SecurityHeadersMiddleware
 
 **Arquivos Criados**:
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ HTTPS obrigatório em produção
@@ -102,14 +102,14 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Documentar health checks
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/HealthChecks/` (novo diretório)
-- `backend/Araponga.Api/HealthChecks/DatabaseHealthCheck.cs`
-- `backend/Araponga.Api/HealthChecks/StorageHealthCheck.cs`
-- `backend/Araponga.Api/HealthChecks/CacheHealthCheck.cs`
-- `backend/Araponga.Api/HealthChecks/EventBusHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/` (novo diretório)
+- `backend/Arah.Api/HealthChecks/DatabaseHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/StorageHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/CacheHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/EventBusHealthCheck.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os health checks retornam status correto
@@ -131,8 +131,8 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Documentar configuração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/appsettings.json`
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Api/appsettings.json`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
 
 **Critérios de Sucesso**:
 - ✅ Pool configurado (MinPoolSize: 5, MaxPoolSize: 100)
@@ -157,7 +157,7 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [ ] Validar em staging
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Postgres/Migrations/XXXXXX_AddPerformanceIndexes.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/XXXXXX_AddPerformanceIndexes.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os índices criados
@@ -191,8 +191,8 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 8. ✅ `UpdateContactInfoRequestValidator.cs`
 
 **Arquivos Criados**:
-- `backend/Araponga.Api/Validators/CommonValidators.cs`
-- `backend/Araponga.Api/Validators/GeoValidationRules.cs`
+- `backend/Arah.Api/Validators/CommonValidators.cs`
+- `backend/Arah.Api/Validators/GeoValidationRules.cs`
 - 8 novos validators
 
 **Critérios de Sucesso**:
@@ -220,15 +220,15 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Documentar estratégia
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Exceptions/DomainException.cs`
-- `backend/Araponga.Application/Exceptions/ValidationException.cs`
-- `backend/Araponga.Application/Exceptions/NotFoundException.cs`
-- `backend/Araponga.Application/Exceptions/UnauthorizedException.cs`
-- `backend/Araponga.Application/Exceptions/ConflictException.cs`
-- `backend/Araponga.Application/Exceptions/ForbiddenException.cs`
+- `backend/Arah.Application/Exceptions/DomainException.cs`
+- `backend/Arah.Application/Exceptions/ValidationException.cs`
+- `backend/Arah.Application/Exceptions/NotFoundException.cs`
+- `backend/Arah.Application/Exceptions/UnauthorizedException.cs`
+- `backend/Arah.Application/Exceptions/ConflictException.cs`
+- `backend/Arah.Application/Exceptions/ForbiddenException.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (exception handler)
+- `backend/Arah.Api/Program.cs` (exception handler)
 - Todos os services (migração gradual)
 
 **Critérios de Sucesso**:
@@ -287,7 +287,7 @@ Resolver todos os bloqueantes críticos e estabelecer base sólida para produç�
 - [x] Permitir credentials quando necessário
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs` (linhas 54-76)
+- `backend/Arah.Api/Program.cs` (linhas 54-76)
 
 **Critérios de Sucesso**:
 - ✅ CORS configurado por ambiente

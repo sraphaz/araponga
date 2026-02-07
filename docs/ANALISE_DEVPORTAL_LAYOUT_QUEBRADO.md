@@ -92,7 +92,7 @@ O DevPortal tem **conteúdo duplicado** em duas estruturas diferentes:
 #### **Panel "fundamentos"** (data-phase-panel="fundamentos")
 **Conteúdo necessário**:
 - Visão Geral (accordion)
-- Como o Araponga funciona (accordion)
+- Como o Arah funciona (accordion)
 - Territórios (accordion)
 - Conceitos de produto (accordion)
 - Modelo de domínio (accordion)

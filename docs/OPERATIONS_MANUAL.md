@@ -1,4 +1,4 @@
-# Manual de Operação - Araponga
+# Manual de Operação - Arah
 
 **Última Atualização**: 2026-01-21  
 **Versão**: 1.0
@@ -19,7 +19,7 @@
 
 ## 1. Visão Geral
 
-Araponga é uma API ASP.NET Core 8.0 que utiliza:
+Arah é uma API ASP.NET Core 8.0 que utiliza:
 - **Banco de Dados**: PostgreSQL
 - **Cache**: Redis (opcional, fallback para IMemoryCache)
 - **Autenticação**: JWT
@@ -41,22 +41,22 @@ Araponga é uma API ASP.NET Core 8.0 que utiliza:
 
 ```bash
 # 1. Fazer pull da imagem mais recente
-docker pull ghcr.io/[seu-org]/araponga-api:latest
+docker pull ghcr.io/[seu-org]/Arah-api:latest
 
 # 2. Parar container existente (se houver)
-docker stop araponga-api || true
-docker rm araponga-api || true
+docker stop Arah-api || true
+docker rm Arah-api || true
 
 # 3. Executar novo container
 docker run -d \
-  --name araponga-api \
+  --name Arah-api \
   --restart unless-stopped \
   -p 8080:8080 \
   -e ASPNETCORE_ENVIRONMENT=Production \
-  -e ConnectionStrings__Postgres="Host=postgres;Database=araponga;Username=..." \
+  -e ConnectionStrings__Postgres="Host=postgres;Database=Arah;Username=..." \
   -e JWT__SIGNINGKEY="[seu-jwt-secret]" \
-  -e Cors__AllowedOrigins__0="https://app.araponga.com" \
-  ghcr.io/[seu-org]/araponga-api:latest
+  -e Cors__AllowedOrigins__0="https://app.Arah.com" \
+  ghcr.io/[seu-org]/Arah-api:latest
 ```
 
 ### 2.3 Deploy via Docker Compose
@@ -64,13 +64,13 @@ docker run -d \
 ```yaml
 version: '3.8'
 services:
-  araponga-api:
-    image: ghcr.io/[seu-org]/araponga-api:latest
+  Arah-api:
+    image: ghcr.io/[seu-org]/Arah-api:latest
     ports:
       - "8080:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__Postgres=Host=postgres;Database=araponga;...
+      - ConnectionStrings__Postgres=Host=postgres;Database=Arah;...
       - JWT__SIGNINGKEY=${JWT_SIGNINGKEY}
     depends_on:
       - postgres
@@ -106,19 +106,19 @@ Ver `docs/kubernetes/` para manifests completos.
 
 ```bash
 # 1. Identificar versão anterior
-docker images ghcr.io/[seu-org]/araponga-api --format "table {{.Tag}}\t{{.CreatedAt}}"
+docker images ghcr.io/[seu-org]/Arah-api --format "table {{.Tag}}\t{{.CreatedAt}}"
 
 # 2. Parar container atual
-docker stop araponga-api
+docker stop Arah-api
 
 # 3. Executar versão anterior
 docker run -d \
-  --name araponga-api \
+  --name Arah-api \
   --restart unless-stopped \
   -p 8080:8080 \
   -e ASPNETCORE_ENVIRONMENT=Production \
   [mesmas variáveis de ambiente] \
-  ghcr.io/[seu-org]/araponga-api:[tag-anterior]
+  ghcr.io/[seu-org]/Arah-api:[tag-anterior]
 ```
 
 ### 3.2 Rollback com Migrations
@@ -127,7 +127,7 @@ docker run -d \
 
 ```bash
 # 1. Conectar ao banco
-psql -h [host] -U [user] -d araponga
+psql -h [host] -U [user] -d Arah
 
 # 2. Listar migrations aplicadas
 SELECT * FROM "__EFMigrationsHistory" ORDER BY "MigrationId" DESC LIMIT 5;
@@ -135,12 +135,12 @@ SELECT * FROM "__EFMigrationsHistory" ORDER BY "MigrationId" DESC LIMIT 5;
 # 3. Reverter última migration (CUIDADO!)
 # Use dotnet ef migrations script para gerar script de rollback
 dotnet ef migrations script [migration-anterior] [migration-atual] \
-  --project backend/Araponga.Infrastructure \
-  --startup-project backend/Araponga.Api \
+  --project backend/Arah.Infrastructure \
+  --startup-project backend/Arah.Api \
   --output rollback.sql
 
 # 4. Revisar script e executar manualmente
-psql -h [host] -U [user] -d araponga -f rollback.sql
+psql -h [host] -U [user] -d Arah -f rollback.sql
 ```
 
 ---
@@ -151,33 +151,33 @@ psql -h [host] -U [user] -d araponga -f rollback.sql
 
 ```bash
 # Backup completo
-pg_dump -h [host] -U [user] -d araponga -F c -f backup_$(date +%Y%m%d_%H%M%S).dump
+pg_dump -h [host] -U [user] -d Arah -F c -f backup_$(date +%Y%m%d_%H%M%S).dump
 
 # Backup apenas schema
-pg_dump -h [host] -U [user] -d araponga --schema-only -f schema_$(date +%Y%m%d).sql
+pg_dump -h [host] -U [user] -d Arah --schema-only -f schema_$(date +%Y%m%d).sql
 
 # Backup apenas dados
-pg_dump -h [host] -U [user] -d araponga --data-only -F c -f data_$(date +%Y%m%d).dump
+pg_dump -h [host] -U [user] -d Arah --data-only -F c -f data_$(date +%Y%m%d).dump
 ```
 
 ### 4.2 Restore do Banco de Dados
 
 ```bash
 # Restore completo
-pg_restore -h [host] -U [user] -d araponga -c backup_20260121_120000.dump
+pg_restore -h [host] -U [user] -d Arah -c backup_20260121_120000.dump
 
 # Restore apenas schema
-psql -h [host] -U [user] -d araponga -f schema_20260121.sql
+psql -h [host] -U [user] -d Arah -f schema_20260121.sql
 
 # Restore apenas dados
-pg_restore -h [host] -U [user] -d araponga --data-only backup_20260121_120000.dump
+pg_restore -h [host] -U [user] -d Arah --data-only backup_20260121_120000.dump
 ```
 
 ### 4.3 Backup Automatizado (Cron)
 
 ```bash
 # Adicionar ao crontab
-0 2 * * * pg_dump -h [host] -U [user] -d araponga -F c -f /backups/araponga_$(date +\%Y\%m\%d).dump
+0 2 * * * pg_dump -h [host] -U [user] -d Arah -F c -f /backups/araponga_$(date +\%Y\%m\%d).dump
 ```
 
 ### 4.4 Retenção de Backups
@@ -221,7 +221,7 @@ Principais métricas:
 
 Logs são escritos em:
 - **Console**: stdout/stderr
-- **Arquivo**: `logs/araponga-YYYYMMDD.log` (30 dias de retenção)
+- **Arquivo**: `logs/Arah-YYYYMMDD.log` (30 dias de retenção)
 - **Seq** (se configurado): Via `Logging__Seq__ServerUrl`
 
 Níveis de log:
@@ -249,10 +249,10 @@ A API é **stateless** e pode ser escalada horizontalmente:
 
 ```bash
 # Docker Compose - múltiplas instâncias
-docker-compose up -d --scale araponga-api=3
+docker-compose up -d --scale Arah-api=3
 
 # Kubernetes - HPA
-kubectl autoscale deployment araponga-api --min=2 --max=10 --cpu-percent=70
+kubectl autoscale deployment Arah-api --min=2 --max=10 --cpu-percent=70
 ```
 
 ### 6.2 Cache Distribuído

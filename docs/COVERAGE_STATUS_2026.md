@@ -84,7 +84,7 @@
    - Corrigido construtor de `TerritoryJoinRequest`
 
 9. **FileStorageEdgeCasesTests.cs** - ✅ **CORRIGIDO**
-   - Corrigido namespace `Domain.Evidence` → `Araponga.Domain.Evidence`
+   - Corrigido namespace `Domain.Evidence` → `Arah.Domain.Evidence`
 
 10. **PostgresRepositoryIntegrationTests.cs** - ✅ **CORRIGIDO**
     - Corrigido `MembershipRole.Curator` → `MembershipRole.Resident`

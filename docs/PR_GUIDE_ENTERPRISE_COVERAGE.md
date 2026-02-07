@@ -19,10 +19,10 @@ dotnet test --verbosity quiet
 ### 2. Preparar Commits (se necessário)
 ```bash
 # Adicionar todos os arquivos novos
-git add backend/Araponga.Tests/Domain/*EdgeCasesTests.cs
-git add backend/Araponga.Tests/Application/ApplicationServiceValidationTests.cs
-git add backend/Araponga.Tests/Infrastructure/*EdgeCasesTests.cs
-git add backend/Araponga.Tests/Api/ControllerValidationEdgeCasesTests.cs
+git add backend/Arah.Tests/Domain/*EdgeCasesTests.cs
+git add backend/Arah.Tests/Application/ApplicationServiceValidationTests.cs
+git add backend/Arah.Tests/Infrastructure/*EdgeCasesTests.cs
+git add backend/Arah.Tests/Api/ControllerValidationEdgeCasesTests.cs
 git add docs/ENTERPRISE_COVERAGE_*.md
 git add docs/PR_ENTERPRISE_COVERAGE_PHASES_1_5.md
 git add docs/PLANO_90_PORCENTO_COBERTURA.md

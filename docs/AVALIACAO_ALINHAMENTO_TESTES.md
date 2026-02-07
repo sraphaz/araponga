@@ -2,7 +2,7 @@
 
 ## Resumo
 
-Os testes **não estavam totalmente alinhados** com a modularização (repositórios core em `InMemorySharedStore` e repositórios de módulo em `InMemoryDataStore`). Várias suítes ainda usavam `InMemoryDataStore` para entidades que hoje vivem em **Shared** (User, Territory, Membership, SystemPermission, Terms, Privacy, UserInterest, Voting, etc.), o que gerava erros de compilação após a migração dos repositórios para `Araponga.Infrastructure.Shared`.
+Os testes **não estavam totalmente alinhados** com a modularização (repositórios core em `InMemorySharedStore` e repositórios de módulo em `InMemoryDataStore`). Várias suítes ainda usavam `InMemoryDataStore` para entidades que hoje vivem em **Shared** (User, Territory, Membership, SystemPermission, Terms, Privacy, UserInterest, Voting, etc.), o que gerava erros de compilação após a migração dos repositórios para `Arah.Infrastructure.Shared`.
 
 Foi feita uma **correção em lote** para alinhar os testes à regra:
 
@@ -30,11 +30,11 @@ Foi feita uma **correção em lote** para alinhar os testes à regra:
 17. **TermsAcceptanceServiceEdgeCasesTests** – Terms e Acceptance com `sharedStore`.
 18. **TerritoryAssetServiceEdgeCasesTests** – `InMemoryTerritoryMembershipRepository(sharedStore)` em todos os testes.
 
-Foi adicionado `using Araponga.Infrastructure.Shared.InMemory` (ou equivalente) onde necessário; `GlobalUsings.cs` do projeto de testes já expõe os tipos de Shared.
+Foi adicionado `using Arah.Infrastructure.Shared.InMemory` (ou equivalente) onde necessário; `GlobalUsings.cs` do projeto de testes já expõe os tipos de Shared.
 
 ## Estado atual
 
-- **Build**: **OK** – `dotnet build backend/Araponga.Tests/Araponga.Tests.csproj` conclui com 0 erros (apenas avisos NU1603 e ASP0019).
+- **Build**: **OK** – `dotnet build backend/Arah.Tests/Arah.Tests.csproj` conclui com 0 erros (apenas avisos NU1603 e ASP0019).
 - **Testes** (após todas as correções): **2172 passando**, **0 falhando**, **23 ignorados** (ex.: performance em CI), total **2195**. **Test Run Successful.**
   - **Correções de aplicação**: Registro de `InMemorySharedStore` na DI onde repositórios Shared são usados; uso de `sharedStore` para Users/Territories/Memberships/JoinRequests em `JoinRequestServiceEdgeCasesTests`; asserção com `sharedStore.Users` em `NotificationFlowTests`; `MembershipSettings` em `MediaInContentIntegrationTests.BecomeResidentAsync`.
   - **Correções de integração API**: Uso de `GetSharedStore()` em vez de `GetDataStore()` para dados que a API lê do Shared: **GovernanceIntegrationTests** (CreateMembershipAsync, CreateCuratorCapabilityAsync, e todas as leituras de `Votings`); **ChatScenariosTests** (Users para verificação de identidade); **MediaInContentIntegrationTests** (MembershipSettings em BecomeResidentAsync); **VotingPerformanceTests** (CreateMembershipAsync e Votings). Com isso, 401/403 foram eliminados.

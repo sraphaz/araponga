@@ -10,7 +10,7 @@ Este documento consolida as **próximas ações** após a reorganização do bac
 - **BFF:** Jornadas onboarding, feed, events, marketplace implementadas; proxy em `/api/v2/journeys/*` para a API; cache por path; GET `/bff/journeys` para documentação.
 - **API:** Jornadas v2 em controllers Journeys; demais funcionalidades em `api/v1/*` (auth, users/me, connections, territories, etc.).
 - **Domain/Application:** Application referencia todos os módulos (hub); Domain compartilhado sem tipos de Connections (módulo isolado). Padrão documentado como aceitável para modular monolith.
-- **Testes:** Core (Araponga.Tests), por módulo (Connections, Map, Marketplace, Moderation, Subscriptions), BFF (Araponga.Tests.Bff), ApiSupport compartilhado. Movimentação de testes Application para módulos já feita onde planejado.
+- **Testes:** Core (Arah.Tests), por módulo (Connections, Map, Marketplace, Moderation, Subscriptions), BFF (Arah.Tests.Bff), ApiSupport compartilhado. Movimentação de testes Application para módulos já feita onde planejado.
 
 ---
 
@@ -103,7 +103,7 @@ Cada fase: mapeamento no registry, TTL onde aplicável, testes, `.http`.
 
 ## 4. Módulo Connections ✅
 
-- **Situação atual:** Módulo com Domain, Application (interfaces), Infrastructure (ConnectionsDbContext, Postgres). Application central (Araponga.Application) contém ConnectionService, ConnectionPrivacyService, AcceptedConnectionsProvider.
+- **Situação atual:** Módulo com Domain, Application (interfaces), Infrastructure (ConnectionsDbContext, Postgres). Application central (Arah.Application) contém ConnectionService, ConnectionPrivacyService, AcceptedConnectionsProvider.
 - **Recomendação:** Manter. Connections já tem infraestrutura própria no módulo; o serviço de aplicação no Core é uma escolha arquitetural documentada (provedores de aplicação podem ficar no Core). Se no futuro o módulo for extraído como serviço, mover serviços para o módulo.
 - **Status:** Mantido conforme recomendação (nenhuma alteração).
 
@@ -113,21 +113,21 @@ Cada fase: mapeamento no registry, TTL onde aplicável, testes, `.http`.
 
 ### 5.1 Simetria e modularização
 
-- Seguir [TEST_SEPARATION_BY_MODULE.md](TEST_SEPARATION_BY_MODULE.md): testes 100% do módulo no `Araponga.Tests.Modules.X` quando o projeto existir; integração que cruza vários módulos no Core.
+- Seguir [TEST_SEPARATION_BY_MODULE.md](TEST_SEPARATION_BY_MODULE.md): testes 100% do módulo no `Arah.Tests.Modules.X` quando o projeto existir; integração que cruza vários módulos no Core.
 - Criar novos projetos de teste por módulo apenas quando houver demanda (ex.: Feed, Events, Chat, Alerts).
 - **Status:** Convenção documentada no README dos testes e em TEST_SEPARATION_BY_MODULE; projetos por módulo existentes (Connections, Map, Marketplace, Moderation, Subscriptions); Feed/Events/Chat/Alerts sem projeto dedicado por opção (sob demanda).
 
 ### 5.2 Cobertura BFF (meta 80%)
 
 - Garantir testes para: registro de jornadas, cache (TTL, hit/miss), proxy (rewrite auth/me e v2), endpoint GET `/bff/journeys`. Cobertura de código do BFF via testes unitários e de integração.
-- **Status:** Cobertura em dia. Testes em `Araponga.Tests.Bff`: **BffJourneyRegistryTests** (registro, GetApiPathBase, CacheableGetEndpoints), **JourneyCacheTtlTests** (TTL por jornada), **JourneyResponseCacheTests** (ShouldCache, GetTtlSeconds, TryGet/Set — hit/miss), **JourneyApiProxyPathRewriteTests** (rewrite auth/me e v2), **BffJourneysEndpointTests** (GET `/bff/journeys` — integração).
+- **Status:** Cobertura em dia. Testes em `Arah.Tests.Bff`: **BffJourneyRegistryTests** (registro, GetApiPathBase, CacheableGetEndpoints), **JourneyCacheTtlTests** (TTL por jornada), **JourneyResponseCacheTests** (ShouldCache, GetTtlSeconds, TryGet/Set — hit/miss), **JourneyApiProxyPathRewriteTests** (rewrite auth/me e v2), **BffJourneysEndpointTests** (GET `/bff/journeys` — integração).
 
 ### 5.3 Arquitetura de testes
 
-- **Araponga.Tests:** API, Application/Domain/Infrastructure compartilhados, integração cross-module.
-- **Araponga.Tests.Bff:** BFF (proxy, cache, registry, endpoint journeys).
-- **Araponga.Tests.ApiSupport:** Factory e helpers de auth compartilhados (Core e Subscriptions).
-- **Araponga.Tests.Modules.X:** Testes específicos do módulo X.
+- **Arah.Tests:** API, Application/Domain/Infrastructure compartilhados, integração cross-module.
+- **Arah.Tests.Bff:** BFF (proxy, cache, registry, endpoint journeys).
+- **Arah.Tests.ApiSupport:** Factory e helpers de auth compartilhados (Core e Subscriptions).
+- **Arah.Tests.Modules.X:** Testes específicos do módulo X.
 - **Status:** Estrutura atual alinhada ao documento; README dos testes referencia TEST_SEPARATION_BY_MODULE.
 
 ---

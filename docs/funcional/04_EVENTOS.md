@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -168,7 +168,7 @@ Usuário visualiza no mapa
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Feed Comunitário](funcional/03_FEED_COMUNITARIO.md)** - Posts automáticos de eventos
 - **[Mapa Territorial](funcional/05_MAPA_TERRITORIAL.md)** - Eventos aparecem como pins
 - **[API - Eventos](api/60_05_API_EVENTOS.md)** - Documentação técnica

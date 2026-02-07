@@ -28,12 +28,12 @@ jobs:
           cache-dependency-path: |
             backend/**/packages.lock.json
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore Arah.sln
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build Arah.sln --no-restore --configuration Release
       - name: Test with Coverage
         run: |
-          dotnet test backend/Tests/Araponga.Tests/Araponga.Tests.csproj \
+          dotnet test backend/Tests/Arah.Tests/Arah.Tests.csproj \
             --no-build \
             --configuration Release \
             --verbosity normal \
@@ -41,7 +41,7 @@ jobs:
             --results-directory:"${{ runner.temp }}/test-results" \
             -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       - name: Test BFF
-        run: dotnet test backend/Tests/Araponga.Tests.Bff/Araponga.Tests.Bff.csproj --no-build --configuration Release --verbosity normal
+        run: dotnet test backend/Tests/Arah.Tests.Bff/Arah.Tests.Bff.csproj --no-build --configuration Release --verbosity normal
       - name: Coverage summary
         run: |
           F=$(find "${{ runner.temp }}/test-results" -name "coverage.cobertura.xml" 2>/dev/null | head -1)
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: frontend/araponga.app
+        working-directory: frontend/arah.app
     steps:
       - uses: actions/checkout@v4
       - name: Setup Flutter
@@ -112,7 +112,7 @@ jobs:
         uses: codecov/codecov-action@v4
         if: success()
         with:
-          files: frontend/araponga.app/coverage/lcov.info
+          files: frontend/arah.app/coverage/lcov.info
           fail_ci_if_error: false
           flags: flutter
           name: flutter-app-coverage

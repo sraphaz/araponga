@@ -1,6 +1,6 @@
-# Playbook de Incidentes - Araponga
+# Playbook de Incidentes - Arah
 
-Este documento contém procedimentos para responder a incidentes no sistema Araponga.
+Este documento contém procedimentos para responder a incidentes no sistema Arah.
 
 ## 🚨 Classificação de Incidentes
 
@@ -93,16 +93,16 @@ Este documento contém procedimentos para responder a incidentes no sistema Arap
 **Ferramentas**:
 ```bash
 # Health
-curl https://api.araponga.com/health/ready
+curl https://api.Arah.com/health/ready
 
 # Métricas
 curl http://localhost:9090/metrics
 
 # Logs
-docker logs araponga-api --tail 100
+docker logs Arah-api --tail 100
 
 # Database
-psql -h localhost -U araponga -d araponga -c "SELECT COUNT(*) FROM outbox_messages WHERE processed_at_utc IS NULL;"
+psql -h localhost -U Arah -d Arah -c "SELECT COUNT(*) FROM outbox_messages WHERE processed_at_utc IS NULL;"
 ```
 
 ---
@@ -162,7 +162,7 @@ psql -h localhost -U araponga -d araponga -c "SELECT COUNT(*) FROM outbox_messag
    ```bash
    # Docker
    docker ps
-   docker logs araponga-api
+   docker logs Arah-api
    
    # Kubernetes
    kubectl get pods
@@ -171,12 +171,12 @@ psql -h localhost -U araponga -d araponga -c "SELECT COUNT(*) FROM outbox_messag
 
 2. **Verificar Banco de Dados**:
    ```bash
-   psql -h localhost -U araponga -d araponga -c "SELECT 1;"
+   psql -h localhost -U Arah -d Arah -c "SELECT 1;"
    ```
 
 3. **Rollback Imediato** (se deploy recente):
    ```bash
-   kubectl rollout undo deployment/araponga-api
+   kubectl rollout undo deployment/Arah-api
    ```
 
 ---
@@ -190,7 +190,7 @@ psql -h localhost -U araponga -d araponga -c "SELECT COUNT(*) FROM outbox_messag
    ```
 3. **Restaurar Backup** (se necessário):
    ```bash
-   psql -h localhost -U araponga -d araponga < backup_<timestamp>.sql
+   psql -h localhost -U Arah -d Arah < backup_<timestamp>.sql
    ```
 4. **Documentar** o que foi perdido
 
@@ -208,8 +208,8 @@ psql -h localhost -U araponga -d araponga -c "SELECT COUNT(*) FROM outbox_messag
 
 ## 📞 Contatos de Emergência
 
-- **DevOps**: devops@araponga.com
-- **Desenvolvimento**: dev@araponga.com
+- **DevOps**: devops@Arah.com
+- **Desenvolvimento**: dev@Arah.com
 - **Emergência**: +55 (11) 99999-9999
 
 ---

@@ -1,10 +1,10 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using Araponga.Bff.Services;
+using Arah.Bff.Services;
 using Microsoft.Extensions.Options;
 
-namespace Araponga.Bff.Middleware;
+namespace Arah.Bff.Middleware;
 
 /// <summary>
 /// Encaminha requisições /api/v2/journeys/* para a API principal.
@@ -90,8 +90,8 @@ public sealed class JourneyProxyMiddleware
             var isPrematureClose = ex.Message.Contains("prematurely", StringComparison.OrdinalIgnoreCase) ||
                                   ex.Message.Contains("ResponseEnded", StringComparison.OrdinalIgnoreCase);
             var hint = isPrematureClose
-                ? "A API fechou a conexão sem responder. Verifique se a API está rodando e os logs do container/processo (ex.: docker logs para araponga-api)."
-                : "Ensure the API is running (e.g. docker ps for araponga-api, or open " + apiBase + "/health).";
+                ? "A API fechou a conexão sem responder. Verifique se a API está rodando e os logs do container/processo (ex.: docker logs para Arah-api)."
+                : "Ensure the API is running (e.g. docker ps for Arah-api, or open " + apiBase + "/health).";
             await context.Response.WriteAsJsonAsync(new
             {
                 error = "BFF could not reach the API.",

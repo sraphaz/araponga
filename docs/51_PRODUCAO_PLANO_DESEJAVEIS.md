@@ -462,7 +462,7 @@ Implementar cache distribuído quando houver múltiplas instâncias da aplicaç�
    services.AddStackExchangeRedisCache(options =>
    {
        options.Configuration = connectionString;
-       options.InstanceName = "Araponga:";
+       options.InstanceName = "Arah:";
    });
    ```
 

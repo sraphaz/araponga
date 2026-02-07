@@ -119,12 +119,12 @@ Implementar **dashboard de métricas comunitárias** que permite:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Metrics/MetricType.cs`
-- `backend/Araponga.Domain/Metrics/MetricPeriod.cs`
-- `backend/Araponga.Domain/Metrics/TerritoryMetric.cs`
-- `backend/Araponga.Domain/Metrics/TerritoryMetricComparison.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryMetricRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryMetricRepository.cs`
+- `backend/Arah.Domain/Metrics/MetricType.cs`
+- `backend/Arah.Domain/Metrics/MetricPeriod.cs`
+- `backend/Arah.Domain/Metrics/TerritoryMetric.cs`
+- `backend/Arah.Domain/Metrics/TerritoryMetricComparison.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryMetricRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryMetricRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -176,9 +176,9 @@ Implementar **dashboard de métricas comunitárias** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryMetricsAggregationService.cs`
-- `backend/Araponga.Application/Jobs/TerritoryMetricsAggregationJob.cs`
-- `backend/Araponga.Tests/Application/TerritoryMetricsAggregationServiceTests.cs`
+- `backend/Arah.Application/Services/TerritoryMetricsAggregationService.cs`
+- `backend/Arah.Application/Jobs/TerritoryMetricsAggregationJob.cs`
+- `backend/Arah.Tests/Application/TerritoryMetricsAggregationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Agregações funcionando
@@ -215,15 +215,15 @@ Implementar **dashboard de métricas comunitárias** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/TerritoryMetricsController.cs`
-- `backend/Araponga.Api/Contracts/Metrics/ActivityMetricsResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/GovernanceMetricsResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/EconomyMetricsResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/HealthMetricsResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/EngagementMetricsResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/MetricsSummaryResponse.cs`
-- `backend/Araponga.Api/Contracts/Metrics/MetricsComparisonResponse.cs`
-- `backend/Araponga.Tests/Integration/TerritoryMetricsIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/TerritoryMetricsController.cs`
+- `backend/Arah.Api/Contracts/Metrics/ActivityMetricsResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/GovernanceMetricsResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/EconomyMetricsResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/HealthMetricsResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/EngagementMetricsResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/MetricsSummaryResponse.cs`
+- `backend/Arah.Api/Contracts/Metrics/MetricsComparisonResponse.cs`
+- `backend/Arah.Tests/Integration/TerritoryMetricsIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ API funcionando
@@ -256,8 +256,8 @@ Implementar **dashboard de métricas comunitárias** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryMetricsComparisonService.cs`
-- `backend/Araponga.Tests/Application/TerritoryMetricsComparisonServiceTests.cs`
+- `backend/Arah.Application/Services/TerritoryMetricsComparisonService.cs`
+- `backend/Arah.Tests/Application/TerritoryMetricsComparisonServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Comparações funcionando
@@ -291,10 +291,10 @@ Implementar **dashboard de métricas comunitárias** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryMetricsExportService.cs`
-- `backend/Araponga.Infrastructure/Export/CsvExporter.cs`
-- `backend/Araponga.Infrastructure/Export/PdfExporter.cs`
-- `backend/Araponga.Tests/Integration/TerritoryMetricsExportIntegrationTests.cs`
+- `backend/Arah.Application/Services/TerritoryMetricsExportService.cs`
+- `backend/Arah.Infrastructure/Export/CsvExporter.cs`
+- `backend/Arah.Infrastructure/Export/PdfExporter.cs`
+- `backend/Arah.Tests/Integration/TerritoryMetricsExportIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Exportação CSV funcionando

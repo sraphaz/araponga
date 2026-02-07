@@ -50,7 +50,7 @@ Este PR implementa **435 testes de edge cases** cobrindo todas as camadas da arq
 ### Testes (10 arquivos novos)
 
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Domain/
 │   ├── TerritoryModerationRuleEdgeCasesTests.cs      (27 testes)
 │   ├── VotingEdgeCasesTests.cs                        (85 testes total)
@@ -148,7 +148,7 @@ docs/
 
 ### Todos os Testes
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 # Result: Passed! - Failed: 0, Passed: 1233, Skipped: 3, Total: 1236
 ```
 
@@ -196,8 +196,8 @@ dotnet test --filter "FullyQualifiedName~RepositoryEdgeCasesTests|FullyQualified
 ## 🔄 Mudanças em Arquivos Existentes
 
 ### Arquivos Modificados (não relacionados aos testes)
-- `backend/Araponga.Application/Services/AccountDeletionService.cs` (modificação pré-existente)
-- `backend/Araponga.Domain/Users/User.cs` (modificação pré-existente)
+- `backend/Arah.Application/Services/AccountDeletionService.cs` (modificação pré-existente)
+- `backend/Arah.Domain/Users/User.cs` (modificação pré-existente)
 - Vários arquivos de documentação (atualizações de status)
 
 **Nota**: Nenhuma mudança funcional foi introduzida. Apenas testes foram adicionados.

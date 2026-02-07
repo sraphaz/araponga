@@ -47,7 +47,7 @@ Total tests: 11
 - Secret forte usado: `ZPq7X8Y2m0bH3kLwQ1fRrC8n5Eo9Tt4K6SxDVaJpM=`
 - appsettings.json configurado para copiar para output directory
 
-**Arquivo**: `backend/Araponga.Tests/Api/ApiFactory.cs`
+**Arquivo**: `backend/Arah.Tests/Api/ApiFactory.cs`
 
 ### 2. Endpoints Corrigidos ✅
 
@@ -93,13 +93,13 @@ Total tests: 11
 
 ```bash
 # Todos os testes de segurança
-dotnet test backend/Araponga.Tests --filter "FullyQualifiedName~SecurityTests"
+dotnet test backend/Arah.Tests --filter "FullyQualifiedName~SecurityTests"
 
 # Com output detalhado
-dotnet test backend/Araponga.Tests --filter "FullyQualifiedName~SecurityTests" --verbosity normal
+dotnet test backend/Arah.Tests --filter "FullyQualifiedName~SecurityTests" --verbosity normal
 
 # Todos os testes do projeto
-dotnet test backend/Araponga.Tests
+dotnet test backend/Arah.Tests
 ```
 
 ---

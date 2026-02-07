@@ -1,4 +1,4 @@
-# Visão do Produto - Araponga
+# Visão do Produto - Arah
 ## Plataforma de Organização Comunitária Territorial
 
 **Versão**: 3.0  
@@ -10,15 +10,15 @@
 
 ## 🎯 Propósito e Visão
 
-**Araponga** é uma plataforma operacional para organização comunitária territorial que combina infraestrutura digital robusta com governança descentralizada e economia circular tokenizada. A plataforma evolui de um MVP sólido para uma solução completa que compete com padrões de mercado estabelecidos por projetos que recebem investimentos significativos.
+**Arah** é uma plataforma operacional para organização comunitária territorial que combina infraestrutura digital robusta com governança descentralizada e economia circular tokenizada. A plataforma evolui de um MVP sólido para uma solução completa que compete com padrões de mercado estabelecidos por projetos que recebem investimentos significativos.
 
 ### Princípios Fundamentais
 
-Araponga é **território-first** e **comunidade-first**: o território físico é a unidade central e a presença no território é requisito para vínculo. Este princípio fundamental diferencia o Araponga no mercado, combinando organização geográfica com governança participativa e economia local.
+Arah é **território-first** e **comunidade-first**: o território físico é a unidade central e a presença no território é requisito para vínculo. Este princípio fundamental diferencia o Arah no mercado, combinando organização geográfica com governança participativa e economia local.
 
 ### Evolução Estratégica
 
-O Araponga incorpora padrões de mercado estabelecidos (DAO, tokenização, Web3) mantendo os valores fundamentais do projeto. A convergência estratégica não significa abandonar valores, mas sim incorporar tecnologias e modelos essenciais para competir no mercado de investimento.
+O Arah incorpora padrões de mercado estabelecidos (DAO, tokenização, Web3) mantendo os valores fundamentais do projeto. A convergência estratégica não significa abandonar valores, mas sim incorporar tecnologias e modelos essenciais para competir no mercado de investimento.
 
 **Referência Estratégica**: [Estratégia de Convergência de Mercado](./39_ESTRATEGIA_CONVERGENCIA_MERCADO.md) | [Mapa de Funcionalidades](./38_MAPA_FUNCIONALIDADES_MERCADO.md)
 

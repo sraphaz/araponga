@@ -82,7 +82,7 @@ Nível 4: Documentação Profunda (Side Panels/Modals)
 ```
 📚 Fundamentos
   ▼ Visão Geral (expandido)
-  ▶ Como o Araponga funciona
+  ▶ Como o Arah funciona
   ▶ Territórios
   ▶ Conceitos de produto
   ▶ Modelo de domínio
@@ -255,7 +255,7 @@ Nível 4: Documentação Profunda (Side Panels/Modals)
 
 ### **Tab 2: 📚 Fundamentos** (Conceitos)
 - Visão Geral (expandido por padrão)
-- Como o Araponga funciona (accordion)
+- Como o Arah funciona (accordion)
 - Territórios (accordion)
 - Conceitos de produto (accordion)
 - Modelo de domínio (accordion)

@@ -74,12 +74,12 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
 - [x] Testes unitários do modelo
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Domain/Media/MediaAsset.cs`
-- ✅ `backend/Araponga.Domain/Media/MediaAttachment.cs`
-- ✅ `backend/Araponga.Domain/Media/MediaType.cs`
-- ✅ `backend/Araponga.Domain/Media/MediaOwnerType.cs`
-- ✅ `backend/Araponga.Tests/Domain/Media/MediaAssetTests.cs`
-- ✅ `backend/Araponga.Tests/Domain/Media/MediaAttachmentTests.cs`
+- ✅ `backend/Arah.Domain/Media/MediaAsset.cs`
+- ✅ `backend/Arah.Domain/Media/MediaAttachment.cs`
+- ✅ `backend/Arah.Domain/Media/MediaType.cs`
+- ✅ `backend/Arah.Domain/Media/MediaOwnerType.cs`
+- ✅ `backend/Arah.Tests/Domain/Media/MediaAssetTests.cs`
+- ✅ `backend/Arah.Tests/Domain/Media/MediaAttachmentTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelo de domínio criado
@@ -110,9 +110,9 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
   - [x] Tipos permitidos, tamanhos máximos
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/Media/IMediaStorageService.cs`
-- `backend/Araponga.Application/Interfaces/Media/IMediaProcessingService.cs`
-- `backend/Araponga.Application/Interfaces/Media/IMediaValidator.cs`
+- `backend/Arah.Application/Interfaces/Media/IMediaStorageService.cs`
+- `backend/Arah.Application/Interfaces/Media/IMediaProcessingService.cs`
+- `backend/Arah.Application/Interfaces/Media/IMediaValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Interfaces criadas
@@ -151,14 +151,14 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
   - [x] `MediaStorage:MaxVideoSizeBytes`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Media/LocalMediaStorageService.cs`
-- `backend/Araponga.Infrastructure/Media/LocalMediaProcessingService.cs`
-- `backend/Araponga.Infrastructure/Media/MediaValidator.cs`
-- `backend/Araponga.Infrastructure/Media/MediaStorageOptions.cs`
+- `backend/Arah.Infrastructure/Media/LocalMediaStorageService.cs`
+- `backend/Arah.Infrastructure/Media/LocalMediaProcessingService.cs`
+- `backend/Arah.Infrastructure/Media/MediaValidator.cs`
+- `backend/Arah.Infrastructure/Media/MediaStorageOptions.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/appsettings.json`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
+- `backend/Arah.Api/appsettings.json`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
 
 **Dependências NuGet**:
 - `SixLabors.ImageSharp` (processamento de imagens)
@@ -205,15 +205,15 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
   - [x] Índices apropriados
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/Media/IMediaAssetRepository.cs`
-- `backend/Araponga.Application/Interfaces/Media/IMediaAttachmentRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMediaAssetRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMediaAttachmentRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/MediaAssetRecord.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/MediaAttachmentRecord.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryMediaAssetRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryMediaAttachmentRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddMediaAssets.cs`
+- `backend/Arah.Application/Interfaces/Media/IMediaAssetRepository.cs`
+- `backend/Arah.Application/Interfaces/Media/IMediaAttachmentRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMediaAssetRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMediaAttachmentRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/MediaAssetRecord.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/MediaAttachmentRecord.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryMediaAssetRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryMediaAttachmentRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddMediaAssets.cs`
 
 **Critérios de Sucesso**:
 - ✅ Repositórios implementados
@@ -252,8 +252,8 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
 - [x] Testes unitários (com Moq)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/MediaService.cs`
-- `backend/Araponga.Tests/Application/Services/MediaServiceTests.cs`
+- `backend/Arah.Application/Services/MediaService.cs`
+- `backend/Arah.Tests/Application/Services/MediaServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço implementado
@@ -290,10 +290,10 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
 - [x] Documentação Swagger (atributos XML)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/MediaController.cs`
-- `backend/Araponga.Api/Contracts/Media/UploadMediaRequest.cs`
-- `backend/Araponga.Api/Contracts/Media/MediaAssetResponse.cs`
-- `backend/Araponga.Api/Validators/UploadMediaRequestValidator.cs`
+- `backend/Arah.Api/Controllers/MediaController.cs`
+- `backend/Arah.Api/Contracts/Media/UploadMediaRequest.cs`
+- `backend/Arah.Api/Contracts/Media/MediaAssetResponse.cs`
+- `backend/Arah.Api/Validators/UploadMediaRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Controller implementado
@@ -336,9 +336,9 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
   - [x] Validação de extensões maliciosas
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Tests/Integration/MediaServiceIntegrationTests.cs`
-- ✅ `backend/Araponga.Tests/Integration/MediaControllerIntegrationTests.cs`
-- ✅ `backend/Araponga.Tests/Performance/MediaPerformanceTests.cs`
+- ✅ `backend/Arah.Tests/Integration/MediaServiceIntegrationTests.cs`
+- ✅ `backend/Arah.Tests/Integration/MediaControllerIntegrationTests.cs`
+- ✅ `backend/Arah.Tests/Performance/MediaPerformanceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Testes de integração passando
@@ -380,11 +380,11 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
 - [x] Documentação de configuração (incluída em `MEDIA_SYSTEM.md`)
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Infrastructure/Media/S3MediaStorageService.cs`
-- ✅ `backend/Araponga.Infrastructure/Media/AzureBlobMediaStorageService.cs`
-- ✅ `backend/Araponga.Infrastructure/Media/CachedMediaStorageService.cs`
-- ✅ `backend/Araponga.Infrastructure/Media/AsyncMediaProcessingBackgroundService.cs`
-- ✅ `backend/Araponga.Infrastructure/Media/MediaStorageFactory.cs`
+- ✅ `backend/Arah.Infrastructure/Media/S3MediaStorageService.cs`
+- ✅ `backend/Arah.Infrastructure/Media/AzureBlobMediaStorageService.cs`
+- ✅ `backend/Arah.Infrastructure/Media/CachedMediaStorageService.cs`
+- ✅ `backend/Arah.Infrastructure/Media/AsyncMediaProcessingBackgroundService.cs`
+- ✅ `backend/Arah.Infrastructure/Media/MediaStorageFactory.cs`
 - ✅ Documentação incluída em `docs/MEDIA_SYSTEM.md`
 
 **Dependências NuGet** (opcional):
@@ -426,7 +426,7 @@ Criar infraestrutura completa de armazenamento e gerenciamento de mídias (image
 
 **Arquivos Modificados**:
 - ✅ `docs/CHANGELOG.md`
-- ✅ `backend/Araponga.Api/wwwroot/CHANGELOG.md`
+- ✅ `backend/Arah.Api/wwwroot/CHANGELOG.md`
 
 **Critérios de Sucesso**:
 - ✅ Otimizações implementadas (cache, processamento assíncrono)
@@ -588,7 +588,7 @@ wwwroot/
 - ✅ Processamento assíncrono implementado (AsyncMediaProcessingBackgroundService)
 - ✅ Factory Pattern implementado (MediaStorageFactory)
 - ✅ Documentação técnica completa (`docs/MEDIA_SYSTEM.md` - 410 linhas)
-- ✅ Changelog atualizado (`backend/Araponga.Api/wwwroot/CHANGELOG.md`)
+- ✅ Changelog atualizado (`backend/Arah.Api/wwwroot/CHANGELOG.md`)
 
 ### ✅ Implementações Adicionais (Além do Planejado)
 

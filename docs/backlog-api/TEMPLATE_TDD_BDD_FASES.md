@@ -74,7 +74,7 @@ Para cada funcionalidade implementada nesta fase:
 
 **Estrutura de arquivo**:
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Api/BDD/
 │   └── [FeatureName].feature
 ├── Application/BDD/

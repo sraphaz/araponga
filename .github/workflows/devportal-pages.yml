@@ -59,7 +59,7 @@ jobs:
           mkdir -p dist
 
           # ============================================
-          # DevPortal: Copiar para raiz (devportal.araponga.app/)
+          # DevPortal: Copiar para raiz (devportal.arah.app/)
           # ============================================
           echo "📦 Copiando DevPortal para raiz..."
           cp -R frontend/devportal/. dist/
@@ -81,7 +81,7 @@ jobs:
           echo "✅ DevPortal assets encontrado em dist/"
 
           # ============================================
-          # Wiki: Copiar para subpasta /wiki (devportal.araponga.app/wiki/)
+          # Wiki: Copiar para subpasta /wiki (devportal.arah.app/wiki/)
           # ============================================
           if [ -d "frontend/wiki/out" ]; then
             echo "📦 Copiando Wiki para dist/wiki/..."
@@ -120,10 +120,10 @@ jobs:
           # ============================================
           # CNAME: Configurar domínio customizado
           # ============================================
-          echo "devportal.araponga.app" > dist/CNAME
-          echo "✅ CNAME criado: devportal.araponga.app"
-          echo "   - DevPortal: devportal.araponga.app/"
-          echo "   - Wiki: devportal.araponga.app/wiki/"
+          echo "devportal.arah.app" > dist/CNAME
+          echo "✅ CNAME criado: devportal.arah.app"
+          echo "   - DevPortal: devportal.arah.app/"
+          echo "   - Wiki: devportal.arah.app/wiki/"
 
           # ============================================
           # Debug: Listar estrutura final
@@ -185,7 +185,7 @@ jobs:
       - name: Test Wiki Links
         working-directory: frontend/wiki
         env:
-          WIKI_URL: https://devportal.araponga.app/wiki
+          WIKI_URL: https://devportal.arah.app/wiki
         run: |
           npm ci
           npm run test:links

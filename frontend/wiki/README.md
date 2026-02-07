@@ -1,10 +1,10 @@
-# Wiki Araponga
+# Wiki Arah
 
-Frontend da Wiki do Araponga - Documentação completa da plataforma.
+Frontend da Wiki do Arah - Documentação completa da plataforma.
 
 ## 🎯 Sobre
 
-Este é o frontend da Wiki do Araponga, construído com Next.js 15, TypeScript e Tailwind CSS. Utiliza a mesma identidade visual do portal principal, com design elevado e foco em legibilidade e organização.
+Este é o frontend da Wiki do Arah, construído com Next.js 15, TypeScript e Tailwind CSS. Utiliza a mesma identidade visual do portal principal, com design elevado e foco em legibilidade e organização.
 
 ## 🚀 Desenvolvimento
 
@@ -34,7 +34,7 @@ npm run test:links
 - `app/page.tsx` - Página inicial (índice da documentação)
 - `app/docs/[slug]/page.tsx` - Páginas dinâmicas para documentos individuais
 - `app/docs/page.tsx` - Lista completa de todos os documentos
-- `app/globals.css` - Estilos globais com identidade visual do Araponga
+- `app/globals.css` - Estilos globais com identidade visual do Arah
 - `app/layout.tsx` - Layout raiz
 
 ## 🎨 Identidade Visual
@@ -42,7 +42,7 @@ npm run test:links
 O wiki utiliza a mesma identidade visual do portal principal:
 - Paleta Forest (verdes)
 - Glass cards com backdrop blur
-- Watermark do logo Araponga
+- Watermark do logo Arah
 - Tipografia Sora (variável)
 - Design limpo e elevado
 
@@ -52,13 +52,13 @@ Os documentos são carregados dinamicamente da pasta `docs/` na raiz do projeto.
 
 ## 🌐 Deploy
 
-O wiki é deployado automaticamente via **GitHub Actions** para **GitHub Pages** no domínio `wiki.araponga.app`.
+O wiki é deployado automaticamente via **GitHub Actions** para **GitHub Pages** no domínio `wiki.Arah.app`.
 
 ### CI/CD Automatizado
 
 - ✅ Build e testes em cada PR
 - ✅ Deploy automático em push para `main`
-- ✅ CNAME configurado automaticamente para `wiki.araponga.app`
+- ✅ CNAME configurado automaticamente para `wiki.Arah.app`
 
 Ver **[CI_CD.md](./CI_CD.md)** para documentação completa do pipeline.
 
@@ -71,6 +71,6 @@ O wiki também pode ser deployado em:
 
 ## 🔗 Links
 
-- **Wiki**: https://wiki.araponga.app (quando deployado)
-- **Portal**: https://araponga.app
-- **Repositório**: https://github.com/sraphaz/araponga
+- **Wiki**: https://wiki.Arah.app (quando deployado)
+- **Portal**: https://Arah.app
+- **Repositório**: https://github.com/sraphaz/Arah

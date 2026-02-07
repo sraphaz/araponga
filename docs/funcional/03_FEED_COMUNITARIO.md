@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 🎯 Visão Geral
 
-O **Feed Comunitário** é a timeline territorial onde usuários compartilham informações relevantes ao território. É o coração da comunicação comunitária na plataforma Araponga.
+O **Feed Comunitário** é a timeline territorial onde usuários compartilham informações relevantes ao território. É o coração da comunicação comunitária na plataforma Arah.
 
 ### Objetivo
 
@@ -190,7 +190,7 @@ Usuário → Visualiza Post → Escolhe ação:
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)** - Visibilidade baseada em Membership
 - **[Mapa Territorial](funcional/05_MAPA_TERRITORIAL.md)** - Posts georreferenciados aparecem no mapa
 - **[API - Feed](api/60_04_API_FEED.md)** - Documentação técnica

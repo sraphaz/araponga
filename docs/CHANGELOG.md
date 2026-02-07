@@ -1,4 +1,4 @@
-# Changelog - Araponga
+# Changelog - Arah
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 

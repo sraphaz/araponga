@@ -1,4 +1,4 @@
-namespace Araponga.Bff.Contracts.Journeys.Onboarding;
+namespace Arah.Bff.Contracts.Journeys.Onboarding;
 
 public sealed record CompleteOnboardingRequest(
     string? AuthToken,

@@ -1,5 +1,5 @@
 # ============================================
-# Araponga - Configuração do ambiente local
+# Arah - Configuração do ambiente local
 # ============================================
 # Garante que .env existe (copia de .env.example), gera JWT para dev se necessário.
 # Execute na raiz do repo: .\scripts\setup-env.ps1
@@ -21,7 +21,7 @@ function Write-Warn { param([string]$Message) Write-Host $Message -ForegroundCol
 
 if ($Help) {
     Write-Host ""
-    Write-Info "=== Araponga - Setup do ambiente ==="
+    Write-Info "=== Arah - Setup do ambiente ==="
     Write-Host ""
     Write-Host "  Garante .env na raiz (cópia de .env.example)."
     Write-Host "  Se JWT_SIGNINGKEY estiver com valor padrão, gera um para desenvolvimento."

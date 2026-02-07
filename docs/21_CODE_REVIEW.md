@@ -1,8 +1,8 @@
-# Revisao Geral do Codigo - Araponga
+# Revisao Geral do Codigo - Arah
 
 ## Resumo Executivo
 
-Esta revisao identifica gaps, incongruencias, oportunidades de refatoracao, gargalos tecnicos e validacao de design patterns e principios SOLID no codigo do Araponga.
+Esta revisao identifica gaps, incongruencias, oportunidades de refatoracao, gargalos tecnicos e validacao de design patterns e principios SOLID no codigo do Arah.
 
 **Data da Revisao**: 2026-01-13  
 **Escopo**: Backend completo (API, Application, Domain, Infrastructure)
@@ -523,7 +523,7 @@ public interface IFeedRepository
 
 ## 8. Conclusao
 
-O codigo do Araponga esta bem estruturado seguindo Clean Architecture e principios SOLID na maioria dos casos. As principais areas de melhoria sao:
+O codigo do Arah esta bem estruturado seguindo Clean Architecture e principios SOLID na maioria dos casos. As principais areas de melhoria sao:
 
 1. **Refatoracao de services grandes** (especialmente FeedService)
 2. **Padronizacao de tratamento de erros**

@@ -1,4 +1,4 @@
-# Revisão de Arte e Design - Wiki Araponga
+# Revisão de Arte e Design - Wiki Arah
 
 **Data**: 2025-01-20  
 **Versão**: 1.0  
@@ -9,7 +9,7 @@
 
 ## 📋 Resumo Executivo
 
-Esta revisão analisa a implementação atual da Wiki contra as diretrizes do Design System do Araponga, identificando conformidades e áreas que precisam de ajustes para garantir coerência visual e alinhamento com os princípios estabelecidos.
+Esta revisão analisa a implementação atual da Wiki contra as diretrizes do Design System do Arah, identificando conformidades e áreas que precisam de ajustes para garantir coerência visual e alinhamento com os princípios estabelecidos.
 
 ### Status Geral
 
@@ -332,7 +332,7 @@ A Wiki está **80% conforme** com o Design System. As principais áreas que prec
 2. **Padronização de espaçamentos** para escala 8px
 3. **Validação de contraste WCAG AA**
 
-Após essas correções, a Wiki estará 100% alinhada com as diretrizes do Design System do Araponga.
+Após essas correções, a Wiki estará 100% alinhada com as diretrizes do Design System do Arah.
 
 ---
 

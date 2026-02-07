@@ -67,12 +67,12 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Testes unitários
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Users/User.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/UserRecord.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs`
+- `backend/Arah.Domain/Users/User.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/UserRecord.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Domain/Users/UserAvatarBioTests.cs`
+- `backend/Arah.Tests/Domain/Users/UserAvatarBioTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Campos adicionados ao modelo
@@ -106,10 +106,10 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Testes unitários
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/UserProfileService.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Application/Services/UserProfileServiceAvatarBioTests.cs`
+- `backend/Arah.Tests/Application/Services/UserProfileServiceAvatarBioTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço atualizado
@@ -142,12 +142,12 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Documentação Swagger
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
-- `backend/Araponga.Api/Contracts/Users/UpdateBioRequest.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Api/Contracts/Users/UpdateBioRequest.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Validators/UpdateBioRequestValidator.cs`
+- `backend/Arah.Api/Validators/UpdateBioRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints implementados
@@ -180,12 +180,12 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
   - [ ] Perfil privado visível apenas pelo próprio usuário
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Contracts/Users/UserProfilePublicResponse.cs`
-- `backend/Araponga.Tests/Integration/UserProfilePrivacyTests.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfilePublicResponse.cs`
+- `backend/Arah.Tests/Integration/UserProfilePrivacyTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoint implementado
@@ -217,8 +217,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Documentar que estatísticas são focadas em **contribuição**, não popularidade
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Models/UserProfileStats.cs`
-- `backend/Araponga.Application/Models/UserProfileStatsByTerritory.cs`
+- `backend/Arah.Application/Models/UserProfileStats.cs`
+- `backend/Arah.Application/Models/UserProfileStatsByTerritory.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelo de estatísticas criado
@@ -251,8 +251,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/UserProfileStatsService.cs`
-- `backend/Araponga.Tests/Application/Services/UserProfileStatsServiceTests.cs`
+- `backend/Arah.Application/Services/UserProfileStatsService.cs`
+- `backend/Arah.Tests/Application/Services/UserProfileStatsServiceTests.cs`
 
 **Dependências**:
 - `IFeedRepository` (para posts)
@@ -288,11 +288,11 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Contracts/Users/UserProfileStatsResponse.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileStatsByTerritoryResponse.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileStatsResponse.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileStatsByTerritoryResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints implementados
@@ -317,8 +317,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Estatísticas integradas ao perfil
@@ -353,8 +353,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
   - [ ] Validação de permissões
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Integration/UserProfileIntegrationTests.cs`
-- `backend/Araponga.Tests/Integration/UserProfilePrivacyTests.cs`
+- `backend/Arah.Tests/Integration/UserProfileIntegrationTests.cs`
+- `backend/Arah.Tests/Integration/UserProfilePrivacyTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Testes de integração passando
@@ -383,8 +383,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
   - [ ] Upload de avatar < 2s
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/UserProfileStatsService.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
+- `backend/Arah.Application/Services/UserProfileStatsService.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Cache implementado
@@ -495,7 +495,7 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 
 #### 1. Modelo de Domínio `User`
 
-**Arquivo**: `backend/Araponga.Domain/Users/User.cs`
+**Arquivo**: `backend/Arah.Domain/Users/User.cs`
 
 **Mudanças**:
 - [ ] Adicionar campo `AvatarMediaAssetId` (Guid?, nullable)
@@ -513,7 +513,7 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 
 #### 2. Migração do Banco de Dados
 
-**Arquivo**: `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs`
+**Arquivo**: `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs`
 
 **Mudanças**:
 - [ ] Adicionar coluna `avatar_media_asset_id` (uuid, nullable)
@@ -527,7 +527,7 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 
 #### 3. `UserProfileService`
 
-**Arquivo**: `backend/Araponga.Application/Services/UserProfileService.cs`
+**Arquivo**: `backend/Arah.Application/Services/UserProfileService.cs`
 
 **Mudanças**:
 - [ ] Atualizar `GetProfileAsync`:
@@ -553,7 +553,7 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 
 #### 4. `UserProfileController`
 
-**Arquivo**: `backend/Araponga.Api/Controllers/UserProfileController.cs`
+**Arquivo**: `backend/Arah.Api/Controllers/UserProfileController.cs`
 
 **Mudanças**:
 - [ ] Atualizar `GET /api/v1/users/me/profile`:
@@ -576,7 +576,7 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 
 #### 5. `UserProfileResponse`
 
-**Arquivo**: `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
+**Arquivo**: `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
 
 **Mudanças**:
 - [ ] Adicionar campo `AvatarUrl` (string?, nullable)
@@ -606,8 +606,8 @@ Completar funcionalidades de perfil de usuário para permitir transição suave 
 #### 7. Testes Existentes
 
 **Arquivos Afetados**:
-- `backend/Araponga.Tests/Application/Services/UserProfileServiceTests.cs`
-- `backend/Araponga.Tests/Integration/UserProfileIntegrationTests.cs`
+- `backend/Arah.Tests/Application/Services/UserProfileServiceTests.cs`
+- `backend/Arah.Tests/Integration/UserProfileIntegrationTests.cs`
 
 **Mudanças**:
 - [ ] Testes existentes devem continuar passando (campos opcionais)

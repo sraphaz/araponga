@@ -222,7 +222,7 @@
 ### Template de Relatório
 
 ```markdown
-# Relatório de Penetration Testing - Araponga API
+# Relatório de Penetration Testing - Arah API
 
 **Data**: [DATA]
 **Testador**: [NOME]

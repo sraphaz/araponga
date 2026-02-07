@@ -1,6 +1,6 @@
 # Arquitetura de Services
 
-Este documento descreve a arquitetura dos services da camada de aplicação do Araponga, especialmente após a refatoração do `FeedService`.
+Este documento descreve a arquitetura dos services da camada de aplicação do Arah, especialmente após a refatoração do `FeedService`.
 
 ## Princípios de Design
 
@@ -107,7 +107,7 @@ Todos os services são registrados via Dependency Injection em `ServiceCollectio
 ## Padrões de Resultado
 
 ### Result<T>
-Para operações que podem falhar, o padrão `Result<T>` está disponível em `Araponga.Application/Common/Result.cs`:
+Para operações que podem falhar, o padrão `Result<T>` está disponível em `Arah.Application/Common/Result.cs`:
 ```csharp
 public sealed class Result<T>
 {

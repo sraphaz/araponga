@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fase**: 22  
 **Prioridade**: 🟡 Alta (Economia Local)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -86,7 +86,7 @@ Transação Processada → Saldo Atualizado
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Web3 e Blockchain](funcional/20_WEB3_BLOCKCHAIN.md)** - Integração futura
 - **[DAO e Tokenização](funcional/21_DAO_TOKENIZACAO.md)** - Tokens on-chain
 

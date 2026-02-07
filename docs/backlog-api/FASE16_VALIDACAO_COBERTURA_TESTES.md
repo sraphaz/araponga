@@ -43,9 +43,9 @@
 | Estatísticas | ✅ `UserProfileStatsServiceTests.cs` | ~70% | ✅ Completo |
 
 **Testes Identificados**:
-- ✅ `backend/Araponga.Tests/Domain/Users/UserAvatarBioTests.cs`
-- ✅ `backend/Araponga.Tests/Application/Services/UserProfileServiceAvatarBioTests.cs`
-- ✅ `backend/Araponga.Tests/Application/UserProfileStatsServiceTests.cs`
+- ✅ `backend/Arah.Tests/Domain/Users/UserAvatarBioTests.cs`
+- ✅ `backend/Arah.Tests/Application/Services/UserProfileServiceAvatarBioTests.cs`
+- ✅ `backend/Arah.Tests/Application/UserProfileStatsServiceTests.cs`
 
 **Status**: ✅ **~75% coberto**
 
@@ -150,7 +150,7 @@
 
 ### 1. SubscriptionAnalyticsService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `GetMRRAsync_ReturnsCorrectMRR_WhenSubscriptionsExist`
@@ -172,7 +172,7 @@
 
 ### 2. SubscriptionPlanAdminService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `CreatePlanAsync_CreatesPlan_WhenValidData`
@@ -192,7 +192,7 @@
 
 ### 3. CouponService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/CouponServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/CouponServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `CreateCouponAsync_CreatesCoupon_WhenValidData`
@@ -212,7 +212,7 @@
 
 ### 4. StripeWebhookService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/StripeWebhookServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/StripeWebhookServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `ProcessWebhookAsync_ProcessesSubscriptionCreated_WhenValidEvent`
@@ -232,7 +232,7 @@
 
 ### 5. MercadoPagoWebhookService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/MercadoPagoWebhookServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/MercadoPagoWebhookServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `ProcessWebhookAsync_ProcessesSubscriptionCreated_WhenValidEvent`
@@ -248,7 +248,7 @@
 
 ### 6. SubscriptionRenewalService ⚠️ CRÍTICO
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/SubscriptionRenewalServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/SubscriptionRenewalServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `ProcessRenewalsAsync_ProcessesRenewals_WhenDue`
@@ -264,7 +264,7 @@
 
 ### 7. SubscriptionTrialService ✅ COMPLETO
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionTrialServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionTrialServiceTests.cs`
 
 **Cenários Implementados**:
 - ✅ `GetTrialsExpiringSoonAsync_ReturnsTrials_WhenExpiringSoon` - Testa busca de trials expirando em breve
@@ -283,7 +283,7 @@
 
 ### 8. SubscriptionService - Cenários Adicionais ⚠️ IMPORTANTE
 
-**Arquivo a Atualizar**: `backend/Araponga.Tests/Application/SubscriptionServiceTests.cs`
+**Arquivo a Atualizar**: `backend/Arah.Tests/Application/SubscriptionServiceTests.cs`
 
 **Cenários Adicionais Necessários**:
 - [ ] `UpgradeSubscriptionAsync_UpgradesSubscription_WhenValidPlan`
@@ -303,7 +303,7 @@
 
 ### 9. SubscriptionPlanSeedService ⚠️ IMPORTANTE
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
 
 **Cenários Necessários**:
 - [ ] `SeedFreePlanAsync_CreatesPlan_WhenNotExists`
@@ -317,7 +317,7 @@
 
 ### 10. Testes de Integração - Subscriptions ⚠️ IMPORTANTE
 
-**Arquivo a Criar**: `backend/Araponga.Tests/Api/SubscriptionIntegrationTests.cs`
+**Arquivo a Criar**: `backend/Arah.Tests/Api/SubscriptionIntegrationTests.cs`
 
 **Cenários Necessários**:
 - [ ] `POST /api/v1/subscriptions_CreatesSubscription_WhenValidData`

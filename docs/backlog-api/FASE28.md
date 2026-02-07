@@ -122,19 +122,19 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/DigitalServices/TerritoryServiceAgreement.cs`
-- `backend/Araponga.Domain/DigitalServices/TerritoryServiceQuotaPool.cs`
-- `backend/Araponga.Domain/DigitalServices/TerritoryQuotaAllocation.cs`
-- `backend/Araponga.Domain/DigitalServices/TerritoryQuotaUsageRequest.cs`
-- `backend/Araponga.Domain/DigitalServices/AgreementStatus.cs`
-- `backend/Araponga.Domain/DigitalServices/AgreementType.cs`
-- `backend/Araponga.Domain/DigitalServices/QuotaDistributionPolicy.cs`
-- `backend/Araponga.Domain/DigitalServices/AllocationStatus.cs`
-- `backend/Araponga.Domain/DigitalServices/RequestStatus.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryServiceAgreementRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryServiceQuotaPoolRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryQuotaAllocationRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryQuotaUsageRequestRepository.cs`
+- `backend/Arah.Domain/DigitalServices/TerritoryServiceAgreement.cs`
+- `backend/Arah.Domain/DigitalServices/TerritoryServiceQuotaPool.cs`
+- `backend/Arah.Domain/DigitalServices/TerritoryQuotaAllocation.cs`
+- `backend/Arah.Domain/DigitalServices/TerritoryQuotaUsageRequest.cs`
+- `backend/Arah.Domain/DigitalServices/AgreementStatus.cs`
+- `backend/Arah.Domain/DigitalServices/AgreementType.cs`
+- `backend/Arah.Domain/DigitalServices/QuotaDistributionPolicy.cs`
+- `backend/Arah.Domain/DigitalServices/AllocationStatus.cs`
+- `backend/Arah.Domain/DigitalServices/RequestStatus.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryServiceAgreementRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryServiceQuotaPoolRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryQuotaAllocationRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryQuotaUsageRequestRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -174,8 +174,8 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryServiceNegotiationService.cs`
-- `backend/Araponga.Tests/Application/TerritoryServiceNegotiationServiceTests.cs`
+- `backend/Arah.Application/Services/TerritoryServiceNegotiationService.cs`
+- `backend/Arah.Tests/Application/TerritoryServiceNegotiationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de negociação funcionando
@@ -216,8 +216,8 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryQuotaPoolService.cs`
-- `backend/Araponga.Tests/Application/TerritoryQuotaPoolServiceTests.cs`
+- `backend/Arah.Application/Services/TerritoryQuotaPoolService.cs`
+- `backend/Arah.Tests/Application/TerritoryQuotaPoolServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Pool de quotas funcionando
@@ -255,8 +255,8 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryQuotaAllocationService.cs`
-- `backend/Araponga.Tests/Application/TerritoryQuotaAllocationServiceTests.cs`
+- `backend/Arah.Application/Services/TerritoryQuotaAllocationService.cs`
+- `backend/Arah.Tests/Application/TerritoryQuotaAllocationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de alocação funcionando
@@ -295,8 +295,8 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/DigitalServiceManager.cs`
-- `backend/Araponga.Application/Services/ChatAIService.cs` (se existir)
+- `backend/Arah.Application/Services/DigitalServiceManager.cs`
+- `backend/Arah.Application/Services/ChatAIService.cs` (se existir)
 
 **Critérios de Sucesso**:
 - ✅ Integração funcionando
@@ -341,13 +341,13 @@ Implementar sistema de **negociação territorial de serviços digitais** que pe
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryServiceDashboardService.cs`
-- `backend/Araponga.Api/Controllers/TerritoryServiceAgreementController.cs`
-- `backend/Araponga.Api/Controllers/TerritoryQuotaPoolController.cs`
-- `backend/Araponga.Api/Controllers/TerritoryServiceDashboardController.cs`
-- `backend/Araponga.Api/Contracts/TerritoryServices/ServiceAgreementResponse.cs`
-- `backend/Araponga.Api/Contracts/TerritoryServices/QuotaPoolResponse.cs`
-- `backend/Araponga.Api/Contracts/TerritoryServices/DashboardResponse.cs`
+- `backend/Arah.Application/Services/TerritoryServiceDashboardService.cs`
+- `backend/Arah.Api/Controllers/TerritoryServiceAgreementController.cs`
+- `backend/Arah.Api/Controllers/TerritoryQuotaPoolController.cs`
+- `backend/Arah.Api/Controllers/TerritoryServiceDashboardController.cs`
+- `backend/Arah.Api/Contracts/TerritoryServices/ServiceAgreementResponse.cs`
+- `backend/Arah.Api/Contracts/TerritoryServices/QuotaPoolResponse.cs`
+- `backend/Arah.Api/Contracts/TerritoryServices/DashboardResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Dashboard funcionando

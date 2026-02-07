@@ -74,9 +74,9 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Legal/TermsAndConditions.cs`
-- `backend/Araponga.Domain/Legal/TermsAcceptance.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTermsAndConditions.cs`
+- `backend/Arah.Domain/Legal/TermsAndConditions.cs`
+- `backend/Arah.Domain/Legal/TermsAcceptance.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTermsAndConditions.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -107,13 +107,13 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/ITermsAndConditionsRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITermsAcceptanceRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTermsAndConditionsRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTermsAcceptanceRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTermsAndConditionsRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTermsAcceptanceRepository.cs`
-- `backend/Araponga.Tests/Application/TermsRepositoryTests.cs`
+- `backend/Arah.Application/Interfaces/ITermsAndConditionsRepository.cs`
+- `backend/Arah.Application/Interfaces/ITermsAcceptanceRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTermsAndConditionsRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTermsAcceptanceRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryTermsAndConditionsRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryTermsAcceptanceRepository.cs`
+- `backend/Arah.Tests/Application/TermsRepositoryTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Repositórios implementados
@@ -154,8 +154,8 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TermsService.cs`
-- `backend/Araponga.Tests/Application/TermsServiceTests.cs`
+- `backend/Arah.Application/Services/TermsService.cs`
+- `backend/Arah.Tests/Application/TermsServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Service implementado
@@ -188,15 +188,15 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/TermsController.cs`
-- `backend/Araponga.Api/Contracts/Legal/TermsResponse.cs`
-- `backend/Araponga.Api/Contracts/Legal/AcceptTermsRequest.cs`
-- `backend/Araponga.Api/Contracts/Legal/CreateTermsRequest.cs`
-- `backend/Araponga.Api/Contracts/Legal/TermsAcceptanceHistoryResponse.cs`
-- `backend/Araponga.Api/Contracts/Legal/TermsStatusResponse.cs`
-- `backend/Araponga.Api/Validators/AcceptTermsRequestValidator.cs`
-- `backend/Araponga.Api/Validators/CreateTermsRequestValidator.cs`
-- `backend/Araponga.Tests/Api/TermsIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/TermsController.cs`
+- `backend/Arah.Api/Contracts/Legal/TermsResponse.cs`
+- `backend/Arah.Api/Contracts/Legal/AcceptTermsRequest.cs`
+- `backend/Arah.Api/Contracts/Legal/CreateTermsRequest.cs`
+- `backend/Arah.Api/Contracts/Legal/TermsAcceptanceHistoryResponse.cs`
+- `backend/Arah.Api/Contracts/Legal/TermsStatusResponse.cs`
+- `backend/Arah.Api/Validators/AcceptTermsRequestValidator.cs`
+- `backend/Arah.Api/Validators/CreateTermsRequestValidator.cs`
+- `backend/Arah.Tests/Api/TermsIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -224,11 +224,11 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AuthService.cs`
-- `backend/Araponga.Api/Controllers/AuthController.cs`
+- `backend/Arah.Application/Services/AuthService.cs`
+- `backend/Arah.Api/Controllers/AuthController.cs`
 
 **Arquivos a Criar** (opcional):
-- `backend/Araponga.Api/Middleware/RequireTermsAcceptanceMiddleware.cs`
+- `backend/Arah.Api/Middleware/RequireTermsAcceptanceMiddleware.cs`
 
 **Critérios de Sucesso**:
 - ✅ Validação integrada no fluxo de autenticação
@@ -257,11 +257,11 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/TermsService.cs`
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+- `backend/Arah.Application/Services/TermsService.cs`
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Templates/Notifications/terms-updated.html` (opcional, para email)
+- `backend/Arah.Api/Templates/Notifications/terms-updated.html` (opcional, para email)
 
 **Critérios de Sucesso**:
 - ✅ Notificações enviadas quando termos são atualizados
@@ -290,10 +290,10 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Documentar gaps encontrados
 
 **Arquivos a Verificar**:
-- `backend/Araponga.Domain/Users/User.cs`
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Api/Controllers/UserPublicProfileController.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Domain/Users/User.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Controllers/UserPublicProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os endpoints funcionando
@@ -326,13 +326,13 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Documentar gaps encontrados
 
 **Arquivos a Verificar**:
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
-- `backend/Araponga.Api/Controllers/RatingController.cs`
-- `backend/Araponga.Api/Controllers/MarketplaceSearchController.cs`
-- `backend/Araponga.Api/Controllers/UserActivityController.cs`
-- `backend/Araponga.Domain/Marketplace/StoreRating.cs`
-- `backend/Araponga.Domain/Marketplace/StoreItemRating.cs`
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
+- `backend/Arah.Api/Controllers/RatingController.cs`
+- `backend/Arah.Api/Controllers/MarketplaceSearchController.cs`
+- `backend/Arah.Api/Controllers/UserActivityController.cs`
+- `backend/Arah.Domain/Marketplace/StoreRating.cs`
+- `backend/Arah.Domain/Marketplace/StoreItemRating.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os endpoints funcionando
@@ -368,13 +368,13 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Documentar gaps encontrados
 
 **Arquivos a Verificar**:
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
-- `backend/Araponga.Api/Controllers/AnalyticsController.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs`
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Application/Services/AnalyticsService.cs`
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Api/Controllers/AnalyticsController.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Application/Services/AnalyticsService.cs`
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os endpoints funcionando
@@ -415,13 +415,13 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Documentar gaps encontrados
 
 **Arquivos a Verificar**:
-- `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
-- `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- `backend/Araponga.Application/Services/EmailQueueService.cs`
-- `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
-- `backend/Araponga.Api/Templates/Email/*.html`
-- `backend/Araponga.Api/appsettings.json` (configuração SMTP)
+- `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
+- `backend/Arah.Application/Services/EmailTemplateService.cs`
+- `backend/Arah.Application/Services/EmailQueueService.cs`
+- `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+- `backend/Arah.Api/Templates/Email/*.html`
+- `backend/Arah.Api/appsettings.json` (configuração SMTP)
 
 **Critérios de Sucesso**:
 - ✅ Configuração SMTP funcionando
@@ -458,11 +458,11 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Aplicar otimizações identificadas
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Performance/FeedPerformanceTests.cs`
-- `backend/Araponga.Tests/Performance/VotingPerformanceTests.cs` (já existe, validar)
-- `backend/Araponga.Tests/Performance/MarketplacePerformanceTests.cs`
-- `backend/Araponga.Tests/Performance/SearchPerformanceTests.cs`
-- `backend/Araponga.Tests/Performance/DataExportPerformanceTests.cs`
+- `backend/Arah.Tests/Performance/FeedPerformanceTests.cs`
+- `backend/Arah.Tests/Performance/VotingPerformanceTests.cs` (já existe, validar)
+- `backend/Arah.Tests/Performance/MarketplacePerformanceTests.cs`
+- `backend/Arah.Tests/Performance/SearchPerformanceTests.cs`
+- `backend/Arah.Tests/Performance/DataExportPerformanceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Testes de performance criados
@@ -500,11 +500,11 @@ Após validação completa das fases 1-14.5, identificamos:
 - [ ] Documentar otimizações aplicadas
 
 **Arquivos a Revisar**:
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/MarketplaceSearchService.cs`
-- `backend/Araponga.Infrastructure/Postgres/Postgres*.cs` (repositórios)
-- `backend/Araponga.Infrastructure/Postgres/Migrations/*.cs` (índices)
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/MarketplaceSearchService.cs`
+- `backend/Arah.Infrastructure/Postgres/Postgres*.cs` (repositórios)
+- `backend/Arah.Infrastructure/Postgres/Migrations/*.cs` (índices)
 
 **Critérios de Sucesso**:
 - ✅ Queries otimizadas
@@ -616,18 +616,18 @@ Após validação completa das fases 1-14.5, identificamos:
 **Total**: 81 cenários de teste (61 críticos + 20 importantes)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
-- `backend/Araponga.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
-- `backend/Araponga.Tests/Application/CouponServiceTests.cs`
-- `backend/Araponga.Tests/Application/StripeWebhookServiceTests.cs`
-- `backend/Araponga.Tests/Application/MercadoPagoWebhookServiceTests.cs`
-- `backend/Araponga.Tests/Application/SubscriptionRenewalServiceTests.cs`
-- `backend/Araponga.Tests/Application/SubscriptionTrialServiceTests.cs`
-- `backend/Araponga.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
-- `backend/Araponga.Tests/Api/SubscriptionIntegrationTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
+- `backend/Arah.Tests/Application/CouponServiceTests.cs`
+- `backend/Arah.Tests/Application/StripeWebhookServiceTests.cs`
+- `backend/Arah.Tests/Application/MercadoPagoWebhookServiceTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionRenewalServiceTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionTrialServiceTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
+- `backend/Arah.Tests/Api/SubscriptionIntegrationTests.cs`
 
 **Arquivos a Atualizar**:
-- `backend/Araponga.Tests/Application/SubscriptionServiceTests.cs` (adicionar 10 cenários)
+- `backend/Arah.Tests/Application/SubscriptionServiceTests.cs` (adicionar 10 cenários)
 
 **Critérios de Sucesso**:
 - ✅ Todos os 81 cenários implementados

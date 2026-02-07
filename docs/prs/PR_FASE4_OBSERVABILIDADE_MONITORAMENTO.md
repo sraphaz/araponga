@@ -9,7 +9,7 @@
 
 ## 📋 Resumo
 
-Este PR implementa observabilidade completa no sistema Araponga, incluindo logs centralizados (Serilog + Seq), métricas de negócio e sistema (Prometheus), distributed tracing (OpenTelemetry), e documentação operacional completa (runbook, troubleshooting, incident playbook).
+Este PR implementa observabilidade completa no sistema Arah, incluindo logs centralizados (Serilog + Seq), métricas de negócio e sistema (Prometheus), distributed tracing (OpenTelemetry), e documentação operacional completa (runbook, troubleshooting, incident playbook).
 
 ---
 
@@ -34,8 +34,8 @@ Este PR implementa observabilidade completa no sistema Araponga, incluindo logs 
 - **Structured logging** implementado
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs`
 
 ---
 
@@ -52,14 +52,14 @@ Este PR implementa observabilidade completa no sistema Araponga, incluindo logs 
 - **Métricas de banco**: DatabaseQueryDuration
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Metrics/ArapongaMetrics.cs`
+- `backend/Arah.Application/Metrics/ArapongaMetrics.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Application/Services/*.cs` (6 serviços)
-- `backend/Araponga.Application/Services/CacheMetricsService.cs`
-- `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs`
-- `backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Application/Services/*.cs` (6 serviços)
+- `backend/Arah.Application/Services/CacheMetricsService.cs`
+- `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs`
+- `backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs`
 
 ---
 
@@ -69,12 +69,12 @@ Este PR implementa observabilidade completa no sistema Araponga, incluindo logs 
 - **Tracing de HTTP requests** (ASP.NET Core instrumentation)
 - **Tracing de database queries** (Entity Framework Core instrumentation)
 - **Tracing de HTTP clients** (HttpClient instrumentation)
-- **Custom sources**: `AddSource("Araponga.*")`
+- **Custom sources**: `AddSource("Arah.*")`
 - **Exporters**: OTLP, Jaeger, Console (desenvolvimento)
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/Araponga.Api.csproj` (pacotes NuGet adicionados)
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/Arah.Api.csproj` (pacotes NuGet adicionados)
 
 ---
 

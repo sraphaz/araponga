@@ -1,4 +1,4 @@
-# Avaliação Geral da Aplicação Araponga
+# Avaliação Geral da Aplicação Arah
 
 **Data**: 2025-01-16  
 **Última Atualização**: 2025-01-16  
@@ -28,7 +28,7 @@
 
 ### Visão Geral
 
-**Araponga** é uma plataforma **território-first** e **comunidade-first** para organização comunitária local. O território físico é a unidade central e a presença física é requisito para vínculo.
+**Arah** é uma plataforma **território-first** e **comunidade-first** para organização comunitária local. O território físico é a unidade central e a presença física é requisito para vínculo.
 
 ### Princípios Fundamentais
 
@@ -781,7 +781,7 @@ Ver: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`](./ENTERPRISE_COVERAGE_P
 
 - ✅ Testes bem organizados por camada
 - ✅ Nomenclatura clara e descritiva
-- ✅ Princípios documentados (`Araponga.Tests/README.md`)
+- ✅ Princípios documentados (`Arah.Tests/README.md`)
 - ✅ Isolamento correto (cada teste cria seu próprio data store)
 
 ### Avaliação de Cobertura de Testes
@@ -938,7 +938,7 @@ Ver: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`](./ENTERPRISE_COVERAGE_P
 
 ### Conclusão
 
-A aplicação **Araponga** demonstra:
+A aplicação **Arah** demonstra:
 
 ✅ **Pontos Fortes**:
 - Arquitetura sólida e bem estruturada

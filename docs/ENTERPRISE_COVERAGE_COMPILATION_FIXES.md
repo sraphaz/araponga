@@ -23,7 +23,7 @@
 ### 2. ChatServiceEdgeCasesTests.cs
 **Problema**: Tipos não encontrados (`ITerritoryMediaConfigRepository`, `IGlobalMediaLimits`, `IFeatureFlagRepository`)  
 **Solução**: 
-- Adicionado `using Araponga.Application.Interfaces.Media;`
+- Adicionado `using Arah.Application.Interfaces.Media;`
 - Corrigido `IFeatureFlagRepository` → `IFeatureFlagService` (5 ocorrências)
 
 ### 3. PostgresRepositoryIntegrationTests.cs
@@ -43,7 +43,7 @@
 **Solução**:
 - Corrigido construtor de `User` com todos os 9 parâmetros obrigatórios (7 ocorrências)
 - Substituído `AddAsync` por `Add` em listas (4 ocorrências)
-- Adicionados usings: `Araponga.Domain.Membership`, `Araponga.Domain.Territories`
+- Adicionados usings: `Arah.Domain.Membership`, `Arah.Domain.Territories`
 - Corrigidos construtores de `Territory` e `TerritoryMembership`
 
 ### 5. VerificationServiceEdgeCasesTests.cs
@@ -91,7 +91,7 @@
 
 ### 8. FileStorageEdgeCasesTests.cs
 **Problema**: Namespace incorreto `Domain.Evidence`  
-**Solução**: `Domain.Evidence` → `Araponga.Domain.Evidence` (2 ocorrências)
+**Solução**: `Domain.Evidence` → `Arah.Domain.Evidence` (2 ocorrências)
 
 ### 9. AuthEdgeCasesTests.cs
 **Problema**: Construtor de `User` com 6 argumentos (esperava 9)  

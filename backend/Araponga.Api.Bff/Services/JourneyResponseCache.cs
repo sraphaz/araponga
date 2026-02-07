@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
-namespace Araponga.Bff.Services;
+namespace Arah.Bff.Services;
 
 /// <summary>
 /// Cache de respostas HTTP das jornadas (GET 2xx) para reduzir chamadas à API.

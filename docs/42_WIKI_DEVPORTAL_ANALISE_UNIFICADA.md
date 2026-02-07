@@ -1,4 +1,4 @@
-# Análise Estratégica Unificada - Wiki e DevPortal Araponga
+# Análise Estratégica Unificada - Wiki e DevPortal Arah
 ## Consultoria de Alto Padrão: Design, Narrativa, Estrutura e Separação de Responsabilidades
 
 **Versão**: 1.0  
@@ -11,7 +11,7 @@
 
 ## 📋 Sumário Executivo
 
-Este documento apresenta uma análise estratégica unificada da **Wiki Araponga** (`/wiki/`) e do **DevPortal** (`/`), identificando responsabilidades, sinergias, gaps e propondo um plano de ação integrado para elevar ambas as plataformas ao nível de líderes de mercado (Vercel, Stripe, Linear, GitBook).
+Este documento apresenta uma análise estratégica unificada da **Wiki Arah** (`/wiki/`) e do **DevPortal** (`/`), identificando responsabilidades, sinergias, gaps e propondo um plano de ação integrado para elevar ambas as plataformas ao nível de líderes de mercado (Vercel, Stripe, Linear, GitBook).
 
 ### Principais Descobertas
 
@@ -24,7 +24,7 @@ Este documento apresenta uma análise estratégica unificada da **Wiki Araponga*
 
 ## 🎯 Definição de Responsabilidades: Wiki vs DevPortal
 
-### Wiki Araponga (`/wiki/`) - Documentação Estratégica e Técnica
+### Wiki Arah (`/wiki/`) - Documentação Estratégica e Técnica
 
 **Propósito**: Documentação completa do projeto, visão, arquitetura, processos, roadmap
 
@@ -51,7 +51,7 @@ Este documento apresenta uma análise estratégica unificada da **Wiki Araponga*
 - ❌ Explorer de OpenAPI
 - ❌ Guias práticos de integração
 
-**URL**: `devportal.araponga.app/wiki/`
+**URL**: `devportal.Arah.app/wiki/`
 
 ---
 
@@ -85,13 +85,13 @@ Este documento apresenta uma análise estratégica unificada da **Wiki Araponga*
 - ❌ Processos de contribuição
 - ❌ Backlog e user stories
 
-**URL**: `devportal.araponga.app/`
+**URL**: `devportal.Arah.app/`
 
 ---
 
 ## 📊 Estado Atual Detalhado
 
-### Wiki Araponga - Estado Atual
+### Wiki Arah - Estado Atual
 
 **Tecnologia**: Next.js 15 com SSG (Static Site Generation)
 
@@ -254,7 +254,7 @@ Este documento apresenta uma análise estratégica unificada da **Wiki Araponga*
 
 ## 📐 Mapa de Responsabilidades: O Que Fica Onde (Definitivo)
 
-### Wiki Araponga (`/wiki/`)
+### Wiki Arah (`/wiki/`)
 
 | Categoria | Conteúdo | Exemplo de Documento | Link para DevPortal? |
 |-----------|----------|---------------------|---------------------|

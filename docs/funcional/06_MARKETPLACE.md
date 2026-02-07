@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -110,7 +110,7 @@ Checkout → Pagamento → Vendedor recebe Payout
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)** - Verificação necessária
 - **[Assets](funcional/09_ASSETS.md)** - Diferenciação: Assets não são vendáveis
 - **[API - Marketplace](api/60_09_API_MARKETPLACE.md)** - Documentação técnica

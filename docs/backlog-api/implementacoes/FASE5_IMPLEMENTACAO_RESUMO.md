@@ -26,7 +26,7 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
 - ✅ Documentação atualizada
 
 **Arquivos Modificados**:
-- `backend/Araponga.Application/Services/AuthService.cs` - Adicionada validação no Disable2FAAsync
+- `backend/Arah.Application/Services/AuthService.cs` - Adicionada validação no Disable2FAAsync
 
 **Critérios de Sucesso**:
 - ✅ 2FA TOTP implementado
@@ -52,10 +52,10 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
 - ✅ Pronto para uso em controllers/services
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/InputSanitizationService.cs`
+- `backend/Arah.Application/Services/InputSanitizationService.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
 
 **Critérios de Sucesso**:
 - ✅ Sanitização HTML implementada
@@ -80,7 +80,7 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
 - ✅ Pronto para validação em endpoints críticos
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs` - Configuração de anti-forgery
+- `backend/Arah.Api/Program.cs` - Configuração de anti-forgery
 
 **Critérios de Sucesso**:
 - ✅ Anti-forgery tokens configurados
@@ -102,8 +102,8 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
 - ✅ Leitura de secrets de variáveis de ambiente ou configuration
 
 **Arquivos Criados**:
-- `backend/Araponga.Infrastructure/Security/ISecretsService.cs`
-- `backend/Araponga.Infrastructure/Security/EnvironmentSecretsService.cs`
+- `backend/Arah.Infrastructure/Security/ISecretsService.cs`
+- `backend/Arah.Infrastructure/Security/EnvironmentSecretsService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Interface criada para abstração
@@ -130,7 +130,7 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
   - Apenas em requisições HTTPS
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs` - CSP melhorado e HSTS adicionado
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs` - CSP melhorado e HSTS adicionado
 
 **Critérios de Sucesso**:
 - ✅ CSP mais restritivo para API
@@ -151,8 +151,8 @@ Este documento resume todas as implementações realizadas na Fase 5: Segurança
 - ✅ Auditoria já está sendo usada em vários serviços (ReportService, UserBlockService, MapService, etc)
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/AuditService.cs`
-- `backend/Araponga.Application/Interfaces/IAuditRepository.cs`
+- `backend/Arah.Application/Services/AuditService.cs`
+- `backend/Arah.Application/Interfaces/IAuditRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço de auditoria criado

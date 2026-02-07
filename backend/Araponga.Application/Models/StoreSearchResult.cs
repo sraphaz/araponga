@@ -1,4 +1,4 @@
-using Araponga.Modules.Marketplace.Domain;
+using Araponga.Domain.Marketplace;
 
 namespace Araponga.Application.Models;
 

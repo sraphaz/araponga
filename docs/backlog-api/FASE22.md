@@ -155,24 +155,24 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Currency/TerritoryCurrency.cs`
-- `backend/Araponga.Domain/Currency/CurrencyMintPolicy.cs`
-- `backend/Araponga.Domain/Currency/UserWallet.cs`
-- `backend/Araponga.Domain/Currency/WalletTransaction.cs`
-- `backend/Araponga.Domain/Currency/WalletTransactionType.cs`
-- `backend/Araponga.Domain/Currency/TerritoryFund.cs`
-- `backend/Araponga.Domain/Currency/FundAllocation.cs`
-- `backend/Araponga.Domain/Currency/FundAllocationStatus.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryCurrencyRepository.cs`
-- `backend/Araponga.Application/Interfaces/IUserWalletRepository.cs`
-- `backend/Araponga.Application/Interfaces/IWalletTransactionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryFundRepository.cs`
-- `backend/Araponga.Application/Interfaces/IFundAllocationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryCurrencyRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserWalletRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresWalletTransactionRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryFundRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresFundAllocationRepository.cs`
+- `backend/Arah.Domain/Currency/TerritoryCurrency.cs`
+- `backend/Arah.Domain/Currency/CurrencyMintPolicy.cs`
+- `backend/Arah.Domain/Currency/UserWallet.cs`
+- `backend/Arah.Domain/Currency/WalletTransaction.cs`
+- `backend/Arah.Domain/Currency/WalletTransactionType.cs`
+- `backend/Arah.Domain/Currency/TerritoryFund.cs`
+- `backend/Arah.Domain/Currency/FundAllocation.cs`
+- `backend/Arah.Domain/Currency/FundAllocationStatus.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryCurrencyRepository.cs`
+- `backend/Arah.Application/Interfaces/IUserWalletRepository.cs`
+- `backend/Arah.Application/Interfaces/IWalletTransactionRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryFundRepository.cs`
+- `backend/Arah.Application/Interfaces/IFundAllocationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryCurrencyRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserWalletRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresWalletTransactionRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryFundRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresFundAllocationRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -212,10 +212,10 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CurrencyMintService.cs`
-- `backend/Araponga.Api/Controllers/CurrencyMintController.cs`
-- `backend/Araponga.Api/Contracts/Currency/MintRequest.cs`
-- `backend/Araponga.Api/Contracts/Currency/MintHistoryResponse.cs`
+- `backend/Arah.Application/Services/CurrencyMintService.cs`
+- `backend/Arah.Api/Controllers/CurrencyMintController.cs`
+- `backend/Arah.Api/Contracts/Currency/MintRequest.cs`
+- `backend/Arah.Api/Contracts/Currency/MintHistoryResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de mint funcionando
@@ -251,11 +251,11 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/WalletService.cs`
-- `backend/Araponga.Api/Controllers/WalletController.cs`
-- `backend/Araponga.Api/Contracts/Wallet/WalletResponse.cs`
-- `backend/Araponga.Api/Contracts/Wallet/TransferRequest.cs`
-- `backend/Araponga.Api/Contracts/Wallet/WalletTransactionResponse.cs`
+- `backend/Arah.Application/Services/WalletService.cs`
+- `backend/Arah.Api/Controllers/WalletController.cs`
+- `backend/Arah.Api/Contracts/Wallet/WalletResponse.cs`
+- `backend/Arah.Api/Contracts/Wallet/TransferRequest.cs`
+- `backend/Arah.Api/Contracts/Wallet/WalletTransactionResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de carteiras funcionando
@@ -290,11 +290,11 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryFundService.cs`
-- `backend/Araponga.Api/Controllers/TerritoryFundController.cs`
-- `backend/Araponga.Api/Contracts/Fund/TerritoryFundResponse.cs`
-- `backend/Araponga.Api/Contracts/Fund/FundAllocationRequest.cs`
-- `backend/Araponga.Api/Contracts/Fund/FundAllocationResponse.cs`
+- `backend/Arah.Application/Services/TerritoryFundService.cs`
+- `backend/Arah.Api/Controllers/TerritoryFundController.cs`
+- `backend/Arah.Api/Contracts/Fund/TerritoryFundResponse.cs`
+- `backend/Arah.Api/Contracts/Fund/FundAllocationRequest.cs`
+- `backend/Arah.Api/Contracts/Fund/FundAllocationResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de fundos funcionando
@@ -327,10 +327,10 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CurrencyConversionService.cs`
-- `backend/Araponga.Api/Controllers/CurrencyConversionController.cs`
-- `backend/Araponga.Api/Contracts/Currency/ConversionRequest.cs`
-- `backend/Araponga.Api/Contracts/Currency/ConversionResponse.cs`
+- `backend/Arah.Application/Services/CurrencyConversionService.cs`
+- `backend/Arah.Api/Controllers/CurrencyConversionController.cs`
+- `backend/Arah.Api/Contracts/Currency/ConversionRequest.cs`
+- `backend/Arah.Api/Contracts/Currency/ConversionResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de conversão funcionando
@@ -394,11 +394,11 @@ Implementar sistema de **moeda territorial** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TerritoryCurrencyService.cs`
-- `backend/Araponga.Api/Controllers/TerritoryCurrencyController.cs`
-- `backend/Araponga.Api/Contracts/Currency/CreateTerritoryCurrencyRequest.cs`
-- `backend/Araponga.Api/Contracts/Currency/TerritoryCurrencyResponse.cs`
-- `backend/Araponga.Api/Contracts/Currency/UpdateCurrencyPolicyRequest.cs`
+- `backend/Arah.Application/Services/TerritoryCurrencyService.cs`
+- `backend/Arah.Api/Controllers/TerritoryCurrencyController.cs`
+- `backend/Arah.Api/Contracts/Currency/CreateTerritoryCurrencyRequest.cs`
+- `backend/Arah.Api/Contracts/Currency/TerritoryCurrencyResponse.cs`
+- `backend/Arah.Api/Contracts/Currency/UpdateCurrencyPolicyRequest.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de governança funcionando

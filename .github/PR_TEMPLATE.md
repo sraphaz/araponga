@@ -66,22 +66,22 @@ dotnet test
 ## Arquivos Alterados
 
 ### Novos Arquivos
-- `backend/Araponga.Api/Middleware/RequestLoggingMiddleware.cs`
-- `backend/Araponga.Application/Interfaces/IObservabilityLogger.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryObservabilityLogger.cs`
-- `backend/Araponga.Tests/Api/EndToEndTests.cs`
-- `backend/Araponga.Tests/Infrastructure/RepositoryTests.cs`
+- `backend/Arah.Api/Middleware/RequestLoggingMiddleware.cs`
+- `backend/Arah.Application/Interfaces/IObservabilityLogger.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryObservabilityLogger.cs`
+- `backend/Arah.Tests/Api/EndToEndTests.cs`
+- `backend/Arah.Tests/Infrastructure/RepositoryTests.cs`
 - `docs/ANALISE_COESAO_E_TESTES.md`
 - `docs/DECISOES_ARQUITETURAIS.md`
 - `docs/IMPLEMENTACAO_RECOMENDACOES.md`
 
 ### Arquivos Modificados
-- `backend/Araponga.Api/Controllers/MembershipsController.cs`
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Application/Services/ReportService.cs`
-- `backend/Araponga.Tests/Application/MarketplaceServiceTests.cs`
-- `backend/Araponga.Tests/Application/NotificationFlowTests.cs`
-- `backend/Araponga.Tests/Infrastructure/RepositoryTests.cs`
+- `backend/Arah.Api/Controllers/MembershipsController.cs`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Application/Services/ReportService.cs`
+- `backend/Arah.Tests/Application/MarketplaceServiceTests.cs`
+- `backend/Arah.Tests/Application/NotificationFlowTests.cs`
+- `backend/Arah.Tests/Infrastructure/RepositoryTests.cs`
 
 ## Links Relacionados
 

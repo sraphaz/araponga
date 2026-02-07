@@ -1,4 +1,4 @@
-# Métricas de Connection Pooling - Araponga
+# Métricas de Connection Pooling - Arah
 
 **Última Atualização**: 2025-01-23  
 **Status**: ✅ Configurado
@@ -7,7 +7,7 @@
 
 ## 📋 Resumo
 
-Este documento descreve a configuração de connection pooling e como monitorar métricas de conexões do PostgreSQL no Araponga.
+Este documento descreve a configuração de connection pooling e como monitorar métricas de conexões do PostgreSQL no Arah.
 
 ---
 
@@ -20,7 +20,7 @@ A connection string está configurada em `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "Postgres": "Host=localhost;Port=5432;Database=araponga;Username=araponga;Password=araponga;Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30"
+    "Postgres": "Host=localhost;Port=5432;Database=Arah;Username=Arah;Password=Arah;Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30"
   }
 }
 ```
@@ -90,7 +90,7 @@ As métricas são expostas via Prometheus em `/metrics` (se configurado).
 
 ### Health Checks
 
-O Araponga inclui health checks que verificam a disponibilidade do banco de dados:
+O Arah inclui health checks que verificam a disponibilidade do banco de dados:
 
 ```csharp
 // GET /health/db

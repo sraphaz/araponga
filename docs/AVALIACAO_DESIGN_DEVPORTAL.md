@@ -1,4 +1,4 @@
-# Avaliação Enterprise de Design - DevPortal Araponga
+# Avaliação Enterprise de Design - DevPortal Arah
 
 **Data**: 2025-01-20  
 **Escopo**: Análise completa de design, UX e arquitetura de conteúdo  
@@ -408,7 +408,7 @@ frontend/devportal/
     <h1>Funcionalidades da Plataforma</h1>
     <p class="hero-lead">
       Explore as funcionalidades que permitem comunidades gerenciarem economia local,
-      eventos territoriais, comunicação e governança através da API Araponga.
+      eventos territoriais, comunicação e governança através da API Arah.
     </p>
   </div>
   <div class="hero-visual">
@@ -420,7 +420,7 @@ frontend/devportal/
 <section class="section section-overview">
   <h2>Por que essas funcionalidades?</h2>
   <p class="lead-text">
-    As funcionalidades do Araponga foram projetadas para fortalecer autonomia territorial,
+    As funcionalidades do Arah foram projetadas para fortalecer autonomia territorial,
     economia circular local e organização comunitária. Cada funcionalidade mantém recursos
     e decisões no território, respeitando soberania local.
   </p>

@@ -176,23 +176,23 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Seeds/SeedBank.cs`
-- `backend/Araponga.Domain/Seeds/SeedCatalog.cs`
-- `backend/Araponga.Domain/Seeds/SeedDonation.cs`
-- `backend/Araponga.Domain/Seeds/SeedRequest.cs`
-- `backend/Araponga.Domain/Seeds/SeedPlanting.cs`
-- `backend/Araponga.Domain/Seeds/SeedBankType.cs`
-- `backend/Araponga.Domain/Seeds/SeedBankStatus.cs`
-- `backend/Araponga.Domain/Seeds/SeedType.cs`
-- `backend/Araponga.Domain/Seeds/SeedQuality.cs`
-- `backend/Araponga.Domain/Seeds/DonationStatus.cs`
-- `backend/Araponga.Domain/Seeds/RequestStatus.cs`
-- `backend/Araponga.Domain/Seeds/PlantingStatus.cs`
-- `backend/Araponga.Application/Interfaces/ISeedBankRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISeedCatalogRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISeedDonationRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISeedRequestRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISeedPlantingRepository.cs`
+- `backend/Arah.Domain/Seeds/SeedBank.cs`
+- `backend/Arah.Domain/Seeds/SeedCatalog.cs`
+- `backend/Arah.Domain/Seeds/SeedDonation.cs`
+- `backend/Arah.Domain/Seeds/SeedRequest.cs`
+- `backend/Arah.Domain/Seeds/SeedPlanting.cs`
+- `backend/Arah.Domain/Seeds/SeedBankType.cs`
+- `backend/Arah.Domain/Seeds/SeedBankStatus.cs`
+- `backend/Arah.Domain/Seeds/SeedType.cs`
+- `backend/Arah.Domain/Seeds/SeedQuality.cs`
+- `backend/Arah.Domain/Seeds/DonationStatus.cs`
+- `backend/Arah.Domain/Seeds/RequestStatus.cs`
+- `backend/Arah.Domain/Seeds/PlantingStatus.cs`
+- `backend/Arah.Application/Interfaces/ISeedBankRepository.cs`
+- `backend/Arah.Application/Interfaces/ISeedCatalogRepository.cs`
+- `backend/Arah.Application/Interfaces/ISeedDonationRepository.cs`
+- `backend/Arah.Application/Interfaces/ISeedRequestRepository.cs`
+- `backend/Arah.Application/Interfaces/ISeedPlantingRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -222,8 +222,8 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedBankService.cs`
-- `backend/Araponga.Tests/Application/SeedBankServiceTests.cs`
+- `backend/Arah.Application/Services/SeedBankService.cs`
+- `backend/Arah.Tests/Application/SeedBankServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço de banco funcionando
@@ -262,8 +262,8 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedDonationService.cs`
-- `backend/Araponga.Tests/Application/SeedDonationServiceTests.cs`
+- `backend/Arah.Application/Services/SeedDonationService.cs`
+- `backend/Arah.Tests/Application/SeedDonationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de doações funcionando
@@ -304,8 +304,8 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedRequestService.cs`
-- `backend/Araponga.Tests/Application/SeedRequestServiceTests.cs`
+- `backend/Arah.Application/Services/SeedRequestService.cs`
+- `backend/Arah.Tests/Application/SeedRequestServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de solicitações funcionando
@@ -339,12 +339,12 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedMarketplaceService.cs`
-- `backend/Araponga.Tests/Integration/SeedMarketplaceIntegrationTests.cs`
+- `backend/Arah.Application/Services/SeedMarketplaceService.cs`
+- `backend/Arah.Tests/Integration/SeedMarketplaceIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Marketplace/ItemType.cs` (adicionar Seed)
-- `backend/Araponga.Application/Services/StoreItemService.cs` (suporte a Seed)
+- `backend/Arah.Domain/Marketplace/ItemType.cs` (adicionar Seed)
+- `backend/Arah.Application/Services/StoreItemService.cs` (suporte a Seed)
 
 **Critérios de Sucesso**:
 - ✅ Sementes no marketplace funcionando
@@ -385,8 +385,8 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedPlantingService.cs`
-- `backend/Araponga.Tests/Application/SeedPlantingServiceTests.cs`
+- `backend/Arah.Application/Services/SeedPlantingService.cs`
+- `backend/Arah.Tests/Application/SeedPlantingServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de plantio funcionando
@@ -431,12 +431,12 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Seeds/SeedSwapEvent.cs`
-- `backend/Araponga.Application/Services/SeedSwapEventService.cs`
-- `backend/Araponga.Tests/Integration/SeedSwapEventIntegrationTests.cs`
+- `backend/Arah.Domain/Seeds/SeedSwapEvent.cs`
+- `backend/Arah.Application/Services/SeedSwapEventService.cs`
+- `backend/Arah.Tests/Integration/SeedSwapEventIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Events/Event.cs` (extensão opcional)
+- `backend/Arah.Domain/Events/Event.cs` (extensão opcional)
 
 **Critérios de Sucesso**:
 - ✅ Eventos de troca funcionando
@@ -475,11 +475,11 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SeedBankAlertService.cs`
-- `backend/Araponga.Tests/Integration/SeedBankAlertIntegrationTests.cs`
+- `backend/Arah.Application/Services/SeedBankAlertService.cs`
+- `backend/Arah.Tests/Integration/SeedBankAlertIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Users/NotificationPreferences.cs` (adicionar preferências de sementes - opcional)
+- `backend/Arah.Domain/Users/NotificationPreferences.cs` (adicionar preferências de sementes - opcional)
 
 **Critérios de Sucesso**:
 - ✅ Alertas funcionando
@@ -520,16 +520,16 @@ Implementar sistema de **banco de sementes e mudas territorial** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/SeedBankController.cs`
-- `backend/Araponga.Api/Controllers/SeedCatalogController.cs`
-- `backend/Araponga.Api/Controllers/SeedDonationController.cs`
-- `backend/Araponga.Api/Controllers/SeedRequestController.cs`
-- `backend/Araponga.Api/Controllers/SeedPlantingController.cs`
-- `backend/Araponga.Api/Contracts/Seeds/SeedBankResponse.cs`
-- `backend/Araponga.Api/Contracts/Seeds/SeedCatalogResponse.cs`
-- `backend/Araponga.Api/Contracts/Seeds/SeedDonationRequest.cs`
-- `backend/Araponga.Api/Contracts/Seeds/SeedRequestRequest.cs`
-- `backend/Araponga.Api/Contracts/Seeds/SeedPlantingRequest.cs`
+- `backend/Arah.Api/Controllers/SeedBankController.cs`
+- `backend/Arah.Api/Controllers/SeedCatalogController.cs`
+- `backend/Arah.Api/Controllers/SeedDonationController.cs`
+- `backend/Arah.Api/Controllers/SeedRequestController.cs`
+- `backend/Arah.Api/Controllers/SeedPlantingController.cs`
+- `backend/Arah.Api/Contracts/Seeds/SeedBankResponse.cs`
+- `backend/Arah.Api/Contracts/Seeds/SeedCatalogResponse.cs`
+- `backend/Arah.Api/Contracts/Seeds/SeedDonationRequest.cs`
+- `backend/Arah.Api/Contracts/Seeds/SeedRequestRequest.cs`
+- `backend/Arah.Api/Contracts/Seeds/SeedPlantingRequest.cs`
 
 **Critérios de Sucesso**:
 - ✅ Controllers funcionando

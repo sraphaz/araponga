@@ -1,4 +1,4 @@
-# Conexões e Círculo de Amigos - Araponga
+# Conexões e Círculo de Amigos - Arah
 
 **Versão**: 1.0  
 **Data**: 2026-01-28  
@@ -38,7 +38,7 @@ O **Módulo de Conexões e Círculo de Amigos** permite que moradores e visitant
 
 ### O Problema
 
-Atualmente, o feed do Araponga mostra conteúdo de forma cronológica ou baseada em interesses, mas não considera relacionamentos pessoais. Isso significa que:
+Atualmente, o feed do Arah mostra conteúdo de forma cronológica ou baseada em interesses, mas não considera relacionamentos pessoais. Isso significa que:
 
 - Conteúdo de pessoas próximas pode se perder no feed
 - Não há forma de priorizar conexões pessoais

@@ -1,4 +1,4 @@
-alize os proximos passos em toda a documentação para # Estratégia de Testes - Araponga Flutter App
+alize os proximos passos em toda a documentação para # Estratégia de Testes - Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -28,7 +28,7 @@ alize os proximos passos em toda a documentação para # Estratégia de Testes -
 
 ### Objetivo
 
-Este documento especifica a **estratégia completa de testes** para o app Flutter Araponga, cobrindo todos os níveis de teste necessários para garantir qualidade, confiabilidade e manutenibilidade do código.
+Este documento especifica a **estratégia completa de testes** para o app Flutter Arah, cobrindo todos os níveis de teste necessários para garantir qualidade, confiabilidade e manutenibilidade do código.
 
 ### Princípios Fundamentais
 
@@ -410,7 +410,7 @@ testWidgets('should handle pull-to-refresh', (WidgetTester tester) async {
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:araponga/main.dart' as app;
+import 'package:Arah/main.dart' as app;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -422,11 +422,11 @@ void main() {
       await tester.pumpAndSettle();
       
       // Step 1: Splash screen should appear
-      expect(find.text('Araponga'), findsOneWidget);
+      expect(find.text('Arah'), findsOneWidget);
       await tester.pumpAndSettle(Duration(seconds: 2));
       
       // Step 2: Onboarding screen should appear
-      expect(find.text('Bem-vinda ao Araponga'), findsOneWidget);
+      expect(find.text('Bem-vinda ao Arah'), findsOneWidget);
       await tester.tap(find.text('Começar'));
       await tester.pumpAndSettle();
       
@@ -545,7 +545,7 @@ dev_dependencies:
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:araponga/shared/widgets/buttons/primary_button.dart';
+import 'package:Arah/shared/widgets/buttons/primary_button.dart';
 
 void main() {
   group('PrimaryButton Golden Tests', () {

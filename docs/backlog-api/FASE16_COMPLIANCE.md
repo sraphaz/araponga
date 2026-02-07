@@ -124,8 +124,8 @@ Implementar sistema completo de **retenção de dados configurável** que permit
 - [ ] Validação: `RetentionPeriodDays` mínimo (ex: 7 dias)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Compliance/DataRetentionConfig.cs`
-- `backend/Araponga.Domain/Compliance/EntityType.cs`
+- `backend/Arah.Domain/Compliance/DataRetentionConfig.cs`
+- `backend/Arah.Domain/Compliance/EntityType.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelo de domínio criado
@@ -158,13 +158,13 @@ Implementar sistema completo de **retenção de dados configurável** que permit
   - [ ] `AnonymizeMediaAsync(MediaAsset media, CancellationToken)`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/Compliance/IDataRetentionConfigRepository.cs`
-- `backend/Araponga.Application/Services/Compliance/DataRetentionConfigService.cs`
-- `backend/Araponga.Application/Services/Compliance/DataRetentionService.cs`
-- `backend/Araponga.Application/Services/Compliance/ArchiveService.cs`
-- `backend/Araponga.Application/Services/Compliance/AnonymizationService.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresDataRetentionConfigRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataRetentionConfigRepository.cs`
+- `backend/Arah.Application/Interfaces/Compliance/IDataRetentionConfigRepository.cs`
+- `backend/Arah.Application/Services/Compliance/DataRetentionConfigService.cs`
+- `backend/Arah.Application/Services/Compliance/DataRetentionService.cs`
+- `backend/Arah.Application/Services/Compliance/ArchiveService.cs`
+- `backend/Arah.Application/Services/Compliance/AnonymizationService.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresDataRetentionConfigRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataRetentionConfigRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Repositório e serviços criados
@@ -191,10 +191,10 @@ Implementar sistema completo de **retenção de dados configurável** que permit
 - [ ] Métricas de processamento (quantidade de entidades processadas, tempo de execução)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Workers/DataRetentionWorker.cs`
+- `backend/Arah.Application/Workers/DataRetentionWorker.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (registrar worker)
+- `backend/Arah.Api/Program.cs` (registrar worker)
 
 **Critérios de Sucesso**:
 - ✅ Worker executando periodicamente
@@ -227,8 +227,8 @@ Implementar sistema completo de **retenção de dados configurável** que permit
   - [ ] Hard delete após período de graça (opcional)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/Compliance/DataRetentionService.cs`
-- `backend/Araponga.Application/Services/Compliance/AnonymizationService.cs`
+- `backend/Arah.Application/Services/Compliance/DataRetentionService.cs`
+- `backend/Arah.Application/Services/Compliance/AnonymizationService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Todos os tipos de entidade suportados
@@ -257,8 +257,8 @@ Implementar sistema completo de **retenção de dados configurável** que permit
   - [ ] `GET /api/v1/admin/archives/{archiveId}/download` (baixar arquivo, SystemAdmin)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/DataRetentionConfigController.cs`
-- `backend/Araponga.Api/Controllers/ArchiveController.cs`
+- `backend/Arah.Api/Controllers/DataRetentionConfigController.cs`
+- `backend/Arah.Api/Controllers/ArchiveController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -280,7 +280,7 @@ Implementar sistema completo de **retenção de dados configurável** que permit
 - [ ] Documentação de políticas de retenção recomendadas
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Critérios de Sucesso**:
 - ✅ Interface administrativa disponível
@@ -304,8 +304,8 @@ Implementar sistema completo de **retenção de dados configurável** que permit
 - [ ] Atualizar `FASE10_CONFIG_FLEXIBILIZACAO_AVALIACAO.md`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Api/DataRetentionConfigIntegrationTests.cs`
-- `backend/Araponga.Tests/Application/DataRetentionServiceTests.cs`
+- `backend/Arah.Tests/Api/DataRetentionConfigIntegrationTests.cs`
+- `backend/Arah.Tests/Application/DataRetentionServiceTests.cs`
 - `docs/COMPLIANCE_RETENTION.md`
 - `docs/GDPR_LGPD_COMPLIANCE.md`
 

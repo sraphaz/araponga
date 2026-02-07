@@ -1,14 +1,14 @@
-# Regras de Design para Desenvolvimento - Araponga
+# Regras de Design para Desenvolvimento - Arah
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
-**Aplicação**: Wiki, DevPortal, App Mobile, Site Institucional, todas as interfaces Araponga
+**Aplicação**: Wiki, DevPortal, App Mobile, Site Institucional, todas as interfaces Arah
 
 ---
 
 ## 📋 Sumário
 
-Este documento define **regras práticas de design** para desenvolvimento no repositório Araponga. Use como referência para todas as decisões de design durante o desenvolvimento.
+Este documento define **regras práticas de design** para desenvolvimento no repositório Arah. Use como referência para todas as decisões de design durante o desenvolvimento.
 
 **Documento Relacionado**: `DESIGN_SYSTEM_IDENTIDADE_VISUAL.md` (identidade e marca)  
 **Análise Detalhada**: `ANALISE_DESIGN_SISTEMATICA_MELHORIAS.md` (análise e propostas)  

@@ -1,13 +1,13 @@
 C4Container
-title Araponga — C4 Container (Nível 2)
+title Arah — C4 Container (Nível 2)
 
 Person(user, "Usuário", "Morador ou Visitante")
 Person(moderator, "Curador/Moderador", "Morador verificado")
 
-System_Boundary(s1, "Araponga") {
+System_Boundary(s1, "Arah") {
   Container(mobile, "App Mobile", "Flutter/React Native (futuro)", "Cliente principal para feed, mapa, eventos, alertas e verificação de morador.")
   Container(web, "Web App", "Next.js/React (futuro)", "Cliente web para exploração e administração leve.")
-  Container(api, "Araponga API (BFF)", ".NET 8 ASP.NET Core", "Exposição de endpoints REST: territórios, feed, mapa, entidades, interações e auth.")
+  Container(api, "Arah API (BFF)", ".NET 8 ASP.NET Core", "Exposição de endpoints REST: territórios, feed, mapa, entidades, interações e auth.")
   ContainerDb(db, "Banco de Dados", "PostgreSQL + PostGIS", "Persistência relacional e geoespacial: territórios, memberships, entidades, feed e saúde do território.")
   Container(storage, "Object Storage", "S3 compatível (MinIO/S3)", "Armazenamento de arquivos e evidências. Acesso inicial via download por proxy pela API.")
   Container(queue, "Event Bus", "RabbitMQ/Kafka (futuro)", "Eventos de domínio/integração: auditoria, notificação, indexação, moderação.")

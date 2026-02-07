@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fase**: 18  
 **Prioridade**: 🔴 Crítica (Economia Local)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -27,7 +27,7 @@ Permitir que:
 - **Comunidades** regulamentem hospedagem territorialmente
 - **Economia local** seja fortalecida através de hospedagem territorial
 
-### Diferenciais do Araponga
+### Diferenciais do Arah
 
 - **Território-first**: Não é global como Airbnb, focado no território
 - **Morador validado**: Pré-requisito para cadastrar propriedades
@@ -178,7 +178,7 @@ Se Não: Envia para Aprovação Manual
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)** - Validação de moradores
 - **[Fase 18 - Hospedagem Territorial](backlog-api/FASE18.md)** - Detalhes técnicos do planejamento
 

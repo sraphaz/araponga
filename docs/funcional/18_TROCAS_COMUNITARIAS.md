@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fase**: 20  
 **Prioridade**: 🟡 Alta (Economia Local)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -90,7 +90,7 @@ Troca Realizada → Ambos Confirmam → Troca Completa
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Marketplace](funcional/06_MARKETPLACE.md)** - Sistema complementar
 - **[Demandas e Ofertas](funcional/17_DEMANDAS_OFERTAS.md)** - Sistema relacionado
 

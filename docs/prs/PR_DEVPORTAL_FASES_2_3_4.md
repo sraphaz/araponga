@@ -8,7 +8,7 @@
 
 ## 📋 Resumo
 
-Este PR atualiza o DevPortal para refletir todas as melhorias implementadas nas Fases 2, 3 e 4 do projeto Araponga.
+Este PR atualiza o DevPortal para refletir todas as melhorias implementadas nas Fases 2, 3 e 4 do projeto Arah.
 
 ---
 

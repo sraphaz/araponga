@@ -10,7 +10,7 @@
 Hoje temos:
 
 - **Postgres**: SharedDbContext + ArapongaDbContext + um DbContext por módulo; entidades duplicadas (Infrastructure/Entities, Shared/Entities, módulos).
-- **InMemory**: um único “monólito” em `Araponga.Infrastructure/InMemory` — todos os repositórios InMemory no mesmo projeto, sem espelhar a fronteira shared vs módulo.
+- **InMemory**: um único “monólito” em `Arah.Infrastructure/InMemory` — todos os repositórios InMemory no mesmo projeto, sem espelhar a fronteira shared vs módulo.
 
 A melhor opção combina dois eixos:
 
@@ -25,7 +25,7 @@ Assim, tanto em Postgres quanto em InMemory fica claro o que é **compartilhado*
 
 ### 2.1 O que significa
 
-- **Entidades “core” / shared** (User, Territory, TerritoryMembership, JoinRequest, WorkItem, DocumentEvidence, NotificationConfig, UserPreferences, etc.) existem **apenas** em `Araponga.Infrastructure.Shared/Postgres/Entities`.
+- **Entidades “core” / shared** (User, Territory, TerritoryMembership, JoinRequest, WorkItem, DocumentEvidence, NotificationConfig, UserPreferences, etc.) existem **apenas** em `Arah.Infrastructure.Shared/Postgres/Entities`.
 - **SharedDbContext** é o único contexto EF que define e mapeia essas tabelas para persistência Postgres.
 - **ArapongaDbContext** (na Infrastructure principal) deixa de ter DbSets para domínios já migrados para módulos e, no limite, pode ser reduzido a:
   - migrations (até migrarmos migrations para Shared ou para um projeto dedicado), e/ou
@@ -51,7 +51,7 @@ Assim, tanto em Postgres quanto em InMemory fica claro o que é **compartilhado*
 
 ### 3.1 Objetivo
 
-Hoje o InMemory é um único bloco: todos os repositórios InMemory vivem em `Araponga.Infrastructure/InMemory` e usam um (ou poucos) stores em memória, sem separar “dados shared” de “dados por módulo”.
+Hoje o InMemory é um único bloco: todos os repositórios InMemory vivem em `Arah.Infrastructure/InMemory` e usam um (ou poucos) stores em memória, sem separar “dados shared” de “dados por módulo”.
 
 A ideia é **replicar a dinâmica de Shared**:
 
@@ -68,8 +68,8 @@ Assim, em testes e em modo InMemory:
 
 **Opção A – Store shared + stores por módulo (recomendada para espelhar Postgres)**
 
-- **InMemorySharedStore** (ou similar): dicionários/coleções para User, Territory, Membership, JoinRequest, etc., em `Araponga.Infrastructure.Shared` ou em uma pasta `InMemory` dentro de Shared.
-- Cada **módulo** que hoje tem repositório InMemory na Infrastructure principal passa a ter seu próprio **InMemoryStore** (ou lista de stores) no módulo, por exemplo `Araponga.Modules.Feed.Infrastructure/InMemory/InMemoryFeedStore.cs` e repositórios Feed que usam esse store.
+- **InMemorySharedStore** (ou similar): dicionários/coleções para User, Territory, Membership, JoinRequest, etc., em `Arah.Infrastructure.Shared` ou em uma pasta `InMemory` dentro de Shared.
+- Cada **módulo** que hoje tem repositório InMemory na Infrastructure principal passa a ter seu próprio **InMemoryStore** (ou lista de stores) no módulo, por exemplo `Arah.Modules.Feed.Infrastructure/InMemory/InMemoryFeedStore.cs` e repositórios Feed que usam esse store.
 - **InMemoryUnitOfWork** vira um “composite”: ao fazer CommitAsync, aplica as “persistências” do shared store e dos stores dos módulos (na mesma ordem ou contrato que o CompositeUnitOfWork em Postgres).
 - Registro: em modo InMemory, a API registra o shared store + os módulos registram seus stores; o UoW composto InMemory agrega todos.
 
@@ -104,7 +104,7 @@ Assim, em testes e em modo InMemory:
 3. **Fase 3 – InMemory por módulo**  
    - Por módulo (Feed, Events, Map, etc.), mover ou criar repositórios InMemory no próprio módulo, com store próprio.  
    - Registrar stores e participantes no UoW InMemory composto.  
-   - Remover gradualmente os repositórios InMemory desses domínios da pasta única em `Araponga.Infrastructure/InMemory`.
+   - Remover gradualmente os repositórios InMemory desses domínios da pasta única em `Arah.Infrastructure/InMemory`.
 
 4. **Fase 4 (opcional) – Migrations e limpeza**  
    - Avaliar mover migrations para um projeto que dependa de Shared (ou projeto “Schema”) e deprecar ArapongaDbContext para tudo que já estiver em Shared.  
@@ -128,9 +128,9 @@ Com isso, a modularização fica coerente em Postgres e InMemory, e Shared passa
 
 Objetivo: **eliminar a Infrastructure “principal” como dona de entidades e repositórios**, deixando só:
 
-- **Araponga.Infrastructure.Shared**: fonte da verdade para entidades core + SharedDbContext + repositórios Postgres core + (futuro) InMemory shared.
-- **Araponga.Modules.*.Infrastructure**: cada módulo com seu DbContext, entidades e repositórios Postgres/InMemory do domínio.
-- **Araponga.Infrastructure** (principal): apenas o que **não** for core nem módulo — por exemplo: migrations (até migrarmos para Shared), workers (Outbox, Email, Renewal, Payout), ConnectionPoolMetricsService, HealthCheck, e repositórios que ainda não foram movidos para Shared ou para módulos. No limite, pode ser reduzido a um “shell” que registra Shared + módulos e hospeda workers/métricas.
+- **Arah.Infrastructure.Shared**: fonte da verdade para entidades core + SharedDbContext + repositórios Postgres core + (futuro) InMemory shared.
+- **Arah.Modules.*.Infrastructure**: cada módulo com seu DbContext, entidades e repositórios Postgres/InMemory do domínio.
+- **Arah.Infrastructure** (principal): apenas o que **não** for core nem módulo — por exemplo: migrations (até migrarmos para Shared), workers (Outbox, Email, Renewal, Payout), ConnectionPoolMetricsService, HealthCheck, e repositórios que ainda não foram movidos para Shared ou para módulos. No limite, pode ser reduzido a um “shell” que registra Shared + módulos e hospeda workers/métricas.
 
 ### 6.1 Checklist de aplicação
 

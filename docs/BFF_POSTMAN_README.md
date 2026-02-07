@@ -118,7 +118,7 @@ A coleção usa as seguintes variáveis:
 
 | Variável | Descrição | Exemplo |
 |----------|-----------|---------|
-| `base_url` | URL base da API | `https://api.araponga.com` |
+| `base_url` | URL base da API | `https://api.Arah.com` |
 | `auth_token` | Token JWT de autenticação | `eyJhbGciOiJIUzI1NiIs...` |
 | `territory_id` | ID do território ativo | `550e8400-e29b-41d4-a716-446655440000` |
 | `post_id` | ID do post (para interações) | `123e4567-e89b-12d3-a456-426614174000` |

@@ -29,7 +29,7 @@ A avaliação inicial do BFF (`AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`) propôs o
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│              Araponga.Api (Aplicação Única)              │
+│              Arah.Api (Aplicação Única)              │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  BFF Module (Journey Controllers)                 │  │
 │  │  - FeedJourneyController                           │  │
@@ -119,7 +119,7 @@ A avaliação inicial do BFF (`AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`) propôs o
                      │ HTTP/REST
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api.Bff (Aplicação Externa)            │
+│         Arah.Api.Bff (Aplicação Externa)            │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Journey Controllers                               │  │
 │  │  - FeedJourneyController                          │  │
@@ -144,7 +144,7 @@ A avaliação inicial do BFF (`AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`) propôs o
                      │ HTTP/REST
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api (API Principal)                    │
+│         Arah.Api (API Principal)                    │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Controllers (por recurso)                        │  │
 │  │  - FeedController                                  │  │
@@ -246,7 +246,7 @@ A avaliação inicial do BFF (`AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md`) propôs o
 
 **Estrutura**:
 ```
-Araponga.Api/
+Arah.Api/
 ├── Controllers/
 │   ├── FeedController.cs (API v1)
 │   ├── EventsController.cs (API v1)
@@ -280,7 +280,7 @@ Araponga.Api/
 
 **Estrutura**:
 ```
-Araponga.Api.Bff/ (aplicação separada)
+Arah.Api.Bff/ (aplicação separada)
 ├── Controllers/
 │   └── Journeys/
 │       ├── FeedJourneyController.cs
@@ -292,13 +292,13 @@ Araponga.Api.Bff/ (aplicação separada)
     ├── FeedApiClient.cs (consome Feed API :5001)
     └── EventsApiClient.cs (consome Events API :5002)
 
-Araponga.Api.Feed/ (API modular)
+Arah.Api.Feed/ (API modular)
 ├── Controllers/
 │   └── FeedController.cs
 └── Modules/
     └── FeedModule.cs
 
-Araponga.Api.Events/ (API modular)
+Arah.Api.Events/ (API modular)
 ├── Controllers/
 │   └── EventsController.cs
 └── Modules/
@@ -323,7 +323,7 @@ Araponga.Api.Events/ (API modular)
 
 **Estrutura**:
 ```
-Araponga.Api.Bff/ (aplicação separada)
+Arah.Api.Bff/ (aplicação separada)
 ├── Controllers/
 │   └── Journeys/
 │       ├── FeedJourneyController.cs
@@ -378,13 +378,13 @@ Events.Service/ (microserviço)
 ### Estratégia Híbrida: Evolução Gradual
 
 **Fase 1 (Atual)**: **BFF como Módulo Interno**
-- ✅ Implementar BFF como módulo dentro de `Araponga.Api`
+- ✅ Implementar BFF como módulo dentro de `Arah.Api`
 - ✅ Rotas em `/api/v2/journeys/*`
 - ✅ Coexiste com API v1 existente
 - ✅ Simplicidade e zero custo
 
 **Fase 2 (APIs Modulares)**: **Migrar BFF para Aplicação Externa**
-- ✅ Extrair BFF para `Araponga.Api.Bff` (aplicação separada)
+- ✅ Extrair BFF para `Arah.Api.Bff` (aplicação separada)
 - ✅ BFF consome APIs modulares via HTTP
 - ✅ Escalabilidade independente
 - ✅ Preparado para microserviços
@@ -404,10 +404,10 @@ Events.Service/ (microserviço)
 **Objetivo**: Implementar BFF básico como módulo interno
 
 **Tarefas**:
-1. Criar `Araponga.Modules.Bff` (módulo)
+1. Criar `Arah.Modules.Bff` (módulo)
 2. Criar `BffModule.cs` que registra serviços de jornadas
-3. Criar controllers em `Araponga.Api/Controllers/Journeys/`
-4. Criar services em `Araponga.Application/Services/Journeys/`
+3. Criar controllers em `Arah.Api/Controllers/Journeys/`
+4. Criar services em `Arah.Application/Services/Journeys/`
 5. Implementar jornadas prioritárias:
    - Onboarding
    - Feed (criar e visualizar)
@@ -418,18 +418,18 @@ Events.Service/ (microserviço)
 **Estrutura**:
 ```
 backend/
-├── Araponga.Api/
+├── Arah.Api/
 │   ├── Controllers/
 │   │   └── Journeys/
 │   │       ├── FeedJourneyController.cs
 │   │       └── EventJourneyController.cs
 │   └── ...
-├── Araponga.Application/
+├── Arah.Application/
 │   └── Services/
 │       └── Journeys/
 │           ├── FeedJourneyService.cs
 │           └── EventJourneyService.cs
-└── Araponga.Modules.Bff/
+└── Arah.Modules.Bff/
     └── BffModule.cs
 ```
 
@@ -448,11 +448,11 @@ backend/
 **⚠️ PLANO DETALHADO**: Ver [`PLANO_EXTRACAO_BFF_APLICACAO_EXTERNA.md`](./PLANO_EXTRACAO_BFF_APLICACAO_EXTERNA.md)
 
 **Tarefas Principais**:
-1. Criar projeto `Araponga.Api.Bff` (aplicação ASP.NET Core separada)
+1. Criar projeto `Arah.Api.Bff` (aplicação ASP.NET Core separada)
 2. Implementar OAuth2 Authorization Server (Client Credentials Flow)
 3. Sistema de registro de múltiplos apps consumidores
-4. Mover controllers de `Araponga.Api` para `Araponga.Api.Bff`
-5. Mover services de `Araponga.Application` para `Araponga.Api.Bff/Services`
+4. Mover controllers de `Arah.Api` para `Arah.Api.Bff`
+5. Mover services de `Arah.Application` para `Arah.Api.Bff/Services`
 6. Criar HTTP clients para consumir APIs modulares:
    - `FeedApiClient` → `http://feed-api:5001`
    - `EventsApiClient` → `http://events-api:5002`
@@ -463,7 +463,7 @@ backend/
 **Estrutura**:
 ```
 backend/
-├── Araponga.Api.Bff/ (nova aplicação)
+├── Arah.Api.Bff/ (nova aplicação)
 │   ├── Controllers/
 │   │   ├── OAuthController.cs (OAuth2 token endpoint)
 │   │   ├── Journeys/
@@ -482,11 +482,11 @@ backend/
 │   └── Security/
 │       ├── BffTokenService.cs
 │       └── BffAuthenticationMiddleware.cs
-├── Araponga.Domain.OAuth/ (novo)
+├── Arah.Domain.OAuth/ (novo)
 │   └── ClientApplication.cs
-├── Araponga.Api.Feed/ (API modular)
+├── Arah.Api.Feed/ (API modular)
 │   └── ...
-└── Araponga.Api.Events/ (API modular)
+└── Arah.Api.Events/ (API modular)
     └── ...
 ```
 

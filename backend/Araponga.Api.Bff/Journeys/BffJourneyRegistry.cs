@@ -1,4 +1,4 @@
-namespace Araponga.Bff.Journeys;
+namespace Arah.Bff.Journeys;
 
 /// <summary>
 /// Registro de todas as jornadas expostas pelo BFF (proxy para a API principal).

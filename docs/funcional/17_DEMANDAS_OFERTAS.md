@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fase**: 19  
 **Prioridade**: 🔴 Crítica (Economia Local)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -152,7 +152,7 @@ Pagamento → Entrega/Prestação
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Marketplace](funcional/06_MARKETPLACE.md)** - Sistema complementar
 - **[Fase 19 - Demandas e Ofertas](backlog-api/FASE19.md)** - Detalhes técnicos do planejamento
 

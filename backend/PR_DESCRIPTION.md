@@ -31,37 +31,37 @@ Esta PR consolida melhorias de documentação do backend, novos projetos de test
 
 ---
 
-### 2. test: Araponga.Tests.Bff, ApiSupport e testes por módulo
+### 2. test: Arah.Tests.Bff, ApiSupport e testes por módulo
 
 **Arquivos alterados / projetos:**
 
-- **`Araponga.Tests.Bff`** (novo)
+- **`Arah.Tests.Bff`** (novo)
   - Projeto de testes para o BFF.
   - Testes para `JourneyResponseCache` (18 testes).
 
-- **`Araponga.Tests.ApiSupport`** (novo)
+- **`Arah.Tests.ApiSupport`** (novo)
   - Projeto com `BaseApiFactory` e `AuthTestHelper` compartilhados para testes de API.
 
-- **`Araponga.Tests`**
+- **`Arah.Tests`**
   - `ApiFactory` passa a herdar de `BaseApiFactory`.
   - `AuthTestHelper` vira facade para o `AuthTestHelper` de ApiSupport.
 
-- **`Araponga.Tests.Modules.Subscriptions`**
+- **`Arah.Tests.Modules.Subscriptions`**
   - `ApiFactory` herda `BaseApiFactory`.
   - `SubscriptionIntegrationTests` usa `AuthTestHelper` do ApiSupport.
 
-- **`Araponga.Tests.Modules.Marketplace`**
+- **`Arah.Tests.Modules.Marketplace`**
   - `GlobalUsings` para `TestIds`.
   - Testes de Application movidos do Core para o módulo.
 
-- **`Araponga.Tests.Modules.Moderation`**
+- **`Arah.Tests.Modules.Moderation`**
   - Testes de Application movidos do Core para o módulo.
 
-- **`Araponga.Tests.Shared`**
+- **`Arah.Tests.Shared`**
   - `CacheTestHelper` e `PatternAwareTestCacheService` consolidados para reuso entre projetos de teste.
 
-- **`Araponga.sln`**
-  - Inclusão dos projetos `Araponga.Tests.Bff` e `Araponga.Tests.ApiSupport`.
+- **`Arah.sln`**
+  - Inclusão dos projetos `Arah.Tests.Bff` e `Arah.Tests.ApiSupport`.
 
 ---
 

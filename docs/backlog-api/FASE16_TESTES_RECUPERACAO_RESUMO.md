@@ -36,7 +36,7 @@ Recuperar e completar os testes faltantes da Fase 15 (Subscriptions & Recurring 
 
 ### 2. Testes Adicionados
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionTrialServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionTrialServiceTests.cs`
 
 **Novos Testes Implementados**:
 

@@ -3,7 +3,7 @@
 ## Nosso compromisso
 
 Como membros, contribuidores e mantenedores, nos comprometemos a tornar a participação
-no projeto Araponga uma experiência livre de assédio para todas as pessoas, independentemente
+no projeto Arah uma experiência livre de assédio para todas as pessoas, independentemente
 de idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais,
 identidade e expressão de gênero, nível de experiência, educação, status socioeconômico,
 nacionalidade, aparência, raça, religião ou identidade e orientação sexual.
@@ -40,7 +40,7 @@ indivíduo está representando oficialmente o projeto em espaços públicos.
 ## Aplicação
 
 Casos de comportamento abusivo, assediador ou de outra forma inaceitável podem ser
-relatados para a equipe do projeto pelo e-mail: suporte@araponga.app. Todas as denúncias
+relatados para a equipe do projeto pelo e-mail: suporte@Arah.app. Todas as denúncias
 serão analisadas e investigadas prontamente, de forma justa e respeitosa.
 
 ## Diretrizes de aplicação

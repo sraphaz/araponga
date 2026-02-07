@@ -345,7 +345,7 @@ grid {
 5. ✅ **Grids Responsivos**: Gaps que se adaptam ao espaço disponível
 6. ✅ **Cores Suaves**: Paleta desaturada (não saturada demais)
 
-**Status Araponga:**
+**Status Arah:**
 - ✅ Espaçamento generoso: **IMPLEMENTADO**
 - ✅ Tipografia limpa: **IMPLEMENTADO**
 - ✅ Glass morphism sutil: **IMPLEMENTADO**

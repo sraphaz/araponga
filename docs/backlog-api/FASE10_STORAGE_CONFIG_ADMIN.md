@@ -23,7 +23,7 @@ Permitir configuração explícita e aberta do provedor de blob storage para mí
 ### 1. Modelo de Domínio
 
 ```csharp
-// Araponga.Domain.Media/MediaStorageConfig.cs
+// Arah.Domain.Media/MediaStorageConfig.cs
 public sealed class MediaStorageConfig
 {
     public Guid Id { get; }
@@ -63,7 +63,7 @@ public sealed record AzureBlobStorageSettings(string ConnectionString, string Co
 ### 2. Repositório
 
 ```csharp
-// Araponga.Application/Interfaces/Media/IMediaStorageConfigRepository.cs
+// Arah.Application/Interfaces/Media/IMediaStorageConfigRepository.cs
 public interface IMediaStorageConfigRepository
 {
     Task<MediaStorageConfig?> GetActiveAsync(CancellationToken cancellationToken);
@@ -78,7 +78,7 @@ public interface IMediaStorageConfigRepository
 ### 3. Serviço
 
 ```csharp
-// Araponga.Application/Services/Media/MediaStorageConfigService.cs
+// Arah.Application/Services/Media/MediaStorageConfigService.cs
 public sealed class MediaStorageConfigService
 {
     private readonly IMediaStorageConfigRepository _repository;
@@ -106,7 +106,7 @@ public sealed class MediaStorageConfigService
 ### 4. API Controller
 
 ```csharp
-// Araponga.Api/Controllers/MediaStorageConfigController.cs
+// Arah.Api/Controllers/MediaStorageConfigController.cs
 [ApiController]
 [Route("api/v1/admin/media-storage-config")]
 [Tags("Admin - Media Storage")]
@@ -123,7 +123,7 @@ public sealed class MediaStorageConfigController : ControllerBase
 ### 5. Integração com MediaStorageFactory
 
 ```csharp
-// Araponga.Infrastructure/Media/MediaStorageFactory.cs
+// Arah.Infrastructure/Media/MediaStorageFactory.cs
 public sealed class MediaStorageFactory
 {
     private readonly IMediaStorageConfigService _configService;

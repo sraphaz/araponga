@@ -1,0 +1,10 @@
+using Arah.Api.Contracts.Journeys.Common;
+
+namespace Arah.Api.Contracts.Journeys.Onboarding;
+
+/// <summary>
+/// Feed inicial resumido para resposta do onboarding (itens + paginação).
+/// </summary>
+public sealed record TerritoryFeedInitialDto(
+    IReadOnlyList<TerritoryFeedItemDto> Items,
+    JourneyPaginationDto Pagination);

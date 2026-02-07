@@ -1,6 +1,6 @@
-# 💬 Configuração do Discord - Araponga
+# 💬 Configuração do Discord - Arah
 
-**Guia para Configurar o Discord do Time Araponga**
+**Guia para Configurar o Discord do Time Arah**
 
 **Versão**: 1.1  
 **Data**: 2025-01-20  
@@ -10,7 +10,7 @@
 
 ## 🎯 Objetivo
 
-Criar um espaço de comunicação e colaboração para o time orgânico do Araponga, permitindo:
+Criar um espaço de comunicação e colaboração para o time orgânico do Arah, permitindo:
 - **Organização natural** em torno de objetivos comuns
 - **Comunicação horizontal** entre todos os papéis
 - **Acolhimento** de novos membros
@@ -99,7 +99,7 @@ Criar um espaço de comunicação e colaboração para o time orgânico do Arapo
 ### Configurações do Servidor
 
 #### Nome do Servidor
-**"Araponga - Time de Desenvolvimento"** ou similar
+**"Arah - Time de Desenvolvimento"** ou similar
 
 #### Descrição
 ```
@@ -108,7 +108,7 @@ Time orgânico construindo tecnologia a serviço da vida local.
 ```
 
 #### Ícone
-- Use logo/marca do Araponga se disponível
+- Use logo/marca do Arah se disponível
 - Mantenha tamanho apropriado (128x128 ou 256x256)
 
 ### Roles (Cargos)
@@ -221,7 +221,7 @@ Criar canal `#regras` ou adicionar ao `#sala-pública`:
 2. Clique em "+" (adicionar servidor)
 3. Escolha "Criar meu próprio"
 4. Escolha "Para um clube ou comunidade"
-5. Dê nome: "Araponga - Time de Desenvolvimento"
+5. Dê nome: "Arah - Time de Desenvolvimento"
 6. Defina região (preferencialmente mais próxima ao Brasil)
 
 ### 2. Criar Categorias e Canais
@@ -269,7 +269,7 @@ Para cada canal:
 No canal `#sala-pública`, adicionar mensagem fixada:
 
 ```
-🌟 Bem-vindo ao Araponga!
+🌟 Bem-vindo ao Arah!
 
 Este é um espaço para construção colaborativa de uma plataforma digital comunitária orientada ao território.
 
@@ -446,7 +446,7 @@ Se possível, integrar GitHub com Discord:
 
 ## 🌍 Conclusão
 
-O Discord do Araponga é um **espaço vivo** - evolui conforme o time evolui.
+O Discord do Arah é um **espaço vivo** - evolui conforme o time evolui.
 
 **Princípios**:
 - ✅ Organização **orgânica**
@@ -454,7 +454,7 @@ O Discord do Araponga é um **espaço vivo** - evolui conforme o time evolui.
 - ✅ Acolhimento de **novos membros**
 - ✅ Respeito e **transparência**
 
-**Bem-vindo ao Discord do Araponga!**
+**Bem-vindo ao Discord do Arah!**
 
 ---
 

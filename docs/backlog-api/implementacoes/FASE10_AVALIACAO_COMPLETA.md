@@ -27,10 +27,10 @@ A Fase 10 está **~85% completa**. A implementação principal de mídias em con
 - ✅ Suporte a vídeos e áudios (além de imagens)
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/PostCreationService.cs`
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs`
+- ✅ `backend/Arah.Application/Services/PostCreationService.cs`
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs`
+- ✅ `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs`
 
 **Testes**: ✅ **40 testes de integração passando**
 
@@ -49,10 +49,10 @@ A Fase 10 está **~85% completa**. A implementação principal de mídias em con
 - ✅ Suporte a vídeos e áudios
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/EventsService.cs`
-- ✅ `backend/Araponga.Api/Controllers/EventsController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Events/CreateEventRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Events/EventResponse.cs`
+- ✅ `backend/Arah.Application/Services/EventsService.cs`
+- ✅ `backend/Arah.Api/Controllers/EventsController.cs`
+- ✅ `backend/Arah.Api/Contracts/Events/CreateEventRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Events/EventResponse.cs`
 
 **Testes**: ✅ **Incluídos nos 40 testes de integração**
 
@@ -71,10 +71,10 @@ A Fase 10 está **~85% completa**. A implementação principal de mídias em con
 - ✅ Suporte a vídeos e áudios
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/StoreItemService.cs`
-- ✅ `backend/Araponga.Api/Controllers/ItemsController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/CreateItemRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/ItemResponse.cs`
+- ✅ `backend/Arah.Application/Services/StoreItemService.cs`
+- ✅ `backend/Arah.Api/Controllers/ItemsController.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/CreateItemRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/ItemResponse.cs`
 
 **Testes**: ✅ **Incluídos nos 40 testes de integração**
 
@@ -92,10 +92,10 @@ A Fase 10 está **~85% completa**. A implementação principal de mídias em con
 - ✅ Validação de ownership
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/ChatService.cs`
-- ✅ `backend/Araponga.Api/Controllers/ChatController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Chat/SendMessageRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Chat/MessageResponse.cs`
+- ✅ `backend/Arah.Application/Services/ChatService.cs`
+- ✅ `backend/Arah.Api/Controllers/ChatController.cs`
+- ✅ `backend/Arah.Api/Contracts/Chat/SendMessageRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Chat/MessageResponse.cs`
 
 **Testes**: ✅ **Incluídos nos 40 testes de integração**
 
@@ -300,5 +300,5 @@ A Fase 10 está **~85% completa**. A implementação principal de mídias em con
 
 ---
 
-**Avaliador**: Sistema de Avaliação Araponga  
+**Avaliador**: Sistema de Avaliação Arah  
 **Data**: 2025-01-20

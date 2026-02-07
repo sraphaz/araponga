@@ -1,4 +1,4 @@
-# Guia de Acessibilidade - Araponga Flutter App
+# Guia de Acessibilidade - Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -28,7 +28,7 @@
 
 ### Objetivo
 
-Este documento especifica as **diretrizes completas de acessibilidade** para o app Flutter Araponga, garantindo que o aplicativo seja acessível para todos os usuários, incluindo pessoas com deficiências visuais, auditivas, motoras e cognitivas.
+Este documento especifica as **diretrizes completas de acessibilidade** para o app Flutter Arah, garantindo que o aplicativo seja acessível para todos os usuários, incluindo pessoas com deficiências visuais, auditivas, motoras e cognitivas.
 
 ### Princípios Fundamentais
 
@@ -352,7 +352,7 @@ MediaQuery(
 
 **Regra**: Usar fontes legíveis (sans-serif recomendado)
 
-**Araponga**:
+**Arah**:
 - Fonte primária: **Inter** (sans-serif) ✅
 - Fallback: System sans-serif
 

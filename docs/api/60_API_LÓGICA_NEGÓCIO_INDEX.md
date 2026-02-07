@@ -1,4 +1,4 @@
-# API Araponga - Lógica de Negócio e Usabilidade
+# API Arah - Lógica de Negócio e Usabilidade
 
 **Documento de Negócio Completo**  
 **Versão**: 2.0  
@@ -94,9 +94,9 @@ Este documento foi reorganizado em subdocumentos para melhor navegação e manut
 
 ### Para Integradores
 
-- Consulte o **DevPortal** (`devportal.araponga.app/`) para exemplos práticos de código
-- Use o **OpenAPI Explorer** (`devportal.araponga.app/#openapi`) para explorar contratos
-- Veja os **Diagramas de Sequência** (`devportal.araponga.app/#fluxos`) para entender fluxos
+- Consulte o **DevPortal** (`devportal.Arah.app/`) para exemplos práticos de código
+- Use o **OpenAPI Explorer** (`devportal.Arah.app/#openapi`) para explorar contratos
+- Veja os **Diagramas de Sequência** (`devportal.Arah.app/#fluxos`) para entender fluxos
 
 ### Para Analistas Funcionais
 
@@ -108,9 +108,9 @@ Este documento foi reorganizado em subdocumentos para melhor navegação e manut
 
 ## 📖 Links Relacionados
 
-- **DevPortal**: `devportal.araponga.app/` - Portal de desenvolvedor com exemplos práticos
-- **Wiki**: `devportal.araponga.app/wiki/` - Documentação completa do projeto
-- **GitHub**: `github.com/sraphaz/araponga` - Código-fonte
+- **DevPortal**: `devportal.Arah.app/` - Portal de desenvolvedor com exemplos práticos
+- **Wiki**: `devportal.Arah.app/wiki/` - Documentação completa do projeto
+- **GitHub**: `github.com/sraphaz/Arah` - Código-fonte
 - **API BFF**: [Avaliação BFF](../AVALIACAO_BFF_BACKEND_FOR_FRONTEND.md) | [Contrato OpenAPI](../BFF_API_CONTRACT.yaml) | [Exemplo Flutter](../BFF_FLUTTER_EXAMPLE.md) - API v2 com jornadas otimizadas
 
 ---

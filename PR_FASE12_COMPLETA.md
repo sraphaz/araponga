@@ -2,7 +2,7 @@
 
 ## 📋 Resumo
 
-Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
+Este PR implementa a **Fase 12** do projeto Arah, incluindo:
 - ✅ Sistema completo de Políticas e Termos de Uso
 - ✅ Exportação de Dados e Anonimização (LGPD)
 - ✅ Analytics e Métricas de Negócio
@@ -30,12 +30,12 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - 26 testes de segurança e validação
 
 **Arquivos Criados:**
-- `backend/Araponga.Domain/Policies/` (6 arquivos)
-- `backend/Araponga.Application/Services/` (5 serviços)
-- `backend/Araponga.Api/Controllers/` (2 controllers)
-- `backend/Araponga.Infrastructure/Postgres/Entities/` (4 records)
-- `backend/Araponga.Tests/Application/PolicySecurityTests.cs`
-- `backend/Araponga.Tests/Api/PolicySecurityControllerTests.cs`
+- `backend/Arah.Domain/Policies/` (6 arquivos)
+- `backend/Arah.Application/Services/` (5 serviços)
+- `backend/Arah.Api/Controllers/` (2 controllers)
+- `backend/Arah.Infrastructure/Postgres/Entities/` (4 records)
+- `backend/Arah.Tests/Application/PolicySecurityTests.cs`
+- `backend/Arah.Tests/Api/PolicySecurityControllerTests.cs`
 
 ---
 
@@ -51,12 +51,12 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - Documentação: `docs/LGPD_COMPLIANCE.md`
 
 **Arquivos Criados:**
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Application/Services/AccountDeletionService.cs`
-- `backend/Araponga.Application/Models/UserDataExport.cs`
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
-- `backend/Araponga.Tests/Application/DataExportServiceTests.cs`
-- `backend/Araponga.Tests/Application/AccountDeletionServiceTests.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Application/Services/AccountDeletionService.cs`
+- `backend/Arah.Application/Models/UserDataExport.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Tests/Application/DataExportServiceTests.cs`
+- `backend/Arah.Tests/Application/AccountDeletionServiceTests.cs`
 
 ---
 
@@ -69,10 +69,10 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - 4 testes unitários
 
 **Arquivos Criados:**
-- `backend/Araponga.Application/Services/AnalyticsService.cs`
-- `backend/Araponga.Application/Models/AnalyticsModels.cs`
-- `backend/Araponga.Api/Controllers/AnalyticsController.cs`
-- `backend/Araponga.Tests/Application/AnalyticsServiceTests.cs`
+- `backend/Arah.Application/Services/AnalyticsService.cs`
+- `backend/Arah.Application/Models/AnalyticsModels.cs`
+- `backend/Arah.Api/Controllers/AnalyticsController.cs`
+- `backend/Arah.Tests/Application/AnalyticsServiceTests.cs`
 
 ---
 
@@ -86,10 +86,10 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - Documentação: `docs/PERFORMANCE_TEST_RESULTS.md`
 
 **Arquivos Criados/Modificados:**
-- `backend/Araponga.Tests/Performance/PerformanceTests.cs`
-- `backend/Araponga.Tests/Performance/LoadTests.cs`
-- `backend/Araponga.Tests/Performance/StressTests.cs`
-- `backend/Araponga.Tests/Performance/MediaPerformanceTests.cs`
+- `backend/Arah.Tests/Performance/PerformanceTests.cs`
+- `backend/Arah.Tests/Performance/LoadTests.cs`
+- `backend/Arah.Tests/Performance/StressTests.cs`
+- `backend/Arah.Tests/Performance/MediaPerformanceTests.cs`
 
 ---
 
@@ -105,15 +105,15 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - 11 testes de API para `DevicesController` (7 falhando - problemas de autenticação em testes)
 
 **Arquivos Criados:**
-- `backend/Araponga.Domain/Users/UserDevice.cs`
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Application/Interfaces/IPushNotificationProvider.cs`
-- `backend/Araponga.Application/Interfaces/IUserDeviceRepository.cs`
-- `backend/Araponga.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs`
-- `backend/Araponga.Api/Validators/RegisterDeviceRequestValidator.cs`
-- `backend/Araponga.Tests/Application/PushNotificationServiceTests.cs`
-- `backend/Araponga.Tests/Api/DevicesControllerTests.cs`
+- `backend/Arah.Domain/Users/UserDevice.cs`
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Application/Interfaces/IPushNotificationProvider.cs`
+- `backend/Arah.Application/Interfaces/IUserDeviceRepository.cs`
+- `backend/Arah.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs`
+- `backend/Arah.Api/Validators/RegisterDeviceRequestValidator.cs`
+- `backend/Arah.Tests/Application/PushNotificationServiceTests.cs`
+- `backend/Arah.Tests/Api/DevicesControllerTests.cs`
 
 **Nota**: A integração real com FCM está como placeholder (apenas logging). Para produção, implementar chamadas reais ao Firebase Admin SDK.
 
@@ -128,10 +128,10 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 - JSON Serialization otimizada: `WriteIndented = false`, `DefaultIgnoreCondition = WhenWritingNull`
 
 **Arquivos Modificados:**
-- `backend/Araponga.Infrastructure/Postgres/Migrations/20260121220000_AddPerformanceIndexes.cs` (novo)
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/PostEditService.cs`
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/20260121220000_AddPerformanceIndexes.cs` (novo)
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/PostEditService.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -268,6 +268,6 @@ Este PR implementa a **Fase 12** do projeto Araponga, incluindo:
 
 ---
 
-**Autor**: Equipe Araponga  
+**Autor**: Equipe Arah  
 **Data**: 2026-01-21  
 **Branch**: `fix/wiki-remove-cmd-k-shortcut...origin/fix/wiki-remove-cmd-k-shortcut`

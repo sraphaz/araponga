@@ -1,11 +1,11 @@
 using System.Net.Http.Headers;
-using Araponga.Bff.Journeys;
+using Arah.Bff.Journeys;
 using Microsoft.Extensions.Options;
 
-namespace Araponga.Bff.Services;
+namespace Arah.Bff.Services;
 
 /// <summary>
-/// Encaminha requisições de jornada para a API principal (Araponga.Api).
+/// Encaminha requisições de jornada para a API principal (Arah.Api).
 /// O BFF é uma aplicação separada que repassa as chamadas para a API.
 /// </summary>
 public interface IJourneyApiProxy

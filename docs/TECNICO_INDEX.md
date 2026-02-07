@@ -8,7 +8,7 @@
 
 ## 📋 Visão Geral
 
-Este índice organiza a documentação técnica das **fases técnicas** do Araponga, cobrindo aspectos arquiteturais, de implementação e de deployment que são fundamentais para o desenvolvimento e operação da plataforma.
+Este índice organiza a documentação técnica das **fases técnicas** do Arah, cobrindo aspectos arquiteturais, de implementação e de deployment que são fundamentais para o desenvolvimento e operação da plataforma.
 
 ### Fases Técnicas Documentadas
 
@@ -23,7 +23,7 @@ Este índice organiza a documentação técnica das **fases técnicas** do Arapo
 
 ### Documentação Principal
 
-- **[Instalador Visual Araponga](./TECNICO_INSTALADOR_VISUAL.md)** ⭐
+- **[Instalador Visual Arah](./TECNICO_INSTALADOR_VISUAL.md)** ⭐
   - Visão geral e objetivos
   - Arquitetura do instalador
   - Fluxo completo de instalação (15 passos)
@@ -51,7 +51,7 @@ Este índice organiza a documentação técnica das **fases técnicas** do Arapo
 
 ### Documentação Principal
 
-- **[Modularização - Arquitetura Modular do Araponga](./TECNICO_MODULARIZACAO.md)** ⭐
+- **[Modularização - Arquitetura Modular do Arah](./TECNICO_MODULARIZACAO.md)** ⭐
   - Princípios de modularização
   - Arquitetura modular (Clean Architecture)
   - Módulos do sistema (15 módulos)
@@ -67,7 +67,7 @@ Este índice organiza a documentação técnica das **fases técnicas** do Arapo
 - [Domain Model](./12_DOMAIN_MODEL.md) - Modelo de domínio
 - [Feature Flags](./api/60_16_API_FEATURE_FLAGS.md) - Sistema de feature flags
 - [Architecture Services](./11_ARCHITECTURE_SERVICES.md) - Organização de services
-- [Plataforma Araponga](./funcional/00_PLATAFORMA_ARAPONGA.md) - Visão geral dos domínios
+- [Plataforma Arah](./funcional/00_PLATAFORMA_Arah.md) - Visão geral dos domínios
 
 ---
 

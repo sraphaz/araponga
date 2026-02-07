@@ -11,23 +11,23 @@
 
 #### Implementações Verificadas
 - ✅ Validação obrigatória de secret em todos os ambientes
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 41-47)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 41-47)
   - **Código**: Verifica se `jwtSigningKey` está vazio e lança exceção
   
 - ✅ Validação de força mínima (32 caracteres em produção)
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 63-68)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 63-68)
   - **Código**: Valida comprimento mínimo em produção
   
 - ✅ Validação que secret não é o valor padrão em produção
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 49-61)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 49-61)
   - **Código**: Verifica se é "dev-only-change-me" e lança exceção em produção
   
 - ✅ Mensagens de erro claras e específicas
-  - **Arquivo**: `backend/Araponga.Api/Program.cs`
+  - **Arquivo**: `backend/Arah.Api/Program.cs`
   - **Status**: Mensagens descritivas implementadas
   
 - ✅ Logging de warning quando usando secret padrão em desenvolvimento
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linha 59)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linha 59)
   - **Código**: `Log.Warning("Using default JWT SigningKey...")`
 
 **Status**: ✅ **COMPLETO**
@@ -38,30 +38,30 @@
 
 #### Implementações Verificadas
 - ✅ Rate limiting global por IP
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 114-129)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 114-129)
   - **Código**: `PartitionedRateLimiter.Create` com fallback para IP
   
 - ✅ Rate limiting por usuário autenticado (quando disponível)
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 117-118)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 117-118)
   - **Código**: Usa `context.User?.FindFirst("sub")?.Value` primeiro
   
 - ✅ Rate limiting específico por endpoint:
   - **Auth endpoints**: 5 req/min ✅
-    - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 132-138)
+    - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 132-138)
     - **Aplicado em**: `AuthController.cs` ✅
   - **Feed endpoints**: 100 req/min ✅
-    - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 141-147)
+    - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 141-147)
     - **Aplicado em**: `FeedController.cs` ✅
   - **Write endpoints**: 30 req/min ✅
-    - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 150-156)
+    - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 150-156)
     - **Aplicado em**: 9 controllers ✅
   
 - ✅ Headers de rate limit retornados (Retry-After)
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 164-167)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 164-167)
   - **Código**: `context.HttpContext.Response.Headers.Append("Retry-After", ...)`
   
 - ✅ Resposta 429 com ProblemDetails
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 169-175)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 169-175)
   - **Código**: Retorna `ProblemDetails` com status 429
 
 #### Controllers com Rate Limiting Aplicado (11/11) ✅
@@ -85,18 +85,18 @@
 
 #### Implementações Verificadas
 - ✅ HTTPS redirection habilitado em produção
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 280-284)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 280-284)
   - **Código**: `app.UseHttpsRedirection()` condicional
   
 - ✅ HSTS (HTTP Strict Transport Security) configurado
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 266-277, 283)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 266-277, 283)
   - **Configuração**:
     - `Preload = true` ✅
     - `IncludeSubDomains = true` ✅
     - `MaxAge = TimeSpan.FromDays(365)` ✅
   
 - ✅ Security Headers middleware criado
-  - **Arquivo**: `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+  - **Arquivo**: `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
   - **Headers implementados**:
     - ✅ X-Frame-Options: DENY
     - ✅ X-Content-Type-Options: nosniff
@@ -106,7 +106,7 @@
     - ✅ Content-Security-Policy: configurado
   
 - ✅ Middleware registrado corretamente
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linha 394)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linha 394)
   - **Código**: `app.UseMiddleware<SecurityHeadersMiddleware>()`
 
 **Status**: ✅ **COMPLETO**
@@ -145,7 +145,7 @@
 - ✅ Validação de GUIDs
 
 #### FluentValidation Configurado ✅
-- **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 203-206)
+- **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 203-206)
 - **Código**: 
   - `AddValidatorsFromAssemblyContaining<Program>()` ✅
   - `AddFluentValidationAutoValidation()` ✅
@@ -159,23 +159,23 @@
 
 #### Implementações Verificadas
 - ✅ Validação de CORS em produção (não permite wildcard)
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 79-87)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 79-87)
   - **Código**: Valida se `allowedOrigins` contém "*" em produção
   
 - ✅ Preflight cache configurado (24 horas)
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linha 105)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linha 105)
   - **Código**: `SetPreflightMaxAge(TimeSpan.FromHours(24))`
   
 - ✅ Credentials permitidos quando necessário
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linha 104)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linha 104)
   - **Código**: `AllowCredentials()`
   
 - ✅ Mensagens de erro claras
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 83-86)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linhas 83-86)
   - **Status**: Mensagem descritiva implementada
 
 - ✅ CORS aplicado no pipeline
-  - **Arquivo**: `backend/Araponga.Api/Program.cs` (linha 390)
+  - **Arquivo**: `backend/Arah.Api/Program.cs` (linha 390)
   - **Código**: `app.UseCors("Default")`
 
 **Status**: ✅ **COMPLETO**
@@ -185,29 +185,29 @@
 ## 📊 Resumo Final
 
 ### Arquivos Criados (9/9) ✅
-1. ✅ `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
-2. ✅ `backend/Araponga.Api/Validators/CreateAssetRequestValidator.cs`
-3. ✅ `backend/Araponga.Api/Validators/SuggestMapEntityRequestValidator.cs`
-4. ✅ `backend/Araponga.Api/Validators/UpsertStoreRequestValidator.cs`
-5. ✅ `backend/Araponga.Api/Validators/CreateItemRequestValidator.cs`
-6. ✅ `backend/Araponga.Api/Validators/SuggestTerritoryRequestValidator.cs`
-7. ✅ `backend/Araponga.Api/Validators/UpdatePrivacyPreferencesRequestValidator.cs`
-8. ✅ `backend/Araponga.Api/Validators/UpdateDisplayNameRequestValidator.cs`
-9. ✅ `backend/Araponga.Api/Validators/UpdateContactInfoRequestValidator.cs`
+1. ✅ `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
+2. ✅ `backend/Arah.Api/Validators/CreateAssetRequestValidator.cs`
+3. ✅ `backend/Arah.Api/Validators/SuggestMapEntityRequestValidator.cs`
+4. ✅ `backend/Arah.Api/Validators/UpsertStoreRequestValidator.cs`
+5. ✅ `backend/Arah.Api/Validators/CreateItemRequestValidator.cs`
+6. ✅ `backend/Arah.Api/Validators/SuggestTerritoryRequestValidator.cs`
+7. ✅ `backend/Arah.Api/Validators/UpdatePrivacyPreferencesRequestValidator.cs`
+8. ✅ `backend/Arah.Api/Validators/UpdateDisplayNameRequestValidator.cs`
+9. ✅ `backend/Arah.Api/Validators/UpdateContactInfoRequestValidator.cs`
 
 ### Arquivos Modificados (12/12) ✅
-1. ✅ `backend/Araponga.Api/Program.cs` - JWT, Rate Limiting, HTTPS, HSTS, CORS, Security Headers
-2. ✅ `backend/Araponga.Api/Controllers/AuthController.cs` - Rate limiting
-3. ✅ `backend/Araponga.Api/Controllers/FeedController.cs` - Rate limiting
-4. ✅ `backend/Araponga.Api/Controllers/EventsController.cs` - Rate limiting
-5. ✅ `backend/Araponga.Api/Controllers/AlertsController.cs` - Rate limiting
-6. ✅ `backend/Araponga.Api/Controllers/AssetsController.cs` - Rate limiting
-7. ✅ `backend/Araponga.Api/Controllers/MapController.cs` - Rate limiting
-8. ✅ `backend/Araponga.Api/Controllers/StoresController.cs` - Rate limiting
-9. ✅ `backend/Araponga.Api/Controllers/ItemsController.cs` - Rate limiting
-10. ✅ `backend/Araponga.Api/Controllers/UserPreferencesController.cs` - Rate limiting
-11. ✅ `backend/Araponga.Api/Controllers/UserProfileController.cs` - Rate limiting
-12. ✅ `backend/Araponga.Api/Controllers/TerritoriesController.cs` - Rate limiting
+1. ✅ `backend/Arah.Api/Program.cs` - JWT, Rate Limiting, HTTPS, HSTS, CORS, Security Headers
+2. ✅ `backend/Arah.Api/Controllers/AuthController.cs` - Rate limiting
+3. ✅ `backend/Arah.Api/Controllers/FeedController.cs` - Rate limiting
+4. ✅ `backend/Arah.Api/Controllers/EventsController.cs` - Rate limiting
+5. ✅ `backend/Arah.Api/Controllers/AlertsController.cs` - Rate limiting
+6. ✅ `backend/Arah.Api/Controllers/AssetsController.cs` - Rate limiting
+7. ✅ `backend/Arah.Api/Controllers/MapController.cs` - Rate limiting
+8. ✅ `backend/Arah.Api/Controllers/StoresController.cs` - Rate limiting
+9. ✅ `backend/Arah.Api/Controllers/ItemsController.cs` - Rate limiting
+10. ✅ `backend/Arah.Api/Controllers/UserPreferencesController.cs` - Rate limiting
+11. ✅ `backend/Arah.Api/Controllers/UserProfileController.cs` - Rate limiting
+12. ✅ `backend/Arah.Api/Controllers/TerritoriesController.cs` - Rate limiting
 
 ---
 

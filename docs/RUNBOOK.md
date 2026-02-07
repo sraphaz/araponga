@@ -1,6 +1,6 @@
-# Runbook de Operações - Araponga
+# Runbook de Operações - Arah
 
-Este documento contém procedimentos operacionais para o sistema Araponga.
+Este documento contém procedimentos operacionais para o sistema Arah.
 
 ## 📋 Índice
 
@@ -22,12 +22,12 @@ Este documento contém procedimentos operacionais para o sistema Araponga.
    env | grep -E "JWT__SIGNINGKEY|CORS__ALLOWEDORIGINS|ConnectionStrings"
    
    # Verificar health checks
-   curl https://api.araponga.com/health
+   curl https://api.Arah.com/health
    ```
 
 2. **Executar Migrations**:
    ```bash
-   dotnet ef database update --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+   dotnet ef database update --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
    ```
 
 3. **Deploy da Aplicação**:
@@ -37,16 +37,16 @@ Este documento contém procedimentos operacionais para o sistema Araponga.
    
    # Kubernetes
    kubectl apply -f k8s/
-   kubectl rollout status deployment/araponga-api
+   kubectl rollout status deployment/Arah-api
    ```
 
 4. **Verificar Deploy**:
    ```bash
    # Health check
-   curl https://api.araponga.com/health/ready
+   curl https://api.Arah.com/health/ready
    
    # Verificar logs
-   docker logs araponga-api --tail 100
+   docker logs Arah-api --tail 100
    ```
 
 ---
@@ -68,12 +68,12 @@ Este documento contém procedimentos operacionais para o sistema Araponga.
    docker-compose up -d --build
    
    # Kubernetes
-   kubectl rollout undo deployment/araponga-api
+   kubectl rollout undo deployment/Arah-api
    ```
 
 3. **Verificar Rollback**:
    ```bash
-   curl https://api.araponga.com/health/ready
+   curl https://api.Arah.com/health/ready
    ```
 
 ### Rollback de Migrations
@@ -82,10 +82,10 @@ Este documento contém procedimentos operacionais para o sistema Araponga.
 
 ```bash
 # Listar migrations
-dotnet ef migrations list --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef migrations list --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 
 # Rollback para migration específica
-dotnet ef database update <MigrationName> --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef database update <MigrationName> --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 ```
 
 ---
@@ -111,8 +111,8 @@ dotnet ef database update <MigrationName> --project backend/Araponga.Infrastruct
 
 ### Contatos
 
-- **Desenvolvimento**: dev@araponga.com
-- **DevOps**: devops@araponga.com
+- **Desenvolvimento**: dev@Arah.com
+- **DevOps**: devops@Arah.com
 - **Emergência**: +55 (11) 99999-9999
 
 ---
@@ -152,17 +152,17 @@ redis-cli FLUSHDB
 
 ```bash
 # PostgreSQL
-pg_dump -h localhost -U araponga -d araponga > backup_$(date +%Y%m%d_%H%M%S).sql
+pg_dump -h localhost -U Arah -d Arah > backup_$(date +%Y%m%d_%H%M%S).sql
 
 # Backup automático (cron)
-0 2 * * * pg_dump -h localhost -U araponga -d araponga > /backups/araponga_$(date +\%Y\%m\%d).sql
+0 2 * * * pg_dump -h localhost -U Arah -d Arah > /backups/araponga_$(date +\%Y\%m\%d).sql
 ```
 
 ### Restore do Banco de Dados
 
 ```bash
 # PostgreSQL
-psql -h localhost -U araponga -d araponga < backup_20250115_020000.sql
+psql -h localhost -U Arah -d Arah < backup_20250115_020000.sql
 ```
 
 ### Backup de Configuração
@@ -193,7 +193,7 @@ env | grep -E "JWT|CORS|ConnectionStrings" > env_backup.txt
 
 A aplicação possui uma **interface web integrada** para monitoramento e auxílio à produção.
 
-**Acesso**: `https://api.araponga.com/admin/monitoring` (requer autenticação e autorização)
+**Acesso**: `https://api.Arah.com/admin/monitoring` (requer autenticação e autorização)
 
 **Funcionalidades**:
 - ✅ Dashboard principal com status geral

@@ -76,7 +76,7 @@ Implementar módulo completo de conexões e círculo de amigos, permitindo que m
 ### Estrutura de Módulo
 
 ```
-Araponga.Modules.Connections/
+Arah.Modules.Connections/
 ├── Domain/
 │   ├── UserConnection.cs
 │   ├── ConnectionStatus.cs
@@ -133,7 +133,7 @@ Araponga.Modules.Connections/
 ### 1. UserConnection
 
 ```csharp
-namespace Araponga.Domain.Connections;
+namespace Arah.Domain.Connections;
 
 public sealed class UserConnection
 {
@@ -230,7 +230,7 @@ public sealed class UserConnection
 ### 2. ConnectionStatus
 
 ```csharp
-namespace Araponga.Domain.Connections;
+namespace Arah.Domain.Connections;
 
 public enum ConnectionStatus
 {
@@ -244,7 +244,7 @@ public enum ConnectionStatus
 ### 3. ConnectionPrivacySettings
 
 ```csharp
-namespace Araponga.Domain.Connections;
+namespace Arah.Domain.Connections;
 
 public sealed class ConnectionPrivacySettings
 {
@@ -305,7 +305,7 @@ public sealed class ConnectionPrivacySettings
 ### 4. Enums
 
 ```csharp
-namespace Araponga.Domain.Connections;
+namespace Arah.Domain.Connections;
 
 public enum ConnectionRequestPolicy
 {
@@ -327,7 +327,7 @@ public enum ConnectionVisibility
 ### 5. Repository Interface
 
 ```csharp
-namespace Araponga.Domain.Connections;
+namespace Arah.Domain.Connections;
 
 public interface IUserConnectionRepository
 {
@@ -850,7 +850,7 @@ public class ConnectionCacheService
 
 ### Modularização física (opcional)
 
-Quando a base de código adotar a migração por módulos físicos (projeto `Araponga.Modules.*.Infrastructure`), o módulo **Connections** pode ser migrado conforme `docs/PLANO_MIGRACAO_MODULOS.md`:
+Quando a base de código adotar a migração por módulos físicos (projeto `Arah.Modules.*.Infrastructure`), o módulo **Connections** pode ser migrado conforme `docs/PLANO_MIGRACAO_MODULOS.md`:
 
 - **Entidades a mover**: `UserConnectionRecord`, `ConnectionPrivacySettingsRecord`
 - **Repositórios a mover**: `PostgresUserConnectionRepository`, `PostgresConnectionPrivacySettingsRepository`

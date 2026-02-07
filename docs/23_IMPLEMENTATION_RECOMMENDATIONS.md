@@ -7,7 +7,7 @@ Este documento registra a implementação das recomendações da análise de coe
 ### 1. Aumentar Cobertura de Testes
 
 #### 1.1 Marketplace (~60% → ~80%)
-**Arquivo**: `backend/Araponga.Tests/Application/MarketplaceServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/MarketplaceServiceTests.cs`
 
 **Testes Adicionados**:
 - ✅ `StoreService_UpdateAndStatusChanges` - Testa atualização de loja e mudanças de status (pause/activate)
@@ -20,7 +20,7 @@ Este documento registra a implementação das recomendações da análise de coe
 **Cobertura**: Aumentada de ~60% para ~80%
 
 #### 1.2 Infraestrutura (~50% → ~75%)
-**Arquivo**: `backend/Araponga.Tests/Infrastructure/RepositoryTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Infrastructure/RepositoryTests.cs` (NOVO)
 
 **Testes Adicionados**:
 - ✅ `TerritoryRepository_ListAndGetById` - Testa listagem e busca por ID
@@ -36,7 +36,7 @@ Este documento registra a implementação das recomendações da análise de coe
 **Cobertura**: Aumentada de ~50% para ~75%
 
 #### 1.3 Notificações - Edge Cases (~75% → ~85%)
-**Arquivo**: `backend/Araponga.Tests/Application/NotificationFlowTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/NotificationFlowTests.cs`
 
 **Testes Adicionados**:
 - ✅ `NotificationInbox_PaginationWorks` - Testa paginação de notificações
@@ -49,7 +49,7 @@ Este documento registra a implementação das recomendações da análise de coe
 
 ### 2. Testes E2E
 
-**Arquivo**: `backend/Araponga.Tests/Api/EndToEndTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Api/EndToEndTests.cs` (NOVO)
 
 **Testes Adicionados**:
 - ✅ `CompleteUserFlow_CadastroToFeed` - Fluxo completo: cadastro → descobrir territórios → selecionar → vínculo → feed
@@ -82,7 +82,7 @@ Este documento registra a implementação das recomendações da análise de coe
 ### 4. Observabilidade Mínima
 
 #### 4.1 Interface de Observabilidade
-**Arquivo**: `backend/Araponga.Application/Interfaces/IObservabilityLogger.cs` (NOVO)
+**Arquivo**: `backend/Arah.Application/Interfaces/IObservabilityLogger.cs` (NOVO)
 
 **Métodos**:
 - ✅ `LogGeolocationError` - Loga erros de geolocalização com contexto mínimo
@@ -91,7 +91,7 @@ Este documento registra a implementação das recomendações da análise de coe
 - ✅ `LogRequest` - Métrica de requisição HTTP (método, path, status, duração)
 
 #### 4.2 Implementação InMemory
-**Arquivo**: `backend/Araponga.Infrastructure/InMemory/InMemoryObservabilityLogger.cs` (NOVO)
+**Arquivo**: `backend/Arah.Infrastructure/InMemory/InMemoryObservabilityLogger.cs` (NOVO)
 
 **Características**:
 - ✅ Usa `ILogger<InMemoryObservabilityLogger>` padrão do .NET
@@ -99,7 +99,7 @@ Este documento registra a implementação das recomendações da análise de coe
 - ✅ Contexto mínimo conforme especificação MVP
 
 #### 4.3 Middleware de Request Logging
-**Arquivo**: `backend/Araponga.Api/Middleware/RequestLoggingMiddleware.cs` (NOVO)
+**Arquivo**: `backend/Arah.Api/Middleware/RequestLoggingMiddleware.cs` (NOVO)
 
 **Funcionalidades**:
 - ✅ Mede duração de requisições HTTP
@@ -108,11 +108,11 @@ Este documento registra a implementação das recomendações da análise de coe
 
 #### 4.4 Integração nos Serviços
 
-**ReportService** (`backend/Araponga.Application/Services/ReportService.cs`):
+**ReportService** (`backend/Arah.Application/Services/ReportService.cs`):
 - ✅ Loga criação de reports (POST e USER)
 - ✅ Loga falhas de moderação automática (threshold atingido)
 
-**MembershipsController** (`backend/Araponga.Api/Controllers/MembershipsController.cs`):
+**MembershipsController** (`backend/Arah.Api/Controllers/MembershipsController.cs`):
 - ✅ Loga erros de geolocalização quando headers faltam para RESIDENT
 
 **Program.cs**:
@@ -134,21 +134,21 @@ Este documento registra a implementação das recomendações da análise de coe
 
 ### Novos Arquivos Criados
 
-1. `backend/Araponga.Tests/Infrastructure/RepositoryTests.cs` - 9 testes de repositórios
-2. `backend/Araponga.Tests/Api/EndToEndTests.cs` - 4 testes E2E
+1. `backend/Arah.Tests/Infrastructure/RepositoryTests.cs` - 9 testes de repositórios
+2. `backend/Arah.Tests/Api/EndToEndTests.cs` - 4 testes E2E
 3. `docs/10_ARCHITECTURE_DECISIONS.md` - 9 ADRs documentados
 4. `docs/23_IMPLEMENTATION_RECOMMENDATIONS.md` - Este documento
-5. `backend/Araponga.Application/Interfaces/IObservabilityLogger.cs` - Interface de observabilidade
-6. `backend/Araponga.Infrastructure/InMemory/InMemoryObservabilityLogger.cs` - Implementação
-7. `backend/Araponga.Api/Middleware/RequestLoggingMiddleware.cs` - Middleware de logging
+5. `backend/Arah.Application/Interfaces/IObservabilityLogger.cs` - Interface de observabilidade
+6. `backend/Arah.Infrastructure/InMemory/InMemoryObservabilityLogger.cs` - Implementação
+7. `backend/Arah.Api/Middleware/RequestLoggingMiddleware.cs` - Middleware de logging
 
 ### Arquivos Modificados
 
-1. `backend/Araponga.Tests/Application/MarketplaceServiceTests.cs` - +6 testes
-2. `backend/Araponga.Tests/Application/NotificationFlowTests.cs` - +3 testes
-3. `backend/Araponga.Application/Services/ReportService.cs` - Integração com observabilidade
-4. `backend/Araponga.Api/Controllers/MembershipsController.cs` - Logging de erros de geo
-5. `backend/Araponga.Api/Program.cs` - Registro de serviços e middleware
+1. `backend/Arah.Tests/Application/MarketplaceServiceTests.cs` - +6 testes
+2. `backend/Arah.Tests/Application/NotificationFlowTests.cs` - +3 testes
+3. `backend/Arah.Application/Services/ReportService.cs` - Integração com observabilidade
+4. `backend/Arah.Api/Controllers/MembershipsController.cs` - Logging de erros de geo
+5. `backend/Arah.Api/Program.cs` - Registro de serviços e middleware
 6. `docs/22_COHESION_AND_TESTS.md` - Atualização com status das recomendações
 
 ---

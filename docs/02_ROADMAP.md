@@ -1,4 +1,4 @@
-# Roadmap Estratégico - Araponga
+# Roadmap Estratégico - Arah
 ## Planejamento de Desenvolvimento e Evolução da Plataforma
 
 **Versão**: 3.1  
@@ -10,7 +10,7 @@
 
 ## 📋 Visão Executiva
 
-O roadmap do Araponga apresenta uma estratégia de desenvolvimento progressivo que evolui de um MVP sólido para uma plataforma completa de organização comunitária territorial com governança descentralizada e economia circular tokenizada. O planejamento incorpora padrões de mercado estabelecidos por plataformas líderes, mantendo os valores fundamentais do projeto (território-first, comunidade-first).
+O roadmap do Arah apresenta uma estratégia de desenvolvimento progressivo que evolui de um MVP sólido para uma plataforma completa de organização comunitária territorial com governança descentralizada e economia circular tokenizada. O planejamento incorpora padrões de mercado estabelecidos por plataformas líderes, mantendo os valores fundamentais do projeto (território-first, comunidade-first).
 
 **Referência Estratégica**: [Estratégia de Convergência de Mercado](./39_ESTRATEGIA_CONVERGENCIA_MERCADO.md) | [Mapa de Funcionalidades](./38_MAPA_FUNCIONALIDADES_MERCADO.md)
 
@@ -20,7 +20,7 @@ O roadmap do Araponga apresenta uma estratégia de desenvolvimento progressivo q
 
 ### MVP Completo
 
-O MVP do Araponga foi concluído com sucesso, estabelecendo uma base técnica robusta e funcionalidades core essenciais para operação de comunidades territoriais.
+O MVP do Arah foi concluído com sucesso, estabelecendo uma base técnica robusta e funcionalidades core essenciais para operação de comunidades territoriais.
 
 **Funcionalidades Core Implementadas**:
 - ✅ Backend estruturado com Clean Architecture
@@ -65,7 +65,7 @@ O MVP do Araponga foi concluído com sucesso, estabelecendo uma base técnica ro
 
 ## 🗺️ Roadmap Estratégico - Próximas Fases
 
-O roadmap estratégico foi reorganizado com base em análise comparativa de mercado e padrões de investimento, priorizando funcionalidades que elevam o Araponga ao nível de plataformas líderes. As fases foram reorganizadas em ondas estratégicas com foco em valor entregue e convergência de mercado.
+O roadmap estratégico foi reorganizado com base em análise comparativa de mercado e padrões de investimento, priorizando funcionalidades que elevam o Arah ao nível de plataformas líderes. As fases foram reorganizadas em ondas estratégicas com foco em valor entregue e convergência de mercado.
 
 ### ✅ Onda 1: MVP Essencial (Mês 0-3) - COMPLETA
 
@@ -194,7 +194,7 @@ O roadmap estratégico foi reorganizado com base em análise comparativa de merc
 
 ### Onda 10: Extensões e Diferenciação (Mês 18+) 🟢 MÉDIA
 
-**Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
+**Objetivo**: Implementar funcionalidades que diferenciam o Arah no mercado.
 
 | Fase | Título | Prioridade | Duração | Status |
 |------|--------|------------|---------|--------|

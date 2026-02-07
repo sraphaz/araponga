@@ -94,7 +94,7 @@
 ### 1. Verificar Estado dos Testes
 ```bash
 git checkout feature/fase10-midias-em-conteudo
-cd backend/Araponga.Tests
+cd backend/Arah.Tests
 dotnet test
 ```
 
@@ -166,7 +166,7 @@ dotnet test
 - ✅ `docs/40_CHANGELOG.md`
 - ✅ `docs/backlog-api/FASE10.md`
 - ✅ `docs/backlog-api/implementacoes/FASE10_*.md` (vários)
-- ✅ `backend/Araponga.Api/wwwroot/devportal/index.html`
+- ✅ `backend/Arah.Api/wwwroot/devportal/index.html`
 
 ---
 

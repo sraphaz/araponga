@@ -1,4 +1,4 @@
-# Diretrizes de Design do App Flutter Araponga
+# Diretrizes de Design do App Flutter Arah
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -36,7 +36,7 @@
 
 ### Propósito do Design System
 
-O design system do Araponga Flutter App deve **guiar, harmonizar e acelerar** o desenvolvimento, garantindo:
+O design system do Arah Flutter App deve **guiar, harmonizar e acelerar** o desenvolvimento, garantindo:
 
 - ✅ **Experiência fluida e natural** (baixa fricção)
 - ✅ **Conversão eficiente** (estratégias de captura de atenção aplicadas ao contexto territorial)
@@ -47,7 +47,7 @@ O design system do Araponga Flutter App deve **guiar, harmonizar e acelerar** o 
 
 ### Filosofia de Design
 
-O design do Araponga é **território-primeiro, comunidade-primeiro**. Ele deve:
+O design do Arah é **território-primeiro, comunidade-primeiro**. Ele deve:
 
 1. **Respeitar o contexto local**: Cada território é único; o design deve se adaptar sem perder a identidade
 2. **Priorizar a relevância**: Informações territoriais devem se destacar naturalmente
@@ -102,7 +102,7 @@ O design do Araponga é **território-primeiro, comunidade-primeiro**. Ele deve:
 - **Carregamento progressivo**: Skeleton loaders, imagens com fade-in suave
 - **Navegação por gestos**: Bottom navigation, swipe entre tabs
 
-**Aplicação no Araponga**:
+**Aplicação no Arah**:
 - Feed territorial com scroll fluido (velocidade 60fps)
 - Pull-to-refresh suave para atualizar conteúdo local
 - Swipe em cards de post para ações rápidas (favoritar, compartilhar)
@@ -114,7 +114,7 @@ O design do Araponga é **território-primeiro, comunidade-primeiro**. Ele deve:
 - **Contraste inteligente**: Cores primárias para CTAs, neutros para secundários
 - **Cards bem definidos**: Bordas sutis, sombras suaves, espaçamento interno generoso
 
-**Aplicação no Araponga**:
+**Aplicação no Arah**:
 - Posts com hierarquia clara: autor em destaque, conteúdo legível, ações discretas
 - Cards de território com informações prioritárias (nome, localização, membros)
 - Eventos com data/hora em destaque, localização clara
@@ -126,19 +126,19 @@ O design do Araponga é **território-primeiro, comunidade-primeiro**. Ele deve:
 - **Estados visuais claros**: Loading, success, error, disabled
 - **Confirmações discretas**: Snackbars, toasts, badges
 
-**Aplicação no Araponga**:
+**Aplicação no Arah**:
 - Like/curtida com animação de escala suave (0.9x → 1.0x → 0.95x → 1.0x)
 - Badge de notificação com bounce sutil quando nova
 - Pull-to-refresh com indicador de carregamento
 - Confirmação de ações com snackbar discreto
 
-#### 4. **Contextualização Territorial** (Araponga Exclusivo)
+#### 4. **Contextualização Territorial** (Arah Exclusivo)
 - **Mapa integrado**: Visualização espacial imediata
 - **Pins visuais**: Destaque para conteúdo georreferenciado
 - **Proximidade visual**: Conteúdo próximo aparece primeiro
 - **Conexão com lugar**: Elementos que remetem ao território (cores naturais, imagens locais)
 
-**Aplicação no Araponga**:
+**Aplicação no Arah**:
 - Feed e mapa sincronizados (seleção em um reflete no outro)
 - Pins coloridos por tipo (post, evento, alerta)
 - Badge de "próximo a você" para conteúdo local
@@ -1815,7 +1815,7 @@ class ArapongaIconSizes {
 - **TikTok**: Fluidez, feedback imediato, transições suaves
 - **Twitter/X**: Hierarquia clara, tipografia escalada, espaçamento generoso
 
-### Princípios Aplicados no Araponga
+### Princípios Aplicados no Arah
 - **Baixa fricção**: Minimizar passos para ações comuns
 - **Fluidez**: Animações 60fps, transições suaves
 - **Contexto territorial**: Conteúdo local em destaque

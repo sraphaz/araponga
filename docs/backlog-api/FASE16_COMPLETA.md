@@ -56,10 +56,10 @@ A **Fase 16** foi completada com sucesso! Todas as funcionalidades críticas for
   - Integrado em: PostCreationService, EventsService, StoreService, etc.
 
 **Arquivos**:
-- `backend/Araponga.Domain/Policies/*.cs`
-- `backend/Araponga.Application/Services/Terms*.cs`
-- `backend/Araponga.Application/Services/PolicyRequirementService.cs`
-- `backend/Araponga.Api/Controllers/Terms*.cs`
+- `backend/Arah.Domain/Policies/*.cs`
+- `backend/Arah.Application/Services/Terms*.cs`
+- `backend/Arah.Application/Services/PolicyRequirementService.cs`
+- `backend/Arah.Api/Controllers/Terms*.cs`
 
 ---
 

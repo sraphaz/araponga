@@ -8,7 +8,7 @@ Este documento lista todas as melhorias aplicadas baseadas nas recomendações d
 
 ### 1. Validação de Geolocalização ✅
 
-**Arquivo**: `backend/Araponga.Application/Services/MembershipService.cs`
+**Arquivo**: `backend/Arah.Application/Services/MembershipService.cs`
 
 **Mudanças**:
 - `VerifyResidencyByGeoAsync` agora recebe `latitude` e `longitude` como parâmetros
@@ -22,7 +22,7 @@ Este documento lista todas as melhorias aplicadas baseadas nas recomendações d
 
 ### 2. Upload de Comprovante (Documentação) ✅
 
-**Arquivo**: `backend/Araponga.Api/Controllers/MembershipsController.cs`
+**Arquivo**: `backend/Arah.Api/Controllers/MembershipsController.cs`
 
 **Mudanças**:
 - Comentários explicativos adicionados sobre o que será necessário quando o sistema de upload for implementado
@@ -30,7 +30,7 @@ Este documento lista todas as melhorias aplicadas baseadas nas recomendações d
 
 ### 3. Verificação de MarketplaceIdentityVerifiedAtUtc ✅
 
-**Arquivo**: `backend/Araponga.Application/Services/MembershipAccessRules.cs`
+**Arquivo**: `backend/Arah.Application/Services/MembershipAccessRules.cs`
 
 **Mudanças**:
 - Comentários melhorados explicando quando e como implementar
@@ -39,9 +39,9 @@ Este documento lista todas as melhorias aplicadas baseadas nas recomendações d
 ### 4. Suporte a Transações Explícitas ✅
 
 **Arquivos**:
-- `backend/Araponga.Application/Interfaces/IUnitOfWork.cs`
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUnitOfWork.cs`
+- `backend/Arah.Application/Interfaces/IUnitOfWork.cs`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryUnitOfWork.cs`
 
 **Mudanças**:
 - Adicionados métodos `BeginTransactionAsync`, `RollbackAsync`, `HasActiveTransactionAsync`
@@ -50,7 +50,7 @@ Este documento lista todas as melhorias aplicadas baseadas nas recomendações d
 
 ### 5. Melhor Rollback no TransferResidencyAsync ✅
 
-**Arquivo**: `backend/Araponga.Application/Services/MembershipService.cs`
+**Arquivo**: `backend/Arah.Application/Services/MembershipService.cs`
 
 **Mudanças**:
 - Refatorado para usar transações explícitas
@@ -106,20 +106,20 @@ catch
 ## 🔧 Arquivos Modificados
 
 ### Application Layer
-1. `backend/Araponga.Application/Interfaces/IUnitOfWork.cs` - Transações
-2. `backend/Araponga.Application/Services/MembershipService.cs` - Validação geo + transações
-3. `backend/Araponga.Application/Services/MembershipAccessRules.cs` - Comentários
+1. `backend/Arah.Application/Interfaces/IUnitOfWork.cs` - Transações
+2. `backend/Arah.Application/Services/MembershipService.cs` - Validação geo + transações
+3. `backend/Arah.Application/Services/MembershipAccessRules.cs` - Comentários
 
 ### Infrastructure Layer
-4. `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` - Transações
-5. `backend/Araponga.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - Transações
+4. `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` - Transações
+5. `backend/Arah.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - Transações
 
 ### API Layer
-6. `backend/Araponga.Api/Controllers/MembershipsController.cs` - Coordenadas + comentários
+6. `backend/Arah.Api/Controllers/MembershipsController.cs` - Coordenadas + comentários
 
 ### Tests
-7. `backend/Araponga.Tests/Application/MembershipServiceTests.cs` - ITerritoryRepository + novo teste
-8. `backend/Araponga.Tests/Application/ApplicationServiceTests.cs` - ITerritoryRepository
+7. `backend/Arah.Tests/Application/MembershipServiceTests.cs` - ITerritoryRepository + novo teste
+8. `backend/Arah.Tests/Application/ApplicationServiceTests.cs` - ITerritoryRepository
 
 ## ✅ Status Final
 

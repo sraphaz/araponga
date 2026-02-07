@@ -100,8 +100,8 @@ A análise de cobertura está incluindo **todo o código do projeto**, o que dil
    - Entities auxiliares
 
 **Arquivos a criar**:
-- `backend/Araponga.Tests/Domain/Work/WorkEdgeCasesTests.cs`
-- `backend/Araponga.Tests/Domain/Email/EmailEdgeCasesTests.cs` (se aplicável)
+- `backend/Arah.Tests/Domain/Work/WorkEdgeCasesTests.cs`
+- `backend/Arah.Tests/Domain/Email/EmailEdgeCasesTests.cs` (se aplicável)
 
 ### Prioridade 2: Application Layer (75% → 90%+)
 **Gap**: ~15 pontos percentuais  
@@ -123,7 +123,7 @@ A análise de cobertura está incluindo **todo o código do projeto**, o que dil
    - FeatureFlagService (parcialmente testado)
 
 **Arquivos a criar/expandir**:
-- `backend/Araponga.Tests/Application/AccountDeletionServiceEdgeCasesTests.cs`
+- `backend/Arah.Tests/Application/AccountDeletionServiceEdgeCasesTests.cs`
 - Expandir testes existentes com mais cenários
 
 ### Prioridade 3: Infrastructure Layer (50% → 80%+)
@@ -149,8 +149,8 @@ A análise de cobertura está incluindo **todo o código do projeto**, o que dil
 
 **Arquivos a criar/expandir**:
 - Expandir `PostgresRepositoryIntegrationTests.cs`
-- `backend/Araponga.Tests/Infrastructure/StorageAdapterTests.cs`
-- `backend/Araponga.Tests/Infrastructure/EmailAdapterTests.cs`
+- `backend/Arah.Tests/Infrastructure/StorageAdapterTests.cs`
+- `backend/Arah.Tests/Infrastructure/EmailAdapterTests.cs`
 
 ### Prioridade 4: API Layer (60% → 70%+)
 **Gap**: ~10 pontos percentuais  
@@ -236,7 +236,7 @@ Para atingir 90%+ nas camadas de negócio:
 
 ## 🔧 Configuração Sugerida do Coverlet
 
-Adicionar ao `Araponga.Tests.csproj`:
+Adicionar ao `Arah.Tests.csproj`:
 
 ```xml
 <PropertyGroup>

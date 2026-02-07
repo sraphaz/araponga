@@ -119,14 +119,14 @@ frontend/portal/next.config.mjs
 **Arquivos Recomendados**:
 ```
 global.json
-backend/Araponga.Api/Araponga.Api.csproj
-backend/Araponga.Application/Araponga.Application.csproj
-backend/Araponga.Domain/Araponga.Domain.csproj
-backend/Araponga.Infrastructure/Araponga.Infrastructure.csproj
-backend/Araponga.Tests/Araponga.Tests.csproj
-backend/Araponga.Api/Program.cs
-backend/Araponga.Api/appsettings.json
-backend/Araponga.Api/appsettings.Development.json
+backend/Arah.Api/Arah.Api.csproj
+backend/Arah.Application/Arah.Application.csproj
+backend/Arah.Domain/Arah.Domain.csproj
+backend/Arah.Infrastructure/Arah.Infrastructure.csproj
+backend/Arah.Tests/Arah.Tests.csproj
+backend/Arah.Api/Program.cs
+backend/Arah.Api/appsettings.json
+backend/Arah.Api/appsettings.Development.json
 ```
 
 **Por quê**: Define versão .NET, dependências, configuração de projeto, settings.
@@ -189,7 +189,7 @@ docs/PRIORIZACAO_PROPOSTAS.md
 ### 4.1 Template Completo
 
 ```markdown
-# Araponga - Cursor Rules
+# Arah - Cursor Rules
 
 ## Documentos de Referência Obrigatórios
 
@@ -234,8 +234,8 @@ docs/PRIORIZACAO_PROPOSTAS.md
 
 ### Backend
 - global.json
-- backend/Araponga.Api/Program.cs
-- backend/Araponga.Api/appsettings.json
+- backend/Arah.Api/Program.cs
+- backend/Arah.Api/appsettings.json
 
 ## Regras Fundamentais
 
@@ -362,8 +362,8 @@ indent_size = 2
 
 **Arquivos Recomendados**:
 ```
-backend/Araponga.Tests/Araponga.Tests.csproj
-backend/Araponga.Tests/appsettings.json
+backend/Arah.Tests/Arah.Tests.csproj
+backend/Arah.Tests/appsettings.json
 ```
 
 **Por quê**: Configuração de testes, cobertura, configurações de teste.
@@ -427,7 +427,7 @@ Antes de considerar o `.cursorrules` completo, verificar:
 ### 8.1 Estrutura Recomendada
 
 ```markdown
-# Araponga - Cursor Rules
+# Arah - Cursor Rules
 
 ## 📚 Documentos de Referência
 
@@ -509,4 +509,4 @@ Aumenta produtividade porque:
 
 ---
 
-**Este documento serve como guia completo para configurar o `.cursorrules` de forma profissional e completa, garantindo que o Cursor tenha todo o contexto necessário para trabalhar efetivamente no projeto Araponga.**
+**Este documento serve como guia completo para configurar o `.cursorrules` de forma profissional e completa, garantindo que o Cursor tenha todo o contexto necessário para trabalhar efetivamente no projeto Arah.**

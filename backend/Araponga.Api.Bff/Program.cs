@@ -1,6 +1,6 @@
-using Araponga.Bff.Journeys;
-using Araponga.Bff.Middleware;
-using Araponga.Bff.Services;
+using Arah.Bff.Journeys;
+using Arah.Bff.Middleware;
+using Arah.Bff.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,7 +54,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v2", new OpenApiInfo
     {
-        Title = "Araponga BFF (Journeys)",
+        Title = "Arah BFF (Journeys)",
         Version = "v2",
         Description = "Backend for Frontend - Jornadas (onboarding, feed, eventos). Aplicação separada que encaminha para a API principal."
     });

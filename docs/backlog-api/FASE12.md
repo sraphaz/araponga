@@ -59,8 +59,8 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Documentar conformidade LGPD
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
 - `docs/LGPD_COMPLIANCE.md`
 
 **Critérios de Sucesso**:
@@ -128,20 +128,20 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Policies/TermsOfService.cs`
-- `backend/Araponga.Domain/Policies/TermsAcceptance.cs`
-- `backend/Araponga.Domain/Policies/PrivacyPolicy.cs`
-- `backend/Araponga.Domain/Policies/PrivacyPolicyAcceptance.cs`
-- `backend/Araponga.Domain/Policies/PolicyType.cs`
-- `backend/Araponga.Application/Interfaces/ITermsOfServiceRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITermsAcceptanceRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPrivacyPolicyRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPrivacyPolicyAcceptanceRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTermsOfServiceRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTermsAcceptanceRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresPrivacyPolicyRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresPrivacyPolicyAcceptanceRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTermsAndPoliciesSystem.cs`
+- `backend/Arah.Domain/Policies/TermsOfService.cs`
+- `backend/Arah.Domain/Policies/TermsAcceptance.cs`
+- `backend/Arah.Domain/Policies/PrivacyPolicy.cs`
+- `backend/Arah.Domain/Policies/PrivacyPolicyAcceptance.cs`
+- `backend/Arah.Domain/Policies/PolicyType.cs`
+- `backend/Arah.Application/Interfaces/ITermsOfServiceRepository.cs`
+- `backend/Arah.Application/Interfaces/ITermsAcceptanceRepository.cs`
+- `backend/Arah.Application/Interfaces/IPrivacyPolicyRepository.cs`
+- `backend/Arah.Application/Interfaces/IPrivacyPolicyAcceptanceRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTermsOfServiceRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTermsAcceptanceRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresPrivacyPolicyRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresPrivacyPolicyAcceptanceRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTermsAndPoliciesSystem.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -184,15 +184,15 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TermsOfServiceService.cs`
-- `backend/Araponga.Application/Services/TermsAcceptanceService.cs`
-- `backend/Araponga.Application/Services/PrivacyPolicyService.cs`
-- `backend/Araponga.Application/Services/PrivacyPolicyAcceptanceService.cs`
-- `backend/Araponga.Tests/Application/TermsOfServiceServiceTests.cs`
-- `backend/Araponga.Tests/Application/TermsAcceptanceServiceTests.cs`
+- `backend/Arah.Application/Services/TermsOfServiceService.cs`
+- `backend/Arah.Application/Services/TermsAcceptanceService.cs`
+- `backend/Arah.Application/Services/PrivacyPolicyService.cs`
+- `backend/Arah.Application/Services/PrivacyPolicyAcceptanceService.cs`
+- `backend/Arah.Tests/Application/TermsOfServiceServiceTests.cs`
+- `backend/Arah.Tests/Application/TermsAcceptanceServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AccessEvaluator.cs` (integrar verificação de aceite)
+- `backend/Arah.Application/Services/AccessEvaluator.cs` (integrar verificação de aceite)
 
 **Critérios de Sucesso**:
 - ✅ Serviços implementados
@@ -233,13 +233,13 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/TermsOfServiceController.cs`
-- `backend/Araponga.Api/Controllers/PrivacyPolicyController.cs`
-- `backend/Araponga.Api/Contracts/Policies/AcceptTermsRequest.cs`
-- `backend/Araponga.Api/Contracts/Policies/TermsOfServiceResponse.cs`
-- `backend/Araponga.Api/Contracts/Policies/TermsAcceptanceResponse.cs`
-- `backend/Araponga.Api/Validators/AcceptTermsRequestValidator.cs`
-- `backend/Araponga.Tests/Integration/TermsOfServiceIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/TermsOfServiceController.cs`
+- `backend/Arah.Api/Controllers/PrivacyPolicyController.cs`
+- `backend/Arah.Api/Contracts/Policies/AcceptTermsRequest.cs`
+- `backend/Arah.Api/Contracts/Policies/TermsOfServiceResponse.cs`
+- `backend/Arah.Api/Contracts/Policies/TermsAcceptanceResponse.cs`
+- `backend/Arah.Api/Validators/AcceptTermsRequestValidator.cs`
+- `backend/Arah.Tests/Integration/TermsOfServiceIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando (`TermsOfServiceController`, `PrivacyPolicyController`)
@@ -286,15 +286,15 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PolicyRequirementService.cs`
-- `backend/Araponga.Application/Models/PolicyRequirement.cs`
-- `backend/Araponga.Tests/Application/PolicyRequirementServiceTests.cs`
+- `backend/Arah.Application/Services/PolicyRequirementService.cs`
+- `backend/Arah.Application/Models/PolicyRequirement.cs`
+- `backend/Arah.Tests/Application/PolicyRequirementServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs` (verificar aceite)
-- `backend/Araponga.Application/Services/EventsService.cs` (verificar aceite)
-- `backend/Araponga.Application/Services/StoreService.cs` (verificar aceite)
-- `backend/Araponga.Application/Services/ModerationService.cs` (verificar aceite)
+- `backend/Arah.Application/Services/PostCreationService.cs` (verificar aceite)
+- `backend/Arah.Application/Services/EventsService.cs` (verificar aceite)
+- `backend/Arah.Application/Services/StoreService.cs` (verificar aceite)
+- `backend/Arah.Application/Services/ModerationService.cs` (verificar aceite)
 
 **Critérios de Sucesso**:
 - ✅ Políticas por papel definidas
@@ -325,11 +325,11 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TermsVersioningService.cs`
-- `backend/Araponga.Api/Controllers/Admin/TermsManagementController.cs` (apenas SystemAdmin)
+- `backend/Arah.Application/Services/TermsVersioningService.cs`
+- `backend/Arah.Api/Controllers/Admin/TermsManagementController.cs` (apenas SystemAdmin)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/NotificationService.cs` (notificações de novos termos)
+- `backend/Arah.Application/Services/NotificationService.cs` (notificações de novos termos)
 
 **Critérios de Sucesso**:
 - ✅ Versionamento funcionando
@@ -398,9 +398,9 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Documentar analytics
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AnalyticsService.cs`
-- `backend/Araponga.Api/Controllers/AnalyticsController.cs`
-- `backend/Araponga.Application/Models/AnalyticsModels.cs`
+- `backend/Arah.Application/Services/AnalyticsService.cs`
+- `backend/Arah.Api/Controllers/AnalyticsController.cs`
+- `backend/Arah.Application/Models/AnalyticsModels.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço de analytics criado
@@ -433,11 +433,11 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Documentar integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
-- `backend/Araponga.Infrastructure/Notifications/IPushNotificationProvider.cs`
-- `backend/Araponga.Domain/Users/UserDevice.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs`
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
+- `backend/Arah.Infrastructure/Notifications/IPushNotificationProvider.cs`
+- `backend/Arah.Domain/Users/UserDevice.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com FCM implementada
@@ -470,8 +470,8 @@ Após as fases anteriores, a aplicação está em **9.2/10**. Restam gaps menore
 - [ ] Documentar resultados e otimizações aplicadas
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Performance/LoadTests.cs`
-- `backend/Araponga.Tests/Performance/StressTests.cs`
+- `backend/Arah.Tests/Performance/LoadTests.cs`
+- `backend/Arah.Tests/Performance/StressTests.cs`
 - `docs/PERFORMANCE_TEST_RESULTS.md`
 
 **Critérios de Sucesso**:
@@ -823,17 +823,17 @@ POST /api/v1/users/me/devices
 - [ ] Documentação
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Marketplace/PlatformFeeConfig.cs`
-- `backend/Araponga.Application/Services/Marketplace/PlatformFeeConfigService.cs`
-- `backend/Araponga.Application/Services/TerritoryPayoutConfigService.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Domain/Marketplace/PlatformFeeConfig.cs`
+- `backend/Arah.Application/Services/Marketplace/PlatformFeeConfigService.cs`
+- `backend/Arah.Application/Services/TerritoryPayoutConfigService.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Marketplace/PlatformFeeLimitsConfig.cs`
-- `backend/Araponga.Application/Interfaces/Marketplace/IPlatformFeeLimitsConfigRepository.cs`
-- `backend/Araponga.Application/Services/Marketplace/PlatformFeeLimitsConfigService.cs`
-- `backend/Araponga.Api/Controllers/PlatformFeeLimitsConfigController.cs`
-- `backend/Araponga.Tests/Api/PlatformFeeLimitsConfigIntegrationTests.cs`
+- `backend/Arah.Domain/Marketplace/PlatformFeeLimitsConfig.cs`
+- `backend/Arah.Application/Interfaces/Marketplace/IPlatformFeeLimitsConfigRepository.cs`
+- `backend/Arah.Application/Services/Marketplace/PlatformFeeLimitsConfigService.cs`
+- `backend/Arah.Api/Controllers/PlatformFeeLimitsConfigController.cs`
+- `backend/Arah.Tests/Api/PlatformFeeLimitsConfigIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Limites configuráveis por território

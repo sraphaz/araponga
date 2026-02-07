@@ -433,7 +433,7 @@ Onda 7: Economia Circular (Mês 12-18) 🟡 ALTA
 **Risco**: Confusão com abstrações do Marketplace
 
 **Mitigação**:
-- ✅ Domínio completamente separado (`Araponga.Domain/Hosting/`)
+- ✅ Domínio completamente separado (`Arah.Domain/Hosting/`)
 - ✅ Nomenclatura distinta (Property ≠ Store, StayRequest ≠ Checkout)
 - ✅ Documentação clara das diferenças
 - ✅ Reutilização apenas de infraestrutura (pagamentos, notificações)

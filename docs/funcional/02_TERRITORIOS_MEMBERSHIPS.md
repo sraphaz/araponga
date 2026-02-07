@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 🎯 Visão Geral
 
-Os domínios de **Territórios** e **Memberships** são o coração da plataforma Araponga. Eles definem como lugares físicos reais são representados digitalmente e como pessoas se relacionam com esses lugares.
+Os domínios de **Territórios** e **Memberships** são o coração da plataforma Arah. Eles definem como lugares físicos reais são representados digitalmente e como pessoas se relacionam com esses lugares.
 
 ### Território: Geográfico e Neutro
 
@@ -546,7 +546,7 @@ Um **Membership** representa a relação entre uma pessoa e um território:
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Autenticação e Identidade](funcional/01_AUTENTICACAO_IDENTIDADE.md)** - Pré-requisito
 - **[Feed Comunitário](funcional/03_FEED_COMUNITARIO.md)** - Conteúdo territorial
 - **[Governança e Votação](funcional/13_GOVERNANCA_VOTACAO.md)** - Aprovação de residências

@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -122,7 +122,7 @@ Feed Pode Filtrar por Interesses
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Moderação](funcional/10_MODERACAO.md)** - Regras via votações
 - **[Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)** - Caracterização do território
 - **[API - Governança](api/60_19_API_GOVERNANCA.md)** - Documentação técnica

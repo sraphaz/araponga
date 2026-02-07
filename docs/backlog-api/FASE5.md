@@ -32,8 +32,8 @@ Segurança de nível enterprise.
 - [ ] Documentar 2FA
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TwoFactorService.cs`
-- `backend/Araponga.Api/Controllers/TwoFactorController.cs`
+- `backend/Arah.Application/Services/TwoFactorService.cs`
+- `backend/Arah.Api/Controllers/TwoFactorController.cs`
 
 **Critérios de Sucesso**:
 - ✅ 2FA TOTP implementado
@@ -57,7 +57,7 @@ Segurança de nível enterprise.
 - [ ] Documentar sanitização
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/InputSanitizationService.cs`
+- `backend/Arah.Application/Services/InputSanitizationService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sanitização HTML implementada
@@ -79,7 +79,7 @@ Segurança de nível enterprise.
 - [ ] Documentar proteção CSRF
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ Anti-forgery tokens configurados
@@ -104,7 +104,7 @@ Segurança de nível enterprise.
 - [ ] Documentar configuração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ Key Vault/Secrets Manager configurado
@@ -127,7 +127,7 @@ Segurança de nível enterprise.
 - [ ] Documentar headers
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
 
 **Critérios de Sucesso**:
 - ✅ Security headers melhorados
@@ -150,8 +150,8 @@ Segurança de nível enterprise.
 - [ ] Documentar auditoria
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AuditLogger.cs`
-- `backend/Araponga.Api/Controllers/AuditController.cs`
+- `backend/Arah.Application/Services/AuditLogger.cs`
+- `backend/Arah.Api/Controllers/AuditController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Auditoria expandida

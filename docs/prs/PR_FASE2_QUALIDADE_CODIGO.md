@@ -68,13 +68,13 @@ Este PR implementa a **Fase 2: Qualidade de Código e Confiabilidade** do Plano 
 ## 📝 Arquivos Modificados
 
 ### Novos Arquivos
-- `backend/Araponga.Tests/Performance/PerformanceTests.cs`
-- `backend/Araponga.Tests/Application/ReportServiceTests.cs` (9 testes)
-- `backend/Araponga.Tests/Application/JoinRequestServiceTests.cs` (16 testes)
-- `backend/Araponga.Tests/Application/CacheMetricsServiceTests.cs` (5 testes)
-- `backend/Araponga.Application/Services/CacheInvalidationService.cs`
-- `backend/Araponga.Application/Services/CacheMetricsService.cs`
-- `backend/Araponga.Api/Controllers/CacheMetricsController.cs`
+- `backend/Arah.Tests/Performance/PerformanceTests.cs`
+- `backend/Arah.Tests/Application/ReportServiceTests.cs` (9 testes)
+- `backend/Arah.Tests/Application/JoinRequestServiceTests.cs` (16 testes)
+- `backend/Arah.Tests/Application/CacheMetricsServiceTests.cs` (5 testes)
+- `backend/Arah.Application/Services/CacheInvalidationService.cs`
+- `backend/Arah.Application/Services/CacheMetricsService.cs`
+- `backend/Arah.Api/Controllers/CacheMetricsController.cs`
 - `docs/FASE2_RESUMO_FINAL.md`
 - `docs/backlog-api/implementacoes/FASE2_IMPLEMENTACAO_PROGRESSO.md`
 

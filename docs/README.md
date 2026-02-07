@@ -1,6 +1,6 @@
-# 🐦 Araponga
+# 🐦 Arah
 
-**Araponga** é uma plataforma digital comunitária orientada ao território.  
+**Arah** é uma plataforma digital comunitária orientada ao território.  
 Um espaço onde tecnologia serve à vida local, à convivência e à autonomia das comunidades.
 
 Não é uma rede social genérica.  
@@ -15,7 +15,7 @@ Vivemos um tempo em que plataformas digitais:
 - desorganizam comunidades,
 - e desconectam pessoas do lugar onde vivem.
 
-O Araponga nasce como um contraponto consciente a esse modelo.
+O Arah nasce como um contraponto consciente a esse modelo.
 
 > **Território como referência.  
 > Comunidade como prioridade.  
@@ -26,9 +26,9 @@ A proposta é simples e profunda:
 
 ---
 
-## 🧭 O que é o Araponga?
+## 🧭 O que é o Arah?
 
-O Araponga é um aplicativo/plataforma que permite:
+O Arah é um aplicativo/plataforma que permite:
 
 - 📍 **Descobrir e reconhecer territórios reais**
 - 👥 **Organizar comunidades locais**
@@ -49,7 +49,7 @@ sem extração de dados para publicidade.
 
 ### 1. Território é geográfico (e neutro)
 
-No Araponga, `territory` representa **apenas um lugar físico real**:
+No Arah, `territory` representa **apenas um lugar físico real**:
 
 - nome
 - localização
@@ -89,7 +89,7 @@ Isso torna o sistema:
 
 ### 3. Tecnologia a serviço do território
 
-O Araponga **não é**:
+O Arah **não é**:
 - um marketplace agressivo
 - uma rede de engajamento infinito
 - um produto de vigilância
@@ -108,12 +108,12 @@ Ele é uma **infraestrutura digital comunitária**, pensada para:
 O backend segue princípios de **Clean Architecture**, com separação clara de responsabilidades:
 
 backend/
-├── Araponga.Api # API HTTP (controllers, endpoints)
-├── Araponga.Application # Casos de uso / regras de aplicação
-├── Araponga.Domain # Modelo de domínio (territory, regras centrais)
-├── Araponga.Infrastructure # Persistência, integrações, adapters
-├── Araponga.Shared # Tipos e utilitários compartilhados
-└── Araponga.Tests # Testes automatizados
+├── Arah.Api # API HTTP (controllers, endpoints)
+├── Arah.Application # Casos de uso / regras de aplicação
+├── Arah.Domain # Modelo de domínio (territory, regras centrais)
+├── Arah.Infrastructure # Persistência, integrações, adapters
+├── Arah.Shared # Tipos e utilitários compartilhados
+└── Arah.Tests # Testes automatizados
 
 
 ### Conceitos centrais do domínio
@@ -220,12 +220,12 @@ O projeto está em **evolução ativa**, com foco em solidez antes de escala.
 
 ### InMemory (padrão)
 ```bash
-git clone https://github.com/sraphaz/araponga.git
-cd araponga
+git clone https://github.com/sraphaz/Arah.git
+cd Arah
 dotnet restore
 dotnet build
 dotnet test
-dotnet run --project backend/Araponga.Api
+dotnet run --project backend/Arah.Api
 ```
 
 ### Postgres (docker compose)
@@ -236,15 +236,15 @@ docker compose up --build
 Para rodar localmente com Postgres sem compose, defina:
 ```
 Persistence__Provider=Postgres
-ConnectionStrings__Postgres=Host=localhost;Port=5432;Database=araponga;Username=araponga;Password=araponga
+ConnectionStrings__Postgres=Host=localhost;Port=5432;Database=Arah;Username=Arah;Password=Arah
 ```
 
 ### Migrations (Postgres)
 Aplicar migrations manualmente (recomendado quando não usar auto-migrate):
 ```bash
 dotnet ef database update \
-  --project backend/Araponga.Infrastructure \
-  --startup-project backend/Araponga.Api
+  --project backend/Arah.Infrastructure \
+  --startup-project backend/Arah.Api
 ```
 
 Auto-migrate (opcional, desligado por padrão): defina `Persistence__ApplyMigrations=true`.
@@ -269,7 +269,7 @@ curl -s -X POST http://localhost:8080/api/v1/auth/social \
     "foreignDocument":null,
     "phoneNumber":"(11) 99999-0000",
     "address":"Rua das Flores, 100",
-    "email":"demo@araponga.com"
+    "email":"demo@Arah.com"
   }' | jq
 ```
 
@@ -331,7 +331,7 @@ A versão do GitHub Pages inclui links diretos para documentação, user stories
 
 Consulte o guia em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-O Araponga é aberto à colaboração, especialmente de pessoas interessadas em:
+O Arah é aberto à colaboração, especialmente de pessoas interessadas em:
 
 tecnologia com impacto social
 
@@ -371,7 +371,7 @@ integração com iniciativas regenerativas
 
 tecnologia como guardiã do território, não como exploradora
 
-O Araponga não quer crescer rápido.
+O Arah não quer crescer rápido.
 Quer criar raízes profundas.
 
 ✨ Uma nota pessoal
@@ -396,5 +396,5 @@ Este projeto é distribuído sob uma **licença aberta orientada à comunidade e
 - Versão oficial (EN): `LICENSE`
 - Versão em português (PT-BR): `LICENSE.pt-BR`
 
-🐦 Araponga canta para avisar, proteger e comunicar.
+🐦 Arah canta para avisar, proteger e comunicar.
 Que esta plataforma faça o mesmo.

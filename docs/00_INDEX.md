@@ -2,14 +2,14 @@
 
 ---
 
-Este documento organiza toda a documentação do projeto Araponga de forma estruturada e fácil de navegar.
+Este documento organiza toda a documentação do projeto Arah de forma estruturada e fácil de navegar.
 
 ## Estrutura da Documentação
 
 ### Visão e Produto
 Documentos sobre a visão do produto, roadmap e funcionalidades.
 
-- **[Visão do Produto](./01_PRODUCT_VISION.md)** ⭐ - Visão geral, princípios e evolução estratégica do Araponga
+- **[Visão do Produto](./01_PRODUCT_VISION.md)** ⭐ - Visão geral, princípios e evolução estratégica do Arah
 - **[Roadmap Estratégico](./02_ROADMAP.md)** ⭐ - Planejamento completo de funcionalidades e épicos, reorganizado estrategicamente
 - **[Backlog](./03_BACKLOG.md)** - Lista de funcionalidades e prioridades
 - **[User Stories](./04_USER_STORIES.md)** - Histórias de usuário consolidadas (MVP e pós-MVP)
@@ -47,7 +47,7 @@ Documentos sobre moderação, observabilidade e operações.
 - **[Rastreabilidade](./32_TRACEABILITY.md)** - Rastreabilidade de requisitos e funcionalidades
 - **[System Config, Work Queue e Evidências](./33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md)** - Configurações globais, fila genérica e evidências documentais (P0)
 - **[API - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO.md)** - Documento índice (reorganizado em 22 subdocumentos - ver [índice completo](./api/60_API_LÓGICA_NEGÓCIO_INDEX.md))
-- **Chat**: documentado em `60_API_LÓGICA_NEGÓCIO.md` (seção "Chat") e no DevPortal/OpenAPI (`backend/Araponga.Api/wwwroot/devportal/openapi.json`)
+- **Chat**: documentado em `60_API_LÓGICA_NEGÓCIO.md` (seção "Chat") e no DevPortal/OpenAPI (`backend/Arah.Api/wwwroot/devportal/openapi.json`)
 - **[Mídias em Conteúdo](./MEDIA_IN_CONTENT.md)** - Documentação completa da integração de mídias em Posts, Eventos, Marketplace e Chat
 - **[Sistema de Mídia](./MEDIA_SYSTEM.md)** - Documentação técnica do sistema de mídia (armazenamento, processamento, APIs)
 - **[Planejamento: Preferências de Usuário](./61_USER_PREFERENCES_PLAN.md)** - Planejamento completo da funcionalidade de preferências de privacidade e configurações do usuário

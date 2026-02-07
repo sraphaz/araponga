@@ -1,6 +1,6 @@
-using Araponga.Bff.Contracts.Journeys.Common;
+using Arah.Bff.Contracts.Journeys.Common;
 
-namespace Araponga.Bff.Contracts.Journeys.Events;
+namespace Arah.Bff.Contracts.Journeys.Events;
 
 public sealed record TerritoryEventsJourneyResponse(
     IReadOnlyList<EventItemJourneyDto> Items,

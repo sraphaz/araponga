@@ -43,52 +43,52 @@ Implementação completa da funcionalidade de preferências de privacidade e con
 ## 📁 Arquivos Criados
 
 ### Domínio
-- `backend/Araponga.Domain/Users/ProfileVisibility.cs`
-- `backend/Araponga.Domain/Users/ContactVisibility.cs`
-- `backend/Araponga.Domain/Users/NotificationPreferences.cs`
-- `backend/Araponga.Domain/Users/UserPreferences.cs`
+- `backend/Arah.Domain/Users/ProfileVisibility.cs`
+- `backend/Arah.Domain/Users/ContactVisibility.cs`
+- `backend/Arah.Domain/Users/NotificationPreferences.cs`
+- `backend/Arah.Domain/Users/UserPreferences.cs`
 
 ### Aplicação
-- `backend/Araponga.Application/Interfaces/IUserPreferencesRepository.cs`
-- `backend/Araponga.Application/Services/UserPreferencesService.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
+- `backend/Arah.Application/Interfaces/IUserPreferencesRepository.cs`
+- `backend/Arah.Application/Services/UserPreferencesService.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
 
 ### Infraestrutura
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUserPreferencesRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/UserPreferencesRecord.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserPreferencesRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/20250113120000_AddUserPreferences.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryUserPreferencesRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/UserPreferencesRecord.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserPreferencesRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/20250113120000_AddUserPreferences.cs`
 
 ### API
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs`
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Api/Contracts/Users/UpdatePrivacyPreferencesRequest.cs`
-- `backend/Araponga.Api/Contracts/Users/UpdateNotificationPreferencesRequest.cs`
-- `backend/Araponga.Api/Contracts/Users/UpdateDisplayNameRequest.cs`
-- `backend/Araponga.Api/Contracts/Users/UpdateContactInfoRequest.cs`
-- `backend/Araponga.Api/Contracts/Users/UserPreferencesResponse.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UpdatePrivacyPreferencesRequest.cs`
+- `backend/Arah.Api/Contracts/Users/UpdateNotificationPreferencesRequest.cs`
+- `backend/Arah.Api/Contracts/Users/UpdateDisplayNameRequest.cs`
+- `backend/Arah.Api/Contracts/Users/UpdateContactInfoRequest.cs`
+- `backend/Arah.Api/Contracts/Users/UserPreferencesResponse.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
 
 ### Testes
-- `backend/Araponga.Tests/Domain/UserPreferencesTests.cs`
+- `backend/Arah.Tests/Domain/UserPreferencesTests.cs`
 
 ---
 
 ## 📝 Arquivos Modificados
 
 ### Infraestrutura
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs` - Adicionado `UserPreferences`
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` - Configuração EF Core
-- `backend/Araponga.Infrastructure/Postgres/PostgresMappers.cs` - Mappers para UserPreferences
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUserRepository.cs` - Método `UpdateAsync`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserRepository.cs` - Método `UpdateAsync`
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` - Integração com preferências
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs` - Adicionado `UserPreferences`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` - Configuração EF Core
+- `backend/Arah.Infrastructure/Postgres/PostgresMappers.cs` - Mappers para UserPreferences
+- `backend/Arah.Infrastructure/InMemory/InMemoryUserRepository.cs` - Método `UpdateAsync`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserRepository.cs` - Método `UpdateAsync`
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` - Integração com preferências
 
 ### Aplicação
-- `backend/Araponga.Application/Interfaces/IUserRepository.cs` - Método `UpdateAsync`
+- `backend/Arah.Application/Interfaces/IUserRepository.cs` - Método `UpdateAsync`
 
 ### API
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` - Registro de serviços e repositórios
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` - Registro de serviços e repositórios
 
 ### Documentação
 - `docs/12_DOMAIN_MODEL.md` - Adicionado UserPreferences
@@ -136,8 +136,8 @@ CREATE TABLE user_preferences (
 **Para aplicar a migration:**
 ```bash
 dotnet ef database update \
-  --project backend/Araponga.Infrastructure \
-  --startup-project backend/Araponga.Api
+  --project backend/Arah.Infrastructure \
+  --startup-project backend/Arah.Api
 ```
 
 ---

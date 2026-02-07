@@ -1,6 +1,6 @@
-using Araponga.Bff.Contracts.Journeys.Common;
+using Arah.Bff.Contracts.Journeys.Common;
 
-namespace Araponga.Bff.Contracts.Journeys.Onboarding;
+namespace Arah.Bff.Contracts.Journeys.Onboarding;
 
 public sealed record TerritoryFeedInitialDto(
     IReadOnlyList<TerritoryFeedItemDto> Items,

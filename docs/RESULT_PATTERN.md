@@ -1,4 +1,4 @@
-# Padrão Result<T> - Araponga
+# Padrão Result<T> - Arah
 
 **Última Atualização**: 2025-01-23  
 **Status**: ✅ Padrão Definido e Implementado
@@ -7,7 +7,7 @@
 
 ## 📋 Resumo
 
-O Araponga usa o padrão `Result<T>` para representar operações que podem falhar de forma esperada, evitando o uso excessivo de exceções para controle de fluxo.
+O Arah usa o padrão `Result<T>` para representar operações que podem falhar de forma esperada, evitando o uso excessivo de exceções para controle de fluxo.
 
 ---
 
@@ -307,4 +307,4 @@ Ao implementar um novo service:
 
 ---
 
-**Nota**: Todos os services do Araponga devem usar `Result<T>` para erros de negócio. Exceções são reservadas para erros técnicos inesperados.
+**Nota**: Todos os services do Arah devem usar `Result<T>` para erros de negócio. Exceções são reservadas para erros técnicos inesperados.

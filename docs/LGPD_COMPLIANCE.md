@@ -1,4 +1,4 @@
-# Conformidade LGPD - Araponga
+# Conformidade LGPD - Arah
 
 **Última Atualização**: 2026-01-20  
 **Status**: ✅ Implementado
@@ -7,7 +7,7 @@
 
 ## 📋 Resumo
 
-Este documento descreve as medidas implementadas no Araponga para garantir conformidade com a **Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)**.
+Este documento descreve as medidas implementadas no Arah para garantir conformidade com a **Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)**.
 
 ---
 
@@ -260,4 +260,4 @@ Este documento descreve as medidas implementadas no Araponga para garantir confo
 ---
 
 **Última Atualização**: 2026-01-20  
-**Responsável**: Equipe de Desenvolvimento Araponga
+**Responsável**: Equipe de Desenvolvimento Arah

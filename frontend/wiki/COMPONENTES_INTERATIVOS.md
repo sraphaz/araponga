@@ -1,6 +1,6 @@
 # Componentes Interativos da Wiki
 
-Esta documentação descreve os componentes interativos disponíveis para revelação progressiva de conteúdo na Wiki Araponga.
+Esta documentação descreve os componentes interativos disponíveis para revelação progressiva de conteúdo na Wiki Arah.
 
 ## 📦 Componentes Disponíveis
 
@@ -117,7 +117,7 @@ import { ExpandableCard } from "@/components/ui";
 **Características:**
 - Design harmonizado com FeatureCard
 - Transições suaves
-- Variantes de cor da paleta Araponga
+- Variantes de cor da paleta Arah
 - Ícone animado
 
 ---

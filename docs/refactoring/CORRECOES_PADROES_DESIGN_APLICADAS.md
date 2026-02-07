@@ -88,16 +88,16 @@ await _membershipRepository.UpdateAsync(existing, cancellationToken);
 ## 📝 Arquivos Modificados
 
 ### Application Layer
-- `backend/Araponga.Application/Interfaces/ITerritoryMembershipRepository.cs` - Adicionado `UpdateAsync`
-- `backend/Araponga.Application/Services/MembershipService.cs` - Simplificado para usar `UpdateAsync`
+- `backend/Arah.Application/Interfaces/ITerritoryMembershipRepository.cs` - Adicionado `UpdateAsync`
+- `backend/Arah.Application/Services/MembershipService.cs` - Simplificado para usar `UpdateAsync`
 
 ### Infrastructure Layer
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTerritoryMembershipRepository.cs` - Implementado `UpdateAsync` e corrigido `HasValidatedResidentAsync`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryMembershipRepository.cs` - Implementado `UpdateAsync` e corrigido `HasValidatedResidentAsync` e `ListResidentUserIdsAsync`
+- `backend/Arah.Infrastructure/InMemory/InMemoryTerritoryMembershipRepository.cs` - Implementado `UpdateAsync` e corrigido `HasValidatedResidentAsync`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryMembershipRepository.cs` - Implementado `UpdateAsync` e corrigido `HasValidatedResidentAsync` e `ListResidentUserIdsAsync`
 
 ### Tests
-- `backend/Araponga.Tests/Application/MembershipServiceTests.cs` - Corrigido isolamento (UserId único)
-- `backend/Araponga.Tests/Application/ApplicationServiceTests.cs` - Atualizado para usar `ResidencyVerification`
+- `backend/Arah.Tests/Application/MembershipServiceTests.cs` - Corrigido isolamento (UserId único)
+- `backend/Arah.Tests/Application/ApplicationServiceTests.cs` - Atualizado para usar `ResidencyVerification`
 
 ### 6. Suporte a Transações Explícitas
 
@@ -198,23 +198,23 @@ if (distance > GeoVerificationRadiusKm)
 ## 📝 Arquivos Modificados (Atualizado)
 
 ### Application Layer
-- `backend/Araponga.Application/Interfaces/IUnitOfWork.cs` - Adicionados métodos de transação
-- `backend/Araponga.Application/Interfaces/ITerritoryMembershipRepository.cs` - Adicionado `UpdateAsync`
-- `backend/Araponga.Application/Services/MembershipService.cs` - Simplificado, validação de geo, transações
-- `backend/Araponga.Application/Services/MembershipAccessRules.cs` - Comentários melhorados
+- `backend/Arah.Application/Interfaces/IUnitOfWork.cs` - Adicionados métodos de transação
+- `backend/Arah.Application/Interfaces/ITerritoryMembershipRepository.cs` - Adicionado `UpdateAsync`
+- `backend/Arah.Application/Services/MembershipService.cs` - Simplificado, validação de geo, transações
+- `backend/Arah.Application/Services/MembershipAccessRules.cs` - Comentários melhorados
 
 ### Infrastructure Layer
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - Implementado métodos de transação
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` - Implementado transações reais
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTerritoryMembershipRepository.cs` - Implementado `UpdateAsync`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryMembershipRepository.cs` - Implementado `UpdateAsync`
+- `backend/Arah.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - Implementado métodos de transação
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` - Implementado transações reais
+- `backend/Arah.Infrastructure/InMemory/InMemoryTerritoryMembershipRepository.cs` - Implementado `UpdateAsync`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryMembershipRepository.cs` - Implementado `UpdateAsync`
 
 ### API Layer
-- `backend/Araponga.Api/Controllers/MembershipsController.cs` - Atualizado para passar coordenadas, comentários melhorados
+- `backend/Arah.Api/Controllers/MembershipsController.cs` - Atualizado para passar coordenadas, comentários melhorados
 
 ### Tests
-- `backend/Araponga.Tests/Application/MembershipServiceTests.cs` - Atualizado para usar `ITerritoryRepository`, adicionado teste de validação de distância
-- `backend/Araponga.Tests/Application/ApplicationServiceTests.cs` - Atualizado para usar `ITerritoryRepository`
+- `backend/Arah.Tests/Application/MembershipServiceTests.cs` - Atualizado para usar `ITerritoryRepository`, adicionado teste de validação de distância
+- `backend/Arah.Tests/Application/ApplicationServiceTests.cs` - Atualizado para usar `ITerritoryRepository`
 
 ## ✅ Conclusão
 

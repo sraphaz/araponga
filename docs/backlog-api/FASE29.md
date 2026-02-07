@@ -95,10 +95,10 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/MobileAnalyticsController.cs`
-- `backend/Araponga.Api/Contracts/Mobile/MobileAnalyticsEventRequest.cs`
-- `backend/Araponga.Application/Models/MobileAnalyticsEvent.cs`
-- `backend/Araponga.Application/Services/MobileAnalyticsService.cs`
+- `backend/Arah.Api/Controllers/MobileAnalyticsController.cs`
+- `backend/Arah.Api/Contracts/Mobile/MobileAnalyticsEventRequest.cs`
+- `backend/Arah.Application/Models/MobileAnalyticsEvent.cs`
+- `backend/Arah.Application/Services/MobileAnalyticsService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Analytics mobile funcionando
@@ -137,12 +137,12 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/LinksController.cs`
-- `backend/Araponga.Api/Contracts/Links/GenerateLinkRequest.cs`
-- `backend/Araponga.Api/Contracts/Links/LinkResponse.cs`
-- `backend/Araponga.Application/Models/DynamicLink.cs`
-- `backend/Araponga.Application/Services/LinkGenerationService.cs`
-- `backend/Araponga.Api/Controllers/WellKnownController.cs` (para .well-known)
+- `backend/Arah.Api/Controllers/LinksController.cs`
+- `backend/Arah.Api/Contracts/Links/GenerateLinkRequest.cs`
+- `backend/Arah.Api/Contracts/Links/LinkResponse.cs`
+- `backend/Arah.Application/Models/DynamicLink.cs`
+- `backend/Arah.Application/Services/LinkGenerationService.cs`
+- `backend/Arah.Api/Controllers/WellKnownController.cs` (para .well-known)
 
 **Critérios de Sucesso**:
 - ✅ Deep linking funcionando
@@ -183,15 +183,15 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 - [ ] Testes de performance
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Controllers/NotificationsController.cs`
-- `backend/Araponga.Api/Controllers/SyncController.cs` (novo)
-- `backend/Araponga.Api/Program.cs` (compressão)
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Controllers/NotificationsController.cs`
+- `backend/Arah.Api/Controllers/SyncController.cs` (novo)
+- `backend/Arah.Api/Program.cs` (compressão)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Contracts/Feed/FeedSummaryResponse.cs`
-- `backend/Araponga.Api/Contracts/Notifications/NotificationSummaryResponse.cs`
-- `backend/Araponga.Api/Contracts/Sync/SyncStatusResponse.cs`
+- `backend/Arah.Api/Contracts/Feed/FeedSummaryResponse.cs`
+- `backend/Arah.Api/Contracts/Notifications/NotificationSummaryResponse.cs`
+- `backend/Arah.Api/Contracts/Sync/SyncStatusResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints leves funcionando
@@ -233,15 +233,15 @@ Implementar suporte completo para funcionalidades mobile avançadas que melhoram
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Notifications/Notification.cs` (adicionar Category, Priority)
-- `backend/Araponga.Application/Services/NotificationDispatchService.cs`
-- `backend/Araponga.Api/Controllers/NotificationsController.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs` (novo)
+- `backend/Arah.Domain/Notifications/Notification.cs` (adicionar Category, Priority)
+- `backend/Arah.Application/Services/NotificationDispatchService.cs`
+- `backend/Arah.Api/Controllers/NotificationsController.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs` (novo)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Contracts/Notifications/BadgeResponse.cs`
-- `backend/Araponga.Api/Contracts/Notifications/NotificationActionRequest.cs`
-- `backend/Araponga.Api/Contracts/Notifications/GroupedNotificationsResponse.cs`
+- `backend/Arah.Api/Contracts/Notifications/BadgeResponse.cs`
+- `backend/Arah.Api/Contracts/Notifications/NotificationActionRequest.cs`
+- `backend/Arah.Api/Contracts/Notifications/GroupedNotificationsResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Badges atualizados

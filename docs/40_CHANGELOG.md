@@ -1,4 +1,4 @@
-# Changelog - Araponga
+# Changelog - Arah
 
 **Versão**: 3.0  
 **Data**: 2025-01-20  

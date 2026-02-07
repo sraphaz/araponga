@@ -48,13 +48,13 @@ Implementar funcionalidade completa para que usuários possam configurar:
 
 ### Componentes Principais
 
-1. **Domínio** (`Araponga.Domain.Users`):
+1. **Domínio** (`Arah.Domain.Users`):
    - `UserPreferences` (entidade)
    - `ProfileVisibility` (enum)
    - `ContactVisibility` (enum)
    - `NotificationPreferences` (value object)
 
-2. **Aplicação** (`Araponga.Application`):
+2. **Aplicação** (`Arah.Application`):
    - `UserPreferencesService` - Gerencia preferências
    - `UserProfileService` - Gerencia perfil do usuário
    - `IUserPreferencesRepository` - Interface de repositório
@@ -64,7 +64,7 @@ Implementar funcionalidade completa para que usuários possam configurar:
    - `PostgresUserPreferencesRepository` - Para produção
    - Migration para tabela `user_preferences`
 
-4. **API** (`Araponga.Api`):
+4. **API** (`Arah.Api`):
    - `UserPreferencesController` - Endpoints de preferências
    - `UserProfileController` - Endpoints de perfil
 
@@ -128,26 +128,26 @@ CREATE TABLE user_preferences (
 ## 📁 Arquivos a Criar
 
 ```
-backend/Araponga.Domain/Users/
+backend/Arah.Domain/Users/
   ├── UserPreferences.cs
   ├── ProfileVisibility.cs
   ├── ContactVisibility.cs
   └── NotificationPreferences.cs
 
-backend/Araponga.Application/
+backend/Arah.Application/
   ├── Interfaces/IUserPreferencesRepository.cs
   └── Services/
       ├── UserPreferencesService.cs
       └── UserProfileService.cs
 
-backend/Araponga.Infrastructure/
+backend/Arah.Infrastructure/
   ├── InMemory/InMemoryUserPreferencesRepository.cs
   └── Postgres/
       ├── Entities/UserPreferencesRecord.cs
       ├── PostgresUserPreferencesRepository.cs
       └── Migrations/YYYYMMDDHHMMSS_AddUserPreferences.cs
 
-backend/Araponga.Api/
+backend/Arah.Api/
   ├── Controllers/
   │   ├── UserPreferencesController.cs
   │   └── UserProfileController.cs

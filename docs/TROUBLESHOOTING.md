@@ -1,6 +1,6 @@
-# Troubleshooting - Araponga
+# Troubleshooting - Arah
 
-Este documento contém soluções para problemas comuns do sistema Araponga.
+Este documento contém soluções para problemas comuns do sistema Arah.
 
 ## 🔍 Problemas Comuns
 
@@ -13,7 +13,7 @@ Este documento contém soluções para problemas comuns do sistema Araponga.
 **Diagnóstico**:
 ```bash
 # Verificar logs
-docker logs araponga-api --tail 100
+docker logs Arah-api --tail 100
 
 # Verificar variáveis de ambiente
 env | grep -E "JWT__SIGNINGKEY|ConnectionStrings"
@@ -36,10 +36,10 @@ env | grep -E "JWT__SIGNINGKEY|ConnectionStrings"
 **Diagnóstico**:
 ```bash
 # Verificar logs recentes
-docker logs araponga-api --tail 50 | grep -i error
+docker logs Arah-api --tail 50 | grep -i error
 
 # Verificar health checks
-curl https://api.araponga.com/health
+curl https://api.Arah.com/health
 ```
 
 **Soluções**:
@@ -62,7 +62,7 @@ curl https://api.araponga.com/health
 curl http://localhost:9090/metrics | grep http_requests_duration
 
 # Verificar queries lentas (logs)
-docker logs araponga-api | grep -i "slow"
+docker logs Arah-api | grep -i "slow"
 ```
 
 **Soluções**:
@@ -125,7 +125,7 @@ curl http://localhost:9090/metrics | grep concurrency
 **Diagnóstico**:
 ```bash
 # Verificar logs do BackgroundEventProcessor
-docker logs araponga-api | grep -i "BackgroundEventProcessor"
+docker logs Arah-api | grep -i "BackgroundEventProcessor"
 
 # Verificar métricas
 curl http://localhost:9090/metrics | grep events
@@ -151,7 +151,7 @@ curl http://localhost:9090/metrics | grep events
 env | grep JWT__SIGNINGKEY
 
 # Verificar logs
-docker logs araponga-api | grep -i "jwt\|auth"
+docker logs Arah-api | grep -i "jwt\|auth"
 ```
 
 **Soluções**:
@@ -175,7 +175,7 @@ docker logs araponga-api | grep -i "jwt\|auth"
 curl http://localhost:9090/metrics
 
 # Verificar uso de recursos
-docker stats araponga-api
+docker stats Arah-api
 ```
 
 **Soluções**:
@@ -192,7 +192,7 @@ docker stats araponga-api
 
 ### Verificar Health
 ```bash
-curl https://api.araponga.com/health/ready
+curl https://api.Arah.com/health/ready
 ```
 
 ### Verificar Métricas
@@ -203,10 +203,10 @@ curl http://localhost:9090/metrics
 ### Verificar Logs
 ```bash
 # Docker
-docker logs araponga-api --tail 100 -f
+docker logs Arah-api --tail 100 -f
 
 # Kubernetes
-kubectl logs -f deployment/araponga-api
+kubectl logs -f deployment/Arah-api
 ```
 
 ### Verificar Cache
@@ -220,7 +220,7 @@ redis-cli
 ### Verificar Banco de Dados
 ```bash
 # PostgreSQL
-psql -h localhost -U araponga -d araponga
+psql -h localhost -U Arah -d Arah
 > \dt
 > SELECT COUNT(*) FROM community_posts;
 ```
@@ -247,6 +247,6 @@ A aplicação possui uma **interface web integrada** para troubleshooting em `/a
 - ✅ Comandos úteis (links para health, métricas, logs)
 - ✅ Guia de resolução interativo
 
-**Acesso**: `https://api.araponga.com/admin/monitoring/troubleshooting` (requer autenticação e autorização)
+**Acesso**: `https://api.Arah.com/admin/monitoring/troubleshooting` (requer autenticação e autorização)
 
 **Ver documentação completa**: [`LOGS_MONITORAMENTO_ARQUITETURA.md`](./LOGS_MONITORAMENTO_ARQUITETURA.md)

@@ -1,4 +1,4 @@
-# Plano de Ação Detalhado: Tornar Araponga 10/10
+# Plano de Ação Detalhado: Tornar Arah 10/10
 
 **Data de Criação**: 2025-01-13  
 **Objetivo**: Elevar a aplicação de 7.4/10 para 10/10  
@@ -64,7 +64,7 @@
 
 2. **Melhorar Validação de Secret**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    var jwtSigningKey = builder.Configuration["Jwt:SigningKey"] 
        ?? builder.Configuration["JWT__SIGNINGKEY"]
        ?? throw new InvalidOperationException(
@@ -84,10 +84,10 @@
    - Documentar processo de rotação
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Infrastructure/Security/JwtTokenService.cs`
-- Criar: `backend/Araponga.Application/Interfaces/ISecretRotationService.cs`
-- Criar: `backend/Araponga.Application/Services/SecretRotationService.cs`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Infrastructure/Security/JwtTokenService.cs`
+- Criar: `backend/Arah.Application/Interfaces/ISecretRotationService.cs`
+- Criar: `backend/Arah.Application/Services/SecretRotationService.cs`
 
 **Estimativa**: 4 horas
 
@@ -107,7 +107,7 @@
 
 1. **Melhorar Rate Limiting por Endpoint**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    builder.Services.AddRateLimiter(options =>
    {
        // Global limiter (já existe)
@@ -130,7 +130,7 @@
 
 2. **Aplicar Rate Limiting por Endpoint**
    ```csharp
-   // backend/Araponga.Api/Controllers/AuthController.cs
+   // backend/Arah.Api/Controllers/AuthController.cs
    [EnableRateLimiting("auth")]
    [HttpPost("social")]
    public async Task<IActionResult> SocialLogin(...)
@@ -160,9 +160,9 @@
    ```
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/Controllers/*.cs` (aplicar limiters)
-- Criar: `backend/Araponga.Api/Middleware/RateLimitHeadersMiddleware.cs`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/Controllers/*.cs` (aplicar limiters)
+- Criar: `backend/Arah.Api/Middleware/RateLimitHeadersMiddleware.cs`
 
 **Estimativa**: 6 horas
 
@@ -183,7 +183,7 @@
 
 1. **Forçar HTTPS em Produção**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    if (!app.Environment.IsDevelopment() && !app.Environment.IsEnvironment("Testing"))
    {
        app.UseHttpsRedirection();
@@ -215,8 +215,8 @@
    ```
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- Criar: `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+- `backend/Arah.Api/Program.cs`
+- Criar: `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
 - Adicionar: `AspNetCore.SecurityHeaders` NuGet package
 
 **Estimativa**: 4 horas
@@ -237,7 +237,7 @@
 
 1. **Criar Validators para Todos os Endpoints**
    ```
-   backend/Araponga.Api/Validators/
+   backend/Arah.Api/Validators/
    ├── CreatePostRequestValidator.cs ✅ (existe)
    ├── TerritorySelectionRequestValidator.cs ✅ (existe)
    ├── CreateEventRequestValidator.cs ❌ (criar)
@@ -253,7 +253,7 @@
 
 2. **Padronizar Validações Comuns**
    ```csharp
-   // backend/Araponga.Api/Validators/CommonValidators.cs
+   // backend/Arah.Api/Validators/CommonValidators.cs
    public static class CommonValidators
    {
        public static IRuleBuilderOptions<T, string> NotEmptyWithMaxLength<T>(
@@ -275,7 +275,7 @@
 
 3. **Validação de Geolocalização**
    ```csharp
-   // backend/Araponga.Api/Validators/GeoValidationRules.cs
+   // backend/Arah.Api/Validators/GeoValidationRules.cs
    public static class GeoValidationRules
    {
        public static bool IsValidLatitude(double lat) => lat >= -90 && lat <= 90;
@@ -284,8 +284,8 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Validators/CommonValidators.cs`
-- `backend/Araponga.Api/Validators/GeoValidationRules.cs`
+- `backend/Arah.Api/Validators/CommonValidators.cs`
+- `backend/Arah.Api/Validators/GeoValidationRules.cs`
 - Validators para todos os requests (15-20 arquivos)
 
 **Estimativa**: 16 horas (2 dias)
@@ -306,7 +306,7 @@
 
 1. **Configurar CORS por Ambiente**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
    
    if (builder.Environment.IsProduction())
@@ -335,8 +335,8 @@
    ```
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/appsettings.json` (adicionar origins)
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/appsettings.json` (adicionar origins)
 
 **Estimativa**: 2 horas
 
@@ -375,7 +375,7 @@
 
 1. **Melhorar Configuração de Serilog**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    builder.Host.UseSerilog((context, configuration) =>
    {
        configuration
@@ -384,11 +384,11 @@
            .Enrich.WithMachineName()
            .Enrich.WithThreadId()
            .Enrich.WithEnvironmentName()
-           .Enrich.WithProperty("Application", "Araponga")
+           .Enrich.WithProperty("Application", "Arah")
            .WriteTo.Console(outputTemplate: 
                "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
            .WriteTo.File(
-               "logs/araponga-.log",
+               "logs/Arah-.log",
                rollingInterval: RollingInterval.Day,
                retainedFileCountLimit: 30,
                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
@@ -400,7 +400,7 @@
 
 2. **Adicionar Correlation ID em Todos os Logs**
    ```csharp
-   // backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs
+   // backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs
    public class CorrelationIdMiddleware
    {
        private const string CorrelationIdHeader = "X-Correlation-ID";
@@ -430,8 +430,8 @@
    ```
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs` (melhorar)
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs` (melhorar)
 - Services principais (adicionar logging)
 
 **Estimativa**: 8 horas
@@ -461,7 +461,7 @@
    ```
 
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    builder.Services.AddPrometheusMetrics();
    
    app.UseMetricServer(); // Endpoint /metrics
@@ -470,7 +470,7 @@
 
 3. **Adicionar Métricas Customizadas**
    ```csharp
-   // backend/Araponga.Application/Metrics/ArapongaMetrics.cs
+   // backend/Arah.Application/Metrics/ArapongaMetrics.cs
    public static class ArapongaMetrics
    {
        private static readonly Counter PostsCreated = Metrics
@@ -498,11 +498,11 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Metrics/ArapongaMetrics.cs`
+- `backend/Arah.Application/Metrics/ArapongaMetrics.cs`
 - Instrumentar services principais
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 - Services principais
 
 **Estimativa**: 12 horas
@@ -523,7 +523,7 @@
 
 1. **Adicionar Health Checks de Dependências**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    builder.Services.AddHealthChecks()
        .AddDbContextCheck<ArapongaDbContext>("database")
        .AddCheck<MemoryCacheHealthCheck>("memory_cache")
@@ -547,7 +547,7 @@
 
 2. **Criar Health Checks Customizados**
    ```csharp
-   // backend/Araponga.Api/HealthChecks/OutboxHealthCheck.cs
+   // backend/Arah.Api/HealthChecks/OutboxHealthCheck.cs
    public class OutboxHealthCheck : IHealthCheck
    {
        public async Task<HealthCheckResult> CheckHealthAsync(
@@ -567,11 +567,11 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/HealthChecks/OutboxHealthCheck.cs`
-- `backend/Araponga.Api/HealthChecks/MemoryCacheHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/OutboxHealthCheck.cs`
+- `backend/Arah.Api/HealthChecks/MemoryCacheHealthCheck.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Estimativa**: 6 horas
 
@@ -637,7 +637,7 @@
 
 2. **Criar Interface de Cache Abstrata**
    ```csharp
-   // backend/Araponga.Application/Interfaces/IDistributedCacheService.cs
+   // backend/Arah.Application/Interfaces/IDistributedCacheService.cs
    public interface IDistributedCacheService
    {
        Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default);
@@ -648,7 +648,7 @@
 
 3. **Implementar Redis Cache Service**
    ```csharp
-   // backend/Araponga.Infrastructure/Caching/RedisCacheService.cs
+   // backend/Arah.Infrastructure/Caching/RedisCacheService.cs
    public class RedisCacheService : IDistributedCacheService
    {
        private readonly IDistributedCache _cache;
@@ -672,11 +672,11 @@
    - Atualizar outros cache services
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IDistributedCacheService.cs`
-- `backend/Araponga.Infrastructure/Caching/RedisCacheService.cs`
+- `backend/Arah.Application/Interfaces/IDistributedCacheService.cs`
+- `backend/Arah.Infrastructure/Caching/RedisCacheService.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (configurar Redis)
+- `backend/Arah.Api/Program.cs` (configurar Redis)
 - Cache services existentes
 
 **Estimativa**: 16 horas
@@ -697,7 +697,7 @@
 
 1. **Criar Migration com Índices Faltantes**
    ```csharp
-   // backend/Araponga.Infrastructure/Postgres/Migrations/XXXXXX_AddPerformanceIndexes.cs
+   // backend/Arah.Infrastructure/Postgres/Migrations/XXXXXX_AddPerformanceIndexes.cs
    public partial class AddPerformanceIndexes : Migration
    {
        protected override void Up(MigrationBuilder migrationBuilder)
@@ -747,7 +747,7 @@
 - Migration com índices
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (se necessário)
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (se necessário)
 
 **Estimativa**: 8 horas
 
@@ -824,7 +824,7 @@
 
 1. **Configurar Connection Pooling**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    services.AddDbContext<ArapongaDbContext>(options =>
        options.UseNpgsql(connectionString, npgsqlOptions =>
        {
@@ -842,7 +842,7 @@
 
 2. **Adicionar Polly para Retry em Services**
    ```csharp
-   // backend/Araponga.Application/Services/ResilientService.cs
+   // backend/Arah.Application/Services/ResilientService.cs
    public class ResilientService
    {
        private readonly IAsyncPolicy _retryPolicy;
@@ -865,7 +865,7 @@
    ```
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 - Services críticos
 
 **Estimativa**: 6 horas
@@ -961,7 +961,7 @@
 
 1. **Criar Exceções Tipadas**
    ```csharp
-   // backend/Araponga.Application/Exceptions/DomainException.cs
+   // backend/Arah.Application/Exceptions/DomainException.cs
    public class DomainException : Exception
    {
        public DomainException(string message) : base(message) { }
@@ -992,7 +992,7 @@
 
 2. **Atualizar Exception Handler**
    ```csharp
-   // backend/Araponga.Api/Program.cs
+   // backend/Arah.Api/Program.cs
    app.UseExceptionHandler(errorApp =>
    {
        errorApp.Run(async context =>
@@ -1027,14 +1027,14 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Exceptions/DomainException.cs`
-- `backend/Araponga.Application/Exceptions/ValidationException.cs`
-- `backend/Araponga.Application/Exceptions/NotFoundException.cs`
-- `backend/Araponga.Application/Exceptions/UnauthorizedException.cs`
-- `backend/Araponga.Application/Exceptions/ConflictException.cs`
+- `backend/Arah.Application/Exceptions/DomainException.cs`
+- `backend/Arah.Application/Exceptions/ValidationException.cs`
+- `backend/Arah.Application/Exceptions/NotFoundException.cs`
+- `backend/Arah.Application/Exceptions/UnauthorizedException.cs`
+- `backend/Arah.Application/Exceptions/ConflictException.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 - Services (substituir throws)
 
 **Estimativa**: 12 horas
@@ -1055,7 +1055,7 @@
 
 1. **Criar Helpers de Validação**
    ```csharp
-   // backend/Araponga.Application/Common/ValidationHelpers.cs
+   // backend/Arah.Application/Common/ValidationHelpers.cs
    public static class ValidationHelpers
    {
        public static bool IsValidTerritoryId(Guid territoryId)
@@ -1077,7 +1077,7 @@
 
 3. **Usar Extension Methods**
    ```csharp
-   // backend/Araponga.Application/Extensions/GuidExtensions.cs
+   // backend/Arah.Application/Extensions/GuidExtensions.cs
    public static class GuidExtensions
    {
        public static bool IsEmpty(this Guid guid) => guid == Guid.Empty;
@@ -1090,8 +1090,8 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Common/ValidationHelpers.cs`
-- `backend/Araponga.Application/Extensions/GuidExtensions.cs`
+- `backend/Arah.Application/Common/ValidationHelpers.cs`
+- `backend/Arah.Application/Extensions/GuidExtensions.cs`
 - Outros extension methods conforme necessário
 
 **Arquivos a Modificar**:
@@ -1114,7 +1114,7 @@
 
 1. **Criar Classe de Configuração**
    ```csharp
-   // backend/Araponga.Application/Configuration/AppSettings.cs
+   // backend/Arah.Application/Configuration/AppSettings.cs
    public class AppSettings
    {
        public int MaxPostAnchors { get; set; } = 50;
@@ -1150,10 +1150,10 @@
    ```
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Configuration/AppSettings.cs`
+- `backend/Arah.Application/Configuration/AppSettings.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/appsettings.json`
+- `backend/Arah.Api/appsettings.json`
 - Services (substituir magic numbers)
 
 **Estimativa**: 6 horas
@@ -1224,7 +1224,7 @@
 
 1. **Adicionar Testes de Performance**
    ```csharp
-   // backend/Araponga.Tests/Performance/FeedPerformanceTests.cs
+   // backend/Arah.Tests/Performance/FeedPerformanceTests.cs
    [Fact]
    public async Task ListFeed_ShouldCompleteWithin200ms()
    {
@@ -1504,7 +1504,7 @@ Fase 1 (Segurança)
 
 ## 🎯 Conclusão
 
-Este plano de ação detalha todos os passos necessários para elevar a aplicação Araponga de **7.4/10 para 10/10**.
+Este plano de ação detalha todos os passos necessários para elevar a aplicação Arah de **7.4/10 para 10/10**.
 
 ### Resumo de Esforço
 

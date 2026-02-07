@@ -1,0 +1,349 @@
+using Arah.Api.Contracts.Marketplace;
+using Arah.Api.Security;
+using Arah.Application.Services;
+using Arah.Modules.Marketplace.Domain;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Arah.Api.Controllers;
+
+[ApiController]
+[Route("api/v1/cart")]
+[Produces("application/json")]
+[Tags("Cart")]
+public sealed class CartController : ControllerBase
+{
+    private readonly CartService _cartService;
+    private readonly CurrentUserAccessor _currentUserAccessor;
+
+    public CartController(CartService cartService, CurrentUserAccessor currentUserAccessor)
+    {
+        _cartService = cartService;
+        _currentUserAccessor = currentUserAccessor;
+    }
+
+    /// <summary>
+    /// Retorna o carrinho do usuário no território.
+    /// </summary>
+    [HttpGet]
+    [ProducesResponseType(typeof(CartResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<CartResponse>> GetCart(
+        [FromQuery] Guid territoryId,
+        CancellationToken cancellationToken)
+    {
+        if (territoryId == Guid.Empty)
+        {
+            return BadRequest(new { error = "territoryId is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var cartResult = await _cartService.GetCartAsync(territoryId, userContext.User.Id, cancellationToken);
+        if (!cartResult.IsSuccess || cartResult.Value is null)
+        {
+            if (string.Equals(cartResult.Error, "Marketplace is disabled for this territory.", StringComparison.Ordinal))
+            {
+                return NotFound();
+            }
+
+            return BadRequest(new { error = cartResult.Error ?? "Unable to get cart." });
+        }
+
+        var cart = cartResult.Value;
+        var response = new CartResponse(
+            cart.Cart.Id,
+            cart.Cart.TerritoryId,
+            cart.Cart.UserId,
+            cart.Cart.CreatedAtUtc,
+            cart.Cart.UpdatedAtUtc,
+            cart.Items.Select(ToResponse).ToList());
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Adiciona um item ao carrinho.
+    /// </summary>
+    [HttpPost("items")]
+    [ProducesResponseType(typeof(CartItemResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<CartItemResponse>> AddItem(
+        [FromBody] AddCartItemRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (request.TerritoryId == Guid.Empty)
+        {
+            return BadRequest(new { error = "territoryId is required." });
+        }
+
+        if (request.ItemId == Guid.Empty)
+        {
+            return BadRequest(new { error = "itemId is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var result = await _cartService.AddItemAsync(
+            request.TerritoryId,
+            userContext.User.Id,
+            request.ItemId,
+            request.Quantity,
+            request.Notes,
+            cancellationToken);
+
+        if (!result.IsSuccess || result.Value is null)
+        {
+            if (string.Equals(result.Error, "Marketplace is disabled for this territory.", StringComparison.Ordinal))
+            {
+                return NotFound();
+            }
+
+            return BadRequest(new { error = result.Error ?? "Unable to add item." });
+        }
+
+        var cartResult = await _cartService.GetCartAsync(request.TerritoryId, userContext.User.Id, cancellationToken);
+        if (!cartResult.IsSuccess || cartResult.Value is null)
+        {
+            if (string.Equals(cartResult.Error, "Marketplace is disabled for this territory.", StringComparison.Ordinal))
+            {
+                return NotFound();
+            }
+
+            return BadRequest(new { error = cartResult.Error ?? "Unable to retrieve cart item." });
+        }
+
+        var cart = cartResult.Value;
+        var detail = cart.Items.FirstOrDefault(i => i.Item.Id == result.Value.Id);
+        if (detail is null)
+        {
+            return BadRequest(new { error = "Unable to retrieve cart item." });
+        }
+
+        return CreatedAtAction(nameof(GetCart), new { territoryId = request.TerritoryId }, ToResponse(detail));
+    }
+
+    /// <summary>
+    /// Atualiza um item do carrinho.
+    /// </summary>
+    [HttpPatch("items/{id:guid}")]
+    [ProducesResponseType(typeof(CartItemResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<CartItemResponse>> UpdateItem(
+        [FromRoute] Guid id,
+        [FromBody] UpdateCartItemRequest request,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var result = await _cartService.UpdateItemAsync(id, userContext.User.Id, request.Quantity, request.Notes, cancellationToken);
+        if (!result.IsSuccess || result.Value is null)
+        {
+            return BadRequest(new { error = result.Error ?? "Unable to update item." });
+        }
+
+        var cartResult = await _cartService.GetCartByIdAsync(result.Value.CartId, userContext.User.Id, cancellationToken);
+        if (!cartResult.IsSuccess)
+        {
+            if (string.Equals(cartResult.Error, "Marketplace is disabled for this territory.", StringComparison.Ordinal))
+            {
+                return NotFound();
+            }
+
+            return BadRequest(new { error = cartResult.Error ?? "Unable to retrieve cart item." });
+        }
+
+        var cart = cartResult.Value;
+        if (cart is null)
+        {
+            return BadRequest(new { error = "Unable to retrieve cart item." });
+        }
+
+        var detail = cart.Items.FirstOrDefault(i => i.Item.Id == result.Value.Id);
+        if (detail is null)
+        {
+            return BadRequest(new { error = "Unable to retrieve cart item." });
+        }
+
+        return Ok(ToResponse(detail));
+    }
+
+    /// <summary>
+    /// Remove um item do carrinho.
+    /// </summary>
+    [HttpDelete("items/{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> RemoveItem(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken)
+    {
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var removed = await _cartService.RemoveItemAsync(id, userContext.User.Id, cancellationToken);
+        if (!removed)
+        {
+            return BadRequest(new { error = "Cart item not found." });
+        }
+
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Finaliza o checkout do carrinho.
+    /// </summary>
+    [HttpPost("checkout")]
+    [ProducesResponseType(typeof(CartCheckoutResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<CartCheckoutResponse>> Checkout(
+        [FromBody] CartCheckoutRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (request.TerritoryId == Guid.Empty)
+        {
+            return BadRequest(new { error = "territoryId is required." });
+        }
+
+        var userContext = await _currentUserAccessor.GetAsync(Request, cancellationToken);
+        if (userContext.Status != TokenStatus.Valid || userContext.User is null)
+        {
+            return Unauthorized();
+        }
+
+        var result = await _cartService.CheckoutAsync(request.TerritoryId, userContext.User.Id, request.Message, cancellationToken);
+        if (!result.IsSuccess || result.Value is null)
+        {
+            if (string.Equals(result.Error, "Marketplace is disabled for this territory.", StringComparison.Ordinal))
+            {
+                return NotFound();
+            }
+
+            return BadRequest(new { error = result.Error ?? "Unable to checkout." });
+        }
+
+        var response = new CartCheckoutResponse(
+            result.Value.Checkouts.Select(ToResponse).ToList(),
+            result.Value.Inquiries.Select(inquiry => new InquiryBundleResponse(
+                inquiry.InquiryId,
+                inquiry.StoreId,
+                inquiry.ItemId,
+                inquiry.BatchId)).ToList(),
+            result.Value.Summaries.Select(summary => new CheckoutSummaryResponse(
+                summary.StoreId,
+                summary.CheckoutItemCount,
+                summary.InquiryCount)).ToList());
+
+        return Ok(response);
+    }
+
+    private static CartItemResponse ToResponse(Arah.Application.Models.CartItemDetails detail)
+    {
+        return new CartItemResponse(
+            detail.Item.Id,
+            detail.Item.ItemId,
+            detail.Item.Quantity,
+            detail.Item.Notes,
+            detail.Item.CreatedAtUtc,
+            detail.Item.UpdatedAtUtc,
+            ToResponse(detail.StoreItem),
+            ToResponse(detail.Store),
+            detail.IsPurchasable);
+    }
+
+    private static ItemResponse ToResponse(StoreItem item)
+    {
+        return new ItemResponse(
+            item.Id,
+            item.TerritoryId,
+            item.StoreId,
+            item.Type.ToString().ToUpperInvariant(),
+            item.Title,
+            item.Description,
+            item.Category,
+            item.Tags,
+            item.PricingType.ToString().ToUpperInvariant(),
+            item.PriceAmount,
+            item.Currency,
+            item.Unit,
+            item.Latitude,
+            item.Longitude,
+            item.Status.ToString().ToUpperInvariant(),
+            item.CreatedAtUtc,
+            item.UpdatedAtUtc);
+    }
+
+    private static StoreResponse ToResponse(Store store)
+    {
+        var contact = new StoreContactPayload(
+            store.Phone,
+            store.Whatsapp,
+            store.Email,
+            store.Instagram,
+            store.Website,
+            store.PreferredContactMethod);
+
+        return new StoreResponse(
+            store.Id,
+            store.TerritoryId,
+            store.OwnerUserId,
+            store.DisplayName,
+            store.Description,
+            store.Status.ToString().ToUpperInvariant(),
+            store.PaymentsEnabled,
+            store.ContactVisibility.ToString().ToUpperInvariant(),
+            contact,
+            store.CreatedAtUtc,
+            store.UpdatedAtUtc);
+    }
+
+    private static CheckoutResponse ToResponse(Arah.Application.Models.CheckoutBundle bundle)
+    {
+        return new CheckoutResponse(
+            bundle.Checkout.Id,
+            bundle.Checkout.TerritoryId,
+            bundle.Checkout.BuyerUserId,
+            bundle.Checkout.StoreId,
+            bundle.Checkout.Status.ToString().ToUpperInvariant(),
+            bundle.Checkout.Currency,
+            bundle.Checkout.ItemsSubtotalAmount,
+            bundle.Checkout.PlatformFeeAmount,
+            bundle.Checkout.TotalAmount,
+            bundle.Checkout.CreatedAtUtc,
+            bundle.Checkout.UpdatedAtUtc,
+            bundle.Items.Select(ToResponse).ToList());
+    }
+
+    private static CheckoutItemResponse ToResponse(CheckoutItem item)
+    {
+        return new CheckoutItemResponse(
+            item.Id,
+            item.ItemId,
+            item.ItemType.ToString().ToUpperInvariant(),
+            item.TitleSnapshot,
+            item.Quantity,
+            item.UnitPrice,
+            item.LineSubtotal,
+            item.PlatformFeeLine,
+            item.LineTotal,
+            item.CreatedAtUtc);
+    }
+}

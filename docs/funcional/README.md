@@ -1,4 +1,4 @@
-# Documentação Funcional da Plataforma Araponga
+# Documentação Funcional da Plataforma Arah
 
 **Versão**: 1.0  
 **Data**: 2026-01-28  
@@ -9,7 +9,7 @@
 ## 📋 Índice Completo
 
 ### Documento Central
-- **[00 - Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral, domínios, funções, motivação
+- **[00 - Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral, domínios, funções, motivação
 
 ### Documentação por Funcionalidade
 
@@ -60,7 +60,7 @@
 ## 🎯 Como Usar Esta Documentação
 
 ### Para Entender a Plataforma
-1. Comece pelo **[documento central](funcional/00_PLATAFORMA_ARAPONGA.md)** para visão geral
+1. Comece pelo **[documento central](funcional/00_PLATAFORMA_Arah.md)** para visão geral
 2. Explore funcionalidades específicas conforme necessidade
 3. Use os links entre documentos para navegação
 

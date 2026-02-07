@@ -5,7 +5,7 @@
 Este PR consolida três melhorias importantes:
 1. **Adiciona paginação** em todos os métodos de listagem (21 métodos)
 2. **Corrige encoding UTF-8** no Developer Portal
-3. **Configura o Developer Portal** para ser servido diretamente em `devportal.araponga.app`
+3. **Configura o Developer Portal** para ser servido diretamente em `devportal.Arah.app`
 
 ## Mudanças Principais
 
@@ -43,17 +43,17 @@ Adicionados 21 métodos paginados em 11 services, seguindo o padrão `PagedResul
 
 **Arquivos corrigidos:**
 - `docs/devportal/index.html`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/Program.cs`
 
 ### 3. Configuração do Developer Portal ✅
 
 **Estrutura final:**
-- `araponga.app` → Landing pública (página estática no Gamma)
-- `devportal.araponga.app` → Developer Portal (servido diretamente, sem página intermediária)
+- `Arah.app` → Landing pública (página estática no Gamma)
+- `devportal.Arah.app` → Developer Portal (servido diretamente, sem página intermediária)
 
 **Configurações:**
-- Workflow do GitHub Pages configurado para `devportal.araponga.app`
+- Workflow do GitHub Pages configurado para `devportal.Arah.app`
 - CNAME atualizado
 - Referências no HTML atualizadas
 - Documentação atualizada
@@ -69,37 +69,37 @@ Adicionados 21 métodos paginados em 11 services, seguindo o padrão `PagedResul
 ## Arquivos Modificados
 
 ### Services (Paginação)
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Services/TerritoryService.cs`
-- `backend/Araponga.Application/Services/MapService.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/ListingService.cs`
-- `backend/Araponga.Application/Services/AssetService.cs`
-- `backend/Araponga.Application/Services/ReportService.cs`
-- `backend/Araponga.Application/Services/JoinRequestService.cs`
-- `backend/Araponga.Application/Services/InquiryService.cs`
-- `backend/Araponga.Application/Services/HealthService.cs`
-- `backend/Araponga.Application/Services/PlatformFeeService.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Services/TerritoryService.cs`
+- `backend/Arah.Application/Services/MapService.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/ListingService.cs`
+- `backend/Arah.Application/Services/AssetService.cs`
+- `backend/Arah.Application/Services/ReportService.cs`
+- `backend/Arah.Application/Services/JoinRequestService.cs`
+- `backend/Arah.Application/Services/InquiryService.cs`
+- `backend/Arah.Application/Services/HealthService.cs`
+- `backend/Arah.Application/Services/PlatformFeeService.cs`
 
 ### Controllers (Endpoints Paginados)
-- `backend/Araponga.Api/Controllers/FeedController.cs` - 2 endpoints paginados
-- `backend/Araponga.Api/Controllers/TerritoriesController.cs` - 3 endpoints paginados
-- `backend/Araponga.Api/Controllers/MapController.cs` - 1 endpoint paginado
-- `backend/Araponga.Api/Controllers/EventsController.cs` - 2 endpoints paginados
-- `backend/Araponga.Api/Controllers/ListingsController.cs` - 1 endpoint paginado
-- `backend/Araponga.Api/Controllers/AssetsController.cs` - 1 endpoint paginado
-- `backend/Araponga.Api/Controllers/InquiriesController.cs` - 2 endpoints paginados
-- `backend/Araponga.Api/Controllers/AlertsController.cs` - 1 endpoint paginado
-- `backend/Araponga.Api/Controllers/ModerationController.cs` - 1 endpoint paginado
-- `backend/Araponga.Api/Controllers/JoinRequestsController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/FeedController.cs` - 2 endpoints paginados
+- `backend/Arah.Api/Controllers/TerritoriesController.cs` - 3 endpoints paginados
+- `backend/Arah.Api/Controllers/MapController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/EventsController.cs` - 2 endpoints paginados
+- `backend/Arah.Api/Controllers/ListingsController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/AssetsController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/InquiriesController.cs` - 2 endpoints paginados
+- `backend/Arah.Api/Controllers/AlertsController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/ModerationController.cs` - 1 endpoint paginado
+- `backend/Arah.Api/Controllers/JoinRequestsController.cs` - 1 endpoint paginado
 
 ### Contratos
-- `backend/Araponga.Api/Contracts/Common/PagedResponse.cs` - Novo contrato para respostas paginadas
+- `backend/Arah.Api/Contracts/Common/PagedResponse.cs` - Novo contrato para respostas paginadas
 
 ### Developer Portal (Encoding e Configuração)
 - `docs/devportal/index.html`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/Program.cs`
 - `.github/workflows/devportal-pages.yml`
 - `docs/CNAME`
 - `docs/13_DOMAIN_ROUTING.md`
@@ -135,7 +135,7 @@ Após merge deste PR:
 1. ✅ Atualizar controllers para expor endpoints paginados - **CONCLUÍDO**
 2. ✅ Adicionar testes unitários para métodos paginados - **CONCLUÍDO**
 3. Validar encoding no navegador após deploy
-4. Configurar DNS para `devportal.araponga.app` (se necessário)
+4. Configurar DNS para `devportal.Arah.app` (se necessário)
 
 ## Checklist
 
@@ -164,5 +164,5 @@ Após merge deste PR:
 ```
 feat: adicionar paginação em todos os métodos de listagem
 fix: corrigir encoding UTF-8 no Developer Portal
-chore: configurar Developer Portal para devportal.araponga.app
+chore: configurar Developer Portal para devportal.Arah.app
 ```

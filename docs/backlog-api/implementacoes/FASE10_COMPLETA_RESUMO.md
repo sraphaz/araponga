@@ -16,7 +16,7 @@ A Fase 10 foi **completada com sucesso**. Todas as funcionalidades principais, t
 
 ### 1. Testes de Performance ✅
 
-**Arquivo Criado**: `backend/Araponga.Tests/Performance/FeedWithMediaPerformanceTests.cs`
+**Arquivo Criado**: `backend/Arah.Tests/Performance/FeedWithMediaPerformanceTests.cs`
 
 **Testes Adicionados**:
 - ✅ `FeedPaged_WithPostsContainingMedia_RespondsWithin500ms` - Valida SLA de 500ms

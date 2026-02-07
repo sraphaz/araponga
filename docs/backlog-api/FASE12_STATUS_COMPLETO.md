@@ -33,10 +33,10 @@ A Fase 12 (Otimizações Finais e Conclusão) está **~95% completa**. Todas as 
   - Aceites de termos e políticas
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/DataExportService.cs`
-- ✅ `backend/Araponga.Application/Services/AccountDeletionService.cs`
-- ✅ `backend/Araponga.Api/Controllers/DataExportController.cs`
-- ✅ `backend/Araponga.Application/Models/UserDataExport.cs`
+- ✅ `backend/Arah.Application/Services/DataExportService.cs`
+- ✅ `backend/Arah.Application/Services/AccountDeletionService.cs`
+- ✅ `backend/Arah.Api/Controllers/DataExportController.cs`
+- ✅ `backend/Arah.Application/Models/UserDataExport.cs`
 
 **Testes**:
 - ✅ `DataExportServiceEdgeCasesTests.cs` - 151 testes
@@ -63,14 +63,14 @@ A Fase 12 (Otimizações Finais e Conclusão) está **~95% completa**. Todas as 
 - ✅ Histórico de aceites
 
 **Arquivos**:
-- ✅ `backend/Araponga.Domain/Policies/*.cs` (4 modelos)
-- ✅ `backend/Araponga.Application/Services/TermsOfServiceService.cs`
-- ✅ `backend/Araponga.Application/Services/TermsAcceptanceService.cs`
-- ✅ `backend/Araponga.Application/Services/PrivacyPolicyService.cs`
-- ✅ `backend/Araponga.Application/Services/PrivacyPolicyAcceptanceService.cs`
-- ✅ `backend/Araponga.Application/Services/PolicyRequirementService.cs`
-- ✅ `backend/Araponga.Api/Controllers/TermsOfServiceController.cs`
-- ✅ `backend/Araponga.Api/Controllers/PrivacyPolicyController.cs`
+- ✅ `backend/Arah.Domain/Policies/*.cs` (4 modelos)
+- ✅ `backend/Arah.Application/Services/TermsOfServiceService.cs`
+- ✅ `backend/Arah.Application/Services/TermsAcceptanceService.cs`
+- ✅ `backend/Arah.Application/Services/PrivacyPolicyService.cs`
+- ✅ `backend/Arah.Application/Services/PrivacyPolicyAcceptanceService.cs`
+- ✅ `backend/Arah.Application/Services/PolicyRequirementService.cs`
+- ✅ `backend/Arah.Api/Controllers/TermsOfServiceController.cs`
+- ✅ `backend/Arah.Api/Controllers/PrivacyPolicyController.cs`
 
 **Endpoints**:
 - ✅ `GET /api/v1/terms/active`
@@ -111,11 +111,11 @@ A Fase 12 (Otimizações Finais e Conclusão) está **~95% completa**. Todas as 
   - Payouts por território
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/AnalyticsService.cs`
-- ✅ `backend/Araponga.Api/Controllers/AnalyticsController.cs`
-- ✅ `backend/Araponga.Application/Models/TerritoryStats.cs`
-- ✅ `backend/Araponga.Application/Models/PlatformStats.cs`
-- ✅ `backend/Araponga.Application/Models/MarketplaceStats.cs`
+- ✅ `backend/Arah.Application/Services/AnalyticsService.cs`
+- ✅ `backend/Arah.Api/Controllers/AnalyticsController.cs`
+- ✅ `backend/Arah.Application/Models/TerritoryStats.cs`
+- ✅ `backend/Arah.Application/Models/PlatformStats.cs`
+- ✅ `backend/Arah.Application/Models/MarketplaceStats.cs`
 
 **Endpoints**:
 - ✅ `GET /api/v1/analytics/territories/{id}/stats`
@@ -123,12 +123,12 @@ A Fase 12 (Otimizações Finais e Conclusão) está **~95% completa**. Todas as 
 - ✅ `GET /api/v1/analytics/marketplace/stats`
 
 **Métricas Prometheus**:
-- ✅ `araponga.posts.created`
-- ✅ `araponga.events.created`
-- ✅ `araponga.memberships.created`
-- ✅ `araponga.territories.created`
-- ✅ `araponga.reports.created`
-- ✅ `araponga.join_requests.created`
+- ✅ `Arah.posts.created`
+- ✅ `Arah.events.created`
+- ✅ `Arah.memberships.created`
+- ✅ `Arah.territories.created`
+- ✅ `Arah.reports.created`
+- ✅ `Arah.join_requests.created`
 
 ---
 
@@ -151,10 +151,10 @@ A Fase 12 (Otimizações Finais e Conclusão) está **~95% completa**. Todas as 
 - ✅ Integração com `IPushNotificationProvider` (abstração para FCM, etc.)
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/PushNotificationService.cs`
-- ✅ `backend/Araponga.Api/Controllers/DevicesController.cs`
-- ✅ `backend/Araponga.Domain/Users/UserDevice.cs`
-- ✅ `backend/Araponga.Application/Interfaces/IPushNotificationProvider.cs`
+- ✅ `backend/Arah.Application/Services/PushNotificationService.cs`
+- ✅ `backend/Arah.Api/Controllers/DevicesController.cs`
+- ✅ `backend/Arah.Domain/Users/UserDevice.cs`
+- ✅ `backend/Arah.Application/Interfaces/IPushNotificationProvider.cs`
 
 **Testes**:
 - ✅ `PushNotificationServiceEdgeCasesTests.cs` - 83 testes

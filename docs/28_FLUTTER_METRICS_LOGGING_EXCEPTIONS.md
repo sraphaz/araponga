@@ -1,4 +1,4 @@
-# Métricas, Logs e Exceções - Araponga Flutter App
+# Métricas, Logs e Exceções - Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -26,7 +26,7 @@
 
 ### Objetivo
 
-Este documento especifica a estratégia completa de **observabilidade** para o app Flutter Araponga, cobrindo:
+Este documento especifica a estratégia completa de **observabilidade** para o app Flutter Arah, cobrindo:
 
 - **Métricas**: Performance, uso, engajamento, negócio
 - **Logs**: Estruturados, categorizados, rastreáveis
@@ -1259,7 +1259,7 @@ lib/
 
 **Versão**: 1.0  
 **Última Atualização**: 2025-01-20  
-**Autor**: Sistema de Documentação Araponga
+**Autor**: Sistema de Documentação Arah
 
 ---
 

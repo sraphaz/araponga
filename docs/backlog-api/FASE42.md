@@ -146,20 +146,20 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Gamification/Contribution.cs`
-- `backend/Araponga.Domain/Gamification/ContributionType.cs`
-- `backend/Araponga.Domain/Gamification/UserContributionStats.cs`
-- `backend/Araponga.Domain/Gamification/Badge.cs`
-- `backend/Araponga.Domain/Gamification/UserBadge.cs`
-- `backend/Araponga.Application/Interfaces/IContributionRepository.cs`
-- `backend/Araponga.Application/Interfaces/IUserContributionStatsRepository.cs`
-- `backend/Araponga.Application/Interfaces/IBadgeRepository.cs`
-- `backend/Araponga.Application/Interfaces/IUserBadgeRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresContributionRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserContributionStatsRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresBadgeRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserBadgeRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddGamificationSystem.cs`
+- `backend/Arah.Domain/Gamification/Contribution.cs`
+- `backend/Arah.Domain/Gamification/ContributionType.cs`
+- `backend/Arah.Domain/Gamification/UserContributionStats.cs`
+- `backend/Arah.Domain/Gamification/Badge.cs`
+- `backend/Arah.Domain/Gamification/UserBadge.cs`
+- `backend/Arah.Application/Interfaces/IContributionRepository.cs`
+- `backend/Arah.Application/Interfaces/IUserContributionStatsRepository.cs`
+- `backend/Arah.Application/Interfaces/IBadgeRepository.cs`
+- `backend/Arah.Application/Interfaces/IUserBadgeRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresContributionRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserContributionStatsRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresBadgeRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserBadgeRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddGamificationSystem.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -200,17 +200,17 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/ContributionService.cs`
-- `backend/Araponga.Application/Models/ContributionPointsConfig.cs` (configuração de pontos)
-- `backend/Araponga.Tests/Application/ContributionServiceTests.cs`
+- `backend/Arah.Application/Services/ContributionService.cs`
+- `backend/Arah.Application/Models/ContributionPointsConfig.cs` (configuração de pontos)
+- `backend/Arah.Tests/Application/ContributionServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs` (registrar contribuição ao criar post)
-- `backend/Araponga.Application/Services/EventsService.cs` (registrar ao criar evento)
-- `backend/Araponga.Application/Services/MapEntityService.cs` (registrar ao criar/confirmar entidade)
-- `backend/Araponga.Application/Services/StoreItemService.cs` (registrar ao criar item)
-- `backend/Araponga.Application/Services/DeliveryService.cs` (registrar ao completar entrega)
-- `backend/Araponga.Application/Services/VotingService.cs` (registrar ao participar/criar votação)
+- `backend/Arah.Application/Services/PostCreationService.cs` (registrar contribuição ao criar post)
+- `backend/Arah.Application/Services/EventsService.cs` (registrar ao criar evento)
+- `backend/Arah.Application/Services/MapEntityService.cs` (registrar ao criar/confirmar entidade)
+- `backend/Arah.Application/Services/StoreItemService.cs` (registrar ao criar item)
+- `backend/Arah.Application/Services/DeliveryService.cs` (registrar ao completar entrega)
+- `backend/Arah.Application/Services/VotingService.cs` (registrar ao participar/criar votação)
 
 **Critérios de Sucesso**:
 - ✅ Serviço implementado
@@ -258,13 +258,13 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/BadgeService.cs`
-- `backend/Araponga.Application/Models/BadgeCriteria.cs`
-- `backend/Araponga.Infrastructure/Postgres/SeedData/BadgesSeedData.cs` (badges padrão)
-- `backend/Araponga.Tests/Application/BadgeServiceTests.cs`
+- `backend/Arah.Application/Services/BadgeService.cs`
+- `backend/Arah.Application/Models/BadgeCriteria.cs`
+- `backend/Arah.Infrastructure/Postgres/SeedData/BadgesSeedData.cs` (badges padrão)
+- `backend/Arah.Tests/Application/BadgeServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ContributionService.cs` (chamar verificação de badges)
+- `backend/Arah.Application/Services/ContributionService.cs` (chamar verificação de badges)
 
 **Critérios de Sucesso**:
 - ✅ Badges padrão criados
@@ -299,8 +299,8 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ContributionService.cs`
-- `backend/Araponga.Application/Services/InterestFilterService.cs` (se necessário)
+- `backend/Arah.Application/Services/ContributionService.cs`
+- `backend/Arah.Application/Services/InterestFilterService.cs` (se necessário)
 
 **Critérios de Sucesso**:
 - ✅ Alinhamento com interesses funcionando
@@ -332,8 +332,8 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ContributionService.cs`
-- `backend/Araponga.Application/Services/AIService.cs` (adicionar método de avaliação de qualidade)
+- `backend/Arah.Application/Services/ContributionService.cs`
+- `backend/Arah.Application/Services/AIService.cs` (adicionar método de avaliação de qualidade)
 
 **Critérios de Sucesso**:
 - ✅ Integração com IA funcionando (se disponível)
@@ -371,12 +371,12 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/LevelService.cs`
-- `backend/Araponga.Application/Models/LevelProgress.cs`
-- `backend/Araponga.Tests/Application/LevelServiceTests.cs`
+- `backend/Arah.Application/Services/LevelService.cs`
+- `backend/Arah.Application/Models/LevelProgress.cs`
+- `backend/Arah.Tests/Application/LevelServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ContributionService.cs` (calcular nível ao atualizar stats)
+- `backend/Arah.Application/Services/ContributionService.cs` (calcular nível ao atualizar stats)
 
 **Critérios de Sucesso**:
 - ✅ Sistema de níveis funcionando
@@ -403,15 +403,15 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/ContributionsController.cs`
-- `backend/Araponga.Api/Contracts/Gamification/ContributionStatsResponse.cs`
-- `backend/Araponga.Api/Contracts/Gamification/ContributionResponse.cs`
-- `backend/Araponga.Api/Contracts/Gamification/BadgeResponse.cs`
-- `backend/Araponga.Api/Contracts/Gamification/LevelProgressResponse.cs`
-- `backend/Araponga.Tests/Integration/ContributionsIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/ContributionsController.cs`
+- `backend/Arah.Api/Contracts/Gamification/ContributionStatsResponse.cs`
+- `backend/Arah.Api/Contracts/Gamification/ContributionResponse.cs`
+- `backend/Arah.Api/Contracts/Gamification/BadgeResponse.cs`
+- `backend/Arah.Api/Contracts/Gamification/LevelProgressResponse.cs`
+- `backend/Arah.Tests/Integration/ContributionsIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs` (adicionar stats)
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs` (adicionar stats)
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -484,13 +484,13 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Gamification/TerritoryGamificationConfig.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryGamificationConfigRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryGamificationConfigRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTerritoryGamificationConfig.cs`
+- `backend/Arah.Domain/Gamification/TerritoryGamificationConfig.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryGamificationConfigRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryGamificationConfigRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTerritoryGamificationConfig.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ContributionService.cs` (usar configuração do território)
+- `backend/Arah.Application/Services/ContributionService.cs` (usar configuração do território)
 
 **Critérios de Sucesso**:
 - ✅ Configuração por território funcionando
@@ -525,7 +525,7 @@ Implementar sistema de **gamificação harmoniosa** que:
 - [ ] Atualizar Swagger
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Integration/GamificationCompleteIntegrationTests.cs`
+- `backend/Arah.Tests/Integration/GamificationCompleteIntegrationTests.cs`
 - `docs/GAMIFICATION_SYSTEM.md`
 
 **Critérios de Sucesso**:

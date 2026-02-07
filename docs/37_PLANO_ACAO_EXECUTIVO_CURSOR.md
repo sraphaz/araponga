@@ -1,4 +1,4 @@
-# Plano de Ação Executivo - Agente Cursor Araponga
+# Plano de Ação Executivo - Agente Cursor Arah
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -25,7 +25,7 @@
 
 ### Objetivo
 
-Este documento fornece um **plano de ação executivo sequencial** para um agente Cursor implementar as funcionalidades críticas do backend Araponga, seguindo a priorização estratégica otimizada por prosperidade.
+Este documento fornece um **plano de ação executivo sequencial** para um agente Cursor implementar as funcionalidades críticas do backend Arah, seguindo a priorização estratégica otimizada por prosperidade.
 
 ### Princípios de Execução
 
@@ -138,7 +138,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Ler `backend/Araponga.Domain/Users/User.cs`
+   - [ ] Ler `backend/Arah.Domain/Users/User.cs`
    - [ ] Adicionar propriedades:
      ```csharp
      public Guid? AvatarMediaAssetId { get; private set; }
@@ -156,7 +156,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar migration: `YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs`
 
 2. **Serviço de Aplicação** (2 dias)
-   - [ ] Ler `backend/Araponga.Application/Services/UserProfileService.cs`
+   - [ ] Ler `backend/Arah.Application/Services/UserProfileService.cs`
    - [ ] Adicionar método `UpdateAvatarAsync(Guid userId, Guid mediaAssetId, CancellationToken)`
      - Validar que `mediaAssetId` existe e pertence ao usuário
      - Validar que é imagem (não vídeo)
@@ -169,7 +169,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
      - Incluir URL do avatar se disponível
 
 3. **Controllers e DTOs** (1.5 dias)
-   - [ ] Criar/atualizar `backend/Araponga.Api/Controllers/ProfileController.cs`
+   - [ ] Criar/atualizar `backend/Arah.Api/Controllers/ProfileController.cs`
    - [ ] Adicionar endpoint `PUT /api/v1/users/profile/avatar`
      - Request: `{ mediaAssetId: Guid }`
      - Response: `{ success: bool, avatarUrl?: string }`
@@ -202,12 +202,12 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 - ✅ Testes passando (>80% cobertura)
 
 **Arquivos a Criar/Modificar**:
-- `backend/Araponga.Domain/Users/User.cs` (modificar)
-- `backend/Araponga.Infrastructure/Postgres/Entities/UserRecord.cs` (modificar)
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs` (criar)
-- `backend/Araponga.Application/Services/UserProfileService.cs` (modificar)
-- `backend/Araponga.Api/Controllers/ProfileController.cs` (criar/atualizar)
-- `backend/Araponga.Api/Contracts/Profile/*.cs` (criar)
+- `backend/Arah.Domain/Users/User.cs` (modificar)
+- `backend/Arah.Infrastructure/Postgres/Entities/UserRecord.cs` (modificar)
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserAvatarAndBio.cs` (criar)
+- `backend/Arah.Application/Services/UserProfileService.cs` (modificar)
+- `backend/Arah.Api/Controllers/ProfileController.cs` (criar/atualizar)
+- `backend/Arah.Api/Contracts/Profile/*.cs` (criar)
 
 ---
 
@@ -221,7 +221,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 
 1. **Modelo de Domínio** (1 dia)
    - [ ] Ler `design/Archtecture/MER.md` - entidade `USER_DEVICE`
-   - [ ] Criar `backend/Araponga.Domain/Devices/Device.cs`
+   - [ ] Criar `backend/Arah.Domain/Devices/Device.cs`
      ```csharp
      public class Device
      {
@@ -249,7 +249,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar migration: `YYYYMMDDHHMMSS_AddUserDevice.cs`
 
 2. **Repositórios** (1 dia)
-   - [ ] Criar `backend/Araponga.Application/Interfaces/IDeviceRepository.cs`
+   - [ ] Criar `backend/Arah.Application/Interfaces/IDeviceRepository.cs`
      - `CreateAsync(Device, CancellationToken)`
      - `GetByIdAsync(Guid, CancellationToken)`
      - `GetByUserIdAsync(Guid, CancellationToken)`
@@ -260,7 +260,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Implementar `InMemoryDeviceRepository.cs` (para testes)
 
 3. **Serviço de Aplicação** (1.5 dias)
-   - [ ] Criar `backend/Araponga.Application/Services/DeviceService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/DeviceService.cs`
      - `RegisterDeviceAsync(Guid userId, string platform, string token, string? label, string? appVersion, CancellationToken)`
        - Validar token único por usuário
        - Criar ou atualizar device existente
@@ -273,7 +273,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
        - Marcar como revoked
 
 4. **Controllers e DTOs** (1 dia)
-   - [ ] Criar `backend/Araponga.Api/Controllers/DevicesController.cs`
+   - [ ] Criar `backend/Arah.Api/Controllers/DevicesController.cs`
    - [ ] Endpoint `POST /api/v1/users/devices/register`:
      - Request: `{ platform: string, deviceToken: string, deviceLabel?: string, appVersion?: string }`
      - Response: `{ deviceId: Guid }`
@@ -308,12 +308,12 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 - ✅ Testes passando
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Devices/Device.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/DeviceRecord.cs`
-- `backend/Araponga.Application/Interfaces/IDeviceRepository.cs`
-- `backend/Araponga.Application/Services/DeviceService.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs`
-- `backend/Araponga.Api/Contracts/Devices/*.cs`
+- `backend/Arah.Domain/Devices/Device.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/DeviceRecord.cs`
+- `backend/Arah.Application/Interfaces/IDeviceRepository.cs`
+- `backend/Arah.Application/Services/DeviceService.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs`
+- `backend/Arah.Api/Contracts/Devices/*.cs`
 
 ---
 
@@ -328,7 +328,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 1. **Modelo de Domínio** (0.5 dia)
    - [ ] Ler `design/Archtecture/MER.md` - entidade `USER_SECURITY_SETTINGS`
    - [ ] Verificar se existe `UserSecuritySettings` no Domain
-   - [ ] Se não existe, criar `backend/Araponga.Domain/Users/UserSecuritySettings.cs`
+   - [ ] Se não existe, criar `backend/Arah.Domain/Users/UserSecuritySettings.cs`
      ```csharp
      public class UserSecuritySettings
      {
@@ -341,13 +341,13 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar migration se necessário
 
 2. **Serviço de Aplicação** (0.5 dia)
-   - [ ] Criar `backend/Araponga.Application/Services/SecuritySettingsService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/SecuritySettingsService.cs`
      - `GetSecuritySettingsAsync(Guid userId, CancellationToken)`
      - `UpdateBiometricEnabledAsync(Guid userId, bool enabled, CancellationToken)`
      - `UpdateLastStrongAuthAsync(Guid userId, CancellationToken)`
 
 3. **Controllers e DTOs** (0.75 dia)
-   - [ ] Criar/atualizar `backend/Araponga.Api/Controllers/SecurityController.cs`
+   - [ ] Criar/atualizar `backend/Arah.Api/Controllers/SecurityController.cs`
    - [ ] Endpoint `GET /api/v1/users/security-settings`:
      - Response: `{ biometricEnabled: bool, lastStrongAuthAt?: DateTime }`
    - [ ] Endpoint `PUT /api/v1/users/security-settings`:
@@ -380,7 +380,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Criar `backend/Araponga.Domain/Recovery/RecoveryRequest.cs`
+   - [ ] Criar `backend/Arah.Domain/Recovery/RecoveryRequest.cs`
      ```csharp
      public class RecoveryRequest
      {
@@ -402,7 +402,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar migration: `YYYYMMDDHHMMSS_AddRecoveryRequest.cs`
 
 2. **Serviço de Recuperação** (2 dias)
-   - [ ] Criar `backend/Araponga.Application/Services/RecoveryService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/RecoveryService.cs`
      - `RequestRecoveryAsync(string emailOrPhone, RecoveryType type, CancellationToken)`
        - Validar email/telefone existe no sistema
        - Gerar código de 6 dígitos
@@ -424,7 +424,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
        - Marcar recovery como USED
 
 3. **Controllers e DTOs** (1 dia)
-   - [ ] Criar `backend/Araponga.Api/Controllers/RecoveryController.cs`
+   - [ ] Criar `backend/Arah.Api/Controllers/RecoveryController.cs`
    - [ ] Endpoint `POST /api/v1/auth/recover`:
      - Request: `{ emailOrPhone: string, type: string }` // ACCOUNT ou TWO_FACTOR
      - Response: `{ recoveryId: Guid, expiresAt: DateTime }`
@@ -498,7 +498,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar migration: `YYYYMMDDHHMMSS_AddUserDeletion.cs`
 
 2. **Serviço de Exportação** (1.5 dias)
-   - [ ] Criar `backend/Araponga.Application/Services/DataExportService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/DataExportService.cs`
      - `ExportUserDataAsync(Guid userId, CancellationToken)`
        - Coletar todos os dados do usuário:
          - Perfil completo
@@ -514,7 +514,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
    - [ ] Criar modelo `UserDataExport.cs` com estrutura completa
 
 3. **Serviço de Exclusão** (1 dia)
-   - [ ] Criar `backend/Araponga.Application/Services/AccountDeletionService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/AccountDeletionService.cs`
      - `ScheduleDeletionAsync(Guid userId, CancellationToken)`
        - Validar confirmação dupla (via request)
        - Agendar exclusão (período de graça: 7 dias)
@@ -532,7 +532,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
        - Processar em batch
 
 4. **Controllers e DTOs** (1 dia)
-   - [ ] Criar `backend/Araponga.Api/Controllers/AccountController.cs`
+   - [ ] Criar `backend/Arah.Api/Controllers/AccountController.cs`
    - [ ] Endpoint `GET /api/v1/users/export-data`:
      - Response: `{ dataUrl: string, expiresAt: DateTime }`
    - [ ] Endpoint `POST /api/v1/users/delete-account`:
@@ -549,7 +549,7 @@ Implementar todas as funcionalidades que bloqueiam o desenvolvimento do frontend
      - `DeleteAccountStatusResponse.cs`
 
 5. **Background Worker** (0.3 dia)
-   - [ ] Criar `backend/Araponga.Infrastructure/Background/AccountDeletionWorker.cs`
+   - [ ] Criar `backend/Arah.Infrastructure/Background/AccountDeletionWorker.cs`
      - Processar exclusões agendadas periodicamente (diário)
      - Chamar `ProcessScheduledDeletionsAsync`
 
@@ -613,7 +613,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Ler `backend/Araponga.Domain/Posts/Post.cs`
+   - [ ] Ler `backend/Arah.Domain/Posts/Post.cs`
    - [ ] Verificar se `MediaAttachment` já existe (Fase 8)
    - [ ] Se não existe, criar modelo de relacionamento Post ↔ MediaAsset
    - [ ] Adicionar propriedade ao Post:
@@ -632,7 +632,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
    - [ ] Criar migration se necessário
 
 2. **Serviço de Criação de Posts** (2 dias)
-   - [ ] Ler `backend/Araponga.Application/Services/PostCreationService.cs`
+   - [ ] Ler `backend/Arah.Application/Services/PostCreationService.cs`
    - [ ] Atualizar `CreatePostAsync` para aceitar `mediaIds`:
      - Validar que mídias pertencem ao usuário
      - Validar máximo 10 mídias por post
@@ -640,7 +640,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
      - Definir `DisplayOrder` (ordem de envio)
 
 3. **Controllers e DTOs** (1 dia)
-   - [ ] Ler `backend/Araponga.Api/Controllers/FeedController.cs`
+   - [ ] Ler `backend/Arah.Api/Controllers/FeedController.cs`
    - [ ] Atualizar `POST /api/v1/feed/posts`:
      - Request adicionar `mediaIds?: Guid[]`
    - [ ] Atualizar `PostResponse`:
@@ -681,7 +681,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Ler `backend/Araponga.Domain/Events/Event.cs`
+   - [ ] Ler `backend/Arah.Domain/Events/Event.cs`
    - [ ] Adicionar propriedades:
      ```csharp
      public Guid? CoverImageMediaAssetId { get; private set; }
@@ -690,12 +690,12 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
    - [ ] Criar migration
 
 2. **Serviço de Eventos** (1.5 dias)
-   - [ ] Ler `backend/Araponga.Application/Services/EventsService.cs`
+   - [ ] Ler `backend/Arah.Application/Services/EventsService.cs`
    - [ ] Atualizar `CreateEventAsync` para aceitar `coverImageId` e `mediaIds`
    - [ ] Atualizar `UpdateEventAsync` para permitir atualizar mídias
 
 3. **Controllers e DTOs** (1 dia)
-   - [ ] Ler `backend/Araponga.Api/Controllers/EventsController.cs`
+   - [ ] Ler `backend/Arah.Api/Controllers/EventsController.cs`
    - [ ] Atualizar `POST /api/v1/events`:
      - Adicionar `coverImageId?: Guid` e `mediaIds?: Guid[]`
    - [ ] Atualizar `EventResponse`:
@@ -724,7 +724,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Ler `backend/Araponga.Domain/Marketplace/Item.cs`
+   - [ ] Ler `backend/Arah.Domain/Marketplace/Item.cs`
    - [ ] Adicionar suporte a mídias (similar a posts)
 
 2. **Serviço de Marketplace** (1.5 dias)
@@ -756,7 +756,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
 **Passos Detalhados**:
 
 1. **Modelo de Domínio** (1 dia)
-   - [ ] Ler `backend/Araponga.Domain/Chat/Message.cs`
+   - [ ] Ler `backend/Arah.Domain/Chat/Message.cs`
    - [ ] Adicionar suporte a `MediaAssetId` opcional
 
 2. **Serviço de Chat** (1.5 dias)
@@ -785,7 +785,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
 **Passos Detalhados**:
 
 1. **Modelo de Dados** (0.5 dia)
-   - [ ] Criar `backend/Araponga.Application/Models/OfflineAction.cs`
+   - [ ] Criar `backend/Arah.Application/Models/OfflineAction.cs`
      ```csharp
      public class OfflineAction
      {
@@ -808,7 +808,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
      ```
 
 2. **Serviço de Sincronização** (1.5 dias)
-   - [ ] Criar `backend/Araponga.Application/Services/OfflineSyncService.cs`
+   - [ ] Criar `backend/Arah.Application/Services/OfflineSyncService.cs`
      - `SyncBatchAsync(Guid userId, List<OfflineAction> actions, CancellationToken)`
        - Processar cada ação na ordem
        - Validar e executar ação
@@ -819,7 +819,7 @@ Implementar integração de mídias em todos os conteúdos e sincronização off
        - Aplicar resolução
 
 3. **Controllers e DTOs** (0.75 dia)
-   - [ ] Criar `backend/Araponga.Api/Controllers/SyncController.cs`
+   - [ ] Criar `backend/Arah.Api/Controllers/SyncController.cs`
    - [ ] Endpoint `POST /api/v1/sync/batch`:
      - Request: `{ actions: OfflineAction[] }`
      - Response: `{ results: OfflineActionResult[] }`
@@ -1026,10 +1026,10 @@ Implementar funcionalidades de edição e gestão de conteúdo.
 
 ```bash
 # Criar migration
-dotnet ef migrations add NomeDaMigration --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef migrations add NomeDaMigration --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 
 # Aplicar migration
-dotnet ef database update --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef database update --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 
 # Rodar testes
 dotnet test

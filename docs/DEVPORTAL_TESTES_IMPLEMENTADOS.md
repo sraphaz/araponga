@@ -5,7 +5,7 @@
 
 ## 📋 Resumo
 
-Implementação completa de testes automatizados para o Developer Portal da API Araponga. O DevPortal é uma aplicação HTML estática com JavaScript vanilla, então os testes validam estrutura HTML, funcionalidades JavaScript e links.
+Implementação completa de testes automatizados para o Developer Portal da API Arah. O DevPortal é uma aplicação HTML estática com JavaScript vanilla, então os testes validam estrutura HTML, funcionalidades JavaScript e links.
 
 ## 🧪 Estrutura de Testes Criada
 

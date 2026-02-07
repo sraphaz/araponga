@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/backend/Araponga.Api/bin/Debug/net8.0/Araponga.Api.dll",
+            "program": "${workspaceFolder}/backend/Arah.Api/bin/Debug/net8.0/Arah.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/backend/Araponga.Api",
+            "cwd": "${workspaceFolder}/backend/Arah.Api",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
@@ -32,11 +32,11 @@
             "request": "attach"
         },
         {
-            "name": "araponga (Flutter) - Chrome",
+            "name": "arah (Flutter) - Chrome",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            "cwd": "${workspaceFolder}/frontend/araponga.app",
+            "cwd": "${workspaceFolder}/frontend/arah.app",
             "args": [
                 "-d", "chrome",
                 "--dart-define=BFF_BASE_URL=http://localhost:5001",
@@ -44,10 +44,10 @@
             ]
         },
         {
-            "name": "araponga (Flutter)",
+            "name": "arah (Flutter)",
             "request": "launch",
             "type": "dart",
-            "cwd": "${workspaceFolder}/frontend/araponga.app",
+            "cwd": "${workspaceFolder}/frontend/arah.app",
             "args": [
                 "--dart-define=BFF_BASE_URL=http://localhost:5001",
                 "--dart-define=flutter.flutter_map.unblockOSM=OpenStreetMap data is free for everyone to use."

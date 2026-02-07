@@ -1,4 +1,4 @@
-# Mapa Completo das Fases - Araponga
+# Mapa Completo das Fases - Arah
 
 **Data**: 2026-01-25  
 **Versão**: 1.0  

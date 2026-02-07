@@ -71,11 +71,11 @@ Este PR completa a **Fase 2: Qualidade de Código e Confiabilidade** do Backlog 
 ## 📝 Arquivos Modificados
 
 ### Novos Arquivos
-- `backend/Araponga.Tests/Application/ReportServiceTests.cs` (9 testes)
-- `backend/Araponga.Tests/Application/JoinRequestServiceTests.cs` (16 testes)
-- `backend/Araponga.Tests/Application/CacheMetricsServiceTests.cs` (5 testes)
-- `backend/Araponga.Application/Services/CacheMetricsService.cs`
-- `backend/Araponga.Api/Controllers/CacheMetricsController.cs`
+- `backend/Arah.Tests/Application/ReportServiceTests.cs` (9 testes)
+- `backend/Arah.Tests/Application/JoinRequestServiceTests.cs` (16 testes)
+- `backend/Arah.Tests/Application/CacheMetricsServiceTests.cs` (5 testes)
+- `backend/Arah.Application/Services/CacheMetricsService.cs`
+- `backend/Arah.Api/Controllers/CacheMetricsController.cs`
 
 ### Arquivos Modificados
 - **Services**: CacheMetricsService integrado em 7 cache services
@@ -111,7 +111,7 @@ Este PR completa a **Fase 2: Qualidade de Código e Confiabilidade** do Backlog 
 
 ### Executar Todos os Testes
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 ```
 
 ### Testes Específicos

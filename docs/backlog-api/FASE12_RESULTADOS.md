@@ -22,9 +22,9 @@ A **Fase 12 (Otimizações Finais e Conclusão) foi encerrada em 100%**. Todas a
 - ✅ 387 testes passando (151 + 236)
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/DataExportService.cs`
-- ✅ `backend/Araponga.Application/Services/AccountDeletionService.cs`
-- ✅ `backend/Araponga.Api/Controllers/DataExportController.cs`
+- ✅ `backend/Arah.Application/Services/DataExportService.cs`
+- ✅ `backend/Arah.Application/Services/AccountDeletionService.cs`
+- ✅ `backend/Arah.Api/Controllers/DataExportController.cs`
 
 ---
 
@@ -101,7 +101,7 @@ A **Fase 12 (Otimizações Finais e Conclusão) foi encerrada em 100%**. Todas a
 - ✅ Middleware implementado
 - ✅ Otimização de nível configurada
 
-**Arquivo**: `backend/Araponga.Api/Program.cs` (linhas 341-359, 612)
+**Arquivo**: `backend/Arah.Api/Program.cs` (linhas 341-359, 612)
 
 ---
 
@@ -199,7 +199,7 @@ A **Fase 12 foi encerrada em 100%**. Todas as funcionalidades críticas estão i
 | [02_ROADMAP.md](../02_ROADMAP.md) | Roadmap estratégico |
 
 **Implementação**:
-- **Compression**: `backend/Araponga.Api/Program.cs` (linhas 341-359, 612)
+- **Compression**: `backend/Arah.Api/Program.cs` (linhas 341-359, 612)
 - **Testes Analytics**: `AnalyticsServiceTests.cs`, `AnalyticsServiceEdgeCasesTests.cs`
 - **Testes cobertura**: `FeatureFlagServiceEdgeCasesTests.cs`, `MediaStorageConfigServiceEdgeCasesTests.cs`, `UserPreferencesServiceEdgeCasesTests.cs`
 - **Próximos passos**: `UserProfileStatsServiceTests.cs`, `TerritoryMediaConfigServiceEdgeCasesTests.cs` (branch `feature/fase12-proximos-passos`)

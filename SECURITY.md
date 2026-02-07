@@ -10,7 +10,7 @@ O projeto ainda está em evolução. Recomendamos sempre testar e reportar com b
 
 Se você encontrou uma vulnerabilidade ou questão de segurança:
 
-1. Envie um e-mail para **suporte@araponga.app** com detalhes suficientes para reproduzir.
+1. Envie um e-mail para **suporte@Arah.app** com detalhes suficientes para reproduzir.
 2. Inclua impacto esperado, ambiente e qualquer prova de conceito relevante.
 3. Aguarde uma confirmação de recebimento. Faremos o possível para responder rapidamente.
 
@@ -92,8 +92,8 @@ Todos os endpoints retornam os seguintes headers de segurança:
 JWT__SIGNINGKEY=seu-secret-forte-aqui-minimo-32-caracteres
 
 # CORS Origins (OBRIGATÓRIO em produção - sem wildcard)
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+Cors__AllowedOrigins__0=https://app.Arah.com
+Cors__AllowedOrigins__1=https://www.Arah.com
 ```
 
 ### Configuração de Rate Limiting
@@ -122,7 +122,7 @@ Testes automatizados validam:
 
 Execute os testes:
 ```bash
-dotnet test backend/Araponga.Tests
+dotnet test backend/Arah.Tests
 ```
 
 ---

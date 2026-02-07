@@ -1,4 +1,4 @@
-# ARAPONGA
+# Arah
 
 **Território-Primeiro & Comunidade-Primeiro**  
 Plataforma orientada ao território para organização comunitária local
@@ -7,10 +7,10 @@ Plataforma orientada ao território para organização comunitária local
 
 ## O Pássaro que nos inspira
 
-O Araponga, também conhecido como **“pássaro-ferreiro”**, é famoso por seu canto metálico e ressonante nas florestas brasileiras.  
+O Arah, também conhecido como **“pássaro-ferreiro”**, é famoso por seu canto metálico e ressonante nas florestas brasileiras.  
 Sua presença vibrante simboliza a força e a resiliência da natureza.
 
-A escolha do Araponga reflete nosso compromisso com a autenticidade e a comunicação clara.  
+A escolha do Arah reflete nosso compromisso com a autenticidade e a comunicação clara.  
 Assim como ele se destaca em seu território, buscamos valorizar as comunidades locais e suas vozes singulares.
 
 ---
@@ -41,7 +41,7 @@ Publicações e eventos aparecem em timeline e visualização geográfica, facil
 ### Governança explícita
 Regras claras sobre quem pode ver e participar, com distinção entre visitantes e residentes, respeitando autonomia comunitária.
 
-O Araponga é uma plataforma de código aberto projetada para fortalecer organização comunitária a partir do território. Combina feed social, mapeamento colaborativo e regras de participação definidas pela comunidade.
+O Arah é uma plataforma de código aberto projetada para fortalecer organização comunitária a partir do território. Combina feed social, mapeamento colaborativo e regras de participação definidas pela comunidade.
 
 Promove relevância local, reduz ruído informacional e diminui dependência de plataformas generalistas que não atendem especificidades de cada lugar.
 
@@ -75,7 +75,7 @@ Conteúdo aparece no **feed** e no **mapa**.
 
 ### Domínios principais da plataforma
 
-O Araponga organiza-se em domínios funcionais que trabalham de forma integrada.  
+O Arah organiza-se em domínios funcionais que trabalham de forma integrada.  
 Cada domínio possui responsabilidades claras e se relaciona com os demais para garantir uma experiência completa orientada ao território.
 
 #### Território
@@ -142,7 +142,7 @@ Filtros territoriais e regras locais diminuem a necessidade de moderação centr
 
 ### Arquitetura técnica: domínio primeiro, evolução incremental
 
-O Araponga é construído com **.NET** e segue princípios de **Domain-Driven Design (DDD)**.  
+O Arah é construído com **.NET** e segue princípios de **Domain-Driven Design (DDD)**.  
 A arquitetura prioriza domínios de negócio bem definidos e evolução incremental, permitindo adicionar funcionalidades sem comprometer a base existente.
 
 ### Componentes principais
@@ -214,7 +214,7 @@ Comunidades estão retomando o controle sobre suas formas de organização, comu
 
 Plataformas centralizadas que ignoram contextos locais estão perdendo relevância onde mais importa: **no território**.
 
-O Araponga não é apenas uma ferramenta.  
+O Arah não é apenas uma ferramenta.  
 É parte de um movimento maior em direção à autonomia comunitária, transparência e relevância local.
 
 ---
@@ -231,7 +231,7 @@ O Araponga não é apenas uma ferramenta.
 
 ## Apoie o desenvolvimento
 
-O Araponga é um projeto de código aberto e conta com o apoio da comunidade para continuar crescendo.
+O Arah é um projeto de código aberto e conta com o apoio da comunidade para continuar crescendo.
 
 Sua contribuição ajuda a:
 - manter a infraestrutura  

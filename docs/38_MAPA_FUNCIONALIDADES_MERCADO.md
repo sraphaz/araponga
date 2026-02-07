@@ -1,4 +1,4 @@
-# Mapa de Funcionalidades - Araponga
+# Mapa de Funcionalidades - Arah
 ## Funcionalidades Implementadas, Planejadas e Previstas para Nível de Mercado
 
 **Versão**: 1.0  
@@ -25,7 +25,7 @@
 
 ### Objetivo
 
-Este documento apresenta um mapeamento completo das funcionalidades do Araponga, comparando o estado atual com os padrões de mercado estabelecidos por plataformas líderes como Closer.earth. O objetivo é identificar gaps críticos e oportunidades de melhoria para elevar a plataforma ao nível de projetos que recebem investimentos significativos (milhões de euros).
+Este documento apresenta um mapeamento completo das funcionalidades do Arah, comparando o estado atual com os padrões de mercado estabelecidos por plataformas líderes como Closer.earth. O objetivo é identificar gaps críticos e oportunidades de melhoria para elevar a plataforma ao nível de projetos que recebem investimentos significativos (milhões de euros).
 
 ### Benchmark de Referência
 
@@ -52,7 +52,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 | ⚠️ **Parcial** | Funcionalidade iniciada, mas incompleta | PART |
 | ⏳ **Planejado** | Funcionalidade documentada e priorizada | PLAN |
 | 🔮 **Previsto** | Funcionalidade considerada para futuro | PREV |
-| ❌ **Gap** | Funcionalidade existente no mercado, mas não no Araponga | GAP |
+| ❌ **Gap** | Funcionalidade existente no mercado, mas não no Arah | GAP |
 
 ### Prioridades de Mercado
 
@@ -159,7 +159,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 
 ### Comparativo com Closer.earth
 
-| Categoria | Closer | Araponga | Gap | Prioridade |
+| Categoria | Closer | Arah | Gap | Prioridade |
 |-----------|--------|----------|-----|------------|
 | **Core Platform** |
 | Territórios | ✅ | ✅ | - | - |
@@ -192,7 +192,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 
 #### 1. Governança e DAO 🔴 P0
 
-**Gap**: Closer tem DAO completa com tokens, Araponga tem apenas votação planejada.
+**Gap**: Closer tem DAO completa com tokens, Arah tem apenas votação planejada.
 
 **Impacto**: Alto - Diferencial competitivo forte do Closer.
 
@@ -207,7 +207,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 
 #### 2. Proof of Sweat 🔴 P0
 
-**Gap**: Closer recompensa trabalho/participação ativa, Araponga não tem.
+**Gap**: Closer recompensa trabalho/participação ativa, Arah não tem.
 
 **Impacto**: Alto - Essencial para engajamento comunitário.
 
@@ -221,7 +221,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 
 #### 3. Subscriptions & Recurring Payments 🔴 P0
 
-**Gap**: Closer tem assinaturas recorrentes, Araponga não tem.
+**Gap**: Closer tem assinaturas recorrentes, Arah não tem.
 
 **Impacto**: Médio-Alto - Importante para sustentabilidade financeira.
 
@@ -235,7 +235,7 @@ Este documento apresenta um mapeamento completo das funcionalidades do Araponga,
 
 #### 4. Ticketing para Eventos 🟡 P1
 
-**Gap**: Closer tem venda de ingressos, Araponga não tem.
+**Gap**: Closer tem venda de ingressos, Arah não tem.
 
 **Impacto**: Médio - Monetização de eventos.
 
@@ -393,7 +393,7 @@ Baixo Impacto + Alto Esforço (Avoid):
 
 ### Estado Atual vs. Mercado
 
-**Pontos Fortes do Araponga**:
+**Pontos Fortes do Arah**:
 - ✅ Arquitetura sólida e testável
 - ✅ Segurança robusta
 - ✅ Observabilidade completa
@@ -416,7 +416,7 @@ Baixo Impacto + Alto Esforço (Avoid):
 3. **Médio Prazo (6-12 meses)**: Preparação e implementação Web3
 4. **Longo Prazo (12-18 meses)**: Diferenciação e expansão
 
-**Resultado Esperado**: Plataforma competitiva ao nível de projetos com investimento significativo, mantendo pontos fortes arquiteturais do Araponga.
+**Resultado Esperado**: Plataforma competitiva ao nível de projetos com investimento significativo, mantendo pontos fortes arquiteturais do Arah.
 
 ---
 

@@ -95,14 +95,14 @@ frontend/portal/next.config.mjs
 
 ```
 global.json
-backend/Araponga.Api/Araponga.Api.csproj
-backend/Araponga.Application/Araponga.Application.csproj
-backend/Araponga.Domain/Araponga.Domain.csproj
-backend/Araponga.Infrastructure/Araponga.Infrastructure.csproj
-backend/Araponga.Tests/Araponga.Tests.csproj
-backend/Araponga.Api/Program.cs
-backend/Araponga.Api/appsettings.json
-backend/Araponga.Api/appsettings.Development.json
+backend/Arah.Api/Arah.Api.csproj
+backend/Arah.Application/Arah.Application.csproj
+backend/Arah.Domain/Arah.Domain.csproj
+backend/Arah.Infrastructure/Arah.Infrastructure.csproj
+backend/Arah.Tests/Arah.Tests.csproj
+backend/Arah.Api/Program.cs
+backend/Arah.Api/appsettings.json
+backend/Arah.Api/appsettings.Development.json
 ```
 
 **Uso**: Versão .NET, dependências, configuração de aplicação.
@@ -149,7 +149,7 @@ Dockerfile
 - frontend/wiki/app/globals.css (design tokens)
 - frontend/wiki/tailwind.config.ts
 - global.json (.NET version)
-- backend/Araponga.Api/Program.cs (configuração)
+- backend/Arah.Api/Program.cs (configuração)
 ```
 
 ---
@@ -281,7 +281,7 @@ Criar em `.vscode/extensions.json`:
 ### Estrutura Recomendada
 
 ```markdown
-# Araponga - Cursor Best Practices
+# Arah - Cursor Best Practices
 
 ## 📚 Arquivos de Referência para Contexto
 

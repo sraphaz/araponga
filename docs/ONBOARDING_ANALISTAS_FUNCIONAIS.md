@@ -2,7 +2,7 @@
 
 ---
 
-## Bem-vindo ao Araponga
+## Bem-vindo ao Arah
 
 Você chegou aqui porque **observa o território** e entende que tecnologia pode servir às necessidades reais das comunidades.
 
@@ -25,7 +25,7 @@ Este documento é para você que:
 3. **Descrever** funcionalidades que atendem essas necessidades
 4. **Propor** melhorias de negócio
 
-### No Contexto do Araponga
+### No Contexto do Arah
 
 Analisar funcionalidades significa:
 - Entender como o território **realmente funciona**
@@ -177,7 +177,7 @@ Quando você observa o território:
 - [Regra 2]
 
 #### Integrações
-[Como se conecta com outras funcionalidades do Araponga]
+[Como se conecta com outras funcionalidades do Arah]
 
 ### Benefícios
 - [Benefício 1 para o território]
@@ -192,7 +192,7 @@ Quando você observa o território:
 
 ---
 
-## Analisando o Araponga
+## Analisando o Arah
 
 ### Funcionalidades Existentes
 
@@ -226,9 +226,9 @@ Quando você observa o território:
 
 ## Guia Técnico Detalhado
 
-Para **detalhes técnicos sobre como explorar a API** e **interagir com o Araponga usando comandos e exemplos práticos**, consulte o **guia técnico completo** no DevPortal:
+Para **detalhes técnicos sobre como explorar a API** e **interagir com o Arah usando comandos e exemplos práticos**, consulte o **guia técnico completo** no DevPortal:
 
-👉 **[Onboarding para Analistas Funcionais - DevPortal](https://devportal.araponga.app/#onboarding-analistas)**
+👉 **[Onboarding para Analistas Funcionais - DevPortal](https://devportal.Arah.app/#onboarding-analistas)**
 
 O guia técnico inclui:
 - Passo a passo detalhado de configuração do ambiente
@@ -243,7 +243,7 @@ O guia técnico inclui:
 
 ### Documentação do Projeto
 
-- **[Visão do Produto](./01_PRODUCT_VISION.md)** - Entenda o propósito do Araponga
+- **[Visão do Produto](./01_PRODUCT_VISION.md)** - Entenda o propósito do Arah
 - **[Glossário](./05_GLOSSARY.md)** - Termos e conceitos
 - **[API - Lógica de Negócio](./60_API_LÓGICA_NEGÓCIO.md)** - Como funcionalidades funcionam
 
@@ -256,7 +256,7 @@ O guia técnico inclui:
 
 ## Conclusão
 
-Bem-vindo como Analista Funcional do Araponga.
+Bem-vindo como Analista Funcional do Arah.
 
 Aqui, **análise funcional vem do território**, não de escritórios distantes.
 
@@ -271,4 +271,4 @@ Aqui, **saberes territoriais** são reconhecidos como expertise.
 **Última Atualização**: 2025-01-20  
 **Versão**: 1.0
 
-**Perguntas?** Abra uma Issue, participe de Discussions ou consulte o [guia técnico completo no DevPortal](https://devportal.araponga.app/#onboarding-analistas)!
+**Perguntas?** Abra uma Issue, participe de Discussions ou consulte o [guia técnico completo no DevPortal](https://devportal.Arah.app/#onboarding-analistas)!

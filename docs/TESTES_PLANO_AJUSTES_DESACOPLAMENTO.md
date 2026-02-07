@@ -48,7 +48,7 @@ Preparar a suite de testes para suportar desacoplamento gradual em microserviço
 ### 1. Estrutura de Testes
 
 ```
-Araponga.Tests/
+Arah.Tests/
 ├── Api/                          # Testes de integração HTTP
 │   ├── ApiFactory.cs            # Factory para WebApplicationFactory
 │   ├── *IntegrationTests.cs    # Testes E2E
@@ -507,7 +507,7 @@ public async Task CreatePost_EndToEnd_ReturnsSuccess() { ... }
         <CodeCoverage>
           <ModulePaths>
             <Include>
-              <ModulePath>.*Araponga\.Application\.Services\.Feed.*</ModulePath>
+              <ModulePath>.*Arah\.Application\.Services\.Feed.*</ModulePath>
             </Include>
           </ModulePaths>
         </CodeCoverage>

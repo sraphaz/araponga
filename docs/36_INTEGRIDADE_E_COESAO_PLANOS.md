@@ -1,4 +1,4 @@
-# Integridade e Coesão dos Planos - Araponga
+# Integridade e Coesão dos Planos - Arah
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  

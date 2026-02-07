@@ -1,19 +1,19 @@
-# Imagens do Wiki Araponga
+# Imagens do Wiki Arah
 
 ## Diagrama do Domínio API
 
 A imagem do diagrama isométrico do Domínio API deve ser colocada em:
 
 ```
-frontend/wiki/public/araponga-api-domain-diagram.png
+frontend/wiki/public/Arah-api-domain-diagram.png
 ```
 
 ### Especificações
 
-- **Nome do arquivo**: `araponga-api-domain-diagram.png`
+- **Nome do arquivo**: `Arah-api-domain-diagram.png`
 - **Formato**: PNG (ou SVG)
 - **Tamanho recomendado**: 1200x800px (ou maior para melhor qualidade)
-- **Descrição**: Diagrama isométrico mostrando o ARAPONGA API DOMAIN com o TERRITÓRIO no centro e conexões para FEED, MAP, HEALTH, FEATURES, MEMBERSHIP & GOVERNANCE, e AUTENTICAÇÃO
+- **Descrição**: Diagrama isométrico mostrando o Arah API DOMAIN com o TERRITÓRIO no centro e conexões para FEED, MAP, HEALTH, FEATURES, MEMBERSHIP & GOVERNANCE, e AUTENTICAÇÃO
 
 ### Componente que usa esta imagem
 

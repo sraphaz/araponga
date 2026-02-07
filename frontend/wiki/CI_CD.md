@@ -1,14 +1,14 @@
-# CI/CD - Wiki Araponga
+# CI/CD - Wiki Arah
 
-Documentação completa do pipeline de CI/CD do Wiki Araponga.
+Documentação completa do pipeline de CI/CD do Wiki Arah.
 
 ## 🚀 Visão Geral
 
-O Wiki Araponga possui um pipeline automatizado de CI/CD usando **GitHub Actions** que:
+O Wiki Arah possui um pipeline automatizado de CI/CD usando **GitHub Actions** que:
 
 1. **Testa** o código em cada PR e push
 2. **Constrói** o site estático
-3. **Faz deploy** automaticamente para GitHub Pages em `wiki.araponga.app`
+3. **Faz deploy** automaticamente para GitHub Pages em `wiki.Arah.app`
 
 ## 📋 Workflow
 
@@ -46,7 +46,7 @@ O workflow está definido em `.github/workflows/wiki-pages.yml` e é executado:
 - ✅ Build estático do Next.js (`NEXT_EXPORT=true npm run build`)
 - ✅ Export para diretório `out/`
 - ✅ Preparação dos artifacts para GitHub Pages (em `dist/wiki/`)
-- ℹ️ Wiki será servido via `devportal.araponga.app/wiki`
+- ℹ️ Wiki será servido via `devportal.Arah.app/wiki`
 
 **Objetivo**: Gerar o site estático pronto para deploy.
 
@@ -57,7 +57,7 @@ O workflow está definido em `.github/workflows/wiki-pages.yml` e é executado:
 
 **Passos**:
 - ✅ Deploy dos artifacts para GitHub Pages
-- ✅ Configuração automática do domínio `wiki.araponga.app`
+- ✅ Configuração automática do domínio `wiki.Arah.app`
 
 **Objetivo**: Publicar o site automaticamente.
 
@@ -100,11 +100,11 @@ npm run test:links
 
 O script `scripts/test-links.mjs` valida se os links principais da wiki respondem corretamente (ex.: `/`, `/docs/`, onboarding, etc.). Ele faz requisições HTTP ao host configurado.
 
-**Causa das falhas antigas**: o script usava **caminho base fixo** (`https://devportal.araponga.app/wiki`). Em local ou CI sem deploy, esse host não resolve → `ENOTFOUND`. O último deploy falhou por isso; **DevPortal e Wiki ficaram fora** até a correção. Agora a base é configurável via `WIKI_URL` e, se o host estiver inacessível, os testes são pulados (exit 0).
+**Causa das falhas antigas**: o script usava **caminho base fixo** (`https://devportal.Arah.app/wiki`). Em local ou CI sem deploy, esse host não resolve → `ENOTFOUND`. O último deploy falhou por isso; **DevPortal e Wiki ficaram fora** até a correção. Agora a base é configurável via `WIKI_URL` e, se o host estiver inacessível, os testes são pulados (exit 0).
 
 **Comportamento**:
 
-- **Host acessível** (ex.: `devportal.araponga.app` em produção): executa os testes e falha se algum link estiver quebrado.
+- **Host acessível** (ex.: `devportal.Arah.app` em produção): executa os testes e falha se algum link estiver quebrado.
 - **Host inacessível** (local sem deploy, DNS não configurado, `ENOTFOUND`, etc.): o script **termina com sucesso** (exit 0), exibe um aviso e **pula** os testes. Assim, `npm ci` e `npm run test:links` não quebram em ambiente local ou em CI antes do deploy.
 
 **Testar localmente** (com a wiki rodando em `http://localhost:3001`):
@@ -113,7 +113,7 @@ O script `scripts/test-links.mjs` valida se os links principais da wiki responde
 WIKI_URL=http://localhost:3001/wiki npm run test:links
 ```
 
-O workflow **DevPortal Pages** (`.github/workflows/devportal-pages.yml`) roda `test:links` após o deploy, com `WIKI_URL=https://devportal.araponga.app/wiki`.
+O workflow **DevPortal Pages** (`.github/workflows/devportal-pages.yml`) roda `test:links` após o deploy, com `WIKI_URL=https://devportal.Arah.app/wiki`.
 
 ## 🌐 Deploy e Domínio
 
@@ -126,7 +126,7 @@ O site é deployado automaticamente para GitHub Pages quando:
 
 ### Domínio e Roteamento
 
-**Acesso**: `devportal.araponga.app/wiki`  
+**Acesso**: `devportal.Arah.app/wiki`  
 **Base Path**: `/wiki` (configurado no `next.config.mjs`)
 
 ### Configuração DNS
@@ -134,9 +134,9 @@ O site é deployado automaticamente para GitHub Pages quando:
 **Nenhuma configuração DNS adicional necessária!**
 
 O wiki é servido como subpasta do DevPortal:
-- **URL**: `devportal.araponga.app/wiki`
-- **DNS**: Usa a mesma configuração de `devportal.araponga.app`
-- **CNAME**: Já configurado para `devportal.araponga.app` → `sraphaz.github.io`
+- **URL**: `devportal.Arah.app/wiki`
+- **DNS**: Usa a mesma configuração de `devportal.Arah.app`
+- **CNAME**: Já configurado para `devportal.Arah.app` → `sraphaz.github.io`
 
 ## 🐛 Troubleshooting
 
@@ -174,7 +174,7 @@ O wiki é servido como subpasta do DevPortal:
 Você pode adicionar um badge de status do workflow no README:
 
 ```markdown
-![Wiki CI/CD](https://github.com/sraphaz/araponga/workflows/Build,%20Test%20&%20Deploy%20Wiki%20to%20GitHub%20Pages/badge.svg)
+![Wiki CI/CD](https://github.com/sraphaz/Arah/workflows/Build,%20Test%20&%20Deploy%20Wiki%20to%20GitHub%20Pages/badge.svg)
 ```
 
 ## 🔗 Links Úteis

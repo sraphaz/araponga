@@ -10,7 +10,7 @@
 
 ## 📊 Resumo Executivo
 
-Foi implementada com **sucesso** a cobertura de testes enterprise-level para o projeto Araponga, cobrindo todas as camadas da arquitetura (Domain, Application, Infrastructure, API) com testes robustos de edge cases.
+Foi implementada com **sucesso** a cobertura de testes enterprise-level para o projeto Arah, cobrindo todas as camadas da arquitetura (Domain, Application, Infrastructure, API) com testes robustos de edge cases.
 
 ### Objetivo Alcançado
 - ✅ **435 testes de edge cases** implementados e passando
@@ -169,7 +169,7 @@ Foi implementada com **sucesso** a cobertura de testes enterprise-level para o p
 ## 📁 Estrutura de Arquivos Criados
 
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Domain/
 │   ├── TerritoryEdgeCasesTests.cs              (28 testes)
 │   ├── UserEdgeCasesTests.cs                   (18 testes)

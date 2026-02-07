@@ -1,4 +1,4 @@
-namespace Araponga.Bff.Contracts.Journeys.Events;
+namespace Arah.Bff.Contracts.Journeys.Events;
 
 public sealed record CreateEventJourneyRequest(
     Guid TerritoryId,

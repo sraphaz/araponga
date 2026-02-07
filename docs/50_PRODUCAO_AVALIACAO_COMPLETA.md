@@ -1,4 +1,4 @@
-# Avaliação Completa para Produção - Araponga
+# Avaliação Completa para Produção - Arah
 
 **Data da Avaliação**: 2025-01-16  
 **Última Atualização**: 2025-01-16  
@@ -101,7 +101,7 @@ A aplicação está **funcionalmente completa** para o MVP e demonstra **arquite
 #### 3.2 Organização ✅
 - Testes bem organizados por camada
 - Nomenclatura clara e descritiva
-- Princípios documentados (`Araponga.Tests/README.md`)
+- Princípios documentados (`Arah.Tests/README.md`)
 
 ### 4. Validação e Qualidade de Código
 

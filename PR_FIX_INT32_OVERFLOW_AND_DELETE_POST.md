@@ -102,44 +102,44 @@ Implementado endpoint completo de deleção de posts:
 ## 🔍 Arquivos Modificados
 
 ### Domain
-- `backend/Araponga.Domain/Feed/CommunityPost.cs`
-- `backend/Araponga.Domain/Map/MapEntity.cs`
+- `backend/Arah.Domain/Feed/CommunityPost.cs`
+- `backend/Arah.Domain/Map/MapEntity.cs`
 
 ### Application
-- `backend/Araponga.Application/Common/PagedResult.cs`
-- `backend/Araponga.Application/Common/PostCounts.cs`
-- `backend/Araponga.Application/Models/EventParticipationCounts.cs`
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Interfaces/IFeedRepository.cs`
+- `backend/Arah.Application/Common/PagedResult.cs`
+- `backend/Arah.Application/Common/PostCounts.cs`
+- `backend/Arah.Application/Models/EventParticipationCounts.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Interfaces/IFeedRepository.cs`
 
 ### Infrastructure
-- `backend/Araponga.Infrastructure/Postgres/PostgresFeedRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresEventParticipationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMapRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMappers.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryFeedRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryEventParticipationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresFeedRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresEventParticipationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMapRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMappers.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryFeedRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryEventParticipationRepository.cs`
 
 ### API
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
-- `backend/Araponga.Api/Controllers/MarketplaceSearchController.cs`
-- `backend/Araponga.Api/Controllers/MapController.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
-- `backend/Araponga.Api/Controllers/TerritoriesController.cs`
-- `backend/Araponga.Api/Controllers/NotificationsController.cs`
-- `backend/Araponga.Api/Controllers/AlertsController.cs`
-- `backend/Araponga.Api/Controllers/AssetsController.cs`
-- `backend/Araponga.Api/Controllers/InquiriesController.cs`
-- `backend/Araponga.Api/Controllers/JoinRequestsController.cs`
-- `backend/Araponga.Api/Controllers/ModerationController.cs`
-- `backend/Araponga.Api/Controllers/PlatformFeesController.cs`
-- `backend/Araponga.Api/Controllers/UserActivityController.cs`
-- `backend/Araponga.Api/Helpers/PagedResponseHelper.cs` (novo)
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
+- `backend/Arah.Api/Controllers/MarketplaceSearchController.cs`
+- `backend/Arah.Api/Controllers/MapController.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Api/Controllers/TerritoriesController.cs`
+- `backend/Arah.Api/Controllers/NotificationsController.cs`
+- `backend/Arah.Api/Controllers/AlertsController.cs`
+- `backend/Arah.Api/Controllers/AssetsController.cs`
+- `backend/Arah.Api/Controllers/InquiriesController.cs`
+- `backend/Arah.Api/Controllers/JoinRequestsController.cs`
+- `backend/Arah.Api/Controllers/ModerationController.cs`
+- `backend/Arah.Api/Controllers/PlatformFeesController.cs`
+- `backend/Arah.Api/Controllers/UserActivityController.cs`
+- `backend/Arah.Api/Helpers/PagedResponseHelper.cs` (novo)
 
 ### Tests
-- `backend/Araponga.Tests/Api/EventsControllerTests.cs`
-- `backend/Araponga.Tests/Application/PostEditServiceTests.cs`
+- `backend/Arah.Tests/Api/EventsControllerTests.cs`
+- `backend/Arah.Tests/Application/PostEditServiceTests.cs`
 
 ## ✅ Checklist
 

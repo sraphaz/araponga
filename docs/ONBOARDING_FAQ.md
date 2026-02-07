@@ -146,7 +146,7 @@ git --version
    - **CS0246**: Tipo não encontrado - Verifique imports
 
 **Se nada funcionar**:
-- Verifique se está na pasta correta (`cd araponga`)
+- Verifique se está na pasta correta (`cd Arah`)
 - Delete `bin/` e `obj/` e tente novamente:
   ```bash
   rm -rf bin obj  # Linux/macOS
@@ -405,11 +405,11 @@ git --version
 1. **Faça Fork** do repositório (botão "Fork" no GitHub)
 2. **Clone seu fork**:
    ```bash
-   git clone https://github.com/SEU-USUARIO/araponga.git
+   git clone https://github.com/SEU-USUARIO/Arah.git
    ```
 3. **Adicione remote original** (opcional, para atualizar):
    ```bash
-   git remote add upstream https://github.com/sraphaz/araponga.git
+   git remote add upstream https://github.com/sraphaz/Arah.git
    ```
 4. **Trabalhe no seu fork**:
    ```bash

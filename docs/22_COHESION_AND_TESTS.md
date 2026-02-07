@@ -2,7 +2,7 @@
 
 ## Resumo Executivo
 
-Este documento avalia a coesão entre as funcionalidades implementadas e a especificação do projeto Araponga, além de mapear a cobertura de testes existente.
+Este documento avalia a coesão entre as funcionalidades implementadas e a especificação do projeto Arah, além de mapear a cobertura de testes existente.
 
 **Status Geral**: ✅ **Alta coesão** - A implementação está bem alinhada com a especificação MVP, com algumas funcionalidades adicionais implementadas.
 
@@ -29,14 +29,14 @@ Este documento avalia a coesão entre as funcionalidades implementadas e a espec
 
 Ver documentação completa: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`](./ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md)
 - **Estrutura de Testes**:
-  - `backend/Araponga.Tests/Api/` - Testes de integração da API (incluindo SecurityTests)
-  - `backend/Araponga.Tests/Performance/` - Testes de performance com SLAs
-  - `backend/Araponga.Tests/Application/` - Testes de serviços de aplicação
+  - `backend/Arah.Tests/Api/` - Testes de integração da API (incluindo SecurityTests)
+  - `backend/Arah.Tests/Performance/` - Testes de performance com SLAs
+  - `backend/Arah.Tests/Application/` - Testes de serviços de aplicação
     - ReportServiceTests (9 testes)
     - JoinRequestServiceTests (16 testes)
     - CacheMetricsServiceTests (5 testes)
-  - `backend/Araponga.Tests/Domain/` - Testes de validação de domínio
-  - `backend/Araponga.Tests/Infrastructure/` - Testes de infraestrutura
+  - `backend/Arah.Tests/Domain/` - Testes de validação de domínio
+  - `backend/Arah.Tests/Infrastructure/` - Testes de infraestrutura
 
 ---
 
@@ -347,10 +347,10 @@ Ver documentação completa: [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`]
 ### 3.1 Estrutura de Testes
 
 O projeto possui testes organizados em:
-- `backend/Araponga.Tests/Api/` - Testes de integração da API
-- `backend/Araponga.Tests/Application/` - Testes de serviços de aplicação
-- `backend/Araponga.Tests/Domain/` - Testes de validação de domínio
-- `backend/Araponga.Tests/Infrastructure/` - Testes de infraestrutura
+- `backend/Arah.Tests/Api/` - Testes de integração da API
+- `backend/Arah.Tests/Application/` - Testes de serviços de aplicação
+- `backend/Arah.Tests/Domain/` - Testes de validação de domínio
+- `backend/Arah.Tests/Infrastructure/` - Testes de infraestrutura
 
 ### 3.2 Cobertura por Funcionalidade
 
@@ -562,14 +562,14 @@ O projeto possui testes organizados em:
 **Isolamento de Testes**: ✅ Implementado
 - Cada teste cria seu próprio `ApiFactory` ou `InMemoryDataStore`
 - Testes são completamente independentes e podem ser executados em qualquer ordem
-- Ver `backend/Araponga.Tests/README.md` para princípios e boas práticas
+- Ver `backend/Arah.Tests/README.md` para princípios e boas práticas
 **Coesão Geral**: ✅ **95%** - Excelente alinhamento com especificação
 
 ---
 
 ## 6. Conclusão
 
-O projeto Araponga demonstra **alta coesão** com a especificação MVP, com todas as funcionalidades críticas (P0) e importantes (P1) implementadas e testadas. As funcionalidades adicionais (Assets, Join Requests, Marketplace) são coerentes com a visão do produto e adicionam valor significativo.
+O projeto Arah demonstra **alta coesão** com a especificação MVP, com todas as funcionalidades críticas (P0) e importantes (P1) implementadas e testadas. As funcionalidades adicionais (Assets, Join Requests, Marketplace) são coerentes com a visão do produto e adicionam valor significativo.
 
 A cobertura de testes está em ~50% (aumentada na Fase 2, objetivo >90%) com a adição de:
 - ✅ 100+ novos testes na Fase 2 (ReportService, JoinRequestService, CacheMetrics, Alerts, Assets, Marketplace, Territories, Events, Security, Performance)

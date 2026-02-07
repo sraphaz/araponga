@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Araponga.Bff.Middleware;
+namespace Arah.Bff.Middleware;
 
 /// <summary>
 /// Garante um Correlation ID em toda a requisição para rastreio App → BFF → API.

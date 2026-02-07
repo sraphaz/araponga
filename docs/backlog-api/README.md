@@ -237,7 +237,7 @@ backlog-api/
 
 ### 🟢 Onda 10: Extensões e Diferenciação (Fases 44-48) - P2 Média
 
-**Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
+**Objetivo**: Implementar funcionalidades que diferenciam o Arah no mercado.
 
 | Fase | Título | Duração | Prioridade | Status | Descrição |
 |------|--------|---------|------------|--------|-----------|
@@ -432,7 +432,7 @@ backlog-api/
 
 ### Onda 0.8: Diferenciação (Mês 12-18) 🟢 MÉDIA
 
-**Objetivo**: Implementar funcionalidades que diferenciam o Araponga no mercado.
+**Objetivo**: Implementar funcionalidades que diferenciam o Arah no mercado.
 
 | Fase | Duração | Prioridade | Status |
 |------|---------|------------|--------|
@@ -511,7 +511,7 @@ O backlog foi expandido com novas fases estratégicas identificadas através de 
 - **[Estratégia de Convergência de Mercado](../39_ESTRATEGIA_CONVERGENCIA_MERCADO.md)** ⭐⭐⭐ - Plano estratégico completo de convergência com padrões de mercado
 - **[Mapa de Funcionalidades](../38_MAPA_FUNCIONALIDADES_MERCADO.md)** ⭐⭐⭐ - Mapeamento completo de funcionalidades implementadas, planejadas e previstas
 - **[Roadmap Estratégico](../02_ROADMAP.md)** - Planejamento completo de desenvolvimento
-- **[Visão do Produto](../01_PRODUCT_VISION.md)** - Visão geral e princípios do Araponga
+- **[Visão do Produto](../01_PRODUCT_VISION.md)** - Visão geral e princípios do Arah
 
 ### Documentos de Implementação
 

@@ -27,9 +27,9 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - ✅ Verificação em serviços críticos (PostCreationService, EventsService, StoreService, etc.)
 
 **Arquivos**:
-- `backend/Araponga.Domain/Policies/*.cs`
-- `backend/Araponga.Application/Services/Terms*.cs`
-- `backend/Araponga.Api/Controllers/Terms*.cs`
+- `backend/Arah.Domain/Policies/*.cs`
+- `backend/Arah.Application/Services/Terms*.cs`
+- `backend/Arah.Api/Controllers/Terms*.cs`
 
 ---
 

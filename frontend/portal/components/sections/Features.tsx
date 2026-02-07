@@ -132,7 +132,7 @@ export default function Features() {
                 Funcionalidades Implementadas
               </h2>
               <p className="text-base leading-relaxed text-forest-800 md:text-lg">
-                O Araponga já possui um conjunto robusto de funcionalidades implementadas e testadas,
+                O Arah já possui um conjunto robusto de funcionalidades implementadas e testadas,
                 cobrindo desde o core da plataforma até recursos avançados de segurança e performance.
                 <br />
                 <strong className="font-semibold text-forest-900">371/371 testes passando (100%)</strong> com cobertura de ~50% e objetivo de {'>'}90%.

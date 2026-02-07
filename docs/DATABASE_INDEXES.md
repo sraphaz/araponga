@@ -1,4 +1,4 @@
-# Índices de Banco de Dados - Araponga
+# Índices de Banco de Dados - Arah
 
 **Última Atualização**: 2025-01-23  
 **Status**: ✅ Implementado
@@ -7,7 +7,7 @@
 
 ## 📋 Resumo
 
-Este documento lista todos os índices de banco de dados criados no PostgreSQL para otimizar a performance das queries mais comuns do Araponga.
+Este documento lista todos os índices de banco de dados criados no PostgreSQL para otimizar a performance das queries mais comuns do Arah.
 
 ---
 

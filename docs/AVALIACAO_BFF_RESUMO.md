@@ -1,4 +1,4 @@
-# Resumo: Avaliação BFF (Backend for Frontend) - Araponga
+# Resumo: Avaliação BFF (Backend for Frontend) - Arah
 
 **Data**: 2026-01-27  
 **Status**: 📋 Resumo Executivo  
@@ -40,12 +40,12 @@ Avaliar criação de **Backend for Frontend (BFF)** que:
 ```
 Frontend Apps (Flutter, Web, etc.)
          ↓
-Araponga.Api.Bff (BFF Layer)
+Arah.Api.Bff (BFF Layer)
   - Journey Controllers (por jornada)
   - Journey Services (orquestração)
   - Response Transformers (formatação UI)
          ↓
-Araponga.Api (API Principal - Existente)
+Arah.Api (API Principal - Existente)
   - Controllers (por recurso)
   - Application Services
   - Modules (arquitetura modular)
@@ -191,8 +191,8 @@ Response: {
 ## 📋 Próximos Passos
 
 1. ✅ **Aprovar proposta** (este documento)
-2. ⏳ Criar projeto `Araponga.Api.Bff`
-3. ⏳ Criar módulo `Araponga.Modules.Bff`
+2. ⏳ Criar projeto `Arah.Api.Bff`
+3. ⏳ Criar módulo `Arah.Modules.Bff`
 4. ⏳ Implementar jornadas prioritárias
 5. ⏳ Testar com frontend
 6. ⏳ Expandir para jornadas secundárias

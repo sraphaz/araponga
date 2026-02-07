@@ -1,4 +1,4 @@
-# Avaliação: Backend for Frontend (BFF) - Araponga
+# Avaliação: Backend for Frontend (BFF) - Arah
 
 **Data**: 2026-01-27  
 **Status**: 📋 Avaliação Estratégica  
@@ -21,7 +21,7 @@ Criar um **Backend for Frontend (BFF)** que:
 
 ### Estado Atual da API
 
-A API atual (`Araponga.Api`) expõe endpoints RESTful organizados por recursos:
+A API atual (`Arah.Api`) expõe endpoints RESTful organizados por recursos:
 
 ```
 /api/v1/auth/*          - Autenticação
@@ -115,7 +115,7 @@ BFF retorna:
                      │ HTTP/REST
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│              Araponga.Api.Bff (BFF Layer)                 │
+│              Arah.Api.Bff (BFF Layer)                 │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Journey Controllers (por jornada)                 │  │
 │  │  - FeedJourneyController                           │  │
@@ -140,7 +140,7 @@ BFF retorna:
                      │ HTTP/REST (interno)
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api (API Principal - Existente)        │
+│         Arah.Api (API Principal - Existente)        │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Controllers (por recurso)                         │  │
 │  │  - FeedController                                  │  │
@@ -164,7 +164,7 @@ BFF retorna:
 ### Estrutura de Módulos BFF
 
 ```
-Araponga.Api.Bff/
+Arah.Api.Bff/
 ├── Controllers/
 │   ├── Journeys/
 │   │   ├── FeedJourneyController.cs
@@ -197,7 +197,7 @@ Araponga.Api.Bff/
 │   └── Common/
 │       └── JourneyResponse.cs
 ├── Program.cs
-└── Araponga.Api.Bff.csproj
+└── Arah.Api.Bff.csproj
 ```
 
 ### Integração com Arquitetura Modular
@@ -211,7 +211,7 @@ Araponga.Api.Bff/
 O BFF pode começar como módulo interno para simplicidade:
 
 ```csharp
-namespace Araponga.Modules.Bff;
+namespace Arah.Modules.Bff;
 
 public class BffModule : ModuleBase
 {
@@ -257,7 +257,7 @@ Quando migrar para APIs Modulares ou precisar de escalabilidade independente:
 
 **Arquitetura**:
 ```
-Araponga.Api.Bff/ (aplicação separada)
+Arah.Api.Bff/ (aplicação separada)
 ├── OAuth2 Authorization Server
 ├── Journey Controllers
 ├── Journey Services
@@ -576,7 +576,7 @@ public class FeedResponseTransformer : IFeedResponseTransformer
 
 ```bash
 backend/
-├── Araponga.Api.Bff/              # Novo projeto BFF
+├── Arah.Api.Bff/              # Novo projeto BFF
 │   ├── Controllers/
 │   │   └── Journeys/
 │   ├── Services/
@@ -584,9 +584,9 @@ backend/
 │   │   └── Transformers/
 │   ├── Contracts/
 │   │   └── Journeys/
-│   └── Araponga.Api.Bff.csproj
+│   └── Arah.Api.Bff.csproj
 │
-└── Araponga.Modules.Bff/          # Módulo BFF
+└── Arah.Modules.Bff/          # Módulo BFF
     └── BffModule.cs
 ```
 
@@ -883,8 +883,8 @@ public class FeedJourneyController : ControllerBase
 **Objetivo**: Implementar BFF básico com jornadas prioritárias
 
 **Tarefas**:
-1. Criar projeto `Araponga.Api.Bff`
-2. Criar módulo `Araponga.Modules.Bff`
+1. Criar projeto `Arah.Api.Bff`
+2. Criar módulo `Arah.Modules.Bff`
 3. Implementar jornadas prioritárias:
    - Onboarding
    - Feed (criar e visualizar)
@@ -976,7 +976,7 @@ public class FeedJourneyController : ControllerBase
 
 ## ✅ Conclusão
 
-A criação de um **Backend for Frontend (BFF)** é **altamente recomendada** para o Araponga porque:
+A criação de um **Backend for Frontend (BFF)** é **altamente recomendada** para o Arah porque:
 
 1. ✅ **Reduz complexidade no frontend** (menos chamadas, menos lógica)
 2. ✅ **Melhora experiência do usuário** (dados formatados, sugestões)

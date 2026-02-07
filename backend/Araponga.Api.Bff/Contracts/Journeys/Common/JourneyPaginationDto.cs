@@ -1,4 +1,4 @@
-namespace Araponga.Bff.Contracts.Journeys.Common;
+namespace Arah.Bff.Contracts.Journeys.Common;
 
 public sealed record JourneyPaginationDto(
     int PageNumber,

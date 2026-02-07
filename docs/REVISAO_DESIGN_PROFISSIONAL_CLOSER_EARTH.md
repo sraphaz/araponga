@@ -9,7 +9,7 @@
 
 ## 📋 Sumário Executivo
 
-Este relatório apresenta uma análise detalhada comparando as interfaces atuais do Wiki Araponga e Developer Portal com a referência de excelência closer.earth. A análise identifica gaps críticos em design system, hierarquia visual, consistência e experiência do usuário, propondo um plano sistemático de reformulação para alcançar padrões enterprise de qualidade.
+Este relatório apresenta uma análise detalhada comparando as interfaces atuais do Wiki Arah e Developer Portal com a referência de excelência closer.earth. A análise identifica gaps críticos em design system, hierarquia visual, consistência e experiência do usuário, propondo um plano sistemático de reformulação para alcançar padrões enterprise de qualidade.
 
 **Principais Achados:**
 - ❌ Inconsistência visual entre Wiki e DevPortal (experiências diferentes)
@@ -24,7 +24,7 @@ Este relatório apresenta uma análise detalhada comparando as interfaces atuais
 
 ---
 
-## 1. Análise Comparativa: Closer.earth vs. Araponga (Atual)
+## 1. Análise Comparativa: Closer.earth vs. Arah (Atual)
 
 ### 1.1 Design System e Consistência Visual
 
@@ -40,7 +40,7 @@ Este relatório apresenta uma análise detalhada comparando as interfaces atuais
 - Transições suaves e previsíveis
 - Elementos compartilhados mantêm mesma aparência
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Falta de Unificação:**
 - Wiki e DevPortal parecem produtos diferentes
 - Mesmo componente tem aparências distintas
@@ -70,7 +70,7 @@ Small: 14px, weight 400, line-height 1.5
 - Espaçamento proporcional ao tamanho da fonte
 - Leitura confortável em todas as densidades de informação
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Escala Tipográfica Inconsistente:**
 - Títulos variam sem padrão claro entre páginas
 - Line-height não otimizado para leitura
@@ -97,7 +97,7 @@ Small: 14px, weight 400, line-height 1.5
 - Densidade adaptada ao tipo de conteúdo
 - Proporção áurea aplicada implicitamente
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Espaçamento Arbitrário:**
 - Uso de `clamp()` sem base matemática clara
 - Valores diferentes para propósitos similares
@@ -123,7 +123,7 @@ Small: 14px, weight 400, line-height 1.5
 - Variantes de cor bem definidas (hover, active, disabled)
 - Dark mode com paleta coerente
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Cores Aplicadas Inconsistentemente:**
 - Mesma função pode ter cores diferentes
 - Contraste não sempre WCAG AA
@@ -150,7 +150,7 @@ Small: 14px, weight 400, line-height 1.5
 - Whitespace usado estrategicamente
 - Fluxo visual guiado pela hierarquia
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Estrutura Inconsistente:**
 - Max-width varia entre páginas
 - Grid não sempre consistente
@@ -178,7 +178,7 @@ Small: 14px, weight 400, line-height 1.5
 - Feedback imediato para ações
 - Animações sutis e funcionais
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ❌ **Componentes Básicos:**
 - Estados não sempre completos
 - Feedback visual inconsistente
@@ -200,7 +200,7 @@ Small: 14px, weight 400, line-height 1.5
 - Transições não bloqueiam interação
 - Feedback de estado claro
 
-#### Araponga (Estado Atual)
+#### Arah (Estado Atual)
 ⚠️ **UX Funcional mas Precisando Refinamento:**
 - Navegação funciona mas pode ser mais intuitiva
 - Hierarquia pode ser mais clara
@@ -803,7 +803,7 @@ frontend/
 
 ## 7. Conclusão e Próximos Passos
 
-Este relatório identifica os gaps críticos entre o estado atual das interfaces do Araponga e o padrão de excelência representado por closer.earth. O plano proposto é sistemático, estruturado e priorizado para alcançar resultados mensuráveis.
+Este relatório identifica os gaps críticos entre o estado atual das interfaces do Arah e o padrão de excelência representado por closer.earth. O plano proposto é sistemático, estruturado e priorizado para alcançar resultados mensuráveis.
 
 **Principais Ações Imediatas:**
 

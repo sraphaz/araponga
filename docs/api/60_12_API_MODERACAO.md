@@ -1,6 +1,6 @@
-# Moderação - API Araponga
+# Moderação - API Arah
 
-**Parte de**: [API Araponga - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
+**Parte de**: [API Arah - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
 **Versão**: 2.0  
 **Data**: 2025-01-20
 

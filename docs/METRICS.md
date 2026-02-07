@@ -1,10 +1,10 @@
-# Métricas do Araponga
+# Métricas do Arah
 
-Este documento descreve todas as métricas coletadas pelo sistema Araponga.
+Este documento descreve todas as métricas coletadas pelo sistema Arah.
 
 ## 📊 Visão Geral
 
-O Araponga utiliza **Prometheus** para coleta de métricas e **OpenTelemetry** para instrumentação. As métricas são expostas no endpoint `/metrics` e podem ser coletadas por Prometheus para visualização em dashboards (Grafana).
+O Arah utiliza **Prometheus** para coleta de métricas e **OpenTelemetry** para instrumentação. As métricas são expostas no endpoint `/metrics` e podem ser coletadas por Prometheus para visualização em dashboards (Grafana).
 
 ---
 
@@ -36,7 +36,7 @@ OpenTelemetry está configurado para coletar:
 ## 📈 Métricas de Negócio
 
 ### Posts Criados
-- **Nome**: `araponga.posts.created`
+- **Nome**: `Arah.posts.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de posts criados
@@ -44,38 +44,38 @@ OpenTelemetry está configurado para coletar:
 
 **Exemplo**:
 ```
-araponga.posts.created{territory_id="123e4567-e89b-12d3-a456-426614174000"} 42
+Arah.posts.created{territory_id="123e4567-e89b-12d3-a456-426614174000"} 42
 ```
 
 ### Eventos Criados
-- **Nome**: `araponga.events.created`
+- **Nome**: `Arah.events.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de eventos criados
 - **Tags**: `territory_id`
 
 ### Membros Criados
-- **Nome**: `araponga.memberships.created`
+- **Nome**: `Arah.memberships.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de memberships criados
 - **Tags**: `territory_id`
 
 ### Territórios Criados
-- **Nome**: `araponga.territories.created`
+- **Nome**: `Arah.territories.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de territórios criados
 
 ### Relatórios Criados
-- **Nome**: `araponga.reports.created`
+- **Nome**: `Arah.reports.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de relatórios de moderação criados
 - **Tags**: `territory_id`
 
 ### Solicitações de Entrada Criadas
-- **Nome**: `araponga.join_requests.created`
+- **Nome**: `Arah.join_requests.created`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de solicitações de entrada criadas
@@ -86,20 +86,20 @@ araponga.posts.created{territory_id="123e4567-e89b-12d3-a456-426614174000"} 42
 ## 💾 Métricas de Cache
 
 ### Cache Hits
-- **Nome**: `araponga.cache.hits`
+- **Nome**: `Arah.cache.hits`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de cache hits
 
 ### Cache Misses
-- **Nome**: `araponga.cache.misses`
+- **Nome**: `Arah.cache.misses`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de cache misses
 
 **Cálculo de Hit Rate**:
 ```
-hit_rate = araponga.cache.hits / (araponga.cache.hits + araponga.cache.misses)
+hit_rate = Arah.cache.hits / (Arah.cache.hits + Arah.cache.misses)
 ```
 
 ---
@@ -107,7 +107,7 @@ hit_rate = araponga.cache.hits / (araponga.cache.hits + araponga.cache.misses)
 ## ⚡ Métricas de Concorrência
 
 ### Conflitos de Concorrência
-- **Nome**: `araponga.concurrency.conflicts`
+- **Nome**: `Arah.concurrency.conflicts`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de conflitos de concorrência detectados (RowVersion mismatch)
@@ -117,19 +117,19 @@ hit_rate = araponga.cache.hits / (araponga.cache.hits + araponga.cache.misses)
 ## 📨 Métricas de Processamento de Eventos
 
 ### Eventos Processados
-- **Nome**: `araponga.events.processed`
+- **Nome**: `Arah.events.processed`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de eventos processados com sucesso
 
 ### Eventos Falhados
-- **Nome**: `araponga.events.failed`
+- **Nome**: `Arah.events.failed`
 - **Tipo**: Counter
 - **Unidade**: count
 - **Descrição**: Total de eventos que falharam após todas as tentativas (moved to dead letter queue)
 
 ### Duração de Processamento de Eventos
-- **Nome**: `araponga.events.processing.duration`
+- **Nome**: `Arah.events.processing.duration`
 - **Tipo**: Histogram
 - **Unidade**: ms
 - **Descrição**: Duração do processamento de eventos em milissegundos
@@ -139,7 +139,7 @@ hit_rate = araponga.cache.hits / (araponga.cache.hits + araponga.cache.misses)
 ## 🗄️ Métricas de Banco de Dados
 
 ### Duração de Queries
-- **Nome**: `araponga.database.query.duration`
+- **Nome**: `Arah.database.query.duration`
 - **Tipo**: Histogram
 - **Unidade**: ms
 - **Descrição**: Duração de queries do banco de dados em milissegundos
@@ -172,9 +172,9 @@ As seguintes métricas são coletadas automaticamente via `prometheus-net.AspNet
 
 1. **Alta Taxa de Erros**: `rate(http_requests_received_total{code=~"5.."}[5m]) > 0.05`
 2. **Alta Latência**: `histogram_quantile(0.95, http_requests_duration_seconds) > 1`
-3. **Cache Hit Rate Baixo**: `rate(araponga.cache.hits[5m]) / (rate(araponga.cache.hits[5m]) + rate(araponga.cache.misses[5m])) < 0.7`
-4. **Muitos Conflitos de Concorrência**: `rate(araponga.concurrency.conflicts[5m]) > 10`
-5. **Eventos Falhando**: `rate(araponga.events.failed[5m]) > 5`
+3. **Cache Hit Rate Baixo**: `rate(Arah.cache.hits[5m]) / (rate(Arah.cache.hits[5m]) + rate(Arah.cache.misses[5m])) < 0.7`
+4. **Muitos Conflitos de Concorrência**: `rate(Arah.concurrency.conflicts[5m]) > 10`
+5. **Eventos Falhando**: `rate(Arah.events.failed[5m]) > 5`
 
 ---
 

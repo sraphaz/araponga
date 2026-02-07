@@ -2,7 +2,7 @@
 
 ---
 
-## Bem-vindo ao Araponga
+## Bem-vindo ao Arah
 
 Você chegou aqui porque **entende que tecnologia pode servir à vida** e não o contrário.
 
@@ -17,7 +17,7 @@ Este documento é para você que:
 
 ---
 
-## Por que o Araponga existe?
+## Por que o Arah existe?
 
 ### O Problema
 
@@ -28,7 +28,7 @@ Vivemos um tempo em que plataformas digitais:
 
 ### A Proposta
 
-O Araponga é uma **plataforma digital comunitária orientada ao território** que:
+O Arah é uma **plataforma digital comunitária orientada ao território** que:
 - **Reconhece o território** como referência fundamental
 - **Valoriza a presença física** e a vida local
 - **Respeita a autonomia** das comunidades
@@ -41,7 +41,7 @@ O Araponga é uma **plataforma digital comunitária orientada ao território** q
 
 ### 1. Território como Referência
 
-O **território** no Araponga é um lugar físico real:
+O **território** no Arah é um lugar físico real:
 - Tem nome, localização e fronteira geográfica
 - Existe **antes do aplicativo** e continua existindo sem usuários
 - **Não contém lógica social** (isso fica em camadas separadas)
@@ -61,7 +61,7 @@ Isso torna o sistema:
 
 ### 3. Tecnologia a Serviço da Vida
 
-O Araponga **não é**:
+O Arah **não é**:
 - Um marketplace agressivo
 - Uma rede de engajamento infinito
 - Um produto de vigilância
@@ -100,11 +100,11 @@ O projeto está organizado em **camadas claras** (Clean Architecture):
 
 ```
 backend/
-├── Araponga.Domain      # Conceitos centrais (território, posts, etc.)
-├── Araponga.Application # Lógica de negócio (services)
-├── Araponga.Infrastructure # Persistência (banco de dados, armazenamento)
-├── Araponga.Api         # Interface HTTP (endpoints)
-└── Araponga.Tests       # Testes automatizados
+├── Arah.Domain      # Conceitos centrais (território, posts, etc.)
+├── Arah.Application # Lógica de negócio (services)
+├── Arah.Infrastructure # Persistência (banco de dados, armazenamento)
+├── Arah.Api         # Interface HTTP (endpoints)
+└── Arah.Tests       # Testes automatizados
 ```
 
 **Não precisa entender tudo de uma vez**. O Cursor vai te ajudar quando você precisar.
@@ -115,7 +115,7 @@ backend/
 
 ### Tecnologia Decolonizadora
 
-O Araponga busca:
+O Arah busca:
 - **Não replicar padrões coloniais** de extração e dominação
 - **Valorizar saberes locais** e conhecimento do território
 - **Reconhecer inteligência** como valor, não como recurso a extrair
@@ -172,7 +172,7 @@ Desenvolvemos com:
 
 Para **detalhes técnicos sobre configuração do ambiente**, **passo a passo de setup**, **comandos específicos** e **exemplos práticos de desenvolvimento**, consulte o **guia técnico completo** no DevPortal:
 
-👉 **[Onboarding para Desenvolvedores - DevPortal](https://devportal.araponga.app/#onboarding-developers)**
+👉 **[Onboarding para Desenvolvedores - DevPortal](https://devportal.Arah.app/#onboarding-developers)**
 
 O guia técnico inclui:
 - Verificação de requisitos do sistema (Windows/macOS/Linux)
@@ -207,7 +207,7 @@ O guia técnico inclui:
 
 ## Glossário Rápido
 
-**Territory** (Território): Lugar físico real - a base de tudo no Araponga  
+**Territory** (Território): Lugar físico real - a base de tudo no Arah  
 **Visitor** (Visitante): Usuário presente no território com vínculo básico  
 **Resident** (Morador): Usuário com vínculo aprovado e acesso a conteúdo restrito  
 **Feed**: Linha do tempo de posts (pessoal ou do território)  
@@ -223,7 +223,7 @@ O guia técnico inclui:
 
 ## Conclusão
 
-Bem-vindo ao Araponga.
+Bem-vindo ao Arah.
 
 Aqui, tecnologia serve à vida, não o contrário.
 
@@ -238,4 +238,4 @@ Aqui, você pode aprender a construir aplicações participando de algo que impo
 **Última Atualização**: 2025-01-20  
 **Versão**: 1.0
 
-**Perguntas?** Abra uma Issue ou consulte o [guia técnico completo no DevPortal](https://devportal.araponga.app/#onboarding-developers)!
+**Perguntas?** Abra uma Issue ou consulte o [guia técnico completo no DevPortal](https://devportal.Arah.app/#onboarding-developers)!

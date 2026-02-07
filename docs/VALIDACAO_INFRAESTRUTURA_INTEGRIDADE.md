@@ -21,9 +21,9 @@ Existem **três camadas** de projetos de infraestrutura:
 
 | Camada | Projeto(s) | Conteúdo | Uso |
 |--------|------------|----------|-----|
-| **Principal** | `Araponga.Infrastructure` | ArapongaDbContext, **78 entidades** em Postgres/Entities, repositórios Postgres restantes (Territory, User, JoinRequest, PostGeoAnchor, PostAsset, Financial, Policies, Media, etc.), **todos** os repositórios InMemory, Migrations | Repositórios “shared” em modo Postgres; todos os repositórios em modo InMemory; migrations; ConnectionPoolMetricsService; HealthCheck; OutboxDispatcherWorker |
-| **Shared** | `Araponga.Infrastructure.Shared` | SharedDbContext, **29 entidades** em Postgres/Entities | SharedDbContext disponível para uso direto; participante do UoW composto (IUnitOfWork = CompositeUnitOfWork) |
-| **Por módulo** | `Araponga.Modules.{Feed,Events,Map,Chat,Alerts,Assets,Marketplace,Moderation,Notifications,Subscriptions,Admin}.Infrastructure` | Cada um: DbContext próprio, entidades do domínio, repositórios Postgres do domínio | Cada módulo registra seu DbContext e seus repositórios; **nenhum** repositório Postgres duplicado na principal para domínios já migrados |
+| **Principal** | `Arah.Infrastructure` | ArapongaDbContext, **78 entidades** em Postgres/Entities, repositórios Postgres restantes (Territory, User, JoinRequest, PostGeoAnchor, PostAsset, Financial, Policies, Media, etc.), **todos** os repositórios InMemory, Migrations | Repositórios “shared” em modo Postgres; todos os repositórios em modo InMemory; migrations; ConnectionPoolMetricsService; HealthCheck; OutboxDispatcherWorker |
+| **Shared** | `Arah.Infrastructure.Shared` | SharedDbContext, **29 entidades** em Postgres/Entities | SharedDbContext disponível para uso direto; participante do UoW composto (IUnitOfWork = CompositeUnitOfWork) |
+| **Por módulo** | `Arah.Modules.{Feed,Events,Map,Chat,Alerts,Assets,Marketplace,Moderation,Notifications,Subscriptions,Admin}.Infrastructure` | Cada um: DbContext próprio, entidades do domínio, repositórios Postgres do domínio | Cada módulo registra seu DbContext e seus repositórios; **nenhum** repositório Postgres duplicado na principal para domínios já migrados |
 
 Conclusão: há **muita** infraestrutura (principal + shared + 11 módulos), mas a **divisão de responsabilidade** está clara: módulos têm só seus domínios; principal tem o que ainda não foi modularizado + InMemory + migrations; shared expõe SharedDbContext; IUnitOfWork é um CompositeUnitOfWork que persiste todos os contextos.
 
@@ -35,11 +35,11 @@ Conclusão: há **muita** infraestrutura (principal + shared + 11 módulos), mas
 
 - **Não há duplicação.** Cada interface de repositório tem **uma única** implementação Postgres:
   - Feed, Events, Map, Chat, Alerts, Assets, Marketplace, Moderation, Notifications, Subscriptions → implementações nos respectivos módulos.
-  - Territory, User, Membership, JoinRequest, PostGeoAnchor, PostAsset, Financial, Policies, Media, etc. → implementações em `Araponga.Infrastructure/Postgres`.
+  - Territory, User, Membership, JoinRequest, PostGeoAnchor, PostAsset, Financial, Policies, Media, etc. → implementações em `Arah.Infrastructure/Postgres`.
 
 ### 2.2 Repositórios InMemory
 
-- **Não há duplicação.** Todas as implementações InMemory estão em `Araponga.Infrastructure/InMemory` (incluindo Feed, Events, Map, Chat, Store, Subscription, etc.). Uma única pasta, sem repetição em módulos.
+- **Não há duplicação.** Todas as implementações InMemory estão em `Arah.Infrastructure/InMemory` (incluindo Feed, Events, Map, Chat, Store, Subscription, etc.). Uma única pasta, sem repetição em módulos.
 
 ### 2.3 Entidades (Records) – **há duplicação**
 
@@ -47,11 +47,11 @@ A mesma tabela do banco é mapeada por **mais de uma** classe C# em assemblies d
 
 | Tabela / domínio | Onde existe a entidade (Record) |
 |------------------|----------------------------------|
-| Core/Shared (ex.: User, Territory, WorkItem, DocumentEvidence, NotificationConfig, UserPreferences, etc.) | `Araponga.Infrastructure/Postgres/Entities` **e** `Araponga.Infrastructure.Shared/Postgres/Entities` |
-| Feed (CommunityPost, PostComment, PostLike, etc.) | `Araponga.Infrastructure/Postgres/Entities` **e** `Araponga.Modules.Feed.Infrastructure/Postgres/Entities` |
+| Core/Shared (ex.: User, Territory, WorkItem, DocumentEvidence, NotificationConfig, UserPreferences, etc.) | `Arah.Infrastructure/Postgres/Entities` **e** `Arah.Infrastructure.Shared/Postgres/Entities` |
+| Feed (CommunityPost, PostComment, PostLike, etc.) | `Arah.Infrastructure/Postgres/Entities` **e** `Arah.Modules.Feed.Infrastructure/Postgres/Entities` |
 | Events, Map, Chat, Alerts, Assets, Marketplace, Moderation, Notifications, Subscriptions | Idem: em **Infrastructure/Postgres/Entities** e no **módulo** correspondente |
 
-Motivo: **ArapongaDbContext** (na Infrastructure principal) ainda referencia **todas** as entidades em `Araponga.Infrastructure.Postgres.Entities` (incluindo as dos domínios já migrados para módulos). As migrations e o ConnectionPoolMetricsService usam esse contexto. Ao mesmo tempo, cada módulo tem seu próprio DbContext e suas **próprias** classes de entidade (em outro namespace/assembly) para as mesmas tabelas.
+Motivo: **ArapongaDbContext** (na Infrastructure principal) ainda referencia **todas** as entidades em `Arah.Infrastructure.Postgres.Entities` (incluindo as dos domínios já migrados para módulos). As migrations e o ConnectionPoolMetricsService usam esse contexto. Ao mesmo tempo, cada módulo tem seu próprio DbContext e suas **próprias** classes de entidade (em outro namespace/assembly) para as mesmas tabelas.
 
 Risco: alteração de schema (coluna, índice) exige cuidado: pode ser preciso ajustar **duas** (ou três) definições de entidade para a mesma tabela, sob pena de drift (modelo desatualizado em um dos lados).
 
@@ -75,7 +75,7 @@ Risco: alteração de schema (coluna, índice) exige cuidado: pode ser preciso a
 
 ### 3.3 Migrations
 
-- Todas as migrations estão em `Araponga.Infrastructure/Postgres/Migrations` e referem **ArapongaDbContext**.
+- Todas as migrations estão em `Arah.Infrastructure/Postgres/Migrations` e referem **ArapongaDbContext**.
 - Os módulos **não** têm migrations próprias; o schema é mantido pela Infrastructure principal. Integridade do banco, hoje, depende apenas desse conjunto de migrations.
 
 ### 3.4 Identificação de jornada (processo / request) entre módulos
@@ -100,7 +100,7 @@ Risco: alteração de schema (coluna, índice) exige cuidado: pode ser preciso a
 | Aspecto | Status | Observação |
 |---------|--------|------------|
 | Repositórios Postgres duplicados | OK | Não há; cada interface tem uma implementação (módulo ou Infrastructure). |
-| Repositórios InMemory duplicados | OK | Todos em `Araponga.Infrastructure/InMemory`. |
+| Repositórios InMemory duplicados | OK | Todos em `Arah.Infrastructure/InMemory`. |
 | Entidades (Record) duplicadas | Atenção | Mesma tabela mapeada em 2 (ou 3) lugares: Infrastructure/Entities, Shared/Entities e/ou módulos. |
 | IUnitOfWork vs repositórios | OK | IUnitOfWork = CompositeUnitOfWork; commit persiste ArapongaDbContext, SharedDbContext e DbContexts dos módulos numa única chamada. |
 | Infra “demais” (principal + shared + módulos) | Esperado | Principal: repositórios restantes + InMemory + migrations. Shared: SharedDbContext disponível; IUnitOfWork na API. Módulos: domínios já migrados. |
@@ -122,7 +122,7 @@ Risco: alteração de schema (coluna, índice) exige cuidado: pode ser preciso a
 Quando uma tabela tiver entidade (Record) em **mais de um lugar** (ex.: Infrastructure/Postgres/Entities e no módulo correspondente, ou em Shared):
 
 - **Garantia de padronização**: o teste `DuplicateEntityStandardizationTests.DuplicateEntities_Infrastructure_And_Shared_Have_Same_Properties` compara propriedades (nome e tipo) de todas as entidades duplicadas entre Infrastructure e Shared. Se alguém alterar uma entidade e não a outra, o teste **falha** (detecção de drift). Rodar a suíte de testes (ou esse teste) no CI garante que as definições duplicadas permaneçam alinhadas.
-- **Ao alterar coluna, índice ou nome de tabela**: atualize **todas** as definições da mesma tabela (Infrastructure/Entities, Shared/Entities e/ou entidades do módulo) e a migration em `Araponga.Infrastructure/Postgres/Migrations`.
+- **Ao alterar coluna, índice ou nome de tabela**: atualize **todas** as definições da mesma tabela (Infrastructure/Entities, Shared/Entities e/ou entidades do módulo) e a migration em `Arah.Infrastructure/Postgres/Migrations`.
 - **Evite alterar só em um dos lados**; isso gera drift e o teste de padronização falhará.
 - Referência: §2.3 (entidades duplicadas) e §3.3 (migrations).
 

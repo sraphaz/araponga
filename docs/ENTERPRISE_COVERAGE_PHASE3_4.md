@@ -120,7 +120,7 @@
 
 ### Estrutura de Projeto
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Domain/
 │   ├── StoreEdgeCasesTests.cs              (25 testes)
 │   ├── StoreItemEdgeCasesTests.cs           (40 testes)

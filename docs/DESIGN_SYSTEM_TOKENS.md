@@ -9,7 +9,7 @@
 
 ## 📋 Sumário
 
-Este documento descreve o sistema unificado de design tokens do Araponga. Os tokens são a **fonte única de verdade** para todos os valores de design (cores, tipografia, espaçamento, etc.) e são usados por Wiki e DevPortal para garantir consistência visual total.
+Este documento descreve o sistema unificado de design tokens do Arah. Os tokens são a **fonte única de verdade** para todos os valores de design (cores, tipografia, espaçamento, etc.) e são usados por Wiki e DevPortal para garantir consistência visual total.
 
 **Objetivo:** Garantir que Wiki e DevPortal compartilhem a mesma identidade visual, criando uma experiência unificada e profissional.
 
@@ -19,7 +19,7 @@ Este documento descreve o sistema unificado de design tokens do Araponga. Os tok
 
 ### Primary (Verde) - Natureza, Território, Crescimento
 
-Baseado no valor "Território como Referência" da Araponga.
+Baseado no valor "Território como Referência" da Arah.
 
 ```css
 --color-primary-400: #4dd4a8;  /* PRIMARY - Verde natural, equilibrado */
@@ -30,7 +30,7 @@ Baseado no valor "Território como Referência" da Araponga.
 
 ### Secondary (Azul) - Transparência, Clareza, Confiança
 
-Baseado no valor "Transparência Radical" da Araponga.
+Baseado no valor "Transparência Radical" da Arah.
 
 ```css
 --color-secondary-300: #7dd3ff;  /* SECONDARY - Azul claro, transparente */

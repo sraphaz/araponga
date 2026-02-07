@@ -18,7 +18,7 @@
 - ✅ Logging de warning quando usando secret padrão em desenvolvimento
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Program.cs` (linhas 40-47)
+- `backend/Arah.Api/Program.cs` (linhas 40-47)
 
 #### Código Implementado
 ```csharp
@@ -66,18 +66,18 @@ if (builder.Environment.IsProduction() && jwtSigningKey.Length < 32)
 - ✅ Resposta 429 com ProblemDetails
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Program.cs` (linhas 78-112)
-- `backend/Araponga.Api/Controllers/AuthController.cs` - `[EnableRateLimiting("auth")]`
-- `backend/Araponga.Api/Controllers/FeedController.cs` - `[EnableRateLimiting("feed")]` e `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/EventsController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/AlertsController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/AssetsController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/MapController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/StoresController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/ItemsController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/UserProfileController.cs` - `[EnableRateLimiting("write")]`
-- `backend/Araponga.Api/Controllers/TerritoriesController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Program.cs` (linhas 78-112)
+- `backend/Arah.Api/Controllers/AuthController.cs` - `[EnableRateLimiting("auth")]`
+- `backend/Arah.Api/Controllers/FeedController.cs` - `[EnableRateLimiting("feed")]` e `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/EventsController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/AlertsController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/AssetsController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/MapController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/StoresController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/ItemsController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/UserProfileController.cs` - `[EnableRateLimiting("write")]`
+- `backend/Arah.Api/Controllers/TerritoriesController.cs` - `[EnableRateLimiting("write")]`
 
 #### Configuração
 ```csharp
@@ -115,10 +115,10 @@ options.AddFixedWindowLimiter("write", limiterOptions => { ... });
   - Content-Security-Policy: configurado
 
 #### Arquivos Criados
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Program.cs` (linhas 200-204, 54-76)
+- `backend/Arah.Api/Program.cs` (linhas 200-204, 54-76)
 
 #### Código Implementado
 ```csharp
@@ -188,7 +188,7 @@ app.UseMiddleware<SecurityHeadersMiddleware>();
 - ✅ Mensagens de erro claras
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Program.cs` (linhas 54-76)
+- `backend/Arah.Api/Program.cs` (linhas 54-76)
 
 #### Código Implementado
 ```csharp
@@ -231,29 +231,29 @@ builder.Services.AddCors(options =>
 ## 📊 Resumo de Arquivos Modificados/Criados
 
 ### Arquivos Criados (9)
-1. `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
-2. `backend/Araponga.Api/Validators/CreateAssetRequestValidator.cs`
-3. `backend/Araponga.Api/Validators/SuggestMapEntityRequestValidator.cs`
-4. `backend/Araponga.Api/Validators/UpsertStoreRequestValidator.cs`
-5. `backend/Araponga.Api/Validators/CreateItemRequestValidator.cs`
-6. `backend/Araponga.Api/Validators/SuggestTerritoryRequestValidator.cs`
-7. `backend/Araponga.Api/Validators/UpdatePrivacyPreferencesRequestValidator.cs`
-8. `backend/Araponga.Api/Validators/UpdateDisplayNameRequestValidator.cs`
-9. `backend/Araponga.Api/Validators/UpdateContactInfoRequestValidator.cs`
+1. `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
+2. `backend/Arah.Api/Validators/CreateAssetRequestValidator.cs`
+3. `backend/Arah.Api/Validators/SuggestMapEntityRequestValidator.cs`
+4. `backend/Arah.Api/Validators/UpsertStoreRequestValidator.cs`
+5. `backend/Arah.Api/Validators/CreateItemRequestValidator.cs`
+6. `backend/Arah.Api/Validators/SuggestTerritoryRequestValidator.cs`
+7. `backend/Arah.Api/Validators/UpdatePrivacyPreferencesRequestValidator.cs`
+8. `backend/Arah.Api/Validators/UpdateDisplayNameRequestValidator.cs`
+9. `backend/Arah.Api/Validators/UpdateContactInfoRequestValidator.cs`
 
 ### Arquivos Modificados (12)
-1. `backend/Araponga.Api/Program.cs` - JWT, Rate Limiting, HTTPS, HSTS, CORS, Security Headers
-2. `backend/Araponga.Api/Controllers/AuthController.cs` - Rate limiting
-3. `backend/Araponga.Api/Controllers/FeedController.cs` - Rate limiting
-4. `backend/Araponga.Api/Controllers/EventsController.cs` - Rate limiting
-5. `backend/Araponga.Api/Controllers/AlertsController.cs` - Rate limiting
-6. `backend/Araponga.Api/Controllers/AssetsController.cs` - Rate limiting
-7. `backend/Araponga.Api/Controllers/MapController.cs` - Rate limiting
-8. `backend/Araponga.Api/Controllers/StoresController.cs` - Rate limiting
-9. `backend/Araponga.Api/Controllers/ItemsController.cs` - Rate limiting
-10. `backend/Araponga.Api/Controllers/UserPreferencesController.cs` - Rate limiting
-11. `backend/Araponga.Api/Controllers/UserProfileController.cs` - Rate limiting
-12. `backend/Araponga.Api/Controllers/TerritoriesController.cs` - Rate limiting
+1. `backend/Arah.Api/Program.cs` - JWT, Rate Limiting, HTTPS, HSTS, CORS, Security Headers
+2. `backend/Arah.Api/Controllers/AuthController.cs` - Rate limiting
+3. `backend/Arah.Api/Controllers/FeedController.cs` - Rate limiting
+4. `backend/Arah.Api/Controllers/EventsController.cs` - Rate limiting
+5. `backend/Arah.Api/Controllers/AlertsController.cs` - Rate limiting
+6. `backend/Arah.Api/Controllers/AssetsController.cs` - Rate limiting
+7. `backend/Arah.Api/Controllers/MapController.cs` - Rate limiting
+8. `backend/Arah.Api/Controllers/StoresController.cs` - Rate limiting
+9. `backend/Arah.Api/Controllers/ItemsController.cs` - Rate limiting
+10. `backend/Arah.Api/Controllers/UserPreferencesController.cs` - Rate limiting
+11. `backend/Arah.Api/Controllers/UserProfileController.cs` - Rate limiting
+12. `backend/Arah.Api/Controllers/TerritoriesController.cs` - Rate limiting
 
 ---
 
@@ -313,7 +313,7 @@ builder.Services.AddCors(options =>
 - ✅ `FASE1_VERIFICACAO_COMPLETA.md` - Checklist de verificação
 - ✅ `README.md` - Seção de segurança atualizada
 - ✅ `60_API_LÓGICA_NEGÓCIO.md` - Rate limiting documentado
-- ✅ `Araponga.Tests/README.md` - Configuração de testes
+- ✅ `Arah.Tests/README.md` - Configuração de testes
 
 ---
 

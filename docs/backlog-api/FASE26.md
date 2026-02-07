@@ -130,17 +130,17 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/DigitalServices/DigitalServiceCategory.cs`
-- `backend/Araponga.Domain/DigitalServices/ServiceProvider.cs`
-- `backend/Araponga.Domain/DigitalServices/UserDigitalServiceConfig.cs`
-- `backend/Araponga.Domain/DigitalServices/DigitalServiceUsageLog.cs`
-- `backend/Araponga.Domain/DigitalServices/DigitalServiceConsumption.cs`
-- `backend/Araponga.Application/Interfaces/IDigitalServiceConfigRepository.cs`
-- `backend/Araponga.Application/Interfaces/IDigitalServiceUsageRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresDigitalServiceConfigRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresDigitalServiceUsageRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/UserDigitalServiceConfigRecord.cs`
-- `backend/Araponga.Infrastructure/Postgres/Entities/DigitalServiceUsageLogRecord.cs`
+- `backend/Arah.Domain/DigitalServices/DigitalServiceCategory.cs`
+- `backend/Arah.Domain/DigitalServices/ServiceProvider.cs`
+- `backend/Arah.Domain/DigitalServices/UserDigitalServiceConfig.cs`
+- `backend/Arah.Domain/DigitalServices/DigitalServiceUsageLog.cs`
+- `backend/Arah.Domain/DigitalServices/DigitalServiceConsumption.cs`
+- `backend/Arah.Application/Interfaces/IDigitalServiceConfigRepository.cs`
+- `backend/Arah.Application/Interfaces/IDigitalServiceUsageRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresDigitalServiceConfigRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresDigitalServiceUsageRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/UserDigitalServiceConfigRecord.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/DigitalServiceUsageLogRecord.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -168,9 +168,9 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Testes de segurança
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/ICredentialEncryptionService.cs`
-- `backend/Araponga.Infrastructure/Security/CredentialEncryptionService.cs`
-- `backend/Araponga.Tests/Infrastructure/CredentialEncryptionServiceTests.cs`
+- `backend/Arah.Application/Interfaces/ICredentialEncryptionService.cs`
+- `backend/Arah.Infrastructure/Security/CredentialEncryptionService.cs`
+- `backend/Arah.Tests/Infrastructure/CredentialEncryptionServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Credenciais criptografadas no banco
@@ -207,9 +207,9 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DigitalServiceManager.cs`
-- `backend/Araponga.Application/Services/DigitalServiceUsageTracker.cs`
-- `backend/Araponga.Tests/Application/DigitalServiceManagerTests.cs`
+- `backend/Arah.Application/Services/DigitalServiceManager.cs`
+- `backend/Arah.Application/Services/DigitalServiceUsageTracker.cs`
+- `backend/Arah.Tests/Application/DigitalServiceManagerTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço de gerenciamento funcionando
@@ -247,10 +247,10 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DigitalServiceConsumptionService.cs`
-- `backend/Araponga.Api/Controllers/DigitalServiceConsumptionController.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/ConsumptionResponse.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/ConsumptionHistoryResponse.cs`
+- `backend/Arah.Application/Services/DigitalServiceConsumptionService.cs`
+- `backend/Arah.Api/Controllers/DigitalServiceConsumptionController.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/ConsumptionResponse.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/ConsumptionHistoryResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Extrato de consumo funcionando
@@ -287,10 +287,10 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Models/FeatureFlag.cs`
-- `backend/Araponga.Domain/Users/UserPreferences.cs`
-- `backend/Araponga.Application/Services/UserPreferencesService.cs`
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs`
+- `backend/Arah.Application/Models/FeatureFlag.cs`
+- `backend/Arah.Domain/Users/UserPreferences.cs`
+- `backend/Arah.Application/Services/UserPreferencesService.cs`
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Feature flags implementadas
@@ -324,13 +324,13 @@ Implementar infraestrutura base para **serviços digitais integrados** que permi
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/DigitalServiceConfigController.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/AddServiceConfigRequest.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/UpdateServiceConfigRequest.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/ServiceConfigResponse.cs`
-- `backend/Araponga.Api/Validators/AddServiceConfigRequestValidator.cs`
-- `backend/Araponga.Api/Validators/UpdateServiceConfigRequestValidator.cs`
-- `backend/Araponga.Tests/Integration/DigitalServiceConfigIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/DigitalServiceConfigController.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/AddServiceConfigRequest.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/UpdateServiceConfigRequest.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/ServiceConfigResponse.cs`
+- `backend/Arah.Api/Validators/AddServiceConfigRequestValidator.cs`
+- `backend/Arah.Api/Validators/UpdateServiceConfigRequestValidator.cs`
+- `backend/Arah.Tests/Integration/DigitalServiceConfigIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ API de configuração funcionando

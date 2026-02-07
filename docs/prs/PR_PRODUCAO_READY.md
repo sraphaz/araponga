@@ -28,8 +28,8 @@ Tornar a aplicação **production-ready** implementando:
 - Mensagem de erro clara
 
 **Mudanças**:
-- `backend/Araponga.Api/appsettings.json`: Remover `SigningKey`
-- `backend/Araponga.Api/Program.cs`: Validação de secret em produção
+- `backend/Arah.Api/appsettings.json`: Remover `SigningKey`
+- `backend/Arah.Api/Program.cs`: Validação de secret em produção
 
 ### 2. HTTPS Obrigatório ✅
 
@@ -40,7 +40,7 @@ Tornar a aplicação **production-ready** implementando:
 - Configuração condicional baseada em ambiente
 
 **Mudanças**:
-- `backend/Araponga.Api/Program.cs`: Habilitar `UseHttpsRedirection()` condicionalmente
+- `backend/Arah.Api/Program.cs`: Habilitar `UseHttpsRedirection()` condicionalmente
 
 ### 3. Rate Limiting ✅
 
@@ -54,8 +54,8 @@ Tornar a aplicação **production-ready** implementando:
 - Configuração via `appsettings.json`
 
 **Mudanças**:
-- `backend/Araponga.Api/Program.cs`: Configurar rate limiting
-- `backend/Araponga.Api/appsettings.json`: Configuração de limites
+- `backend/Arah.Api/Program.cs`: Configurar rate limiting
+- `backend/Arah.Api/appsettings.json`: Configuração de limites
 
 ### 4. Health Checks Completos ✅
 
@@ -68,9 +68,9 @@ Tornar a aplicação **production-ready** implementando:
 - Resposta JSON estruturada
 
 **Mudanças**:
-- `backend/Araponga.Api/Program.cs`: Adicionar health checks
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`: Health check de banco
-- `backend/Araponga.Api/Araponga.Api.csproj`: Referência ao pacote
+- `backend/Arah.Api/Program.cs`: Adicionar health checks
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`: Health check de banco
+- `backend/Arah.Api/Arah.Api.csproj`: Referência ao pacote
 
 ---
 
@@ -83,13 +83,13 @@ Tornar a aplicação **production-ready** implementando:
 **Solução**:
 - Implementar Serilog para logs estruturados
 - Configurar sinks (Console, File)
-- Logs em `logs/araponga-.log` (rolling diário, 30 dias de retenção)
+- Logs em `logs/Arah-.log` (rolling diário, 30 dias de retenção)
 - Configuração via `appsettings.json`
 
 **Mudanças**:
-- `backend/Araponga.Api/Araponga.Api.csproj`: Adicionar Serilog
-- `backend/Araponga.Api/Program.cs`: Configurar Serilog
-- `backend/Araponga.Api/appsettings.json`: Configuração de logging
+- `backend/Arah.Api/Arah.Api.csproj`: Adicionar Serilog
+- `backend/Arah.Api/Program.cs`: Configurar Serilog
+- `backend/Arah.Api/appsettings.json`: Configuração de logging
 
 ### 6. CORS Configurado ✅
 
@@ -102,8 +102,8 @@ Tornar a aplicação **production-ready** implementando:
 - `AllowCredentials()` quando não usar `*`
 
 **Mudanças**:
-- `backend/Araponga.Api/Program.cs`: Configurar CORS
-- `backend/Araponga.Api/appsettings.json`: Configuração de CORS
+- `backend/Arah.Api/Program.cs`: Configurar CORS
+- `backend/Arah.Api/appsettings.json`: Configuração de CORS
 
 ### 7. Validação de Configuração ✅
 
@@ -115,7 +115,7 @@ Tornar a aplicação **production-ready** implementando:
 - Falhar rápido se configuração inválida
 
 **Mudanças**:
-- `backend/Araponga.Api/Program.cs`: Validação de configuração
+- `backend/Arah.Api/Program.cs`: Validação de configuração
 
 ### 8. Validators Críticos ✅
 
@@ -126,10 +126,10 @@ Tornar a aplicação **production-ready** implementando:
 - Validators para autenticação, eventos, moderação e alertas
 
 **Mudanças**:
-- `backend/Araponga.Api/Validators/SocialLoginRequestValidator.cs`: Validador para autenticação
-- `backend/Araponga.Api/Validators/CreateEventRequestValidator.cs`: Validador para eventos
-- `backend/Araponga.Api/Validators/ReportRequestValidator.cs`: Validador para moderação
-- `backend/Araponga.Api/Validators/ReportAlertRequestValidator.cs`: Validador para alertas
+- `backend/Arah.Api/Validators/SocialLoginRequestValidator.cs`: Validador para autenticação
+- `backend/Arah.Api/Validators/CreateEventRequestValidator.cs`: Validador para eventos
+- `backend/Arah.Api/Validators/ReportRequestValidator.cs`: Validador para moderação
+- `backend/Arah.Api/Validators/ReportAlertRequestValidator.cs`: Validador para alertas
 
 **Total**: 6 validators (2 existentes + 4 novos)
 
@@ -147,7 +147,7 @@ Tornar a aplicação **production-ready** implementando:
 - Configuração explícita no EF Core
 
 **Mudanças**:
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`: Configurar pooling com retry
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`: Configurar pooling com retry
 
 ### 10. Índices Faltantes ✅
 
@@ -159,7 +159,7 @@ Tornar a aplicação **production-ready** implementando:
   - `ModerationReports`: `(TargetType, TargetId, CreatedAtUtc)`
 
 **Mudanças**:
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`: Adicionar índices
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`: Adicionar índices
 
 **Nota**: Migration necessária para aplicar os índices no banco de dados
 
@@ -182,20 +182,20 @@ Tornar a aplicação **production-ready** implementando:
 ## 📋 Arquivos Modificados
 
 ### Configuração e Setup
-- `backend/Araponga.Api/Program.cs` - Configurações principais
-- `backend/Araponga.Api/appsettings.json` - Configurações (Serilog, CORS, Rate Limiting)
-- `backend/Araponga.Api/appsettings.Development.json` - Configurações de desenvolvimento
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` - Connection pooling e health checks
-- `backend/Araponga.Api/Araponga.Api.csproj` - Pacotes NuGet
+- `backend/Arah.Api/Program.cs` - Configurações principais
+- `backend/Arah.Api/appsettings.json` - Configurações (Serilog, CORS, Rate Limiting)
+- `backend/Arah.Api/appsettings.Development.json` - Configurações de desenvolvimento
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` - Connection pooling e health checks
+- `backend/Arah.Api/Arah.Api.csproj` - Pacotes NuGet
 
 ### Validação
-- `backend/Araponga.Api/Validators/SocialLoginRequestValidator.cs` - **NOVO**
-- `backend/Araponga.Api/Validators/CreateEventRequestValidator.cs` - **NOVO**
-- `backend/Araponga.Api/Validators/ReportRequestValidator.cs` - **NOVO**
-- `backend/Araponga.Api/Validators/ReportAlertRequestValidator.cs` - **NOVO**
+- `backend/Arah.Api/Validators/SocialLoginRequestValidator.cs` - **NOVO**
+- `backend/Arah.Api/Validators/CreateEventRequestValidator.cs` - **NOVO**
+- `backend/Arah.Api/Validators/ReportRequestValidator.cs` - **NOVO**
+- `backend/Arah.Api/Validators/ReportAlertRequestValidator.cs` - **NOVO**
 
 ### Infraestrutura
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` - Índices adicionados
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` - Índices adicionados
 
 ---
 
@@ -251,7 +251,7 @@ Persistence__ApplyMigrations=true
 ```json
 {
   "Cors": {
-    "AllowedOrigins": ["https://araponga.app", "https://www.araponga.app"]
+    "AllowedOrigins": ["https://Arah.app", "https://www.Arah.app"]
   }
 }
 ```
@@ -259,9 +259,9 @@ Persistence__ApplyMigrations=true
 ### 2. Criar e Aplicar Migration
 
 ```bash
-cd backend/Araponga.Infrastructure
-dotnet ef migrations add AddPerformanceIndexes --startup-project ../Araponga.Api
-dotnet ef database update --startup-project ../Araponga.Api
+cd backend/Arah.Infrastructure
+dotnet ef migrations add AddPerformanceIndexes --startup-project ../Arah.Api
+dotnet ef database update --startup-project ../Arah.Api
 ```
 
 ### 3. Testar em Staging
@@ -329,7 +329,7 @@ dotnet ef database update --startup-project ../Araponga.Api
 
 4. **Rate Limiting**: O rate limiting padrão é 60 req/min por IP. Pode ser configurado via `appsettings.json`.
 
-5. **Logs**: Logs são escritos em `logs/araponga-.log` (rolling diário, 30 dias de retenção).
+5. **Logs**: Logs são escritos em `logs/Arah-.log` (rolling diário, 30 dias de retenção).
 
 ---
 

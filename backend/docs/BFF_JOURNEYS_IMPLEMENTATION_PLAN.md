@@ -162,7 +162,7 @@ Cada entrega pode ser uma branch + PR, com testes de proxy e, se aplicável, cob
 - [ ] Entrada no `BffJourneyRegistry`: nome, `AllEndpoints`, e, se GET cacheável, `CacheableGetEndpoints` e TTL.
 - [ ] `CacheTtlByPath` em `appsettings` (e Development) quando houver cache.
 - [ ] Testes no BFF: proxy retorna mesmo status/body que a API (com mock ou API real em teste); cache hit/miss quando aplicável.
-- [ ] Atualizar `Araponga.Api.Bff.http` com exemplos da nova jornada.
+- [ ] Atualizar `Arah.Api.Bff.http` com exemplos da nova jornada.
 - [ ] Documentar no CHANGELOG ou no PR a nova jornada e qualquer decisão (ex.: “auth só documentada, proxy fica para fase 2”).
 
 ---

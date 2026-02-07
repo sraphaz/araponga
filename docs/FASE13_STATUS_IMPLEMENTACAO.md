@@ -119,21 +119,21 @@
 ### Arquivos Principais
 
 **Interfaces e Modelos**:
-- `backend/Araponga.Application/Interfaces/IEmailSender.cs`
-- `backend/Araponga.Application/Models/EmailMessage.cs`
-- `backend/Araponga.Domain/Email/EmailQueueItem.cs`
-- `backend/Araponga.Domain/Users/EmailPreferences.cs`
+- `backend/Arah.Application/Interfaces/IEmailSender.cs`
+- `backend/Arah.Application/Models/EmailMessage.cs`
+- `backend/Arah.Domain/Email/EmailQueueItem.cs`
+- `backend/Arah.Domain/Users/EmailPreferences.cs`
 
 **Implementações**:
-- `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
-- `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- `backend/Araponga.Application/Services/EmailQueueService.cs`
-- `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
-- `backend/Araponga.Application/Services/EmailNotificationMapper.cs`
+- `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
+- `backend/Arah.Application/Services/EmailTemplateService.cs`
+- `backend/Arah.Application/Services/EmailQueueService.cs`
+- `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
+- `backend/Arah.Application/Services/EmailNotificationMapper.cs`
 
 **Integração**:
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (linhas 203-349)
-- `backend/Araponga.Application/Services/AuthService.cs` (linhas 92-114)
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (linhas 203-349)
+- `backend/Arah.Application/Services/AuthService.cs` (linhas 92-114)
 
 ### Configuração
 
@@ -143,12 +143,12 @@
     "Smtp": {
       "Host": "smtp.gmail.com",
       "Port": 587,
-      "Username": "noreply@araponga.com",
+      "Username": "noreply@Arah.com",
       "Password": "[secret]",
       "EnableSsl": true
     },
-    "FromAddress": "noreply@araponga.com",
-    "FromName": "Araponga"
+    "FromAddress": "noreply@Arah.com",
+    "FromName": "Arah"
   }
 }
 ```

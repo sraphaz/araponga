@@ -2,15 +2,15 @@
 
 **Data**: 2025-01-13  
 **Objetivo**: Mapear correlações entre funcionalidades de plataformas populares para facilitar transição suave mantendo valores de soberania territorial  
-**Contexto**: Araponga como alternativa que promove união comunitária vs extrativismo
+**Contexto**: Arah como alternativa que promove união comunitária vs extrativismo
 
 ---
 
 ## 🎯 Princípios da Correlação
 
-### Valores do Araponga vs Plataformas Extrativistas
+### Valores do Arah vs Plataformas Extrativistas
 
-| Aspecto | Plataformas Extrativistas | Araponga (Soberania Territorial) |
+| Aspecto | Plataformas Extrativistas | Arah (Soberania Territorial) |
 |---------|---------------------------|----------------------------------|
 | **Algoritmo** | Feed manipulado por engajamento | Feed cronológico territorial |
 | **Dados** | Extração para publicidade | Dados do território, sem venda |
@@ -25,7 +25,7 @@
 
 ### 1. Perfil de Usuário
 
-| Funcionalidade | Instagram | Facebook | WhatsApp | LinkedIn | Nextdoor | Araponga | Status | Prioridade |
+| Funcionalidade | Instagram | Facebook | WhatsApp | LinkedIn | Nextdoor | Arah | Status | Prioridade |
 |----------------|-----------|----------|----------|----------|----------|----------|--------|------------|
 | **Nome de Exibição** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
 | **Foto/Avatar** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | 🔴 Falta | 🔴 ALTA |
@@ -37,7 +37,7 @@
 | **Verificação** | ✅ (Badge azul) | ✅ | ❌ | ✅ | ✅ | ✅ (IdentityVerification) | ✅ Implementado | - |
 | **Privacidade** | ✅ (Perfil privado) | ✅ | ✅ | ✅ | ✅ | ✅ (UserPreferences) | ✅ Implementado | - |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Nome, localização, verificação, privacidade
 - 🔴 **Falta para transição**: Avatar, Bio, Estatísticas básicas
 - 🟡 **Opcional**: Links externos, histórico visual
@@ -51,7 +51,7 @@
 
 ### 2. Feed Social
 
-| Funcionalidade | Instagram | Facebook | WhatsApp Status | LinkedIn | Nextdoor | Araponga | Status | Prioridade |
+| Funcionalidade | Instagram | Facebook | WhatsApp Status | LinkedIn | Nextdoor | Arah | Status | Prioridade |
 |----------------|-----------|----------|-----------------|----------|----------|----------|--------|------------|
 | **Criar Post** | ✅ | ✅ | ✅ (Status) | ✅ | ✅ | ✅ | ✅ Implementado | - |
 | **Texto** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
@@ -69,7 +69,7 @@
 | **Hashtags (#)** | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | 🟡 Opcional | 🟢 BAIXA |
 | **Algoritmo** | ✅ (Engajamento) | ✅ (Engajamento) | ❌ | ✅ (Relevância) | ✅ (Local) | ❌ (Cronológico) | ✅ Diferencial | - |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Criar post, texto, geolocalização, interações (like, comentar, compartilhar)
 - 🔴 **Falta para transição**: Imagens, excluir post
 - 🟡 **Opcional**: Vídeos, editar, salvar, busca, menções, hashtags
@@ -84,7 +84,7 @@
 
 ### 3. Eventos
 
-| Funcionalidade | Facebook Events | WhatsApp Grupos | Google Calendar | Eventbrite | Nextdoor | Araponga | Status | Prioridade |
+| Funcionalidade | Facebook Events | WhatsApp Grupos | Google Calendar | Eventbrite | Nextdoor | Arah | Status | Prioridade |
 |----------------|-----------------|-----------------|-----------------|------------|----------|----------|--------|------------|
 | **Criar Evento** | ✅ | ✅ (Grupo) | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
 | **Data/Hora** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
@@ -100,7 +100,7 @@
 | **Repetição** | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | 🟡 Opcional | 🟢 BAIXA |
 | **Notificações** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ (Sistema existe) | ✅ Implementado | - |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Criar, data/hora, localização obrigatória, marcar interesse/confirmar, cancelar
 - 🔴 **Falta para transição**: Imagem de capa, lista de participantes, editar
 - 🟡 **Opcional**: Compartilhar, repetição
@@ -114,7 +114,7 @@
 
 ### 4. Marketplace/Economia Local
 
-| Funcionalidade | Facebook Marketplace | Mercado Livre | OLX | Nextdoor | Araponga | Status | Prioridade |
+| Funcionalidade | Facebook Marketplace | Mercado Livre | OLX | Nextdoor | Arah | Status | Prioridade |
 |----------------|----------------------|---------------|-----|----------|----------|--------|------------|
 | **Criar Anúncio** | ✅ | ✅ | ✅ | ✅ | ✅ (Store/Item) | ✅ Implementado | - |
 | **Imagens** | ✅ (Múltiplas) | ✅ (Múltiplas) | ✅ | ✅ | ❌ | 🔴 Falta | 🔴 ALTA |
@@ -129,7 +129,7 @@
 | **Busca** | ✅ | ✅ | ✅ | ✅ | ❌ | 🔴 Falta | 🟡 MÉDIA |
 | **Favoritos** | ✅ | ✅ | ✅ | ❌ | ❌ | 🟡 Opcional | 🟢 BAIXA |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Criar anúncio, preço, localização territorial, categorias, carrinho, checkout, pagamentos, payouts
 - 🔴 **Falta para transição**: Imagens, avaliações, busca
 - 🟡 **Opcional**: Favoritos
@@ -144,7 +144,7 @@
 
 ### 5. Chat/Mensagens
 
-| Funcionalidade | WhatsApp | Telegram | Facebook Messenger | Instagram DM | Araponga | Status | Prioridade |
+| Funcionalidade | WhatsApp | Telegram | Facebook Messenger | Instagram DM | Arah | Status | Prioridade |
 |----------------|----------|----------|---------------------|--------------|----------|--------|------------|
 | **Mensagens de Texto** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
 | **Imagens** | ✅ | ✅ | ✅ | ✅ | ❌ | 🔴 Falta | 🔴 ALTA |
@@ -159,7 +159,7 @@
 | **Busca** | ✅ | ✅ | ✅ | ✅ | ❌ | 🟡 Opcional | 🟢 BAIXA |
 | **Notificações** | ✅ | ✅ | ✅ | ✅ | ✅ (Sistema existe) | ✅ Parcial | 🟡 MÉDIA |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Mensagens de texto, grupos, canais públicos, mensagens diretas, excluir
 - 🔴 **Falta para transição**: Imagens
 - 🟡 **Opcional**: Vídeos, áudios, editar, busca
@@ -173,7 +173,7 @@
 
 ### 6. Mapa Territorial
 
-| Funcionalidade | Google Maps | Apple Maps | Waze | Foursquare | Nextdoor | Araponga | Status | Prioridade |
+| Funcionalidade | Google Maps | Apple Maps | Waze | Foursquare | Nextdoor | Arah | Status | Prioridade |
 |----------------|-------------|------------|------|------------|----------|----------|--------|------------|
 | **Pins no Mapa** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ Implementado | - |
 | **Geolocalização** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ (GeoAnchor) | ✅ Implementado | - |
@@ -184,7 +184,7 @@
 | **Rotas** | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | 🟡 Opcional | 🟢 BAIXA |
 | **Integração com Feed** | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ Diferencial | - |
 
-**Correlação Araponga**:
+**Correlação Arah**:
 - ✅ **Já tem**: Pins, geolocalização, entidades, confirmações, relações, integração com feed
 - 🟡 **Opcional**: Busca, rotas
 
@@ -356,7 +356,7 @@
 
 ## 📊 Resumo da Correlação
 
-| Plataforma | Funcionalidades Correlacionadas | Status Araponga | Gap para Transição |
+| Plataforma | Funcionalidades Correlacionadas | Status Arah | Gap para Transição |
 |------------|--------------------------------|-----------------|---------------------|
 | **Instagram** | Perfil, Feed, Stories, DM | 60% | Avatar, Bio, Imagens, Excluir |
 | **Facebook** | Perfil, Feed, Events, Marketplace, Messenger | 65% | Avatar, Bio, Imagens, Editar, Excluir |
@@ -373,7 +373,7 @@
 
 ## 🎯 Conclusão
 
-O Araponga já possui **67% de correlação** com funcionalidades de plataformas populares, mas precisa de **8 funcionalidades críticas** para permitir transição suave:
+O Arah já possui **67% de correlação** com funcionalidades de plataformas populares, mas precisa de **8 funcionalidades críticas** para permitir transição suave:
 
 1. Avatar/Foto de perfil
 2. Bio/Descrição pessoal

@@ -100,13 +100,13 @@ Completar funcionalidades essenciais de edição e gestão que permitem:
 - [x] Testes — ✅ `PostEditServiceTests.cs` existe
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Application/Services/PostEditService.cs`
-- ✅ `backend/Araponga.Api/Contracts/Feed/EditPostRequest.cs`
-- ✅ `backend/Araponga.Tests/Application/PostEditServiceTests.cs`
+- ✅ `backend/Arah.Application/Services/PostEditService.cs`
+- ✅ `backend/Arah.Api/Contracts/Feed/EditPostRequest.cs`
+- ✅ `backend/Arah.Tests/Application/PostEditServiceTests.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Domain/Feed/CommunityPost.cs` (campos `EditedAtUtc`, `EditCount` adicionados)
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs` (endpoint `PATCH /api/v1/feed/{id}`)
+- ✅ `backend/Arah.Domain/Feed/CommunityPost.cs` (campos `EditedAtUtc`, `EditCount` adicionados)
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs` (endpoint `PATCH /api/v1/feed/{id}`)
 
 **Critérios de Sucesso**:
 - ✅ Edição de posts funcionando
@@ -137,13 +137,13 @@ Completar funcionalidades essenciais de edição e gestão que permitem:
 - [x] Testes — ✅ Testes em `ApplicationServiceTests.cs` cobrem UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Api/Contracts/Events/EditEventRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Events/EventParticipantResponse.cs`
+- ✅ `backend/Arah.Api/Contracts/Events/EditEventRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Events/EventParticipantResponse.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Domain/Events/TerritoryEvent.cs` (métodos `Update` e `Cancel` implementados)
-- ✅ `backend/Araponga.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync)
-- ✅ `backend/Araponga.Api/Controllers/EventsController.cs` (endpoints implementados)
+- ✅ `backend/Arah.Domain/Events/TerritoryEvent.cs` (métodos `Update` e `Cancel` implementados)
+- ✅ `backend/Arah.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync)
+- ✅ `backend/Arah.Api/Controllers/EventsController.cs` (endpoints implementados)
 
 **Critérios de Sucesso**:
 - ✅ Edição de eventos funcionando
@@ -192,16 +192,16 @@ Completar funcionalidades essenciais de edição e gestão que permitem:
 - [x] Testes — ✅ `RatingServiceTests.cs` existe
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Domain/Marketplace/StoreRating.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreItemRating.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreRatingResponse.cs`
-- ✅ `backend/Araponga.Application/Interfaces/IStoreRatingRepository.cs`
-- ✅ `backend/Araponga.Application/Interfaces/IStoreItemRatingRepository.cs`
-- ✅ `backend/Araponga.Application/Services/RatingService.cs`
-- ✅ `backend/Araponga.Api/Controllers/RatingController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/CreateRatingRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/RatingResponse.cs`
-- ✅ `backend/Araponga.Tests/Application/RatingServiceTests.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreRating.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreItemRating.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreRatingResponse.cs`
+- ✅ `backend/Arah.Application/Interfaces/IStoreRatingRepository.cs`
+- ✅ `backend/Arah.Application/Interfaces/IStoreItemRatingRepository.cs`
+- ✅ `backend/Arah.Application/Services/RatingService.cs`
+- ✅ `backend/Arah.Api/Controllers/RatingController.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/CreateRatingRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/RatingResponse.cs`
+- ✅ `backend/Arah.Tests/Application/RatingServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de avaliações funcionando
@@ -242,15 +242,15 @@ Completar funcionalidades essenciais de edição e gestão que permitem:
 - [x] Testes — ✅ Testes existem
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Application/Services/MarketplaceSearchService.cs`
-- ✅ `backend/Araponga.Application/Models/SearchFilters.cs`
-- ✅ `backend/Araponga.Api/Controllers/MarketplaceSearchController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/SearchRequest.cs`
-- ✅ `backend/Araponga.Api/Contracts/Marketplace/SearchResponse.cs`
+- ✅ `backend/Arah.Application/Services/MarketplaceSearchService.cs`
+- ✅ `backend/Arah.Application/Models/SearchFilters.cs`
+- ✅ `backend/Arah.Api/Controllers/MarketplaceSearchController.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/SearchRequest.cs`
+- ✅ `backend/Arah.Api/Contracts/Marketplace/SearchResponse.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs` (índices full-text adicionados)
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresStoreItemRepository.cs` (full-text search implementado)
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs` (índices full-text adicionados)
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresStoreItemRepository.cs` (full-text search implementado)
 
 **Critérios de Sucesso**:
 - ✅ Busca funcionando
@@ -289,11 +289,11 @@ Completar funcionalidades essenciais de edição e gestão que permitem:
 - [x] Testes — ✅ `UserActivityServiceTests.cs` existe
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Application/Services/UserActivityService.cs`
-- ✅ `backend/Araponga.Application/Models/UserActivityHistory.cs`
-- ✅ `backend/Araponga.Api/Controllers/UserActivityController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Users/UserActivityHistoryResponse.cs`
-- ✅ `backend/Araponga.Tests/Application/UserActivityServiceTests.cs`
+- ✅ `backend/Arah.Application/Services/UserActivityService.cs`
+- ✅ `backend/Arah.Application/Models/UserActivityHistory.cs`
+- ✅ `backend/Arah.Api/Controllers/UserActivityController.cs`
+- ✅ `backend/Arah.Api/Contracts/Users/UserActivityHistoryResponse.cs`
+- ✅ `backend/Arah.Tests/Application/UserActivityServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Histórico funcionando
@@ -348,7 +348,7 @@ Para cada funcionalidade implementada nesta fase:
 
 **Estrutura de arquivo**:
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Api/BDD/
 │   ├── PostEditing.feature
 │   ├── EventEditing.feature
@@ -504,19 +504,19 @@ Feature: Editar Post
 - [ ] Documentação
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Moderation/ModerationThresholdConfig.cs`
-- `backend/Araponga.Application/Interfaces/Moderation/IModerationThresholdConfigRepository.cs`
-- `backend/Araponga.Application/Services/Moderation/ModerationThresholdConfigService.cs`
-- `backend/Araponga.Api/Controllers/ModerationThresholdConfigController.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresModerationThresholdConfigRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryModerationThresholdConfigRepository.cs`
-- `backend/Araponga.Tests/Api/ModerationThresholdConfigIntegrationTests.cs`
+- `backend/Arah.Domain/Moderation/ModerationThresholdConfig.cs`
+- `backend/Arah.Application/Interfaces/Moderation/IModerationThresholdConfigRepository.cs`
+- `backend/Arah.Application/Services/Moderation/ModerationThresholdConfigService.cs`
+- `backend/Arah.Api/Controllers/ModerationThresholdConfigController.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresModerationThresholdConfigRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryModerationThresholdConfigRepository.cs`
+- `backend/Arah.Tests/Api/ModerationThresholdConfigIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ReportService.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Application/Services/ReportService.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Critérios de Sucesso**:
 - ✅ Thresholds configuráveis por território
@@ -603,29 +603,29 @@ Feature: Editar Post
 ### Arquivos Implementados
 
 **Edição de Posts**:
-- ✅ `backend/Araponga.Application/Services/PostEditService.cs`
-- ✅ `backend/Araponga.Domain/Feed/CommunityPost.cs` (campos `EditedAtUtc`, `EditCount`)
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs` (endpoint `PATCH /api/v1/feed/{id}`)
+- ✅ `backend/Arah.Application/Services/PostEditService.cs`
+- ✅ `backend/Arah.Domain/Feed/CommunityPost.cs` (campos `EditedAtUtc`, `EditCount`)
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs` (endpoint `PATCH /api/v1/feed/{id}`)
 
 **Edição de Eventos**:
-- ✅ `backend/Araponga.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync)
-- ✅ `backend/Araponga.Domain/Events/TerritoryEvent.cs` (métodos `Update`, `Cancel`)
-- ✅ `backend/Araponga.Api/Controllers/EventsController.cs` (endpoints implementados)
+- ✅ `backend/Arah.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync)
+- ✅ `backend/Arah.Domain/Events/TerritoryEvent.cs` (métodos `Update`, `Cancel`)
+- ✅ `backend/Arah.Api/Controllers/EventsController.cs` (endpoints implementados)
 
 **Sistema de Avaliações**:
-- ✅ `backend/Araponga.Application/Services/RatingService.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreRating.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreItemRating.cs`
-- ✅ `backend/Araponga.Api/Controllers/RatingController.cs`
+- ✅ `backend/Arah.Application/Services/RatingService.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreRating.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreItemRating.cs`
+- ✅ `backend/Arah.Api/Controllers/RatingController.cs`
 
 **Busca no Marketplace**:
-- ✅ `backend/Araponga.Application/Services/MarketplaceSearchService.cs`
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs`
-- ✅ `backend/Araponga.Api/Controllers/MarketplaceSearchController.cs`
+- ✅ `backend/Arah.Application/Services/MarketplaceSearchService.cs`
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs`
+- ✅ `backend/Arah.Api/Controllers/MarketplaceSearchController.cs`
 
 **Histórico de Atividades**:
-- ✅ `backend/Araponga.Application/Services/UserActivityService.cs`
-- ✅ `backend/Araponga.Api/Controllers/UserActivityController.cs`
+- ✅ `backend/Arah.Application/Services/UserActivityService.cs`
+- ✅ `backend/Arah.Api/Controllers/UserActivityController.cs`
 
 ---
 
