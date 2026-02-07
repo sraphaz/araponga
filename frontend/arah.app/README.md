@@ -15,7 +15,7 @@ Se a pasta foi criada manualmente (sem `flutter create`):
 
 ```bash
 cd frontend/Arah.app
-flutter create . --project-name araponga_app --org com.Arah --platforms android,ios,web
+flutter create . --project-name arah_app --org com.arah --platforms android,ios,web
 ```
 
 Depois:

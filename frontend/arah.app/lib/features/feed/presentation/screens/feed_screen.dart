@@ -213,7 +213,7 @@ class _FeedListState extends State<_FeedList> {
                   Icon(
                     Icons.article_outlined,
                     size: AppConstants.avatarSizeLg,
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: AppConstants.spacingMd),
                   Text(

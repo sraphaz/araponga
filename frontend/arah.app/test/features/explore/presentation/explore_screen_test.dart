@@ -1,7 +1,7 @@
-import 'package:araponga_app/core/providers/territory_provider.dart';
-import 'package:araponga_app/features/explore/presentation/screens/explore_screen.dart';
-import 'package:araponga_app/features/territories/presentation/providers/territories_list_provider.dart';
-import 'package:araponga_app/l10n/app_localizations.dart';
+import 'package:arah_app/core/providers/territory_provider.dart';
+import 'package:arah_app/features/explore/presentation/screens/explore_screen.dart';
+import 'package:arah_app/features/territories/presentation/providers/territories_list_provider.dart';
+import 'package:arah_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

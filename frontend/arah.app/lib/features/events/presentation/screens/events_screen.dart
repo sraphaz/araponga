@@ -39,7 +39,7 @@ class EventsScreen extends ConsumerWidget {
                     Icon(
                       Icons.event_busy,
                       size: AppConstants.iconSizeLg,
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                     ),
                     const SizedBox(height: AppConstants.spacingMd),
                     Text(
@@ -96,7 +96,7 @@ class EventsScreen extends ConsumerWidget {
                   Icon(
                     Icons.event_available,
                     size: AppConstants.iconSizeLg,
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: AppConstants.spacingMd),
                   Text(
@@ -259,9 +259,9 @@ class _EventCardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: AppConstants.spacingMd),
-      child: const Padding(
+    return const Card(
+      margin: EdgeInsets.only(bottom: AppConstants.spacingMd),
+      child: Padding(
         padding: EdgeInsets.all(AppConstants.spacingMd),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

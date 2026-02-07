@@ -1,8 +1,8 @@
-import 'package:araponga_app/core/config/app_config.dart';
-import 'package:araponga_app/core/storage/secure_storage_service.dart';
-import 'package:araponga_app/features/auth/data/models/auth_models.dart';
-import 'package:araponga_app/features/auth/data/repositories/auth_repository.dart';
-import 'package:araponga_app/features/auth/presentation/providers/auth_state_provider.dart';
+import 'package:arah_app/core/config/app_config.dart';
+import 'package:arah_app/core/storage/secure_storage_service.dart';
+import 'package:arah_app/features/auth/data/models/auth_models.dart';
+import 'package:arah_app/features/auth/data/repositories/auth_repository.dart';
+import 'package:arah_app/features/auth/presentation/providers/auth_state_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -67,7 +67,7 @@ class NotificationsScreen extends ConsumerWidget {
                   Icon(
                     Icons.notifications_none,
                     size: AppConstants.iconSizeLg,
-                    color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: AppConstants.spacingMd),
                   Text(

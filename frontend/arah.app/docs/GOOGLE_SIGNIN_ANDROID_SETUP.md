@@ -116,7 +116,7 @@ cd frontend\Arah.app
 flutter create . --platforms=android
 ```
 
-**Importante:** o package name deve ser exatamente `com.Arah`. Em `android/app/build.gradle`, em `defaultConfig`, defina `applicationId "com.Arah"`. Se o template tiver outro valor (ex.: `com.example.araponga_app`), altere para `com.Arah` para coincidir com o Firebase e o Google Cloud. Depois ajuste os arquivos abaixo.
+**Importante:** o package name deve ser exatamente `com.Arah`. Em `android/app/build.gradle`, em `defaultConfig`, defina `applicationId "com.Arah"`. Se o template tiver outro valor (ex.: `com.example.arah_app`), altere para `com.Arah` para coincidir com o Firebase e o Google Cloud. Depois ajuste os arquivos abaixo.
 
 ### 4.1 android/build.gradle (raiz do Android)
 

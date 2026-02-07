@@ -1,0 +1,36 @@
+# CodeQL: análise de segurança. Usa sempre o workspace do Actions ($GITHUB_WORKSPACE),
+# evitando caminhos antigos (ex.: .../araponga/araponga) que causam "Invalid working directory"
+# no pre-finalize do C# após renomear o repositório.
+name: CodeQL
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: '0 0 * * 1' # Segunda-feira 00:00
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: csharp
+          # C# usa modo "none" por padrão; não gravar caminho absoluto do workspace.
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:csharp"
