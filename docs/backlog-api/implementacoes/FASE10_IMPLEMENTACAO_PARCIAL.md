@@ -11,12 +11,12 @@
 ### 1. Mídias em Posts (10.1 e 10.2)
 
 #### Arquivos Modificados:
-- ✅ `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs` - Adicionado campo `MediaIds`
-- ✅ `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs` - Adicionados campos `MediaUrls` e `MediaCount`
-- ✅ `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs` - Validação de máximo 10 mídias
-- ✅ `backend/Araponga.Application/Services/PostCreationService.cs` - Integração de mídias na criação de posts
-- ✅ `backend/Araponga.Application/Services/FeedService.cs` - Passagem de `mediaIds` para PostCreationService
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs` - Suporte completo a mídias em todas as respostas
+- ✅ `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs` - Adicionado campo `MediaIds`
+- ✅ `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs` - Adicionados campos `MediaUrls` e `MediaCount`
+- ✅ `backend/Arah.Api/Validators/CreatePostRequestValidator.cs` - Validação de máximo 10 mídias
+- ✅ `backend/Arah.Application/Services/PostCreationService.cs` - Integração de mídias na criação de posts
+- ✅ `backend/Arah.Application/Services/FeedService.cs` - Passagem de `mediaIds` para PostCreationService
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs` - Suporte completo a mídias em todas as respostas
 
 #### Funcionalidades:
 - ✅ Posts podem ter até 10 mídias associadas

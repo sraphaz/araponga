@@ -2,7 +2,7 @@
 
 **Versão**: 2.0  
 **Data**: 2025-01-20  
-**Aplicação**: Documentação, código, comunicação e materiais do projeto Araponga
+**Aplicação**: Documentação, código, comunicação e materiais do projeto Arah
 
 ---
 

@@ -7,7 +7,7 @@
 
 ### 1. Estrutura HTML Quebrada
 - **Seções fora dos phase-panels**: Linhas 1155-1700+ contêm seções que estão fora dos `phase-panels`, sendo escondidas pelo CSS mas causando problemas de estrutura
-- **Conteúdo duplicado**: "Como o Araponga funciona" aparece dentro de phase-panel (linha 666) e fora (linha 1156)
+- **Conteúdo duplicado**: "Como o Arah funciona" aparece dentro de phase-panel (linha 666) e fora (linha 1156)
 - **Seções sem IDs corretos**: `#visao-geral` e `#como-funciona` referenciados na sidebar mas não existem nos phase-panels
 
 ### 2. Falta de Contexto Institucional

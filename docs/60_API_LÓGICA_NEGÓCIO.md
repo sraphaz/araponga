@@ -1,4 +1,4 @@
-# API Araponga - Lógica de Negócio e Usabilidade
+# API Arah - Lógica de Negócio e Usabilidade
 
 **Documento de Negócio Completo**  
 **Versão**: 2.0  
@@ -90,9 +90,9 @@ A documentação completa está agora organizada em **22 subdocumentos** por cat
 
 ## 📚 Links Relacionados
 
-- **DevPortal**: `devportal.araponga.app/` - Portal de desenvolvedor com exemplos práticos
-- **Wiki**: `devportal.araponga.app/wiki/` - Documentação completa do projeto
-- **GitHub**: `github.com/sraphaz/araponga` - Código-fonte
+- **DevPortal**: `devportal.Arah.app/` - Portal de desenvolvedor com exemplos práticos
+- **Wiki**: `devportal.Arah.app/wiki/` - Documentação completa do projeto
+- **GitHub**: `github.com/sraphaz/Arah` - Código-fonte
 
 ---
 

@@ -53,7 +53,7 @@ class BffService {
 // Uso
 void main() async {
   final service = BffService(
-    baseUrl: 'https://api.araponga.com',
+    baseUrl: 'https://api.Arah.com',
     token: 'seu_token_aqui',
   );
 
@@ -94,7 +94,7 @@ class _FeedPageState extends State<FeedPage> {
     setState(() => loading = true);
 
     try {
-      final uri = Uri.parse('https://api.araponga.com/api/v2/journeys/feed/territory-feed')
+      final uri = Uri.parse('https://api.Arah.com/api/v2/journeys/feed/territory-feed')
           .replace(queryParameters: {
         'territoryId': 'seu-territory-id',
         'pageNumber': '1',
@@ -149,7 +149,7 @@ class _FeedPageState extends State<FeedPage> {
 // Obter token
 Future<String> getAuthToken() async {
   final response = await http.post(
-    Uri.parse('https://api.araponga.com/api/v1/auth/social'),
+    Uri.parse('https://api.Arah.com/api/v1/auth/social'),
     headers: {'Content-Type': 'application/json'},
     body: jsonEncode({
       'provider': 'GOOGLE',

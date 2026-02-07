@@ -24,8 +24,8 @@ Este PR corrige dois problemas críticos identificados nos testes:
 - ✅ Testes são pulados automaticamente quando detectam variáveis de ambiente CI/CD (`GITHUB_ACTIONS`, `CI`, `TF_BUILD`, `JENKINS_URL`)
 
 **Arquivos modificados:**
-- `backend/Araponga.Tests/Performance/MediaPerformanceTests.cs`
-- `backend/Araponga.Tests/Performance/PerformanceTests.cs`
+- `backend/Arah.Tests/Performance/MediaPerformanceTests.cs`
+- `backend/Arah.Tests/Performance/PerformanceTests.cs`
 
 ### 2. Bug de Autenticação BDD
 
@@ -42,7 +42,7 @@ O step `"que o usuário X está autenticado"` apenas definia `_currentUser`, mas
 - ✅ Garante que cada requisição use o token do usuário correto
 
 **Arquivo modificado:**
-- `backend/Araponga.Tests/Api/BDD/MediaSteps.cs`
+- `backend/Arah.Tests/Api/BDD/MediaSteps.cs`
 
 ## 📊 Impacto
 
@@ -131,5 +131,5 @@ public async Task GivenQueOUsuarioEstaAutenticado(string userName)
 ## 🔗 Referências
 
 - Issue identificada pelo bot: P2 Badge - Re-authenticate when switching the active user
-- Testes de performance: `backend/Araponga.Tests/Performance/`
-- Testes BDD: `backend/Araponga.Tests/Api/BDD/MediaSteps.cs`
+- Testes de performance: `backend/Arah.Tests/Performance/`
+- Testes BDD: `backend/Arah.Tests/Api/BDD/MediaSteps.cs`

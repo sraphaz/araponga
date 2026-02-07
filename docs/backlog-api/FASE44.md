@@ -24,7 +24,7 @@ Implementar **integrações com aplicativos externos** que:
 - ✅ **Não Invasivo**: Não substitui funcionalidades principais
 - ✅ **Transparência**: Usuário sabe o que está sendo compartilhado
 - ✅ **Privacidade**: Respeita preferências de privacidade
-- ✅ **Soberania**: Feed cronológico do Araponga permanece principal
+- ✅ **Soberania**: Feed cronológico do Arah permanece principal
 
 ---
 
@@ -42,8 +42,8 @@ Implementar **integrações com aplicativos externos** que:
 ### Requisitos Funcionais
 
 #### 1. Postagem Cross-Platform
-- ✅ Publicar post do Araponga no Instagram
-- ✅ Publicar post do Araponga no Facebook
+- ✅ Publicar post do Arah no Instagram
+- ✅ Publicar post do Arah no Facebook
 - ✅ Compartilhar via WhatsApp (link + preview)
 - ✅ Sincronização opcional (usuário escolhe)
 - ✅ Respeitar privacidade territorial (não compartilhar RESIDENTS_ONLY)
@@ -104,7 +104,7 @@ Implementar **integrações com aplicativos externos** que:
   - [ ] `ExpiresAt?` (nullable)
   - [ ] `CreatedAtUtc`, `UpdatedAtUtc`
 - [ ] Criar modelo `SocialMediaPost`:
-  - [ ] `Id`, `PostId` (post do Araponga)
+  - [ ] `Id`, `PostId` (post do Arah)
   - [ ] `Platform` (SocialMediaPlatform)
   - [ ] `ExternalPostId` (ID na plataforma externa)
   - [ ] `Status` (PENDING, PUBLISHED, FAILED, DELETED)
@@ -125,19 +125,19 @@ Implementar **integrações com aplicativos externos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SocialMediaService.cs`
-- `backend/Araponga.Infrastructure/SocialMedia/ISocialMediaPublisher.cs`
-- `backend/Araponga.Infrastructure/SocialMedia/InstagramPublisher.cs`
-- `backend/Araponga.Infrastructure/SocialMedia/FacebookPublisher.cs`
-- `backend/Araponga.Infrastructure/SocialMedia/WhatsAppPublisher.cs`
-- `backend/Araponga.Domain/SocialMedia/SocialMediaConnection.cs`
-- `backend/Araponga.Domain/SocialMedia/SocialMediaPlatform.cs`
-- `backend/Araponga.Domain/SocialMedia/SocialMediaPost.cs`
-- `backend/Araponga.Application/Interfaces/ISocialMediaConnectionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISocialMediaPostRepository.cs`
-- `backend/Araponga.Api/Controllers/SocialMediaController.cs`
-- `backend/Araponga.Api/Contracts/SocialMedia/ConnectAccountRequest.cs`
-- `backend/Araponga.Api/Contracts/SocialMedia/SocialMediaConnectionResponse.cs`
+- `backend/Arah.Application/Services/SocialMediaService.cs`
+- `backend/Arah.Infrastructure/SocialMedia/ISocialMediaPublisher.cs`
+- `backend/Arah.Infrastructure/SocialMedia/InstagramPublisher.cs`
+- `backend/Arah.Infrastructure/SocialMedia/FacebookPublisher.cs`
+- `backend/Arah.Infrastructure/SocialMedia/WhatsAppPublisher.cs`
+- `backend/Arah.Domain/SocialMedia/SocialMediaConnection.cs`
+- `backend/Arah.Domain/SocialMedia/SocialMediaPlatform.cs`
+- `backend/Arah.Domain/SocialMedia/SocialMediaPost.cs`
+- `backend/Arah.Application/Interfaces/ISocialMediaConnectionRepository.cs`
+- `backend/Arah.Application/Interfaces/ISocialMediaPostRepository.cs`
+- `backend/Arah.Api/Controllers/SocialMediaController.cs`
+- `backend/Arah.Api/Contracts/SocialMedia/ConnectAccountRequest.cs`
+- `backend/Arah.Api/Contracts/SocialMedia/SocialMediaConnectionResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com Instagram funcionando
@@ -187,12 +187,12 @@ Implementar **integrações com aplicativos externos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/WhatsAppService.cs`
-- `backend/Araponga.Infrastructure/WhatsApp/IWhatsAppClient.cs`
-- `backend/Araponga.Infrastructure/WhatsApp/WhatsAppClient.cs`
-- `backend/Araponga.Api/Controllers/WhatsAppController.cs`
-- `backend/Araponga.Api/Controllers/WhatsAppWebhookController.cs`
-- `backend/Araponga.Api/Contracts/WhatsApp/SendMessageRequest.cs`
+- `backend/Arah.Application/Services/WhatsAppService.cs`
+- `backend/Arah.Infrastructure/WhatsApp/IWhatsAppClient.cs`
+- `backend/Arah.Infrastructure/WhatsApp/WhatsAppClient.cs`
+- `backend/Arah.Api/Controllers/WhatsAppController.cs`
+- `backend/Arah.Api/Controllers/WhatsAppWebhookController.cs`
+- `backend/Arah.Api/Contracts/WhatsApp/SendMessageRequest.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com WhatsApp funcionando
@@ -233,11 +233,11 @@ Implementar **integrações com aplicativos externos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Payments/ApplePayGateway.cs`
-- `backend/Araponga.Infrastructure/Payments/GooglePayGateway.cs`
-- `backend/Araponga.Api/Controllers/PaymentController.cs` (expandir)
-- `backend/Araponga.Api/Contracts/Payments/ApplePayRequest.cs`
-- `backend/Araponga.Api/Contracts/Payments/GooglePayRequest.cs`
+- `backend/Arah.Infrastructure/Payments/ApplePayGateway.cs`
+- `backend/Arah.Infrastructure/Payments/GooglePayGateway.cs`
+- `backend/Arah.Api/Controllers/PaymentController.cs` (expandir)
+- `backend/Arah.Api/Contracts/Payments/ApplePayRequest.cs`
+- `backend/Arah.Api/Contracts/Payments/GooglePayRequest.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com Apple Pay funcionando
@@ -288,16 +288,16 @@ Implementar **integrações com aplicativos externos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DigitalSignatureService.cs`
-- `backend/Araponga.Infrastructure/Signatures/IDigitalSignatureClient.cs`
-- `backend/Araponga.Infrastructure/Signatures/DocuSignClient.cs` (ou ClickSignClient)
-- `backend/Araponga.Domain/Signatures/DocumentSignature.cs`
-- `backend/Araponga.Domain/Signatures/DocumentType.cs`
-- `backend/Araponga.Domain/Signatures/SignatureStatus.cs`
-- `backend/Araponga.Application/Interfaces/IDocumentSignatureRepository.cs`
-- `backend/Araponga.Api/Controllers/DigitalSignatureController.cs`
-- `backend/Araponga.Api/Contracts/Signatures/SignDocumentRequest.cs`
-- `backend/Araponga.Api/Contracts/Signatures/DocumentSignatureResponse.cs`
+- `backend/Arah.Application/Services/DigitalSignatureService.cs`
+- `backend/Arah.Infrastructure/Signatures/IDigitalSignatureClient.cs`
+- `backend/Arah.Infrastructure/Signatures/DocuSignClient.cs` (ou ClickSignClient)
+- `backend/Arah.Domain/Signatures/DocumentSignature.cs`
+- `backend/Arah.Domain/Signatures/DocumentType.cs`
+- `backend/Arah.Domain/Signatures/SignatureStatus.cs`
+- `backend/Arah.Application/Interfaces/IDocumentSignatureRepository.cs`
+- `backend/Arah.Api/Controllers/DigitalSignatureController.cs`
+- `backend/Arah.Api/Contracts/Signatures/SignDocumentRequest.cs`
+- `backend/Arah.Api/Contracts/Signatures/DocumentSignatureResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de assinaturas funcionando
@@ -367,7 +367,7 @@ Implementar **integrações com aplicativos externos** que:
 - Notificar usuário sobre o que está sendo compartilhado
 
 **Feed Cronológico**:
-- Feed do Araponga permanece principal
+- Feed do Arah permanece principal
 - Postagem cross-platform é opcional
 - Não substitui funcionalidades principais
 

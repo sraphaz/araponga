@@ -33,8 +33,8 @@ Observabilidade completa com métricas, logs e tracing.
 - [x] Documentar configuração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (Serilog configuration)
-- `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs`
+- `backend/Arah.Api/Program.cs` (Serilog configuration)
+- `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs`
 
 **Critérios de Sucesso**:
 - ✅ Logs centralizados funcionando
@@ -61,12 +61,12 @@ Observabilidade completa com métricas, logs e tracing.
 - [x] Documentar métricas
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Metrics/ArapongaMetrics.cs`
-- `backend/Araponga.Api/Metrics/` (novo diretório)
+- `backend/Arah.Application/Metrics/ArapongaMetrics.cs`
+- `backend/Arah.Api/Metrics/` (novo diretório)
 - `docs/METRICS.md`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 - Services principais (instrumentar)
 
 **Critérios de Sucesso**:
@@ -95,10 +95,10 @@ Observabilidade completa com métricas, logs e tracing.
 - [x] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Tracing/` (novo diretório)
+- `backend/Arah.Api/Tracing/` (novo diretório)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ OpenTelemetry configurado
@@ -210,19 +210,19 @@ Observabilidade completa com métricas, logs e tracing.
 - [ ] Documentação
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Map/MapConfig.cs`
-- `backend/Araponga.Application/Interfaces/Map/IMapConfigRepository.cs`
-- `backend/Araponga.Application/Services/Map/MapConfigService.cs`
-- `backend/Araponga.Api/Controllers/MapConfigController.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMapConfigRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryMapConfigRepository.cs`
-- `backend/Araponga.Tests/Api/MapConfigIntegrationTests.cs`
+- `backend/Arah.Domain/Map/MapConfig.cs`
+- `backend/Arah.Application/Interfaces/Map/IMapConfigRepository.cs`
+- `backend/Arah.Application/Services/Map/MapConfigService.cs`
+- `backend/Arah.Api/Controllers/MapConfigController.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMapConfigRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryMapConfigRepository.cs`
+- `backend/Arah.Tests/Api/MapConfigIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/TerritoryService.cs` (ou serviço de mapas equivalente)
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Application/Services/TerritoryService.cs` (ou serviço de mapas equivalente)
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Critérios de Sucesso**:
 - ✅ Configuração de mapas por território

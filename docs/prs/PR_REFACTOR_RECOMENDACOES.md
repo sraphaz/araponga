@@ -9,12 +9,12 @@ Este PR implementa as recomendacoes criticas identificadas na revisao geral do c
 ### Fase 1 - Fundacoes
 
 #### 1.1 Padronizacao de Tratamento de Erros
-- ✅ Criado `Result<T>` e `OperationResult` em `Araponga.Application/Common/Result.cs`
+- ✅ Criado `Result<T>` e `OperationResult` em `Arah.Application/Common/Result.cs`
 - ✅ Estrutura padronizada para retornos de operacoes que podem falhar
 - ✅ Base para migracao futura de todos os services
 
 #### 1.2 Paginacao
-- ✅ Criado `PagedResult<T>` e `PaginationParameters` em `Araponga.Application/Common/PagedResult.cs`
+- ✅ Criado `PagedResult<T>` e `PaginationParameters` em `Arah.Application/Common/PagedResult.cs`
 - ✅ Suporte a paginacao em `FeedService.ListForTerritoryPagedAsync`
 - ✅ Estrutura reutilizavel para outros metodos de listagem
 
@@ -65,23 +65,23 @@ Este PR implementa as recomendacoes criticas identificadas na revisao geral do c
 ## Arquivos Alterados
 
 ### Novos Arquivos (12)
-- `backend/Araponga.Application/Common/Result.cs`
-- `backend/Araponga.Application/Common/PagedResult.cs`
-- `backend/Araponga.Application/Common/ValidationHelper.cs`
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/PostInteractionService.cs`
-- `backend/Araponga.Application/Services/PostFilterService.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
-- `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs`
-- `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs`
-- `backend/Araponga.Api/Validators/TerritorySelectionRequestValidator.cs`
+- `backend/Arah.Application/Common/Result.cs`
+- `backend/Arah.Application/Common/PagedResult.cs`
+- `backend/Arah.Application/Common/ValidationHelper.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/PostInteractionService.cs`
+- `backend/Arah.Application/Services/PostFilterService.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs`
+- `backend/Arah.Api/Validators/CreatePostRequestValidator.cs`
+- `backend/Arah.Api/Validators/TerritorySelectionRequestValidator.cs`
 
 ### Arquivos Modificados (8)
-- `backend/Araponga.Application/Services/FeedService.cs` - refatorado
-- `backend/Araponga.Api/Program.cs` - simplificado
-- `backend/Araponga.Api/Middleware/RequestLoggingMiddleware.cs` - melhorado
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - documentado
-- `backend/Araponga.Api/Araponga.Api.csproj` - dependencias adicionadas
+- `backend/Arah.Application/Services/FeedService.cs` - refatorado
+- `backend/Arah.Api/Program.cs` - simplificado
+- `backend/Arah.Api/Middleware/RequestLoggingMiddleware.cs` - melhorado
+- `backend/Arah.Infrastructure/InMemory/InMemoryUnitOfWork.cs` - documentado
+- `backend/Arah.Api/Arah.Api.csproj` - dependencias adicionadas
 
 ## Impacto
 

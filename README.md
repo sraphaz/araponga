@@ -1,6 +1,6 @@
-# Araponga
+# Arah
 
-**Araponga** é uma plataforma digital comunitária orientada ao território. Tecnologia que serve à vida local, à convivência e à autonomia das comunidades.
+**Arah** é uma plataforma digital comunitária orientada ao território. Tecnologia que serve à vida local, à convivência e à autonomia das comunidades.
 
 Não é uma rede social genérica. É uma **extensão digital do território vivo**.
 
@@ -10,13 +10,13 @@ Não é uma rede social genérica. É uma **extensão digital do território viv
 
 Plataformas digitais capturam atenção, desorganizam comunidades e desconectam pessoas do lugar onde vivem.
 
-O Araponga é um contraponto consciente a esse modelo.
+O Arah é um contraponto consciente a esse modelo.
 
 **Território como referência. Comunidade como prioridade. Tecnologia como ferramenta — não como fim.**
 
 ---
 
-## O que é o Araponga
+## O que é o Arah
 
 Plataforma que permite:
 
@@ -40,7 +40,7 @@ Sem algoritmos de manipulação, feed global infinito ou extração de dados par
 
 ### 1. Território é geográfico (e neutro)
 
-No Araponga, `territory` representa **apenas um lugar físico real**:
+No Arah, `territory` representa **apenas um lugar físico real**:
 
 - nome
 - localização
@@ -80,7 +80,7 @@ Isso torna o sistema:
 
 ### 3. Tecnologia a serviço do território
 
-O Araponga **não é**:
+O Arah **não é**:
 - um marketplace agressivo
 - uma rede de engajamento infinito
 - um produto de vigilância
@@ -99,12 +99,12 @@ Ele é uma **infraestrutura digital comunitária**, pensada para:
 O backend segue princípios de **Clean Architecture**, com separação clara de responsabilidades:
 
 backend/
-├── Araponga.Api # API HTTP (controllers, endpoints, middlewares)
-├── Araponga.Application # Casos de uso / regras de aplicação
-├── Araponga.Domain # Modelo de domínio (territory, regras centrais)
-├── Araponga.Infrastructure # Persistência, integrações, adapters
-├── Araponga.Shared # Tipos e utilitários compartilhados
-└── Araponga.Tests # Testes automatizados
+├── Arah.Api # API HTTP (controllers, endpoints, middlewares)
+├── Arah.Application # Casos de uso / regras de aplicação
+├── Arah.Domain # Modelo de domínio (territory, regras centrais)
+├── Arah.Infrastructure # Persistência, integrações, adapters
+├── Arah.Shared # Tipos e utilitários compartilhados
+└── Arah.Tests # Testes automatizados
 
 ### Conceitos centrais do domínio
 
@@ -137,7 +137,7 @@ Para rodar **API, BFF, seeds e app Flutter** do zero:
 
 1. **Subir a stack**: `.\scripts\run-local-stack.ps1` (PowerShell na raiz do repositório).  
    Use `-ResetDatabase` para recriar o banco e aplicar migrações.
-2. **Rodar o app**: em outro terminal, `cd frontend\araponga.app` e `flutter run`.
+2. **Rodar o app**: em outro terminal, `cd frontend\arah.app` e `flutter run`.
 
 Guia completo (pré-requisitos, fluxo de onboarding, o que está implementado e o que falta): **[Release estável – App e Onboarding](./docs/STABLE_RELEASE_APP_ONBOARDING.md)**.
 
@@ -196,7 +196,7 @@ Documentação técnica das fases de implementação: Instalador, Modularizaçã
 
 ## 🚀 Estado do Projeto - 48 Fases de Desenvolvimento
 
-O Araponga está em **desenvolvimento ativo** com **16 fases completas** (Fases 1-16) implementadas e validadas. O projeto segue um modelo de desenvolvimento disciplinado com foco em arquitetura sólida e evolução estratégica.
+O Arah está em **desenvolvimento ativo** com **16 fases completas** (Fases 1-16) implementadas e validadas. O projeto segue um modelo de desenvolvimento disciplinado com foco em arquitetura sólida e evolução estratégica.
 
 ### 📊 Progresso do Desenvolvimento
 
@@ -501,7 +501,7 @@ O projeto está em **evolução disciplinada**, com foco em solidez e escalabili
 dotnet restore
 dotnet build
 dotnet test
-dotnet run --project backend/Araponga.Api
+dotnet run --project backend/Arah.Api
 ```
 
 **Testes com cobertura**: `./scripts/run-coverage.ps1` (ou `pwsh scripts/run-coverage.ps1`). O CI (GitHub Actions) também roda coverage e envia ao Codecov.
@@ -536,7 +536,7 @@ docker-compose -f docker-compose.dev.yml up -d --build
 - PostgreSQL 16 com PostGIS
 - Redis 7 (cache distribuído)
 - MinIO (storage S3-compatible)
-- API Araponga
+- API Arah
 
 **Endpoints:**
 - API: http://localhost:8080
@@ -549,8 +549,8 @@ Veja a [documentação completa do ambiente Docker](./docs/DOCKER_DEV_ENVIRONMEN
 
 ```bash
 dotnet ef database update \
-  --project backend/Araponga.Infrastructure \
-  --startup-project backend/Araponga.Api
+  --project backend/Arah.Infrastructure \
+  --startup-project backend/Arah.Api
 ```
 
 ### Configuração (Produção)
@@ -564,8 +564,8 @@ Para rodar em produção, configure as variáveis de ambiente:
 JWT__SIGNINGKEY=<secret-forte-de-pelo-menos-32-caracteres>
 
 # CORS Origins - Não pode ser wildcard (*) em produção
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+Cors__AllowedOrigins__0=https://app.arah.com
+Cors__AllowedOrigins__1=https://www.arah.com
 ```
 
 **Opcional** (se usar Postgres):
@@ -613,7 +613,7 @@ A versão do GitHub Pages inclui links diretos para documentação, user stories
 
 Consulte o guia em [`docs/41_CONTRIBUTING.md`](./docs/41_CONTRIBUTING.md).
 
-O Araponga é aberto à colaboração, especialmente de pessoas interessadas em:
+O Arah é aberto à colaboração, especialmente de pessoas interessadas em:
 
 - tecnologia com impacto social
 - comunidades locais
@@ -643,7 +643,7 @@ Direções possíveis (não promessas fechadas):
 - Integração com iniciativas regenerativas
 - Tecnologia como guardiã do território, não como exploradora
 
-O Araponga não quer crescer rápido. Quer criar raízes profundas.
+O Arah não quer crescer rápido. Quer criar raízes profundas.
 
 ---
 
@@ -668,4 +668,4 @@ Este projeto é distribuído sob uma **licença aberta orientada à comunidade e
 - Versão oficial (EN): `LICENSE`
 - Versão em português (PT-BR): `LICENSE.pt-BR`
 
-Araponga canta para avisar, proteger e comunicar. Que esta plataforma faça o mesmo.
+Arah canta para avisar, proteger e comunicar. Que esta plataforma faça o mesmo.

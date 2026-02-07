@@ -40,7 +40,7 @@
 - ✅ CORS
 - ✅ Security headers
 
-**Arquivo**: `backend/Araponga.Tests/Api/SecurityTests.cs`
+**Arquivo**: `backend/Arah.Tests/Api/SecurityTests.cs`
 
 ### 2. Testes de Performance (100% ✅)
 
@@ -53,7 +53,7 @@
 - ✅ Authentication: < 1000ms
 - ✅ MultipleConcurrentRequests: < 2000ms (10 requisições)
 
-**Arquivo**: `backend/Araponga.Tests/Performance/PerformanceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Performance/PerformanceTests.cs`
 
 ### 3. Paginação Completa (100% ✅)
 
@@ -186,15 +186,15 @@ Todas as tarefas da Fase 2 foram concluídas:
 ## 📝 Arquivos Criados/Modificados
 
 ### Novos Arquivos
-- `backend/Araponga.Tests/Performance/PerformanceTests.cs`
-- `backend/Araponga.Tests/Application/ReportServiceTests.cs`
-- `backend/Araponga.Tests/Application/JoinRequestServiceTests.cs`
-- `backend/Araponga.Tests/Application/CacheMetricsServiceTests.cs`
-- `backend/Araponga.Application/Common/Constants.cs` (expandido)
-- `backend/Araponga.Application/Common/ValidationHelpers.cs`
-- `backend/Araponga.Application/Services/CacheInvalidationService.cs`
-- `backend/Araponga.Application/Services/CacheMetricsService.cs`
-- `backend/Araponga.Api/Controllers/CacheMetricsController.cs`
+- `backend/Arah.Tests/Performance/PerformanceTests.cs`
+- `backend/Arah.Tests/Application/ReportServiceTests.cs`
+- `backend/Arah.Tests/Application/JoinRequestServiceTests.cs`
+- `backend/Arah.Tests/Application/CacheMetricsServiceTests.cs`
+- `backend/Arah.Application/Common/Constants.cs` (expandido)
+- `backend/Arah.Application/Common/ValidationHelpers.cs`
+- `backend/Arah.Application/Services/CacheInvalidationService.cs`
+- `backend/Arah.Application/Services/CacheMetricsService.cs`
+- `backend/Arah.Api/Controllers/CacheMetricsController.cs`
 
 ### Arquivos Modificados
 - 15 services refatorados

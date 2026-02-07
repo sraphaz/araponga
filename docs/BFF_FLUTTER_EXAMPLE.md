@@ -1018,7 +1018,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Araponga BFF Example',
+      title: 'Arah BFF Example',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -1034,7 +1034,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Exemplo de uso
     const territoryId = '550e8400-e29b-41d4-a716-446655440000';
-    const baseUrl = 'https://api.araponga.com';
+    const baseUrl = 'https://api.Arah.com';
     const authToken = 'your_jwt_token_here'; // Obter via /api/v1/auth/social
 
     return FeedScreen(

@@ -1,4 +1,4 @@
-# Resumo Executivo Estratégico: Araponga
+# Resumo Executivo Estratégico: Arah
 
 **Data**: 2025-01-13  
 **Versão**: 1.0  
@@ -8,13 +8,13 @@
 
 ## 🎯 Visão Executiva
 
-### O Que É o Araponga?
+### O Que É o Arah?
 
-**Araponga** é uma plataforma de **soberania territorial** que conecta comunidades locais através de um feed cronológico territorial, marketplace comunitário, eventos locais e mapeamento colaborativo. Diferente de plataformas extrativistas, o Araponga prioriza **união comunitária** sobre **engajamento manipulado**, **contexto territorial** sobre **escala global**, e **transparência** sobre **algoritmos opacos**.
+**Arah** é uma plataforma de **soberania territorial** que conecta comunidades locais através de um feed cronológico territorial, marketplace comunitário, eventos locais e mapeamento colaborativo. Diferente de plataformas extrativistas, o Arah prioriza **união comunitária** sobre **engajamento manipulado**, **contexto territorial** sobre **escala global**, e **transparência** sobre **algoritmos opacos**.
 
 ### Proposta de Valor Única
 
-| Aspecto | Plataformas Extrativistas | Araponga (Soberania Territorial) |
+| Aspecto | Plataformas Extrativistas | Arah (Soberania Territorial) |
 |--------|---------------------------|----------------------------------|
 | **Algoritmo** | Feed manipulado por engajamento | Feed cronológico territorial |
 | **Dados** | Extração para publicidade | Dados do território, sem venda |
@@ -280,9 +280,9 @@
 
 ### Mapa de Correlação com Plataformas Populares
 
-O Araponga foi projetado para permitir **transição suave** de usuários de plataformas populares, mantendo valores de **soberania territorial**:
+O Arah foi projetado para permitir **transição suave** de usuários de plataformas populares, mantendo valores de **soberania territorial**:
 
-| Plataforma | Funcionalidade Principal | Araponga Equivalente | Status |
+| Plataforma | Funcionalidade Principal | Arah Equivalente | Status |
 |------------|-------------------------|---------------------|--------|
 | **Instagram** | Feed de fotos | Feed territorial com mídias | ⏳ Fase 10 |
 | **Facebook** | Perfil, eventos, grupos | Perfil completo, eventos territoriais | ⏳ Fase 9, 10 |
@@ -409,7 +409,7 @@ O Araponga foi projetado para permitir **transição suave** de usuários de pla
 - Escala global sem contexto
 - Governança centralizada
 
-**Soberania Territorial** (Araponga):
+**Soberania Territorial** (Arah):
 - Feed cronológico territorial
 - Dados do território, sem venda
 - Contexto local e físico
@@ -424,7 +424,7 @@ O Araponga foi projetado para permitir **transição suave** de usuários de pla
 - Engajamento através de polarização
 - Dados vendidos para manipulação
 
-**Araponga**:
+**Arah**:
 - Feed cronológico (sem manipulação)
 - Foco em comunidade local
 - Transparência total
@@ -437,7 +437,7 @@ O Araponga foi projetado para permitir **transição suave** de usuários de pla
 - Conexões virtuais sem vínculo físico
 - Sem contexto territorial
 
-**Araponga**:
+**Arah**:
 - Tudo ancorado ao território físico
 - Vínculo visitor/resident baseado em localização
 - Mapa colaborativo do território
@@ -667,7 +667,7 @@ O Araponga foi projetado para permitir **transição suave** de usuários de pla
 
 ### Uma Jornada Coletiva
 
-O **Araponga** nasce da convicção de que tecnologia pode servir à vida comunitária, fortalecendo laços territoriais e promovendo autonomia local. Esta não é uma jornada solitária, mas um projeto que se fortalece com a participação de pessoas que compartilham essa visão.
+O **Arah** nasce da convicção de que tecnologia pode servir à vida comunitária, fortalecendo laços territoriais e promovendo autonomia local. Esta não é uma jornada solitária, mas um projeto que se fortalece com a participação de pessoas que compartilham essa visão.
 
 ### Por Que Colaborar?
 
@@ -690,7 +690,7 @@ O **Araponga** nasce da convicção de que tecnologia pode servir à vida comuni
 
 #### 1. Contribuição Financeira
 
-O desenvolvimento do Araponga requer recursos para:
+O desenvolvimento do Arah requer recursos para:
 - Infraestrutura (servidores, banco de dados, storage)
 - Integrações (gateways de pagamento, serviços)
 - Desenvolvimento (fases 8-14 pendentes)
@@ -703,7 +703,7 @@ O desenvolvimento do Araponga requer recursos para:
 [INSERIR CHAVE PIX AQUI]
 ```
 
-*Todas as contribuições são transparentes e serão utilizadas exclusivamente para o desenvolvimento e manutenção do Araponga.*
+*Todas as contribuições são transparentes e serão utilizadas exclusivamente para o desenvolvimento e manutenção do Arah.*
 
 ---
 
@@ -714,7 +714,7 @@ O desenvolvimento do Araponga requer recursos para:
 - **Infraestrutura**: DevOps, monitoramento, otimizações
 - **Revisão**: Code review, arquitetura, segurança
 
-**Repositório**: [GitHub - Araponga](https://github.com/[seu-repositorio])
+**Repositório**: [GitHub - Arah](https://github.com/[seu-repositorio])
 
 ---
 
@@ -775,7 +775,7 @@ O desenvolvimento do Araponga requer recursos para:
 **Para contribuir ou saber mais**:
 - **Email**: [seu-email@exemplo.com]
 - **GitHub**: [github.com/seu-repositorio]
-- **Documentação**: [docs.araponga.com]
+- **Documentação**: [docs.Arah.com]
 
 **Para contribuições financeiras**:
 - **PIX**: [INSERIR CHAVE PIX AQUI]

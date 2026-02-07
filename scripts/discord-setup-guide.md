@@ -1,6 +1,6 @@
 # 🤖 Guia de Setup Automatizado do Discord
 
-**Guia Passo a Passo para Configurar o Discord do Araponga usando Script Automatizado**
+**Guia Passo a Passo para Configurar o Discord do Arah usando Script Automatizado**
 
 **Versão**: 1.0  
 **Data**: 2025-01-20
@@ -24,7 +24,7 @@
 
 1. Acesse: https://discord.com/developers/applications
 2. Clique em **"New Application"**
-3. Dê um nome: **"Araponga Setup Bot"** ou similar
+3. Dê um nome: **"Arah Setup Bot"** ou similar
 4. Clique em **"Create"**
 
 ### 1.2 Criar Bot
@@ -94,7 +94,7 @@
 
 1. **Copie a URL gerada**
 2. **Cole no navegador** e pressione Enter
-3. Selecione seu servidor (Araponga)
+3. Selecione seu servidor (Arah)
 4. Clique em **"Autorizar"**
 5. Complete o captcha se aparecer
 6. ✅ Bot adicionado ao servidor!
@@ -119,7 +119,7 @@
 
 ## 📦 Passo 4: Instalar Dependências
 
-1. Abra terminal na pasta raiz do projeto (`araponga`)
+1. Abra terminal na pasta raiz do projeto (`Arah`)
 2. Execute:
 
 ```bash
@@ -381,7 +381,7 @@ Com este script, você configurou automaticamente:
 - ✅ Mensagem de boas-vindas fixada
 - ✅ Link de convite gerado
 
-**Agora você pode começar a usar o Discord do Araponga!**
+**Agora você pode começar a usar o Discord do Arah!**
 
 **Dúvidas?** Abra uma Issue no GitHub ou pergunte no Discord!
 

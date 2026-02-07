@@ -8,31 +8,31 @@
 
 ## 📋 Objetivo
 
-Este documento mapeia quais repositórios devem ser migrados de `Araponga.Infrastructure.Postgres` para os módulos correspondentes.
+Este documento mapeia quais repositórios devem ser migrados de `Arah.Infrastructure.Postgres` para os módulos correspondentes.
 
 ---
 
 ## 🗺️ Mapeamento Completo
 
 ### ✅ Feed Module (Já Migrado)
-- ✅ `IFeedRepository` → `PostgresFeedRepository` (já em `Araponga.Modules.Feed.Infrastructure`)
+- ✅ `IFeedRepository` → `PostgresFeedRepository` (já em `Arah.Modules.Feed.Infrastructure`)
 
 ### ✅ Chat Module (Migrado)
-- ✅ `IChatConversationRepository` → `PostgresChatConversationRepository` (em Araponga.Modules.Chat.Infrastructure)
+- ✅ `IChatConversationRepository` → `PostgresChatConversationRepository` (em Arah.Modules.Chat.Infrastructure)
 - ✅ `IChatConversationParticipantRepository` → `PostgresChatConversationParticipantRepository`
 - ✅ `IChatMessageRepository` → `PostgresChatMessageRepository`
 - ✅ `IChatConversationStatsRepository` → `PostgresChatConversationStatsRepository`
 
 ### ✅ Events Module (Migrado)
-- ✅ `ITerritoryEventRepository` → `PostgresTerritoryEventRepository` (em Araponga.Modules.Events.Infrastructure)
+- ✅ `ITerritoryEventRepository` → `PostgresTerritoryEventRepository` (em Arah.Modules.Events.Infrastructure)
 - ✅ `IEventParticipationRepository` → `PostgresEventParticipationRepository`
 
 ### ✅ Map Module (Migrado)
-- ✅ `IMapRepository` → `PostgresMapRepository` (em Araponga.Modules.Map.Infrastructure)
+- ✅ `IMapRepository` → `PostgresMapRepository` (em Arah.Modules.Map.Infrastructure)
 - ✅ `IMapEntityRelationRepository` → `PostgresMapEntityRelationRepository`
 
 ### ✅ Marketplace Module (Migrado)
-- ✅ `IStoreRepository` → `PostgresStoreRepository` (em Araponga.Modules.Marketplace.Infrastructure)
+- ✅ `IStoreRepository` → `PostgresStoreRepository` (em Arah.Modules.Marketplace.Infrastructure)
 - ✅ `IStoreItemRepository` → `PostgresStoreItemRepository`
 - ✅ `IInquiryRepository` → `PostgresInquiryRepository`
 - ✅ `IStoreRatingRepository` → `PostgresStoreRatingRepository`
@@ -46,7 +46,7 @@ Este documento mapeia quais repositórios devem ser migrados de `Araponga.Infras
 - ✅ `ITerritoryPayoutConfigRepository` → `PostgresTerritoryPayoutConfigRepository`
 
 ### ✅ Subscriptions Module (Migrado)
-- ✅ `ISubscriptionPlanRepository` → `PostgresSubscriptionPlanRepository` (em Araponga.Modules.Subscriptions.Infrastructure)
+- ✅ `ISubscriptionPlanRepository` → `PostgresSubscriptionPlanRepository` (em Arah.Modules.Subscriptions.Infrastructure)
 - ✅ `ISubscriptionRepository` → `PostgresSubscriptionRepository`
 - ✅ `ISubscriptionPaymentRepository` → `PostgresSubscriptionPaymentRepository`
 - ✅ `ICouponRepository` → `PostgresCouponRepository`
@@ -54,26 +54,26 @@ Este documento mapeia quais repositórios devem ser migrados de `Araponga.Infras
 - ✅ `ISubscriptionPlanHistoryRepository` → `PostgresSubscriptionPlanHistoryRepository`
 
 ### ✅ Moderation Module (Migrado)
-- ✅ `IReportRepository` → `PostgresReportRepository` (em Araponga.Modules.Moderation.Infrastructure)
+- ✅ `IReportRepository` → `PostgresReportRepository` (em Arah.Modules.Moderation.Infrastructure)
 - ✅ `ISanctionRepository` → `PostgresSanctionRepository`
 - ✅ `IWorkItemRepository` → `PostgresWorkItemRepository`
 - ✅ `IDocumentEvidenceRepository` → `PostgresDocumentEvidenceRepository`
 - ✅ `ITerritoryModerationRuleRepository` → `PostgresTerritoryModerationRuleRepository`
 
 ### ✅ Notifications Module (Migrado)
-- ✅ `INotificationInboxRepository` → `PostgresNotificationInboxRepository` (em Araponga.Modules.Notifications.Infrastructure)
+- ✅ `INotificationInboxRepository` → `PostgresNotificationInboxRepository` (em Arah.Modules.Notifications.Infrastructure)
 - ✅ `INotificationConfigRepository` → `PostgresNotificationConfigRepository`
 
 ### ✅ Alerts Module (Migrado)
-- ✅ `IHealthAlertRepository` → `PostgresHealthAlertRepository` (em Araponga.Modules.Alerts.Infrastructure)
+- ✅ `IHealthAlertRepository` → `PostgresHealthAlertRepository` (em Arah.Modules.Alerts.Infrastructure)
 
 ### ✅ Assets Module (Migrado)
-- ✅ `ITerritoryAssetRepository` → `PostgresAssetRepository` (em Araponga.Modules.Assets.Infrastructure)
+- ✅ `ITerritoryAssetRepository` → `PostgresAssetRepository` (em Arah.Modules.Assets.Infrastructure)
 - ✅ `IAssetGeoAnchorRepository` → `PostgresAssetGeoAnchorRepository`
 - ✅ `IAssetValidationRepository` → `PostgresAssetValidationRepository`
 
 ### 📍 Shared/Infrastructure (Permanecer)
-Estes repositórios devem permanecer em `Araponga.Infrastructure.Postgres` ou `Araponga.Infrastructure.Shared`:
+Estes repositórios devem permanecer em `Arah.Infrastructure.Postgres` ou `Arah.Infrastructure.Shared`:
 
 - ✅ `ITerritoryRepository` → `PostgresTerritoryRepository` (Shared - core)
 - ✅ `IUserRepository` → `PostgresUserRepository` (Shared - core)

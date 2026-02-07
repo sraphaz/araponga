@@ -28,7 +28,7 @@ Este PR inclui melhorias na interface tanto da Wiki quanto do DevPortal:
 **Alterações:**
 - Substituição de textos por ícones SVG
 - Adição de estilos `.header-link-icon` similares ao DevPortal
-- Correção da URL do DevPortal para `https://devportal.araponga.app`
+- Correção da URL do DevPortal para `https://devportal.arah.app`
 - Adição de `target="_blank"` e `rel="noopener noreferrer"` para links externos
 - Desabilitação de prefetch nos Links para evitar erros 404 com duplicação do basePath
 

@@ -84,9 +84,9 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Testes unitários e integração — ✅ Testes existem
 
 **Arquivos Existentes**:
-- ✅ `backend/Araponga.Domain/Users/User.cs` (campos `AvatarMediaAssetId` e `Bio` existem)
-- ✅ `backend/Araponga.Application/Services/UserProfileService.cs` (métodos implementados)
-- ✅ `backend/Araponga.Api/Controllers/UserProfileController.cs` (endpoints implementados)
+- ✅ `backend/Arah.Domain/Users/User.cs` (campos `AvatarMediaAssetId` e `Bio` existem)
+- ✅ `backend/Arah.Application/Services/UserProfileService.cs` (métodos implementados)
+- ✅ `backend/Arah.Api/Controllers/UserProfileController.cs` (endpoints implementados)
 
 **Status atual**: ✅ Completamente implementado e funcional.
 
@@ -103,9 +103,9 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Testes de privacidade — ✅ Testes existem
 
 **Arquivos Existentes**:
-- ✅ `backend/Araponga.Api/Controllers/UserPublicProfileController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Users/UserProfilePublicResponse.cs`
-- ✅ `backend/Araponga.Application/Services/UserProfileService.cs` (métodos implementados)
+- ✅ `backend/Arah.Api/Controllers/UserPublicProfileController.cs`
+- ✅ `backend/Arah.Api/Contracts/Users/UserProfilePublicResponse.cs`
+- ✅ `backend/Arah.Application/Services/UserProfileService.cs` (métodos implementados)
 
 **Status atual**: ✅ Completamente implementado e funcional.
 
@@ -127,10 +127,10 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Testes — ✅ Testes existem
 
 **Arquivos Existentes**:
-- ✅ `backend/Araponga.Application/Services/UserProfileStatsService.cs`
-- ✅ `backend/Araponga.Application/Models/UserProfileStats.cs`
-- ✅ `backend/Araponga.Api/Contracts/Users/UserProfileStatsResponse.cs`
-- ✅ `backend/Araponga.Api/Controllers/UserPublicProfileController.cs` (endpoint stats)
+- ✅ `backend/Arah.Application/Services/UserProfileStatsService.cs`
+- ✅ `backend/Arah.Application/Models/UserProfileStats.cs`
+- ✅ `backend/Arah.Api/Contracts/Users/UserProfileStatsResponse.cs`
+- ✅ `backend/Arah.Api/Controllers/UserPublicProfileController.cs` (endpoint stats)
 
 **Status atual**: ✅ Completamente implementado e funcional.
 
@@ -159,10 +159,10 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [ ] Validar cobertura de testes
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/PostEditService.cs`
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs` (EditPost)
-- ✅ `backend/Araponga.Api/Contracts/Feed/EditPostRequest.cs`
-- ✅ `backend/Araponga.Tests/Application/PostEditServiceTests.cs`
+- ✅ `backend/Arah.Application/Services/PostEditService.cs`
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs` (EditPost)
+- ✅ `backend/Arah.Api/Contracts/Feed/EditPostRequest.cs`
+- ✅ `backend/Arah.Tests/Application/PostEditServiceTests.cs`
 
 ---
 
@@ -177,8 +177,8 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Validar cobertura de testes — ✅ Testes em `ApplicationServiceTests.cs` cobrem UpdateEventAsync, CancelEventAsync, GetEventParticipantsAsync
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync)
-- ✅ `backend/Araponga.Api/Controllers/EventsController.cs` (UpdateEvent, CancelEvent)
+- ✅ `backend/Arah.Application/Services/EventsService.cs` (UpdateEventAsync, CancelEventAsync)
+- ✅ `backend/Arah.Api/Controllers/EventsController.cs` (UpdateEvent, CancelEvent)
 
 ---
 
@@ -191,9 +191,9 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [ ] Validar cobertura de testes
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/EventsService.cs` (GetEventParticipantsAsync)
-- ✅ `backend/Araponga.Api/Controllers/EventsController.cs` (GetEventParticipants)
-- ✅ `backend/Araponga.Api/Contracts/Events/EventParticipantResponse.cs`
+- ✅ `backend/Arah.Application/Services/EventsService.cs` (GetEventParticipantsAsync)
+- ✅ `backend/Arah.Api/Controllers/EventsController.cs` (GetEventParticipants)
+- ✅ `backend/Arah.Api/Contracts/Events/EventParticipantResponse.cs`
 
 ---
 
@@ -208,11 +208,11 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [ ] Integração com `StoreItemResponse` (AverageRating, ReviewCount) — opcional
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Domain/Marketplace/StoreRating.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreItemRating.cs`
-- ✅ `backend/Araponga.Domain/Marketplace/StoreRatingResponse.cs`
-- ✅ `backend/Araponga.Application/Services/RatingService.cs`
-- ✅ `backend/Araponga.Api/Controllers/RatingController.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreRating.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreItemRating.cs`
+- ✅ `backend/Arah.Domain/Marketplace/StoreRatingResponse.cs`
+- ✅ `backend/Arah.Application/Services/RatingService.cs`
+- ✅ `backend/Arah.Api/Controllers/RatingController.cs`
 - ✅ Repositórios (Postgres, InMemory)
 
 ---
@@ -235,10 +235,10 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - ✅ Triggers automáticos para atualizar search_vector
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/MarketplaceSearchService.cs` (SearchStoresAsync, SearchItemsAsync, SearchAllAsync)
-- ✅ `backend/Araponga.Application/Services/StoreItemService.cs` (SearchItemsAsync, SearchItemsPagedAsync)
-- ✅ `backend/Araponga.Api/Controllers/MarketplaceSearchController.cs`
-- ✅ `backend/Araponga.Api/Controllers/ItemsController.cs` (SearchItems)
+- ✅ `backend/Arah.Application/Services/MarketplaceSearchService.cs` (SearchStoresAsync, SearchItemsAsync, SearchAllAsync)
+- ✅ `backend/Arah.Application/Services/StoreItemService.cs` (SearchItemsAsync, SearchItemsPagedAsync)
+- ✅ `backend/Arah.Api/Controllers/MarketplaceSearchController.cs`
+- ✅ `backend/Arah.Api/Controllers/ItemsController.cs` (SearchItems)
 
 ---
 
@@ -252,10 +252,10 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [ ] Filtros e paginação avançados — opcional
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/UserActivityService.cs`
-- ✅ `backend/Araponga.Application/Models/UserActivityHistory.cs`
-- ✅ `backend/Araponga.Api/Controllers/UserActivityController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Users/UserActivityHistoryResponse.cs`
+- ✅ `backend/Arah.Application/Services/UserActivityService.cs`
+- ✅ `backend/Arah.Application/Models/UserActivityHistory.cs`
+- ✅ `backend/Arah.Api/Controllers/UserActivityController.cs`
+- ✅ `backend/Arah.Api/Contracts/Users/UserActivityHistoryResponse.cs`
 
 ---
 
@@ -276,14 +276,14 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 **Status atual**: ✅ `SmtpEmailSender` implementado com MailKit. `EmailQueueService` e `EmailQueueWorker` também implementados. Sistema completo de envio de emails funcional.
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
-- ✅ `backend/Araponga.Infrastructure/Email/EmailConfiguration.cs`
-- ✅ `backend/Araponga.Application/Services/EmailQueueService.cs`
-- ✅ `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
-- ✅ `backend/Araponga.Application/Services/EmailTemplateService.cs`
+- ✅ `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
+- ✅ `backend/Arah.Infrastructure/Email/EmailConfiguration.cs`
+- ✅ `backend/Arah.Application/Services/EmailQueueService.cs`
+- ✅ `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
+- ✅ `backend/Arah.Application/Services/EmailTemplateService.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` (registrado `SmtpEmailSender`)
+- ✅ `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` (registrado `SmtpEmailSender`)
 
 ---
 
@@ -305,18 +305,18 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [ ] Internacionalização (i18n) de templates — opcional
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- ✅ `backend/Araponga.Api/Templates/Email/*.html` (6 templates)
+- ✅ `backend/Arah.Application/Services/EmailTemplateService.cs`
+- ✅ `backend/Arah.Api/Templates/Email/*.html` (6 templates)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- `backend/Araponga.Application/Interfaces/IEmailTemplateService.cs`
-- `backend/Araponga.Api/Templates/Email/welcome.html`
-- `backend/Araponga.Api/Templates/Email/password-reset.html`
-- `backend/Araponga.Api/Templates/Email/event-reminder.html`
-- `backend/Araponga.Api/Templates/Email/marketplace-order.html`
-- `backend/Araponga.Api/Templates/Email/alert-critical.html`
-- `backend/Araponga.Api/Templates/Email/_layout.html`
+- `backend/Arah.Application/Services/EmailTemplateService.cs`
+- `backend/Arah.Application/Interfaces/IEmailTemplateService.cs`
+- `backend/Arah.Api/Templates/Email/welcome.html`
+- `backend/Arah.Api/Templates/Email/password-reset.html`
+- `backend/Arah.Api/Templates/Email/event-reminder.html`
+- `backend/Arah.Api/Templates/Email/marketplace-order.html`
+- `backend/Arah.Api/Templates/Email/alert-critical.html`
+- `backend/Arah.Api/Templates/Email/_layout.html`
 
 ---
 
@@ -335,21 +335,21 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Rate limiting (máx. 100 emails por minuto) ✅
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Domain/Email/EmailQueueItem.cs`
-- ✅ `backend/Araponga.Application/Services/EmailQueueService.cs`
-- ✅ `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
+- ✅ `backend/Arah.Domain/Email/EmailQueueItem.cs`
+- ✅ `backend/Arah.Application/Services/EmailQueueService.cs`
+- ✅ `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Email/EmailQueueItem.cs`
-- `backend/Araponga.Application/Interfaces/IEmailQueueRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresEmailQueueRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryEmailQueueRepository.cs`
-- `backend/Araponga.Application/Services/EmailQueueService.cs`
-- `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
+- `backend/Arah.Domain/Email/EmailQueueItem.cs`
+- `backend/Arah.Application/Interfaces/IEmailQueueRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresEmailQueueRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryEmailQueueRepository.cs`
+- `backend/Arah.Application/Services/EmailQueueService.cs`
+- `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionar DbSet)
-- `backend/Araponga.Api/Program.cs` (registrar worker)
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (adicionar DbSet)
+- `backend/Arah.Api/Program.cs` (registrar worker)
 
 ---
 
@@ -370,12 +370,12 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Priorização: emails apenas para notificações críticas/importantes ✅
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração completa)
+- ✅ `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração completa)
 - ✅ `EmailNotificationMapper.ShouldSendEmail()` implementado
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
-- `backend/Araponga.Application/Services/EmailNotificationMapper.cs` (criar)
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+- `backend/Arah.Application/Services/EmailNotificationMapper.cs` (criar)
 
 ---
 
@@ -396,14 +396,14 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Validação: não enviar email se usuário optou out ✅
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Domain/Users/EmailPreferences.cs`
-- ✅ `backend/Araponga.Application/Services/UserPreferencesService.cs` (UpdateEmailPreferencesAsync)
-- ✅ `backend/Araponga.Api/Controllers/UserPreferencesController.cs` (PUT /email)
+- ✅ `backend/Arah.Domain/Users/EmailPreferences.cs`
+- ✅ `backend/Arah.Application/Services/UserPreferencesService.cs` (UpdateEmailPreferencesAsync)
+- ✅ `backend/Arah.Api/Controllers/UserPreferencesController.cs` (PUT /email)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Users/NotificationPreferences.cs` (adicionar EmailPreferences)
-- `backend/Araponga.Application/Services/UserPreferencesService.cs`
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs`
+- `backend/Arah.Domain/Users/NotificationPreferences.cs` (adicionar EmailPreferences)
+- `backend/Arah.Application/Services/UserPreferencesService.cs`
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs`
 
 ---
 
@@ -430,21 +430,21 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
   - [x] Template `alert-critical.html` ✅
 
 **Arquivos existentes**:
-- ✅ `backend/Araponga.Application/Services/AuthService.cs` (email boas-vindas)
-- ✅ `backend/Araponga.Application/Services/PasswordResetService.cs` (email reset)
-- ✅ `backend/Araponga.Infrastructure/Email/EventReminderWorker.cs`
-- ✅ `backend/Araponga.Application/Services/CartService.cs` (email pedido)
-- ✅ `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (email alertas)
+- ✅ `backend/Arah.Application/Services/AuthService.cs` (email boas-vindas)
+- ✅ `backend/Arah.Application/Services/PasswordResetService.cs` (email reset)
+- ✅ `backend/Arah.Infrastructure/Email/EventReminderWorker.cs`
+- ✅ `backend/Arah.Application/Services/CartService.cs` (email pedido)
+- ✅ `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (email alertas)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AuthService.cs`
-- `backend/Araponga.Api/Controllers/AuthController.cs` (forgot-password já existe)
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/CartService.cs`
-- `backend/Araponga.Application/Services/AlertService.cs`
+- `backend/Arah.Application/Services/AuthService.cs`
+- `backend/Arah.Api/Controllers/AuthController.cs` (forgot-password já existe)
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/CartService.cs`
+- `backend/Arah.Application/Services/AlertService.cs`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/BackgroundJobs/EventReminderJob.cs`
+- `backend/Arah.Application/BackgroundJobs/EventReminderJob.cs`
 
 ---
 
@@ -463,7 +463,7 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Incluir em `GovernanceIntegrationTests`
 
 **Arquivos**:
-- `backend/Araponga.Tests/Api/GovernanceIntegrationTests.cs` — `Feed_WithFilterByInterests_ReturnsOnlyMatchingPosts`
+- `backend/Arah.Tests/Api/GovernanceIntegrationTests.cs` — `Feed_WithFilterByInterests_ReturnsOnlyMatchingPosts`
 
 ---
 
@@ -480,7 +480,7 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Testes implementados em `VotingPerformanceTests.cs`
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Tests/Performance/VotingPerformanceTests.cs` — 3 testes de performance:
+- ✅ `backend/Arah.Tests/Performance/VotingPerformanceTests.cs` — 3 testes de performance:
   - `GetResults_WithManyVotes_RespondsWithinSLA` (1000 votos, SLA < 500ms)
   - `ListVotings_WithManyVotings_RespondsWithinSLA` (100 votações, SLA < 200ms)
   - `GetResults_WithDistributedVotes_RespondsWithinSLA` (500 votos em 20 opções, SLA < 500ms)
@@ -501,7 +501,7 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Incluir em `GovernanceIntegrationTests`
 
 **Arquivos**:
-- ✅ `backend/Araponga.Tests/Api/GovernanceIntegrationTests.cs` — Testes adicionados:
+- ✅ `backend/Arah.Tests/Api/GovernanceIntegrationTests.cs` — Testes adicionados:
   - `Visitor_CannotVote_OnResidentsOnlyVoting`
   - `Visitor_CannotVote_OnCuratorsOnlyVoting`
   - `Resident_CannotCreate_ModerationRuleVoting`
@@ -529,10 +529,10 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Adicionar códigos de resposta apropriados (403 Forbidden, 409 Conflict, etc.)
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Api/Controllers/VotingsController.cs` — Anotações melhoradas
-- ✅ `backend/Araponga.Api/Controllers/UserInterestsController.cs` — Anotações melhoradas
-- ✅ `backend/Araponga.Api/Controllers/UserProfileController.cs` — Anotações melhoradas
-- ✅ `backend/Araponga.Api/Controllers/UserPublicProfileController.cs` — Já tinha anotações adequadas
+- ✅ `backend/Arah.Api/Controllers/VotingsController.cs` — Anotações melhoradas
+- ✅ `backend/Arah.Api/Controllers/UserInterestsController.cs` — Anotações melhoradas
+- ✅ `backend/Arah.Api/Controllers/UserProfileController.cs` — Anotações melhoradas
+- ✅ `backend/Arah.Api/Controllers/UserPublicProfileController.cs` — Já tinha anotações adequadas
 
 ---
 
@@ -581,15 +581,15 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
 - [x] Índice GIN para busca eficiente — ✅ Implementado
 
 **Arquivos Criados/Modificados**:
-- ✅ `backend/Araponga.Domain/Feed/CommunityPost.cs` (campo `Tags` adicionado)
-- ✅ `backend/Araponga.Infrastructure/Postgres/Entities/CommunityPostRecord.cs` (campo `TagsJson` adicionado)
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresMappers.cs` (mapeamento JSON)
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123150000_AddPostTags.cs`
-- ✅ `backend/Araponga.Application/Services/InterestFilterService.cs` (filtro por tags explícitas)
-- ✅ `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Contracts/Feed/EditPostRequest.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs` (validação de tags)
+- ✅ `backend/Arah.Domain/Feed/CommunityPost.cs` (campo `Tags` adicionado)
+- ✅ `backend/Arah.Infrastructure/Postgres/Entities/CommunityPostRecord.cs` (campo `TagsJson` adicionado)
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresMappers.cs` (mapeamento JSON)
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123150000_AddPostTags.cs`
+- ✅ `backend/Arah.Application/Services/InterestFilterService.cs` (filtro por tags explícitas)
+- ✅ `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Contracts/Feed/EditPostRequest.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Validators/CreatePostRequestValidator.cs` (validação de tags)
 
 **Nota**: Tags explícitas implementadas. Filtro verifica tags primeiro, depois título/conteúdo como fallback.
 
@@ -607,20 +607,20 @@ Implementar todos os itens que ficaram pendentes ou não plenamente cobertos nas
   - [x] Documentação — ✅ `docs/NOTIFICATION_CONFIG_ADVANCED.md` criado
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Domain/Notifications/NotificationConfig.cs`
-- ✅ `backend/Araponga.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Application/Services/Notifications/NotificationConfigService.cs`
-- ✅ `backend/Araponga.Api/Controllers/NotificationConfigController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Notifications/NotificationConfigResponse.cs`
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123160000_AddNotificationConfig.cs`
+- ✅ `backend/Arah.Domain/Notifications/NotificationConfig.cs`
+- ✅ `backend/Arah.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
+- ✅ `backend/Arah.Application/Services/Notifications/NotificationConfigService.cs`
+- ✅ `backend/Arah.Api/Controllers/NotificationConfigController.cs`
+- ✅ `backend/Arah.Api/Contracts/Notifications/NotificationConfigResponse.cs`
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
+- ✅ `backend/Arah.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123160000_AddNotificationConfig.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração com NotificationConfigService)
-- ✅ `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (entidade NotificationConfigRecord)
-- ✅ `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs` (lista NotificationConfigs)
-- ✅ `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
+- ✅ `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração com NotificationConfigService)
+- ✅ `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (entidade NotificationConfigRecord)
+- ✅ `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs` (lista NotificationConfigs)
+- ✅ `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
 
 **Nota**: Configuração avançada de notificações implementada. Permite configurar tipos, canais e templates por território ou globalmente.
 

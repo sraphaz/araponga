@@ -48,14 +48,19 @@
 
     _onDOMReady: function() {
       // Encontra container de conteúdo
-      this.contentContainer = document.getElementById('page-content') ||
-                             document.querySelector('.page-content') ||
-                             document.querySelector('main');
+      this.contentContainer = document.getElementById('page-content');
 
       if (!this.contentContainer) {
-        console.error('Router: Container de conteúdo não encontrado');
+        console.warn('Router: Container #page-content não encontrado, usando fallback');
+        // Fallback: usa main como container (sistema antigo continua ativo)
         return;
       }
+
+      // Esconde phase-panels quando router está ativo
+      this._hidePhasePanels();
+
+      // Mostra container do router
+      this.contentContainer.style.display = 'block';
 
       // Inicializa navegação
       this._initNavigation();
@@ -63,8 +68,29 @@
       // Escuta mudanças de hash
       window.addEventListener('hashchange', this._onHashChange.bind(this));
 
-      // Carrega rota inicial
-      this._onHashChange();
+      // Carrega rota inicial (aguarda um pouco para garantir que DOM está pronto)
+      setTimeout(function() {
+        this._onHashChange();
+      }.bind(this), 100);
+    },
+
+    _hidePhasePanels: function() {
+      // Esconde phase-panels quando router está ativo
+      const phasePanels = document.querySelector('.phase-panels');
+      const phaseNavigation = document.querySelector('.phase-navigation');
+      if (phasePanels) {
+        phasePanels.style.display = 'none';
+      }
+      // Mantém tabs visíveis para navegação
+      // phaseNavigation pode ficar visível ou ser escondido conforme preferência
+    },
+
+    _showPhasePanels: function() {
+      // Mostra phase-panels (fallback)
+      const phasePanels = document.querySelector('.phase-panels');
+      if (phasePanels) {
+        phasePanels.style.display = 'block';
+      }
     },
 
     _initNavigation: function() {
@@ -95,25 +121,34 @@
 
     _onHashChange: function() {
       const hash = window.location.hash.replace('#/', '').replace('#', '');
-      const route = hash && ROUTES[hash] ? ROUTES[hash] : (hash ? hash : DEFAULT_ROUTE);
+      // Suporta sub-rotas: funcionalidades/marketplace
+      const routeParts = hash.split('/');
+      const mainRoute = routeParts[0];
+      const subRoute = routeParts[1];
 
-      if (route === this.currentRoute) {
+      // Mapeia rota principal
+      const route = mainRoute && ROUTES[mainRoute] ? ROUTES[mainRoute] : (mainRoute ? mainRoute : DEFAULT_ROUTE);
+
+      // Se houver sub-rota, constrói caminho completo
+      const fullRoute = subRoute ? route + '/' + subRoute : route;
+
+      if (fullRoute === this.currentRoute) {
         return; // Já está na rota atual
       }
 
-      this.currentRoute = route;
-      this._loadRoute(route);
+      this.currentRoute = fullRoute;
+      this._loadRoute(fullRoute, mainRoute);
     },
 
-    _loadRoute: function(route) {
+    _loadRoute: function(route, mainRoute) {
       // Mostra loading state
       this._showLoading();
 
       // Carrega conteúdo da rota
-      this._fetchContent(route)
+      this._fetchContent(route, mainRoute)
         .then(function(html) {
           this._renderContent(html);
-          this._updateActiveNavigation(route);
+          this._updateActiveNavigation(mainRoute || route);
           this._initPageScripts();
           this._scrollToTop();
         }.bind(this))
@@ -123,15 +158,37 @@
         }.bind(this));
     },
 
-    _fetchContent: function(route) {
+    _fetchContent: function(route, mainRoute) {
       // Se for homepage ou rota especial, renderiza conteúdo inline
       if (route === 'home' || route === '') {
         return Promise.resolve(this._getHomeContent());
       }
 
-      // Usa sempre conteúdo inline dos phase-panels (compatível com protocolo file://)
-      // Não tenta fazer fetch de arquivos externos para evitar erro CORS
-      return Promise.resolve(this._getInlineContent(route));
+      // Constrói caminho do arquivo
+      // Se route tem sub-rota (ex: funcionalidades/marketplace), usa route completo
+      // Senão, usa mainRoute para index.html
+      const filePath = route.includes('/')
+        ? 'pages/' + route + '.html'
+        : 'pages/' + route + '/index.html';
+
+      // Tenta carregar arquivo HTML primeiro
+      return this._fetchHTML(filePath)
+        .catch(function(error) {
+          // Se falhar (CORS com file:// ou arquivo não existe), usa fallback inline
+          console.log('Router: Fallback para conteúdo inline para rota', route);
+          return Promise.resolve(this._getInlineContent(route));
+        }.bind(this));
+    },
+
+    _fetchHTML: function(filePath) {
+      // Tenta fazer fetch do arquivo HTML
+      return fetch(filePath)
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('HTTP ' + response.status);
+          }
+          return response.text();
+        });
     },
 
     _getHomeContent: function() {
@@ -139,7 +196,7 @@
       return `
         <div class="page-hero">
           <span class="eyebrow">Bem-vindo</span>
-          <h1>Developer Portal da API Araponga</h1>
+          <h1>Developer Portal da API Arah</h1>
           <p class="hero-intro">
             Documentação completa da API orientada a território.
             Explore os conceitos, fluxos e funcionalidades para começar a integrar.
@@ -177,15 +234,56 @@
 
     _getInlineContent: function(route) {
       // Fallback: extrai conteúdo do phase-panel correspondente
-      const panel = document.querySelector('[data-phase-panel="' + route + '"]');
+      // Remove sub-rota se houver (ex: "funcionalidades/marketplace" -> "funcionalidades")
+      const mainRoute = route.split('/')[0];
+
+      // Mostra phase-panels temporariamente para extrair conteúdo
+      this._showPhasePanels();
+
+      const panel = document.querySelector('[data-phase-panel="' + mainRoute + '"]');
       if (panel) {
-        return panel.innerHTML;
+        // Se houver sub-rota, tenta encontrar seção específica
+        if (route.includes('/')) {
+          const subRoute = route.split('/')[1];
+          const section = panel.querySelector('#' + subRoute);
+          if (section) {
+            // Retorna hero + seção específica
+            const content = this._buildPageWithHero(subRoute, section.outerHTML);
+            this._hidePhasePanels(); // Esconde novamente após extrair
+            return content;
+          }
+        }
+        // Retorna conteúdo completo do panel
+        const content = panel.innerHTML;
+        this._hidePhasePanels(); // Esconde novamente após extrair
+        return content;
       }
-      return '<div class="error">Conteúdo não encontrado</div>';
+
+      this._hidePhasePanels(); // Esconde novamente
+      return '<div class="error">Conteúdo não encontrado para rota: ' + route + '</div>';
+    },
+
+    _buildPageWithHero: function(title, content) {
+      // Constrói página com hero section básico
+      const titleFormatted = title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      return `
+        <section class="page-hero">
+          <div class="hero-content">
+            <h1>${titleFormatted}</h1>
+          </div>
+        </section>
+        ${content}
+      `;
     },
 
     _renderContent: function(html) {
       if (!this.contentContainer) return;
+
+      // Esconde phase-panels
+      this._hidePhasePanels();
+
+      // Mostra container do router
+      this.contentContainer.style.display = 'block';
 
       // Limpa conteúdo anterior
       this.contentContainer.innerHTML = '';
@@ -229,7 +327,7 @@
         'avancado': 'Avançado'
       };
       const title = routeTitles[route] || 'DevPortal';
-      document.title = title + ' • Araponga API • Developer Portal';
+      document.title = title + ' • Arah API • Developer Portal';
     },
 
     _initPageScripts: function() {
@@ -271,15 +369,8 @@
   // Exporta para uso global
   window.DevPortalRouter = Router;
 
-  // Inicializa apenas se não houver sistema de phase-panels ativo
-  // O sistema de phase-panels (tabs + accordions) já gerencia a navegação
-  // O router serve apenas como fallback para hash routing futuro
-  if (document.querySelector('.phase-panels')) {
-    // Phase-panels existem - router desabilitado para evitar conflitos
-    console.log('Router: Phase-panels detectados, router desabilitado');
-  } else {
-    // Sem phase-panels - inicializa router
-    Router.init();
-  }
+  // Inicializa router - agora suporta carregamento de arquivos HTML
+  // Phase-panels servem como fallback se arquivos não estiverem disponíveis
+  Router.init();
 
 })();

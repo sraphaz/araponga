@@ -217,8 +217,8 @@
 - [ ] Documentar conformidade LGPD
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
 - `docs/LGPD_COMPLIANCE.md`
 
 ---
@@ -247,11 +247,11 @@
 - [ ] Documentar integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
-- `backend/Araponga.Infrastructure/Notifications/IPushNotificationProvider.cs`
-- `backend/Araponga.Domain/Users/UserDevice.cs`
-- `backend/Araponga.Api/Controllers/DevicesController.cs`
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Infrastructure/Notifications/FirebasePushNotificationProvider.cs`
+- `backend/Arah.Infrastructure/Notifications/IPushNotificationProvider.cs`
+- `backend/Arah.Domain/Users/UserDevice.cs`
+- `backend/Arah.Api/Controllers/DevicesController.cs`
 
 ---
 

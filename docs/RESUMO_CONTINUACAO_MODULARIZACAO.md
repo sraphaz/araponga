@@ -31,7 +31,7 @@ Foram criados **3 documentos** para guiar a continuação da modularização:
 
 ### 2. Análise Realizada
 
-- ✅ **Identificados** todos os repositórios em `Araponga.Infrastructure.Postgres` (70 arquivos)
+- ✅ **Identificados** todos os repositórios em `Arah.Infrastructure.Postgres` (70 arquivos)
 - ✅ **Mapeados** repositórios para módulos correspondentes
 - ✅ **Classificados** repositórios por prioridade de migração
 - ✅ **Identificadas** dependências e entidades compartilhadas

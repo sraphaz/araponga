@@ -69,7 +69,7 @@ Cada phase-panel atual vira um arquivo HTML:
 <section class="section" id="introducao">
   <h2>Bem-vindo ao Developer Portal</h2>
   <p class="lead-text">
-    Este é o portal técnico da plataforma Araponga...
+    Este é o portal técnico da plataforma Arah...
   </p>
 </section>
 

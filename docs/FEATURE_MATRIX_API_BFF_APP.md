@@ -119,8 +119,8 @@ Sugestão de frase padrão para colocar nesses documentos:
 
 ## Referências
 
-- **Registro de jornadas BFF**: `backend/Araponga.Api.Bff/Journeys/BffJourneyRegistry.cs`
-- **App – repositórios que chamam o BFF**: `frontend/araponga.app/lib/features/*/data/repositories/*.dart` e `feed/presentation/providers/feed_provider.dart`
+- **Registro de jornadas BFF**: `backend/Arah.Api.Bff/Journeys/BffJourneyRegistry.cs`
+- **App – repositórios que chamam o BFF**: `frontend/Arah.app/lib/features/*/data/repositories/*.dart` e `feed/presentation/providers/feed_provider.dart`
 - **Release estável e getting started**: [STABLE_RELEASE_APP_ONBOARDING.md](./STABLE_RELEASE_APP_ONBOARDING.md)
 - **Planejamento do frontend Flutter**: [24_FLUTTER_FRONTEND_PLAN.md](./24_FLUTTER_FRONTEND_PLAN.md)
 - **Backlog e fases**: [docs/backlog-api/](./backlog-api/)

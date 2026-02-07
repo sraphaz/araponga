@@ -44,20 +44,20 @@ Este PR fortalece o modelo de **feature flags por território**, eliminando bypa
 ## 📁 Arquivos principais
 
 ### Código
-- `backend/Araponga.Application/Services/TerritoryFeatureFlagGuard.cs`
-- `backend/Araponga.Application/Services/HealthService.cs`
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Application/Services/CartService.cs`
-- `backend/Araponga.Application/Services/InquiryService.cs`
-- `backend/Araponga.Application/Services/ChatService.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
-- `backend/Araponga.Api/Controllers/CartController.cs`
-- `backend/Araponga.Api/Controllers/InquiriesController.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Application/Services/TerritoryFeatureFlagGuard.cs`
+- `backend/Arah.Application/Services/HealthService.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Application/Services/CartService.cs`
+- `backend/Arah.Application/Services/InquiryService.cs`
+- `backend/Arah.Application/Services/ChatService.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Api/Controllers/CartController.cs`
+- `backend/Arah.Api/Controllers/InquiriesController.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
 
 ### Testes
-- `backend/Araponga.Tests/Application/ApplicationServiceTests.cs`
-- `backend/Araponga.Tests/Application/MarketplaceServiceTests.cs`
+- `backend/Arah.Tests/Application/ApplicationServiceTests.cs`
+- `backend/Arah.Tests/Application/MarketplaceServiceTests.cs`
 
 ### Documentação
 - `docs/60_API_LÓGICA_NEGÓCIO.md`
@@ -70,7 +70,7 @@ Este PR fortalece o modelo de **feature flags por território**, eliminando bypa
 Executado:
 
 ```bash
-dotnet test Araponga.sln -c Release
+dotnet test Arah.sln -c Release
 ```
 
 Resultado: **250/250 passando**.

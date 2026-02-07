@@ -97,12 +97,12 @@ Todas as tarefas pendentes da Fase 14.5 foram implementadas ou documentadas:
 ## 🔧 Arquivos Modificados
 
 ### Código
-- ✅ `backend/Araponga.Application/Metrics/ArapongaMetrics.cs` - Métricas de connection pooling adicionadas
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresStoreItemRepository.cs` - Full-text search implementado
-- ✅ `backend/Araponga.Application/Services/MarketplaceSearchService.cs` - Comentários atualizados
+- ✅ `backend/Arah.Application/Metrics/ArapongaMetrics.cs` - Métricas de connection pooling adicionadas
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresStoreItemRepository.cs` - Full-text search implementado
+- ✅ `backend/Arah.Application/Services/MarketplaceSearchService.cs` - Comentários atualizados
 
 ### Migrations
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs` - Nova migration
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123130000_AddFullTextSearchIndexes.cs` - Nova migration
 
 ### Documentação
 - ✅ `docs/backlog-api/FASE14_5.md` - Status atualizado de todas as tarefas

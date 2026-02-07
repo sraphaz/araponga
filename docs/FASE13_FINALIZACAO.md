@@ -99,7 +99,7 @@ A **Fase 13: Conector de Envio de Emails** foi finalizada completamente em 2026-
 ## 📝 Arquivos Criados/Modificados
 
 ### Novos Arquivos
-- ✅ `backend/Araponga.Tests/Api/EmailIntegrationTests.cs` - Testes E2E
+- ✅ `backend/Arah.Tests/Api/EmailIntegrationTests.cs` - Testes E2E
 - ✅ `docs/FASE13_STATUS_IMPLEMENTACAO.md` - Status detalhado
 - ✅ `docs/FASE13_FINALIZACAO.md` - Este documento
 

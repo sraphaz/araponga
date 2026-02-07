@@ -2,35 +2,35 @@
 
 ## Resumo
 
-Este PR corrige o problema onde o Developer Portal em `devportal.araponga.app` mostrava apenas uma mensagem de "Carregando..." ao invés do conteúdo completo do portal. O problema ocorreu após a remoção de scripts de redirect que também continham a lógica de renderização do conteúdo.
+Este PR corrige o problema onde o Developer Portal em `devportal.Arah.app` mostrava apenas uma mensagem de "Carregando..." ao invés do conteúdo completo do portal. O problema ocorreu após a remoção de scripts de redirect que também continham a lógica de renderização do conteúdo.
 
 ## Problema
 
 O Developer Portal não estava renderizando o conteúdo completo:
 
-- **`https://devportal.araponga.app/devportal/`** mostrava apenas:
+- **`https://devportal.Arah.app/devportal/`** mostrava apenas:
   ```
   Developer Portal - Carregando...
   Se você foi redirecionado aqui, o portal deve carregar automaticamente.
   ```
 
-- **`https://devportal.araponga.app/`** mostrava apenas:
+- **`https://devportal.Arah.app/`** mostrava apenas:
   ```
-  Araponga API
+  Arah API
   Redirecionando para o aplicativo principal e o Developer Portal.
-  Se o redirecionamento não acontecer, acesse araponga.app ou Developer Portal.
+  Se o redirecionamento não acontecer, acesse Arah.app ou Developer Portal.
   ```
 
 **Causa raiz:**
 - O arquivo `docs/devportal/index.html` continha apenas um placeholder simples
-- O conteúdo completo estava apenas em `backend/Araponga.Api/wwwroot/devportal/index.html`
+- O conteúdo completo estava apenas em `backend/Arah.Api/wwwroot/devportal/index.html`
 - Quando o GitHub Pages serve o conteúdo de `docs/`, ele não tinha acesso ao conteúdo completo
 - Os caminhos dos assets estavam usando caminhos absolutos (`/devportal/assets/...`) que não funcionavam no contexto do GitHub Pages
 
 ## Solução
 
 1. **Substituir `docs/devportal/index.html` pelo conteúdo completo**
-   - Copiar o conteúdo completo de `backend/Araponga.Api/wwwroot/devportal/index.html`
+   - Copiar o conteúdo completo de `backend/Arah.Api/wwwroot/devportal/index.html`
    - Garantir que o portal tenha toda a documentação da API
 
 2. **Ajustar caminhos de assets para relativos**
@@ -82,12 +82,12 @@ O Developer Portal não estava renderizando o conteúdo completo:
 
 ## Testes
 
-- ✅ Portal renderiza completamente em `devportal.araponga.app`
+- ✅ Portal renderiza completamente em `devportal.Arah.app`
 - ✅ Assets (CSS, imagens) carregam corretamente
 - ✅ Navegação entre seções funciona
 - ✅ Explorer OpenAPI funciona (tenta múltiplos caminhos)
 - ✅ Links internos e externos funcionam
-- ✅ Banner de retorno para `araponga.app` visível
+- ✅ Banner de retorno para `Arah.app` visível
 
 ## Checklist
 

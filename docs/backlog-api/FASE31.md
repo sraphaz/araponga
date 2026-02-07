@@ -11,10 +11,10 @@
 
 ## 🎯 Objetivo
 
-Realizar **avaliação completa e escolha de blockchain** para suportar funcionalidades Web3 do Araponga, incluindo:
+Realizar **avaliação completa e escolha de blockchain** para suportar funcionalidades Web3 do Arah, incluindo:
 - Análise comparativa de blockchains disponíveis
 - Avaliação de custos, performance e escalabilidade
-- Avaliação de compatibilidade com requisitos do Araponga
+- Avaliação de compatibilidade com requisitos do Arah
 - Recomendação técnica fundamentada
 - Documentação completa da decisão
 - Preparação para implementação (quando houver demanda)
@@ -79,7 +79,7 @@ Realizar **avaliação completa e escolha de blockchain** para suportar funciona
 - ✅ **Governança**: Modelo de governança da blockchain
 - ✅ **Suporte**: Comunidade, suporte técnico
 
-### 2. Avaliação de Requisitos do Araponga
+### 2. Avaliação de Requisitos do Arah
 
 #### 2.1 Casos de Uso Identificados
 - ✅ Tokens territoriais (ERC-20 ou equivalente)
@@ -168,7 +168,7 @@ Realizar **avaliação completa e escolha de blockchain** para suportar funciona
 
 ---
 
-#### 31.2 Análise de Requisitos do Araponga
+#### 31.2 Análise de Requisitos do Arah
 **Estimativa**: 24 horas (3 dias)  
 **Status**: ❌ Não implementado
 
@@ -216,7 +216,7 @@ Realizar **avaliação completa e escolha de blockchain** para suportar funciona
   - [ ] Ecosystem (peso: 15%)
   - [ ] Adoção (peso: 10%)
   - [ ] Segurança (peso: 5%)
-- [ ] Avaliar cada blockchain contra requisitos do Araponga:
+- [ ] Avaliar cada blockchain contra requisitos do Arah:
   - [ ] Atende requisitos obrigatórios?
   - [ ] Atende requisitos desejáveis?
   - [ ] Atende requisitos opcionais?
@@ -318,7 +318,7 @@ Realizar **avaliação completa e escolha de blockchain** para suportar funciona
 ### Funcionalidades
 - ✅ Pesquisa completa de blockchains realizada
 - ✅ Análise comparativa detalhada concluída
-- ✅ Requisitos do Araponga mapeados
+- ✅ Requisitos do Arah mapeados
 - ✅ Análise de custo-benefício realizada
 - ✅ Recomendação técnica fundamentada
 - ✅ Documentação completa criada
@@ -386,7 +386,7 @@ Realizar **avaliação completa e escolha de blockchain** para suportar funciona
 - Auditorias realizadas
 - Modelo de segurança
 
-### Casos de Uso do Araponga
+### Casos de Uso do Arah
 
 **Tokens Territoriais**:
 - Moeda territorial on-chain

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Health • Arah API</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="section">
+      <div class="section-header">
+        <h1>Status da API</h1>
+        <p>
+          Os endpoints de status são servidos pela API em execução. Para consultá-los,
+          rode a API localmente e use os endereços abaixo.
+        </p>
+      </div>
+
+      <div class="callout">
+        <p><strong>URL local (liveness):</strong> <a href="http://localhost:8080/liveness">http://localhost:8080/liveness</a></p>
+        <p><strong>URL local (readiness):</strong> <a href="http://localhost:8080/readiness">http://localhost:8080/readiness</a></p>
+      </div>
+
+      <p class="note">
+        Se a API estiver em outra porta ou host, ajuste a URL conforme o seu ambiente.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

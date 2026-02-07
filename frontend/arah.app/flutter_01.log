@@ -1,0 +1,106 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter gen-l10n
+
+## exception
+
+ProcessException: ProcessException: `dart format` failed with exit code 65
+
+stdout:
+Formatted no files in 0.01 seconds.
+
+
+stderr:
+Could not format because the source could not be parsed:
+
+line 261, column 14 of c:/Users/rapha/CursorRepos/araponga/frontend/araponga.app/lib/l10n/app_localizations_en.dart: 'continue' can't be used as an identifier because it's a keyword.
+    ╷
+261 │   String get continue => 'Continue';
+    │              ^^^^^^^^
+    ╵
+Could not format because the source could not be parsed:
+
+line 261, column 14 of c:/Users/rapha/CursorRepos/araponga/frontend/araponga.app/lib/l10n/app_localizations_pt.dart: 'continue' can't be used as an identifier because it's a keyword.
+    ╷
+261 │   String get continue => 'Continuar';
+    │              ^^^^^^^^
+    ╵
+Could not format because the source could not be parsed:
+
+line 600, column 14 of c:/Users/rapha/CursorRepos/araponga/frontend/araponga.app/lib/l10n/app_localizations.dart: 'continue' can't be used as an identifier because it's a keyword.
+    ╷
+600 │   String get continue;
+    │              ^^^^^^^^
+    ╵
+
+  Command: C:\Users\rapha\AppData\Local\flutter\bin\cache\dart-sdk\bin\dart.exe C:\Users\rapha\AppData\Local\flutter\bin\cache\dart-sdk\bin\dart.exe format C:\Users\rapha\CursorRepos\araponga\frontend\araponga.app\lib\l10n\app_localizations_en.dart C:\Users\rapha\CursorRepos\araponga\frontend\araponga.app\lib\l10n\app_localizations_pt.dart C:\Users\rapha\CursorRepos\araponga\frontend\araponga.app\lib\l10n\app_localizations.dart
+
+```
+#0      generateLocalizations (package:flutter_tools/src/localizations/gen_l10n.dart:96:7)
+<asynchronous suspension>
+#1      GenerateLocalizationsCommand.runCommand (package:flutter_tools/src/commands/generate_localizations.dart:263:5)
+<asynchronous suspension>
+#2      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1559:27)
+<asynchronous suspension>
+#3      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#4      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+<asynchronous suspension>
+#5      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:487:9)
+<asynchronous suspension>
+#6      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#7      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:422:5)
+<asynchronous suspension>
+#8      run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:104:11)
+<asynchronous suspension>
+#9      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#10     main (package:flutter_tools/executable.dart:103:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.38.9, on Microsoft Windows [Version 10.0.26200.7623], locale pt-BR) [176ms]
+    • Flutter version 3.38.9 on channel stable at C:\Users\rapha\AppData\Local\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision 67323de285 (8 days ago), 2026-01-28 13:43:12 -0800
+    • Engine revision 587c18f873
+    • Dart version 3.10.8
+    • DevTools version 2.51.1
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-native-assets, omit-legacy-version-file, enable-lldb-debugging
+
+[✓] Windows Version (Windows 11 or higher, 25H2, 2009) [1.840ms]
+
+[✗] Android toolchain - develop for Android devices [16ms]
+    ✗ Unable to locate Android SDK.
+      Install Android Studio from: https://developer.android.com/studio/index.html
+      On first launch it will assist you in installing the Android SDK components.
+      (or visit https://flutter.dev/to/windows-android-setup for detailed instructions).
+      If the Android SDK has been installed to a custom location, please use
+      `flutter config --android-sdk` to update to that location.
+
+
+[✓] Chrome - develop for the web [9ms]
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[✗] Visual Studio - develop Windows apps [8ms]
+    ✗ Visual Studio not installed; this is necessary to develop Windows apps.
+      Download at https://visualstudio.microsoft.com/downloads/.
+      Please install the "Desktop development with C++" workload, including all of its default components
+
+[✓] Connected device (3 available) [64ms]
+    • Windows (desktop) • windows • windows-x64    • Microsoft Windows [Version 10.0.26200.7623]
+    • Chrome (web)      • chrome  • web-javascript • Google Chrome 144.0.7559.110
+    • Edge (web)        • edge    • web-javascript • Microsoft Edge 144.0.3719.104
+
+[✓] Network resources [308ms]
+    • All expected network resources are available.
+
+! Doctor found issues in 2 categories.
+```

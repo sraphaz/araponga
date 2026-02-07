@@ -41,7 +41,7 @@ Este PR consolida uma **versão estável** do app: atualiza a documentação do 
 ## Como testar
 
 1. Na raiz: `.\scripts\run-local-stack.ps1` (e opcionalmente `-ResetDatabase` na primeira vez).
-2. Em outro terminal: `cd frontend\araponga.app` e `flutter run`.
+2. Em outro terminal: `cd frontend\Arah.app` e `flutter run`.
 3. No app: check-email → signup/login → onboarding (escolher território na lista, tocar em Continuar) → feed; Explorar para trocar território.
 
 ## Checklist

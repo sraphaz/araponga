@@ -66,7 +66,7 @@ Devido ao tamanho do arquivo (~2795 linhas), a reestruturação será feita em *
 | `#onboarding-analistas` | Onboarding Analistas | Tab 1 | Accordion |
 | `#onboarding-developers` | Onboarding Developers | Tab 1 | Accordion |
 | `#visao-geral` | Visão Geral | Tab 2 | Expandido |
-| `#como-funciona` | Como o Araponga funciona | Tab 2 | Accordion |
+| `#como-funciona` | Como o Arah funciona | Tab 2 | Accordion |
 | `#territorios` | Territórios | Tab 2 | Accordion |
 | `#conceitos` | Conceitos de produto | Tab 2 | Accordion |
 | `#modelo-dominio` | Modelo de domínio | Tab 2 | Accordion + Details |

@@ -107,7 +107,7 @@
 
 ### Estrutura de Projeto
 ```
-/backend/Araponga.Tests/Domain/
+/backend/Arah.Tests/Domain/
 ├── TerritoryModerationRuleEdgeCasesTests.cs      (27 testes)
 └── VotingEdgeCasesTests.cs                        (85 testes total)
     ├── VotingEdgeCasesTests                       (47 testes)

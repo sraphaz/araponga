@@ -1,4 +1,4 @@
-# Regras de Documentação para Agentes Cursor - Araponga
+# Regras de Documentação para Agentes Cursor - Arah
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  

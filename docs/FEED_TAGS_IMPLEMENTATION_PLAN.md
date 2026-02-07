@@ -55,7 +55,7 @@ ON community_posts USING GIN(tags);
 
 ### 1. Atualizar Domain Model
 
-**Arquivo**: `backend/Araponga.Domain/Feed/CommunityPost.cs`
+**Arquivo**: `backend/Arah.Domain/Feed/CommunityPost.cs`
 
 - Adicionar propriedade `Tags`
 - Atualizar construtor
@@ -63,13 +63,13 @@ ON community_posts USING GIN(tags);
 
 ### 2. Atualizar Database Record
 
-**Arquivo**: `backend/Araponga.Infrastructure/Postgres/Entities/CommunityPostRecord.cs`
+**Arquivo**: `backend/Arah.Infrastructure/Postgres/Entities/CommunityPostRecord.cs`
 
 - Adicionar propriedade `Tags` (string[])
 
 ### 3. Criar Migration
 
-**Arquivo**: `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostTags.cs`
+**Arquivo**: `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostTags.cs`
 
 - Adicionar coluna `tags TEXT[]`
 - Criar índice GIN
@@ -77,7 +77,7 @@ ON community_posts USING GIN(tags);
 
 ### 4. Atualizar InterestFilterService
 
-**Arquivo**: `backend/Araponga.Application/Services/InterestFilterService.cs`
+**Arquivo**: `backend/Arah.Application/Services/InterestFilterService.cs`
 
 ```csharp
 public async Task<IReadOnlyList<CommunityPost>> FilterFeedByInterestsAsync(
@@ -113,17 +113,17 @@ public async Task<IReadOnlyList<CommunityPost>> FilterFeedByInterestsAsync(
 
 ### 5. Atualizar API Contracts
 
-**Arquivo**: `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`
+**Arquivo**: `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`
 
 - Adicionar campo opcional `Tags` (string[])
 
-**Arquivo**: `backend/Araponga.Api/Contracts/Feed/PostResponse.cs`
+**Arquivo**: `backend/Arah.Api/Contracts/Feed/PostResponse.cs`
 
 - Adicionar campo `Tags` (string[])
 
 ### 6. Atualizar Validators
 
-**Arquivo**: `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs`
+**Arquivo**: `backend/Arah.Api/Validators/CreatePostRequestValidator.cs`
 
 - Validar tags (máx. 10 tags, máx. 50 caracteres por tag)
 
@@ -161,7 +161,7 @@ public async Task<IReadOnlyList<CommunityPost>> FilterFeedByInterestsAsync(
 
 - [PostgreSQL Array Types](https://www.postgresql.org/docs/current/arrays.html)
 - [PostgreSQL GIN Indexes](https://www.postgresql.org/docs/current/gin.html)
-- [InterestFilterService Implementation](../backend/Araponga.Application/Services/InterestFilterService.cs)
+- [InterestFilterService Implementation](../backend/Arah.Application/Services/InterestFilterService.cs)
 
 ---
 

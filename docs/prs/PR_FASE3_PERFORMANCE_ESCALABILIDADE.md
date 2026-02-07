@@ -39,16 +39,16 @@ Este PR implementa completamente a **Fase 3: Performance e Escalabilidade**, foc
 - Repositories atualizados para rastrear entidades corretamente
 
 **Arquivos Criados**:
-- `backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs`
-- `backend/Araponga.Tests/Infrastructure/ConcurrencyTests.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/*AddRowVersion*.cs`
+- `backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs`
+- `backend/Arah.Tests/Infrastructure/ConcurrencyTests.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/*AddRowVersion*.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Infrastructure/Postgres/Entities/*Record.cs` (4 arquivos)
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresMapRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryEventRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresFeedRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Entities/*Record.cs` (4 arquivos)
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresMapRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryEventRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresFeedRepository.cs`
 
 ---
 
@@ -63,7 +63,7 @@ Este PR implementa completamente a **Fase 3: Performance e Escalabilidade**, foc
 - Resolução dinâmica de handlers via `IServiceProvider`
 
 **Arquivos Criados**:
-- `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs`
+- `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs`
 
 **Características**:
 - Processamento assíncrono não bloqueia requests
@@ -90,13 +90,13 @@ Este PR implementa completamente a **Fase 3: Performance e Escalabilidade**, foc
   - `AccessEvaluator`
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Interfaces/IDistributedCacheService.cs`
-- `backend/Araponga.Infrastructure/Caching/RedisCacheService.cs`
-- `backend/Araponga.Tests/TestHelpers/CacheTestHelper.cs`
+- `backend/Arah.Application/Interfaces/IDistributedCacheService.cs`
+- `backend/Arah.Infrastructure/Caching/RedisCacheService.cs`
+- `backend/Arah.Tests/TestHelpers/CacheTestHelper.cs`
 
 **Arquivos Modificados**:
 - Todos os cache services (7 arquivos)
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 - Todos os testes que usam cache (múltiplos arquivos)
 
 **Características**:
@@ -152,11 +152,11 @@ Este PR implementa completamente a **Fase 3: Performance e Escalabilidade**, foc
   - `JsonNumberHandling.AllowReadingFromString` para compatibilidade
 
 **Arquivos Modificados**:
-- `backend/Araponga.Infrastructure/Caching/RedisCacheService.cs`
-- `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs`
-- `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
-- `backend/Araponga.Application/Events/ReportCreatedNotificationHandler.cs`
-- `backend/Araponga.Application/Events/PostCreatedNotificationHandler.cs`
+- `backend/Arah.Infrastructure/Caching/RedisCacheService.cs`
+- `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs`
+- `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+- `backend/Arah.Application/Events/ReportCreatedNotificationHandler.cs`
+- `backend/Arah.Application/Events/PostCreatedNotificationHandler.cs`
 
 ---
 
@@ -267,7 +267,7 @@ builder.Services.AddDbContext<ArapongaDbContext>(options =>
 - [FASE3.md](../backlog-api/FASE3.md) - Plano original da Fase 3
 - [FASE3_IMPLEMENTACAO_RESUMO.md](../backlog-api/implementacoes/FASE3_IMPLEMENTACAO_RESUMO.md) - Resumo detalhado
 - [DEPLOYMENT_MULTI_INSTANCE.md](../DEPLOYMENT_MULTI_INSTANCE.md) - Documentação de deployment
-- [ConcurrencyHelper.cs](../../backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs) - Helper de concorrência
+- [ConcurrencyHelper.cs](../../backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs) - Helper de concorrência
 
 ---
 

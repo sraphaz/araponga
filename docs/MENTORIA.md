@@ -1,4 +1,4 @@
-# 🤝 Sistema de Mentoria Orgânica - Araponga
+# 🤝 Sistema de Mentoria Orgânica - Arah
 
 **Facilitando Acolhimento e Crescimento de Contribuidores**
 
@@ -9,7 +9,7 @@
 
 ## 🎯 Propósito
 
-O sistema de mentoria do Araponga é **orgânico, voluntário e horizontal**. Não há hierarquias rígidas - apenas pessoas que oferecem ajuda e pessoas que buscam orientação.
+O sistema de mentoria do Arah é **orgânico, voluntário e horizontal**. Não há hierarquias rígidas - apenas pessoas que oferecem ajuda e pessoas que buscam orientação.
 
 **Objetivo**: Facilitar o acolhimento de novos contribuidores e o crescimento orgânico da comunidade, mantendo consciência elevada e respeito aos saberes diversos.
 
@@ -420,7 +420,7 @@ Validador de Territórios
 
 ## 🌍 Conclusão
 
-Mentoria no Araponga é sobre **construir comunidade**, não sobre hierarquia.
+Mentoria no Arah é sobre **construir comunidade**, não sobre hierarquia.
 
 **É sobre**:
 - ✅ Acolher pessoas que chegam

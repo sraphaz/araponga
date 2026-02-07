@@ -1,6 +1,6 @@
 # Deployment Multi-Instância e Load Balancer
 
-Este documento descreve como configurar e fazer deploy da aplicação Araponga em múltiplas instâncias com load balancer.
+Este documento descreve como configurar e fazer deploy da aplicação Arah em múltiplas instâncias com load balancer.
 
 ## 📋 Pré-requisitos
 
@@ -13,7 +13,7 @@ Este documento descreve como configurar e fazer deploy da aplicação Araponga e
 
 ### 1. API Stateless
 
-A API Araponga é **stateless** por design:
+A API Arah é **stateless** por design:
 - Autenticação via JWT (sem sessão no servidor)
 - Cache distribuído via Redis (ou fallback para IMemoryCache)
 - Sem sticky sessions necessárias
@@ -32,7 +32,7 @@ upstream araponga_backend {
 
 server {
     listen 80;
-    server_name api.araponga.com;
+    server_name api.Arah.com;
 
     location / {
         proxy_pass http://araponga_backend;
@@ -78,12 +78,12 @@ Cada instância precisa das seguintes variáveis:
 
 ```bash
 # Database (write)
-ConnectionStrings__Postgres=Host=db.example.com;Database=araponga;Username=...
+ConnectionStrings__Postgres=Host=db.example.com;Database=Arah;Username=...
 
 # Database (read replica - opcional)
 # Para usar read replicas, configure uma connection string separada e use
 # ArapongaDbContext com ChangeTracker.QueryTrackingBehavior = NoTracking
-ConnectionStrings__PostgresReadOnly=Host=db-read.example.com;Database=araponga;Username=...
+ConnectionStrings__PostgresReadOnly=Host=db-read.example.com;Database=Arah;Username=...
 
 # Redis (opcional, fallback para IMemoryCache)
 ConnectionStrings__Redis=redis.example.com:6379
@@ -92,8 +92,8 @@ ConnectionStrings__Redis=redis.example.com:6379
 JWT__SIGNINGKEY=your-secret-key-here
 
 # CORS
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+Cors__AllowedOrigins__0=https://app.Arah.com
+Cors__AllowedOrigins__1=https://www.Arah.com
 ```
 
 ### 5. Deploy Multi-Instância
@@ -145,7 +145,7 @@ services:
   postgres:
     image: postgres:16
     environment:
-      - POSTGRES_DB=araponga
+      - POSTGRES_DB=Arah
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
@@ -159,30 +159,30 @@ services:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: araponga-api
+  name: Arah-api
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: araponga-api
+      app: Arah-api
   template:
     metadata:
       labels:
-        app: araponga-api
+        app: Arah-api
     spec:
       containers:
       - name: api
-        image: araponga/api:latest
+        image: Arah/api:latest
         env:
         - name: ConnectionStrings__Postgres
           valueFrom:
             secretKeyRef:
-              name: araponga-secrets
+              name: Arah-secrets
               key: postgres-connection
         - name: ConnectionStrings__Redis
           valueFrom:
             secretKeyRef:
-              name: araponga-secrets
+              name: Arah-secrets
               key: redis-connection
         ports:
         - containerPort: 5000
@@ -196,10 +196,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: araponga-api-service
+  name: Arah-api-service
 spec:
   selector:
-    app: araponga-api
+    app: Arah-api
   ports:
   - port: 80
     targetPort: 5000

@@ -192,27 +192,27 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/CollectivePurchase/Producer.cs`
-- `backend/Araponga.Domain/CollectivePurchase/ProducerType.cs`
-- `backend/Araponga.Domain/CollectivePurchase/ProducerProduct.cs`
-- `backend/Araponga.Domain/CollectivePurchase/ProductCategory.cs`
-- `backend/Araponga.Domain/CollectivePurchase/CollectivePurchase.cs`
-- `backend/Araponga.Domain/CollectivePurchase/CollectivePurchaseStatus.cs`
-- `backend/Araponga.Domain/CollectivePurchase/CollectivePurchaseProduct.cs`
-- `backend/Araponga.Domain/CollectivePurchase/PurchaseInterest.cs`
-- `backend/Araponga.Domain/CollectivePurchase/PurchaseInterestStatus.cs`
-- `backend/Araponga.Domain/CollectivePurchase/PurchaseInterestItem.cs`
-- `backend/Araponga.Domain/CollectivePurchase/CollectivePurchaseSchedule.cs`
-- `backend/Araponga.Application/Interfaces/IProducerRepository.cs`
-- `backend/Araponga.Application/Interfaces/IProducerProductRepository.cs`
-- `backend/Araponga.Application/Interfaces/ICollectivePurchaseRepository.cs`
-- `backend/Araponga.Application/Interfaces/IPurchaseInterestRepository.cs`
-- `backend/Araponga.Application/Interfaces/ICollectivePurchaseScheduleRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresProducerRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresProducerProductRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresCollectivePurchaseRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresPurchaseInterestRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresCollectivePurchaseScheduleRepository.cs`
+- `backend/Arah.Domain/CollectivePurchase/Producer.cs`
+- `backend/Arah.Domain/CollectivePurchase/ProducerType.cs`
+- `backend/Arah.Domain/CollectivePurchase/ProducerProduct.cs`
+- `backend/Arah.Domain/CollectivePurchase/ProductCategory.cs`
+- `backend/Arah.Domain/CollectivePurchase/CollectivePurchase.cs`
+- `backend/Arah.Domain/CollectivePurchase/CollectivePurchaseStatus.cs`
+- `backend/Arah.Domain/CollectivePurchase/CollectivePurchaseProduct.cs`
+- `backend/Arah.Domain/CollectivePurchase/PurchaseInterest.cs`
+- `backend/Arah.Domain/CollectivePurchase/PurchaseInterestStatus.cs`
+- `backend/Arah.Domain/CollectivePurchase/PurchaseInterestItem.cs`
+- `backend/Arah.Domain/CollectivePurchase/CollectivePurchaseSchedule.cs`
+- `backend/Arah.Application/Interfaces/IProducerRepository.cs`
+- `backend/Arah.Application/Interfaces/IProducerProductRepository.cs`
+- `backend/Arah.Application/Interfaces/ICollectivePurchaseRepository.cs`
+- `backend/Arah.Application/Interfaces/IPurchaseInterestRepository.cs`
+- `backend/Arah.Application/Interfaces/ICollectivePurchaseScheduleRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresProducerRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresProducerProductRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresCollectivePurchaseRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresPurchaseInterestRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresCollectivePurchaseScheduleRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -254,15 +254,15 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/ProducerService.cs`
-- `backend/Araponga.Application/Services/ProducerProductService.cs`
-- `backend/Araponga.Api/Controllers/ProducerController.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/RegisterProducerRequest.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/ProducerResponse.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/AddProductRequest.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/ProducerProductResponse.cs`
-- `backend/Araponga.Api/Validators/RegisterProducerRequestValidator.cs`
-- `backend/Araponga.Api/Validators/AddProductRequestValidator.cs`
+- `backend/Arah.Application/Services/ProducerService.cs`
+- `backend/Arah.Application/Services/ProducerProductService.cs`
+- `backend/Arah.Api/Controllers/ProducerController.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/RegisterProducerRequest.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/ProducerResponse.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/AddProductRequest.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/ProducerProductResponse.cs`
+- `backend/Arah.Api/Validators/RegisterProducerRequestValidator.cs`
+- `backend/Arah.Api/Validators/AddProductRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de produtores funcionando
@@ -303,12 +303,12 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchaseService.cs`
-- `backend/Araponga.Api/Controllers/CollectivePurchaseController.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/CreateCollectivePurchaseRequest.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/CollectivePurchaseResponse.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/AddProductToPurchaseRequest.cs`
-- `backend/Araponga.Api/Validators/CreateCollectivePurchaseRequestValidator.cs`
+- `backend/Arah.Application/Services/CollectivePurchaseService.cs`
+- `backend/Arah.Api/Controllers/CollectivePurchaseController.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/CreateCollectivePurchaseRequest.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/CollectivePurchaseResponse.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/AddProductToPurchaseRequest.cs`
+- `backend/Arah.Api/Validators/CreateCollectivePurchaseRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de compra coletiva funcionando
@@ -354,11 +354,11 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PurchaseInterestService.cs`
-- `backend/Araponga.Api/Controllers/PurchaseInterestController.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/ExpressInterestRequest.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/PurchaseInterestResponse.cs`
-- `backend/Araponga.Api/Validators/ExpressInterestRequestValidator.cs`
+- `backend/Arah.Application/Services/PurchaseInterestService.cs`
+- `backend/Arah.Api/Controllers/PurchaseInterestController.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/ExpressInterestRequest.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/PurchaseInterestResponse.cs`
+- `backend/Arah.Api/Validators/ExpressInterestRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de interesse funcionando
@@ -400,11 +400,11 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchaseScheduleService.cs`
-- `backend/Araponga.Api/Controllers/CollectivePurchaseScheduleController.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/CreateScheduleRequest.cs`
-- `backend/Araponga.Api/Contracts/CollectivePurchase/CollectivePurchaseScheduleResponse.cs`
-- `backend/Araponga.Application/BackgroundJobs/CollectivePurchaseScheduleJob.cs`
+- `backend/Arah.Application/Services/CollectivePurchaseScheduleService.cs`
+- `backend/Arah.Api/Controllers/CollectivePurchaseScheduleController.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/CreateScheduleRequest.cs`
+- `backend/Arah.Api/Contracts/CollectivePurchase/CollectivePurchaseScheduleResponse.cs`
+- `backend/Arah.Application/BackgroundJobs/CollectivePurchaseScheduleJob.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de agenda funcionando
@@ -437,8 +437,8 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchaseVotingService.cs`
-- `backend/Araponga.Api/Controllers/CollectivePurchaseVotingController.cs`
+- `backend/Arah.Application/Services/CollectivePurchaseVotingService.cs`
+- `backend/Arah.Api/Controllers/CollectivePurchaseVotingController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com votação funcionando
@@ -468,7 +468,7 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchaseDeliveryService.cs`
+- `backend/Arah.Application/Services/CollectivePurchaseDeliveryService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com entregas funcionando
@@ -499,7 +499,7 @@ Implementar sistema de **compra coletiva de alimentos** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchasePaymentService.cs`
+- `backend/Arah.Application/Services/CollectivePurchasePaymentService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com moeda territorial funcionando

@@ -26,8 +26,8 @@ Definir estratégia completa de logs e monitoramento que:
 
 ```mermaid
 graph TB
-    subgraph API["Araponga.Api (Monolito)"]
-        Serilog["Serilog (Logging)<br/>- Console Sink<br/>- File Sink (logs/araponga-.log)<br/>- Seq Sink (opcional)"]
+    subgraph API["Arah.Api (Monolito)"]
+        Serilog["Serilog (Logging)<br/>- Console Sink<br/>- File Sink (logs/Arah-.log)<br/>- Seq Sink (opcional)"]
         Prometheus["Prometheus Metrics<br/>- Endpoint: /metrics<br/>- Métricas HTTP automáticas<br/>- Métricas de negócio"]
         OpenTelemetry["OpenTelemetry Tracing<br/>- HTTP requests<br/>- Database queries<br/>- Eventos"]
         HealthChecks["Health Checks<br/>- /health (liveness)<br/>- /health/ready (readiness)<br/>- /health/live (liveness)"]
@@ -55,7 +55,7 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph Gateway["Araponga.Api.Host (Gateway)"]
+    subgraph Gateway["Arah.Api.Host (Gateway)"]
         WebInterface2["Interface Web de Monitoramento<br/>- /admin/monitoring (agregação)<br/>- Logs agregados de todas as APIs<br/>- Métricas agregadas"]
     end
     
@@ -243,7 +243,7 @@ A aplicação terá uma **interface web integrada** para monitoramento e auxíli
 ### Estrutura de Arquivos
 
 ```
-backend/Araponga.Api/
+backend/Arah.Api/
 ├── Controllers/
 │   └── Admin/
 │       ├── MonitoringController.cs          # Endpoints de monitoramento
@@ -386,7 +386,7 @@ public sealed class HealthController : ControllerBase
 ### SignalR para Logs em Tempo Real
 
 ```csharp
-// Araponga.Api/Hubs/LogsHub.cs
+// Arah.Api/Hubs/LogsHub.cs
 public sealed class LogsHub : Hub
 {
     private readonly ILogViewerService _logViewerService;
@@ -420,7 +420,7 @@ public sealed class LogsHub : Hub
   "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "Araponga": "Information"
+      "Arah": "Information"
     },
     "Seq": {
       "ServerUrl": "http://localhost:5341",
@@ -436,7 +436,7 @@ public sealed class LogsHub : Hub
       {
         "Name": "File",
         "Args": {
-          "path": "logs/araponga-.log",
+          "path": "logs/Arah-.log",
           "rollingInterval": "Day",
           "retainedFileCountLimit": 30
         }
@@ -455,7 +455,7 @@ public sealed class LogsHub : Hub
 ```
 
 **Características**:
-- ✅ Logs em arquivo local (`logs/araponga-.log`)
+- ✅ Logs em arquivo local (`logs/Arah-.log`)
 - ✅ Seq opcional (para centralização)
 - ✅ Interface web integrada (`/admin/monitoring`)
 - ✅ Logs em tempo real via SignalR
@@ -603,7 +603,7 @@ public sealed class LogsHub : Hub
 
 ```mermaid
 graph TB
-    subgraph Dashboard["Dashboard de Monitoramento - Araponga"]
+    subgraph Dashboard["Dashboard de Monitoramento - Arah"]
         subgraph Row1["Métricas Principais"]
             Status["Status Geral<br/>🟢 Healthy"]
             RequestRate["Request Rate<br/>150 req/s"]
@@ -790,7 +790,7 @@ graph TB
   "Serilog": {
     "Properties": {
       "InstanceId": "${HOSTNAME}",
-      "Application": "Araponga.Api"
+      "Application": "Arah.Api"
     }
   }
 }

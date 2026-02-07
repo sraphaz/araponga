@@ -57,7 +57,7 @@
 
 ### Estrutura de Projeto
 ```
-/backend/Araponga.Tests/Domain/
+/backend/Arah.Tests/Domain/
 ├── TerritoryEdgeCasesTests.cs      (28 testes)
 ├── UserEdgeCasesTests.cs            (18 testes)
 └── CommunityPostEdgeCasesTests.cs   (26 testes)
@@ -163,7 +163,7 @@
 ### Execução de Testes
 ```bash
 # Total tests
-dotnet test Araponga.sln --verbosity quiet
+dotnet test Arah.sln --verbosity quiet
 # Result: Passed! - Failed: 0, Passed: 870, Skipped: 3, Total: 873
 
 # Edge cases only

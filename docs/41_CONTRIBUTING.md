@@ -1,6 +1,6 @@
-# Contribuindo com o Araponga
+# Contribuindo com o Arah
 
-Obrigado por considerar contribuir com o Araponga! Este é um projeto comunitário orientado ao território.
+Obrigado por considerar contribuir com o Arah! Este é um projeto comunitário orientado ao território.
 
 ## Código de conduta
 
@@ -58,8 +58,8 @@ Se precisar rodar a API localmente, utilize o .NET 8 e siga as instruções do R
 
 ## Design e Coerência
 
-O design do Araponga atua como campo de coerência: orienta escolhas visuais para sustentar foco, cuidado e continuidade.
-Consulte o guia completo em [Design & Coerência](https://araponga.eco.br/design/).
+O design do Arah atua como campo de coerência: orienta escolhas visuais para sustentar foco, cuidado e continuidade.
+Consulte o guia completo em [Design & Coerência](https://Arah.eco.br/design/).
 
 **Princípios**
 - Território como referência.

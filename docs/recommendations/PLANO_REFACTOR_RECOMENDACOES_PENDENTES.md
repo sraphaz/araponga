@@ -9,7 +9,7 @@ Este documento detalha o plano de implementação para as recomendações penden
 ### 1. Migrar todos os services para usar `Result<T>` ✅ ESTRUTURA CRIADA
 
 **Status Atual:**
-- ✅ `Result<T>` e `OperationResult` já criados em `Araponga.Application/Common/Result.cs`
+- ✅ `Result<T>` e `OperationResult` já criados em `Arah.Application/Common/Result.cs`
 - ❌ Ainda há 29 métodos usando tuplas `(bool success, string? error, T? result)`
 
 **Services que precisam migração:**

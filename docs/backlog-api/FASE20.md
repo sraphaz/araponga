@@ -145,23 +145,23 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Trades/TradeOffer.cs`
-- `backend/Araponga.Domain/Trades/TradeCategory.cs`
-- `backend/Araponga.Domain/Trades/TradeOfferStatus.cs`
-- `backend/Araponga.Domain/Trades/TradeProposal.cs`
-- `backend/Araponga.Domain/Trades/TradeProposalStatus.cs`
-- `backend/Araponga.Domain/Trades/Trade.cs`
-- `backend/Araponga.Domain/Trades/TradeStatus.cs`
-- `backend/Araponga.Domain/Trades/TradeEvent.cs`
-- `backend/Araponga.Domain/Trades/TradeEventParticipation.cs`
-- `backend/Araponga.Application/Interfaces/ITradeOfferRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITradeProposalRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITradeRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITradeEventRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTradeOfferRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTradeProposalRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTradeRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTradeEventRepository.cs`
+- `backend/Arah.Domain/Trades/TradeOffer.cs`
+- `backend/Arah.Domain/Trades/TradeCategory.cs`
+- `backend/Arah.Domain/Trades/TradeOfferStatus.cs`
+- `backend/Arah.Domain/Trades/TradeProposal.cs`
+- `backend/Arah.Domain/Trades/TradeProposalStatus.cs`
+- `backend/Arah.Domain/Trades/Trade.cs`
+- `backend/Arah.Domain/Trades/TradeStatus.cs`
+- `backend/Arah.Domain/Trades/TradeEvent.cs`
+- `backend/Arah.Domain/Trades/TradeEventParticipation.cs`
+- `backend/Arah.Application/Interfaces/ITradeOfferRepository.cs`
+- `backend/Arah.Application/Interfaces/ITradeProposalRepository.cs`
+- `backend/Arah.Application/Interfaces/ITradeRepository.cs`
+- `backend/Arah.Application/Interfaces/ITradeEventRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTradeOfferRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTradeProposalRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTradeRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTradeEventRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -197,11 +197,11 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TradeOfferService.cs`
-- `backend/Araponga.Api/Controllers/TradeOfferController.cs`
-- `backend/Araponga.Api/Contracts/Trades/CreateTradeOfferRequest.cs`
-- `backend/Araponga.Api/Contracts/Trades/TradeOfferResponse.cs`
-- `backend/Araponga.Api/Validators/CreateTradeOfferRequestValidator.cs`
+- `backend/Arah.Application/Services/TradeOfferService.cs`
+- `backend/Arah.Api/Controllers/TradeOfferController.cs`
+- `backend/Arah.Api/Contracts/Trades/CreateTradeOfferRequest.cs`
+- `backend/Arah.Api/Contracts/Trades/TradeOfferResponse.cs`
+- `backend/Arah.Api/Validators/CreateTradeOfferRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de ofertas funcionando
@@ -238,11 +238,11 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TradeProposalService.cs`
-- `backend/Araponga.Api/Controllers/TradeProposalController.cs`
-- `backend/Araponga.Api/Contracts/Trades/CreateTradeProposalRequest.cs`
-- `backend/Araponga.Api/Contracts/Trades/TradeProposalResponse.cs`
-- `backend/Araponga.Api/Validators/CreateTradeProposalRequestValidator.cs`
+- `backend/Arah.Application/Services/TradeProposalService.cs`
+- `backend/Arah.Api/Controllers/TradeProposalController.cs`
+- `backend/Arah.Api/Contracts/Trades/CreateTradeProposalRequest.cs`
+- `backend/Arah.Api/Contracts/Trades/TradeProposalResponse.cs`
+- `backend/Arah.Api/Validators/CreateTradeProposalRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de propostas funcionando
@@ -279,9 +279,9 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TradeMatchingService.cs`
-- `backend/Araponga.Api/Controllers/TradeMatchingController.cs`
-- `backend/Araponga.Api/Contracts/Trades/TradeMatchResponse.cs`
+- `backend/Arah.Application/Services/TradeMatchingService.cs`
+- `backend/Arah.Api/Controllers/TradeMatchingController.cs`
+- `backend/Arah.Api/Contracts/Trades/TradeMatchResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de matching funcionando
@@ -316,10 +316,10 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TradeEventService.cs`
-- `backend/Araponga.Api/Controllers/TradeEventController.cs`
-- `backend/Araponga.Api/Contracts/Trades/CreateTradeEventRequest.cs`
-- `backend/Araponga.Api/Contracts/Trades/TradeEventResponse.cs`
+- `backend/Arah.Application/Services/TradeEventService.cs`
+- `backend/Arah.Api/Controllers/TradeEventController.cs`
+- `backend/Arah.Api/Contracts/Trades/CreateTradeEventRequest.cs`
+- `backend/Arah.Api/Contracts/Trades/TradeEventResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de eventos funcionando
@@ -357,9 +357,9 @@ Implementar sistema de **trocas comunitárias** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TradeService.cs`
-- `backend/Araponga.Api/Controllers/TradeController.cs`
-- `backend/Araponga.Api/Contracts/Trades/TradeResponse.cs`
+- `backend/Arah.Application/Services/TradeService.cs`
+- `backend/Arah.Api/Controllers/TradeController.cs`
+- `backend/Arah.Api/Contracts/Trades/TradeResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com moeda territorial funcionando

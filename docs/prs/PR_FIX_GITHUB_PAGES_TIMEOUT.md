@@ -78,7 +78,7 @@ Além do fix do GitHub Pages, este PR também organiza a documentação do proje
 - `.github/workflows/devportal-pages.yml`
 - `docs/prs/README.md` (novo)
 - `docs/00_INDEX.md`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 - Movidos/Removidos: `PLANO_REFACTOR_RECOMENDACOES_PENDENTES.md`, `CHANGELOG.md`, `PR_*.md`
 
 ## Testes

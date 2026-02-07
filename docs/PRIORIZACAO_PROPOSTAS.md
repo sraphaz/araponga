@@ -1,4 +1,4 @@
-# 📊 Priorização de Propostas Funcionais - Araponga
+# 📊 Priorização de Propostas Funcionais - Arah
 
 **Critérios e Processo para Validar e Priorizar Funcionalidades**
 
@@ -9,7 +9,7 @@
 
 ## 🎯 Propósito
 
-Este documento estabelece **critérios claros** e um **processo orgânico** para validar e priorizar propostas de funcionalidades no Araponga, garantindo que implementações sirvam ao território e respeitem valores do projeto.
+Este documento estabelece **critérios claros** e um **processo orgânico** para validar e priorizar propostas de funcionalidades no Arah, garantindo que implementações sirvam ao território e respeitem valores do projeto.
 
 ---
 
@@ -55,7 +55,7 @@ Este documento estabelece **critérios claros** e um **processo orgânico** para
 - [ ] Serve à vida, não a captura de atenção
 - [ ] Descoloniza padrões digitais
 
-**Pergunta-chave**: "Esta funcionalidade alinha com os valores do Araponga?"
+**Pergunta-chave**: "Esta funcionalidade alinha com os valores do Arah?"
 
 #### 6. É Tecnicamente Viável (Quando Aplicável) ✅ OBRIGATÓRIO
 - [ ] Desenvolvedores avaliaram viabilidade
@@ -547,7 +547,7 @@ Este documento estabelece **critérios claros** e um **processo orgânico** para
 
 ## 🌱 Conclusão
 
-Priorização no Araponga é sobre **servir ao território** de forma **consciente e orgânica**.
+Priorização no Arah é sobre **servir ao território** de forma **consciente e orgânica**.
 
 **Não é sobre**:
 - ❌ Satisfazer o maior número de pessoas

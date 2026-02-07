@@ -154,18 +154,18 @@ Este PR implementa suporte completo a vídeos em Posts, Eventos e Marketplace, e
 ## 📦 Arquivos Modificados
 
 ### Application Services
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Application/Services/JoinRequestService.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Application/Services/JoinRequestService.cs`
 
 ### Tests
-- `backend/Araponga.Tests/Api/MediaInContentIntegrationTests.cs`
-- `backend/Araponga.Tests/Application/JoinRequestServiceTests.cs`
+- `backend/Arah.Tests/Api/MediaInContentIntegrationTests.cs`
+- `backend/Arah.Tests/Application/JoinRequestServiceTests.cs`
 
 ### API
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 ### Documentation
 - `docs/backlog-api/FASE10.md`

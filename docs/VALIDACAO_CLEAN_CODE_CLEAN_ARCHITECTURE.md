@@ -1,7 +1,7 @@
 # Validação: Clean Code e Clean Architecture
 
 **Data**: 2026-02-02  
-**Objetivo**: Validar a aplicação Araponga contra os princípios e padrões descritos em *Clean Code* (Robert C. Martin) e *Clean Architecture* (Uncle Bob).
+**Objetivo**: Validar a aplicação Arah contra os princípios e padrões descritos em *Clean Code* (Robert C. Martin) e *Clean Architecture* (Uncle Bob).
 
 ---
 
@@ -13,10 +13,10 @@ A regra central: **dependências apontam para dentro**. O núcleo (Domain) não 
 
 | Camada | Projeto(s) | Depende de | Avaliação |
 |--------|-------------|------------|-----------|
-| **Entidades (núcleo)** | `Araponga.Domain` | Nenhum projeto; apenas `Araponga.Domain.*` | **OK** – Domain não referencia Application, Infrastructure ou API. Sem EF, Npgsql ou ASP.NET. |
-| **Casos de uso** | `Araponga.Application` | Domain, Araponga.Shared | **OK** – Application depende apenas de Domain (e Shared, projeto mínimo). Persistência/cache via **interfaces** (I*Repository, IUnitOfWork, IDistributedCacheService). |
-| **Adaptadores de interface** | `Araponga.Infrastructure`, módulos | Domain, Application | **OK** – Implementam interfaces definidas em Application; não são referenciados por Domain ou Application. |
-| **Frameworks e drivers** | `Araponga.Api` | Application, Infrastructure, módulos | **OK** – API orquestra serviços de aplicação e infraestrutura; controllers finos delegam para Application. |
+| **Entidades (núcleo)** | `Arah.Domain` | Nenhum projeto; apenas `Arah.Domain.*` | **OK** – Domain não referencia Application, Infrastructure ou API. Sem EF, Npgsql ou ASP.NET. |
+| **Casos de uso** | `Arah.Application` | Domain, Arah.Shared | **OK** – Application depende apenas de Domain (e Shared, projeto mínimo). Persistência/cache via **interfaces** (I*Repository, IUnitOfWork, IDistributedCacheService). |
+| **Adaptadores de interface** | `Arah.Infrastructure`, módulos | Domain, Application | **OK** – Implementam interfaces definidas em Application; não são referenciados por Domain ou Application. |
+| **Frameworks e drivers** | `Arah.Api` | Application, Infrastructure, módulos | **OK** – API orquestra serviços de aplicação e infraestrutura; controllers finos delegam para Application. |
 
 **Conclusão**: A **Dependency Rule** é respeitada. Domain é independente; Application define interfaces e usa entidades de domínio; Infrastructure e API dependem para dentro.
 
@@ -44,7 +44,7 @@ A regra central: **dependências apontam para dentro**. O núcleo (Domain) não 
 ### 2.1 Domain (entidades e regras de negócio)
 
 - **Entidades ricas**: Territory, User, MapEntity, etc. com construtores que validam invariantes (`ArgumentException` para dados inválidos).
-- **Sem referências externas**: Apenas namespaces `Araponga.Domain.*`.
+- **Sem referências externas**: Apenas namespaces `Arah.Domain.*`.
 - **Validação no construtor**: Ex.: Territory exige name, city, state não vazios; StoreRating exige rating entre 1 e 5.
 
 **Avaliação**: **OK** – Domain concentra regras de negócio e permanece isolado.

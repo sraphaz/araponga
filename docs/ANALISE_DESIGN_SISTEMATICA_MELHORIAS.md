@@ -2,7 +2,7 @@
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
-**Escopo**: Wiki Araponga e DevPortal  
+**Escopo**: Wiki Arah e DevPortal  
 **Baseado em**: `DESIGN_SYSTEM_IDENTIDADE_VISUAL.md`
 
 ---
@@ -359,7 +359,7 @@ color: var(--link);
 
 #### Proposta 2: Aplicar Glass Morphism no DevPortal
 
-**Arquivo**: `backend/Araponga.Api/wwwroot/devportal/assets/css/devportal.css`
+**Arquivo**: `backend/Arah.Api/wwwroot/devportal/assets/css/devportal.css`
 
 **Adicionar variáveis glass:**
 ```css
@@ -647,7 +647,7 @@ color: var(--link);
 
 #### Proposta 1: Unificar Tipografia
 
-**Arquivo**: `backend/Araponga.Api/wwwroot/devportal/index.html`
+**Arquivo**: `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Adicionar fontes:**
 ```html
@@ -763,4 +763,4 @@ code, pre {
 
 ---
 
-**Este documento serve como guia detalhado para implementação sistemática das melhorias de design, alinhadas com as diretrizes de identidade visual do Araponga.**
+**Este documento serve como guia detalhado para implementação sistemática das melhorias de design, alinhadas com as diretrizes de identidade visual do Arah.**

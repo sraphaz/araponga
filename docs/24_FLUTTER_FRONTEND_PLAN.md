@@ -1,4 +1,4 @@
-# Planejamento do Frontend Flutter - Araponga Mobile App
+# Planejamento do Frontend Flutter - Arah Mobile App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -26,7 +26,7 @@
 
 ## 🎯 Contexto do Projeto
 
-O **Araponga** é uma plataforma **território-first** e **comunidade-first** para organização comunitária local, onde:
+O **Arah** é uma plataforma **território-first** e **comunidade-first** para organização comunitária local, onde:
 
 - O **território físico é a unidade central** de organização
 - A **presença física é critério de vínculo** (geolocalização obrigatória para residentes)
@@ -35,7 +35,7 @@ O **Araponga** é uma plataforma **território-first** e **comunidade-first** pa
 - **Feature flags territoriais** ativam/desativam funcionalidades
 - Tudo é **georreferenciado** e conectado ao mapa territorial
 
-Este documento especifica o planejamento completo para desenvolvimento do **app mobile Flutter** que consome a API Araponga (`/api/v1/*`), cobrindo todos os domínios funcionais do projeto.
+Este documento especifica o planejamento completo para desenvolvimento do **app mobile Flutter** que consome a API Arah (`/api/v1/*`), cobrindo todos os domínios funcionais do projeto.
 
 ### Princípios Fundamentais da Aplicação
 
@@ -61,7 +61,7 @@ Este documento especifica o planejamento completo para desenvolvimento do **app 
   - Roteamento declarativo com suporte a deep linking
   - Transições customizadas entre telas
   - Rotas protegidas por autenticação e capabilities
-  - Deep linking: `araponga://territory/{id}`, `araponga://post/{id}`, `araponga://event/{id}`
+  - Deep linking: `Arah://territory/{id}`, `Arah://post/{id}`, `Arah://event/{id}`
   - Navegação com estado preservado (nested navigation)
 
 ### Gerenciamento de Estado
@@ -1060,7 +1060,7 @@ GoRouter(
 - Verificar feature flag antes de habilitar funcionalidade
 
 ### Deep Linking
-- Suportar: `araponga://territory/{id}`, `araponga://post/{id}`, `araponga://event/{id}`
+- Suportar: `Arah://territory/{id}`, `Arah://post/{id}`, `Arah://event/{id}`
 - Configurar no `AndroidManifest.xml` e `Info.plist`
 
 ---
@@ -1344,7 +1344,7 @@ dev_dependencies:
 - [API - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO.md)
 - [Modelo de Domínio](./12_DOMAIN_MODEL.md)
 - [Decisões Arquiteturais](./10_ARCHITECTURE_DECISIONS.md)
-- [OpenAPI Specification](../backend/Araponga.Api/wwwroot/devportal/openapi.json)
+- [OpenAPI Specification](../backend/Arah.Api/wwwroot/devportal/openapi.json)
 
 ---
 

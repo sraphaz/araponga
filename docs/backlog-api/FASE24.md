@@ -140,20 +140,20 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/HealthDomain.cs`
-- `backend/Araponga.Domain/Health/HealthSeverity.cs`
-- `backend/Araponga.Domain/Health/HealthObservationStatus.cs`
-- `backend/Araponga.Domain/Health/HealthMetric.cs`
-- `backend/Araponga.Domain/Health/HealthObservation.cs`
-- `backend/Araponga.Domain/Health/HealthObservationConfirmation.cs`
-- `backend/Araponga.Application/Interfaces/IHealthDomainRepository.cs`
-- `backend/Araponga.Application/Interfaces/IHealthMetricRepository.cs`
-- `backend/Araponga.Application/Interfaces/IHealthObservationRepository.cs`
-- `backend/Araponga.Application/Interfaces/IHealthObservationConfirmationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresHealthDomainRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresHealthMetricRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresHealthObservationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresHealthObservationConfirmationRepository.cs`
+- `backend/Arah.Domain/Health/HealthDomain.cs`
+- `backend/Arah.Domain/Health/HealthSeverity.cs`
+- `backend/Arah.Domain/Health/HealthObservationStatus.cs`
+- `backend/Arah.Domain/Health/HealthMetric.cs`
+- `backend/Arah.Domain/Health/HealthObservation.cs`
+- `backend/Arah.Domain/Health/HealthObservationConfirmation.cs`
+- `backend/Arah.Application/Interfaces/IHealthDomainRepository.cs`
+- `backend/Arah.Application/Interfaces/IHealthMetricRepository.cs`
+- `backend/Arah.Application/Interfaces/IHealthObservationRepository.cs`
+- `backend/Arah.Application/Interfaces/IHealthObservationConfirmationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresHealthDomainRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresHealthMetricRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresHealthObservationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresHealthObservationConfirmationRepository.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -188,11 +188,11 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/HealthObservationService.cs`
-- `backend/Araponga.Api/Controllers/HealthObservationController.cs`
-- `backend/Araponga.Api/Contracts/Health/CreateHealthObservationRequest.cs`
-- `backend/Araponga.Api/Contracts/Health/HealthObservationResponse.cs`
-- `backend/Araponga.Api/Validators/CreateHealthObservationRequestValidator.cs`
+- `backend/Arah.Application/Services/HealthObservationService.cs`
+- `backend/Arah.Api/Controllers/HealthObservationController.cs`
+- `backend/Arah.Api/Contracts/Health/CreateHealthObservationRequest.cs`
+- `backend/Arah.Api/Contracts/Health/HealthObservationResponse.cs`
+- `backend/Arah.Api/Validators/CreateHealthObservationRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço implementado
@@ -246,14 +246,14 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/SensorDevice.cs`
-- `backend/Araponga.Domain/Health/SensorDeviceType.cs`
-- `backend/Araponga.Domain/Health/SensorDeviceStatus.cs`
-- `backend/Araponga.Domain/Health/SensorReading.cs`
-- `backend/Araponga.Application/Interfaces/ISensorDeviceRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISensorReadingRepository.cs`
-- `backend/Araponga.Application/Services/SensorDeviceService.cs`
-- `backend/Araponga.Api/Controllers/SensorDeviceController.cs`
+- `backend/Arah.Domain/Health/SensorDevice.cs`
+- `backend/Arah.Domain/Health/SensorDeviceType.cs`
+- `backend/Arah.Domain/Health/SensorDeviceStatus.cs`
+- `backend/Arah.Domain/Health/SensorReading.cs`
+- `backend/Arah.Application/Interfaces/ISensorDeviceRepository.cs`
+- `backend/Arah.Application/Interfaces/ISensorReadingRepository.cs`
+- `backend/Arah.Application/Services/SensorDeviceService.cs`
+- `backend/Arah.Api/Controllers/SensorDeviceController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de sensores funcionando
@@ -296,12 +296,12 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/TerritoryHealthIndicator.cs`
-- `backend/Araponga.Domain/Health/IndicatorPeriod.cs`
-- `backend/Araponga.Domain/Health/CalculationMethod.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryHealthIndicatorRepository.cs`
-- `backend/Araponga.Application/Services/HealthIndicatorService.cs`
-- `backend/Araponga.Api/Controllers/HealthIndicatorController.cs`
+- `backend/Arah.Domain/Health/TerritoryHealthIndicator.cs`
+- `backend/Arah.Domain/Health/IndicatorPeriod.cs`
+- `backend/Arah.Domain/Health/CalculationMethod.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryHealthIndicatorRepository.cs`
+- `backend/Arah.Application/Services/HealthIndicatorService.cs`
+- `backend/Arah.Api/Controllers/HealthIndicatorController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Indicadores sendo calculados
@@ -360,14 +360,14 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/TerritoryAction.cs`
-- `backend/Araponga.Domain/Health/TerritoryActionType.cs`
-- `backend/Araponga.Domain/Health/TerritoryActionStatus.cs`
-- `backend/Araponga.Domain/Health/TerritoryActionParticipant.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryActionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryActionParticipantRepository.cs`
-- `backend/Araponga.Application/Services/TerritoryActionService.cs`
-- `backend/Araponga.Api/Controllers/TerritoryActionController.cs`
+- `backend/Arah.Domain/Health/TerritoryAction.cs`
+- `backend/Arah.Domain/Health/TerritoryActionType.cs`
+- `backend/Arah.Domain/Health/TerritoryActionStatus.cs`
+- `backend/Arah.Domain/Health/TerritoryActionParticipant.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryActionRepository.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryActionParticipantRepository.cs`
+- `backend/Arah.Application/Services/TerritoryActionService.cs`
+- `backend/Arah.Api/Controllers/TerritoryActionController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sistema de ações funcionando
@@ -403,10 +403,10 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/WasteCollection.cs`
-- `backend/Araponga.Application/Interfaces/IWasteCollectionRepository.cs`
-- `backend/Araponga.Application/Services/WasteCollectionService.cs`
-- `backend/Araponga.Api/Controllers/WasteCollectionController.cs`
+- `backend/Arah.Domain/Health/WasteCollection.cs`
+- `backend/Arah.Application/Interfaces/IWasteCollectionRepository.cs`
+- `backend/Arah.Application/Services/WasteCollectionService.cs`
+- `backend/Arah.Api/Controllers/WasteCollectionController.cs`
 
 ---
 
@@ -434,10 +434,10 @@ Implementar sistema completo de **saúde territorial e monitoramento** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Health/TreePlanting.cs`
-- `backend/Araponga.Application/Interfaces/ITreePlantingRepository.cs`
-- `backend/Araponga.Application/Services/TreePlantingService.cs`
-- `backend/Araponga.Api/Controllers/TreePlantingController.cs`
+- `backend/Arah.Domain/Health/TreePlanting.cs`
+- `backend/Arah.Application/Interfaces/ITreePlantingRepository.cs`
+- `backend/Arah.Application/Services/TreePlantingService.cs`
+- `backend/Arah.Api/Controllers/TreePlantingController.cs`
 
 ---
 

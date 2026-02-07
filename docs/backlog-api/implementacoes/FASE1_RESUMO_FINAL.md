@@ -54,7 +54,7 @@
 - ✅ `60_API_LÓGICA_NEGÓCIO.md` - Rate limiting documentado
 - ✅ `README.md` - Seção de segurança atualizada
 - ✅ `00_INDEX.md` - Nova seção de segurança
-- ✅ `Araponga.Tests/README.md` - Configuração de testes
+- ✅ `Arah.Tests/README.md` - Configuração de testes
 
 ---
 

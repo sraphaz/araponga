@@ -59,7 +59,7 @@
   - Tipos MIME inválidos
   - URLs malformadas
 
-**Arquivo**: `backend/Araponga.Tests/Domain/Media/MediaEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Domain/Media/MediaEdgeCasesTests.cs` (NOVO)
 
 #### 2. Events Entities (5-8 testes)
 - ❌ `TerritoryEvent` - Sem testes de edge cases
@@ -71,7 +71,7 @@
   - Status transitions
   - Unicode em títulos/descrições
 
-**Arquivo**: `backend/Araponga.Tests/Domain/Events/EventEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Domain/Events/EventEdgeCasesTests.cs` (NOVO)
 
 #### 3. Chat Entities (4-6 testes)
 - ❌ `ChatConversation` - Sem testes de edge cases
@@ -82,7 +82,7 @@
   - Timestamps inválidos
   - Status transitions
 
-**Arquivo**: `backend/Araponga.Tests/Domain/Chat/ChatEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Domain/Chat/ChatEdgeCasesTests.cs` (NOVO)
 
 #### 4. Assets Entities (3-5 testes)
 - ✅ `TerritoryAsset` - Já tem testes básicos
@@ -91,7 +91,7 @@
   - Status transitions
   - Unicode em nomes/descrições
 
-**Arquivo**: `backend/Araponga.Tests/Domain/Assets/AssetEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Domain/Assets/AssetEdgeCasesTests.cs` (NOVO)
 
 #### 5. Financial Entities (3-5 testes)
 - ✅ `SellerBalance`, `SellerTransaction` - Já tem testes básicos
@@ -100,7 +100,7 @@
   - Transições de status
   - Moedas inválidas
 
-**Arquivo**: `backend/Araponga.Tests/Domain/Financial/FinancialEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Domain/Financial/FinancialEdgeCasesTests.cs` (NOVO)
 
 **Total Phase 6**: ~20-30 testes
 
@@ -121,7 +121,7 @@
 - ❌ Unicode em nomes de arquivo
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/MediaServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/MediaServiceEdgeCasesTests.cs` (NOVO)
 
 #### 2. EventService (8-12 testes)
 - ❌ Criação com coordenadas inválidas
@@ -130,7 +130,7 @@
 - ❌ Participação edge cases
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/EventServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/EventServiceEdgeCasesTests.cs` (NOVO)
 
 #### 3. ChatService (8-12 testes)
 - ❌ Mensagens vazias/null
@@ -139,7 +139,7 @@
 - ❌ Conversas com participantes inválidos
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/ChatServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/ChatServiceEdgeCasesTests.cs` (NOVO)
 
 #### 4. AssetService (6-10 testes)
 - ❌ GeoAnchors inválidos
@@ -147,7 +147,7 @@
 - ❌ Validação de território
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/AssetServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/AssetServiceEdgeCasesTests.cs` (NOVO)
 
 #### 5. FinancialService (8-12 testes)
 - ❌ Valores negativos/zero
@@ -155,14 +155,14 @@
 - ❌ Moedas inválidas
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/FinancialServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/FinancialServiceEdgeCasesTests.cs` (NOVO)
 
 #### 6. VerificationService (5-8 testes)
 - ❌ Documentos inválidos
 - ❌ Status transitions
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/VerificationServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/VerificationServiceEdgeCasesTests.cs` (NOVO)
 
 #### 7. JoinRequestService (5-8 testes)
 - ✅ Já tem testes básicos
@@ -171,7 +171,7 @@
   - Validação de território
   - Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Application/JoinRequestServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Application/JoinRequestServiceEdgeCasesTests.cs` (NOVO)
 
 **Total Phase 7**: ~50-70 testes
 
@@ -192,7 +192,7 @@
 - ❌ Performance com grandes volumes
 - ❌ Error handling de conexão
 
-**Arquivo**: `backend/Araponga.Tests/Infrastructure/Postgres/PostgresRepositoryIntegrationTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Infrastructure/Postgres/PostgresRepositoryIntegrationTests.cs` (NOVO)
 
 #### 2. File Storage (8-12 testes)
 - ❌ `LocalFileStorage` edge cases
@@ -201,7 +201,7 @@
 - ❌ Unicode em nomes de arquivo
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Infrastructure/FileStorage/FileStorageEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Infrastructure/FileStorage/FileStorageEdgeCasesTests.cs` (NOVO)
 
 #### 3. Email Services (5-8 testes)
 - ❌ `SmtpEmailSender` edge cases
@@ -209,14 +209,14 @@
 - ❌ Unicode em emails
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Infrastructure/Email/EmailServiceEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Infrastructure/Email/EmailServiceEdgeCasesTests.cs` (NOVO)
 
 #### 4. Event Bus (3-5 testes)
 - ❌ `InMemoryEventBus` edge cases
 - ❌ Error handling
 - ❌ Concorrência
 
-**Arquivo**: `backend/Araponga.Tests/Infrastructure/Eventing/EventBusEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Infrastructure/Eventing/EventBusEdgeCasesTests.cs` (NOVO)
 
 **Total Phase 8**: ~30-40 testes
 
@@ -237,7 +237,7 @@
 - ❌ Error responses
 - ❌ Status codes corretos
 
-**Arquivo**: `backend/Araponga.Tests/Api/ControllerIntegrationEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Api/ControllerIntegrationEdgeCasesTests.cs` (NOVO)
 
 #### 2. Authentication & Authorization (10-15 testes)
 - ❌ JWT token inválido/expirado
@@ -245,7 +245,7 @@
 - ❌ Rate limiting
 - ❌ Error handling
 
-**Arquivo**: `backend/Araponga.Tests/Api/AuthEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Api/AuthEdgeCasesTests.cs` (NOVO)
 
 #### 3. Request Validation (10-12 testes)
 - ✅ Já tem `ControllerValidationEdgeCasesTests`
@@ -254,7 +254,7 @@
   - Validação de query parameters
   - Validação de route parameters
 
-**Arquivo**: `backend/Araponga.Tests/Api/RequestValidationEdgeCasesTests.cs` (NOVO)
+**Arquivo**: `backend/Arah.Tests/Api/RequestValidationEdgeCasesTests.cs` (NOVO)
 
 **Total Phase 9**: ~40-50 testes
 

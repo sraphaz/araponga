@@ -94,4 +94,4 @@ assignees: ''
 
 ---
 
-**Bem-vindo ao Araponga! Estamos felizes que você está começando a contribuir! 🌱**
+**Bem-vindo ao Arah! Estamos felizes que você está começando a contribuir! 🌱**

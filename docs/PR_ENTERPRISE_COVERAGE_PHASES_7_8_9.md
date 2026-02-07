@@ -32,24 +32,24 @@ Este PR implementa **268 testes de edge cases** cobrindo as camadas Application,
 ## 📁 Arquivos Adicionados
 
 ### Testes de Application Layer (Phase 7)
-- `backend/Araponga.Tests/Application/EventServiceEdgeCasesTests.cs` (12 testes)
-- `backend/Araponga.Tests/Application/FinancialServiceEdgeCasesTests.cs` (10 testes)
-- `backend/Araponga.Tests/Application/VerificationServiceEdgeCasesTests.cs` (10 testes)
-- `backend/Araponga.Tests/Application/JoinRequestServiceEdgeCasesTests.cs` (8 testes)
-- `backend/Araponga.Tests/Application/MediaServiceEdgeCasesTests.cs` (12 testes) - atualizado
-- `backend/Araponga.Tests/Application/ChatServiceEdgeCasesTests.cs` (5 testes) - atualizado
-- `backend/Araponga.Tests/Application/TerritoryAssetServiceEdgeCasesTests.cs` (9 testes)
+- `backend/Arah.Tests/Application/EventServiceEdgeCasesTests.cs` (12 testes)
+- `backend/Arah.Tests/Application/FinancialServiceEdgeCasesTests.cs` (10 testes)
+- `backend/Arah.Tests/Application/VerificationServiceEdgeCasesTests.cs` (10 testes)
+- `backend/Arah.Tests/Application/JoinRequestServiceEdgeCasesTests.cs` (8 testes)
+- `backend/Arah.Tests/Application/MediaServiceEdgeCasesTests.cs` (12 testes) - atualizado
+- `backend/Arah.Tests/Application/ChatServiceEdgeCasesTests.cs` (5 testes) - atualizado
+- `backend/Arah.Tests/Application/TerritoryAssetServiceEdgeCasesTests.cs` (9 testes)
 
 ### Testes de Infrastructure Layer (Phase 8)
-- `backend/Araponga.Tests/Infrastructure/FileStorageEdgeCasesTests.cs` (14 testes)
-- `backend/Araponga.Tests/Infrastructure/EmailServiceEdgeCasesTests.cs` (11 testes)
-- `backend/Araponga.Tests/Infrastructure/EventBusEdgeCasesTests.cs` (5 testes) - corrigido
-- `backend/Araponga.Tests/Infrastructure/PostgresRepositoryIntegrationTests.cs` (18 testes)
+- `backend/Arah.Tests/Infrastructure/FileStorageEdgeCasesTests.cs` (14 testes)
+- `backend/Arah.Tests/Infrastructure/EmailServiceEdgeCasesTests.cs` (11 testes)
+- `backend/Arah.Tests/Infrastructure/EventBusEdgeCasesTests.cs` (5 testes) - corrigido
+- `backend/Arah.Tests/Infrastructure/PostgresRepositoryIntegrationTests.cs` (18 testes)
 
 ### Testes de API Layer (Phase 9)
-- `backend/Araponga.Tests/Api/ControllerIntegrationEdgeCasesTests.cs` (20 testes)
-- `backend/Araponga.Tests/Api/AuthEdgeCasesTests.cs` (11 testes)
-- `backend/Araponga.Tests/Api/RequestValidationEdgeCasesTests.cs` (11 testes)
+- `backend/Arah.Tests/Api/ControllerIntegrationEdgeCasesTests.cs` (20 testes)
+- `backend/Arah.Tests/Api/AuthEdgeCasesTests.cs` (11 testes)
+- `backend/Arah.Tests/Api/RequestValidationEdgeCasesTests.cs` (11 testes)
 
 ### Documentação
 - `docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md` - atualizado
@@ -68,7 +68,7 @@ Este PR implementa **268 testes de edge cases** cobrindo as camadas Application,
 ### ChatServiceEdgeCasesTests
 - ✅ Substituído mock de `TerritoryMediaConfigService` por instância real (classe sealed não pode ser mockada)
 - ✅ Habilitados feature flags `ChatEnabled` e `ChatGroups` nos testes
-- ✅ Adicionado import de `Araponga.Application.Models` para `FeatureFlag`
+- ✅ Adicionado import de `Arah.Application.Models` para `FeatureFlag`
 
 ### EventServiceEdgeCasesTests
 - ✅ Ajustado teste `CreateEventAsync_WithUnicodeInTitle_HandlesCorrectly` para lidar com políticas
@@ -101,12 +101,12 @@ Este PR implementa **268 testes de edge cases** cobrindo as camadas Application,
 ### Documentação Completa
 - [`docs/ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md`](./ENTERPRISE_COVERAGE_PHASES_7_8_9_STATUS.md) - Status detalhado das fases
 - [`docs/22_COHESION_AND_TESTS.md`](./22_COHESION_AND_TESTS.md) - Análise de coesão e testes
-- [`backend/Araponga.Tests/README.md`](../backend/Araponga.Tests/README.md) - Guia de testes
+- [`backend/Arah.Tests/README.md`](../backend/Arah.Tests/README.md) - Guia de testes
 
 ### Estrutura de Testes
 
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Application/
 │   ├── MediaServiceEdgeCasesTests.cs              ✅ (12 testes)
 │   ├── ChatServiceEdgeCasesTests.cs               ✅ (5 testes)

@@ -14,18 +14,18 @@ O sistema tinha redirects automaticos complexos que causavam loops infinitos:
 ## Solucao
 
 Remover TODOS os redirects automaticos e usar apenas links estaticos:
-- Usuario acessa `araponga.app` (Gamma) - ve opcao de ir ao Developer Portal
-- Usuario acessa Developer Portal - sempre ve banner com link para voltar ao `araponga.app`
+- Usuario acessa `Arah.app` (Gamma) - ve opcao de ir ao Developer Portal
+- Usuario acessa Developer Portal - sempre ve banner com link para voltar ao `Arah.app`
 - Navegacao totalmente controlada pelo usuario via cliques
 
 ## Mudancas
 
 ### 1. Remocao de Redirects Automaticos
 
-**docs/index.html e backend/Araponga.Api/wwwroot/index.html:**
+**docs/index.html e backend/Arah.Api/wwwroot/index.html:**
 - Removido TODO o JavaScript de redirect (74 linhas)
 - Substituido por pagina simples com 2 links estaticos:
-  - "Visitar araponga.app" (botao principal)
+  - "Visitar Arah.app" (botao principal)
   - "Developer Portal" (botao secundario)
 - Design limpo e claro
 
@@ -35,10 +35,10 @@ Remover TODOS os redirects automaticos e usar apenas links estaticos:
 
 ### 2. Banner Sempre Visivel no Developer Portal
 
-**backend/Araponga.Api/wwwroot/devportal/index.html:**
+**backend/Arah.Api/wwwroot/devportal/index.html:**
 - Removido atributo `hidden` do banner
-- Banner sempre visivel com link "← Voltar para araponga.app"
-- Texto atualizado: "Developer Portal da API Araponga"
+- Banner sempre visivel com link "← Voltar para Arah.app"
+- Texto atualizado: "Developer Portal da API Arah"
 
 **devportal.js (ambos):**
 - Removida logica de mostrar/esconder banner baseado em `fromLanding`
@@ -55,18 +55,18 @@ Remover TODOS os redirects automaticos e usar apenas links estaticos:
 ## Fluxo de Navegacao
 
 ### Antes (com redirects):
-1. Usuario acessa `devportal.araponga.app`
+1. Usuario acessa `devportal.Arah.app`
 2. JavaScript detecta origem e redireciona automaticamente
 3. Loop infinito se parametros conflitarem
 
 ### Depois (sem redirects):
-1. Usuario acessa `araponga.app` (Gamma)
+1. Usuario acessa `Arah.app` (Gamma)
 2. Ve pagina com 2 opcoes claras:
-   - Visitar araponga.app (ja esta la)
+   - Visitar Arah.app (ja esta la)
    - Developer Portal (link clicavel)
 3. Clica em "Developer Portal"
 4. No Developer Portal, sempre ve banner no topo:
-   - "← Voltar para araponga.app" (link clicavel)
+   - "← Voltar para Arah.app" (link clicavel)
 5. Clica para voltar quando quiser
 
 ## Beneficios
@@ -80,10 +80,10 @@ Remover TODOS os redirects automaticos e usar apenas links estaticos:
 ## Arquivos Modificados
 
 - `docs/index.html` - Removido JavaScript, adicionados links estaticos
-- `backend/Araponga.Api/wwwroot/index.html` - Mesma simplificacao
+- `backend/Arah.Api/wwwroot/index.html` - Mesma simplificacao
 - `docs/devportal/index.html` - Removido script de limpeza
-- `backend/Araponga.Api/wwwroot/devportal/index.html` - Banner sempre visivel
-- `backend/Araponga.Api/wwwroot/devportal/assets/js/devportal.js` - Removida logica de banner
+- `backend/Arah.Api/wwwroot/devportal/index.html` - Banner sempre visivel
+- `backend/Arah.Api/wwwroot/devportal/assets/js/devportal.js` - Removida logica de banner
 - `docs/assets/js/devportal.js` - Removida logica de banner
 - `docs/13_DOMAIN_ROUTING.md` - Documentacao atualizada
 

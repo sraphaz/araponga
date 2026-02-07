@@ -1,4 +1,4 @@
-# Resultados de Testes de Performance - Araponga
+# Resultados de Testes de Performance - Arah
 
 **Última Atualização**: 2026-01-20  
 **Status**: ✅ Implementado
@@ -139,21 +139,21 @@ Os testes de performance podem ser pulados via variáveis de ambiente:
 
 ### Executar Todos os Testes de Performance
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --filter "FullyQualifiedName~PerformanceTests"
+dotnet test backend/Arah.Tests/Arah.Tests.csproj --filter "FullyQualifiedName~PerformanceTests"
 ```
 
 ### Executar Testes de Carga
 ```bash
 # Configurar para não pular
 $env:SKIP_LOAD_TESTS="false"
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --filter "FullyQualifiedName~LoadTests"
+dotnet test backend/Arah.Tests/Arah.Tests.csproj --filter "FullyQualifiedName~LoadTests"
 ```
 
 ### Executar Testes de Stress
 ```bash
 # Configurar para não pular
 $env:SKIP_STRESS_TESTS="false"
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --filter "FullyQualifiedName~StressTests"
+dotnet test backend/Arah.Tests/Arah.Tests.csproj --filter "FullyQualifiedName~StressTests"
 ```
 
 ---
@@ -200,4 +200,4 @@ dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --filter "FullyQualifie
 ---
 
 **Última Atualização**: 2026-01-20  
-**Responsável**: Equipe de Desenvolvimento Araponga
+**Responsável**: Equipe de Desenvolvimento Arah

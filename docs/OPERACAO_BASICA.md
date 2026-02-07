@@ -1,4 +1,4 @@
-# Documentação Operacional - Araponga API
+# Documentação Operacional - Arah API
 
 **Data de Criação**: 2026-01-26  
 **Versão**: 1.0  
@@ -23,7 +23,7 @@
 
 ## 🎯 Visão Geral
 
-Esta documentação fornece informações básicas para operação da API Araponga em produção.
+Esta documentação fornece informações básicas para operação da API Arah em produção.
 
 ### Componentes Principais
 
@@ -50,32 +50,32 @@ Esta documentação fornece informações básicas para operação da API Arapon
 
 ```bash
 # Build da imagem
-docker build -t araponga-api:latest .
+docker build -t Arah-api:latest .
 
 # Executar com docker-compose
 docker-compose up -d
 
 # Verificar logs
-docker-compose logs -f araponga-api
+docker-compose logs -f Arah-api
 ```
 
 ### Deploy Manual
 
 ```bash
 # 1. Publicar aplicação
-dotnet publish backend/Araponga.Api/Araponga.Api.csproj -c Release -o ./publish
+dotnet publish backend/Arah.Api/Arah.Api.csproj -c Release -o ./publish
 
 # 2. Configurar variáveis de ambiente (ver seção abaixo)
 
 # 3. Executar migrações
 cd publish
-dotnet Araponga.Api.dll --migrate
+dotnet Arah.Api.dll --migrate
 
 # 4. Executar seed inicial
-dotnet Araponga.Api.dll --seed
+dotnet Arah.Api.dll --seed
 
 # 5. Iniciar aplicação
-dotnet Araponga.Api.dll
+dotnet Arah.Api.dll
 ```
 
 ---
@@ -87,7 +87,7 @@ dotnet Araponga.Api.dll
 #### Banco de Dados (PostgreSQL)
 
 ```bash
-ConnectionStrings__Postgres=Host=<host>;Port=5432;Database=araponga;Username=<user>;Password=<password>;Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30
+ConnectionStrings__Postgres=Host=<host>;Port=5432;Database=Arah;Username=<user>;Password=<password>;Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30
 Persistence__Provider=Postgres
 Persistence__ApplyMigrations=true
 ```
@@ -101,8 +101,8 @@ Persistence__ApplyMigrations=true
 
 ```bash
 JWT__SIGNINGKEY=<strong_secret_key_min_32_chars>
-JWT__Issuer=Araponga
-JWT__Audience=Araponga
+JWT__Issuer=Arah
+JWT__Audience=Arah
 JWT__ExpirationMinutes=60
 ```
 
@@ -150,7 +150,7 @@ Email__Smtp__Username=<smtp_username>
 Email__Smtp__Password=<smtp_password>
 Email__Smtp__EnableSsl=true
 Email__FromAddress=<from_email>
-Email__FromName=Araponga
+Email__FromName=Arah
 ```
 
 **Provedores Testados**:
@@ -176,9 +176,9 @@ RateLimiting__QueueLimit=100
 #### Base URL e CORS
 
 ```bash
-BaseUrl=https://araponga.com
-Cors__AllowedOrigins__0=https://app.araponga.com
-Cors__AllowedOrigins__1=https://www.araponga.com
+BaseUrl=https://Arah.com
+Cors__AllowedOrigins__0=https://app.Arah.com
+Cors__AllowedOrigins__1=https://www.Arah.com
 ```
 
 #### Observabilidade
@@ -202,7 +202,7 @@ Logging__Seq__ApiKey=<seq_api_key>
 
 ```bash
 # Aplicar todas as migrações
-dotnet ef database update --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef database update --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 
 # Ou via aplicação (se configurado)
 Persistence__ApplyMigrations=true
@@ -212,10 +212,10 @@ Persistence__ApplyMigrations=true
 
 ```bash
 # Verificar migrações pendentes
-dotnet ef migrations list --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef migrations list --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 
 # Aplicar migrações pendentes
-dotnet ef database update --project backend/Araponga.Infrastructure --startup-project backend/Araponga.Api
+dotnet ef database update --project backend/Arah.Infrastructure --startup-project backend/Arah.Api
 ```
 
 ### Seed Inicial
@@ -228,7 +228,7 @@ POST /api/v1/admin/seed/default-plan
 Authorization: Bearer <admin_token>
 
 # Ou via script
-dotnet run --project backend/Araponga.Api -- seed-default-plan
+dotnet run --project backend/Arah.Api -- seed-default-plan
 ```
 
 **Nota**: O plano FREE é criado automaticamente na primeira execução se não existir.
@@ -285,15 +285,15 @@ dotnet run --project backend/Araponga.Api -- seed-default-plan
 **Porta**: 9090 (configurável via `Metrics__Prometheus__Port`)
 
 **Métricas de Negócio**:
-- `araponga.posts.created` - Total de posts criados
-- `araponga.events.created` - Total de eventos criados
-- `araponga.memberships.created` - Total de memberships criados
-- `araponga.territories.created` - Total de territórios criados
-- `araponga.reports.created` - Total de reports criados
+- `Arah.posts.created` - Total de posts criados
+- `Arah.events.created` - Total de eventos criados
+- `Arah.memberships.created` - Total de memberships criados
+- `Arah.territories.created` - Total de territórios criados
+- `Arah.reports.created` - Total de reports criados
 
 **Métricas de Cache**:
-- `araponga.cache.hits` - Cache hits
-- `araponga.cache.misses` - Cache misses
+- `Arah.cache.hits` - Cache hits
+- `Arah.cache.misses` - Cache misses
 - Taxa de hit: `cache_hits / (cache_hits + cache_misses)`
 
 **Métricas HTTP** (Prometheus padrão):
@@ -323,7 +323,7 @@ dotnet run --project backend/Araponga.Api -- seed-default-plan
 
 **Sinks Configurados**:
 - **Console**: Desenvolvimento e debug
-- **File**: `logs/araponga-YYYYMMDD.log` (rotação diária, 30 dias de retenção)
+- **File**: `logs/Arah-YYYYMMDD.log` (rotação diária, 30 dias de retenção)
 - **Seq**: Opcional, se `Logging__Seq__ServerUrl` configurado
 
 **Enriquecimento**:
@@ -331,19 +331,19 @@ dotnet run --project backend/Araponga.Api -- seed-default-plan
 - `MachineName`: Nome da máquina
 - `ThreadId`: ID da thread
 - `EnvironmentName`: Nome do ambiente (Development, Production, etc.)
-- `Application`: "Araponga"
+- `Application`: "Arah"
 - `Version`: Versão da aplicação
 
 **Filtros Recomendados**:
 ```bash
 # Buscar erros
-grep '"Level":"Error"' logs/araponga-*.log
+grep '"Level":"Error"' logs/Arah-*.log
 
 # Buscar por CorrelationId
-grep '"CorrelationId":"<id>"' logs/araponga-*.log
+grep '"CorrelationId":"<id>"' logs/Arah-*.log
 
 # Buscar por componente
-grep '"SourceContext":"Araponga.Application.Services.EmailQueueService"' logs/araponga-*.log
+grep '"SourceContext":"Arah.Application.Services.EmailQueueService"' logs/Arah-*.log
 ```
 
 ### Tracing (OpenTelemetry)
@@ -395,10 +395,10 @@ grep '"SourceContext":"Araponga.Application.Services.EmailQueueService"' logs/ar
 **Monitoramento**:
 ```bash
 # Verificar logs do worker
-grep "EmailQueueWorker" logs/araponga-*.log | tail -20
+grep "EmailQueueWorker" logs/Arah-*.log | tail -20
 
 # Verificar emails processados
-grep "Processed.*emails from queue" logs/araponga-*.log
+grep "Processed.*emails from queue" logs/Arah-*.log
 ```
 
 **Troubleshooting**:
@@ -415,10 +415,10 @@ grep "Processed.*emails from queue" logs/araponga-*.log
 **Monitoramento**:
 ```bash
 # Verificar processamento
-grep "OutboxDispatcherWorker" logs/araponga-*.log | tail -20
+grep "OutboxDispatcherWorker" logs/Arah-*.log | tail -20
 
 # Verificar mensagens com erro
-grep "Outbox processing failed" logs/araponga-*.log
+grep "Outbox processing failed" logs/Arah-*.log
 ```
 
 **Troubleshooting**:
@@ -435,10 +435,10 @@ grep "Outbox processing failed" logs/araponga-*.log
 **Monitoramento**:
 ```bash
 # Verificar renovações processadas
-grep "SubscriptionRenewalWorker" logs/araponga-*.log | tail -20
+grep "SubscriptionRenewalWorker" logs/Arah-*.log | tail -20
 
 # Verificar falhas de renovação
-grep "Failed to renew subscription" logs/araponga-*.log
+grep "Failed to renew subscription" logs/Arah-*.log
 ```
 
 #### PayoutProcessingWorker
@@ -518,8 +518,8 @@ WHERE status = 'Failed'
 
 DATE=$(date +%Y%m%d_%H%M%S)
 BACKUP_DIR="/backups/postgres"
-DB_NAME="araponga"
-DB_USER="araponga"
+DB_NAME="Arah"
+DB_USER="Arah"
 DB_HOST="localhost"
 
 # Criar diretório se não existir
@@ -540,7 +540,7 @@ echo "Backup concluído: araponga_$DATE.backup.gz"
 **Restauração**:
 ```bash
 # Restaurar backup
-pg_restore -h localhost -U araponga -d araponga -c araponga_YYYYMMDD_HHMMSS.backup
+pg_restore -h localhost -U Arah -d Arah -c araponga_YYYYMMDD_HHMMSS.backup
 ```
 
 **Backup Contínuo** (WAL Archiving):
@@ -826,7 +826,7 @@ grep "Email" logs/app.log | grep "Error"
 **Sintomas**: Health check retorna 503, aplicação não responde
 
 **Ações Imediatas**:
-1. Verificar logs: `tail -f logs/araponga-*.log`
+1. Verificar logs: `tail -f logs/Arah-*.log`
 2. Verificar recursos: CPU, memória, disco
 3. Verificar dependências: PostgreSQL, Redis, Storage
 4. Restart da aplicação (se necessário)
@@ -835,14 +835,14 @@ grep "Email" logs/app.log | grep "Error"
 **Rollback**:
 ```bash
 # Parar aplicação atual
-systemctl stop araponga-api
+systemctl stop Arah-api
 
 # Reverter para versão anterior (se deploy recente)
 # Restaurar backup do banco (se corrupção de dados)
-pg_restore -h localhost -U araponga -d araponga backup_anterior.backup
+pg_restore -h localhost -U Arah -d Arah backup_anterior.backup
 
 # Reiniciar aplicação
-systemctl start araponga-api
+systemctl start Arah-api
 ```
 
 ### Incidente: Banco de Dados Indisponível
@@ -947,7 +947,7 @@ systemctl start araponga-api
 
 ### Logs e Debugging
 
-- **Logs da Aplicação**: `logs/araponga-YYYYMMDD.log`
+- **Logs da Aplicação**: `logs/Arah-YYYYMMDD.log`
 - **Logs do PostgreSQL**: `/var/log/postgresql/` (Linux)
 - **Logs do Redis**: Configurado no Redis
 - **Métricas**: `http://<host>:9090/metrics` (Prometheus)
@@ -972,13 +972,13 @@ curl http://localhost:5000/health
 curl http://localhost:9090/metrics
 
 # Verificar logs em tempo real
-tail -f logs/araponga-$(date +%Y%m%d).log
+tail -f logs/Arah-$(date +%Y%m%d).log
 
 # Verificar workers
 ps aux | grep -E "Worker|BackgroundService"
 
 # Verificar conexões PostgreSQL
-psql -U araponga -d araponga -c "SELECT count(*) FROM pg_stat_activity;"
+psql -U Arah -d Arah -c "SELECT count(*) FROM pg_stat_activity;"
 
 # Verificar cache Redis
 redis-cli INFO stats

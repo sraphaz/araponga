@@ -1,4 +1,4 @@
-# Araponga - Documentação Funcional da Plataforma
+# Arah - Documentação Funcional da Plataforma
 
 **Versão**: 1.0  
 **Data**: 2026-01-28  
@@ -20,7 +20,7 @@
 
 ## 🎯 Visão Geral
 
-**Araponga** é uma plataforma digital comunitária orientada ao território. Não é uma rede social genérica, mas sim uma **extensão digital do território vivo** - tecnologia que serve à vida local, à convivência e à autonomia das comunidades.
+**Arah** é uma plataforma digital comunitária orientada ao território. Não é uma rede social genérica, mas sim uma **extensão digital do território vivo** - tecnologia que serve à vida local, à convivência e à autonomia das comunidades.
 
 ### Princípios Fundamentais
 
@@ -54,9 +54,9 @@ Plataformas digitais atuais:
 - Usam algoritmos de manipulação
 - Criam feed global infinito sem contexto territorial
 
-### A Solução Araponga
+### A Solução Arah
 
-O Araponga nasce como **contraponto consciente** a esse modelo, oferecendo:
+O Arah nasce como **contraponto consciente** a esse modelo, oferecendo:
 
 - **Território como referência**: O lugar físico é a unidade central
 - **Comunidade como prioridade**: Organização local respeitando especificidades
@@ -74,13 +74,13 @@ O Araponga nasce como **contraponto consciente** a esse modelo, oferecendo:
 
 ## 🏗️ Domínios e Arquitetura Funcional
 
-A plataforma Araponga é organizada em **domínios funcionais** que trabalham de forma integrada. Cada domínio possui responsabilidades claras e se relaciona com os demais para garantir uma experiência completa orientada ao território.
+A plataforma Arah é organizada em **domínios funcionais** que trabalham de forma integrada. Cada domínio possui responsabilidades claras e se relaciona com os demais para garantir uma experiência completa orientada ao território.
 
 ### Mapa de Domínios
 
 ```mermaid
 flowchart TB
-    subgraph PLATFORM["ARAPONGA PLATFORM"]
+    subgraph PLATFORM["Arah PLATFORM"]
         direction TB
         
         subgraph LAYER1["Camada Base"]
@@ -415,7 +415,7 @@ Ação Auditada
 - **[README - Índice Completo](funcional/README.md)** - Navegação estruturada de toda a documentação funcional
 
 ### Documento Central
-- **[00 - Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** ← Você está aqui
+- **[00 - Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** ← Você está aqui
 
 ### Documentação por Funcionalidade
 
@@ -470,7 +470,7 @@ Ação Auditada
 
 > **⚠️ Status**: As funcionalidades descritas nesta seção estão **planejadas** mas **ainda não implementadas**. Detalhes podem mudar durante o desenvolvimento.
 
-A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido para uma plataforma completa de organização comunitária territorial. As funcionalidades futuras estão organizadas em ondas estratégicas priorizadas.
+A plataforma Arah tem um roadmap estratégico que evolui de um MVP sólido para uma plataforma completa de organização comunitária territorial. As funcionalidades futuras estão organizadas em ondas estratégicas priorizadas.
 
 ### Onda 3: Economia Local (Próximas Prioridades)
 
@@ -560,7 +560,7 @@ A plataforma Araponga tem um roadmap estratégico que evolui de um MVP sólido p
 
 ## 🎯 Resumo Executivo
 
-Araponga é uma plataforma que **conecta tecnologia e território** de forma consciente. Cada elemento técnico da arquitetura se reflete diretamente em funções de negócio que servem à vida comunitária local.
+Arah é uma plataforma que **conecta tecnologia e território** de forma consciente. Cada elemento técnico da arquitetura se reflete diretamente em funções de negócio que servem à vida comunitária local.
 
 **Princípios que guiam tudo**:
 - Território é geográfico e neutro

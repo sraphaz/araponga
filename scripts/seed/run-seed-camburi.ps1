@@ -14,9 +14,9 @@ $SqlFile = Join-Path $ScriptDir "seed-camburi.sql"
 
 $PgHost = if ($env:POSTGRES_HOST) { $env:POSTGRES_HOST } else { "localhost" }
 $Port = if ($env:POSTGRES_PORT) { $env:POSTGRES_PORT } else { "5432" }
-$Db   = if ($env:POSTGRES_DB)   { $env:POSTGRES_DB }   else { "araponga" }
-$User = if ($env:POSTGRES_USER) { $env:POSTGRES_USER } else { "araponga" }
-$Pass = if ($env:POSTGRES_PASSWORD) { $env:POSTGRES_PASSWORD } else { "araponga" }
+$Db   = if ($env:POSTGRES_DB)   { $env:POSTGRES_DB }   else { "arah" }
+$User = if ($env:POSTGRES_USER) { $env:POSTGRES_USER } else { "arah" }
+$Pass = if ($env:POSTGRES_PASSWORD) { $env:POSTGRES_PASSWORD } else { "arah" }
 
 if (-not (Test-Path -LiteralPath $SqlFile)) {
     Write-Error "Arquivo não encontrado: $SqlFile"

@@ -198,6 +198,6 @@ O **MVP Essencial está completo e pronto para produção**. Todas as funcionali
 
 ---
 
-**Release Manager**: Sistema Araponga  
+**Release Manager**: Sistema Arah  
 **Data de Release**: 2026-01-25  
 **Versão**: 1.0.0-MVP

@@ -19,7 +19,7 @@ Permitir vídeos além de imagens em Posts, Eventos e Marketplace, mantendo regr
 - **Facebook**: 10GB
 - **Twitter/X**: 512MB
 
-### Regras para Araponga
+### Regras para Arah
 
 #### Posts
 - **Duração**: Até 60 segundos (similar a TikTok/Instagram Reels)

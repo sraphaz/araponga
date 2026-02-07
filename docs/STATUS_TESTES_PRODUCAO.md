@@ -2,7 +2,7 @@
 
 ## 📊 Resumo Atual dos Testes
 
-**Data**: Verificar com `dotnet test` no backend/Araponga.Tests
+**Data**: Verificar com `dotnet test` no backend/Arah.Tests
 
 ### Resultados da Suite Completa
 

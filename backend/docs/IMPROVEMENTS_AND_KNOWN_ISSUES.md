@@ -1,6 +1,6 @@
 # Melhorias, erros conhecidos e problemas comuns
 
-Este documento reúne **melhorias observáveis** na estruturação do projeto e na organização dos módulos e camadas, **erros conhecidos** (ou riscos já identificados nos ADRs) e **problemas comuns** de diferentes abordagens (modular monolith, shared kernel, vertical slices, etc.), com foco em decisões práticas para o Araponga.
+Este documento reúne **melhorias observáveis** na estruturação do projeto e na organização dos módulos e camadas, **erros conhecidos** (ou riscos já identificados nos ADRs) e **problemas comuns** de diferentes abordagens (modular monolith, shared kernel, vertical slices, etc.), com foco em decisões práticas para o Arah.
 
 ---
 
@@ -8,12 +8,12 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 ### 1.1 Inconsistência na estrutura física dos módulos
 
-**Observação:** Alguns módulos têm **pasta aninhada** (ex.: `Araponga.Modules.Feed/Araponga.Modules.Feed/` com o .csproj dentro), outros têm o .csproj na **raiz** do módulo (ex.: `Araponga.Modules.Connections/Araponga.Modules.Connections.csproj`).
+**Observação:** Alguns módulos têm **pasta aninhada** (ex.: `Arah.Modules.Feed/Arah.Modules.Feed/` com o .csproj dentro), outros têm o .csproj na **raiz** do módulo (ex.: `Arah.Modules.Connections/Arah.Modules.Connections.csproj`).
 
-**Problema:** Referências e caminhos na solution e nos .csproj ficam diferentes (ex.: `..\Araponga.Modules.Feed\Araponga.Modules.Feed\Araponga.Modules.Feed.csproj` vs `..\Araponga.Modules.Connections\Araponga.Modules.Connections.csproj`). Aumenta chance de erro ao adicionar novos módulos e dificulta onboarding.
+**Problema:** Referências e caminhos na solution e nos .csproj ficam diferentes (ex.: `..\Arah.Modules.Feed\Arah.Modules.Feed\Arah.Modules.Feed.csproj` vs `..\Arah.Modules.Connections\Arah.Modules.Connections.csproj`). Aumenta chance de erro ao adicionar novos módulos e dificulta onboarding.
 
 **Melhoria proposta:** Padronizar **um único padrão** para todos os módulos:
-- **Opção A (recomendada):** Um nível só — `Araponga.Modules.<Nome>/` contém o .csproj e as pastas Domain/, Application/, Infrastructure/ (como Connections hoje). Migrar Feed, Map, Marketplace, etc. movendo o conteúdo da subpasta interna para a raiz do módulo e removendo a pasta duplicada.
+- **Opção A (recomendada):** Um nível só — `Arah.Modules.<Nome>/` contém o .csproj e as pastas Domain/, Application/, Infrastructure/ (como Connections hoje). Migrar Feed, Map, Marketplace, etc. movendo o conteúdo da subpasta interna para a raiz do módulo e removendo a pasta duplicada.
 - **Opção B:** Manter o aninhamento em todos (menos alinhado ao “um projeto por módulo” na raiz do backend).
 
 **Erro conhecido:** Quem adiciona um novo módulo pode copiar Feed (aninhado) ou Connections (flat) e aumentar a inconsistência. Documentar no README do backend ou em CONTRIBUTING qual padrão usar.
@@ -22,7 +22,7 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 ### 1.2 Application como “hub” de todos os módulos
 
-**Observação:** `Araponga.Application` referencia **todos** os projetos de módulos (Feed, Events, Map, Marketplace, Moderation, Connections, etc.). A camada de aplicação central conhece todos os contextos.
+**Observação:** `Arah.Application` referencia **todos** os projetos de módulos (Feed, Events, Map, Marketplace, Moderation, Connections, etc.). A camada de aplicação central conhece todos os contextos.
 
 **Problemas comuns dessa abordagem:**
 - **Acoplamento em compile-time:** Qualquer mudança de contrato em um módulo pode exigir recompilar Application e todos os consumidores.
@@ -40,12 +40,12 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 ### 1.3 Domain “compartilhado” muito grande
 
-**Observação:** `Araponga.Domain` contém Users, Territories, Membership, Governance, Geo, Media, Email, Configuration, **Financial** (transações, plataforma), **Policies**, **Social** (JoinRequests), etc.
+**Observação:** `Arah.Domain` contém Users, Territories, Membership, Governance, Geo, Media, Email, Configuration, **Financial** (transações, plataforma), **Policies**, **Social** (JoinRequests), etc.
 
 **Problemas comuns:**
 - **Shared kernel inchado:** Tudo que “mais de um módulo usa” tende a ir para o Domain. Com o tempo, o núcleo vira um “monte de entidades” e perde coerência.
 - **Domain anêmico:** Se as entidades forem só DTOs com getters/setters e a lógica estiver em Application, o Domain vira apenas um modelo de dados compartilhado (comum em CRUD); não é um “erro” por si, mas vale documentar a opção (rich domain vs anêmico).
-- **Bordas pouco claras:** Financial, Media e partes de Social poderiam ser módulos (ex.: Araponga.Modules.Billing, Araponga.Modules.Media) se crescerem em regras; hoje estão no núcleo.
+- **Bordas pouco claras:** Financial, Media e partes de Social poderiam ser módulos (ex.: Arah.Modules.Billing, Arah.Modules.Media) se crescerem em regras; hoje estão no núcleo.
 
 **Melhorias propostas:**
 - **Documentar** no BACKEND_LAYERS_AND_NAMING ou em um ADR o critério: “Está no Domain se é identidade/contexto universal (User, Territory, Membership, políticas globais, geo). O que é contexto de negócio com regras próprias tende a módulo.”
@@ -72,7 +72,7 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 **Problema comum:** Novos desenvolvedores podem não saber onde colocar um novo repositório (Infrastructure vs Infrastructure.Shared). A regra é: “repositórios das entidades do Domain compartilhado (User, Territory, Membership, Policies, etc.) → Infrastructure.Shared; resto (módulos ou cross-cutting que não é núcleo) → Infrastructure ou no próprio módulo”.
 
-**Melhoria proposta:** No BACKEND_LAYERS_AND_NAMING ou no README do backend, acrescentar uma **regra de decisão** em uma linha: “Novo repositório para entidade do Araponga.Domain (núcleo) → Infrastructure.Shared; para entidade de módulo → no módulo; para outro cross-cutting → Infrastructure.”
+**Melhoria proposta:** No BACKEND_LAYERS_AND_NAMING ou no README do backend, acrescentar uma **regra de decisão** em uma linha: “Novo repositório para entidade do Arah.Domain (núcleo) → Infrastructure.Shared; para entidade de módulo → no módulo; para outro cross-cutting → Infrastructure.”
 
 ---
 
@@ -96,7 +96,7 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 **Melhorias propostas:**
 - Manter **uma única** dependência entre módulos e documentá-la (já feito). Evitar novas dependências diretas; preferir eventos ou tipos no Domain compartilhado (ex.: um “GeoAnchor” ou “GeoReference” no Domain) se outro módulo precisar do mesmo conceito.
-- Se mais módulos precisarem de “geo para conteúdo”, considerar mover o tipo compartilhado para `Araponga.Domain` (Geo ou novo subdomínio) e Feed/Map referenciarem apenas o Domain.
+- Se mais módulos precisarem de “geo para conteúdo”, considerar mover o tipo compartilhado para `Arah.Domain` (Geo ou novo subdomínio) e Feed/Map referenciarem apenas o Domain.
 
 ---
 
@@ -104,26 +104,26 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 
 ### 3.1 Assimetria de testes por módulo
 
-**Observação (ADR-019):** Alguns módulos têm projeto de teste dedicado (Connections, Map, Marketplace, Moderation, Subscriptions); Feed, Events, Notifications, Chat, Alerts não têm. Integração de API do Connections está no Core (Araponga.Tests); Subscriptions tem integração no próprio projeto de teste.
+**Observação (ADR-019):** Alguns módulos têm projeto de teste dedicado (Connections, Map, Marketplace, Moderation, Subscriptions); Feed, Events, Notifications, Chat, Alerts não têm. Integração de API do Connections está no Core (Arah.Tests); Subscriptions tem integração no próprio projeto de teste.
 
 **Problemas comuns:**
 - Cobertura desigual: mudanças em Feed ou Events são testadas apenas indiretamente via testes do Core.
-- Dificuldade de “testar só o módulo X” quando não existe Araponga.Tests.Modules.X.
+- Dificuldade de “testar só o módulo X” quando não existe Arah.Tests.Modules.X.
 
 **Melhorias propostas:**
-- **Aplicado:** README dos testes atualizado; testes Moderation Application movidos para Tests.Modules.Moderation; testes Marketplace Application (Cart, Store, Inquiry, Rating, PlatformFee, SellerPayout, MarketplaceSearch, MarketplaceService, TerritoryPayoutConfig) movidos para Tests.Modules.Marketplace. `CacheTestHelper` e `PatternAwareTestCacheService` consolidados em `Araponga.Tests.Shared/TestHelpers` para reuso entre Core e módulos. Ver TEST_SEPARATION_BY_MODULE.md. **Opcional:** Criar Araponga.Tests.Modules.Feed, .Events quando houver demanda (ex.: regras de negócio complexas no módulo, time dedicado ao módulo). Não é obrigatório ter projeto de teste por módulo.
-- **Documentar** no README dos testes: “Módulos sem projeto de teste são cobertos por Araponga.Tests (integração e serviços). Para adicionar testes específicos do módulo, criar Araponga.Tests.Modules.<Nome> seguindo o padrão de Connections/Subscriptions.”
+- **Aplicado:** README dos testes atualizado; testes Moderation Application movidos para Tests.Modules.Moderation; testes Marketplace Application (Cart, Store, Inquiry, Rating, PlatformFee, SellerPayout, MarketplaceSearch, MarketplaceService, TerritoryPayoutConfig) movidos para Tests.Modules.Marketplace. `CacheTestHelper` e `PatternAwareTestCacheService` consolidados em `Arah.Tests.Shared/TestHelpers` para reuso entre Core e módulos. Ver TEST_SEPARATION_BY_MODULE.md. **Opcional:** Criar Arah.Tests.Modules.Feed, .Events quando houver demanda (ex.: regras de negócio complexas no módulo, time dedicado ao módulo). Não é obrigatório ter projeto de teste por módulo.
+- **Documentar** no README dos testes: “Módulos sem projeto de teste são cobertos por Arah.Tests (integração e serviços). Para adicionar testes específicos do módulo, criar Arah.Tests.Modules.<Nome> seguindo o padrão de Connections/Subscriptions.”
 - **Convenção de nomenclatura:** Deixar explícito no README: *IntegrationTests = fluxos que cruzam vários endpoints/serviços; *ControllerTests = foco em um controller; *EdgeCasesTests = cenários de borda (Domain/Application).
 
 ---
 
 ### 3.2 ApiFactory e helpers duplicados
 
-**Observação:** Subscriptions mantém ApiFactory e helper de login próprios para não referenciar Araponga.Tests (evitar dependências pesadas). Core usa AuthTestHelper centralizado.
+**Observação:** Subscriptions mantém ApiFactory e helper de login próprios para não referenciar Arah.Tests (evitar dependências pesadas). Core usa AuthTestHelper centralizado.
 
 **Risco:** Duas implementações podem divergir (ex.: mudança em JWT ou session no Core e o factory do Subscriptions não atualizado).
 
-**Melhoria proposta:** Já documentado no ADR — manter sincronia de configuração (JWT, RateLimiting, Persistence). Opcional: extrair um pacote ou projeto “Araponga.Tests.ApiSupport” com apenas ApiFactory base e helpers de auth, referenciado por Araponga.Tests e por Araponga.Tests.Modules.Subscriptions, para reduzir duplicação sem puxar todo o Araponga.Tests.
+**Melhoria proposta:** Já documentado no ADR — manter sincronia de configuração (JWT, RateLimiting, Persistence). Opcional: extrair um pacote ou projeto “Arah.Tests.ApiSupport” com apenas ApiFactory base e helpers de auth, referenciado por Arah.Tests e por Arah.Tests.Modules.Subscriptions, para reduzir duplicação sem puxar todo o Arah.Tests.
 
 ---
 
@@ -187,9 +187,9 @@ Este documento reúne **melhorias observáveis** na estruturação do projeto e 
 | Média | ~~Documentar convenção de registro de serviços~~ **Feito:** BACKEND_LAYERS_AND_NAMING.md | Evita proliferação de registros na API |
 | Média | ~~Revisar remoção de PostGeoAnchor/PostAsset do ArapongaDbContext~~ **Feito:** entidades removidas do modelo; ao gerar próxima migração, remover do `Up()` os `DropTable` dessas tabelas | Remove duplicação e confusão |
 | Média | ~~Mover testes Application de Marketplace para Tests.Modules.Marketplace; consolidar CacheTestHelper em Tests.Shared~~ **Feito** | Reduz concentração no Core e reuso de helpers |
-| Baixa | ~~Critério explícito para “o que entra no Domain” (identidade, território, políticas; o resto tende a módulo) ~~ **Feito:** BACKEND_LAYERS_AND_NAMING.md, seção "O que entra no Araponga.Domain" | Evita kernel inchado |
+| Baixa | ~~Critério explícito para “o que entra no Domain” (identidade, território, políticas; o resto tende a módulo) ~~ **Feito:** BACKEND_LAYERS_AND_NAMING.md, seção "O que entra no Arah.Domain" | Evita kernel inchado |
 | Baixa | Opcional: analyzer ou regra de CI para “Domain do módulo não referencia Infrastructure do mesmo projeto” | Reforça fronteiras |
-| Baixa | ~~Opcional: projeto Araponga.Tests.ApiSupport~~ **Feito:** BaseApiFactory + AuthTestHelper compartilhados por Araponga.Tests e Subscriptions | Reduz duplicação de testes |
+| Baixa | ~~Opcional: projeto Arah.Tests.ApiSupport~~ **Feito:** BaseApiFactory + AuthTestHelper compartilhados por Arah.Tests e Subscriptions | Reduz duplicação de testes |
 
 ---
 

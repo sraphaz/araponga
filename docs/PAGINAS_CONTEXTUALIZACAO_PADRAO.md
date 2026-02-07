@@ -23,7 +23,7 @@ Cada categoria/temática deve ter:
 <section class="page-hero">
   <div class="hero-content">
     <span class="eyebrow">Funcionalidades</span>
-    <h1>Funcionalidades da Plataforma Araponga</h1>
+    <h1>Funcionalidades da Plataforma Arah</h1>
     <p class="hero-lead">
       Conjunto de funcionalidades que permitem comunidades gerenciarem economia local,
       eventos territoriais, comunicação e governança através de ferramentas técnicas
@@ -41,7 +41,7 @@ Cada categoria/temática deve ter:
 <section class="section section-overview">
   <h2>Por que essas funcionalidades?</h2>
   <p class="lead-text">
-    As funcionalidades do Araponga foram projetadas para fortalecer autonomia territorial,
+    As funcionalidades do Arah foram projetadas para fortalecer autonomia territorial,
     economia circular local e organização comunitária. Cada funcionalidade mantém recursos
     e decisões no território, respeitando soberania local e evitando dependência externa.
   </p>
@@ -236,7 +236,7 @@ Cada categoria/temática deve ter:
 <section class="section" id="marketplace-conceitos">
   <h2>O que é o Marketplace?</h2>
   <p class="lead-text">
-    O marketplace é o sistema de economia local do Araponga, permitindo que moradores
+    O marketplace é o sistema de economia local do Arah, permitindo que moradores
     validados criem lojas e publiquem produtos ou serviços dentro de um território.
   </p>
   

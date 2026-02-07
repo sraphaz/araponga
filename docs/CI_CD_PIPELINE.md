@@ -1,4 +1,4 @@
-# CI/CD Pipeline - Araponga
+# CI/CD Pipeline - Arah
 
 **Última Atualização**: 2026-01-21  
 **Versão**: 1.0
@@ -7,7 +7,7 @@
 
 ## 📋 Visão Geral
 
-O pipeline CI/CD do Araponga está configurado no GitHub Actions e automatiza:
+O pipeline CI/CD do Arah está configurado no GitHub Actions e automatiza:
 - Build e testes
 - Análise de código e segurança
 - Build de imagem Docker
@@ -53,10 +53,10 @@ Push/PR → CI (Build + Testes + Security) → CD (Build Docker + Deploy)
 
 ```bash
 # Todos os testes
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 
 # Com coverage
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj \
+dotnet test backend/Arah.Tests/Arah.Tests.csproj \
   --collect:"XPlat Code Coverage" \
   -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
 ```
@@ -65,13 +65,13 @@ dotnet test backend/Araponga.Tests/Araponga.Tests.csproj \
 
 ```bash
 # Build
-docker build -f backend/Araponga.Api/Dockerfile -t araponga-api:local .
+docker build -f backend/Arah.Api/Dockerfile -t Arah-api:local .
 
 # Run
 docker run -p 8080:8080 \
   -e ASPNETCORE_ENVIRONMENT=Development \
   -e JWT__SIGNINGKEY=dev-only-change-me \
-  araponga-api:local
+  Arah-api:local
 ```
 
 ---
@@ -125,7 +125,7 @@ Secrets configurados no GitHub:
 
 ### Registry
 
-- **GHCR**: `ghcr.io/[org]/araponga-api`
+- **GHCR**: `ghcr.io/[org]/Arah-api`
 - **Tags**:
   - `latest` - Última build de `main`
   - `{sha}` - Build específica por commit
@@ -141,7 +141,7 @@ Secrets configurados no GitHub:
 **Manual**:
 ```bash
 # Fazer pull da imagem
-docker pull ghcr.io/[org]/araponga-api:latest
+docker pull ghcr.io/[org]/Arah-api:latest
 
 # Deploy (ver OPERATIONS_MANUAL.md)
 ```

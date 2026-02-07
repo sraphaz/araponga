@@ -43,7 +43,7 @@ Este PR implementa a migração completa de todos os services e controllers para
 ### 3. Correção de Encoding UTF-8 ✅
 
 - ✅ `docs/devportal/index.html`: encoding corrigido, caracteres acentuados legíveis
-- ✅ `backend/Araponga.Api/wwwroot/devportal/index.html`: encoding corrigido
+- ✅ `backend/Arah.Api/wwwroot/devportal/index.html`: encoding corrigido
 
 ### 4. Developer Portal Atualizado ✅
 
@@ -80,7 +80,7 @@ Este PR implementa a migração completa de todos os services e controllers para
 ## Testes
 
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --configuration Release
+dotnet test backend/Arah.Tests/Arah.Tests.csproj --configuration Release
 ```
 
 **Resultado:** ✅ 119 testes passando, 0 falhando

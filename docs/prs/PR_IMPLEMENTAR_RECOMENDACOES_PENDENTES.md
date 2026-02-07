@@ -29,8 +29,8 @@ Após a implementação das recomendações críticas no PR anterior (`PR_REFACT
 
 ### Estrutura Base (já existente do PR anterior)
 
-- ✅ `Result<T>` e `OperationResult` já criados em `Araponga.Application/Common/Result.cs`
-- ✅ `PagedResult<T>` e `PaginationParameters` já criados em `Araponga.Application/Common/PagedResult.cs`
+- ✅ `Result<T>` e `OperationResult` já criados em `Arah.Application/Common/Result.cs`
+- ✅ `PagedResult<T>` e `PaginationParameters` já criados em `Arah.Application/Common/PagedResult.cs`
 - ✅ Estrutura preparada para migração gradual
 
 ## Recomendações Pendentes Detalhadas

@@ -73,7 +73,7 @@ assignees: ''
 
 ## 🔗 Integrações
 
-**Como isso se conecta com outras funcionalidades do Araponga?**
+**Como isso se conecta com outras funcionalidades do Arah?**
 [Ex: Integra com Feed, Marketplace, Eventos, Chat, etc.]
 
 ---

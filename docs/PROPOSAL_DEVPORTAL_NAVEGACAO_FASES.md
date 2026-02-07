@@ -34,7 +34,7 @@ Reorganizar a navegação do DevPortal para **revelar conhecimento em fases prog
 
 #### **Fase 2: Fundamentos** 📚
 - Visão geral
-- Como o Araponga funciona (visitor → resident)
+- Como o Arah funciona (visitor → resident)
 - Territórios (conceito)
 - Conceitos de produto (semântica)
 

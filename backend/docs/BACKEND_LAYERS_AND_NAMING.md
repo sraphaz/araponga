@@ -4,7 +4,7 @@ Este documento descreve **o que cada projeto e pasta contém**, a diferença ent
 
 ---
 
-## 1. Araponga.Api
+## 1. Arah.Api
 
 **Papel:** Camada de entrada HTTP — controllers, contratos (DTOs), validação, autenticação, middleware, health checks.
 
@@ -24,7 +24,7 @@ Este documento descreve **o que cada projeto e pasta contém**, a diferença ent
 
 ---
 
-## 2. Araponga.Application
+## 2. Arah.Application
 
 **Papel:** Casos de uso, orquestração, interfaces de repositórios e serviços transversais. Não contém entidades de domínio (ficam em Domain ou nos módulos).
 
@@ -40,11 +40,11 @@ Este documento descreve **o que cada projeto e pasta contém**, a diferença ent
 **Por que existe a pasta "Platform" dentro de Application?**  
 Interfaces e serviços em `Interfaces/Platform/` e `Services/Platform/` são os que **não pertencem a um módulo específico** (Feed, Map, Marketplace, etc.) e são usados em vários lugares. O nome "Platform" deixa claro que é funcionalidade transversal, não um projeto "Core" separado.
 
-**Não existe** um projeto "Core.Application" ou "Domain.Core". O projeto único é **Araponga.Application**.
+**Não existe** um projeto "Core.Application" ou "Domain.Core". O projeto único é **Arah.Application**.
 
 ---
 
-## 3. Araponga.Domain
+## 3. Arah.Domain
 
 **Papel:** Entidades e value objects do **núcleo compartilhado** do domínio. Sem infraestrutura, sem casos de uso.
 
@@ -62,11 +62,11 @@ Interfaces e serviços em `Interfaces/Platform/` e `Services/Platform/` são os 
 - **Configuration/** — SystemConfig, SystemConfigCategory
 
 **"Domain Core"?**  
-Na documentação (ADRs), "Core.Domain" designa **este projeto** (Araponga.Domain): o domínio **compartilhado** que os módulos podem referenciar (UserId, TerritoryId, GeoCoordinate, etc.). Não existe um projeto separado chamado "Domain.Core" ou "Araponga.Domain.Core".
+Na documentação (ADRs), "Core.Domain" designa **este projeto** (Arah.Domain): o domínio **compartilhado** que os módulos podem referenciar (UserId, TerritoryId, GeoCoordinate, etc.). Não existe um projeto separado chamado "Domain.Core" ou "Arah.Domain.Core".
 
 ---
 
-## 4. Araponga.Infrastructure
+## 4. Arah.Infrastructure
 
 **Papel:** Implementações de persistência, integrações e infraestrutura técnica usada pela aplicação e pelos módulos (quando não está no próprio módulo).
 
@@ -87,7 +87,7 @@ Ou seja: **infraestrutura “principal”** — Postgres/InMemory gerais, e-mail
 
 ---
 
-## 5. Araponga.Infrastructure.Shared
+## 5. Arah.Infrastructure.Shared
 
 **Papel:** Persistência **compartilhada** das entidades do **núcleo** (Domain): User, Territory, Membership, Terms, Privacy, SystemConfig, JoinRequests, Voting, etc.
 
@@ -97,21 +97,21 @@ Ou seja: **infraestrutura “principal”** — Postgres/InMemory gerais, e-mail
 - **DbContextUnitOfWorkParticipant.cs** — participação no Unit of Work
 - **ServiceCollectionExtensions.cs** — registro dos serviços/repositórios compartilhados
 
-**Diferença em relação a Araponga.Infrastructure:**  
+**Diferença em relação a Arah.Infrastructure:**  
 - **Infrastructure** — infraestrutura geral (vários DbContexts, módulos, e-mail, storage, cache, workers).  
 - **Infrastructure.Shared** — um **DbContext e repositórios** dedicados às entidades **compartilhadas** (User, Territory, Membership, Policies, etc.) usadas em toda a aplicação. Evita que cada módulo implemente seu próprio UserRepository; centraliza o que é “núcleo”.
 
 ---
 
-## 6. Araponga.Shared
+## 6. Arah.Shared
 
 **Papel:** Biblioteca para **tipos e utilitários compartilhados** entre Application e outros projetos do backend (constantes, extensões, DTOs comuns que não pertencem a Domain nem a um módulo).
 
-**Conteúdo:** Um assembly marcador e, no futuro, tipos compartilhados. Referenciado por **Araponga.Application**. Ver `Araponga.Shared/README.md` para convenções de uso.
+**Conteúdo:** Um assembly marcador e, no futuro, tipos compartilhados. Referenciado por **Arah.Application**. Ver `Arah.Shared/README.md` para convenções de uso.
 
 ---
 
-## 7. Araponga.Application.Abstractions
+## 7. Arah.Application.Abstractions
 
 **Papel:** Contratos que **quebram ciclos de dependência** entre Application e módulos.
 
@@ -123,7 +123,7 @@ Módulos referenciam **Application.Abstractions** (e não Application inteiro) p
 
 ---
 
-## 8. Araponga.Modules.Admin.Infrastructure
+## 8. Arah.Modules.Admin.Infrastructure
 
 **Papel:** Módulo **apenas de infraestrutura** — sem Domain nem Application próprios.
 
@@ -136,19 +136,19 @@ Por decisão arquitetural (ADR): Admin não modela um contexto de negócio com e
 
 ---
 
-## 9. Araponga.Api.Bff
+## 9. Arah.Api.Bff
 
-**Papel:** Backend for Frontend — aplicação **separada** que expõe as jornadas (onboarding, feed, eventos, marketplace) para o frontend. O BFF **não** contém lógica de negócio; encaminha as requisições para a API principal (`Araponga.Api`) e pode aplicar cache em respostas GET.
+**Papel:** Backend for Frontend — aplicação **separada** que expõe as jornadas (onboarding, feed, eventos, marketplace) para o frontend. O BFF **não** contém lógica de negócio; encaminha as requisições para a API principal (`Arah.Api`) e pode aplicar cache em respostas GET.
 
 **Conteúdo principal:**
 - **Middleware/** — `JourneyProxyMiddleware`: intercepta `/api/v2/journeys/*`, repassa para a API e aplica cache quando configurado.
 - **Services/** — `JourneyApiProxy` (encaminha HTTP para a API), `JourneyResponseCache` (cache em memória com TTL configurável por path).
 - **Contracts/** — DTOs das jornadas (espelho dos contratos da API, para documentação Swagger do BFF).
-- **Namespace:** `Araponga.Bff` (sem `.Api` no nome do namespace).
+- **Namespace:** `Arah.Bff` (sem `.Api` no nome do namespace).
 
 **Configuração:** `Bff:ApiBaseUrl` aponta para a API principal; `Bff:EnableCache`, `Bff:CacheTtlSeconds` e `Bff:CacheTtlByPath` controlam o cache de respostas GET 2xx.
 
-**Desacoplamento:** O BFF não referencia Araponga.Application nem módulos; apenas faz HTTP para a API. Testes do BFF cobrem proxy e cache em isolamento.
+**Desacoplamento:** O BFF não referencia Arah.Application nem módulos; apenas faz HTTP para a API. Testes do BFF cobrem proxy e cache em isolamento.
 
 ---
 
@@ -156,16 +156,16 @@ Por decisão arquitetural (ADR): Admin não modela um contexto de negócio com e
 
 ### Onde colocar um novo repositório
 
-- **Entidade do núcleo (Araponga.Domain):** User, Territory, Membership, Policies, JoinRequests, Voting, etc. → **Araponga.Infrastructure.Shared** (SharedDbContext e repositórios Postgres/InMemory).
+- **Entidade do núcleo (Arah.Domain):** User, Territory, Membership, Policies, JoinRequests, Voting, etc. → **Arah.Infrastructure.Shared** (SharedDbContext e repositórios Postgres/InMemory).
 - **Entidade de módulo:** repositório no **próprio módulo** (pasta Infrastructure do módulo, com DbContext do módulo).
-- **Outro cross-cutting** (e-mail, cache, outbox, mídia, etc.) → **Araponga.Infrastructure**.
+- **Outro cross-cutting** (e-mail, cache, outbox, mídia, etc.) → **Arah.Infrastructure**.
 
 ### Registro de serviços (API vs IModule)
 
 - **Repositórios e implementações de persistência** → sempre registrados no **módulo** (via `IModule.RegisterServices`) ou em **Infrastructure.Shared** para o núcleo.
 - **Provedores de aplicação** (ex.: `IAcceptedConnectionsProvider`) que dependem de Application podem ser registrados na API ou em um extension method do Core chamado pela API. Evitar proliferação de registros na API; preferir registro no módulo quando possível.
 
-### O que entra no Araponga.Domain
+### O que entra no Arah.Domain
 
 Está no **Domain** o que é **identidade/contexto universal**: User, Territory, Membership, políticas globais (Terms, Privacy), JoinRequests, Governance (Voting), Geo (coordenadas), Configuration. O que é **contexto de negócio com regras próprias** tende a **módulo** (ex.: Feed, Map, Marketplace, Connections). Revisar periodicamente; não mover por mover — migrar para módulo só se houver ganho claro (ownership, testes isolados, evolução independente).
 
@@ -179,24 +179,24 @@ Dentro de um módulo (um projeto com pastas Domain/, Application/, Infrastructur
 
 | Projeto / Pasta | O que é | “Core” / “Shared” |
 |-----------------|---------|-------------------|
-| **Araponga.Api** | API HTTP, controllers, DTOs, auth, middleware | Pasta **Platform** em Controllers = endpoints transversais (auth, territórios, membros, etc.) |
-| **Araponga.Application** | Casos de uso, interfaces, serviços | Pasta **Platform** em Interfaces/Services = contratos e serviços transversais |
-| **Araponga.Domain** | Entidades e value objects do núcleo | É o “Core.Domain” dos ADRs — domínio compartilhado; não existe projeto “Domain.Core” |
-| **Araponga.Infrastructure** | Postgres/InMemory gerais, e-mail, storage, cache, eventos, workers | Infraestrutura principal |
-| **Araponga.Infrastructure.Shared** | Persistência (Postgres/InMemory) de User, Territory, Membership, Terms, Privacy, etc. | “Shared” = repositórios compartilhados por toda a aplicação |
-| **Araponga.Shared** | Tipos/utilitários compartilhados (ver README no projeto) | Referenciado por Application; evita duplicar constantes ou helpers entre projetos |
-| **Araponga.Application.Abstractions** | IModule, IUnitOfWorkParticipant | Quebra ciclo Application ↔ módulos |
-| **Araponga.Modules.Admin.Infrastructure** | Só registro de infraestrutura para admin | Sem Domain/Application; só Infrastructure por opção de design |
-| **Araponga.Api.Bff** | BFF: proxy de jornadas para a API, cache opcional | Namespace Araponga.Bff; desacoplado da API (apenas HTTP) |
+| **Arah.Api** | API HTTP, controllers, DTOs, auth, middleware | Pasta **Platform** em Controllers = endpoints transversais (auth, territórios, membros, etc.) |
+| **Arah.Application** | Casos de uso, interfaces, serviços | Pasta **Platform** em Interfaces/Services = contratos e serviços transversais |
+| **Arah.Domain** | Entidades e value objects do núcleo | É o “Core.Domain” dos ADRs — domínio compartilhado; não existe projeto “Domain.Core” |
+| **Arah.Infrastructure** | Postgres/InMemory gerais, e-mail, storage, cache, eventos, workers | Infraestrutura principal |
+| **Arah.Infrastructure.Shared** | Persistência (Postgres/InMemory) de User, Territory, Membership, Terms, Privacy, etc. | “Shared” = repositórios compartilhados por toda a aplicação |
+| **Arah.Shared** | Tipos/utilitários compartilhados (ver README no projeto) | Referenciado por Application; evita duplicar constantes ou helpers entre projetos |
+| **Arah.Application.Abstractions** | IModule, IUnitOfWorkParticipant | Quebra ciclo Application ↔ módulos |
+| **Arah.Modules.Admin.Infrastructure** | Só registro de infraestrutura para admin | Sem Domain/Application; só Infrastructure por opção de design |
+| **Arah.Api.Bff** | BFF: proxy de jornadas para a API, cache opcional | Namespace Arah.Bff; desacoplado da API (apenas HTTP) |
 
 ---
 
 ## Nomenclatura e redundância
 
 - **“Platform”** (pastas em Api e Application) indica funcionalidade **transversal** (Controllers/Platform, Interfaces/Platform, Services/Platform). Nos ADRs, “Core” designa o **conjunto** de projetos do núcleo (Api, Application, Domain, Infrastructure, Infrastructure.Shared, Shared), não uma pasta.
-- **Não existe** projeto “Domain.Core” ou “Araponga.Domain.Core”; o domínio compartilhado é o projeto **Araponga.Domain**.
+- **Não existe** projeto “Domain.Core” ou “Arah.Domain.Core”; o domínio compartilhado é o projeto **Arah.Domain**.
 - **Infrastructure vs Infrastructure.Shared:** o primeiro é a infraestrutura geral; o segundo é a persistência **compartilhada** do núcleo (User, Territory, Membership, etc.). Não são redundantes — são escopos diferentes.
-- **Araponga.Shared** existe para tipos e utilitários compartilhados; ver README no projeto.
+- **Arah.Shared** existe para tipos e utilitários compartilhados; ver README no projeto.
 
 Este documento reflete o estado **atual** dos projetos e pastas (projetos na raiz de `backend/`, pastas **Platform** em vez de Core onde havia ambiguidade).
 

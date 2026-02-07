@@ -30,7 +30,7 @@ Esta análise estratégica concilia o desenvolvimento do **frontend Flutter** co
 - ✅ **Sincronização de Fases**: Fases do frontend alinhadas com fases do backend
 - ✅ **Fluxos Coesos**: Todas as jornadas do usuário funcionam end-to-end
 - ✅ **Padrões Elevados**: Design e desenvolvimento de alta qualidade
-- ✅ **Diretrizes do Projeto**: Seguindo princípios fundamentais do Araponga
+- ✅ **Diretrizes do Projeto**: Seguindo princípios fundamentais do Arah
 
 ### Escopo da Análise
 
@@ -44,7 +44,7 @@ Esta análise estratégica concilia o desenvolvimento do **frontend Flutter** co
 - `docs/backlog-api/README.md` - Estrutura do backlog
 - `docs/backlog-api/FASE*.md` - Fases 1-28
 - `docs/60_API_LÓGICA_NEGÓCIO.md` - Lógica de negócio
-- `backend/Araponga.Api/wwwroot/devportal/openapi.json` - Especificação OpenAPI
+- `backend/Arah.Api/wwwroot/devportal/openapi.json` - Especificação OpenAPI
 
 ---
 

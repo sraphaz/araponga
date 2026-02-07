@@ -1,4 +1,4 @@
-# Avaliação Completa da Aplicação Araponga
+# Avaliação Completa da Aplicação Arah
 
 **Data**: 2025-01-13  
 **Versão Avaliada**: MVP  
@@ -33,7 +33,7 @@
 
 ### Status Geral: ⚠️ **PRONTO COM RESERVAS**
 
-A aplicação Araponga demonstra **arquitetura sólida**, **boa coesão** com a especificação (~95%) e **funcionalidades completas** para o MVP. No entanto, existem **gaps críticos de segurança e produção** que devem ser endereçados antes do lançamento público.
+A aplicação Arah demonstra **arquitetura sólida**, **boa coesão** com a especificação (~95%) e **funcionalidades completas** para o MVP. No entanto, existem **gaps críticos de segurança e produção** que devem ser endereçados antes do lançamento público.
 
 ### Pontuação por Categoria
 
@@ -125,10 +125,10 @@ A aplicação Araponga demonstra **arquitetura sólida**, **boa coesão** com a 
 
 #### Pontos Fortes
 - **Separação clara de camadas**:
-  - `Araponga.Api`: Controllers, DTOs, Middleware
-  - `Araponga.Application`: Services, Interfaces, Events
-  - `Araponga.Domain`: Entidades, Value Objects, Enums
-  - `Araponga.Infrastructure`: Repositórios, Persistência, Event Bus
+  - `Arah.Api`: Controllers, DTOs, Middleware
+  - `Arah.Application`: Services, Interfaces, Events
+  - `Arah.Domain`: Entidades, Value Objects, Enums
+  - `Arah.Infrastructure`: Repositórios, Persistência, Event Bus
 - **Inversão de dependências**: Interfaces bem definidas em Application
 - **Testabilidade**: Abstrações permitem testes isolados
 - **Flexibilidade**: Suporte a InMemory e Postgres sem mudanças na lógica
@@ -311,7 +311,7 @@ services.Configure<IpRateLimitOptions>(options => {
 ```csharp
 services.AddCors(options => {
     options.AddPolicy("Production", builder => {
-        builder.WithOrigins("https://araponga.app")
+        builder.WithOrigins("https://Arah.app")
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials();
@@ -836,7 +836,7 @@ services.AddCors(options => {
 
 ### Status: ⚠️ **PRONTO COM RESERVAS**
 
-A aplicação Araponga demonstra **arquitetura sólida**, **boa coesão** com a especificação (~95%) e **funcionalidades completas** para o MVP. No entanto, existem **gaps críticos de segurança e produção** que devem ser endereçados antes do lançamento público.
+A aplicação Arah demonstra **arquitetura sólida**, **boa coesão** com a especificação (~95%) e **funcionalidades completas** para o MVP. No entanto, existem **gaps críticos de segurança e produção** que devem ser endereçados antes do lançamento público.
 
 ### Pontos Principais
 

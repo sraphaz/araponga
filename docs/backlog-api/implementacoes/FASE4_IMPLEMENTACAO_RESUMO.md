@@ -8,7 +8,7 @@
 
 ## 📋 Resumo Executivo
 
-A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo logs centralizados, métricas de negócio e sistema, distributed tracing com OpenTelemetry, e documentação operacional completa (runbook, troubleshooting, incident playbook).
+A Fase 4 implementou observabilidade completa no sistema Arah, incluindo logs centralizados, métricas de negócio e sistema, distributed tracing com OpenTelemetry, e documentação operacional completa (runbook, troubleshooting, incident playbook).
 
 ---
 
@@ -31,8 +31,8 @@ A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo log
 - **Configuração condicional** do Seq baseada em `appsettings.json`
 
 #### Arquivos Modificados:
-- `backend/Araponga.Api/Program.cs` - Configuração do Serilog
-- `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs` - Integração com LogContext
+- `backend/Arah.Api/Program.cs` - Configuração do Serilog
+- `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs` - Integração com LogContext
 
 #### Documentação:
 - Configuração documentada em `appsettings.json`
@@ -67,19 +67,19 @@ A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo log
   - `DatabaseQueryDuration` - Duração de queries (histograma)
 
 #### Arquivos Criados:
-- `backend/Araponga.Application/Metrics/ArapongaMetrics.cs` - Classe estática com todas as métricas customizadas
+- `backend/Arah.Application/Metrics/ArapongaMetrics.cs` - Classe estática com todas as métricas customizadas
 
 #### Arquivos Modificados:
-- `backend/Araponga.Api/Program.cs` - Configuração do Prometheus
-- `backend/Araponga.Application/Services/PostCreationService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/EventsService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/ReportService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/JoinRequestService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/MembershipService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/TerritoryService.cs` - Instrumentação
-- `backend/Araponga.Application/Services/CacheMetricsService.cs` - Instrumentação de cache
-- `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs` - Instrumentação de eventos
-- `backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs` - Instrumentação de concorrência
+- `backend/Arah.Api/Program.cs` - Configuração do Prometheus
+- `backend/Arah.Application/Services/PostCreationService.cs` - Instrumentação
+- `backend/Arah.Application/Services/EventsService.cs` - Instrumentação
+- `backend/Arah.Application/Services/ReportService.cs` - Instrumentação
+- `backend/Arah.Application/Services/JoinRequestService.cs` - Instrumentação
+- `backend/Arah.Application/Services/MembershipService.cs` - Instrumentação
+- `backend/Arah.Application/Services/TerritoryService.cs` - Instrumentação
+- `backend/Arah.Application/Services/CacheMetricsService.cs` - Instrumentação de cache
+- `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs` - Instrumentação de eventos
+- `backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs` - Instrumentação de concorrência
 
 #### Documentação:
 - `docs/METRICS.md` - Documentação completa de todas as métricas
@@ -95,15 +95,15 @@ A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo log
 - **Tracing de HTTP requests** - Instrumentação automática do ASP.NET Core
 - **Tracing de database queries** - Instrumentação do Entity Framework Core
 - **Tracing de HTTP clients** - Instrumentação de chamadas HTTP externas
-- **Custom sources** - `AddSource("Araponga.*")` para tracing customizado
+- **Custom sources** - `AddSource("Arah.*")` para tracing customizado
 - **Exporters configurados**:
   - **OTLP** (OpenTelemetry Protocol) - Suporte para backends compatíveis
   - **Jaeger** - Suporte para Jaeger
   - **Console** - Exporter para desenvolvimento
 
 #### Arquivos Modificados:
-- `backend/Araponga.Api/Program.cs` - Configuração completa do OpenTelemetry
-- `backend/Araponga.Api/Araponga.Api.csproj` - Pacotes NuGet adicionados:
+- `backend/Arah.Api/Program.cs` - Configuração completa do OpenTelemetry
+- `backend/Arah.Api/Arah.Api.csproj` - Pacotes NuGet adicionados:
   - `OpenTelemetry.Extensions.Hosting`
   - `OpenTelemetry.Instrumentation.AspNetCore`
   - `OpenTelemetry.Instrumentation.Http`
@@ -231,7 +231,7 @@ A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo log
 ## 📊 Estatísticas
 
 - **Arquivos Criados**: 5
-  - `backend/Araponga.Application/Metrics/ArapongaMetrics.cs`
+  - `backend/Arah.Application/Metrics/ArapongaMetrics.cs`
   - `docs/METRICS.md`
   - `docs/MONITORING.md`
   - `docs/RUNBOOK.md`
@@ -239,12 +239,12 @@ A Fase 4 implementou observabilidade completa no sistema Araponga, incluindo log
   - `docs/INCIDENT_PLAYBOOK.md`
 
 - **Arquivos Modificados**: 12+
-  - `backend/Araponga.Api/Program.cs`
-  - `backend/Araponga.Api/Araponga.Api.csproj`
-  - `backend/Araponga.Api/Middleware/CorrelationIdMiddleware.cs`
-  - `backend/Araponga.Application/Services/*.cs` (6 serviços)
-  - `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs`
-  - `backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs`
+  - `backend/Arah.Api/Program.cs`
+  - `backend/Arah.Api/Arah.Api.csproj`
+  - `backend/Arah.Api/Middleware/CorrelationIdMiddleware.cs`
+  - `backend/Arah.Application/Services/*.cs` (6 serviços)
+  - `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs`
+  - `backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs`
   - `docs/plano-acao-10-10/FASE4.md`
 
 - **Linhas de Código Adicionadas**: ~800+

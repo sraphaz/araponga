@@ -1,4 +1,4 @@
-# Modularização - Arquitetura Modular do Araponga
+# Modularização - Arquitetura Modular do Arah
 
 **Versão**: 1.0  
 **Data**: 2026-01-28  
@@ -23,7 +23,7 @@
 
 ## 🎯 Visão Geral
 
-O Araponga utiliza uma **arquitetura modular** baseada em **Clean Architecture** e **Domain-Driven Design (DDD)**, onde cada módulo representa um domínio funcional específico com responsabilidades claras e bem definidas.
+O Arah utiliza uma **arquitetura modular** baseada em **Clean Architecture** e **Domain-Driven Design (DDD)**, onde cada módulo representa um domínio funcional específico com responsabilidades claras e bem definidas.
 
 ### Características da Modularização
 
@@ -35,11 +35,11 @@ O Araponga utiliza uma **arquitetura modular** baseada em **Clean Architecture**
 
 ### Isolamento: infraestrutura independente (não microserviços)
 
-**Isolamento real** (deploy, rede, falhas independentes) só existe com **serviços separados** (microserviços). Para o tamanho e estágio do projeto, o Araponga **não** adota microserviços.
+**Isolamento real** (deploy, rede, falhas independentes) só existe com **serviços separados** (microserviços). Para o tamanho e estágio do projeto, o Arah **não** adota microserviços.
 
 O objetivo adotado é ter **infraestrutura independente por módulo**, isolando **pontos de manutenção e de falha** dentro do mesmo processo:
 
-- **Manutenção**: alterações em Feed (schema, repositório, bugs) ficam contidas no projeto `Araponga.Modules.Feed.Infrastructure`; o mesmo para Events, Map, Chat, Marketplace, etc. Menos risco de regressão em outros domínios e ownership claro por módulo.
+- **Manutenção**: alterações em Feed (schema, repositório, bugs) ficam contidas no projeto `Arah.Modules.Feed.Infrastructure`; o mesmo para Events, Map, Chat, Marketplace, etc. Menos risco de regressão em outros domínios e ownership claro por módulo.
 - **Falha**: um bug ou problema de persistência em um módulo fica limitado ao código e ao DbContext daquele módulo; o restante da aplicação continua referenciando apenas interfaces da Application.
 - **Evolução**: se no futuro um módulo precisar virar serviço separado, a fronteira já está desenhada (projeto de infra + contratos de aplicação).
 
@@ -93,19 +93,19 @@ Módulos podem ser habilitados/desabilitados via feature flags:
 ### Estrutura de Camadas
 
 ```
-Araponga.Api (API Layer)
+Arah.Api (API Layer)
     ↓
-Araponga.Application (Application Layer)
+Arah.Application (Application Layer)
     ├── Módulo 1 (Domain Services)
     ├── Módulo 2 (Domain Services)
     └── Módulo N (Domain Services)
     ↓
-Araponga.Domain (Domain Layer)
+Arah.Domain (Domain Layer)
     ├── Módulo 1 (Entities, Value Objects)
     ├── Módulo 2 (Entities, Value Objects)
     └── Módulo N (Entities, Value Objects)
     ↓
-Araponga.Infrastructure (Infrastructure Layer)
+Arah.Infrastructure (Infrastructure Layer)
     ├── Módulo 1 (Repositories, External Services)
     ├── Módulo 2 (Repositories, External Services)
     └── Módulo N (Repositories, External Services)
@@ -115,7 +115,7 @@ Araponga.Infrastructure (Infrastructure Layer)
 
 ```
 backend/
-├── Araponga.Api/
+├── Arah.Api/
 │   ├── Controllers/
 │   │   ├── AuthController.cs          # Módulo: Autenticação
 │   │   ├── TerritoriesController.cs   # Módulo: Territórios
@@ -124,7 +124,7 @@ backend/
 │   │   ├── MarketplaceController.cs  # Módulo: Marketplace
 │   │   └── ChatController.cs          # Módulo: Chat
 │   └── ...
-├── Araponga.Application/
+├── Arah.Application/
 │   ├── Services/
 │   │   ├── Auth/                      # Módulo: Autenticação
 │   │   ├── Territories/               # Módulo: Territórios
@@ -133,14 +133,14 @@ backend/
 │   │   ├── Marketplace/               # Módulo: Marketplace
 │   │   └── Chat/                      # Módulo: Chat
 │   └── ...
-├── Araponga.Domain/
+├── Arah.Domain/
 │   ├── Users/                         # Módulo: Autenticação
 │   ├── Territories/                   # Módulo: Territórios
 │   ├── Feed/                          # Módulo: Feed
 │   ├── Events/                        # Módulo: Eventos
 │   ├── Marketplace/                   # Módulo: Marketplace
 │   └── Chat/                          # Módulo: Chat
-└── Araponga.Infrastructure/
+└── Arah.Infrastructure/
     ├── Postgres/
     │   ├── Entities/                  # Mapeamento por módulo
     │   └── Repositories/              # Repositories por módulo
@@ -426,10 +426,10 @@ public void ValidateModuleDependencies(
 1. **Criar Estrutura de Diretórios**:
    ```
    backend/
-   ├── Araponga.Domain/NewModule/
-   ├── Araponga.Application/Services/NewModule/
-   ├── Araponga.Infrastructure/Postgres/Entities/NewModule/
-   └── Araponga.Api/Controllers/NewModuleController.cs
+   ├── Arah.Domain/NewModule/
+   ├── Arah.Application/Services/NewModule/
+   ├── Arah.Infrastructure/Postgres/Entities/NewModule/
+   └── Arah.Api/Controllers/NewModuleController.cs
    ```
 
 2. **Definir Feature Flags** (se necessário):
@@ -502,7 +502,7 @@ public void ValidateModuleDependencies(
 - [Domain-Driven Design](./12_DOMAIN_MODEL.md) - Modelo de domínio
 - [Feature Flags](./api/60_16_API_FEATURE_FLAGS.md) - Sistema de feature flags
 - [Arquitetura de Services](./11_ARCHITECTURE_SERVICES.md) - Organização de services
-- [Plataforma Araponga](./funcional/00_PLATAFORMA_ARAPONGA.md) - Visão geral dos domínios
+- [Plataforma Arah](./funcional/00_PLATAFORMA_Arah.md) - Visão geral dos domínios
 
 ---
 

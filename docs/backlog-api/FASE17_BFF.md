@@ -27,7 +27,7 @@ Implementar um **Backend for Frontend (BFF)** como aplicação externa que:
 
 ### Estado Atual
 
-- ✅ API principal (`Araponga.Api`) com endpoints RESTful organizados por recursos
+- ✅ API principal (`Arah.Api`) com endpoints RESTful organizados por recursos
 - ✅ Arquitetura modular (módulos por funcionalidade)
 - ✅ Autenticação JWT implementada
 - ✅ Sistema de observabilidade (logs, métricas, tracing)
@@ -87,7 +87,7 @@ Frontend precisa:
                      │ (Client Credentials Flow)
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api.Bff (Aplicação Externa)            │
+│         Arah.Api.Bff (Aplicação Externa)            │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  OAuth2 Authorization Server                        │  │
 │  │  - Client Registration                              │  │
@@ -116,7 +116,7 @@ Frontend precisa:
                      │ (Token do usuário repassado)
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api (API Principal)                    │
+│         Arah.Api (API Principal)                    │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Controllers (por recurso)                        │  │
 │  │  - FeedController                                  │  │
@@ -134,13 +134,13 @@ Frontend precisa:
 ### Estratégia de Implementação
 
 **Fase 1 (Atual)**: BFF como Módulo Interno
-- ✅ Implementar BFF como módulo dentro de `Araponga.Api`
+- ✅ Implementar BFF como módulo dentro de `Arah.Api`
 - ✅ Rotas em `/api/v2/journeys/*`
 - ✅ Coexiste com API v1 existente
 - ✅ Simplicidade e zero custo
 
 **Fase 2 (Esta Fase)**: Migrar BFF para Aplicação Externa
-- ✅ Extrair BFF para `Araponga.Api.Bff` (aplicação separada)
+- ✅ Extrair BFF para `Arah.Api.Bff` (aplicação separada)
 - ✅ Implementar OAuth2 Client Credentials Flow
 - ✅ Sistema de registro de múltiplos apps consumidores
 - ✅ BFF consome API principal via HTTP
@@ -273,7 +273,7 @@ Frontend precisa:
 ### Semana 1: Preparação (40h)
 
 #### 1.1 Domínio OAuth (8h)
-- [ ] Criar projeto `Araponga.Domain.OAuth`
+- [ ] Criar projeto `Arah.Domain.OAuth`
 - [ ] Criar `ClientApplication` entity
 - [ ] Criar `OAuthScopes` (enum/constants)
 - [ ] Criar interfaces de repositório
@@ -328,7 +328,7 @@ Frontend precisa:
 - [ ] Testes de integração
 
 #### 3.3 Journey Controllers (8h)
-- [ ] Mover controllers de `Araponga.Api` para `Araponga.Api.Bff`
+- [ ] Mover controllers de `Arah.Api` para `Arah.Api.Bff`
 - [ ] Atualizar rotas para `/api/v2/journeys/*`
 - [ ] Aplicar middleware de autenticação
 - [ ] Testes de integração
@@ -434,7 +434,7 @@ CREATE INDEX idx_oauth_clients_is_active ON oauth_clients(is_active);
 
 ```
 backend/
-├── Araponga.Api.Bff/                    # Nova aplicação BFF
+├── Arah.Api.Bff/                    # Nova aplicação BFF
 │   ├── Controllers/
 │   │   ├── OAuthController.cs           # OAuth2 token endpoint
 │   │   ├── Journeys/
@@ -459,18 +459,18 @@ backend/
 │   ├── HealthChecks/
 │   │   └── BffHealthCheck.cs
 │   ├── Program.cs
-│   └── Araponga.Api.Bff.csproj
+│   └── Arah.Api.Bff.csproj
 │
-├── Araponga.Domain.OAuth/               # Novo domínio OAuth
+├── Arah.Domain.OAuth/               # Novo domínio OAuth
 │   ├── ClientApplication.cs
 │   └── OAuthScopes.cs
 │
-├── Araponga.Application/                 # Atualizar
+├── Arah.Application/                 # Atualizar
 │   └── Services/
 │       └── OAuth/
 │           └── ClientRegistrationService.cs
 │
-└── Araponga.Infrastructure/              # Atualizar
+└── Arah.Infrastructure/              # Atualizar
     └── Postgres/
         ├── Entities/
         │   └── OAuthClientRecord.cs
@@ -547,7 +547,7 @@ backend/
 ## ✅ Checklist de Implementação
 
 ### Semana 1: Preparação
-- [ ] Criar projeto `Araponga.Domain.OAuth`
+- [ ] Criar projeto `Arah.Domain.OAuth`
 - [ ] Criar `ClientApplication` entity
 - [ ] Criar `OAuthClientRecord` (Postgres)
 - [ ] Criar `PostgresOAuthClientRepository`

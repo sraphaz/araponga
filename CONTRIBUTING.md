@@ -1,6 +1,6 @@
-# Contribuindo com o Araponga
+# Contribuindo com o Arah
 
-Obrigado por considerar contribuir com o Araponga! Este é um projeto comunitário orientado ao território.
+Obrigado por considerar contribuir com o Arah! Este é um projeto comunitário orientado ao território.
 
 ## Código de conduta
 
@@ -33,9 +33,20 @@ Se você não tem certeza de qual documento atualizar:
 2. Atualize TODOS os documentos que mencionam a funcionalidade
 3. Quando em dúvida, atualize mais do que menos
 
+### Antes do commit
+
+**Não faça commit sem rodar todos os testes.** Na raiz do repositório:
+
+```powershell
+./scripts/run-all-tests.ps1
+```
+
+A suíte inclui: **backend** (.NET, ~2.400 testes), **wiki** (Jest), **devportal** (Jest) e **app** (Flutter). Requer .NET 8, Node/npm e Flutter no PATH. Só prossiga com o commit se todos passarem.
+
 ### Checklist Rápido
 
 Antes de criar PR, verifique:
+- [ ] Testes passando (`./scripts/run-all-tests.ps1`)
 - [ ] Documentação técnica atualizada
 - [ ] Exemplos de código atualizados
 - [ ] Changelog atualizado (se mudança significativa)
@@ -57,8 +68,8 @@ Se precisar rodar a API localmente, utilize o .NET 8 e siga as instruções do R
 
 ## Design e Coerência
 
-O design do Araponga atua como campo de coerência: orienta escolhas visuais para sustentar foco, cuidado e continuidade.
-Consulte o guia completo em [Design & Coerência](https://araponga.eco.br/design/).
+O design do Arah atua como campo de coerência: orienta escolhas visuais para sustentar foco, cuidado e continuidade.
+Consulte o guia completo em [Design & Coerência](https://Arah.eco.br/design/).
 
 **Princípios**
 - Território como referência.

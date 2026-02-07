@@ -14,7 +14,7 @@ A migração será feita **gradualmente**, módulo por módulo, seguindo o padr�
 
 1. **Criar estrutura de diretórios no módulo**:
    ```
-   Araponga.Modules.Xxx.Infrastructure/
+   Arah.Modules.Xxx.Infrastructure/
    ├── Postgres/
    │   ├── Entities/
    │   │   └── XxxRecord.cs (mover de Infrastructure.Postgres.Entities)
@@ -30,13 +30,13 @@ A migração será feita **gradualmente**, módulo por módulo, seguindo o padr�
    - Configurar `OnModelCreating` com mapeamentos
 
 3. **Mover repositórios**:
-   - Copiar arquivos de `Araponga.Infrastructure.Postgres` para o módulo
+   - Copiar arquivos de `Arah.Infrastructure.Postgres` para o módulo
    - Atualizar namespace
    - Atualizar dependência de `ArapongaDbContext` para `XxxDbContext`
    - Atualizar referências de entidades
 
 4. **Mover entidades**:
-   - Copiar arquivos de `Araponga.Infrastructure.Postgres.Entities` para o módulo
+   - Copiar arquivos de `Arah.Infrastructure.Postgres.Entities` para o módulo
    - Atualizar namespace
    - Verificar dependências (algumas podem precisar ficar em Shared)
 
@@ -46,7 +46,7 @@ A migração será feita **gradualmente**, módulo por módulo, seguindo o padr�
    - Remover registros de `AddPostgresRepositories` (ou comentar temporariamente)
 
 6. **Atualizar referências**:
-   - Atualizar `Araponga.Api.csproj` se necessário
+   - Atualizar `Arah.Api.csproj` se necessário
    - Atualizar outros projetos que referenciam os repositórios
 
 7. **Testar**:
@@ -78,8 +78,8 @@ A migração será feita **gradualmente**, módulo por módulo, seguindo o padr�
 
 **Passos**:
 1. Criar `ChatDbContext` com DbSets para as 4 entidades
-2. Mover entidades para `Araponga.Modules.Chat.Infrastructure.Postgres.Entities`
-3. Mover repositórios para `Araponga.Modules.Chat.Infrastructure.Postgres`
+2. Mover entidades para `Arah.Modules.Chat.Infrastructure.Postgres.Entities`
+3. Mover repositórios para `Arah.Modules.Chat.Infrastructure.Postgres`
 4. Atualizar repositórios para usar `ChatDbContext`
 5. Atualizar `ChatModule.RegisterServices`
 6. Remover registros de `AddPostgresRepositories`
@@ -122,8 +122,8 @@ A migração será feita **gradualmente**, módulo por módulo, seguindo o padr�
 
 **Passos**:
 1. Criar `ConnectionsDbContext` (ou estender mapeamentos no DbContext principal, conforme estratégia adotada)
-2. Mover entidades para `Araponga.Modules.Connections.Infrastructure.Postgres.Entities`
-3. Mover repositórios para `Araponga.Modules.Connections.Infrastructure.Postgres`
+2. Mover entidades para `Arah.Modules.Connections.Infrastructure.Postgres.Entities`
+3. Mover repositórios para `Arah.Modules.Connections.Infrastructure.Postgres`
 4. Atualizar repositórios para usar o DbContext do módulo
 5. Registrar repositórios no módulo; remover registros de `AddPostgresRepositories`
 6. Manter Domain/Application/API de Connections em projetos principais até eventual migração completa

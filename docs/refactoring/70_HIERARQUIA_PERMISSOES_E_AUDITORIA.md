@@ -165,7 +165,7 @@ Todas as operações são rastreáveis através de:
 ### 4.1 Organização por Domínio
 
 ```
-backend/Araponga.Application/
+backend/Arah.Application/
 ├── Services/
 │   ├── SystemPermissionService.cs       # Gerencia permissões globais
 │   ├── MembershipCapabilityService.cs   # Gerencia capabilities territoriais
@@ -178,7 +178,7 @@ backend/Araponga.Application/
 └── Common/
     └── Result.cs                        # OperationResult<T> genérico
 
-backend/Araponga.Domain/
+backend/Arah.Domain/
 ├── Users/
 │   └── SystemPermission.cs             # Permissões globais
 └── Membership/

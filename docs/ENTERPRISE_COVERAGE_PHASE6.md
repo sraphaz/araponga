@@ -128,7 +128,7 @@
 
 ### Estrutura de Projeto
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Domain/
 │   ├── Media/
 │   │   └── MediaEdgeCasesTests.cs              (20 testes)

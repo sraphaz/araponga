@@ -1,4 +1,4 @@
-# Avaliação de Design Profissional - Wiki Araponga
+# Avaliação de Design Profissional - Wiki Arah
 
 ## Análise Internacional de Diretor de Arte
 
@@ -6,14 +6,14 @@
 
 1. **Tipografia**: Inter + JetBrains Mono = Excelente escolha para tom profissional
 2. **Hierarquia Visual**: Bom uso de espaçamento e tamanhos de fonte
-3. **Paleta de Cores**: Consistente com identidade Araponga
+3. **Paleta de Cores**: Consistente com identidade Arah
 4. **Glass Morphism**: Efeito moderno e elegante
 
 ### ⚠️ Oportunidades de Melhoria
 
 #### 1. **Consistência de Linguagem**
-- ❌ "Bem-Vind@ à Wiki Araponga" - símbolo @ é inconsistente
-- ✅ Usar apenas "Araponga" como título principal (já implementado)
+- ❌ "Bem-Vind@ à Wiki Arah" - símbolo @ é inconsistente
+- ✅ Usar apenas "Arah" como título principal (já implementado)
 
 #### 2. **Ícones e Elementos Visuais**
 - ❌ Emojis em botões podem causar flash/flicker
@@ -40,7 +40,7 @@
    - ✅ ThemeToggle já corrigido
 
 2. **Harmonizar títulos e headings**
-   - Títulos principais: "Araponga" (sem emojis, sem @)
+   - Títulos principais: "Arah" (sem emojis, sem @)
    - Subtítulos: manter consistência de linguagem
 
 3. **Otimizar densidade de informação**
@@ -86,7 +86,7 @@ Inspiração de plataformas de alto padrão:
 
 ### ✅ Implementações Realizadas
 
-1. ✅ Título simplificado: "Araponga" (sem "Bem-Vind@")
+1. ✅ Título simplificado: "Arah" (sem "Bem-Vind@")
 2. ✅ ThemeToggle com SVG icons (sem emojis)
 3. ✅ Tipografia profissional (Inter + JetBrains Mono)
 4. ✅ Progressive disclosure implementado

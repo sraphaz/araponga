@@ -106,7 +106,7 @@ Mover estas seções para dentro de `.phase-panel[data-phase-panel="avancado"]`:
 | `#onboarding-analistas` | Onboarding Analistas | 1 | Accordion | ~1812 |
 | `#onboarding-developers` | Onboarding Developers | 1 | Accordion | ~2041 |
 | `#visao-geral` | Visão Geral | 2 | Expandido | ~172 |
-| `#como-funciona` | Como o Araponga funciona | 2 | Accordion | ~201 |
+| `#como-funciona` | Como o Arah funciona | 2 | Accordion | ~201 |
 | `#territorios` | Territórios | 2 | Accordion | ~242 |
 | `#conceitos` | Conceitos de produto | 2 | Accordion | ~270 |
 | `#modelo-dominio` | Modelo de domínio | 2 | Accordion | ~322 |

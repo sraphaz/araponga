@@ -1,6 +1,6 @@
-# Resumo de Endpoints Principais - API Araponga
+# Resumo de Endpoints Principais - API Arah
 
-**Parte de**: [API Araponga - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
+**Parte de**: [API Arah - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
 **Versão**: 2.0  
 **Data**: 2025-01-20
 
@@ -178,9 +178,9 @@ Para detalhes completos de cada endpoint, consulte os subdocumentos específicos
 
 ## 🔗 Links Úteis
 
-- **DevPortal**: `devportal.araponga.app/` - Portal de desenvolvedor com exemplos práticos
-- **OpenAPI Explorer**: `devportal.araponga.app/#openapi` - Contratos completos da API
-- **Diagramas de Sequência**: `devportal.araponga.app/#fluxos` - Fluxos principais documentados
+- **DevPortal**: `devportal.Arah.app/` - Portal de desenvolvedor com exemplos práticos
+- **OpenAPI Explorer**: `devportal.Arah.app/#openapi` - Contratos completos da API
+- **Diagramas de Sequência**: `devportal.Arah.app/#fluxos` - Fluxos principais documentados
 
 ---
 

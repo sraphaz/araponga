@@ -43,9 +43,9 @@
 - ❌ Histórico de edições (opcional)
 
 **Arquivos relevantes**:
-- `backend/Araponga.Application/Services/EventsService.cs` (linhas 296-339)
-- `backend/Araponga.Api/Controllers/EventsController.cs` (linhas 78-133)
-- `backend/Araponga.Api/Contracts/Events/UpdateEventRequest.cs`
+- `backend/Arah.Application/Services/EventsService.cs` (linhas 296-339)
+- `backend/Arah.Api/Controllers/EventsController.cs` (linhas 78-133)
+- `backend/Arah.Api/Contracts/Events/UpdateEventRequest.cs`
 
 **Próximos passos**:
 1. Adicionar campos `EditedAtUtc` e `EditCount` ao modelo `TerritoryEvent`
@@ -79,8 +79,8 @@
 - ❌ Cache de resultados frequentes
 
 **Arquivos relevantes**:
-- `backend/Araponga.Application/Services/StoreItemService.cs` (linhas 347-386)
-- `backend/Araponga.Api/Controllers/ItemsController.cs` (linhas 233-308)
+- `backend/Arah.Application/Services/StoreItemService.cs` (linhas 347-386)
+- `backend/Arah.Api/Controllers/ItemsController.cs` (linhas 233-308)
 
 **Próximos passos**:
 1. Implementar busca de lojas
@@ -109,14 +109,14 @@
 - ❌ Histórico de edições (opcional)
 
 **Arquivos a criar**:
-- `backend/Araponga.Application/Services/PostEditService.cs`
-- `backend/Araponga.Api/Contracts/Feed/EditPostRequest.cs`
-- `backend/Araponga.Api/Validators/EditPostRequestValidator.cs`
-- `backend/Araponga.Tests/Api/BDD/PostEditing.feature`
+- `backend/Arah.Application/Services/PostEditService.cs`
+- `backend/Arah.Api/Contracts/Feed/EditPostRequest.cs`
+- `backend/Arah.Api/Validators/EditPostRequestValidator.cs`
+- `backend/Arah.Tests/Api/BDD/PostEditing.feature`
 
 **Arquivos a modificar**:
-- `backend/Araponga.Domain/Feed/Post.cs` (adicionar campos)
-- `backend/Araponga.Api/Controllers/FeedController.cs` (adicionar endpoint)
+- `backend/Arah.Domain/Feed/Post.cs` (adicionar campos)
+- `backend/Arah.Api/Controllers/FeedController.cs` (adicionar endpoint)
 
 **Estimativa**: 24 horas (3 dias)
 
@@ -143,16 +143,16 @@
 - ❌ Validação: apenas compradores podem avaliar
 
 **Arquivos a criar**:
-- `backend/Araponga.Domain/Marketplace/StoreRating.cs`
-- `backend/Araponga.Domain/Marketplace/StoreItemRating.cs`
-- `backend/Araponga.Domain/Marketplace/StoreRatingResponse.cs`
-- `backend/Araponga.Application/Interfaces/IStoreRatingRepository.cs`
-- `backend/Araponga.Application/Interfaces/IStoreItemRatingRepository.cs`
-- `backend/Araponga.Application/Services/RatingService.cs`
-- `backend/Araponga.Api/Controllers/RatingController.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/CreateRatingRequest.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/RatingResponse.cs`
-- `backend/Araponga.Tests/Api/BDD/MarketplaceRatings.feature`
+- `backend/Arah.Domain/Marketplace/StoreRating.cs`
+- `backend/Arah.Domain/Marketplace/StoreItemRating.cs`
+- `backend/Arah.Domain/Marketplace/StoreRatingResponse.cs`
+- `backend/Arah.Application/Interfaces/IStoreRatingRepository.cs`
+- `backend/Arah.Application/Interfaces/IStoreItemRatingRepository.cs`
+- `backend/Arah.Application/Services/RatingService.cs`
+- `backend/Arah.Api/Controllers/RatingController.cs`
+- `backend/Arah.Api/Contracts/Marketplace/CreateRatingRequest.cs`
+- `backend/Arah.Api/Contracts/Marketplace/RatingResponse.cs`
+- `backend/Arah.Tests/Api/BDD/MarketplaceRatings.feature`
 
 **Estimativa**: 32 horas (4 dias)
 
@@ -176,9 +176,9 @@
 - ❌ Filtros e paginação
 
 **Arquivos a criar**:
-- `backend/Araponga.Application/Services/UserActivityService.cs`
-- `backend/Araponga.Api/Controllers/UserActivityController.cs`
-- `backend/Araponga.Api/Contracts/Users/UserActivityResponse.cs`
+- `backend/Arah.Application/Services/UserActivityService.cs`
+- `backend/Arah.Api/Controllers/UserActivityController.cs`
+- `backend/Arah.Api/Contracts/Users/UserActivityResponse.cs`
 
 **Estimativa**: 16 horas (2 dias)
 
@@ -197,10 +197,10 @@
 - ❌ Interface administrativa no DevPortal
 
 **Arquivos a criar**:
-- `backend/Araponga.Domain/Moderation/ModerationThresholdConfig.cs`
-- `backend/Araponga.Application/Interfaces/Moderation/IModerationThresholdConfigRepository.cs`
-- `backend/Araponga.Application/Services/Moderation/ModerationThresholdConfigService.cs`
-- `backend/Araponga.Api/Controllers/ModerationThresholdConfigController.cs`
+- `backend/Arah.Domain/Moderation/ModerationThresholdConfig.cs`
+- `backend/Arah.Application/Interfaces/Moderation/IModerationThresholdConfigRepository.cs`
+- `backend/Arah.Application/Services/Moderation/ModerationThresholdConfigService.cs`
+- `backend/Arah.Api/Controllers/ModerationThresholdConfigController.cs`
 
 **Estimativa**: 24 horas (3 dias)
 
@@ -220,7 +220,7 @@
 
 **Arquivos esperados**:
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Api/BDD/
 │   ├── PostEditing.feature
 │   ├── EventEditing.feature

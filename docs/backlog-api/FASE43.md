@@ -47,7 +47,7 @@ A aplicação é um **monolito acoplado** onde:
 ┌─────────────────────────────────────────────────────┐
 │                   Versão Monolito                    │
 │  ┌──────────────────────────────────────────────┐  │
-│  │  Araponga.Api (Todos os módulos)              │  │
+│  │  Arah.Api (Todos os módulos)              │  │
 │  │  ├── Core Module                              │  │
 │  │  ├── Feed Module                              │  │
 │  │  ├── Marketplace Module                       │  │
@@ -128,9 +128,9 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar interface de módulo
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Modules/IModule.cs`
-- `backend/Araponga.Application/Modules/ModuleBase.cs`
-- `backend/Araponga.Application/Modules/ModuleRegistry.cs`
+- `backend/Arah.Application/Modules/IModule.cs`
+- `backend/Arah.Application/Modules/ModuleBase.cs`
+- `backend/Arah.Application/Modules/ModuleRegistry.cs`
 
 **Critérios de Sucesso**:
 - ✅ Interface de módulo criada
@@ -159,17 +159,17 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Organizar controllers por módulo (opcional: mover para pastas de módulo)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Modules/CoreModule.cs`
-- `backend/Araponga.Api/Modules/FeedModule.cs`
-- `backend/Araponga.Api/Modules/MarketplaceModule.cs`
-- `backend/Araponga.Api/Modules/ChatModule.cs`
-- `backend/Araponga.Api/Modules/EventsModule.cs`
-- `backend/Araponga.Api/Modules/MapModule.cs`
-- `backend/Araponga.Api/Modules/ModerationModule.cs`
-- `backend/Araponga.Api/Modules/AlertsModule.cs`
-- `backend/Araponga.Api/Modules/AssetsModule.cs`
-- `backend/Araponga.Api/Modules/NotificationsModule.cs`
-- `backend/Araponga.Api/Modules/AdminModule.cs`
+- `backend/Arah.Api/Modules/CoreModule.cs`
+- `backend/Arah.Api/Modules/FeedModule.cs`
+- `backend/Arah.Api/Modules/MarketplaceModule.cs`
+- `backend/Arah.Api/Modules/ChatModule.cs`
+- `backend/Arah.Api/Modules/EventsModule.cs`
+- `backend/Arah.Api/Modules/MapModule.cs`
+- `backend/Arah.Api/Modules/ModerationModule.cs`
+- `backend/Arah.Api/Modules/AlertsModule.cs`
+- `backend/Arah.Api/Modules/AssetsModule.cs`
+- `backend/Arah.Api/Modules/NotificationsModule.cs`
+- `backend/Arah.Api/Modules/AdminModule.cs`
 
 **Critérios de Sucesso**:
 - ✅ Módulos criados para todas as funcionalidades
@@ -192,12 +192,12 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar configuração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/appsettings.json`
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/appsettings.json`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/appsettings.Development.json` (exemplo)
-- `backend/Araponga.Api/appsettings.Production.json` (exemplo)
+- `backend/Arah.Api/appsettings.Development.json` (exemplo)
+- `backend/Arah.Api/appsettings.Production.json` (exemplo)
 
 **Critérios de Sucesso**:
 - ✅ Configuração de módulos funcionando
@@ -222,13 +222,13 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Testar ambas as implementações
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Messaging/IMessageBroker.cs`
-- `backend/Araponga.Infrastructure/Messaging/MessageBrokerEventBus.cs`
-- `backend/Araponga.Application/Events/EventBusFactory.cs`
+- `backend/Arah.Infrastructure/Messaging/IMessageBroker.cs`
+- `backend/Arah.Infrastructure/Messaging/MessageBrokerEventBus.cs`
+- `backend/Arah.Application/Events/EventBusFactory.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Eventing/InMemoryEventBus.cs` (se necessário)
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Infrastructure/Eventing/InMemoryEventBus.cs` (se necessário)
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
 
 **Critérios de Sucesso**:
 - ✅ Event Bus funciona em monolito (InMemory)
@@ -252,13 +252,13 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Messaging/RabbitMQMessageBroker.cs`
-- `backend/Araponga.Infrastructure/Messaging/MessageBrokerOptions.cs`
-- `backend/Araponga.Infrastructure/Messaging/RetryPolicy.cs`
-- `backend/Araponga.Infrastructure/Messaging/CircuitBreaker.cs`
+- `backend/Arah.Infrastructure/Messaging/RabbitMQMessageBroker.cs`
+- `backend/Arah.Infrastructure/Messaging/MessageBrokerOptions.cs`
+- `backend/Arah.Infrastructure/Messaging/RetryPolicy.cs`
+- `backend/Arah.Infrastructure/Messaging/CircuitBreaker.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/appsettings.json` (configuração)
+- `backend/Arah.Api/appsettings.json` (configuração)
 
 **Critérios de Sucesso**:
 - ✅ Message Broker funcionando
@@ -277,7 +277,7 @@ A aplicação é um **monolito acoplado** onde:
 
 **Tarefas**:
 - [ ] Escolher API Gateway (YARP recomendado - .NET native)
-- [ ] Criar projeto `Araponga.Gateway`
+- [ ] Criar projeto `Arah.Gateway`
 - [ ] Configurar roteamento por serviço
 - [ ] Implementar load balancing
 - [ ] Implementar circuit breaker no gateway
@@ -285,11 +285,11 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Gateway/Araponga.Gateway.csproj`
-- `backend/Araponga.Gateway/Program.cs`
-- `backend/Araponga.Gateway/Configuration/GatewayConfig.cs`
-- `backend/Araponga.Gateway/Middleware/GatewayMiddleware.cs`
-- `backend/Araponga.Gateway/appsettings.json`
+- `backend/Arah.Gateway/Arah.Gateway.csproj`
+- `backend/Arah.Gateway/Program.cs`
+- `backend/Arah.Gateway/Configuration/GatewayConfig.cs`
+- `backend/Arah.Gateway/Middleware/GatewayMiddleware.cs`
+- `backend/Arah.Gateway/appsettings.json`
 
 **Critérios de Sucesso**:
 - ✅ API Gateway funcionando
@@ -313,9 +313,9 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IServiceDiscovery.cs`
-- `backend/Araponga.Infrastructure/ServiceDiscovery/ConsulServiceDiscovery.cs`
-- `backend/Araponga.Infrastructure/ServiceDiscovery/ServiceDiscoveryOptions.cs`
+- `backend/Arah.Application/Interfaces/IServiceDiscovery.cs`
+- `backend/Arah.Infrastructure/ServiceDiscovery/ConsulServiceDiscovery.cs`
+- `backend/Arah.Infrastructure/ServiceDiscovery/ServiceDiscoveryOptions.cs`
 
 **Critérios de Sucesso**:
 - ✅ Service Discovery funcionando
@@ -332,7 +332,7 @@ A aplicação é um **monolito acoplado** onde:
 **Status**: ❌ Não implementado
 
 **Tarefas**:
-- [ ] Criar projeto `Araponga.Api.Notifications`
+- [ ] Criar projeto `Arah.Api.Notifications`
 - [ ] Mover `NotificationsController` para novo projeto
 - [ ] Criar banco de dados separado (ou schema separado)
 - [ ] Implementar API REST para Notifications
@@ -343,15 +343,15 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar serviço
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api.Notifications/Araponga.Api.Notifications.csproj`
-- `backend/Araponga.Api.Notifications/Program.cs`
-- `backend/Araponga.Api.Notifications/Controllers/NotificationsController.cs`
-- `backend/Araponga.Api.Notifications/appsettings.json`
-- `backend/Araponga.Application/Interfaces/INotificationsApiClient.cs`
-- `backend/Araponga.Infrastructure/Clients/NotificationsApiClient.cs`
+- `backend/Arah.Api.Notifications/Arah.Api.Notifications.csproj`
+- `backend/Arah.Api.Notifications/Program.cs`
+- `backend/Arah.Api.Notifications/Controllers/NotificationsController.cs`
+- `backend/Arah.Api.Notifications/appsettings.json`
+- `backend/Arah.Application/Interfaces/INotificationsApiClient.cs`
+- `backend/Arah.Infrastructure/Clients/NotificationsApiClient.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Modules/NotificationsModule.cs` (remover do monolito)
+- `backend/Arah.Api/Modules/NotificationsModule.cs` (remover do monolito)
 
 **Critérios de Sucesso**:
 - ✅ Notifications como serviço independente
@@ -376,10 +376,10 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar migração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Services/PaymentService.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/ReportService.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Services/PaymentService.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/ReportService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Dependências migradas
@@ -506,10 +506,10 @@ A aplicação é um **monolito acoplado** onde:
 - [ ] Documentar resultados
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Integration/MonolithIntegrationTests.cs`
-- `backend/Araponga.Tests/Integration/DistributedIntegrationTests.cs`
-- `backend/Araponga.Tests/Performance/MonolithLoadTests.cs`
-- `backend/Araponga.Tests/Performance/DistributedLoadTests.cs`
+- `backend/Arah.Tests/Integration/MonolithIntegrationTests.cs`
+- `backend/Arah.Tests/Integration/DistributedIntegrationTests.cs`
+- `backend/Arah.Tests/Performance/MonolithLoadTests.cs`
+- `backend/Arah.Tests/Performance/DistributedLoadTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Testes de integração passando

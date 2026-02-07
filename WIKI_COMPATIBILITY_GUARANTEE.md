@@ -75,7 +75,7 @@ O wiki processa **automaticamente** links:
 
 **DevPortal (frontend/devportal/assets/js/devportal.js):**
 ```javascript
-href: "https://github.com/sraphaz/araponga/blob/main/docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md"
+href: "https://github.com/sraphaz/Arah/blob/main/docs/33_ADMIN_SYSTEM_CONFIG_WORKQUEUE.md"
 ```
 ✅ Links EXTERNOS para GitHub - NÃO afetados por reorganização
 

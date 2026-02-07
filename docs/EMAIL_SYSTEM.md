@@ -8,7 +8,7 @@
 
 ## 🎯 Visão Geral
 
-Sistema completo de envio de emails para a plataforma Araponga, permitindo comunicação com usuários via email em situações específicas (boas-vindas, recuperação de senha, notificações importantes, alertas críticos).
+Sistema completo de envio de emails para a plataforma Arah, permitindo comunicação com usuários via email em situações específicas (boas-vindas, recuperação de senha, notificações importantes, alertas críticos).
 
 ---
 
@@ -53,7 +53,7 @@ Sistema completo de envio de emails para a plataforma Araponga, permitindo comun
 
 ### 1. Interface IEmailSender
 
-**Localização**: `backend/Araponga.Application/Interfaces/IEmailSender.cs`
+**Localização**: `backend/Arah.Application/Interfaces/IEmailSender.cs`
 
 Interface para envio de emails com três sobrecargas:
 - `SendEmailAsync(string to, string subject, string body, bool isHtml, CancellationToken)`
@@ -62,7 +62,7 @@ Interface para envio de emails com três sobrecargas:
 
 ### 2. Implementação SMTP
 
-**Localização**: `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
+**Localização**: `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
 
 Implementação usando MailKit para envio via SMTP.
 
@@ -73,19 +73,19 @@ Implementação usando MailKit para envio via SMTP.
     "Smtp": {
       "Host": "smtp.gmail.com",
       "Port": 587,
-      "Username": "noreply@araponga.com",
+      "Username": "noreply@Arah.com",
       "Password": "[secret]",
       "EnableSsl": true
     },
-    "FromAddress": "noreply@araponga.com",
-    "FromName": "Araponga"
+    "FromAddress": "noreply@Arah.com",
+    "FromName": "Arah"
   }
 }
 ```
 
 ### 3. Sistema de Templates
 
-**Localização**: `backend/Araponga.Application/Services/EmailTemplateService.cs`
+**Localização**: `backend/Arah.Application/Services/EmailTemplateService.cs`
 
 Sistema de templates HTML com suporte a:
 - Substituição de propriedades (`{{PropertyName}}`)
@@ -103,7 +103,7 @@ Sistema de templates HTML com suporte a:
 
 ### 4. Queue de Envio Assíncrono
 
-**Localização**: `backend/Araponga.Application/Services/EmailQueueService.cs`
+**Localização**: `backend/Arah.Application/Services/EmailQueueService.cs`
 
 Sistema de fila para envio assíncrono de emails com:
 - **Prioridades**: Low, Normal, High, Critical
@@ -119,7 +119,7 @@ Sistema de fila para envio assíncrono de emails com:
 
 ### 5. Integração com Notificações
 
-**Localização**: `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
+**Localização**: `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs`
 
 O `OutboxDispatcherWorker` agora também enfileira emails quando apropriado:
 - Verifica se notificação deve gerar email (`EmailNotificationMapper.ShouldSendEmail`)
@@ -134,7 +134,7 @@ O `OutboxDispatcherWorker` agora também enfileira emails quando apropriado:
 
 ### 6. Preferências de Email
 
-**Localização**: `backend/Araponga.Domain/Users/EmailPreferences.cs`
+**Localização**: `backend/Arah.Domain/Users/EmailPreferences.cs`
 
 Usuários podem configurar:
 - `ReceiveEmails` (bool) - Habilitar/desabilitar emails
@@ -154,7 +154,7 @@ Usuários podem configurar:
 
 ### 1. Email de Boas-Vindas
 
-**Localização**: `backend/Araponga.Application/Services/AuthService.cs`
+**Localização**: `backend/Arah.Application/Services/AuthService.cs`
 
 Enviado automaticamente quando novo usuário se cadastra via `LoginSocialAsync`.
 
@@ -170,7 +170,7 @@ Enviado automaticamente quando novo usuário se cadastra via `LoginSocialAsync`.
 
 ### 3. Email de Pedido Confirmado
 
-**Localização**: `backend/Araponga.Application/Services/CartService.cs`
+**Localização**: `backend/Arah.Application/Services/CartService.cs`
 
 Enviado automaticamente após checkout bem-sucedido.
 
@@ -265,7 +265,7 @@ var emailSender = serviceProvider.GetRequiredService<IEmailSender>();
 var templateData = new WelcomeEmailTemplateData
 {
     UserName = "João",
-    BaseUrl = "https://araponga.com",
+    BaseUrl = "https://Arah.com",
     ActivationLink = null
 };
 
@@ -314,8 +314,8 @@ await emailQueueService.EnqueueEmailAsync(
 ## 🔗 Referências
 
 - **Documentação da Fase**: `docs/backlog-api/FASE13.md`
-- **Templates**: `backend/Araponga.Api/Templates/Email/`
-- **Configuração**: `backend/Araponga.Api/appsettings.json`
+- **Templates**: `backend/Arah.Api/Templates/Email/`
+- **Configuração**: `backend/Arah.Api/appsettings.json`
 
 ---
 

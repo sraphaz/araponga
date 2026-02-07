@@ -64,17 +64,17 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 #### Arquivos a Modificar
 
 **Fase 13**:
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`
-- `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs`
-- `backend/Araponga.Application/Services/PostFilterService.cs` (opcional)
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`
+- `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs`
+- `backend/Arah.Application/Services/PostFilterService.cs` (opcional)
 
 **Fase 14**:
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Services/PostCreationService.cs` (ou criar `PostUpdateService`)
-- `backend/Araponga.Api/Controllers/FeedController.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs` (ou criar `PostUpdateService`)
+- `backend/Arah.Api/Controllers/FeedController.cs`
 
 #### Migrações de Dados
 - ⚠️ **Nenhuma migração necessária** (posts existentes continuam funcionando, apenas sem mídias)
@@ -116,14 +116,14 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 #### Arquivos a Modificar
 
 **Fase 13**:
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
-- `backend/Araponga.Api/Contracts/Events/CreateEventRequest.cs`
-- `backend/Araponga.Api/Contracts/Events/EventSummary.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
+- `backend/Arah.Api/Contracts/Events/CreateEventRequest.cs`
+- `backend/Arah.Api/Contracts/Events/EventSummary.cs`
 
 **Fase 14**:
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
 
 #### Migrações de Dados
 - ⚠️ **Nenhuma migração necessária** (eventos existentes continuam funcionando, apenas sem imagem de capa)
@@ -168,23 +168,23 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 #### Arquivos a Modificar
 
 **Fase 13**:
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/CreateItemRequest.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/StoreItemResponse.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Api/Contracts/Marketplace/CreateItemRequest.cs`
+- `backend/Arah.Api/Contracts/Marketplace/StoreItemResponse.cs`
 
 **Fase 14**:
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
-- `backend/Araponga.Application/Interfaces/IStoreItemRepository.cs` (adicionar `SearchAsync`)
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Application/Interfaces/IStoreItemRepository.cs` (adicionar `SearchAsync`)
 
 #### Arquivos a Criar (Fase 14)
 
 **Avaliações**:
-- `backend/Araponga.Domain/Marketplace/StoreReview.cs`
-- `backend/Araponga.Application/Interfaces/IStoreReviewRepository.cs`
-- `backend/Araponga.Application/Services/StoreReviewService.cs`
-- `backend/Araponga.Api/Controllers/StoreReviewsController.cs`
+- `backend/Arah.Domain/Marketplace/StoreReview.cs`
+- `backend/Arah.Application/Interfaces/IStoreReviewRepository.cs`
+- `backend/Arah.Application/Services/StoreReviewService.cs`
+- `backend/Arah.Api/Controllers/StoreReviewsController.cs`
 
 #### Migrações de Dados
 - ⚠️ **Nenhuma migração necessária** (itens existentes continuam funcionando, apenas sem imagens)
@@ -216,11 +216,11 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 #### Arquivos a Modificar
 
 **Fase 13**:
-- `backend/Araponga.Domain/Chat/ChatMessage.cs` (verificar se já tem `ContentType`)
-- `backend/Araponga.Application/Services/ChatService.cs`
-- `backend/Araponga.Api/Controllers/ChatController.cs`
-- `backend/Araponga.Api/Contracts/Chat/SendMessageRequest.cs`
-- `backend/Araponga.Api/Contracts/Chat/ChatMessageResponse.cs`
+- `backend/Arah.Domain/Chat/ChatMessage.cs` (verificar se já tem `ContentType`)
+- `backend/Arah.Application/Services/ChatService.cs`
+- `backend/Arah.Api/Controllers/ChatController.cs`
+- `backend/Arah.Api/Contracts/Chat/SendMessageRequest.cs`
+- `backend/Arah.Api/Contracts/Chat/ChatMessageResponse.cs`
 
 #### Migrações de Dados
 - ⚠️ **Pode precisar migração** se `ChatMessage` não tiver campo para tipo de conteúdo
@@ -259,17 +259,17 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 #### Arquivos a Modificar
 
 **Fase 12**:
-- `backend/Araponga.Domain/Users/User.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Domain/Users/User.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
 
 #### Arquivos a Criar (Fase 12)
 
 **Estatísticas**:
-- `backend/Araponga.Application/Services/UserProfileStatsService.cs`
-- `backend/Araponga.Application/Models/UserProfileStats.cs`
-- `backend/Araponga.Api/Contracts/Users/UserProfileStatsResponse.cs`
+- `backend/Arah.Application/Services/UserProfileStatsService.cs`
+- `backend/Arah.Application/Models/UserProfileStats.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileStatsResponse.cs`
 
 **Fase 14 (Histórico de Atividades)**:
 - [ ] Criar `UserActivityService` (novo serviço)
@@ -452,10 +452,10 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 ### Fase 12: Ajustes no Perfil
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Users/User.cs` (adicionar campos)
-- `backend/Araponga.Application/Services/UserProfileService.cs` (novos métodos)
-- `backend/Araponga.Api/Controllers/UserProfileController.cs` (novos endpoints)
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs` (novos campos)
+- `backend/Arah.Domain/Users/User.cs` (adicionar campos)
+- `backend/Arah.Application/Services/UserProfileService.cs` (novos métodos)
+- `backend/Arah.Api/Controllers/UserProfileController.cs` (novos endpoints)
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs` (novos campos)
 
 **Migrações**:
 - Nova coluna `avatar_media_asset_id` (nullable)
@@ -472,30 +472,30 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 **Arquivos a Modificar**:
 
 1. **Feed**:
-   - `backend/Araponga.Application/Services/PostCreationService.cs`
-   - `backend/Araponga.Application/Services/FeedService.cs`
-   - `backend/Araponga.Api/Controllers/FeedController.cs`
-   - `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`
-   - `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs`
+   - `backend/Arah.Application/Services/PostCreationService.cs`
+   - `backend/Arah.Application/Services/FeedService.cs`
+   - `backend/Arah.Api/Controllers/FeedController.cs`
+   - `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`
+   - `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs`
 
 2. **Eventos**:
-   - `backend/Araponga.Application/Services/EventsService.cs`
-   - `backend/Araponga.Api/Controllers/EventsController.cs`
-   - `backend/Araponga.Api/Contracts/Events/CreateEventRequest.cs`
-   - `backend/Araponga.Api/Contracts/Events/EventSummary.cs`
+   - `backend/Arah.Application/Services/EventsService.cs`
+   - `backend/Arah.Api/Controllers/EventsController.cs`
+   - `backend/Arah.Api/Contracts/Events/CreateEventRequest.cs`
+   - `backend/Arah.Api/Contracts/Events/EventSummary.cs`
 
 3. **Marketplace**:
-   - `backend/Araponga.Application/Services/StoreItemService.cs`
-   - `backend/Araponga.Api/Controllers/ItemsController.cs`
-   - `backend/Araponga.Api/Contracts/Marketplace/CreateItemRequest.cs`
-   - `backend/Araponga.Api/Contracts/Marketplace/StoreItemResponse.cs`
+   - `backend/Arah.Application/Services/StoreItemService.cs`
+   - `backend/Arah.Api/Controllers/ItemsController.cs`
+   - `backend/Arah.Api/Contracts/Marketplace/CreateItemRequest.cs`
+   - `backend/Arah.Api/Contracts/Marketplace/StoreItemResponse.cs`
 
 4. **Chat**:
-   - `backend/Araponga.Domain/Chat/ChatMessage.cs` (verificar)
-   - `backend/Araponga.Application/Services/ChatService.cs`
-   - `backend/Araponga.Api/Controllers/ChatController.cs`
-   - `backend/Araponga.Api/Contracts/Chat/SendMessageRequest.cs`
-   - `backend/Araponga.Api/Contracts/Chat/ChatMessageResponse.cs`
+   - `backend/Arah.Domain/Chat/ChatMessage.cs` (verificar)
+   - `backend/Arah.Application/Services/ChatService.cs`
+   - `backend/Arah.Api/Controllers/ChatController.cs`
+   - `backend/Arah.Api/Contracts/Chat/SendMessageRequest.cs`
+   - `backend/Arah.Api/Contracts/Chat/ChatMessageResponse.cs`
 
 **Migrações**:
 - ⚠️ Pode precisar migração se `ChatMessage` não tiver campo para tipo de conteúdo
@@ -511,30 +511,30 @@ As Fases 11-14 introduzem **mídias** e **novas funcionalidades** que impactam *
 **Arquivos a Modificar**:
 
 1. **Feed**:
-   - `backend/Araponga.Application/Services/FeedService.cs` (método `UpdatePostAsync`)
-   - `backend/Araponga.Application/Services/PostCreationService.cs` (ou criar `PostUpdateService`)
-   - `backend/Araponga.Api/Controllers/FeedController.cs` (endpoint `PUT`)
+   - `backend/Arah.Application/Services/FeedService.cs` (método `UpdatePostAsync`)
+   - `backend/Arah.Application/Services/PostCreationService.cs` (ou criar `PostUpdateService`)
+   - `backend/Arah.Api/Controllers/FeedController.cs` (endpoint `PUT`)
 
 2. **Eventos**:
-   - `backend/Araponga.Application/Services/EventsService.cs` (método `UpdateEventAsync`, `GetParticipantsAsync`)
-   - `backend/Araponga.Api/Controllers/EventsController.cs` (endpoints `PUT` e `GET /participants`)
+   - `backend/Arah.Application/Services/EventsService.cs` (método `UpdateEventAsync`, `GetParticipantsAsync`)
+   - `backend/Arah.Api/Controllers/EventsController.cs` (endpoints `PUT` e `GET /participants`)
 
 3. **Marketplace**:
-   - `backend/Araponga.Application/Services/StoreItemService.cs` (método `SearchItemsAsync`)
-   - `backend/Araponga.Application/Interfaces/IStoreItemRepository.cs` (método `SearchAsync`)
-   - `backend/Araponga.Api/Controllers/ItemsController.cs` (endpoint `GET /search`)
+   - `backend/Arah.Application/Services/StoreItemService.cs` (método `SearchItemsAsync`)
+   - `backend/Arah.Application/Interfaces/IStoreItemRepository.cs` (método `SearchAsync`)
+   - `backend/Arah.Api/Controllers/ItemsController.cs` (endpoint `GET /search`)
 
 4. **Perfil**:
-   - `backend/Araponga.Application/Services/UserActivityService.cs` (novo serviço)
-   - `backend/Araponga.Api/Controllers/UserProfileController.cs` (endpoint `GET /activity`)
+   - `backend/Arah.Application/Services/UserActivityService.cs` (novo serviço)
+   - `backend/Arah.Api/Controllers/UserProfileController.cs` (endpoint `GET /activity`)
 
 **Arquivos a Criar**:
 
 1. **Avaliações**:
-   - `backend/Araponga.Domain/Marketplace/StoreReview.cs`
-   - `backend/Araponga.Application/Interfaces/IStoreReviewRepository.cs`
-   - `backend/Araponga.Application/Services/StoreReviewService.cs`
-   - `backend/Araponga.Api/Controllers/StoreReviewsController.cs`
+   - `backend/Arah.Domain/Marketplace/StoreReview.cs`
+   - `backend/Arah.Application/Interfaces/IStoreReviewRepository.cs`
+   - `backend/Arah.Application/Services/StoreReviewService.cs`
+   - `backend/Arah.Api/Controllers/StoreReviewsController.cs`
 
 **Migrações**:
 - Nova tabela `store_reviews`

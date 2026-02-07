@@ -16,7 +16,7 @@ Este documento descreve a **versão estável** atual do app (Flutter), do fluxo 
 
 ## O que está implementado
 
-### App (Flutter – `frontend/araponga.app`)
+### App (Flutter – `frontend/Arah.app`)
 
 - **Autenticação**: login com e-mail (check-email → senha ou criar conta), signup com nome e senha.
 - **Onboarding**: tela de seleção de território após login/cadastro quando não há território salvo.
@@ -68,7 +68,7 @@ Este documento descreve a **versão estável** atual do app (Flutter), do fluxo 
 2. **Rodar o app Flutter**  
    Em outro terminal:
    ```powershell
-   cd frontend\araponga.app
+   cd frontend\Arah.app
    flutter run
    ```
    Ou use o script do projeto que define `BFF_BASE_URL` (ex.: `http://localhost:5001`).

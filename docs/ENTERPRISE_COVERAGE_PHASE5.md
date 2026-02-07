@@ -71,7 +71,7 @@
 
 ### Estrutura de Projeto
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Infrastructure/
 │   ├── RepositoryEdgeCasesTests.cs        (57 testes)
 │   └── CacheServiceEdgeCasesTests.cs      (23 testes)

@@ -34,7 +34,7 @@ Aumentar cobertura de testes e melhorar qualidade de código.
 - [ ] Validar cobertura final
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Tests/` (adicionar testes)
+- `backend/Arah.Tests/` (adicionar testes)
 
 **Critérios de Sucesso**:
 - ✅ Cobertura geral >90%
@@ -59,7 +59,7 @@ Aumentar cobertura de testes e melhorar qualidade de código.
 - [ ] Documentar resultados e SLAs
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Performance/` (novo diretório)
+- `backend/Arah.Tests/Performance/` (novo diretório)
 
 **Critérios de Sucesso**:
 - ✅ Testes de carga implementados
@@ -82,7 +82,7 @@ Aumentar cobertura de testes e melhorar qualidade de código.
 - [ ] Documentar testes de segurança
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Security/` (novo diretório)
+- `backend/Arah.Tests/Security/` (novo diretório)
 
 **Critérios de Sucesso**:
 - ✅ Testes de autenticação implementados
@@ -108,7 +108,7 @@ Aumentar cobertura de testes e melhorar qualidade de código.
 - [ ] Documentar estratégia
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CacheInvalidationService.cs`
+- `backend/Arah.Application/Services/CacheInvalidationService.cs`
 
 **Arquivos a Modificar**:
 - Todos os cache services
@@ -161,14 +161,14 @@ Aumentar cobertura de testes e melhorar qualidade de código.
 - [ ] Documentar padrões
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Common/ValidationHelpers.cs`
-- `backend/Araponga.Application/Common/Constants.cs`
-- `backend/Araponga.Application/Configuration/AppSettings.cs`
-- `backend/Araponga.Application/Extensions/GuidExtensions.cs`
+- `backend/Arah.Application/Common/ValidationHelpers.cs`
+- `backend/Arah.Application/Common/Constants.cs`
+- `backend/Arah.Application/Configuration/AppSettings.cs`
+- `backend/Arah.Application/Extensions/GuidExtensions.cs`
 
 **Arquivos a Modificar**:
 - Services (usar helpers)
-- `backend/Araponga.Api/appsettings.json`
+- `backend/Arah.Api/appsettings.json`
 
 **Critérios de Sucesso**:
 - ✅ Duplicação eliminada

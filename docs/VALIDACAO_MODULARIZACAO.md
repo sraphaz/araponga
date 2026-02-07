@@ -1,4 +1,4 @@
-# Validação da Modularização - Araponga
+# Validação da Modularização - Arah
 
 **Data**: 2026-01-28  
 **Status**: ✅ Concluída (estrutura base)  
@@ -8,7 +8,7 @@
 
 ## 📋 Resumo Executivo
 
-A modularização do backend do Araponga foi **validada e recuperada**. A estrutura de módulos está em uso, o build compila com sucesso e o trabalho pode ser retomado a partir do estado atual.
+A modularização do backend do Arah foi **validada e recuperada**. A estrutura de módulos está em uso, o build compila com sucesso e o trabalho pode ser retomado a partir do estado atual.
 
 ---
 
@@ -18,7 +18,7 @@ A modularização do backend do Araponga foi **validada e recuperada**. A estrut
 
 | Item | Status |
 |------|--------|
-| Referência `Microsoft.Extensions.Configuration.Abstractions` no `Araponga.Application` | ✅ Adicionada (necessária para `IModule` e `ModuleRegistry`) |
+| Referência `Microsoft.Extensions.Configuration.Abstractions` no `Arah.Application` | ✅ Adicionada (necessária para `IModule` e `ModuleRegistry`) |
 | Chamada inexistente `AddAdditionalPostgresRepositories` | ✅ Substituída por `AddPostgresRepositories` (método privado existente) |
 | `ConnectionPoolMetricsService` recebendo `SharedDbContext` | ✅ Ajustado para usar `ArapongaDbContext` temporariamente (compatível com assinatura atual) |
 
@@ -28,14 +28,14 @@ Os projetos e classes de módulo abaixo **não existiam** mas eram referenciados
 
 | Módulo | Projeto | Classe | Observação |
 |--------|---------|--------|------------|
-| Events | `Araponga.Modules.Events.Infrastructure` | `EventsModule` | Stub; TODO: EventsDbContext quando necessário |
-| Map | `Araponga.Modules.Map.Infrastructure` | `MapModule` | Stub; TODO: MapDbContext quando necessário |
-| Chat | `Araponga.Modules.Chat.Infrastructure` | `ChatModule` | Stub; TODO: ChatDbContext quando necessário |
+| Events | `Arah.Modules.Events.Infrastructure` | `EventsModule` | Stub; TODO: EventsDbContext quando necessário |
+| Map | `Arah.Modules.Map.Infrastructure` | `MapModule` | Stub; TODO: MapDbContext quando necessário |
+| Chat | `Arah.Modules.Chat.Infrastructure` | `ChatModule` | Stub; TODO: ChatDbContext quando necessário |
 
 ### 3. Solution e Referências
 
-- **Araponga.sln**: Incluídos os projetos Feed, Marketplace, Events, Map e Chat (com configurações Debug/Release e NestedProjects).
-- **Araponga.Api.csproj**: Já referenciava todos os módulos; nenhuma alteração necessária nas referências.
+- **Arah.sln**: Incluídos os projetos Feed, Marketplace, Events, Map e Chat (com configurações Debug/Release e NestedProjects).
+- **Arah.Api.csproj**: Já referenciava todos os módulos; nenhuma alteração necessária nas referências.
 
 ---
 
@@ -43,24 +43,24 @@ Os projetos e classes de módulo abaixo **não existiam** mas eram referenciados
 
 | Módulo | Projeto | Implementação | Observação |
 |--------|---------|----------------|------------|
-| Feed | `Araponga.Modules.Feed.Infrastructure` | ✅ Completo | FeedDbContext + PostgresFeedRepository |
-| Marketplace | `Araponga.Modules.Marketplace.Infrastructure` | ⚠️ Parcial | MarketplaceDbContext; repositórios ainda em Infrastructure principal |
-| Events | `Araponga.Modules.Events.Infrastructure` | ✅ Completo | EventsDbContext + 2 repositórios (TerritoryEvent, EventParticipation) |
-| Map | `Araponga.Modules.Map.Infrastructure` | ✅ Completo | MapDbContext + 2 repositórios (Map, MapEntityRelation) |
-| Chat | `Araponga.Modules.Chat.Infrastructure` | ✅ Completo | ChatDbContext + 4 repositórios (Conversation, Participant, Message, Stats) |
-| Subscriptions | `Araponga.Modules.Subscriptions.Infrastructure` | ✅ Completo | SubscriptionsDbContext + 6 repositórios |
-| Moderation | `Araponga.Modules.Moderation.Infrastructure` | ✅ Completo | ModerationDbContext + 5 repositórios |
-| Notifications | `Araponga.Modules.Notifications.Infrastructure` | ✅ Completo | NotificationsDbContext + 2 repositórios |
-| Alerts | `Araponga.Modules.Alerts.Infrastructure` | ✅ Completo | AlertsDbContext + PostgresHealthAlertRepository |
-| Assets | `Araponga.Modules.Assets.Infrastructure` | ✅ Completo | AssetsDbContext + 3 repositórios |
-| Admin | `Araponga.Modules.Admin.Infrastructure` | 🔲 Stub | Sem DbContext; usa Shared quando necessário |
+| Feed | `Arah.Modules.Feed.Infrastructure` | ✅ Completo | FeedDbContext + PostgresFeedRepository |
+| Marketplace | `Arah.Modules.Marketplace.Infrastructure` | ⚠️ Parcial | MarketplaceDbContext; repositórios ainda em Infrastructure principal |
+| Events | `Arah.Modules.Events.Infrastructure` | ✅ Completo | EventsDbContext + 2 repositórios (TerritoryEvent, EventParticipation) |
+| Map | `Arah.Modules.Map.Infrastructure` | ✅ Completo | MapDbContext + 2 repositórios (Map, MapEntityRelation) |
+| Chat | `Arah.Modules.Chat.Infrastructure` | ✅ Completo | ChatDbContext + 4 repositórios (Conversation, Participant, Message, Stats) |
+| Subscriptions | `Arah.Modules.Subscriptions.Infrastructure` | ✅ Completo | SubscriptionsDbContext + 6 repositórios |
+| Moderation | `Arah.Modules.Moderation.Infrastructure` | ✅ Completo | ModerationDbContext + 5 repositórios |
+| Notifications | `Arah.Modules.Notifications.Infrastructure` | ✅ Completo | NotificationsDbContext + 2 repositórios |
+| Alerts | `Arah.Modules.Alerts.Infrastructure` | ✅ Completo | AlertsDbContext + PostgresHealthAlertRepository |
+| Assets | `Arah.Modules.Assets.Infrastructure` | ✅ Completo | AssetsDbContext + 3 repositórios |
+| Admin | `Arah.Modules.Admin.Infrastructure` | 🔲 Stub | Sem DbContext; usa Shared quando necessário |
 
 ---
 
 ## 🏗️ Infraestrutura Compartilhada
 
-- **Araponga.Infrastructure.Shared**: `SharedDbContext` e entidades compartilhadas (Users, Territories, Memberships, etc.) já existentes e em uso.
-- **Araponga.Infrastructure**: Continua com a maioria dos repositórios Postgres e `ArapongaDbContext`; `AddPostgresRepositories` registra esses repositórios quando `Persistence:Provider = Postgres`.
+- **Arah.Infrastructure.Shared**: `SharedDbContext` e entidades compartilhadas (Users, Territories, Memberships, etc.) já existentes e em uso.
+- **Arah.Infrastructure**: Continua com a maioria dos repositórios Postgres e `ArapongaDbContext`; `AddPostgresRepositories` registra esses repositórios quando `Persistence:Provider = Postgres`.
 - **Compatibilidade**: `ArapongaDbContext` permanece registrado “temporariamente” para compatibilidade (comentário no código: “será removido na Fase 6”).
 
 ---
@@ -68,7 +68,7 @@ Os projetos e classes de módulo abaixo **não existiam** mas eram referenciados
 ## ⚠️ Avisos Conhecidos (Build)
 
 - **NU1603**: `Microsoft.Extensions.Caching.Memory` 8.0.11 não encontrado; resolvido para 9.0.0. Pode ser alinhado fixando a versão ou atualizando o pacote no Application.
-- **CS0105**: `using Araponga.Application.Interfaces` duplicado em `ServiceCollectionExtensions.cs` (pode ser removido um dos usings).
+- **CS0105**: `using Arah.Application.Interfaces` duplicado em `ServiceCollectionExtensions.cs` (pode ser removido um dos usings).
 - **CS8601**: Possíveis atribuições nulas em controllers de Subscriptions/Admin; não bloqueiam build.
 
 ---
@@ -87,8 +87,8 @@ Durante a validação e recuperação, foram criados os seguintes documentos:
 
 | Camada | Estado | Observação |
 |--------|--------|------------|
-| **Infrastructure** | ✅ **Modularizada** | Cada módulo tem projeto próprio (Araponga.Modules.X.Infrastructure), DbContext e repositórios; slices removidos da infra central. |
-| **Domain** | ✅ **Rico por pastas** | Um único projeto (`Araponga.Domain`) com pastas por domínio (Feed/, Chat/, Events/, Map/, Marketplace/, Moderation/, Subscriptions/, etc.). Entidades e value objects organizados; não há projetos separados por módulo. |
+| **Infrastructure** | ✅ **Modularizada** | Cada módulo tem projeto próprio (Arah.Modules.X.Infrastructure), DbContext e repositórios; slices removidos da infra central. |
+| **Domain** | ✅ **Rico por pastas** | Um único projeto (`Arah.Domain`) com pastas por domínio (Feed/, Chat/, Events/, Map/, Marketplace/, Moderation/, Subscriptions/, etc.). Entidades e value objects organizados; não há projetos separados por módulo. |
 | **Application** | ⚠️ **Rico, não modularizado** | Um único projeto; serviços e interfaces em lista quase plana (ex.: FeedService, EventsService, ChatService no mesmo nível). Poucas subpastas (Media/, Notifications/, Users/). Comportamento por domínio existe, mas não há pastas por módulo (ex.: Application/Services/Feed/, Application/Interfaces/Feed/). |
 | **API** | ⚠️ **Por feature, não por módulo** | Controllers em uma pasta (FeedController, EventsController, etc.); não agrupados em Api/Controllers/Feed/, Api/Controllers/Events/, etc. |
 
@@ -105,7 +105,7 @@ Durante a validação e recuperação, foram criados os seguintes documentos:
    - `Api/Controllers/Feed/`, `Api/Controllers/Events/`, etc.
    - Opcional; impacto principalmente de organização.
 
-3. **Domain em projetos separados** (ex.: Araponga.Domain.Feed, Araponga.Domain.Events):
+3. **Domain em projetos separados** (ex.: Arah.Domain.Feed, Arah.Domain.Events):
    - Não é obrigatório; um Domain único com pastas evita dependências circulares e já deixa os domínios ricos e claros.
    - Só faz sentido se a solução evoluir para deploy ou versionamento independente por módulo.
 
@@ -113,7 +113,7 @@ Durante a validação e recuperação, foram criados os seguintes documentos:
    - **Financial**: 8 repositórios ainda em Infrastructure (a decidir: manter central ou módulo Finance/Marketplace).
    - **Admin**: módulo stub; sem DbContext próprio.
    - **ConnectionPoolMetricsService**: ainda usa `ArapongaDbContext`; refatorar para DbContext genérico ou interface.
-   - **Migrations**: ainda no `Araponga.Infrastructure`; `ArapongaDbContext` mantém todos os DbSets (compatibilidade e banco único). Migrations por módulo seriam uma evolução futura.
+   - **Migrations**: ainda no `Arah.Infrastructure`; `ArapongaDbContext` mantém todos os DbSets (compatibilidade e banco único). Migrations por módulo seriam uma evolução futura.
 
 ### Os domínios estão ricos e modularizados?
 
@@ -138,7 +138,7 @@ Durante a validação e recuperação, foram criados os seguintes documentos:
 ## ✅ Conclusão
 
 - **Conclusão da modularização em curso**: A **estrutura** da modularização está concluída (interfaces, registry, 11 módulos de infraestrutura, integração na API e na solution). Todos os módulos (Feed, Chat, Events, Map, Marketplace, Subscriptions, Moderation, Notifications, Alerts, Assets) possuem DbContext e repositórios próprios e são registrados exclusivamente pelos módulos; `AddPostgresRepositories` não sobrescreve mais nenhum deles (ex.: `IFeedRepository` foi removido de `AddPostgresRepositories` em 2026-02-02).
-- **Slices da infra**: Em 2026-02-02 foram **removidos** da `Araponga.Infrastructure/Postgres` os 38 arquivos de repositórios duplicados (Feed, Chat, Events, Map, Alerts, Moderation, Notifications, Subscriptions, Marketplace, Assets). A infra central ficou apenas com repositórios Shared (Territory, User, Membership, JoinRequest, PostGeoAnchor, PostAsset, FeatureFlag, Audit, Financial, Policies, Media, etc.). Build ok após remoção.
-- **Trabalho recuperado**: Build ok, todos os módulos referenciados existem e são carregados via `ModuleRegistry`. O projeto Araponga está em estado consistente para continuar o desenvolvimento.
+- **Slices da infra**: Em 2026-02-02 foram **removidos** da `Arah.Infrastructure/Postgres` os 38 arquivos de repositórios duplicados (Feed, Chat, Events, Map, Alerts, Moderation, Notifications, Subscriptions, Marketplace, Assets). A infra central ficou apenas com repositórios Shared (Territory, User, Membership, JoinRequest, PostGeoAnchor, PostAsset, FeatureFlag, Audit, Financial, Policies, Media, etc.). Build ok após remoção.
+- **Trabalho recuperado**: Build ok, todos os módulos referenciados existem e são carregados via `ModuleRegistry`. O projeto Arah está em estado consistente para continuar o desenvolvimento.
 
 **Última atualização**: 2026-02-02

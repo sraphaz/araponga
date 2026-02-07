@@ -1,6 +1,6 @@
 ## 📋 Resumo
 
-Este PR adiciona uma nova seção no DevPortal HTML documentando as capacidades técnicas da plataforma Araponga.
+Este PR adiciona uma nova seção no DevPortal HTML documentando as capacidades técnicas da plataforma Arah.
 
 ## ✨ Nova Seção: Capacidades Técnicas
 
@@ -29,7 +29,7 @@ A seção apresenta três categorias principais:
 
 ## 📁 Arquivos Modificados
 
-- `backend/Araponga.Api/wwwroot/devportal/index.html` (adicionada seção e link no menu)
+- `backend/Arah.Api/wwwroot/devportal/index.html` (adicionada seção e link no menu)
 
 ## 📍 Localização
 

@@ -1,6 +1,6 @@
-# 📘 Cartilha Completa - Araponga
+# 📘 Cartilha Completa - Arah
 
-**Guia Detalhado para Todos os Papéis na Construção do Araponga**
+**Guia Detalhado para Todos os Papéis na Construção do Arah**
 
 **Versão**: 1.0  
 **Data**: 2025-01-20
@@ -24,7 +24,7 @@
 
 ## Introdução
 
-Esta cartilha é um **guia completo** para todas as pessoas que querem contribuir com o Araponga, independente do papel ou nível de experiência.
+Esta cartilha é um **guia completo** para todas as pessoas que querem contribuir com o Arah, independente do papel ou nível de experiência.
 
 **Objetivo**: Facilitar organização orgânica de um time livre em torno de um objetivo comum e territorial, construindo com consciência elevada.
 
@@ -38,7 +38,7 @@ Esta cartilha é um **guia completo** para todas as pessoas que querem contribui
 
 ### Organização Orgânica
 
-O time do Araponga é **orgânico e livre**:
+O time do Arah é **orgânico e livre**:
 - ✅ Sem hierarquias rígidas
 - ✅ Organização natural em torno de objetivos
 - ✅ Contribuições conforme capacidade
@@ -462,7 +462,7 @@ Se necessário, podem ser criados:
 ### Estrutura do Repositório
 
 ```
-araponga/
+Arah/
 ├── backend/          # Código do backend (.NET)
 ├── frontend/         # Código do frontend (se houver)
 ├── docs/             # Documentação
@@ -708,7 +708,7 @@ Esta cartilha é um **guia vivo** - ela evolui conforme o projeto e o time evolu
 - **Aprender** - fazendo e colaborando
 - **Respeitar** - valores e outras pessoas
 
-**Bem-vindo ao Araponga. Vamos construir juntos.**
+**Bem-vindo ao Arah. Vamos construir juntos.**
 
 ---
 

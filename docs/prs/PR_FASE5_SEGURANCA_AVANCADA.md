@@ -9,7 +9,7 @@
 
 ## 📋 Resumo
 
-Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA completo (TOTP), sanitização avançada de inputs, proteção CSRF, secrets management, security headers melhorados, auditoria avançada e documentação de penetration testing.
+Este PR implementa segurança avançada no sistema Arah, incluindo 2FA completo (TOTP), sanitização avançada de inputs, proteção CSRF, secrets management, security headers melhorados, auditoria avançada e documentação de penetration testing.
 
 ---
 
@@ -35,7 +35,7 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
 - ✅ Backup codes já implementados
 
 **Arquivos Modificados**:
-- `backend/Araponga.Application/Services/AuthService.cs` - Validação no Disable2FAAsync
+- `backend/Arah.Application/Services/AuthService.cs` - Validação no Disable2FAAsync
 
 ---
 
@@ -50,10 +50,10 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
   - Sanitização de texto genérico (remove caracteres de controle)
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/InputSanitizationService.cs`
+- `backend/Arah.Application/Services/InputSanitizationService.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
 
 ---
 
@@ -68,7 +68,7 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
   - SameSite = Strict
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Program.cs` - Configuração de anti-forgery
+- `backend/Arah.Api/Program.cs` - Configuração de anti-forgery
 
 ---
 
@@ -80,11 +80,11 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
 - ✅ Suporte para Key Vault/Secrets Manager (interface pronta para extensão)
 
 **Arquivos Criados**:
-- `backend/Araponga.Infrastructure/Security/ISecretsService.cs`
-- `backend/Araponga.Infrastructure/Security/EnvironmentSecretsService.cs`
+- `backend/Arah.Infrastructure/Security/ISecretsService.cs`
+- `backend/Arah.Infrastructure/Security/EnvironmentSecretsService.cs`
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` - Registro do serviço
 
 ---
 
@@ -102,7 +102,7 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
   - Apenas em requisições HTTPS
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs` - CSP melhorado e HSTS adicionado
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs` - CSP melhorado e HSTS adicionado
 
 ---
 
@@ -115,8 +115,8 @@ Este PR implementa segurança avançada no sistema Araponga, incluindo 2FA compl
 - ✅ Filtros por territoryId, actorUserId, action
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/AuditService.cs`
-- `backend/Araponga.Application/Interfaces/IAuditRepository.cs`
+- `backend/Arah.Application/Services/AuditService.cs`
+- `backend/Arah.Application/Interfaces/IAuditRepository.cs`
 
 **Nota**: Implementação de `IAuditRepository` em Postgres/InMemory e endpoint de consulta podem ser adicionados conforme necessário.
 
@@ -178,7 +178,7 @@ Usa variáveis de ambiente ou `appsettings.json`:
 - ✅ `docs/SECURITY_AUDIT.md` - Checklist e guia de penetration testing
 - ✅ `docs/backlog-api/FASE5.md` - Plano atualizado com 100% de conclusão
 - ✅ `docs/40_CHANGELOG.md` - Changelog atualizado
-- ✅ `backend/Araponga.Api/wwwroot/devportal/index.html` - DevPortal atualizado com seção de Segurança Avançada
+- ✅ `backend/Arah.Api/wwwroot/devportal/index.html` - DevPortal atualizado com seção de Segurança Avançada
 
 ---
 

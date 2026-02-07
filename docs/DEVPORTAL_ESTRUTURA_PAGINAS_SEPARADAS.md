@@ -21,7 +21,7 @@ Criar uma estrutura de páginas separadas que permita ao usuário explorar o con
 │  HEADER (fixo)                                          │
 │  - Logo/título                                          │
 │  - Idioma, tema                                         │
-│  - Link para araponga.app                               │
+│  - Link para Arah.app                               │
 └─────────────────────────────────────────────────────────┘
 ┌──────────┬──────────────────────────────────────────────┐
 │          │                                              │
@@ -53,7 +53,7 @@ Criar uma estrutura de páginas separadas que permita ao usuário explorar o con
 
 3. **`/fundamentos.html`** - Fundamentos
    - Visão Geral
-   - Como o Araponga funciona
+   - Como o Arah funciona
    - Territórios
    - Conceitos de Produto
    - Modelo de Domínio

@@ -60,10 +60,10 @@
 - Estatísticas de Contribuição (`UserProfileStatsService`)
 
 **Arquivos**:
-- ✅ `backend/Araponga.Domain/Users/User.cs` (campos existem)
-- ✅ `backend/Araponga.Application/Services/UserProfileService.cs`
-- ✅ `backend/Araponga.Application/Services/UserProfileStatsService.cs`
-- ✅ `backend/Araponga.Api/Controllers/UserPublicProfileController.cs`
+- ✅ `backend/Arah.Domain/Users/User.cs` (campos existem)
+- ✅ `backend/Arah.Application/Services/UserProfileService.cs`
+- ✅ `backend/Arah.Application/Services/UserProfileStatsService.cs`
+- ✅ `backend/Arah.Api/Controllers/UserPublicProfileController.cs`
 
 ---
 
@@ -87,11 +87,11 @@
 - **Lista de Participantes**: `GetEventParticipantsAsync` implementado
 
 **Arquivos**:
-- ✅ `backend/Araponga.Application/Services/PostEditService.cs`
-- ✅ `backend/Araponga.Application/Services/EventsService.cs`
-- ✅ `backend/Araponga.Application/Services/RatingService.cs`
-- ✅ `backend/Araponga.Application/Services/MarketplaceSearchService.cs`
-- ✅ `backend/Araponga.Application/Services/UserActivityService.cs`
+- ✅ `backend/Arah.Application/Services/PostEditService.cs`
+- ✅ `backend/Arah.Application/Services/EventsService.cs`
+- ✅ `backend/Arah.Application/Services/RatingService.cs`
+- ✅ `backend/Arah.Application/Services/MarketplaceSearchService.cs`
+- ✅ `backend/Arah.Application/Services/UserActivityService.cs`
 
 **Nota**: A documentação da FASE11.md marca como "não implementado", mas o código mostra que está implementado. **Documentação precisa ser atualizada**.
 
@@ -108,11 +108,11 @@
 - Casos de Uso Específicos (boas-vindas, reset, eventos, pedidos, alertas)
 
 **Arquivos**:
-- ✅ `backend/Araponga.Infrastructure/Email/SmtpEmailSender.cs`
-- ✅ `backend/Araponga.Application/Services/EmailQueueService.cs`
-- ✅ `backend/Araponga.Infrastructure/Email/EmailQueueWorker.cs`
-- ✅ `backend/Araponga.Application/Services/EmailTemplateService.cs`
-- ✅ `backend/Araponga.Api/Templates/Email/*.html` (6 templates)
+- ✅ `backend/Arah.Infrastructure/Email/SmtpEmailSender.cs`
+- ✅ `backend/Arah.Application/Services/EmailQueueService.cs`
+- ✅ `backend/Arah.Infrastructure/Email/EmailQueueWorker.cs`
+- ✅ `backend/Arah.Application/Services/EmailTemplateService.cs`
+- ✅ `backend/Arah.Api/Templates/Email/*.html` (6 templates)
 
 ---
 

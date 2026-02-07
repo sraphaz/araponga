@@ -175,8 +175,8 @@ Este documento avalia outras funcionalidades do sistema que possuem configuraç�
 - Configuração em `appsettings.json`:
   ```json
   "Jwt": {
-    "Issuer": "Araponga",
-    "Audience": "Araponga",
+    "Issuer": "Arah",
+    "Audience": "Arah",
     "ExpirationMinutes": 60
   }
   ```
@@ -402,7 +402,7 @@ Este documento avalia outras funcionalidades do sistema que possuem configuraç�
 
 Seguir o mesmo padrão implementado para `MediaStorageConfig`:
 
-1. **Modelo de Domínio**: Criar entidade no `Araponga.Domain`
+1. **Modelo de Domínio**: Criar entidade no `Arah.Domain`
 2. **Repositório**: Interface `IRepository` e implementação InMemory/Postgres
 3. **Serviço**: `Service` para lógica de negócio
 4. **API Controller**: Endpoint administrativo com permissão `SystemAdmin` ou `Curator` (conforme caso)
@@ -452,4 +452,4 @@ Seguir o mesmo padrão implementado para `MediaStorageConfig`:
 
 **Documento criado em**: 2026-01-17  
 **Última atualização**: 2026-01-17  
-**Autor**: Sistema de Documentação Araponga
+**Autor**: Sistema de Documentação Arah

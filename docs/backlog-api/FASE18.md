@@ -29,7 +29,7 @@ Implementar sistema de **hospedagem territorial** que permite:
 - ✅ **Economia Local**: Fortalece circulação de recursos no território
 - ✅ **Soberania Territorial**: Moradores validados, regulação territorial
 
-**Diferenciais do Araponga**:
+**Diferenciais do Arah**:
 - Território-first (não global como Airbnb)
 - Morador validado como pré-requisito
 - Aprovação humana sempre presente
@@ -658,7 +658,7 @@ Implementar sistema de **hospedagem territorial** que permite:
 
 ### Risco 2: Confusão com Marketplace
 **Mitigação**:
-- Domínio completamente separado (`Araponga.Domain/Hosting/`)
+- Domínio completamente separado (`Arah.Domain/Hosting/`)
 - Nomenclatura distinta (Property ≠ Store, StayRequest ≠ Checkout)
 - Documentação clara das diferenças
 

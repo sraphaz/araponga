@@ -12,7 +12,7 @@
 **Status**: ✅ **Implementado**
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Application/Services/ConnectionPoolMetricsService.cs`
+- ✅ `backend/Arah.Application/Services/ConnectionPoolMetricsService.cs`
 - ✅ Métricas ObservableGauge adicionadas em `ArapongaMetrics.cs`
 
 **Funcionalidades**:
@@ -30,15 +30,15 @@
 **Status**: ✅ **Implementado**
 
 **Arquivos Criados/Modificados**:
-- ✅ `backend/Araponga.Domain/Feed/CommunityPost.cs` (campo `Tags` adicionado)
-- ✅ `backend/Araponga.Infrastructure/Postgres/Entities/CommunityPostRecord.cs` (campo `TagsJson` adicionado)
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresMappers.cs` (mapeamento JSON)
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123150000_AddPostTags.cs`
-- ✅ `backend/Araponga.Application/Services/InterestFilterService.cs` (filtro por tags explícitas)
-- ✅ `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Contracts/Feed/EditPostRequest.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs` (campo `Tags`)
-- ✅ `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs` (validação de tags)
+- ✅ `backend/Arah.Domain/Feed/CommunityPost.cs` (campo `Tags` adicionado)
+- ✅ `backend/Arah.Infrastructure/Postgres/Entities/CommunityPostRecord.cs` (campo `TagsJson` adicionado)
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresMappers.cs` (mapeamento JSON)
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123150000_AddPostTags.cs`
+- ✅ `backend/Arah.Application/Services/InterestFilterService.cs` (filtro por tags explícitas)
+- ✅ `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Contracts/Feed/EditPostRequest.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs` (campo `Tags`)
+- ✅ `backend/Arah.Api/Validators/CreatePostRequestValidator.cs` (validação de tags)
 
 **Funcionalidades**:
 - ✅ Campo `Tags` em `CommunityPost` (máximo 10 tags, normalizadas: lowercase, trim)
@@ -56,20 +56,20 @@
 **Status**: ✅ **Implementado**
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Domain/Notifications/NotificationConfig.cs`
-- ✅ `backend/Araponga.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Application/Services/Notifications/NotificationConfigService.cs`
-- ✅ `backend/Araponga.Api/Controllers/NotificationConfigController.cs`
-- ✅ `backend/Araponga.Api/Contracts/Notifications/NotificationConfigResponse.cs`
-- ✅ `backend/Araponga.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
-- ✅ `backend/Araponga.Infrastructure/Postgres/Migrations/20250123160000_AddNotificationConfig.cs`
+- ✅ `backend/Arah.Domain/Notifications/NotificationConfig.cs`
+- ✅ `backend/Arah.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
+- ✅ `backend/Arah.Application/Services/Notifications/NotificationConfigService.cs`
+- ✅ `backend/Arah.Api/Controllers/NotificationConfigController.cs`
+- ✅ `backend/Arah.Api/Contracts/Notifications/NotificationConfigResponse.cs`
+- ✅ `backend/Arah.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
+- ✅ `backend/Arah.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
+- ✅ `backend/Arah.Infrastructure/Postgres/Migrations/20250123160000_AddNotificationConfig.cs`
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração com NotificationConfigService)
-- ✅ `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs` (entidade NotificationConfigRecord)
-- ✅ `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs` (lista NotificationConfigs)
-- ✅ `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
+- ✅ `backend/Arah.Infrastructure/Outbox/OutboxDispatcherWorker.cs` (integração com NotificationConfigService)
+- ✅ `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs` (entidade NotificationConfigRecord)
+- ✅ `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs` (lista NotificationConfigs)
+- ✅ `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs` (registro de serviços)
 
 **Funcionalidades**:
 - ✅ Configuração por território ou global (TerritoryId nullable)

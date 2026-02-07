@@ -1,6 +1,6 @@
 # Pull Requests - Documentação
 
-Esta pasta contém a documentação detalhada de todos os Pull Requests implementados no projeto Araponga.
+Esta pasta contém a documentação detalhada de todos os Pull Requests implementados no projeto Arah.
 
 ## 📋 Índice
 

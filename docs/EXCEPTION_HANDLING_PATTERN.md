@@ -1,4 +1,4 @@
-# Padrão de Exception Handling - Araponga
+# Padrão de Exception Handling - Arah
 
 **Última Atualização**: 2025-01-23  
 **Status**: ✅ Padrão Definido
@@ -7,7 +7,7 @@
 
 ## 📋 Resumo
 
-Este documento descreve o padrão de tratamento de exceções usado no Araponga, garantindo consistência e melhor experiência para desenvolvedores e usuários.
+Este documento descreve o padrão de tratamento de exceções usado no Arah, garantindo consistência e melhor experiência para desenvolvedores e usuários.
 
 ---
 
@@ -147,7 +147,7 @@ public async Task<Result<Post>> CreatePostAsync(...)
 
 ## 🛡️ Exception Middleware
 
-O Araponga usa exception middleware global para:
+O Arah usa exception middleware global para:
 - Capturar exceções não tratadas
 - Logar com contexto completo
 - Retornar respostas padronizadas

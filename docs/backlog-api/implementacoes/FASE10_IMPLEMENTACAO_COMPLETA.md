@@ -16,12 +16,12 @@ Implementação completa da integração de mídias (imagens e vídeos) em todos
 ### 1. Posts (Feed)
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`: Adicionado `MediaIds`
-- `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs`: Adicionado `MediaUrls` e `MediaCount`
-- `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs`: Validação de `MediaIds` (máximo 10)
-- `backend/Araponga.Application/Services/PostCreationService.cs`: Processamento de `MediaIds` e criação de `MediaAttachment`
-- `backend/Araponga.Application/Services/FeedService.cs`: Passagem de `MediaIds` para `PostCreationService`
-- `backend/Araponga.Api/Controllers/FeedController.cs`: 
+- `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`: Adicionado `MediaIds`
+- `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs`: Adicionado `MediaUrls` e `MediaCount`
+- `backend/Arah.Api/Validators/CreatePostRequestValidator.cs`: Validação de `MediaIds` (máximo 10)
+- `backend/Arah.Application/Services/PostCreationService.cs`: Processamento de `MediaIds` e criação de `MediaAttachment`
+- `backend/Arah.Application/Services/FeedService.cs`: Passagem de `MediaIds` para `PostCreationService`
+- `backend/Arah.Api/Controllers/FeedController.cs`: 
   - Injeção de `MediaService`
   - Método helper `LoadMediaUrlsForPostsAsync` para buscar URLs em batch
   - Inclusão de `MediaUrls` e `MediaCount` em todas as respostas de feed
@@ -35,12 +35,12 @@ Implementação completa da integração de mídias (imagens e vídeos) em todos
 ### 2. Eventos
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Contracts/Events/CreateEventRequest.cs`: Adicionado `CoverMediaId` e `AdditionalMediaIds`
-- `backend/Araponga.Api/Contracts/Events/EventResponse.cs`: Adicionado `CoverImageUrl` e `AdditionalImageUrls`
-- `backend/Araponga.Application/Services/EventsService.cs`: 
+- `backend/Arah.Api/Contracts/Events/CreateEventRequest.cs`: Adicionado `CoverMediaId` e `AdditionalMediaIds`
+- `backend/Arah.Api/Contracts/Events/EventResponse.cs`: Adicionado `CoverImageUrl` e `AdditionalImageUrls`
+- `backend/Arah.Application/Services/EventsService.cs`: 
   - Processamento de `CoverMediaId` e `AdditionalMediaIds`
   - Criação de `MediaAttachment` para imagem de capa (DisplayOrder = 0) e imagens adicionais (DisplayOrder = 1+)
-- `backend/Araponga.Api/Controllers/EventsController.cs`:
+- `backend/Arah.Api/Controllers/EventsController.cs`:
   - Injeção de `MediaService`
   - Método helper `LoadMediaUrlsForEventAsync` para buscar URLs
   - Inclusão de URLs de mídia em todas as respostas de eventos
@@ -54,14 +54,14 @@ Implementação completa da integração de mídias (imagens e vídeos) em todos
 ### 3. Marketplace (Items)
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Contracts/Marketplace/ItemContracts.cs`: 
+- `backend/Arah.Api/Contracts/Marketplace/ItemContracts.cs`: 
   - `CreateItemRequest`: Adicionado `MediaIds`
   - `ItemResponse`: Adicionado `PrimaryImageUrl` e `ImageUrls`
-- `backend/Araponga.Api/Validators/CreateItemRequestValidator.cs`: Validação de `MediaIds` (máximo 10)
-- `backend/Araponga.Application/Services/StoreItemService.cs`: 
+- `backend/Arah.Api/Validators/CreateItemRequestValidator.cs`: Validação de `MediaIds` (máximo 10)
+- `backend/Arah.Application/Services/StoreItemService.cs`: 
   - Injeção de `IMediaAssetRepository` e `IMediaAttachmentRepository`
   - Processamento de `MediaIds` e criação de `MediaAttachment`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`:
+- `backend/Arah.Api/Controllers/ItemsController.cs`:
   - Injeção de `MediaService`
   - Método helper `LoadMediaUrlsForItemAsync` para buscar URLs
   - Inclusão de URLs de mídia em todas as respostas de items
@@ -75,13 +75,13 @@ Implementação completa da integração de mídias (imagens e vídeos) em todos
 ### 4. Chat
 
 #### Arquivos Modificados
-- `backend/Araponga.Api/Contracts/Chat/SendMessageRequest.cs`: Adicionado `MediaId` (opcional)
-- `backend/Araponga.Api/Contracts/Chat/MessageResponse.cs`: Adicionado `MediaUrl` e `HasMedia`
-- `backend/Araponga.Application/Services/ChatService.cs`: 
+- `backend/Arah.Api/Contracts/Chat/SendMessageRequest.cs`: Adicionado `MediaId` (opcional)
+- `backend/Arah.Api/Contracts/Chat/MessageResponse.cs`: Adicionado `MediaUrl` e `HasMedia`
+- `backend/Arah.Application/Services/ChatService.cs`: 
   - Injeção de `IMediaAssetRepository` e `IMediaAttachmentRepository`
   - Validação de mídia (apenas imagens, máximo 5MB)
   - Processamento de `MediaId` e criação de `MediaAttachment`
-- `backend/Araponga.Api/Controllers/ChatController.cs`:
+- `backend/Arah.Api/Controllers/ChatController.cs`:
   - Injeção de `MediaService`
   - Método helper `LoadMediaUrlForMessageAsync` para buscar URL
   - Inclusão de URL de mídia em todas as respostas de mensagens

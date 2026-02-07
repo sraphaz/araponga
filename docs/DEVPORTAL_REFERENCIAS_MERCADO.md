@@ -8,7 +8,7 @@
 
 ## 🎯 Objetivo
 
-Este documento documenta as referências de documentação de APIs de mercado utilizadas para orientar o design e estrutura do Developer Portal da Araponga, garantindo alinhamento com padrões estabelecidos e melhores práticas da indústria.
+Este documento documenta as referências de documentação de APIs de mercado utilizadas para orientar o design e estrutura do Developer Portal da Arah, garantindo alinhamento com padrões estabelecidos e melhores práticas da indústria.
 
 ---
 
@@ -44,7 +44,7 @@ Este documento documenta as referências de documentação de APIs de mercado ut
 **Aplicação no DevPortal**:
 - Layout com sidebar fixo + conteúdo principal
 - Navegação por categorias (Começando, Fundamentos, API Prática, etc.)
-- Ícones SVG para links externos (GitHub, Discord, Araponga)
+- Ícones SVG para links externos (GitHub, Discord, Arah)
 
 ---
 
@@ -175,7 +175,7 @@ function switchPhase(phase) {
   <section class="section" id="introducao">
     <h2>Bem-vindo ao Developer Portal</h2>
     <p class="lead-text">
-      Este é o portal técnico da plataforma Araponga. 
+      Este é o portal técnico da plataforma Arah. 
       Explore a documentação através do menu lateral.
     </p>
   </section>

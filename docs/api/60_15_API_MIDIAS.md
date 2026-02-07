@@ -1,6 +1,6 @@
-# Mídias em Conteúdo (Imagens, Vídeos e Áudios) - API Araponga
+# Mídias em Conteúdo (Imagens, Vídeos e Áudios) - API Arah
 
-**Parte de**: [API Araponga - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
+**Parte de**: [API Arah - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
 **Versão**: 2.0  
 **Data**: 2025-01-20
 
@@ -10,7 +10,7 @@
 
 ### Visão Geral
 
-A plataforma Araponga suporta **mídias ricas** (imagens, vídeos e áudios) em diferentes tipos de conteúdo, permitindo documentação territorial e fortalecimento comunitário através de conteúdo visual e multimídia.
+A plataforma Arah suporta **mídias ricas** (imagens, vídeos e áudios) em diferentes tipos de conteúdo, permitindo documentação territorial e fortalecimento comunitário através de conteúdo visual e multimídia.
 
 ### Upload de Mídia (`POST /api/v1/media/upload`)
 

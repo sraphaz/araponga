@@ -25,7 +25,7 @@
 
 ### Situação Atual
 
-O Araponga encontra-se em uma fase de maturação técnica sólida, com arquitetura robusta, segurança avançada e funcionalidades core implementadas. No entanto, análise comparativa com plataformas líderes de mercado (ex: Closer.earth) revela gaps significativos em funcionalidades que são consideradas essenciais para projetos que recebem investimentos substanciais.
+O Arah encontra-se em uma fase de maturação técnica sólida, com arquitetura robusta, segurança avançada e funcionalidades core implementadas. No entanto, análise comparativa com plataformas líderes de mercado (ex: Closer.earth) revela gaps significativos em funcionalidades que são consideradas essenciais para projetos que recebem investimentos substanciais.
 
 ### Mercado de Referência
 
@@ -44,7 +44,7 @@ O Araponga encontra-se em uma fase de maturação técnica sólida, com arquitet
 
 ### Oportunidade
 
-A diferenciação do Araponga (território-first, comunidade-first) permanece válida e única. A convergência estratégica não significa abandonar valores, mas sim incorporar tecnologias e modelos que são considerados essenciais pelo mercado de investimento, mantendo a essência territorial e comunitária.
+A diferenciação do Arah (território-first, comunidade-first) permanece válida e única. A convergência estratégica não significa abandonar valores, mas sim incorporar tecnologias e modelos que são considerados essenciais pelo mercado de investimento, mantendo a essência territorial e comunitária.
 
 ---
 
@@ -52,7 +52,7 @@ A diferenciação do Araponga (território-first, comunidade-first) permanece v�
 
 ### Comparativo com Closer.earth
 
-| Dimensão | Closer.earth | Araponga | Gap | Estratégia |
+| Dimensão | Closer.earth | Arah | Gap | Estratégia |
 |----------|--------------|----------|-----|------------|
 | **Arquitetura Técnica** | Modular Web2/Web3 | Clean Architecture Web2 | Web3 | Integração gradual |
 | **Governança** | DAO nativa | Votação planejada | DAO | Implementar DAO completa |
@@ -63,7 +63,7 @@ A diferenciação do Araponga (território-first, comunidade-first) permanece v�
 | **Extensibilidade** | Plataforma modular | Clean Architecture | Modularidade | Avaliar microserviços |
 | **IA** | Closer Agent | Nenhum | Completo | Planejar para médio prazo |
 
-### Vantagens Competitivas do Araponga
+### Vantagens Competitivas do Arah
 
 1. ✅ **Arquitetura Sólida**: Clean Architecture bem implementada, alta cobertura de testes
 2. ✅ **Segurança Robusta**: JWT, 2FA, rate limiting, validações abrangentes
@@ -84,7 +84,7 @@ A diferenciação do Araponga (território-first, comunidade-first) permanece v�
 
 ### Visão Estratégica
 
-**Araponga como plataforma líder em organização comunitária territorial com governança descentralizada e economia circular tokenizada.**
+**Arah como plataforma líder em organização comunitária territorial com governança descentralizada e economia circular tokenizada.**
 
 ### Princípios de Convergência
 
@@ -242,7 +242,7 @@ DAO completa e competitiva, alinhada com padrões de mercado.
 ### Fase 5: Diferenciação (Mês 12-18)
 
 #### Objetivo
-Implementar funcionalidades que diferenciam o Araponga no mercado.
+Implementar funcionalidades que diferenciam o Arah no mercado.
 
 #### Entregas
 
@@ -463,7 +463,7 @@ Plataforma completa e diferenciada, com funcionalidades avançadas.
 
 ### Resumo Executivo
 
-A convergência estratégica com padrões de mercado requer implementação gradual de funcionalidades Web3 e governança descentralizada, mantendo os valores core do Araponga (território-first, comunidade-first).
+A convergência estratégica com padrões de mercado requer implementação gradual de funcionalidades Web3 e governança descentralizada, mantendo os valores core do Arah (território-first, comunidade-first).
 
 ### Recomendações Imediatas
 

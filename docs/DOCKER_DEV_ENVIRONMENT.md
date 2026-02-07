@@ -1,6 +1,6 @@
 # Ambiente Docker de Desenvolvimento/Pré-Produção
 
-Este documento descreve como usar o ambiente Docker completo do Araponga para desenvolvimento e pré-produção.
+Este documento descreve como usar o ambiente Docker completo do Arah para desenvolvimento e pré-produção.
 
 ## 📋 Visão Geral
 
@@ -9,7 +9,7 @@ O ambiente Docker inclui:
 - **PostgreSQL 16 com PostGIS** - Banco de dados principal com suporte geoespacial
 - **Redis 7** - Cache distribuído para melhor performance
 - **MinIO** - Storage S3-compatible para desenvolvimento/pré-produção
-- **API Araponga** - Aplicação .NET 8 com todas as dependências configuradas
+- **API Arah** - Aplicação .NET 8 com todas as dependências configuradas
 
 ## 🚀 Início Rápido
 
@@ -77,8 +77,8 @@ Após iniciar o ambiente, os seguintes endpoints estarão disponíveis:
 | **Health Check** | http://localhost:8080/health | - |
 | **MinIO API** | http://localhost:9000 | minioadmin / minioadmin |
 | **MinIO Console** | http://localhost:9001 | minioadmin / minioadmin |
-| **PostgreSQL** | localhost:5432 | araponga / araponga |
-| **Redis** | localhost:6379 | senha: araponga |
+| **PostgreSQL** | localhost:5432 | Arah / Arah |
+| **Redis** | localhost:6379 | senha: Arah |
 
 ## 🛠️ Comandos Úteis
 
@@ -149,17 +149,17 @@ O arquivo `.env` contém todas as configurações. Principais variáveis:
 JWT_SIGNINGKEY=seu-secret-aqui-minimo-32-caracteres
 
 # Database
-POSTGRES_USER=araponga
-POSTGRES_PASSWORD=araponga
-POSTGRES_DB=araponga
+POSTGRES_USER=Arah
+POSTGRES_PASSWORD=Arah
+POSTGRES_DB=Arah
 
 # Redis
-REDIS_PASSWORD=araponga
+REDIS_PASSWORD=Arah
 
 # MinIO
 MINIO_ROOT_USER=minioadmin
 MINIO_ROOT_PASSWORD=minioadmin
-MINIO_BUCKET_NAME=araponga-media
+MINIO_BUCKET_NAME=Arah-media
 
 # CORS (desenvolvimento pode usar *)
 CORS_ALLOWED_ORIGIN_0=*
@@ -167,7 +167,7 @@ CORS_ALLOWED_ORIGIN_0=*
 
 ### Configuração de Storage
 
-Por padrão, o ambiente usa **MinIO** (S3-compatible) para armazenamento de mídias. O bucket `araponga-media` é criado automaticamente.
+Por padrão, o ambiente usa **MinIO** (S3-compatible) para armazenamento de mídias. O bucket `Arah-media` é criado automaticamente.
 
 Para usar storage local, altere no `.env`:
 
@@ -235,9 +235,9 @@ Para aplicar manualmente:
 Ou manualmente:
 
 ```bash
-docker exec -it araponga-api dotnet ef database update \
-  --project /src/backend/Araponga.Infrastructure \
-  --startup-project /src/backend/Araponga.Api
+docker exec -it Arah-api dotnet ef database update \
+  --project /src/backend/Arah.Infrastructure \
+  --startup-project /src/backend/Arah.Api
 ```
 
 ## 🔐 Segurança
@@ -245,7 +245,7 @@ docker exec -it araponga-api dotnet ef database update \
 ### Desenvolvimento
 
 - CORS permite wildcard (`*`)
-- Senhas padrão (araponga/araponga)
+- Senhas padrão (Arah/Arah)
 - JWT secret deve ser configurado mas pode ser simples
 
 ### Pré-Produção
@@ -259,8 +259,8 @@ docker exec -it araponga-api dotnet ef database update \
 
 2. **CORS específico** (não use wildcard)
    ```env
-   CORS_ALLOWED_ORIGIN_0=https://app.araponga.com
-   CORS_ALLOWED_ORIGIN_1=https://www.araponga.com
+   CORS_ALLOWED_ORIGIN_0=https://app.Arah.com
+   CORS_ALLOWED_ORIGIN_1=https://www.Arah.com
    ```
 
 3. **Senhas fortes** para PostgreSQL, Redis e MinIO

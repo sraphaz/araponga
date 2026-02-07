@@ -29,9 +29,9 @@
 - [x] Estrutura de salas definida (`DISCORD_SETUP.md` criado)
 - [ ] **TODO**: Criar servidor Discord real
   - [ ] Criar servidor no Discord
-  - [ ] Nome: "Araponga - Time de Desenvolvimento"
+  - [ ] Nome: "Arah - Time de Desenvolvimento"
   - [ ] Descrição: "Plataforma digital comunitária orientada ao território"
-  - [ ] Ícone: Logo do Araponga (se disponível)
+  - [ ] Ícone: Logo do Arah (se disponível)
 
 - [ ] **TODO**: Configurar categorias e salas
   - [ ] Categoria: "🟢 Entrada e Boas-Vindas"
@@ -198,7 +198,7 @@
 ### 2.2 Vídeos Curtos (Opcional)
 
 - [ ] **TODO**: Planejar vídeos
-  - [ ] Roteiro: "Setup do Cursor no Araponga" (2-3 min)
+  - [ ] Roteiro: "Setup do Cursor no Arah" (2-3 min)
   - [ ] Roteiro: "Primeira Contribuição" (1-2 min)
   - [ ] Roteiro: "Observação Territorial e Proposta Funcional" (2 min)
 

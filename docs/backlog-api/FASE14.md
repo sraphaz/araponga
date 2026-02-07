@@ -97,11 +97,11 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Criar migration
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Users/UserInterest.cs`
-- `backend/Araponga.Application/Interfaces/IUserInterestRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresUserInterestRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryUserInterestRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserInterests.cs`
+- `backend/Arah.Domain/Users/UserInterest.cs`
+- `backend/Arah.Application/Interfaces/IUserInterestRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresUserInterestRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryUserInterestRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddUserInterests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelo criado
@@ -127,8 +127,8 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/UserInterestService.cs`
-- `backend/Araponga.Tests/Application/UserInterestServiceTests.cs`
+- `backend/Arah.Application/Services/UserInterestService.cs`
+- `backend/Arah.Tests/Application/UserInterestServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço implementado
@@ -154,14 +154,14 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes de integração (em `GovernanceIntegrationTests`)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/UserInterestsController.cs`
-- `backend/Araponga.Api/Contracts/Users/AddInterestRequest.cs`
-- `backend/Araponga.Api/Validators/AddInterestRequestValidator.cs`
-- `backend/Araponga.Tests/Api/GovernanceIntegrationTests.cs` (cobre interesses)
+- `backend/Arah.Api/Controllers/UserInterestsController.cs`
+- `backend/Arah.Api/Contracts/Users/AddInterestRequest.cs`
+- `backend/Arah.Api/Validators/AddInterestRequestValidator.cs`
+- `backend/Arah.Tests/Api/GovernanceIntegrationTests.cs` (cobre interesses)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -204,16 +204,16 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Governance/Voting.cs`
-- `backend/Araponga.Domain/Governance/Vote.cs`
-- `backend/Araponga.Domain/Governance/VotingType.cs`
-- `backend/Araponga.Domain/Governance/VotingStatus.cs`
-- `backend/Araponga.Domain/Governance/VotingVisibility.cs`
-- `backend/Araponga.Application/Interfaces/IVotingRepository.cs`
-- `backend/Araponga.Application/Interfaces/IVoteRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresVotingRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresVoteRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddVotingSystem.cs`
+- `backend/Arah.Domain/Governance/Voting.cs`
+- `backend/Arah.Domain/Governance/Vote.cs`
+- `backend/Arah.Domain/Governance/VotingType.cs`
+- `backend/Arah.Domain/Governance/VotingStatus.cs`
+- `backend/Arah.Domain/Governance/VotingVisibility.cs`
+- `backend/Arah.Application/Interfaces/IVotingRepository.cs`
+- `backend/Arah.Application/Interfaces/IVoteRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresVotingRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresVoteRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddVotingSystem.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -249,8 +249,8 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/VotingService.cs`
-- `backend/Araponga.Tests/Application/VotingServiceTests.cs`
+- `backend/Arah.Application/Services/VotingService.cs`
+- `backend/Arah.Tests/Application/VotingServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço implementado
@@ -277,13 +277,13 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes de integração (em `GovernanceIntegrationTests`)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/VotingsController.cs`
-- `backend/Araponga.Api/Contracts/Governance/CreateVotingRequest.cs`
-- `backend/Araponga.Api/Contracts/Governance/VotingResponse.cs`
-- `backend/Araponga.Api/Contracts/Governance/VoteRequest.cs`
-- `backend/Araponga.Api/Contracts/Governance/VotingResultsResponse.cs`
-- `backend/Araponga.Api/Validators/CreateVotingRequestValidator.cs`
-- `backend/Araponga.Tests/Api/GovernanceIntegrationTests.cs` (cobre votação)
+- `backend/Arah.Api/Controllers/VotingsController.cs`
+- `backend/Arah.Api/Contracts/Governance/CreateVotingRequest.cs`
+- `backend/Arah.Api/Contracts/Governance/VotingResponse.cs`
+- `backend/Arah.Api/Contracts/Governance/VoteRequest.cs`
+- `backend/Arah.Api/Contracts/Governance/VotingResultsResponse.cs`
+- `backend/Arah.Api/Validators/CreateVotingRequestValidator.cs`
+- `backend/Arah.Tests/Api/GovernanceIntegrationTests.cs` (cobre votação)
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -321,16 +321,16 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Governance/TerritoryModerationRule.cs`
-- `backend/Araponga.Domain/Governance/RuleType.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryModerationRuleRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryModerationRuleRepository.cs`
-- `backend/Araponga.Application/Services/TerritoryModerationService.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddModerationRules.cs`
+- `backend/Arah.Domain/Governance/TerritoryModerationRule.cs`
+- `backend/Arah.Domain/Governance/RuleType.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryModerationRuleRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryModerationRuleRepository.cs`
+- `backend/Arah.Application/Services/TerritoryModerationService.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddModerationRules.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/StoreItemService.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Regras de moderação funcionando
@@ -359,13 +359,13 @@ Implementar sistema de **governança comunitária** que permite:
 - [ ] Teste de integração dedicado para `filterByInterests=true` → **Fase 14.5**
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/InterestFilterService.cs`
-- `backend/Araponga.Tests/Application/InterestFilterServiceTests.cs`
+- `backend/Arah.Application/Services/InterestFilterService.cs`
+- `backend/Arah.Tests/Application/InterestFilterServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Tests/Api/` — teste dedicado em **Fase 14.5**
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Tests/Api/` — teste dedicado em **Fase 14.5**
 
 **Critérios de Sucesso**:
 - ✅ Filtro de interesses funcionando
@@ -397,15 +397,15 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Territories/TerritoryCharacterization.cs`
-- `backend/Araponga.Application/Interfaces/ITerritoryCharacterizationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryCharacterizationRepository.cs`
-- `backend/Araponga.Application/Services/TerritoryCharacterizationService.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTerritoryCharacterization.cs`
+- `backend/Arah.Domain/Territories/TerritoryCharacterization.cs`
+- `backend/Arah.Application/Interfaces/ITerritoryCharacterizationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryCharacterizationRepository.cs`
+- `backend/Arah.Application/Services/TerritoryCharacterizationService.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddTerritoryCharacterization.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Contracts/Territories/TerritoryResponse.cs`
-- `backend/Araponga.Application/Services/VotingService.cs`
+- `backend/Arah.Api/Contracts/Territories/TerritoryResponse.cs`
+- `backend/Arah.Application/Services/VotingService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Caracterização funcionando
@@ -426,9 +426,9 @@ Implementar sistema de **governança comunitária** que permite:
 - [x] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Contracts/Users/UserProfileResponse.cs`
-- `backend/Araponga.Application/Services/UserProfileService.cs`
-- `backend/Araponga.Api/Controllers/UserProfileController.cs`
+- `backend/Arah.Api/Contracts/Users/UserProfileResponse.cs`
+- `backend/Arah.Application/Services/UserProfileService.cs`
+- `backend/Arah.Api/Controllers/UserProfileController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Histórico aparecendo no perfil
@@ -454,7 +454,7 @@ Implementar sistema de **governança comunitária** que permite:
 - [ ] Verificar/atualizar Swagger → **Fase 14.5**
 
 **Arquivos**:
-- [x] `backend/Araponga.Tests/Api/GovernanceIntegrationTests.cs`
+- [x] `backend/Arah.Tests/Api/GovernanceIntegrationTests.cs`
 - [x] `docs/GOVERNANCE_SYSTEM.md`, `VOTING_SYSTEM.md`, `COMMUNITY_MODERATION.md`
 
 **Critérios de Sucesso**:
@@ -524,19 +524,19 @@ Implementar sistema de **governança comunitária** que permite:
 - [ ] Documentação
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Notifications/NotificationConfig.cs`
-- `backend/Araponga.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
-- `backend/Araponga.Application/Services/Notifications/NotificationConfigService.cs`
-- `backend/Araponga.Api/Controllers/NotificationConfigController.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
-- `backend/Araponga.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
-- `backend/Araponga.Tests/Api/NotificationConfigIntegrationTests.cs`
+- `backend/Arah.Domain/Notifications/NotificationConfig.cs`
+- `backend/Arah.Application/Interfaces/Notifications/INotificationConfigRepository.cs`
+- `backend/Arah.Application/Services/Notifications/NotificationConfigService.cs`
+- `backend/Arah.Api/Controllers/NotificationConfigController.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
+- `backend/Arah.Infrastructure/InMemory/InMemoryNotificationConfigRepository.cs`
+- `backend/Arah.Tests/Api/NotificationConfigIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/NotificationService.cs` (ou equivalente)
-- `backend/Araponga.Infrastructure/InMemory/InMemoryDataStore.cs`
-- `backend/Araponga.Api/Extensions/ServiceCollectionExtensions.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Application/Services/NotificationService.cs` (ou equivalente)
+- `backend/Arah.Infrastructure/InMemory/InMemoryDataStore.cs`
+- `backend/Arah.Api/Extensions/ServiceCollectionExtensions.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Critérios de Sucesso**:
 - ✅ Tipos de notificação configuráveis

@@ -120,20 +120,20 @@ Estrutura inicial de módulos preparada para implementação:
 
 ```
 backend/
-├── Araponga.Application/
+├── Arah.Application/
 │   ├── Interfaces/
 │   │   ├── IModule.cs
 │   │   └── IModuleRegistry.cs
 │   └── ModuleRegistry.cs
-├── Araponga.Infrastructure.Shared/
-├── Araponga.Modules.Admin.Infrastructure/
-├── Araponga.Modules.Alerts.Infrastructure/
-├── Araponga.Modules.Assets.Infrastructure/
-├── Araponga.Modules.Feed.Infrastructure/
-├── Araponga.Modules.Marketplace.Infrastructure/
-├── Araponga.Modules.Moderation.Infrastructure/
-├── Araponga.Modules.Notifications.Infrastructure/
-└── Araponga.Modules.Subscriptions.Infrastructure/
+├── Arah.Infrastructure.Shared/
+├── Arah.Modules.Admin.Infrastructure/
+├── Arah.Modules.Alerts.Infrastructure/
+├── Arah.Modules.Assets.Infrastructure/
+├── Arah.Modules.Feed.Infrastructure/
+├── Arah.Modules.Marketplace.Infrastructure/
+├── Arah.Modules.Moderation.Infrastructure/
+├── Arah.Modules.Notifications.Infrastructure/
+└── Arah.Modules.Subscriptions.Infrastructure/
 ```
 
 **Nota**: Estrutura preparada para suportar a arquitetura modular e o BFF como aplicação externa.

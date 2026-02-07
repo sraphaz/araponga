@@ -1,6 +1,6 @@
 # Plano de Ação 10/10 - Resumo Executivo
 
-**Objetivo**: Elevar Araponga de 7.4/10 para 10/10  
+**Objetivo**: Elevar Arah de 7.4/10 para 10/10  
 **Duração Total**: 4-6 semanas (198 horas)  
 **Desenvolvedor(es)**: 1-2 full-time
 

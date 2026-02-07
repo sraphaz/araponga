@@ -8,7 +8,7 @@
 
 ## 📋 Visão Geral
 
-Este documento descreve a integração de mídias em todos os tipos de conteúdo do Araponga:
+Este documento descreve a integração de mídias em todos os tipos de conteúdo do Arah:
 - **Posts**: Múltiplas imagens por post (até 10)
 - **Eventos**: Imagem de capa + imagens adicionais (até 10)
 - **Marketplace**: Múltiplas imagens por item (até 10)

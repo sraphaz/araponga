@@ -25,10 +25,10 @@ Com **psql** e conexão ao Postgres (ex.: banco já criado pelo Docker):
 
 ```bash
 # Linux/macOS
-psql -h localhost -p 5432 -U araponga -d araponga -f scripts/seed/seed-camburi.sql
+psql -h localhost -p 5432 -U Arah -d Arah -f scripts/seed/seed-camburi.sql
 
 # Windows (PowerShell)
-& "C:\Program Files\PostgreSQL\16\bin\psql.exe" -h localhost -p 5432 -U araponga -d araponga -f scripts/seed/seed-camburi.sql
+& "C:\Program Files\PostgreSQL\16\bin\psql.exe" -h localhost -p 5432 -U Arah -d Arah -f scripts/seed/seed-camburi.sql
 ```
 
 Ou use o script PowerShell que descobre o `psql` e usa variáveis de ambiente (ou padrões):
@@ -63,8 +63,8 @@ Para `run-seed-camburi.ps1` ou para montar o comando `psql` manualmente:
 
 - `POSTGRES_HOST` (default: `localhost`)
 - `POSTGRES_PORT` (default: `5432`)
-- `POSTGRES_DB` (default: `araponga`)
-- `POSTGRES_USER` (default: `araponga`)
-- `POSTGRES_PASSWORD` (default: `araponga`)
+- `POSTGRES_DB` (default: `Arah`)
+- `POSTGRES_USER` (default: `Arah`)
+- `POSTGRES_PASSWORD` (default: `Arah`)
 
 Se o backend estiver no Docker com `docker-compose`, use `Host=localhost` e a porta exposta do Postgres (ex.: 5432).

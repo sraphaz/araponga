@@ -3,45 +3,45 @@ services:
   # PostgreSQL com PostGIS para dados geográficos
   postgres:
     image: postgis/postgis:16-3.4
-    container_name: araponga-postgres
+    container_name: arah-postgres
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-araponga}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-araponga}
-      POSTGRES_DB: ${POSTGRES_DB:-araponga}
+      POSTGRES_USER: ${POSTGRES_USER:-arah}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-arah}
+      POSTGRES_DB: ${POSTGRES_DB:-arah}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - araponga_pgdata:/var/lib/postgresql/data
+      - arah_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-araponga} -d ${POSTGRES_DB:-araponga}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-arah} -d ${POSTGRES_DB:-arah}"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - araponga-network
+      - arah-network
 
   # Redis para cache distribuído
   redis:
     image: redis:7-alpine
-    container_name: araponga-redis
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-araponga}
+    container_name: arah-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-arah}
     ports:
       - "${REDIS_PORT:-6379}:6379"
     volumes:
-      - araponga_redis_data:/data
+      - arah_redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-araponga}", "--raw", "incr", "ping"]
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD:-arah}", "--raw", "incr", "ping"]
       interval: 10s
       timeout: 3s
       retries: 5
     networks:
-      - araponga-network
+      - arah-network
 
   # MinIO para storage S3-compatible (desenvolvimento/pré-produção)
   minio:
     image: minio/minio:latest
-    container_name: araponga-minio
+    container_name: arah-minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
@@ -50,38 +50,38 @@ services:
       - "${MINIO_API_PORT:-9000}:9000"
       - "${MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
-      - araponga_minio_data:/data
+      - arah_minio_data:/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
       interval: 30s
       timeout: 20s
       retries: 3
     networks:
-      - araponga-network
+      - arah-network
 
   # MinIO Client para criar bucket automaticamente
   minio-setup:
     image: minio/mc:latest
-    container_name: araponga-minio-setup
+    container_name: arah-minio-setup
     depends_on:
       - minio
     entrypoint: >
       /bin/sh -c "
       sleep 5;
       /usr/bin/mc alias set myminio http://minio:9000 ${MINIO_ROOT_USER:-minioadmin} ${MINIO_ROOT_PASSWORD:-minioadmin};
-      /usr/bin/mc mb myminio/${MINIO_BUCKET_NAME:-araponga-media} --ignore-existing;
-      /usr/bin/mc anonymous set download myminio/${MINIO_BUCKET_NAME:-araponga-media};
+      /usr/bin/mc mb myminio/${MINIO_BUCKET_NAME:-arah-media} --ignore-existing;
+      /usr/bin/mc anonymous set download myminio/${MINIO_BUCKET_NAME:-arah-media};
       exit 0;
       "
     networks:
-      - araponga-network
+      - arah-network
 
-  # API Araponga (usa Dockerfile do backend; context = raiz do repo)
+  # API Arah (usa Dockerfile do backend; context = raiz do repo)
   api:
     build:
       context: .
-      dockerfile: backend/Araponga.Api/Dockerfile
-    container_name: araponga-api
+      dockerfile: backend/Arah.Api/Dockerfile
+    container_name: arah-api
     depends_on:
       postgres:
         condition: service_healthy
@@ -95,12 +95,12 @@ services:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
       
       # Database
-      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=${POSTGRES_DB:-araponga};Username=${POSTGRES_USER:-araponga};Password=${POSTGRES_PASSWORD:-araponga};Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=${POSTGRES_DB:-arah};Username=${POSTGRES_USER:-arah};Password=${POSTGRES_PASSWORD:-arah};Pooling=true;Minimum Pool Size=5;Maximum Pool Size=100;Command Timeout=30
       Persistence__Provider: Postgres
       Persistence__ApplyMigrations: "true"
       
       # Redis Cache
-      ConnectionStrings__Redis: ${REDIS_CONNECTION_STRING:-redis:6379,password=${REDIS_PASSWORD:-araponga},abortConnect=false}
+      ConnectionStrings__Redis: ${REDIS_CONNECTION_STRING:-redis:6379,password=${REDIS_PASSWORD:-arah},abortConnect=false}
       
       # JWT (OBRIGATÓRIO - gere um secret forte)
       JWT__SIGNINGKEY: ${JWT_SIGNINGKEY:-CHANGE_THIS_IN_PRODUCTION_USE_AT_LEAST_32_CHARACTERS_SECRET_KEY}
@@ -110,7 +110,7 @@ services:
       
       # Media Storage - MinIO (S3-compatible)
       MediaStorage__Provider: ${MEDIA_STORAGE_PROVIDER:-S3}
-      MediaStorage__S3BucketName: ${MINIO_BUCKET_NAME:-araponga-media}
+      MediaStorage__S3BucketName: ${MINIO_BUCKET_NAME:-arah-media}
       MediaStorage__S3Region: ${MINIO_REGION:-us-east-1}
       MediaStorage__S3AccessKeyId: ${MINIO_ROOT_USER:-minioadmin}
       MediaStorage__S3SecretAccessKey: ${MINIO_ROOT_PASSWORD:-minioadmin}
@@ -127,24 +127,24 @@ services:
       # Logging
       Serilog__WriteTo__0__Name: Console
       Serilog__WriteTo__1__Name: File
-      Serilog__WriteTo__1__Args__path: logs/araponga-.log
+      Serilog__WriteTo__1__Args__path: logs/arah-.log
     ports:
       - "${API_PORT:-8080}:8080"
     volumes:
       - ./logs:/app/logs
       - ./wwwroot/media:/app/wwwroot/media
     networks:
-      - araponga-network
+      - arah-network
     restart: unless-stopped
 
 volumes:
-  araponga_pgdata:
+  arah_pgdata:
     driver: local
-  araponga_redis_data:
+  arah_redis_data:
     driver: local
-  araponga_minio_data:
+  arah_minio_data:
     driver: local
 
 networks:
-  araponga-network:
+  arah-network:
     driver: bridge

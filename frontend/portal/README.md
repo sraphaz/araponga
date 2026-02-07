@@ -1,4 +1,4 @@
-# Araponga Landing (Next.js)
+# Arah Landing (Next.js)
 
 Este projeto é um *scaffold* para substituir a publicação no Gamma por um front-end próprio, com controle de **SEO**, **Open Graph (WhatsApp/LinkedIn)**, **favicon** e evolução incremental.
 
@@ -13,7 +13,7 @@ npm run dev
 
 1. Suba este repositório no GitHub.
 2. Importe na Vercel.
-3. Configure o domínio `araponga.app`.
+3. Configure o domínio `Arah.app`.
 
 ## Importante: cache de preview (WhatsApp/Telegram)
 

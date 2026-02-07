@@ -22,7 +22,7 @@ Propor níveis de abstração que:
 
 ```
 ┌─────────────────────────────────┐
-│      Araponga.Api (Única)       │
+│      Arah.Api (Única)       │
 │  ┌───────────────────────────┐  │
 │  │  Módulos (Domain/App)     │  │
 │  │  Infrastructure.Shared    │  │
@@ -55,7 +55,7 @@ Propor níveis de abstração que:
 
 ```
 ┌─────────────────────────────────────────┐
-│      Araponga.Api.Host (Gateway)       │
+│      Arah.Api.Host (Gateway)       │
 └───────────────┬─────────────────────────┘
                 │
     ┌───────────┴───────────┬──────────────┐

@@ -242,25 +242,25 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Criar migrations
 
 **Arquivos a Criar**:
-- `backend/Araponga.Domain/Subscriptions/SubscriptionPlan.cs`
-- `backend/Araponga.Domain/Subscriptions/SubscriptionPlanTier.cs`
-- `backend/Araponga.Domain/Subscriptions/PlanScope.cs`
-- `backend/Araponga.Domain/Subscriptions/SubscriptionBillingCycle.cs`
-- `backend/Araponga.Domain/Subscriptions/Subscription.cs`
-- `backend/Araponga.Domain/Subscriptions/SubscriptionStatus.cs`
-- `backend/Araponga.Domain/Subscriptions/SubscriptionPayment.cs`
-- `backend/Araponga.Domain/Subscriptions/Coupon.cs`
-- `backend/Araponga.Domain/Subscriptions/SubscriptionCoupon.cs`
-- `backend/Araponga.Application/Interfaces/ISubscriptionPlanRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISubscriptionPlanRepository.cs` (métodos: `GetGlobalPlansAsync`, `GetTerritoryPlansAsync`, `GetPlansForTerritoryAsync`)
-- `backend/Araponga.Application/Interfaces/ISubscriptionRepository.cs`
-- `backend/Araponga.Application/Interfaces/ISubscriptionPaymentRepository.cs`
-- `backend/Araponga.Application/Interfaces/ICouponRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresSubscriptionPlanRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresSubscriptionRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresSubscriptionPaymentRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresCouponRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddSubscriptionsSystem.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionPlan.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionPlanTier.cs`
+- `backend/Arah.Domain/Subscriptions/PlanScope.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionBillingCycle.cs`
+- `backend/Arah.Domain/Subscriptions/Subscription.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionStatus.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionPayment.cs`
+- `backend/Arah.Domain/Subscriptions/Coupon.cs`
+- `backend/Arah.Domain/Subscriptions/SubscriptionCoupon.cs`
+- `backend/Arah.Application/Interfaces/ISubscriptionPlanRepository.cs`
+- `backend/Arah.Application/Interfaces/ISubscriptionPlanRepository.cs` (métodos: `GetGlobalPlansAsync`, `GetTerritoryPlansAsync`, `GetPlansForTerritoryAsync`)
+- `backend/Arah.Application/Interfaces/ISubscriptionRepository.cs`
+- `backend/Arah.Application/Interfaces/ISubscriptionPaymentRepository.cs`
+- `backend/Arah.Application/Interfaces/ICouponRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresSubscriptionPlanRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresSubscriptionRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresSubscriptionPaymentRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresCouponRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddSubscriptionsSystem.cs`
 
 **Critérios de Sucesso**:
 - ✅ Modelos criados
@@ -299,13 +299,13 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Payments/StripeSubscriptionService.cs`
-- `backend/Araponga.Infrastructure/Payments/StripeConfiguration.cs`
-- `backend/Araponga.Tests/Infrastructure/StripeSubscriptionServiceTests.cs`
+- `backend/Arah.Infrastructure/Payments/StripeSubscriptionService.cs`
+- `backend/Arah.Infrastructure/Payments/StripeConfiguration.cs`
+- `backend/Arah.Tests/Infrastructure/StripeSubscriptionServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (registrar serviço)
-- `backend/Araponga.Api/appsettings.json` (adicionar configuração Stripe)
+- `backend/Arah.Api/Program.cs` (registrar serviço)
+- `backend/Arah.Api/appsettings.json` (adicionar configuração Stripe)
 
 **Critérios de Sucesso**:
 - ✅ Integração Stripe funcionando
@@ -342,13 +342,13 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/StripeWebhookController.cs`
-- `backend/Araponga.Application/Services/StripeWebhookService.cs`
-- `backend/Araponga.Application/BackgroundJobs/StripeWebhookProcessingJob.cs`
-- `backend/Araponga.Tests/Integration/StripeWebhookIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/StripeWebhookController.cs`
+- `backend/Arah.Application/Services/StripeWebhookService.cs`
+- `backend/Arah.Application/BackgroundJobs/StripeWebhookProcessingJob.cs`
+- `backend/Arah.Tests/Integration/StripeWebhookIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (configurar webhook endpoint)
+- `backend/Arah.Api/Program.cs` (configurar webhook endpoint)
 
 **Critérios de Sucesso**:
 - ✅ Webhooks sendo recebidos
@@ -402,11 +402,11 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SubscriptionService.cs`
-- `backend/Araponga.Tests/Application/SubscriptionServiceTests.cs`
+- `backend/Arah.Application/Services/SubscriptionService.cs`
+- `backend/Arah.Tests/Application/SubscriptionServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/StripeSubscriptionService.cs` (integrar)
+- `backend/Arah.Application/Services/StripeSubscriptionService.cs` (integrar)
 
 **Critérios de Sucesso**:
 - ✅ Criação de assinaturas funcionando
@@ -439,8 +439,8 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CouponService.cs`
-- `backend/Araponga.Tests/Application/CouponServiceTests.cs`
+- `backend/Arah.Application/Services/CouponService.cs`
+- `backend/Arah.Tests/Application/CouponServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Criação de cupons funcionando
@@ -475,9 +475,9 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/BackgroundJobs/SubscriptionRenewalJob.cs`
-- `backend/Araponga.Application/Services/SubscriptionRenewalService.cs`
-- `backend/Araponga.Tests/Application/SubscriptionRenewalServiceTests.cs`
+- `backend/Arah.Application/BackgroundJobs/SubscriptionRenewalJob.cs`
+- `backend/Arah.Application/Services/SubscriptionRenewalService.cs`
+- `backend/Arah.Tests/Application/SubscriptionRenewalServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Renovações automáticas funcionando
@@ -507,11 +507,11 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SubscriptionTrialService.cs`
-- `backend/Araponga.Tests/Application/SubscriptionTrialServiceTests.cs`
+- `backend/Arah.Application/Services/SubscriptionTrialService.cs`
+- `backend/Arah.Tests/Application/SubscriptionTrialServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/SubscriptionService.cs` (integrar trial)
+- `backend/Arah.Application/Services/SubscriptionService.cs` (integrar trial)
 
 **Critérios de Sucesso**:
 - ✅ Trials funcionando
@@ -569,13 +569,13 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes unitários e de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SubscriptionPlanAdminService.cs`
-- `backend/Araponga.Application/Services/SubscriptionPlanValidationService.cs`
-- `backend/Araponga.Application/Models/SubscriptionPlanHistory.cs`
-- `backend/Araponga.Application/Interfaces/ISubscriptionPlanHistoryRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresSubscriptionPlanHistoryRepository.cs`
-- `backend/Araponga.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
-- `backend/Araponga.Tests/Application/SubscriptionPlanValidationServiceTests.cs`
+- `backend/Arah.Application/Services/SubscriptionPlanAdminService.cs`
+- `backend/Arah.Application/Services/SubscriptionPlanValidationService.cs`
+- `backend/Arah.Application/Models/SubscriptionPlanHistory.cs`
+- `backend/Arah.Application/Interfaces/ISubscriptionPlanHistoryRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresSubscriptionPlanHistoryRepository.cs`
+- `backend/Arah.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
+- `backend/Arah.Tests/Application/SubscriptionPlanValidationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Criação de planos customizados funcionando
@@ -610,8 +610,8 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CouponAdminService.cs`
-- `backend/Araponga.Tests/Application/CouponAdminServiceTests.cs`
+- `backend/Arah.Application/Services/CouponAdminService.cs`
+- `backend/Arah.Tests/Application/CouponAdminServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Criação de cupons funcionando
@@ -647,10 +647,10 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SubscriptionCapabilityService.cs`
-- `backend/Araponga.Application/Attributes/RequiresCapabilityAttribute.cs`
-- `backend/Araponga.Api/Middleware/SubscriptionCapabilityMiddleware.cs`
-- `backend/Araponga.Tests/Application/SubscriptionCapabilityServiceTests.cs`
+- `backend/Arah.Application/Services/SubscriptionCapabilityService.cs`
+- `backend/Arah.Application/Attributes/RequiresCapabilityAttribute.cs`
+- `backend/Arah.Api/Middleware/SubscriptionCapabilityMiddleware.cs`
+- `backend/Arah.Tests/Application/SubscriptionCapabilityServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Verificação de capacidades funcionando
@@ -709,18 +709,18 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/AdminSubscriptionPlansController.cs` (SystemAdmin)
-- `backend/Araponga.Api/Controllers/TerritorySubscriptionPlansController.cs` (Curadores)
-- `backend/Araponga.Api/Controllers/AdminCouponsController.cs` (SystemAdmin)
-- `backend/Araponga.Api/Controllers/TerritoryCouponsController.cs` (Curadores)
-- `backend/Araponga.Api/Contracts/Admin/CreatePlanRequest.cs`
-- `backend/Araponga.Api/Contracts/Admin/UpdatePlanRequest.cs`
-- `backend/Araponga.Api/Contracts/Admin/UpdateCapabilitiesRequest.cs`
-- `backend/Araponga.Api/Contracts/Admin/PlanHistoryResponse.cs`
-- `backend/Araponga.Api/Contracts/Admin/CapabilityInfoResponse.cs`
-- `backend/Araponga.Api/Validators/CreatePlanRequestValidator.cs`
-- `backend/Araponga.Api/Validators/UpdatePlanRequestValidator.cs`
-- `backend/Araponga.Tests/Integration/AdminSubscriptionPlansIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/AdminSubscriptionPlansController.cs` (SystemAdmin)
+- `backend/Arah.Api/Controllers/TerritorySubscriptionPlansController.cs` (Curadores)
+- `backend/Arah.Api/Controllers/AdminCouponsController.cs` (SystemAdmin)
+- `backend/Arah.Api/Controllers/TerritoryCouponsController.cs` (Curadores)
+- `backend/Arah.Api/Contracts/Admin/CreatePlanRequest.cs`
+- `backend/Arah.Api/Contracts/Admin/UpdatePlanRequest.cs`
+- `backend/Arah.Api/Contracts/Admin/UpdateCapabilitiesRequest.cs`
+- `backend/Arah.Api/Contracts/Admin/PlanHistoryResponse.cs`
+- `backend/Arah.Api/Contracts/Admin/CapabilityInfoResponse.cs`
+- `backend/Arah.Api/Validators/CreatePlanRequestValidator.cs`
+- `backend/Arah.Api/Validators/UpdatePlanRequestValidator.cs`
+- `backend/Arah.Tests/Integration/AdminSubscriptionPlansIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints administrativos funcionando
@@ -764,14 +764,14 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/SubscriptionPlansController.cs`
-- `backend/Araponga.Api/Controllers/SubscriptionsController.cs`
-- `backend/Araponga.Api/Controllers/CouponsController.cs`
-- `backend/Araponga.Api/Contracts/Subscriptions/CreateSubscriptionRequest.cs`
-- `backend/Araponga.Api/Contracts/Subscriptions/SubscriptionResponse.cs`
-- `backend/Araponga.Api/Contracts/Subscriptions/SubscriptionPlanResponse.cs`
-- `backend/Araponga.Api/Contracts/Subscriptions/CouponResponse.cs`
-- `backend/Araponga.Api/Validators/CreateSubscriptionRequestValidator.cs`
+- `backend/Arah.Api/Controllers/SubscriptionPlansController.cs`
+- `backend/Arah.Api/Controllers/SubscriptionsController.cs`
+- `backend/Arah.Api/Controllers/CouponsController.cs`
+- `backend/Arah.Api/Contracts/Subscriptions/CreateSubscriptionRequest.cs`
+- `backend/Arah.Api/Contracts/Subscriptions/SubscriptionResponse.cs`
+- `backend/Arah.Api/Contracts/Subscriptions/SubscriptionPlanResponse.cs`
+- `backend/Arah.Api/Contracts/Subscriptions/CouponResponse.cs`
+- `backend/Arah.Api/Validators/CreateSubscriptionRequestValidator.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints funcionando
@@ -806,9 +806,9 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/SubscriptionAnalyticsService.cs`
-- `backend/Araponga.Api/Controllers/SubscriptionAnalyticsController.cs`
-- `backend/Araponga.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
+- `backend/Arah.Application/Services/SubscriptionAnalyticsService.cs`
+- `backend/Arah.Api/Controllers/SubscriptionAnalyticsController.cs`
+- `backend/Arah.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Métricas sendo calculadas
@@ -955,7 +955,7 @@ Implementar sistema completo de **assinaturas e pagamentos recorrentes** que:
 - [ ] Atualizar Swagger
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Integration/SubscriptionsCompleteIntegrationTests.cs`
+- `backend/Arah.Tests/Integration/SubscriptionsCompleteIntegrationTests.cs`
 - `docs/SUBSCRIPTIONS_SYSTEM.md`
 
 **Critérios de Sucesso**:

@@ -1,4 +1,4 @@
-# Configuração Avançada de Notificações - Araponga
+# Configuração Avançada de Notificações - Arah
 
 **Última Atualização**: 2025-01-23  
 **Status**: 📋 Planejado (Opcional)
@@ -69,16 +69,16 @@ public enum NotificationChannel
 
 ### 1. Criar Domain Model
 
-**Arquivo**: `backend/Araponga.Domain/Notifications/NotificationConfig.cs`
+**Arquivo**: `backend/Arah.Domain/Notifications/NotificationConfig.cs`
 
 ### 2. Criar Repository
 
-**Arquivo**: `backend/Araponga.Application/Interfaces/INotificationConfigRepository.cs`
-**Arquivo**: `backend/Araponga.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
+**Arquivo**: `backend/Arah.Application/Interfaces/INotificationConfigRepository.cs`
+**Arquivo**: `backend/Arah.Infrastructure/Postgres/PostgresNotificationConfigRepository.cs`
 
 ### 3. Criar Service
 
-**Arquivo**: `backend/Araponga.Application/Services/NotificationConfigService.cs`
+**Arquivo**: `backend/Arah.Application/Services/NotificationConfigService.cs`
 
 ```csharp
 public sealed class NotificationConfigService
@@ -92,7 +92,7 @@ public sealed class NotificationConfigService
 
 ### 4. Integrar com NotificationService
 
-**Arquivo**: `backend/Araponga.Application/Services/NotificationService.cs`
+**Arquivo**: `backend/Arah.Application/Services/NotificationService.cs`
 
 - Verificar configuração antes de enviar notificação
 - Respeitar canais habilitados
@@ -100,7 +100,7 @@ public sealed class NotificationConfigService
 
 ### 5. Criar API Endpoints
 
-**Arquivo**: `backend/Araponga.Api/Controllers/NotificationConfigController.cs`
+**Arquivo**: `backend/Arah.Api/Controllers/NotificationConfigController.cs`
 
 ```csharp
 // GET /api/v1/territories/{id}/notification-configs
@@ -114,7 +114,7 @@ public sealed class NotificationConfigService
 
 ### 6. Criar Migration
 
-**Arquivo**: `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddNotificationConfigs.cs`
+**Arquivo**: `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddNotificationConfigs.cs`
 
 ```sql
 CREATE TABLE notification_configs (
@@ -223,9 +223,9 @@ POST /api/v1/admin/notification-configs
 
 ## 📚 Referências
 
-- [NotificationService Implementation](../backend/Araponga.Application/Services/NotificationService.cs)
-- [UserPreferences Implementation](../backend/Araponga.Domain/Users/UserPreferences.cs)
-- [FeatureFlags Pattern](../backend/Araponga.Application/Services/FeatureFlagService.cs)
+- [NotificationService Implementation](../backend/Arah.Application/Services/NotificationService.cs)
+- [UserPreferences Implementation](../backend/Arah.Domain/Users/UserPreferences.cs)
+- [FeatureFlags Pattern](../backend/Arah.Application/Services/FeatureFlagService.cs)
 
 ---
 

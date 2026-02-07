@@ -10,7 +10,7 @@ Este documento descreve a implementação das pendências da Fase 10: **Testes d
 
 ### Implementação
 
-Criado arquivo `backend/Araponga.Tests/Api/MediaInContentIntegrationTests.cs` com testes completos de integração para mídias em conteúdo.
+Criado arquivo `backend/Arah.Tests/Api/MediaInContentIntegrationTests.cs` com testes completos de integração para mídias em conteúdo.
 
 ### Cobertura de Testes
 
@@ -38,7 +38,7 @@ Criado arquivo `backend/Araponga.Tests/Api/MediaInContentIntegrationTests.cs` co
 ### Execução dos Testes
 
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj --filter "FullyQualifiedName~MediaInContentIntegrationTests"
+dotnet test backend/Arah.Tests/Arah.Tests.csproj --filter "FullyQualifiedName~MediaInContentIntegrationTests"
 ```
 
 ---
@@ -134,13 +134,13 @@ Implementada exclusão automática de `MediaAttachment` quando conteúdo é remo
 ## 4. Resumo de Arquivos Modificados
 
 ### Novos Arquivos
-- `backend/Araponga.Tests/Api/MediaInContentIntegrationTests.cs` - Testes de integração
+- `backend/Arah.Tests/Api/MediaInContentIntegrationTests.cs` - Testes de integração
 
 ### Arquivos Modificados
-- `backend/Araponga.Application/Services/ReportService.cs` - Exclusão de mídias em posts ocultados
-- `backend/Araponga.Application/Services/ModerationCaseService.cs` - Exclusão de mídias em posts ocultados
-- `backend/Araponga.Application/Services/EventsService.cs` - Exclusão de mídias em eventos cancelados
-- `backend/Araponga.Application/Services/StoreItemService.cs` - Exclusão de mídias em items arquivados
+- `backend/Arah.Application/Services/ReportService.cs` - Exclusão de mídias em posts ocultados
+- `backend/Arah.Application/Services/ModerationCaseService.cs` - Exclusão de mídias em posts ocultados
+- `backend/Arah.Application/Services/EventsService.cs` - Exclusão de mídias em eventos cancelados
+- `backend/Arah.Application/Services/StoreItemService.cs` - Exclusão de mídias em items arquivados
 
 ---
 

@@ -59,11 +59,11 @@ Diagramas adicionados para os seguintes fluxos principais:
 
 ## Mudanças Implementadas
 
-**Nota de Deploy**: O Developer Portal está disponível em `https://devportal.araponga.app/` e é servido pelo GitHub Pages através do workflow `.github/workflows/devportal-pages.yml`. O workflow copia automaticamente o conteúdo de `backend/Araponga.Api/wwwroot/devportal/` para o GitHub Pages durante o deploy.
+**Nota de Deploy**: O Developer Portal está disponível em `https://devportal.Arah.app/` e é servido pelo GitHub Pages através do workflow `.github/workflows/devportal-pages.yml`. O workflow copia automaticamente o conteúdo de `backend/Arah.Api/wwwroot/devportal/` para o GitHub Pages durante o deploy.
 
 ### Arquivos Modificados
 
-#### `backend/Araponga.Api/wwwroot/devportal/index.html`
+#### `backend/Arah.Api/wwwroot/devportal/index.html`
 - ✅ Adicionado script Mermaid.js via CDN
 - ✅ Adicionados 6 diagramas de sequência em acordeões expansíveis
 - ✅ JavaScript para inicialização e renderização lazy do Mermaid
@@ -78,7 +78,7 @@ Diagramas adicionados para os seguintes fluxos principais:
   - Fluxo 9: Membership: visitor → resident
   - Fluxo 10: Moderação & segurança
 
-#### `backend/Araponga.Api/wwwroot/devportal/assets/css/devportal.css`
+#### `backend/Arah.Api/wwwroot/devportal/assets/css/devportal.css`
 - ✅ Estilos para `.sequence-diagram-toggle` (acordeão)
 - ✅ Estilos para `.sequence-diagram-summary` (botão de expansão)
 - ✅ Estilos para `.sequence-diagram-container` (container do diagrama)
@@ -198,8 +198,8 @@ No DevPortal, cada fluxo principal agora possui um acordeão "📊 Ver Diagrama 
 
 ## Deploy
 
-- **URL de Produção**: `https://devportal.araponga.app/`
-- **Localização do Código**: `backend/Araponga.Api/wwwroot/devportal/`
+- **URL de Produção**: `https://devportal.Arah.app/`
+- **Localização do Código**: `backend/Arah.Api/wwwroot/devportal/`
 - **Workflow de Deploy**: `.github/workflows/devportal-pages.yml`
 - **Processo**: O workflow do GitHub Actions copia automaticamente o conteúdo de `wwwroot/devportal/` para o GitHub Pages quando há push na branch `main` ou `master`
 

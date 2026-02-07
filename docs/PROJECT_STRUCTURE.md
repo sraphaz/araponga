@@ -1,4 +1,4 @@
-# 📁 Estrutura do Projeto Araponga
+# 📁 Estrutura do Projeto Arah
 
 **Guia Visual e Explicativo da Organização do Código**
 
@@ -9,7 +9,7 @@
 
 ## 🎯 Propósito
 
-Este documento ajuda você a **navegar o código** do Araponga, entendendo onde cada coisa está e por quê.
+Este documento ajuda você a **navegar o código** do Arah, entendendo onde cada coisa está e por quê.
 
 **Não precisa decorar** - use como referência quando precisar!
 
@@ -18,14 +18,14 @@ Este documento ajuda você a **navegar o código** do Araponga, entendendo onde 
 ## 📂 Estrutura de Diretórios
 
 ```
-araponga/
+Arah/
 ├── backend/              # Código do backend (.NET)
-│   ├── Araponga.Api      # Interface HTTP (controllers, endpoints)
-│   ├── Araponga.Application  # Lógica de negócio (services)
-│   ├── Araponga.Domain   # Conceitos centrais (entidades, value objects)
-│   ├── Araponga.Infrastructure  # Persistência (banco, armazenamento)
-│   ├── Araponga.Shared   # Tipos e utilitários compartilhados
-│   └── Araponga.Tests    # Testes automatizados
+│   ├── Arah.Api      # Interface HTTP (controllers, endpoints)
+│   ├── Arah.Application  # Lógica de negócio (services)
+│   ├── Arah.Domain   # Conceitos centrais (entidades, value objects)
+│   ├── Arah.Infrastructure  # Persistência (banco, armazenamento)
+│   ├── Arah.Shared   # Tipos e utilitários compartilhados
+│   └── Arah.Tests    # Testes automatizados
 │
 ├── frontend/             # Frontend (Flutter - planejado)
 │   └── portal/           # Portal React (site institucional)
@@ -55,7 +55,7 @@ araponga/
 
 O backend segue **Clean Architecture**, organizado em camadas:
 
-### 📍 Araponga.Domain
+### 📍 Arah.Domain
 
 **O que é**: Conceitos centrais do domínio (territory, posts, events, etc.)
 
@@ -72,7 +72,7 @@ O backend segue **Clean Architecture**, organizado em camadas:
 
 **Exemplo de navegação**:
 ```
-Araponga.Domain/
+Arah.Domain/
 ├── Entities/
 │   ├── Territory.cs          # Entidade Territory
 │   ├── Post.cs               # Entidade Post
@@ -86,7 +86,7 @@ Araponga.Domain/
 
 ---
 
-### 📍 Araponga.Application
+### 📍 Arah.Application
 
 **O que é**: Lógica de negócio e casos de uso
 
@@ -103,7 +103,7 @@ Araponga.Domain/
 
 **Exemplo de navegação**:
 ```
-Araponga.Application/
+Arah.Application/
 ├── Services/
 │   ├── TerritoryService.cs   # Lógica de territórios
 │   ├── FeedService.cs        # Lógica de feed
@@ -117,7 +117,7 @@ Araponga.Application/
 
 ---
 
-### 📍 Araponga.Infrastructure
+### 📍 Arah.Infrastructure
 
 **O que é**: Persistência e integrações externas
 
@@ -134,7 +134,7 @@ Araponga.Application/
 
 **Exemplo de navegação**:
 ```
-Araponga.Infrastructure/
+Arah.Infrastructure/
 ├── Repositories/
 │   ├── PostgresTerritoryRepository.cs
 │   └── InMemoryTerritoryRepository.cs
@@ -146,7 +146,7 @@ Araponga.Infrastructure/
 
 ---
 
-### 📍 Araponga.Api
+### 📍 Arah.Api
 
 **O que é**: Interface HTTP (endpoints, controllers)
 
@@ -163,7 +163,7 @@ Araponga.Infrastructure/
 
 **Exemplo de navegação**:
 ```
-Araponga.Api/
+Arah.Api/
 ├── Controllers/
 │   ├── TerritoriesController.cs
 │   ├── FeedController.cs
@@ -177,7 +177,7 @@ Araponga.Api/
 
 ---
 
-### 📍 Araponga.Tests
+### 📍 Arah.Tests
 
 **O que é**: Testes automatizados
 
@@ -194,7 +194,7 @@ Araponga.Api/
 
 **Exemplo de navegação**:
 ```
-Araponga.Tests/
+Arah.Tests/
 ├── Domain/
 │   └── TerritoryTests.cs
 ├── Application/
@@ -210,7 +210,7 @@ Araponga.Tests/
 ### Exemplo: Quero entender como criar um Post
 
 **Passo 1**: Procure pelo endpoint
-- Vá para `Araponga.Api/Controllers/FeedController.cs`
+- Vá para `Arah.Api/Controllers/FeedController.cs`
 - Encontre `POST /api/v1/feed` ou método `CreatePost`
 
 **Passo 2**: Entenda o controller
@@ -218,16 +218,16 @@ Araponga.Tests/
 - Chama `FeedService.CreatePostAsync()`
 
 **Passo 3**: Entenda o service
-- Vá para `Araponga.Application/Services/FeedService.cs`
+- Vá para `Arah.Application/Services/FeedService.cs`
 - Encontre método `CreatePostAsync()`
 - Veja regras de negócio e validações
 
 **Passo 4**: Entenda a entidade
-- Vá para `Araponga.Domain/Entities/Post.cs`
+- Vá para `Arah.Domain/Entities/Post.cs`
 - Veja estrutura e validações da entidade
 
 **Passo 5**: Entenda persistência
-- Vá para `Araponga.Infrastructure/Repositories/PostgresFeedRepository.cs`
+- Vá para `Arah.Infrastructure/Repositories/PostgresFeedRepository.cs`
 - Veja como é salvo no banco
 
 **Dica**: Use o Cursor! Pergunte: "Como funciona a criação de posts?" e ele te mostra o fluxo completo.
@@ -237,22 +237,22 @@ Araponga.Tests/
 ### Exemplo: Quero adicionar um novo endpoint
 
 **Passo 1**: Defina a entidade (se nova)
-- Crie em `Araponga.Domain/Entities/`
+- Crie em `Arah.Domain/Entities/`
 
 **Passo 2**: Defina interface do repositório
-- Crie em `Araponga.Domain/Interfaces/Repositories/`
+- Crie em `Arah.Domain/Interfaces/Repositories/`
 
 **Passo 3**: Implemente repositório
-- Crie em `Araponga.Infrastructure/Repositories/`
+- Crie em `Arah.Infrastructure/Repositories/`
 
 **Passo 4**: Crie service
-- Crie em `Araponga.Application/Services/`
+- Crie em `Arah.Application/Services/`
 
 **Passo 5**: Crie controller
-- Crie em `Araponga.Api/Controllers/`
+- Crie em `Arah.Api/Controllers/`
 
 **Passo 6**: Adicione testes
-- Crie em `Araponga.Tests/`
+- Crie em `Arah.Tests/`
 
 **Dica**: Use o Cursor! Ele sabe seguir essa estrutura automaticamente.
 
@@ -272,15 +272,15 @@ Araponga.Tests/
 ```
 Usuário faz requisição HTTP
   ↓
-Araponga.Api (Controller recebe)
+Arah.Api (Controller recebe)
   ↓
-Araponga.Application (Service processa regra de negócio)
+Arah.Application (Service processa regra de negócio)
   ↓
-Araponga.Domain (Entidade/Value Object)
+Arah.Domain (Entidade/Value Object)
   ↓
-Araponga.Application (Service orquestra)
+Arah.Application (Service orquestra)
   ↓
-Araponga.Infrastructure (Repository persiste)
+Arah.Infrastructure (Repository persiste)
   ↓
 Banco de Dados (Postgres ou InMemory)
 ```
@@ -331,7 +331,7 @@ Banco de Dados (Postgres ou InMemory)
 
 ## 🌱 Conclusão
 
-A estrutura do Araponga é **clara e organizada** seguindo Clean Architecture.
+A estrutura do Arah é **clara e organizada** seguindo Clean Architecture.
 
 **Lembre-se**:
 - ✅ **Domain** não depende de nada

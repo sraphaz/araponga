@@ -1,4 +1,4 @@
-# Plano Sistemático de Reformulação de Design - Araponga
+# Plano Sistemático de Reformulação de Design - Arah
 
 **Versão**: 2.0  
 **Data**: 2025-01-20  
@@ -9,13 +9,13 @@
 
 ## 📋 Sumário Executivo
 
-Este documento apresenta um **plano sistemático e completo** de reformulação do design system do Araponga, alinhado com diretrizes internacionais de design (Material Design 3, Apple HIG, WCAG 2.1) e profundamente enraizado nos **valores fundamentais** do projeto: território, autonomia, transparência, sobriedade elevada e consciência ética.
+Este documento apresenta um **plano sistemático e completo** de reformulação do design system do Arah, alinhado com diretrizes internacionais de design (Material Design 3, Apple HIG, WCAG 2.1) e profundamente enraizado nos **valores fundamentais** do projeto: território, autonomia, transparência, sobriedade elevada e consciência ética.
 
 **Objetivo Final:** Transformar Wiki e DevPortal em **referências de design profissional**, igualando ou superando closer.earth em qualidade visual, consistência e experiência do usuário.
 
 ---
 
-## 🎯 Valores da Araponga (Base para Design)
+## 🎯 Valores da Arah (Base para Design)
 
 ### Valores Fundamentais
 
@@ -76,7 +76,7 @@ Este documento apresenta um **plano sistemático e completo** de reformulação 
 
 ### Análise dos Valores → Cores
 
-Baseado nos valores da Araponga (território, transparência, sobriedade), a paleta deve evocar:
+Baseado nos valores da Arah (território, transparência, sobriedade), a paleta deve evocar:
 
 - **Natureza e Território**: Verdes suaves e naturais
 - **Transparência e Clareza**: Azuis claros e neutros
@@ -366,7 +366,7 @@ Baseado nos valores da Araponga (território, transparência, sobriedade), a pal
 
 **Critérios de Sucesso:**
 - [ ] Todos os tokens definidos e documentados
-- [ ] Cores seguem valores da Araponga
+- [ ] Cores seguem valores da Arah
 - [ ] Tipografia segue escala harmônica
 - [ ] Espaçamento baseado em 8px
 
@@ -502,6 +502,6 @@ A implementação seguirá esta ordem:
 ---
 
 **Preparado por:** Plano Sistemático de Reformulação de Design  
-**Baseado em:** Valores da Araponga + Diretrizes Internacionais (Material Design 3, Apple HIG, WCAG 2.1)  
+**Baseado em:** Valores da Arah + Diretrizes Internacionais (Material Design 3, Apple HIG, WCAG 2.1)  
 **Data:** 2025-01-20  
 **Versão:** 2.0

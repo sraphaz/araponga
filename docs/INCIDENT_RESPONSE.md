@@ -1,4 +1,4 @@
-# Plano de Resposta a Incidentes - Araponga
+# Plano de Resposta a Incidentes - Arah
 
 **Última Atualização**: 2026-01-21  
 **Versão**: 1.0
@@ -123,16 +123,16 @@
 **Comandos Úteis**:
 ```bash
 # Verificar containers
-docker ps -a | grep araponga
+docker ps -a | grep Arah
 
 # Verificar logs
-docker logs araponga-api --tail 100
+docker logs Arah-api --tail 100
 
 # Verificar health
 curl http://localhost:8080/health
 
 # Reiniciar
-docker restart araponga-api
+docker restart Arah-api
 ```
 
 ### 3.2 Banco de Dados Inacessível (P0)
@@ -152,13 +152,13 @@ docker restart araponga-api
 **Comandos Úteis**:
 ```bash
 # Verificar conexões
-psql -h [host] -U [user] -d araponga -c "SELECT count(*) FROM pg_stat_activity;"
+psql -h [host] -U [user] -d Arah -c "SELECT count(*) FROM pg_stat_activity;"
 
 # Verificar locks
-psql -h [host] -U [user] -d araponga -c "SELECT * FROM pg_locks WHERE NOT granted;"
+psql -h [host] -U [user] -d Arah -c "SELECT * FROM pg_locks WHERE NOT granted;"
 
 # Verificar espaço
-psql -h [host] -U [user] -d araponga -c "SELECT pg_size_pretty(pg_database_size('araponga'));"
+psql -h [host] -U [user] -d Arah -c "SELECT pg_size_pretty(pg_database_size('Arah'));"
 ```
 
 ### 3.3 Performance Degradada (P1-P2)
@@ -206,7 +206,7 @@ curl http://localhost:8080/metrics | grep cache
 env | grep JWT__SIGNINGKEY
 
 # Verificar logs de auth
-docker logs araponga-api | grep -i "auth\|jwt\|unauthorized"
+docker logs Arah-api | grep -i "auth\|jwt\|unauthorized"
 ```
 
 ### 3.5 Perda de Dados (P0)

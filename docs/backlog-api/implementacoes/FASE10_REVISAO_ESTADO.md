@@ -136,7 +136,7 @@
 
 ### DevPortal Atualizado
 
-- ✅ `backend/Araponga.Api/wwwroot/devportal/index.html`:
+- ✅ `backend/Arah.Api/wwwroot/devportal/index.html`:
   - Seção de mídias em posts
   - Seção de mídias em eventos
   - Seção de mídias em marketplace
@@ -222,7 +222,7 @@
 ### 1. Verificar Estado dos Testes
 ```bash
 git checkout feature/fase10-midias-em-conteudo
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 ```
 
 ### 2. Verificar Conflitos com Main
@@ -236,7 +236,7 @@ git merge --abort
 ### 3. Revisar Mudanças
 ```bash
 git diff main..feature/fase10-midias-em-conteudo --stat
-git diff main..feature/fase10-midias-em-conteudo backend/Araponga.Api/Controllers
+git diff main..feature/fase10-midias-em-conteudo backend/Arah.Api/Controllers
 ```
 
 ### 4. Preparar Pull Request

@@ -34,7 +34,7 @@ Otimizar performance e preparar para escala.
 
 **Arquivos a Modificar**:
 - Entidades de domínio
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
 - Services que fazem updates
 
 **Critérios de Sucesso**:
@@ -81,10 +81,10 @@ Otimizar performance e preparar para escala.
 - [x] Documentar implementação
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Events/BackgroundEventProcessor.cs`
+- `backend/Arah.Infrastructure/Events/BackgroundEventProcessor.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Events/InMemoryEventBus.cs`
+- `backend/Arah.Infrastructure/Events/InMemoryEventBus.cs`
 
 **Critérios de Sucesso**:
 - ✅ Eventos processados em background
@@ -113,12 +113,12 @@ Otimizar performance e preparar para escala.
 - [x] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IDistributedCacheService.cs`
-- `backend/Araponga.Infrastructure/Caching/RedisCacheService.cs`
+- `backend/Arah.Application/Interfaces/IDistributedCacheService.cs`
+- `backend/Arah.Infrastructure/Caching/RedisCacheService.cs`
 
 **Arquivos a Modificar**:
 - Todos os cache services
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 **Critérios de Sucesso**:
 - ✅ Redis configurado
@@ -141,7 +141,7 @@ Otimizar performance e preparar para escala.
 - [x] Documentar configuração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Postgres/ReadOnlyArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/ReadOnlyArapongaDbContext.cs`
 
 **Arquivos a Modificar**:
 - Repositórios que fazem queries de leitura

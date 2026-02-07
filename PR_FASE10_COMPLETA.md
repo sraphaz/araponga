@@ -86,9 +86,9 @@ Este PR completa a **Fase 10: Mídias em Conteúdo** e a **Fase 10.9: Configura�
 ## 📊 Arquivos Modificados
 
 ### Principais
-- `backend/Araponga.Tests/Api/BDD/MediaSteps.cs` - Correções em steps BDD
-- `backend/Araponga.Tests/Application/BDD/MediaValidationSteps.cs` - Mapeamento de erros
-- `backend/Araponga.Tests/Api/BDD/MediaInChat.feature` - Ajuste de step
+- `backend/Arah.Tests/Api/BDD/MediaSteps.cs` - Correções em steps BDD
+- `backend/Arah.Tests/Application/BDD/MediaValidationSteps.cs` - Mapeamento de erros
+- `backend/Arah.Tests/Api/BDD/MediaInChat.feature` - Ajuste de step
 
 ### Documentação
 - `docs/backlog-api/FASE11_VERIFICACAO.md` - Verificação completa da Fase 11

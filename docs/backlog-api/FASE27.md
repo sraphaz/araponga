@@ -111,13 +111,13 @@ Implementar **IA integrada ao chat** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IAIServiceAdapter.cs`
-- `backend/Araponga.Infrastructure/DigitalServices/AI/OpenAIServiceAdapter.cs`
-- `backend/Araponga.Infrastructure/DigitalServices/AI/AnthropicClaudeServiceAdapter.cs`
-- `backend/Araponga.Infrastructure/DigitalServices/AI/GoogleGeminiServiceAdapter.cs`
-- `backend/Araponga.Infrastructure/DigitalServices/AI/AzureOpenAIServiceAdapter.cs`
-- `backend/Araponga.Application/Services/AIServiceAdapterFactory.cs`
-- `backend/Araponga.Tests/Infrastructure/AIServiceAdapterTests.cs`
+- `backend/Arah.Application/Interfaces/IAIServiceAdapter.cs`
+- `backend/Arah.Infrastructure/DigitalServices/AI/OpenAIServiceAdapter.cs`
+- `backend/Arah.Infrastructure/DigitalServices/AI/AnthropicClaudeServiceAdapter.cs`
+- `backend/Arah.Infrastructure/DigitalServices/AI/GoogleGeminiServiceAdapter.cs`
+- `backend/Arah.Infrastructure/DigitalServices/AI/AzureOpenAIServiceAdapter.cs`
+- `backend/Arah.Application/Services/AIServiceAdapterFactory.cs`
+- `backend/Arah.Tests/Infrastructure/AIServiceAdapterTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Adapters implementados
@@ -158,11 +158,11 @@ Implementar **IA integrada ao chat** que permite:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/ChatAIService.cs`
-- `backend/Araponga.Tests/Application/ChatAIServiceTests.cs`
+- `backend/Arah.Application/Services/ChatAIService.cs`
+- `backend/Arah.Tests/Application/ChatAIServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ChatService.cs` (integração opcional)
+- `backend/Arah.Application/Services/ChatService.cs` (integração opcional)
 
 **Critérios de Sucesso**:
 - ✅ Serviço de IA funcionando
@@ -194,15 +194,15 @@ Implementar **IA integrada ao chat** que permite:
 - [ ] Testes de integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/ChatAIController.cs`
-- `backend/Araponga.Api/Contracts/Chat/SendAIMessageRequest.cs`
-- `backend/Araponga.Api/Contracts/Chat/AIMessageResponse.cs`
-- `backend/Araponga.Api/Contracts/Chat/ConversationAIConsumptionResponse.cs`
-- `backend/Araponga.Api/Validators/SendAIMessageRequestValidator.cs`
-- `backend/Araponga.Tests/Integration/ChatAIIntegrationTests.cs`
+- `backend/Arah.Api/Controllers/ChatAIController.cs`
+- `backend/Arah.Api/Contracts/Chat/SendAIMessageRequest.cs`
+- `backend/Arah.Api/Contracts/Chat/AIMessageResponse.cs`
+- `backend/Arah.Api/Contracts/Chat/ConversationAIConsumptionResponse.cs`
+- `backend/Arah.Api/Validators/SendAIMessageRequestValidator.cs`
+- `backend/Arah.Tests/Integration/ChatAIIntegrationTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/ChatController.cs` (opcional)
+- `backend/Arah.Api/Controllers/ChatController.cs` (opcional)
 
 **Critérios de Sucesso**:
 - ✅ API funcionando
@@ -238,11 +238,11 @@ Implementar **IA integrada ao chat** que permite:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AIConsumptionQuotaService.cs`
-- `backend/Araponga.Tests/Application/AIConsumptionQuotaServiceTests.cs`
+- `backend/Arah.Application/Services/AIConsumptionQuotaService.cs`
+- `backend/Arah.Tests/Application/AIConsumptionQuotaServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/DigitalServiceUsageTracker.cs` (integração)
+- `backend/Arah.Application/Services/DigitalServiceUsageTracker.cs` (integração)
 
 **Critérios de Sucesso**:
 - ✅ Verificação de quota funcionando
@@ -278,12 +278,12 @@ Implementar **IA integrada ao chat** que permite:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AIConsumptionReportService.cs`
-- `backend/Araponga.Api/Contracts/DigitalServices/AIConsumptionSummaryResponse.cs`
-- `backend/Araponga.Tests/Application/AIConsumptionReportServiceTests.cs`
+- `backend/Arah.Application/Services/AIConsumptionReportService.cs`
+- `backend/Arah.Api/Contracts/DigitalServices/AIConsumptionSummaryResponse.cs`
+- `backend/Arah.Tests/Application/AIConsumptionReportServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/DigitalServiceConsumptionController.cs` (adicionar filtros de IA)
+- `backend/Arah.Api/Controllers/DigitalServiceConsumptionController.cs` (adicionar filtros de IA)
 
 **Critérios de Sucesso**:
 - ✅ Relatórios de consumo funcionando

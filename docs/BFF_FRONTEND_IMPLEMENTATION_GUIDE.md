@@ -73,7 +73,7 @@ Content-Type: application/json
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"]
+  "redirectUris": ["Arah://callback"]
 }
 ```
 
@@ -86,7 +86,7 @@ Content-Type: application/json
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"],
+  "redirectUris": ["Arah://callback"],
   "isActive": true,
   "createdAtUtc": "2026-01-28T10:00:00Z"
 }

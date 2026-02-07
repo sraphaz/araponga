@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fase**: 17  
 **Prioridade**: 🔴 Crítica (Economia Local)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -199,7 +199,7 @@ Distribuição Realizada
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Marketplace](funcional/06_MARKETPLACE.md)** - Sistema de lojas existente
 - **[Governança e Votação](funcional/13_GOVERNANCA_VOTACAO.md)** - Decisões coletivas
 - **[Fase 17 - Compra Coletiva](backlog-api/FASE17.md)** - Detalhes técnicos do planejamento

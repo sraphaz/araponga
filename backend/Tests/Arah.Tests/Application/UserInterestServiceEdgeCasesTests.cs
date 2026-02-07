@@ -1,0 +1,89 @@
+using Arah.Application.Services;
+using Arah.Domain.Users;
+using Arah.Infrastructure.InMemory;
+using Arah.Infrastructure.Shared.InMemory;
+using Xunit;
+
+namespace Arah.Tests.Application;
+
+/// <summary>
+/// Edge case tests for UserInterestService (empty tag, duplicate, remove non-existent, list empty).
+/// </summary>
+public sealed class UserInterestServiceEdgeCasesTests
+{
+    [Fact]
+    public async Task AddInterestAsync_WithEmptyTag_ReturnsFailure()
+    {
+        var sharedStore = new InMemorySharedStore();
+        var repo = new InMemoryUserInterestRepository(sharedStore);
+        var uow = new InMemoryUnitOfWork();
+        var svc = new UserInterestService(repo, uow);
+        var userId = Guid.NewGuid();
+
+        var result = await svc.AddInterestAsync(userId, "  ", CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Contains("required", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task AddInterestAsync_WhenDuplicate_ReturnsFailure()
+    {
+        var sharedStore = new InMemorySharedStore();
+        var repo = new InMemoryUserInterestRepository(sharedStore);
+        var uow = new InMemoryUnitOfWork();
+        var svc = new UserInterestService(repo, uow);
+        var userId = Guid.NewGuid();
+        await svc.AddInterestAsync(userId, "eventos", CancellationToken.None);
+
+        var result = await svc.AddInterestAsync(userId, "eventos", CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Contains("already exists", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task RemoveInterestAsync_WithEmptyTag_ReturnsFailure()
+    {
+        var sharedStore = new InMemorySharedStore();
+        var repo = new InMemoryUserInterestRepository(sharedStore);
+        var uow = new InMemoryUnitOfWork();
+        var svc = new UserInterestService(repo, uow);
+        var userId = Guid.NewGuid();
+
+        var result = await svc.RemoveInterestAsync(userId, "", CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Contains("required", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task RemoveInterestAsync_WhenNotExists_ReturnsFailure()
+    {
+        var sharedStore = new InMemorySharedStore();
+        var repo = new InMemoryUserInterestRepository(sharedStore);
+        var uow = new InMemoryUnitOfWork();
+        var svc = new UserInterestService(repo, uow);
+        var userId = Guid.NewGuid();
+
+        var result = await svc.RemoveInterestAsync(userId, "nonexistent", CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Contains("does not exist", result.Error ?? "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task ListInterestsAsync_WhenUserHasNone_ReturnsEmpty()
+    {
+        var sharedStore = new InMemorySharedStore();
+        var repo = new InMemoryUserInterestRepository(sharedStore);
+        var uow = new InMemoryUnitOfWork();
+        var svc = new UserInterestService(repo, uow);
+        var userId = Guid.NewGuid();
+
+        var list = await svc.ListInterestsAsync(userId, CancellationToken.None);
+
+        Assert.NotNull(list);
+        Assert.Empty(list);
+    }
+}

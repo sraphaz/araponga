@@ -7,7 +7,7 @@
 
 ## 📋 Contexto
 
-No Araponga, o modelo atual mistura identidade pessoal, vínculo territorial, verificação, participação econômica e permissões operacionais. Isso gerou ambiguidades e dificuldade de evolução.
+No Arah, o modelo atual mistura identidade pessoal, vínculo territorial, verificação, participação econômica e permissões operacionais. Isso gerou ambiguidades e dificuldade de evolução.
 
 Este trabalho refatora o modelo para recentralizar o **User** e separar corretamente:
 - Identidade pessoal

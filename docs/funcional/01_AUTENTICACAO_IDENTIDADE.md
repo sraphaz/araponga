@@ -3,7 +3,7 @@
 **Versão**: 1.0  
 **Data**: 2026-01-28  
 **Status**: Funcionalidade Implementada  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -20,7 +20,7 @@
 
 ## 🎯 Visão Geral
 
-O domínio de **Autenticação e Identidade** é responsável por garantir que cada pessoa tenha uma identidade única, verificada e segura na plataforma Araponga. Este é o primeiro passo para qualquer interação na plataforma.
+O domínio de **Autenticação e Identidade** é responsável por garantir que cada pessoa tenha uma identidade única, verificada e segura na plataforma Arah. Este é o primeiro passo para qualquer interação na plataforma.
 
 ### Objetivo
 
@@ -462,7 +462,7 @@ Permitir que usuários:
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[Territórios e Memberships](funcional/02_TERRITORIOS_MEMBERSHIPS.md)** - Próximo passo após autenticação
 - **[API - Autenticação](api/60_01_API_AUTENTICACAO.md)** - Documentação técnica da API
 

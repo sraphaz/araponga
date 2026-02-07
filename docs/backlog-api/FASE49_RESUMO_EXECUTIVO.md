@@ -37,7 +37,7 @@ Implementar módulo completo de conexões e círculo de amigos, permitindo que m
 ### Módulo Novo
 
 ```
-Araponga.Modules.Connections/
+Arah.Modules.Connections/
 ├── Domain/          # Entidades: UserConnection, ConnectionPrivacySettings
 ├── Application/     # Services: ConnectionService, ConnectionPrivacyService
 ├── Infrastructure/  # Repositórios PostgreSQL

@@ -35,9 +35,9 @@ Implementar funcionalidades de negócio essenciais, incluindo sistema de pagamen
 - [ ] Documentar integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PaymentService.cs`
-- `backend/Araponga.Infrastructure/Payments/` (novo diretório)
-- `backend/Araponga.Api/Controllers/PaymentController.cs`
+- `backend/Arah.Application/Services/PaymentService.cs`
+- `backend/Arah.Infrastructure/Payments/` (novo diretório)
+- `backend/Arah.Api/Controllers/PaymentController.cs`
 
 **Nota**: Sistema de pagamentos completo implementado na FASE7. Ver [FASE7.md](./FASE7.md) para detalhes.
 
@@ -64,8 +64,8 @@ Implementar funcionalidades de negócio essenciais, incluindo sistema de pagamen
 - [ ] Documentar conformidade LGPD
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Exportação de dados funcionando
@@ -91,8 +91,8 @@ Implementar funcionalidades de negócio essenciais, incluindo sistema de pagamen
 - [ ] Documentar analytics
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AnalyticsService.cs`
-- `backend/Araponga.Api/Controllers/AnalyticsController.cs`
+- `backend/Arah.Application/Services/AnalyticsService.cs`
+- `backend/Arah.Api/Controllers/AnalyticsController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Serviço de analytics criado
@@ -116,7 +116,7 @@ Implementar funcionalidades de negócio essenciais, incluindo sistema de pagamen
 - [ ] Documentar interface
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/CuratorDashboardController.cs`
+- `backend/Arah.Api/Controllers/CuratorDashboardController.cs`
 - Frontend (se aplicável)
 
 **Critérios de Sucesso**:
@@ -140,8 +140,8 @@ Implementar funcionalidades de negócio essenciais, incluindo sistema de pagamen
 - [ ] Documentar integração
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Infrastructure/Notifications/` (novo diretório)
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Infrastructure/Notifications/` (novo diretório)
 
 **Critérios de Sucesso**:
 - ✅ Integração implementada

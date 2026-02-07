@@ -10,7 +10,7 @@
 
 As **fases 31-44** são mencionadas no **roadmap estratégico** (`docs/02_ROADMAP.md`) e na **Estratégia de Convergência de Mercado** (`docs/39_ESTRATEGIA_CONVERGENCIA_MERCADO.md`), mas **não possuem documentos detalhados** (arquivos `FASE31.md` até `FASE44.md`).
 
-Elas foram identificadas como necessárias para elevar o Araponga ao nível de projetos que recebem investimentos significativos, mas ainda não foram detalhadas em documentos de fase individuais.
+Elas foram identificadas como necessárias para elevar o Arah ao nível de projetos que recebem investimentos significativos, mas ainda não foram detalhadas em documentos de fase individuais.
 
 **Nota Importante**: A **Fase 30 (Sistema de Hospedagem Territorial)** foi criada como documento completo e é a primeira fase nova após as 29 existentes. As fases conceituais seguem a sequência numérica correta a partir de 31.
 

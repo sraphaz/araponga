@@ -20,7 +20,7 @@ O arquivo `openapi.json` é **gerado automaticamente** quando a aplicação ASP.
 ### Localização
 
 - **Geração dinâmica**: `/swagger/v1/swagger.json` (quando backend está rodando)
-- **Arquivo estático**: `backend/Araponga.Api/wwwroot/devportal/openapi.json` (para GitHub Pages)
+- **Arquivo estático**: `backend/Arah.Api/wwwroot/devportal/openapi.json` (para GitHub Pages)
 - **DevPortal**: `http://localhost:5000/devportal` (quando backend está rodando)
 
 ### Atualização Manual (quando necessário)
@@ -29,7 +29,7 @@ Para atualizar o arquivo `openapi.json` estático no Git:
 
 1. **Rodar a aplicação em modo de desenvolvimento**:
    ```bash
-   cd backend/Araponga.Api
+   cd backend/Arah.Api
    dotnet run
    ```
 
@@ -40,12 +40,12 @@ Para atualizar o arquivo `openapi.json` estático no Git:
 
 3. **Copiar o conteúdo** para:
    ```
-   backend/Araponga.Api/wwwroot/devportal/openapi.json
+   backend/Arah.Api/wwwroot/devportal/openapi.json
    ```
 
 4. **Commitar a atualização**:
    ```bash
-   git add backend/Araponga.Api/wwwroot/devportal/openapi.json
+   git add backend/Arah.Api/wwwroot/devportal/openapi.json
    git commit -m "Atualizar OpenAPI para Fase 10 (Mídias em Conteúdo)"
    ```
 
@@ -237,9 +237,9 @@ Após a Fase 10, os seguintes schemas devem incluir novos campos:
 ### Estrutura do DevPortal
 
 O DevPortal está localizado em:
-- **HTML**: `backend/Araponga.Api/wwwroot/devportal/index.html`
-- **JavaScript**: `backend/Araponga.Api/wwwroot/devportal/assets/js/devportal.js`
-- **OpenAPI**: `backend/Araponga.Api/wwwroot/devportal/openapi.json`
+- **HTML**: `backend/Arah.Api/wwwroot/devportal/index.html`
+- **JavaScript**: `backend/Arah.Api/wwwroot/devportal/assets/js/devportal.js`
+- **OpenAPI**: `backend/Arah.Api/wwwroot/devportal/openapi.json`
 
 ### Atualizações Necessárias
 
@@ -251,7 +251,7 @@ Para verificar se as atualizações estão corretas:
 
 1. **Rodar a aplicação**:
    ```bash
-   cd backend/Araponga.Api
+   cd backend/Arah.Api
    dotnet run
    ```
 

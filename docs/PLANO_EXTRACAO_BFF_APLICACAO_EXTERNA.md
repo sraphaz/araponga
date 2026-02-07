@@ -34,7 +34,7 @@ Extrair o BFF (Backend for Frontend) de módulo interno para uma **aplicação A
                      │ (Client Credentials Flow)
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api.Bff (Aplicação Externa)            │
+│         Arah.Api.Bff (Aplicação Externa)            │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  OAuth2 Authorization Server                        │  │
 │  │  - Client Registration                              │  │
@@ -63,7 +63,7 @@ Extrair o BFF (Backend for Frontend) de módulo interno para uma **aplicação A
                      │ (Token do usuário repassado)
                      │
 ┌────────────────────▼────────────────────────────────────┐
-│         Araponga.Api (API Principal)                    │
+│         Arah.Api (API Principal)                    │
 │  ┌────────────────────────────────────────────────────┐  │
 │  │  Controllers (por recurso)                        │  │
 │  │  - FeedController                                  │  │
@@ -88,7 +88,7 @@ Admin → POST /api/v1/admin/clients
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"]
+  "redirectUris": ["Arah://callback"]
 }
 
 Response:
@@ -139,7 +139,7 @@ X-BFF-Client-Id: 550e8400-e29b-41d4-a716-446655440000
 #### 1.1 Modelo de Domínio
 
 ```csharp
-// Araponga.Domain.OAuth/ClientApplication.cs
+// Arah.Domain.OAuth/ClientApplication.cs
 public sealed class ClientApplication
 {
     public Guid Id { get; private set; }
@@ -159,7 +159,7 @@ public sealed class ClientApplication
 #### 1.2 Repositório
 
 ```csharp
-// Araponga.Application.Interfaces.OAuth/IClientApplicationRepository.cs
+// Arah.Application.Interfaces.OAuth/IClientApplicationRepository.cs
 public interface IClientApplicationRepository
 {
     Task<ClientApplication?> GetByClientIdAsync(string clientId, CancellationToken cancellationToken);
@@ -174,7 +174,7 @@ public interface IClientApplicationRepository
 #### 1.3 Serviço de Registro
 
 ```csharp
-// Araponga.Application.Services.OAuth/ClientRegistrationService.cs
+// Arah.Application.Services.OAuth/ClientRegistrationService.cs
 public sealed class ClientRegistrationService
 {
     public async Task<Result<(string clientId, string clientSecret)>> RegisterClientAsync(
@@ -216,7 +216,7 @@ public sealed class ClientRegistrationService
 #### 2.1 Token Service para BFF
 
 ```csharp
-// Araponga.Api.Bff/Security/IBffTokenService.cs
+// Arah.Api.Bff/Security/IBffTokenService.cs
 public interface IBffTokenService
 {
     string IssueClientToken(string clientId, IReadOnlyList<string> scopes);
@@ -227,7 +227,7 @@ public interface IBffTokenService
 #### 2.2 OAuth2 Token Endpoint
 
 ```csharp
-// Araponga.Api.Bff/Controllers/OAuthController.cs
+// Arah.Api.Bff/Controllers/OAuthController.cs
 [ApiController]
 [Route("oauth")]
 public sealed class OAuthController : ControllerBase
@@ -271,7 +271,7 @@ public sealed class OAuthController : ControllerBase
 ### 3. Middleware de Autenticação no BFF
 
 ```csharp
-// Araponga.Api.Bff/Middleware/BffAuthenticationMiddleware.cs
+// Arah.Api.Bff/Middleware/BffAuthenticationMiddleware.cs
 public sealed class BffAuthenticationMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -305,7 +305,7 @@ public sealed class BffAuthenticationMiddleware
 ### 4. API Client para Consumir API Principal
 
 ```csharp
-// Araponga.Api.Bff/Clients/ApiHttpClient.cs
+// Arah.Api.Bff/Clients/ApiHttpClient.cs
 public sealed class ApiHttpClient
 {
     private readonly HttpClient _httpClient;
@@ -394,7 +394,7 @@ CREATE INDEX idx_oauth_clients_is_active ON oauth_clients(is_active);
 ### Migração
 
 ```csharp
-// Araponga.Infrastructure.Postgres/Migrations/XXXXXX_AddOAuthClients.cs
+// Arah.Infrastructure.Postgres/Migrations/XXXXXX_AddOAuthClients.cs
 public partial class AddOAuthClients : Migration
 {
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -457,7 +457,7 @@ public partial class AddOAuthClients : Migration
 
 ```
 backend/
-├── Araponga.Api.Bff/                    # Nova aplicação BFF
+├── Arah.Api.Bff/                    # Nova aplicação BFF
 │   ├── Controllers/
 │   │   ├── OAuthController.cs           # OAuth2 token endpoint
 │   │   ├── Journeys/
@@ -480,18 +480,18 @@ backend/
 │   ├── Middleware/
 │   │   └── BffAuthenticationMiddleware.cs
 │   ├── Program.cs
-│   └── Araponga.Api.Bff.csproj
+│   └── Arah.Api.Bff.csproj
 │
-├── Araponga.Domain.OAuth/               # Novo domínio OAuth
+├── Arah.Domain.OAuth/               # Novo domínio OAuth
 │   ├── ClientApplication.cs
 │   └── OAuthScopes.cs
 │
-├── Araponga.Application/                 # Atualizar
+├── Arah.Application/                 # Atualizar
 │   └── Services/
 │       └── OAuth/
 │           └── ClientRegistrationService.cs
 │
-└── Araponga.Infrastructure/              # Atualizar
+└── Arah.Infrastructure/              # Atualizar
     └── Postgres/
         ├── Entities/
         │   └── OAuthClientRecord.cs
@@ -509,7 +509,7 @@ backend/
 
 #### 1.1 Criar Domínio OAuth (2 dias)
 
-- [ ] Criar projeto `Araponga.Domain.OAuth`
+- [ ] Criar projeto `Arah.Domain.OAuth`
 - [ ] Criar `ClientApplication` entity
 - [ ] Criar `OAuthScopes` (enum/constants)
 - [ ] Criar interfaces de repositório
@@ -572,7 +572,7 @@ backend/
 
 #### 3.3 Journey Controllers (1 dia)
 
-- [ ] Mover controllers de `Araponga.Api` para `Araponga.Api.Bff`
+- [ ] Mover controllers de `Arah.Api` para `Arah.Api.Bff`
 - [ ] Atualizar rotas para `/api/v2/journeys/*`
 - [ ] Aplicar middleware de autenticação
 - [ ] Testes de integração
@@ -757,7 +757,7 @@ backend/
 ## ✅ Checklist de Implementação
 
 ### Fase 1: Preparação
-- [ ] Criar projeto `Araponga.Domain.OAuth`
+- [ ] Criar projeto `Arah.Domain.OAuth`
 - [ ] Criar `ClientApplication` entity
 - [ ] Criar `OAuthClientRecord` (Postgres)
 - [ ] Criar `PostgresOAuthClientRepository`
@@ -846,7 +846,7 @@ grant_type=client_credentials
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"]
+  "redirectUris": ["Arah://callback"]
 }
 ```
 
@@ -859,7 +859,7 @@ grant_type=client_credentials
   "name": "Flutter Mobile App",
   "description": "Aplicativo mobile Flutter",
   "scopes": ["journeys:read", "journeys:write"],
-  "redirectUris": ["araponga://callback"],
+  "redirectUris": ["Arah://callback"],
   "isActive": true,
   "createdAtUtc": "2026-01-28T10:00:00Z"
 }
@@ -968,7 +968,7 @@ grant_type=client_credentials
     "LogLevel": {
       "Default": "Information",
       "Microsoft.AspNetCore": "Warning",
-      "Araponga.Api.Bff": "Information"
+      "Arah.Api.Bff": "Information"
     },
     "Seq": {
       "ServerUrl": "http://localhost:5341",
@@ -982,7 +982,7 @@ grant_type=client_credentials
       "Override": {
         "Microsoft": "Warning",
         "System": "Warning",
-        "Araponga.Api.Bff.Security": "Debug"
+        "Arah.Api.Bff.Security": "Debug"
       }
     },
     "WriteTo": [
@@ -1004,7 +1004,7 @@ grant_type=client_credentials
     ],
     "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId", "WithEnvironmentName" ],
     "Properties": {
-      "Application": "Araponga.Bff",
+      "Application": "Arah.Bff",
       "Version": "1.0.0"
     }
   }
@@ -1014,7 +1014,7 @@ grant_type=client_credentials
 #### 1.2 Program.cs - Configuração Serilog
 
 ```csharp
-// Araponga.Api.Bff/Program.cs
+// Arah.Api.Bff/Program.cs
 using Serilog;
 using System.Reflection;
 
@@ -1035,7 +1035,7 @@ builder.Host.UseSerilog((context, configuration) =>
         .Enrich.WithMachineName()
         .Enrich.WithThreadId()
         .Enrich.WithEnvironmentName()
-        .Enrich.WithProperty("Application", "Araponga.Bff")
+        .Enrich.WithProperty("Application", "Arah.Bff")
         .Enrich.WithProperty("Version", Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown")
         .MinimumLevel.Is(minLevel)
         .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
@@ -1062,11 +1062,11 @@ builder.Host.UseSerilog((context, configuration) =>
 #### 1.3 Middleware de Logging com Enriquecimento
 
 ```csharp
-// Araponga.Api.Bff/Middleware/BffRequestLoggingMiddleware.cs
+// Arah.Api.Bff/Middleware/BffRequestLoggingMiddleware.cs
 using Serilog.Context;
 using System.Diagnostics;
 
-namespace Araponga.Api.Bff.Middleware;
+namespace Arah.Api.Bff.Middleware;
 
 public sealed class BffRequestLoggingMiddleware
 {
@@ -1118,7 +1118,7 @@ public sealed class BffRequestLoggingMiddleware
 #### 2.1 Eventos de Auditoria OAuth2
 
 ```csharp
-// Araponga.Api.Bff/Services/OAuth/AuditLogService.cs
+// Arah.Api.Bff/Services/OAuth/AuditLogService.cs
 public sealed class AuditLogService
 {
     private readonly ILogger<AuditLogService> _logger;
@@ -1165,7 +1165,7 @@ public sealed class AuditLogService
 #### 3.1 Configuração Prometheus
 
 ```csharp
-// Araponga.Api.Bff/Program.cs
+// Arah.Api.Bff/Program.cs
 using Prometheus;
 
 // Métricas customizadas
@@ -1197,7 +1197,7 @@ app.UseHttpMetrics(); // Métricas HTTP automáticas
 #### 3.2 Instrumentação de Código
 
 ```csharp
-// Araponga.Api.Bff/Services/OAuth/BffTokenService.cs
+// Arah.Api.Bff/Services/OAuth/BffTokenService.cs
 public sealed class BffTokenService : IBffTokenService
 {
     private readonly ILogger<BffTokenService> _logger;
@@ -1225,7 +1225,7 @@ public sealed class BffTokenService : IBffTokenService
 #### 4.1 Configuração OpenTelemetry
 
 ```csharp
-// Araponga.Api.Bff/Program.cs
+// Arah.Api.Bff/Program.cs
 using OpenTelemetry.Trace;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Metrics;
@@ -1233,12 +1233,12 @@ using OpenTelemetry.Metrics;
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource
         .AddService(
-            serviceName: "Araponga.Bff",
+            serviceName: "Arah.Bff",
             serviceVersion: "1.0.0"))
     .WithTracing(tracing => tracing
         .AddAspNetCoreInstrumentation()
         .AddHttpClientInstrumentation()
-        .AddSource("Araponga.Bff")
+        .AddSource("Arah.Bff")
         .AddOtlpExporter(options =>
         {
             options.Endpoint = new Uri(builder.Configuration["OpenTelemetry:Otlp:Endpoint"] ?? "");
@@ -1254,7 +1254,7 @@ builder.Services.AddOpenTelemetry()
 #### 5.1 Health Checks Customizados
 
 ```csharp
-// Araponga.Api.Bff/HealthChecks/BffHealthCheck.cs
+// Arah.Api.Bff/HealthChecks/BffHealthCheck.cs
 public sealed class BffHealthCheck : IHealthCheck
 {
     private readonly IClientApplicationRepository _clientRepository;
@@ -1315,7 +1315,7 @@ builder.Services.AddHealthChecks()
   "Logging": {
     "LogLevel": {
       "Default": "Debug",
-      "Araponga.Api.Bff": "Debug"
+      "Arah.Api.Bff": "Debug"
     },
     "Seq": {
       "ServerUrl": "http://localhost:5341"
@@ -1327,8 +1327,8 @@ builder.Services.AddHealthChecks()
   },
   "Bff": {
     "Jwt": {
-      "Issuer": "Araponga.Bff",
-      "Audience": "Araponga.Bff",
+      "Issuer": "Arah.Bff",
+      "Audience": "Arah.Bff",
       "SigningKey": "dev-only-change-me-in-production-min-32-chars",
       "ExpirationMinutes": 60
     }
@@ -1343,7 +1343,7 @@ builder.Services.AddHealthChecks()
   "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "Araponga.Api.Bff": "Information"
+      "Arah.Api.Bff": "Information"
     },
     "Seq": {
       "ServerUrl": "${SEQ_SERVER_URL}",
@@ -1356,8 +1356,8 @@ builder.Services.AddHealthChecks()
   },
   "Bff": {
     "Jwt": {
-      "Issuer": "Araponga.Bff",
-      "Audience": "Araponga.Bff",
+      "Issuer": "Arah.Bff",
+      "Audience": "Arah.Bff",
       "SigningKey": "${BFF_JWT_SIGNING_KEY}",
       "ExpirationMinutes": 60
     }

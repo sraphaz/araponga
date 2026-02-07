@@ -1,4 +1,4 @@
-# Prompt Avançado para Desenvolvimento do Araponga Flutter App
+# Prompt Avançado para Desenvolvimento do Arah Flutter App
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
@@ -9,7 +9,7 @@
 
 ## 🎯 CONTEXTO DO PROJETO
 
-Você é um **engenheiro Flutter sênior especializado** em desenvolvimento mobile de aplicações corporativas de alto nível. Seu objetivo é desenvolver o **Araponga Flutter Mobile App**, uma plataforma **território-first** e **comunidade-first** para organização comunitária local.
+Você é um **engenheiro Flutter sênior especializado** em desenvolvimento mobile de aplicações corporativas de alto nível. Seu objetivo é desenvolver o **Arah Flutter Mobile App**, uma plataforma **território-first** e **comunidade-first** para organização comunitária local.
 
 ### Princípios Fundamentais Não Negociáveis
 
@@ -43,7 +43,7 @@ Você é um **engenheiro Flutter sênior especializado** em desenvolvimento mobi
 - **go_router**: ^14.0.0
   - Roteamento declarativo com deep linking
   - Rotas protegidas por autenticação e capabilities
-  - Deep linking: `araponga://territory/{id}`, `araponga://post/{id}`, `araponga://event/{id}`
+  - Deep linking: `Arah://territory/{id}`, `Arah://post/{id}`, `Arah://event/{id}`
   - Navegação com estado preservado (nested navigation)
 
 ### Gerenciamento de Estado
@@ -66,7 +66,7 @@ Você é um **engenheiro Flutter sênior especializado** em desenvolvimento mobi
 ### Serialização JSON
 - **json_serializable**: ^6.7.0 + **json_annotation**: ^4.8.0
 - **build_runner**: Geração automática de fromJson/toJson
-- Todos os models devem ser gerados automaticamente a partir do OpenAPI (`backend/Araponga.Api/wwwroot/devportal/openapi.json`)
+- Todos os models devem ser gerados automaticamente a partir do OpenAPI (`backend/Arah.Api/wwwroot/devportal/openapi.json`)
 
 ### Persistência Local
 - **shared_preferences**: Preferências do usuário (tema, idioma, território selecionado)
@@ -613,9 +613,9 @@ final appRouter = GoRouter(
 ### Deep Linking
 
 **Suportar**:
-- `araponga://territory/{id}` → TerritoryDetailScreen
-- `araponga://post/{id}` → PostDetailScreen
-- `araponga://event/{id}` → EventDetailScreen
+- `Arah://territory/{id}` → TerritoryDetailScreen
+- `Arah://post/{id}` → PostDetailScreen
+- `Arah://event/{id}` → EventDetailScreen
 
 ---
 
@@ -624,7 +624,7 @@ final appRouter = GoRouter(
 ### Base URL
 
 **Desenvolvimento**: `http://localhost:5000/api/v1`
-**Produção**: `https://api.araponga.app/api/v1`
+**Produção**: `https://api.Arah.app/api/v1`
 
 ### Endpoints Principais (ver OpenAPI)
 
@@ -914,9 +914,9 @@ Todos os models devem ser gerados automaticamente a partir do `openapi.json` usa
 - App Links (Android) via `assetlinks.json`
 
 **Tipos de Links**:
-- `https://araponga.page.link/post/{id}` → PostDetailScreen
-- `https://araponga.page.link/event/{id}` → EventDetailScreen
-- `https://araponga.page.link/territory/{id}` → TerritoryDetailScreen
+- `https://Arah.page.link/post/{id}` → PostDetailScreen
+- `https://Arah.page.link/event/{id}` → EventDetailScreen
+- `https://Arah.page.link/territory/{id}` → TerritoryDetailScreen
 
 ### 11.4 Recuperação de Conta ⭐
 
@@ -1172,7 +1172,7 @@ Toda a documentação detalhada está em:
 
 ### Documentação de Backend e API
 - **`docs/60_API_LÓGICA_NEGÓCIO.md`**: Lógica de negócio da API
-- **`backend/Araponga.Api/wwwroot/devportal/openapi.json`**: Especificação OpenAPI
+- **`backend/Arah.Api/wwwroot/devportal/openapi.json`**: Especificação OpenAPI
 
 ---
 
@@ -1213,4 +1213,4 @@ Toda a documentação detalhada está em:
 
 ---
 
-**Este prompt contém TODAS as informações necessárias para criar o app Flutter Araponga completo e profissional. Use este documento como referência única e completa para desenvolvimento.**
+**Este prompt contém TODAS as informações necessárias para criar o app Flutter Arah completo e profissional. Use este documento como referência única e completa para desenvolvimento.**

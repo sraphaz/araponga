@@ -5,7 +5,7 @@
 **Status**: ⏳ **PLANEJADA - NÃO IMPLEMENTADA**  
 **Fases**: 31-35  
 **Prioridade**: 🟡 Alta (Quando Houver Demanda)  
-**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_ARAPONGA.md)
+**Parte de**: [Documentação Funcional da Plataforma](funcional/00_PLATAFORMA_Arah.md)
 
 ---
 
@@ -79,7 +79,7 @@ Adoção brasileira de blockchain ainda é baixa. Web3 pode ser adicionado depoi
 
 ## 📚 Documentação Relacionada
 
-- **[Plataforma Araponga](funcional/00_PLATAFORMA_ARAPONGA.md)** - Visão geral
+- **[Plataforma Arah](funcional/00_PLATAFORMA_Arah.md)** - Visão geral
 - **[DAO e Tokenização](funcional/21_DAO_TOKENIZACAO.md)** - Uso de Web3
 - **[Moeda Territorial](funcional/19_MOEDA_TERRITORIAL.md)** - Preparação para tokens
 

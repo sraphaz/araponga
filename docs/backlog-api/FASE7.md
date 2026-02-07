@@ -54,16 +54,16 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar modelo de rastreabilidade
 
 **Arquivos Criados**:
-- `backend/Araponga.Domain/Financial/FinancialTransaction.cs` ✅
-- `backend/Araponga.Domain/Financial/TransactionType.cs` ✅
-- `backend/Araponga.Domain/Financial/TransactionStatus.cs` ✅
-- `backend/Araponga.Domain/Financial/TransactionStatusHistory.cs` ✅
-- `backend/Araponga.Application/Interfaces/IFinancialTransactionRepository.cs` ✅
-- `backend/Araponga.Application/Interfaces/ITransactionStatusHistoryRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresFinancialTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresTransactionStatusHistoryRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryFinancialTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTransactionStatusHistoryRepository.cs` ✅
+- `backend/Arah.Domain/Financial/FinancialTransaction.cs` ✅
+- `backend/Arah.Domain/Financial/TransactionType.cs` ✅
+- `backend/Arah.Domain/Financial/TransactionStatus.cs` ✅
+- `backend/Arah.Domain/Financial/TransactionStatusHistory.cs` ✅
+- `backend/Arah.Application/Interfaces/IFinancialTransactionRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/ITransactionStatusHistoryRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresFinancialTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresTransactionStatusHistoryRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryFinancialTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryTransactionStatusHistoryRepository.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Modelo de rastreabilidade completo
@@ -88,15 +88,15 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar modelo de saldo de vendedor
 
 **Arquivos Criados**:
-- `backend/Araponga.Domain/Marketplace/SellerBalance.cs` ✅
-- `backend/Araponga.Domain/Marketplace/SellerTransaction.cs` ✅
-- `backend/Araponga.Domain/Marketplace/SellerTransactionStatus.cs` ✅
-- `backend/Araponga.Application/Interfaces/ISellerBalanceRepository.cs` ✅
-- `backend/Araponga.Application/Interfaces/ISellerTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresSellerBalanceRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemorySellerBalanceRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs` ✅
+- `backend/Arah.Domain/Marketplace/SellerBalance.cs` ✅
+- `backend/Arah.Domain/Marketplace/SellerTransaction.cs` ✅
+- `backend/Arah.Domain/Marketplace/SellerTransactionStatus.cs` ✅
+- `backend/Arah.Application/Interfaces/ISellerBalanceRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/ISellerTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresSellerBalanceRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemorySellerBalanceRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Modelo de saldo de vendedor completo
@@ -120,22 +120,22 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar modelo de gestão financeira
 
 **Arquivos Criados**:
-- `backend/Araponga.Domain/Financial/PlatformFinancialBalance.cs` ✅
-- `backend/Araponga.Domain/Financial/PlatformRevenueTransaction.cs` ✅
-- `backend/Araponga.Domain/Financial/PlatformExpenseTransaction.cs` ✅
-- `backend/Araponga.Domain/Financial/ReconciliationRecord.cs` ✅
-- `backend/Araponga.Application/Interfaces/IPlatformFinancialBalanceRepository.cs` ✅
-- `backend/Araponga.Application/Interfaces/IPlatformRevenueTransactionRepository.cs` ✅
-- `backend/Araponga.Application/Interfaces/IPlatformExpenseTransactionRepository.cs` ✅
-- `backend/Araponga.Application/Interfaces/IReconciliationRecordRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresPlatformFinancialBalanceRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresPlatformRevenueTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresPlatformExpenseTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresReconciliationRecordRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryPlatformFinancialBalanceRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryPlatformRevenueTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryPlatformExpenseTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryReconciliationRecordRepository.cs` ✅
+- `backend/Arah.Domain/Financial/PlatformFinancialBalance.cs` ✅
+- `backend/Arah.Domain/Financial/PlatformRevenueTransaction.cs` ✅
+- `backend/Arah.Domain/Financial/PlatformExpenseTransaction.cs` ✅
+- `backend/Arah.Domain/Financial/ReconciliationRecord.cs` ✅
+- `backend/Arah.Application/Interfaces/IPlatformFinancialBalanceRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/IPlatformRevenueTransactionRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/IPlatformExpenseTransactionRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/IReconciliationRecordRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresPlatformFinancialBalanceRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresPlatformRevenueTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresPlatformExpenseTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresReconciliationRecordRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryPlatformFinancialBalanceRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryPlatformRevenueTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryPlatformExpenseTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryReconciliationRecordRepository.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Modelo de gestão financeira completo
@@ -166,14 +166,14 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar configuração
 
 **Arquivos Criados**:
-- `backend/Araponga.Domain/Marketplace/TerritoryPayoutConfig.cs` ✅
-- `backend/Araponga.Application/Interfaces/ITerritoryPayoutConfigRepository.cs` ✅
-- `backend/Araponga.Application/Services/TerritoryPayoutConfigService.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryPayoutConfigRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryTerritoryPayoutConfigRepository.cs` ✅
-- `backend/Araponga.Api/Controllers/TerritoryPayoutConfigController.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs` ✅
+- `backend/Arah.Domain/Marketplace/TerritoryPayoutConfig.cs` ✅
+- `backend/Arah.Application/Interfaces/ITerritoryPayoutConfigRepository.cs` ✅
+- `backend/Arah.Application/Services/TerritoryPayoutConfigService.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryPayoutConfigRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryTerritoryPayoutConfigRepository.cs` ✅
+- `backend/Arah.Api/Controllers/TerritoryPayoutConfigController.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Configuração por território funcionando
@@ -194,8 +194,8 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar interface
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Interfaces/IPayoutGateway.cs` ✅
-- `backend/Araponga.Infrastructure/Payments/MockPayoutGateway.cs` ✅
+- `backend/Arah.Application/Interfaces/IPayoutGateway.cs` ✅
+- `backend/Arah.Infrastructure/Payments/MockPayoutGateway.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Interface de gateway criada
@@ -224,15 +224,15 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Criar `UpdatePayoutStatusAsync` para atualizar status do gateway
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/SellerPayoutService.cs` ✅
+- `backend/Arah.Application/Services/SellerPayoutService.cs` ✅
 
 **Arquivos Modificados**:
-- `backend/Araponga.Application/Interfaces/ICheckoutRepository.cs` ✅ (adicionado GetByIdAsync)
-- `backend/Araponga.Application/Interfaces/ISellerTransactionRepository.cs` ✅ (adicionado GetByPayoutIdAsync)
-- `backend/Araponga.Infrastructure/Postgres/PostgresCheckoutRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemoryCheckoutRepository.cs` ✅
-- `backend/Araponga.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs` ✅
-- `backend/Araponga.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs` ✅
+- `backend/Arah.Application/Interfaces/ICheckoutRepository.cs` ✅ (adicionado GetByIdAsync)
+- `backend/Arah.Application/Interfaces/ISellerTransactionRepository.cs` ✅ (adicionado GetByPayoutIdAsync)
+- `backend/Arah.Infrastructure/Postgres/PostgresCheckoutRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemoryCheckoutRepository.cs` ✅
+- `backend/Arah.Infrastructure/Postgres/PostgresSellerTransactionRepository.cs` ✅
+- `backend/Arah.Infrastructure/InMemory/InMemorySellerTransactionRepository.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Quando checkout = `Paid`, `SellerTransaction` é criada automaticamente
@@ -256,7 +256,7 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Documentar worker
 
 **Arquivos Criados**:
-- `backend/Araponga.Infrastructure/Background/PayoutProcessingWorker.cs` ✅
+- `backend/Arah.Infrastructure/Background/PayoutProcessingWorker.cs` ✅
 
 **Critérios de Sucesso**:
 - ✅ Worker processando payouts automaticamente
@@ -278,16 +278,16 @@ Quando um checkout é marcado como `Paid`, o dinheiro fica no gateway mas **não
 - [x] Implementar paginação
 
 **Arquivos Criados**:
-- `backend/Araponga.Api/Controllers/TerritoryPayoutConfigController.cs` ✅
-- `backend/Araponga.Api/Controllers/SellerBalanceController.cs` ✅
-- `backend/Araponga.Api/Controllers/PlatformFinancialController.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/SellerBalanceResponse.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/SellerTransactionResponse.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/PlatformFinancialBalanceResponse.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/PlatformRevenueTransactionResponse.cs` ✅
-- `backend/Araponga.Api/Contracts/Payout/PlatformExpenseTransactionResponse.cs` ✅
+- `backend/Arah.Api/Controllers/TerritoryPayoutConfigController.cs` ✅
+- `backend/Arah.Api/Controllers/SellerBalanceController.cs` ✅
+- `backend/Arah.Api/Controllers/PlatformFinancialController.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigRequest.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/TerritoryPayoutConfigResponse.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/SellerBalanceResponse.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/SellerTransactionResponse.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/PlatformFinancialBalanceResponse.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/PlatformRevenueTransactionResponse.cs` ✅
+- `backend/Arah.Api/Contracts/Payout/PlatformExpenseTransactionResponse.cs` ✅
 
 **Endpoints Criados**:
 - `GET /api/v1/territories/{territoryId}/payout-config` - Obter configuração ativa

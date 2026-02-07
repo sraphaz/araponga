@@ -38,7 +38,7 @@
 - [ ] Atualizei `docs/STATUS_FASES.md` (se mudou status de fase)
 
 ### DevPortal
-- [ ] Atualizei `backend/Araponga.Api/wwwroot/devportal/index.html` (se mudou DevPortal)
+- [ ] Atualizei `backend/Arah.Api/wwwroot/devportal/index.html` (se mudou DevPortal)
 - [ ] Atualizei exemplos de código (se mudou contratos)
 
 ### Segurança

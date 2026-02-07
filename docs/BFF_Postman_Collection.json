@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "araponga-bff-api",
-		"name": "Araponga BFF API - Journeys",
-		"description": "Coleção completa da API BFF (Backend for Frontend) do Araponga.\n\nEsta coleção contém todos os endpoints de jornadas (user journeys) que encapsulam operações complexas em chamadas únicas.\n\n**Versão**: 2.0.0\n**Base URL**: `/api/v2/journeys`",
+		"_postman_id": "Arah-bff-api",
+		"name": "Arah BFF API - Journeys",
+		"description": "Coleção completa da API BFF (Backend for Frontend) do Arah.\n\nEsta coleção contém todos os endpoints de jornadas (user journeys) que encapsulam operações complexas em chamadas únicas.\n\n**Versão**: 2.0.0\n**Base URL**: `/api/v2/journeys`",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -204,7 +204,7 @@
 									"value": "application/json"
 								}
 							],
-							"body": "{\n  \"items\": [\n    {\n      \"post\": {\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n        \"title\": \"Feira de Artesanato\",\n        \"content\": \"Venha participar da nossa feira de artesanato no próximo sábado!\",\n        \"type\": \"POST\",\n        \"visibility\": \"PUBLIC\",\n        \"status\": \"PUBLISHED\",\n        \"mapEntityId\": null,\n        \"createdAtUtc\": \"2026-01-27T10:00:00Z\",\n        \"tags\": [\"evento\", \"comunidade\"]\n      },\n      \"counts\": {\n        \"likes\": 15,\n        \"shares\": 3,\n        \"comments\": 5\n      },\n      \"media\": [\n        {\n          \"url\": \"https://cdn.araponga.com/media/abc123.jpg\",\n          \"type\": \"IMAGE\",\n          \"thumbnailUrl\": \"https://cdn.araponga.com/media/abc123_thumb.jpg\"\n        }\n      ],\n      \"event\": null,\n      \"author\": {\n        \"id\": \"456e7890-e89b-12d3-a456-426614174001\",\n        \"displayName\": \"Maria Santos\",\n        \"avatarUrl\": \"https://cdn.araponga.com/avatars/maria.jpg\"\n      },\n      \"userInteractions\": {\n        \"liked\": false,\n        \"shared\": false,\n        \"commented\": false\n      },\n      \"metadata\": {\n        \"canEdit\": false,\n        \"canDelete\": false,\n        \"canShare\": true,\n        \"canComment\": true\n      }\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 20,\n    \"totalCount\": 42,\n    \"totalPages\": 3,\n    \"hasPreviousPage\": false,\n    \"hasNextPage\": true\n  },\n  \"filters\": {\n    \"availableTypes\": [\"POST\", \"ALERT\", \"EVENT\"],\n    \"availableTags\": [\"evento\", \"comunidade\", \"alerta\"],\n    \"availableVisibilities\": [\"PUBLIC\", \"RESIDENTS_ONLY\"]\n  }\n}"
+							"body": "{\n  \"items\": [\n    {\n      \"post\": {\n        \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n        \"title\": \"Feira de Artesanato\",\n        \"content\": \"Venha participar da nossa feira de artesanato no próximo sábado!\",\n        \"type\": \"POST\",\n        \"visibility\": \"PUBLIC\",\n        \"status\": \"PUBLISHED\",\n        \"mapEntityId\": null,\n        \"createdAtUtc\": \"2026-01-27T10:00:00Z\",\n        \"tags\": [\"evento\", \"comunidade\"]\n      },\n      \"counts\": {\n        \"likes\": 15,\n        \"shares\": 3,\n        \"comments\": 5\n      },\n      \"media\": [\n        {\n          \"url\": \"https://cdn.Arah.com/media/abc123.jpg\",\n          \"type\": \"IMAGE\",\n          \"thumbnailUrl\": \"https://cdn.Arah.com/media/abc123_thumb.jpg\"\n        }\n      ],\n      \"event\": null,\n      \"author\": {\n        \"id\": \"456e7890-e89b-12d3-a456-426614174001\",\n        \"displayName\": \"Maria Santos\",\n        \"avatarUrl\": \"https://cdn.Arah.com/avatars/maria.jpg\"\n      },\n      \"userInteractions\": {\n        \"liked\": false,\n        \"shared\": false,\n        \"commented\": false\n      },\n      \"metadata\": {\n        \"canEdit\": false,\n        \"canDelete\": false,\n        \"canShare\": true,\n        \"canComment\": true\n      }\n    }\n  ],\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 20,\n    \"totalCount\": 42,\n    \"totalPages\": 3,\n    \"hasPreviousPage\": false,\n    \"hasNextPage\": true\n  },\n  \"filters\": {\n    \"availableTypes\": [\"POST\", \"ALERT\", \"EVENT\"],\n    \"availableTags\": [\"evento\", \"comunidade\", \"alerta\"],\n    \"availableVisibilities\": [\"PUBLIC\", \"RESIDENTS_ONLY\"]\n  }\n}"
 						}
 					]
 				},
@@ -345,7 +345,7 @@
 									"value": "application/json"
 								}
 							],
-							"body": "{\n  \"success\": true,\n  \"post\": {\n    \"id\": \"789e0123-e89b-12d3-a456-426614174002\",\n    \"title\": \"Novo Post\",\n    \"content\": \"Conteúdo do post\",\n    \"type\": \"POST\",\n    \"visibility\": \"PUBLIC\",\n    \"status\": \"PUBLISHED\",\n    \"createdAtUtc\": \"2026-01-27T10:00:00Z\"\n  },\n  \"mediaUrls\": [\n    \"https://cdn.araponga.com/media/xyz789.jpg\"\n  ],\n  \"suggestions\": {\n    \"similarPosts\": [],\n    \"suggestedTags\": [\"comunidade\", \"evento\"]\n  }\n}"
+							"body": "{\n  \"success\": true,\n  \"post\": {\n    \"id\": \"789e0123-e89b-12d3-a456-426614174002\",\n    \"title\": \"Novo Post\",\n    \"content\": \"Conteúdo do post\",\n    \"type\": \"POST\",\n    \"visibility\": \"PUBLIC\",\n    \"status\": \"PUBLISHED\",\n    \"createdAtUtc\": \"2026-01-27T10:00:00Z\"\n  },\n  \"mediaUrls\": [\n    \"https://cdn.Arah.com/media/xyz789.jpg\"\n  ],\n  \"suggestions\": {\n    \"similarPosts\": [],\n    \"suggestedTags\": [\"comunidade\", \"evento\"]\n  }\n}"
 						}
 					]
 				},
@@ -936,7 +936,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "https://api.araponga.com",
+			"value": "https://api.Arah.com",
 			"type": "string"
 		},
 		{

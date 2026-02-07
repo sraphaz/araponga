@@ -19,7 +19,7 @@
 
 ### 1. SubscriptionAnalyticsServiceTests (12 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionAnalyticsServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -123,7 +123,7 @@ public async Task GetRevenueByPlanAsync_FiltersByDateRange_Correctly()
 
 ### 2. SubscriptionPlanAdminServiceTests (10 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionPlanAdminServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -211,7 +211,7 @@ public async Task GetPlanHistoryAsync_ReturnsEmpty_WhenNoHistory()
 
 ### 3. CouponServiceTests (10 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/CouponServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/CouponServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -299,7 +299,7 @@ public async Task ValidateCouponAsync_ReturnsFalse_WhenUsageLimitExceeded()
 
 ### 4. StripeWebhookServiceTests (10 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/StripeWebhookServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/StripeWebhookServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -387,7 +387,7 @@ public async Task ProcessWebhookAsync_CreatesPaymentRecord_WhenPaymentSucceeded(
 
 ### 5. MercadoPagoWebhookServiceTests (6 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/MercadoPagoWebhookServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/MercadoPagoWebhookServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -443,7 +443,7 @@ public async Task ProcessWebhookAsync_HandlesIdempotency_Correctly()
 
 ### 6. SubscriptionRenewalServiceTests (6 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionRenewalServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionRenewalServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -499,7 +499,7 @@ public async Task ProcessRenewalsAsync_CancelsSubscription_WhenPaymentFailsMulti
 
 ### 7. SubscriptionTrialServiceTests (7 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionTrialServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionTrialServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -565,7 +565,7 @@ public async Task EndTrialAsync_SendsNotification_WhenTrialEnded()
 
 ### 8. SubscriptionServiceTests - Adicionais (10 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionServiceTests.cs` (atualizar)
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionServiceTests.cs` (atualizar)
 
 ```csharp
 [Fact]
@@ -653,7 +653,7 @@ public async Task ApplyCouponToSubscriptionAsync_ReturnsFailure_WhenInvalidCoupo
 
 ### 9. SubscriptionPlanSeedServiceTests (4 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/SubscriptionPlanSeedServiceTests.cs`
 
 ```csharp
 [Fact]
@@ -693,7 +693,7 @@ public async Task SeedFreePlanAsync_SetsCorrectLimits()
 
 ### 10. SubscriptionIntegrationTests (6 cenários)
 
-**Arquivo**: `backend/Araponga.Tests/Api/SubscriptionIntegrationTests.cs`
+**Arquivo**: `backend/Arah.Tests/Api/SubscriptionIntegrationTests.cs`
 
 ```csharp
 [Fact]

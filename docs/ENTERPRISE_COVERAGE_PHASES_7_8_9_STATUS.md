@@ -180,7 +180,7 @@
 ### Estrutura de Arquivos
 
 ```
-/backend/Araponga.Tests/
+/backend/Arah.Tests/
 ├── Application/
 │   ├── MediaServiceEdgeCasesTests.cs              ✅ (12 testes)
 │   ├── ChatServiceEdgeCasesTests.cs               ✅ (5 testes)

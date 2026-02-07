@@ -16,10 +16,10 @@
 dotnet restore
 
 # Build
-dotnet build Araponga.sln
+dotnet build Arah.sln
 
 # Aplicar migrações
-dotnet ef database update --project backend/Araponga.Infrastructure
+dotnet ef database update --project backend/Arah.Infrastructure
 ```
 
 ### Frontend
@@ -50,7 +50,7 @@ Criar arquivo `.env` na raiz:
 
 ```env
 # Database
-DATABASE_URL=postgresql://user:password@localhost/araponga
+DATABASE_URL=postgresql://user:password@localhost/Arah
 
 # Email
 EMAIL_HOST=smtp.gmail.com

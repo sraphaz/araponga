@@ -2,7 +2,7 @@
 
 ## 🚀 Resumo Executivo
 
-Foi implementada com **sucesso** a **Fase 1** do plano de cobertura de testes enterprise-level para o Araponga, focando no **Domain Layer** com testes de edge cases robustos.
+Foi implementada com **sucesso** a **Fase 1** do plano de cobertura de testes enterprise-level para o Arah, focando no **Domain Layer** com testes de edge cases robustos.
 
 ---
 
@@ -79,7 +79,7 @@ Foi implementada com **sucesso** a **Fase 1** do plano de cobertura de testes en
 ## 📁 Estrutura de Arquivos
 
 ```
-backend/Araponga.Tests/Domain/
+backend/Arah.Tests/Domain/
 ├── TerritoryEdgeCasesTests.cs        (28 testes)
 ├── UserEdgeCasesTests.cs              (18 testes)
 └── CommunityPostEdgeCasesTests.cs     (26 testes)

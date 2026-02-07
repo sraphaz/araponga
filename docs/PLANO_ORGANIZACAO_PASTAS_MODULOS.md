@@ -7,8 +7,8 @@
 
 ## 1. Escopo
 
-- **Application/Services**: criar pastas por módulo e mover serviços (manter `namespace Araponga.Application.Services`).
-- **Application/Interfaces**: criar pastas por módulo e mover interfaces (manter `namespace Araponga.Application.Interfaces` ou subnamespaces existentes).
+- **Application/Services**: criar pastas por módulo e mover serviços (manter `namespace Arah.Application.Services`).
+- **Application/Interfaces**: criar pastas por módulo e mover interfaces (manter `namespace Arah.Application.Interfaces` ou subnamespaces existentes).
 - **Api/Controllers**: criar pastas por módulo e mover controllers (manter namespace atual).
 
 Namespaces **não** serão alterados para evitar quebra de usings em todo o código; apenas a organização em pastas.

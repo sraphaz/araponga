@@ -1,7 +1,7 @@
 C4Component
-title Araponga API — C4 Component (Nível 3)
+title Arah API — C4 Component (Nível 3)
 
-Container_Boundary(api, "Araponga API (.NET 8)") {
+Container_Boundary(api, "Arah API (.NET 8)") {
 
   Component(auth, "Auth Module", "ASP.NET Core Auth", "Login social (OIDC), emissão/validação de token, sessão e claims.")
   Component(access, "Access Control", "Policy/Rules", "Regras de visibilidade: morador vs visitante; território confirmado; permissões de curadoria.")

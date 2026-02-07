@@ -23,16 +23,16 @@
 - ✅ Bloqueio de funcionalidades quando termos não aceitos
 
 **Arquivos Implementados**:
-- `backend/Araponga.Domain/Policies/TermsOfService.cs`
-- `backend/Araponga.Domain/Policies/TermsAcceptance.cs`
-- `backend/Araponga.Domain/Policies/PrivacyPolicy.cs`
-- `backend/Araponga.Domain/Policies/PrivacyPolicyAcceptance.cs`
-- `backend/Araponga.Application/Services/TermsOfServiceService.cs`
-- `backend/Araponga.Application/Services/TermsAcceptanceService.cs`
-- `backend/Araponga.Application/Services/PolicyRequirementService.cs`
-- `backend/Araponga.Api/Controllers/TermsOfServiceController.cs`
-- `backend/Araponga.Api/Controllers/PrivacyPolicyController.cs`
-- `backend/Araponga.Application/Services/AccessEvaluator.cs` (integração)
+- `backend/Arah.Domain/Policies/TermsOfService.cs`
+- `backend/Arah.Domain/Policies/TermsAcceptance.cs`
+- `backend/Arah.Domain/Policies/PrivacyPolicy.cs`
+- `backend/Arah.Domain/Policies/PrivacyPolicyAcceptance.cs`
+- `backend/Arah.Application/Services/TermsOfServiceService.cs`
+- `backend/Arah.Application/Services/TermsAcceptanceService.cs`
+- `backend/Arah.Application/Services/PolicyRequirementService.cs`
+- `backend/Arah.Api/Controllers/TermsOfServiceController.cs`
+- `backend/Arah.Api/Controllers/PrivacyPolicyController.cs`
+- `backend/Arah.Application/Services/AccessEvaluator.cs` (integração)
 
 **Validação Necessária**:
 - [ ] Validar notificações de nova versão de termos

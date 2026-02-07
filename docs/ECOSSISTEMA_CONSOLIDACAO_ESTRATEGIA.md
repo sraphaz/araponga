@@ -11,7 +11,7 @@
 
 ## 📋 Resumo Executivo
 
-Este plano estabelece uma **estratégia orgânica e consciente** para consolidar o ecossistema de desenvolvimento territorial do Araponga, **construindo comunidade e contribuidores** enquanto a plataforma ainda está em desenvolvimento.
+Este plano estabelece uma **estratégia orgânica e consciente** para consolidar o ecossistema de desenvolvimento territorial do Arah, **construindo comunidade e contribuidores** enquanto a plataforma ainda está em desenvolvimento.
 
 **Contexto Atual**:
 - ✅ Site institucional ativo (GitHub Pages/DevPortal)
@@ -111,7 +111,7 @@ Este plano estabelece uma **estratégia orgânica e consciente** para consolidar
 **Sugestão**: Usar Mermaid para diagramas ou criar imagens simples.
 
 #### 2.2 Vídeos Curtos (Opcional)
-- [ ] **TODO**: Vídeo de 2-3 min: "Setup do Cursor no Araponga"
+- [ ] **TODO**: Vídeo de 2-3 min: "Setup do Cursor no Arah"
 - [ ] **TODO**: Vídeo de 1-2 min: "Primeira Contribuição"
 - [ ] **TODO**: Vídeo de 2 min: "Como Observar Território e Propor Funcionalidade"
 
@@ -456,7 +456,7 @@ Ver [`docs/ECOSSISTEMA_CONSOLIDACAO_CHECKLIST.md`](./ECOSSISTEMA_CONSOLIDACAO_CH
 
 ## 🌍 Conclusão
 
-Este plano estabelece uma **estratégia consciente e orgânica** para consolidar o ecossistema de desenvolvimento territorial do Araponga **antes da plataforma estar em produção**.
+Este plano estabelece uma **estratégia consciente e orgânica** para consolidar o ecossistema de desenvolvimento territorial do Arah **antes da plataforma estar em produção**.
 
 **A ideia central**: Construir comunidade e processos **agora**, para que quando a plataforma estiver pronta, já tenhamos:
 - Pessoas prontas para contribuir

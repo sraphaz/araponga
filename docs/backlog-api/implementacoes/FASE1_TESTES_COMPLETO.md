@@ -15,7 +15,7 @@ Este documento detalha todos os testes de segurança implementados para validar 
 
 ### Classe: `SecurityTests`
 
-**Arquivo**: `backend/Araponga.Tests/Api/SecurityTests.cs`  
+**Arquivo**: `backend/Arah.Tests/Api/SecurityTests.cs`  
 **Total de Testes**: 11
 
 ---
@@ -162,16 +162,16 @@ Este documento detalha todos os testes de segurança implementados para validar 
 
 ```bash
 # Todos os testes
-dotnet test backend/Araponga.Tests
+dotnet test backend/Arah.Tests
 
 # Apenas testes de segurança
-dotnet test backend/Araponga.Tests --filter "FullyQualifiedName~SecurityTests"
+dotnet test backend/Arah.Tests --filter "FullyQualifiedName~SecurityTests"
 
 # Com output detalhado
-dotnet test backend/Araponga.Tests --filter "FullyQualifiedName~SecurityTests" --verbosity normal
+dotnet test backend/Arah.Tests --filter "FullyQualifiedName~SecurityTests" --verbosity normal
 
 # Com cobertura
-dotnet test backend/Araponga.Tests /p:CollectCoverage=true
+dotnet test backend/Arah.Tests /p:CollectCoverage=true
 ```
 
 ---

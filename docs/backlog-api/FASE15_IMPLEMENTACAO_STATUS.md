@@ -22,9 +22,9 @@
 - ✅ Suporte para ambiente de desenvolvimento
 
 **Arquivos Modificados**:
-- `backend/Araponga.Api/Controllers/StripeWebhookController.cs`
-- `backend/Araponga.Api/Controllers/MercadoPagoWebhookController.cs`
-- `backend/Araponga.Api/Araponga.Api.csproj` (adicionado Stripe.net)
+- `backend/Arah.Api/Controllers/StripeWebhookController.cs`
+- `backend/Arah.Api/Controllers/MercadoPagoWebhookController.cs`
+- `backend/Arah.Api/Arah.Api.csproj` (adicionado Stripe.net)
 
 ### 2. Seed Script para Plano FREE ✅
 
@@ -36,8 +36,8 @@
 - ✅ Limites padrão configurados (10 posts/mês, 3 eventos/mês, 5 itens marketplace, 100MB storage)
 
 **Arquivos Criados**:
-- `backend/Araponga.Application/Services/SubscriptionPlanSeedService.cs`
-- `backend/Araponga.Api/Controllers/AdminSeedController.cs`
+- `backend/Arah.Application/Services/SubscriptionPlanSeedService.cs`
+- `backend/Arah.Api/Controllers/AdminSeedController.cs`
 
 ### 3. Notificações de Fim de Trial ✅
 
@@ -48,8 +48,8 @@
 - ✅ Payloads de notificação com informações detalhadas (dias restantes, nome do plano, etc.)
 
 **Arquivos Modificados**:
-- `backend/Araponga.Application/Services/StripeWebhookService.cs`
-- `backend/Araponga.Application/Services/SubscriptionTrialService.cs`
+- `backend/Arah.Application/Services/StripeWebhookService.cs`
+- `backend/Arah.Application/Services/SubscriptionTrialService.cs`
 
 **Tipos de Notificação**:
 - `subscription.trial_will_end` - Trial terminando em breve
@@ -75,7 +75,7 @@
 - ✅ Fallback automático para mock quando credenciais não configuradas
 
 **Arquivos Modificados**:
-- `backend/Araponga.Infrastructure/Payments/StripeSubscriptionService.cs` ✅
+- `backend/Arah.Infrastructure/Payments/StripeSubscriptionService.cs` ✅
 
 ### 2. Integração com Mercado Pago
 
@@ -96,8 +96,8 @@
 - ✅ Métricas calculadas: MRR, churn rate, assinaturas ativas, novas, canceladas, receita por plano
 
 **Arquivos Criados**:
-- `backend/Araponga.Api/Controllers/SubscriptionAnalyticsController.cs`
-- `backend/Araponga.Api/Contracts/Subscriptions/SubscriptionAnalyticsResponse.cs`
+- `backend/Arah.Api/Controllers/SubscriptionAnalyticsController.cs`
+- `backend/Arah.Api/Contracts/Subscriptions/SubscriptionAnalyticsResponse.cs`
 
 ### 4. Cobertura de Testes ✅
 

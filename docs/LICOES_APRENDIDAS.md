@@ -1,4 +1,4 @@
-# Lições Aprendidas - Araponga
+# Lições Aprendidas - Arah
 
 **Última Atualização**: 2025-01-20  
 **Total de Lições**: 1  

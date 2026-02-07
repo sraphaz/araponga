@@ -1,7 +1,7 @@
 # Diagnóstico: DevPortal 404
 
 **Data**: 2025-01-20  
-**Problema**: `devportal.araponga.app` retornando 404  
+**Problema**: `devportal.Arah.app` retornando 404  
 **Status**: Investigando
 
 ---
@@ -9,7 +9,7 @@
 ## 🔍 Análise do Problema
 
 ### Sintomas
-- URL `devportal.araponga.app` retorna 404 "File not found"
+- URL `devportal.Arah.app` retorna 404 "File not found"
 - GitHub Pages mostra erro padrão
 - Workflow de deploy está executando com sucesso
 
@@ -20,7 +20,7 @@
    - Verificar se domínio customizado está habilitado
 
 2. **DNS não apontando corretamente**
-   - Verificar registros DNS do domínio `devportal.araponga.app`
+   - Verificar registros DNS do domínio `devportal.Arah.app`
    - Deve apontar para GitHub Pages
 
 3. **Estrutura de arquivos incorreta**
@@ -42,9 +42,9 @@
 - ⚠️ Test-links: Falhou (mas não bloqueia deploy)
 
 ### Estrutura de Arquivos
-- ✅ `backend/Araponga.Api/wwwroot/devportal/index.html` existe
+- ✅ `backend/Arah.Api/wwwroot/devportal/index.html` existe
 - ✅ Workflow copia para `dist/`
-- ✅ CNAME é criado: `devportal.araponga.app`
+- ✅ CNAME é criado: `devportal.Arah.app`
 
 ### Correções Aplicadas
 
@@ -76,10 +76,10 @@
 
 2. **Verificar configuração do GitHub Pages**
    - Settings → Pages → Custom domain
-   - Verificar se `devportal.araponga.app` está configurado
+   - Verificar se `devportal.Arah.app` está configurado
 
 3. **Verificar DNS**
-   - Confirmar que `devportal.araponga.app` aponta para GitHub Pages
+   - Confirmar que `devportal.Arah.app` aponta para GitHub Pages
    - Verificar registros A/AAAA ou CNAME
 
 4. **Se persistir**:
@@ -92,8 +92,8 @@
 ## 🔗 Referências
 
 - Workflow: `.github/workflows/devportal-pages.yml`
-- DevPortal: `backend/Araponga.Api/wwwroot/devportal/`
-- Último deploy: https://github.com/sraphaz/araponga/actions/runs/21105188475
+- DevPortal: `backend/Arah.Api/wwwroot/devportal/`
+- Último deploy: https://github.com/sraphaz/Arah/actions/runs/21105188475
 
 ---
 

@@ -18,7 +18,7 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - Recomendações contextuais (sem manipular feed)
 - Análise de conteúdo
 
-**Princípios de IA no Araponga**:
+**Princípios de IA no Arah**:
 - ✅ **Transparência**: Usuário sabe quando IA está sendo usada
 - ✅ **Privacidade**: Dados não são compartilhados sem consentimento
 - ✅ **Não Manipulação**: Feed cronológico permanece, IA apenas auxilia
@@ -124,13 +124,13 @@ Implementar funcionalidades de **Inteligência Artificial** para:
   - [ ] `RelevanceScoreResult` (score 0-100, fatores, confiança)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Interfaces/IAIService.cs`
-- `backend/Araponga.Application/Models/AI/ModerationResult.cs`
-- `backend/Araponga.Application/Models/AI/SearchResults.cs`
-- `backend/Araponga.Application/Models/AI/CategorizationResult.cs`
-- `backend/Araponga.Application/Models/AI/EntityExtractionResult.cs`
-- `backend/Araponga.Application/Models/AI/AIGeneratedContentResult.cs`
-- `backend/Araponga.Application/Models/AI/RelevanceScoreResult.cs`
+- `backend/Arah.Application/Interfaces/IAIService.cs`
+- `backend/Arah.Application/Models/AI/ModerationResult.cs`
+- `backend/Arah.Application/Models/AI/SearchResults.cs`
+- `backend/Arah.Application/Models/AI/CategorizationResult.cs`
+- `backend/Arah.Application/Models/AI/EntityExtractionResult.cs`
+- `backend/Arah.Application/Models/AI/AIGeneratedContentResult.cs`
+- `backend/Arah.Application/Models/AI/RelevanceScoreResult.cs`
 
 **Critérios de Sucesso**:
 - ✅ Interface criada
@@ -159,11 +159,11 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Logging (sem expor dados sensíveis)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/AI/OpenAIService.cs`
-- `backend/Araponga.Infrastructure/AI/OpenAIConfiguration.cs`
+- `backend/Arah.Infrastructure/AI/OpenAIService.cs`
+- `backend/Arah.Infrastructure/AI/OpenAIConfiguration.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (registrar serviço)
+- `backend/Arah.Api/Program.cs` (registrar serviço)
 
 **Critérios de Sucesso**:
 - ✅ Integração OpenAI funcionando
@@ -191,7 +191,7 @@ Implementar funcionalidades de **Inteligência Artificial** para:
   - [ ] Extração de entidades: usar `Text Analytics`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/AI/AzureAIService.cs`
+- `backend/Arah.Infrastructure/AI/AzureAIService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração Azure funcionando
@@ -220,12 +220,12 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes unitários
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/ModerationService.cs`
-- `backend/Araponga.Tests/Application/ModerationServiceTests.cs`
+- `backend/Arah.Application/Services/ModerationService.cs`
+- `backend/Arah.Tests/Application/ModerationServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/ReportService.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/ReportService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Moderação automática funcionando
@@ -251,9 +251,9 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Moderation/ModerationCase.cs`
-- `backend/Araponga.Application/Services/ModerationCaseService.cs`
-- `backend/Araponga.Api/Controllers/ModerationController.cs`
+- `backend/Arah.Domain/Moderation/ModerationCase.cs`
+- `backend/Arah.Application/Services/ModerationCaseService.cs`
+- `backend/Arah.Api/Controllers/ModerationController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Sugestões de IA aparecendo
@@ -285,8 +285,8 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CollectivePurchaseVotingService.cs`
-- `backend/Araponga.Api/Controllers/CollectivePurchaseVotingController.cs`
+- `backend/Arah.Application/Services/CollectivePurchaseVotingService.cs`
+- `backend/Arah.Api/Controllers/CollectivePurchaseVotingController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Integração com votação funcionando
@@ -311,9 +311,9 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Endpoints de busca funcionando
@@ -341,13 +341,13 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CategorizationService.cs`
-- `backend/Araponga.Tests/Application/CategorizationServiceTests.cs`
+- `backend/Arah.Application/Services/CategorizationService.cs`
+- `backend/Arah.Tests/Application/CategorizationServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Feed/CommunityPost.cs` (adicionar campos de categoria/tags)
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostCategories.cs`
+- `backend/Arah.Domain/Feed/CommunityPost.cs` (adicionar campos de categoria/tags)
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostCategories.cs`
 
 **Critérios de Sucesso**:
 - ✅ Categorização funcionando
@@ -376,9 +376,9 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/RecommendationService.cs`
-- `backend/Araponga.Api/Controllers/RecommendationsController.cs`
-- `backend/Araponga.Tests/Application/RecommendationServiceTests.cs`
+- `backend/Arah.Application/Services/RecommendationService.cs`
+- `backend/Arah.Api/Controllers/RecommendationsController.cs`
+- `backend/Arah.Tests/Application/RecommendationServiceTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Recomendações funcionando
@@ -406,11 +406,11 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TranslationService.cs`
-- `backend/Araponga.Tests/Application/TranslationServiceTests.cs`
+- `backend/Arah.Application/Services/TranslationService.cs`
+- `backend/Arah.Tests/Application/TranslationServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Controllers/FeedController.cs`
 
 **Critérios de Sucesso**:
 - ✅ Tradução funcionando
@@ -435,11 +435,11 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Testes
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/ContentAnalysisService.cs`
-- `backend/Araponga.Tests/Application/ContentAnalysisServiceTests.cs`
+- `backend/Arah.Application/Services/ContentAnalysisService.cs`
+- `backend/Arah.Tests/Application/ContentAnalysisServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Extração de informações funcionando
@@ -524,23 +524,23 @@ Implementar funcionalidades de **Inteligência Artificial** para:
   - [ ] Testes de performance (latência)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AIGeneratedContentDetectionService.cs`
-- `backend/Araponga.Domain/AI/AIGeneratedContentClassification.cs`
-- `backend/Araponga.Application/Interfaces/IAIGeneratedContentClassificationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresAIGeneratedContentClassificationRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddAIGeneratedContentClassification.cs`
-- `backend/Araponga.Tests/Application/AIGeneratedContentDetectionServiceTests.cs`
+- `backend/Arah.Application/Services/AIGeneratedContentDetectionService.cs`
+- `backend/Arah.Domain/AI/AIGeneratedContentClassification.cs`
+- `backend/Arah.Application/Interfaces/IAIGeneratedContentClassificationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresAIGeneratedContentClassificationRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddAIGeneratedContentClassification.cs`
+- `backend/Arah.Tests/Application/AIGeneratedContentDetectionServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Interfaces/IAIService.cs` (adicionar método de detecção)
-- `backend/Araponga.Application/Services/PostCreationService.cs` (integrar detecção e bloqueio)
-- `backend/Araponga.Application/Services/FeedService.cs` (aplicar bloqueio baseado em feature flags)
-- `backend/Araponga.Application/Services/ModerationService.cs` (alertas e bloqueio automático)
-- `backend/Araponga.Application/Services/FeatureFlagService.cs` (adicionar feature flags de bloqueio)
-- `backend/Araponga.Domain/Users/UserPreferences.cs` (adicionar preferências de bloqueio)
-- `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs` (adicionar flags)
-- `backend/Araponga.Api/Controllers/FeedController.cs` (aplicar bloqueio)
-- `backend/Araponga.Api/Controllers/UserPreferencesController.cs` (gerenciar preferências de bloqueio)
+- `backend/Arah.Application/Interfaces/IAIService.cs` (adicionar método de detecção)
+- `backend/Arah.Application/Services/PostCreationService.cs` (integrar detecção e bloqueio)
+- `backend/Arah.Application/Services/FeedService.cs` (aplicar bloqueio baseado em feature flags)
+- `backend/Arah.Application/Services/ModerationService.cs` (alertas e bloqueio automático)
+- `backend/Arah.Application/Services/FeatureFlagService.cs` (adicionar feature flags de bloqueio)
+- `backend/Arah.Domain/Users/UserPreferences.cs` (adicionar preferências de bloqueio)
+- `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs` (adicionar flags)
+- `backend/Arah.Api/Controllers/FeedController.cs` (aplicar bloqueio)
+- `backend/Arah.Api/Controllers/UserPreferencesController.cs` (gerenciar preferências de bloqueio)
 
 **Critérios de Sucesso**:
 - ✅ Detecção de conteúdo gerado por IA funcionando
@@ -631,21 +631,21 @@ Implementar funcionalidades de **Inteligência Artificial** para:
   - [ ] Testes de performance (cálculo em lote)
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PostRelevanceService.cs`
-- `backend/Araponga.Domain/AI/PostRelevanceScore.cs`
-- `backend/Araponga.Application/Interfaces/IPostRelevanceScoreRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresPostRelevanceScoreRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostRelevanceScore.cs`
-- `backend/Araponga.Application/Models/AI/RelevanceScoreFactors.cs`
-- `backend/Araponga.Tests/Application/PostRelevanceServiceTests.cs`
+- `backend/Arah.Application/Services/PostRelevanceService.cs`
+- `backend/Arah.Domain/AI/PostRelevanceScore.cs`
+- `backend/Arah.Application/Interfaces/IPostRelevanceScoreRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresPostRelevanceScoreRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/Migrations/YYYYMMDDHHMMSS_AddPostRelevanceScore.cs`
+- `backend/Arah.Application/Models/AI/RelevanceScoreFactors.cs`
+- `backend/Arah.Tests/Application/PostRelevanceServiceTests.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Interfaces/IAIService.cs` (adicionar método de relevância)
-- `backend/Araponga.Application/Services/PostCreationService.cs` (integrar cálculo de relevância)
-- `backend/Araponga.Application/Services/FeedService.cs` (incluir score e opção de ordenação)
-- `backend/Araponga.Domain/Users/UserPreferences.cs` (adicionar preferência de ordenação)
-- `backend/Araponga.Api/Contracts/Feed/FeedItemResponse.cs` (adicionar score opcional)
-- `backend/Araponga.Api/Controllers/FeedController.cs` (endpoint de relevância e query param)
+- `backend/Arah.Application/Interfaces/IAIService.cs` (adicionar método de relevância)
+- `backend/Arah.Application/Services/PostCreationService.cs` (integrar cálculo de relevância)
+- `backend/Arah.Application/Services/FeedService.cs` (incluir score e opção de ordenação)
+- `backend/Arah.Domain/Users/UserPreferences.cs` (adicionar preferência de ordenação)
+- `backend/Arah.Api/Contracts/Feed/FeedItemResponse.cs` (adicionar score opcional)
+- `backend/Arah.Api/Controllers/FeedController.cs` (endpoint de relevância e query param)
 
 **Critérios de Sucesso**:
 - ✅ Cálculo de relevância funcionando
@@ -692,7 +692,7 @@ Implementar funcionalidades de **Inteligência Artificial** para:
 - [ ] Atualizar Swagger
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Integration/AICompleteIntegrationTests.cs`
+- `backend/Arah.Tests/Integration/AICompleteIntegrationTests.cs`
 - `docs/AI_SYSTEM.md`
 
 **Critérios de Sucesso**:

@@ -39,14 +39,14 @@ A Fase 3 foi implementada com foco em performance e escalabilidade. As principai
 - ✅ Testes para `CommunityPost` e `TerritoryMembership`
 
 #### Arquivos Criados/Modificados
-- `backend/Araponga.Infrastructure/Postgres/Entities/*Record.cs` (4 arquivos)
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
-- `backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs` (novo)
-- `backend/Araponga.Infrastructure/Postgres/PostgresMapRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresTerritoryEventRepository.cs`
-- `backend/Araponga.Infrastructure/Postgres/PostgresFeedRepository.cs`
-- `backend/Araponga.Tests/Infrastructure/ConcurrencyTests.cs` (novo)
-- `backend/Araponga.Infrastructure/Postgres/Migrations/*AddRowVersion*.cs` (novo)
+- `backend/Arah.Infrastructure/Postgres/Entities/*Record.cs` (4 arquivos)
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs` (novo)
+- `backend/Arah.Infrastructure/Postgres/PostgresMapRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresTerritoryEventRepository.cs`
+- `backend/Arah.Infrastructure/Postgres/PostgresFeedRepository.cs`
+- `backend/Arah.Tests/Infrastructure/ConcurrencyTests.cs` (novo)
+- `backend/Arah.Infrastructure/Postgres/Migrations/*AddRowVersion*.cs` (novo)
 
 ---
 
@@ -61,7 +61,7 @@ A Fase 3 foi implementada com foco em performance e escalabilidade. As principai
 - ✅ Fallback automático se handlers falharem
 
 #### Arquivos Criados
-- `backend/Araponga.Infrastructure/Eventing/BackgroundEventProcessor.cs` (novo)
+- `backend/Arah.Infrastructure/Eventing/BackgroundEventProcessor.cs` (novo)
 
 #### Próximos Passos
 - Migrar `InMemoryEventBus` para usar `BackgroundEventProcessor`
@@ -83,8 +83,8 @@ A Fase 3 foi implementada com foco em performance e escalabilidade. As principai
 - ✅ Logs de warning quando fallback é usado
 
 #### Arquivos Criados
-- `backend/Araponga.Application/Interfaces/IDistributedCacheService.cs` (novo)
-- `backend/Araponga.Infrastructure/Caching/RedisCacheService.cs` (novo)
+- `backend/Arah.Application/Interfaces/IDistributedCacheService.cs` (novo)
+- `backend/Arah.Infrastructure/Caching/RedisCacheService.cs` (novo)
 
 #### Migração Completa
 - ✅ `TerritoryCacheService` migrado para `IDistributedCacheService`
@@ -207,7 +207,7 @@ builder.Services.AddDbContext<ReadOnlyArapongaDbContext>(options =>
 
 - [FASE3.md](../plano-acao-10-10/FASE3.md) - Plano original da Fase 3
 - [DEPLOYMENT_MULTI_INSTANCE.md](./DEPLOYMENT_MULTI_INSTANCE.md) - Documentação de deployment
-- [ConcurrencyHelper.cs](../../backend/Araponga.Infrastructure/Postgres/ConcurrencyHelper.cs) - Helper de concorrência
+- [ConcurrencyHelper.cs](../../backend/Arah.Infrastructure/Postgres/ConcurrencyHelper.cs) - Helper de concorrência
 
 ---
 

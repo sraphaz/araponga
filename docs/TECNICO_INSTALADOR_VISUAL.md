@@ -1,4 +1,4 @@
-# Instalador Visual Araponga
+# Instalador Visual Arah
 
 **Versão**: 1.0  
 **Data**: 2026-01-28  
@@ -27,7 +27,7 @@
 
 ## 🎯 Visão Geral
 
-O **Instalador Visual Araponga** é uma aplicação web moderna e amigável que permite a sysadmins fazer o deploy e configuração completa do Araponga através de uma interface gráfica intuitiva, sem necessidade de conhecimento técnico profundo em linha de comando.
+O **Instalador Visual Arah** é uma aplicação web moderna e amigável que permite a sysadmins fazer o deploy e configuração completa do Arah através de uma interface gráfica intuitiva, sem necessidade de conhecimento técnico profundo em linha de comando.
 
 ### Características Principais
 
@@ -45,7 +45,7 @@ O **Instalador Visual Araponga** é uma aplicação web moderna e amigável que 
 
 ### Objetivo
 
-Facilitar o processo de instalação e configuração do Araponga para sysadmins, reduzindo:
+Facilitar o processo de instalação e configuração do Arah para sysadmins, reduzindo:
 - Tempo de setup de horas para minutos
 - Erros de configuração manual
 - Necessidade de conhecimento técnico profundo
@@ -534,7 +534,7 @@ O instalador permite configurar feature flags padrão que serão aplicadas a nov
 
 ### Design
 
-- Seguir identidade visual do Araponga (cores Forest, glass morphism)
+- Seguir identidade visual do Arah (cores Forest, glass morphism)
 - Componentes reutilizáveis do frontend existente
 - Mobile-first e responsivo
 - Feedback visual claro (sucesso, aviso, erro)

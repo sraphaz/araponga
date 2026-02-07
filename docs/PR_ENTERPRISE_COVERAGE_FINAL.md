@@ -30,7 +30,7 @@ Este PR consolida todas as melhorias de cobertura de testes implementadas, inclu
 ## ✨ Novos Testes Implementados
 
 ### 1. Domain Layer (30 testes)
-**Arquivo**: `backend/Araponga.Tests/Domain/WorkItemTests.cs`
+**Arquivo**: `backend/Arah.Tests/Domain/WorkItemTests.cs`
 
 - Validações de construtor (id vazio, createdByUserId vazio, subjectType vazio/muito longo, etc.)
 - Normalização de strings (trim, uppercase)
@@ -40,7 +40,7 @@ Este PR consolida todas as melhorias de cobertura de testes implementadas, inclu
 - Testes com todos os outcomes (Approved, Rejected, NoAction)
 
 ### 2. Application Layer - AccountDeletionService (14 testes)
-**Arquivo**: `backend/Araponga.Tests/Application/AccountDeletionServiceEdgeCasesTests.cs`
+**Arquivo**: `backend/Arah.Tests/Application/AccountDeletionServiceEdgeCasesTests.cs`
 
 - Anonimização com usuário completo (todos os campos)
 - Anonimização com usuário mínimo
@@ -53,8 +53,8 @@ Este PR consolida todas as melhorias de cobertura de testes implementadas, inclu
 
 ### 3. Application Layer - Cache Services (28 testes)
 **Arquivos**:
-- `backend/Araponga.Tests/Application/UserBlockCacheServiceEdgeCasesTests.cs` (14 testes)
-- `backend/Araponga.Tests/Application/AlertCacheServiceEdgeCasesTests.cs` (14 testes)
+- `backend/Arah.Tests/Application/UserBlockCacheServiceEdgeCasesTests.cs` (14 testes)
+- `backend/Arah.Tests/Application/AlertCacheServiceEdgeCasesTests.cs` (14 testes)
 
 **Cenários testados**:
 - Cache hit/miss scenarios

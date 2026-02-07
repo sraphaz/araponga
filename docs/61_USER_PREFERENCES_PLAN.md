@@ -16,7 +16,7 @@ Implementar uma funcionalidade completa para que usuários possam configurar sua
 
 ### O que existe hoje
 
-1. **Modelo User básico** (`Araponga.Domain.Users.User`):
+1. **Modelo User básico** (`Arah.Domain.Users.User`):
    - Campos: `DisplayName`, `Email`, `Cpf`, `ForeignDocument`, `PhoneNumber`, `Address`, `Provider`, `ExternalId`, `Role`, `CreatedAtUtc`
    - Não há campos para preferências ou configurações
 
@@ -69,7 +69,7 @@ Implementar uma funcionalidade completa para que usuários possam configurar sua
 #### 1.1. Entidade `UserPreferences`
 
 ```csharp
-namespace Araponga.Domain.Users;
+namespace Arah.Domain.Users;
 
 public sealed class UserPreferences
 {
@@ -134,7 +134,7 @@ public sealed class UserPreferences
 #### 1.2. Value Objects
 
 ```csharp
-namespace Araponga.Domain.Users;
+namespace Arah.Domain.Users;
 
 public enum ProfileVisibility
 {
@@ -192,7 +192,7 @@ public sealed record NotificationPreferences
 #### 1.3. Métodos no `User` para atualização de perfil
 
 ```csharp
-// Adicionar ao Araponga.Domain.Users.User
+// Adicionar ao Arah.Domain.Users.User
 
 public void UpdateDisplayName(string displayName, DateTime updatedAtUtc)
 {
@@ -226,7 +226,7 @@ public void UpdateContactInfo(
 #### 2.1. Interface `IUserPreferencesRepository`
 
 ```csharp
-namespace Araponga.Application.Interfaces;
+namespace Arah.Application.Interfaces;
 
 public interface IUserPreferencesRepository
 {
@@ -249,7 +249,7 @@ public interface IUserPreferencesRepository
 #### 3.1. `UserPreferencesService`
 
 ```csharp
-namespace Araponga.Application.Services;
+namespace Arah.Application.Services;
 
 public sealed class UserPreferencesService
 {
@@ -316,7 +316,7 @@ public sealed class UserPreferencesService
 #### 3.2. `UserProfileService`
 
 ```csharp
-namespace Araponga.Application.Services;
+namespace Arah.Application.Services;
 
 public sealed class UserProfileService
 {
@@ -412,7 +412,7 @@ public sealed class UserProfileService
 #### 4.1. `UserPreferencesController`
 
 ```csharp
-namespace Araponga.Api.Controllers;
+namespace Arah.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/users/me/preferences")]
@@ -522,7 +522,7 @@ public sealed class UserPreferencesController : ControllerBase
 #### 4.2. `UserProfileController`
 
 ```csharp
-namespace Araponga.Api.Controllers;
+namespace Arah.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/users/me/profile")]
@@ -617,7 +617,7 @@ public sealed class UserProfileController : ControllerBase
 #### 5.1. Requests
 
 ```csharp
-namespace Araponga.Api.Contracts.Users;
+namespace Arah.Api.Contracts.Users;
 
 public sealed record UpdatePrivacyPreferencesRequest(
     string ProfileVisibility,      // "Public", "ResidentsOnly", "Private"
@@ -645,7 +645,7 @@ public sealed record UpdateContactInfoRequest(
 #### 5.2. Responses
 
 ```csharp
-namespace Araponga.Api.Contracts.Users;
+namespace Arah.Api.Contracts.Users;
 
 public sealed record UserPreferencesResponse(
     Guid UserId,
@@ -731,7 +731,7 @@ modelBuilder.Entity<UserPreferencesRecord>(entity =>
 Antes de enviar notificações, verificar preferências do usuário:
 
 ```csharp
-namespace Araponga.Application.Services;
+namespace Arah.Application.Services;
 
 public sealed class NotificationDispatcher
 {
@@ -782,21 +782,21 @@ public sealed class NotificationDispatcher
 
 ```
 backend/
-├── Araponga.Domain/
+├── Arah.Domain/
 │   └── Users/
 │       ├── UserPreferences.cs          (nova)
 │       ├── ProfileVisibility.cs        (nova)
 │       ├── ContactVisibility.cs        (nova)
 │       └── NotificationPreferences.cs  (nova)
 │
-├── Araponga.Application/
+├── Arah.Application/
 │   ├── Interfaces/
 │   │   └── IUserPreferencesRepository.cs  (nova)
 │   └── Services/
 │       ├── UserPreferencesService.cs     (nova)
 │       └── UserProfileService.cs         (nova)
 │
-├── Araponga.Infrastructure/
+├── Arah.Infrastructure/
 │   ├── InMemory/
 │   │   └── InMemoryUserPreferencesRepository.cs  (nova)
 │   └── Postgres/
@@ -806,7 +806,7 @@ backend/
 │       └── Migrations/
 │           └── YYYYMMDDHHMMSS_AddUserPreferences.cs  (nova)
 │
-└── Araponga.Api/
+└── Arah.Api/
     ├── Controllers/
     │   ├── UserPreferencesController.cs  (nova)
     │   └── UserProfileController.cs      (nova)

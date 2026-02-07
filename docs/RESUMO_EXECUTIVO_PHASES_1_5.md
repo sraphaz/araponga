@@ -100,7 +100,7 @@ dotnet test --filter "FullyQualifiedName~EdgeCases" --verbosity quiet
 git status
 
 # Adicionar arquivos (se necessário)
-git add backend/Araponga.Tests/**/*EdgeCasesTests.cs
+git add backend/Arah.Tests/**/*EdgeCasesTests.cs
 git add docs/ENTERPRISE_COVERAGE_*.md
 git add docs/PR_*.md
 git add docs/PLANO_*.md

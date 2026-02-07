@@ -8,7 +8,7 @@
 
 ## 🎯 Visão Geral
 
-O Sistema de Mídia do Araponga fornece infraestrutura completa para armazenamento, processamento e gerenciamento de mídias (imagens, vídeos, áudios, documentos). O sistema foi projetado para ser seguro, escalável e preparado para migração para cloud storage quando necessário.
+O Sistema de Mídia do Arah fornece infraestrutura completa para armazenamento, processamento e gerenciamento de mídias (imagens, vídeos, áudios, documentos). O sistema foi projetado para ser seguro, escalável e preparado para migração para cloud storage quando necessário.
 
 **Valores Mantidos**: Mídias servem para **documentar território** e **fortalecer comunidade**, não para capturar atenção.
 

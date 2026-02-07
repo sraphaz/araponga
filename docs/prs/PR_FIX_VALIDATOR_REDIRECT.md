@@ -40,7 +40,7 @@ Este PR corrige dois problemas criticos identificados nos testes e no developer 
 ## Mudancas
 
 ### Arquivos Modificados
-- `backend/Araponga.Api/Validators/CreatePostRequestValidator.cs` - Correcao da validacao de enums
+- `backend/Arah.Api/Validators/CreatePostRequestValidator.cs` - Correcao da validacao de enums
 - `docs/devportal/index.html` - Correcao do loop de redirect
 - `docs/40_CHANGELOG.md` - Documentacao das correcoes
 - `docs/21_CODE_REVIEW.md` - Atualizacao do status das recomendacoes
@@ -51,7 +51,7 @@ Este PR corrige dois problemas criticos identificados nos testes e no developer 
 
 Todos os 119 testes passam:
 ```bash
-dotnet test backend/Araponga.Tests/Araponga.Tests.csproj
+dotnet test backend/Arah.Tests/Arah.Tests.csproj
 ```
 
 ## Impacto

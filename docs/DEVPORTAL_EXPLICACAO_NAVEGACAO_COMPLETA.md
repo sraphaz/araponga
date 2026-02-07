@@ -170,7 +170,7 @@ O conteúdo foi dividido em **5 phase-panels** principais:
 
 **Seções**:
 - `visao-geral`: Visão geral da API e plataforma
-- `como-funciona`: Como o Araponga funciona (do visitante ao morador)
+- `como-funciona`: Como o Arah funciona (do visitante ao morador)
 - `territorios`: Conceito de território como unidade primária
 - `conceitos`: Conceitos de produto e semântica de negócio
 - `modelo-dominio`: Modelo de domínio e relacionamentos

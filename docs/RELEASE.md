@@ -1,4 +1,4 @@
-# Fluxo de release – Araponga
+# Fluxo de release – Arah
 
 Como fazer release de versão, atualizar versão e publicar artefatos.
 
@@ -6,7 +6,7 @@ Como fazer release de versão, atualizar versão e publicar artefatos.
 
 ## Versão
 
-- **App Flutter:** `frontend/araponga.app/pubspec.yaml` → campo `version` (ex.: `0.1.0+1` → semver + build number).
+- **App Flutter:** `frontend/Arah.app/pubspec.yaml` → campo `version` (ex.: `0.1.0+1` → semver + build number).
 - **Formato:** `MAJOR.MINOR.PATCH+BUILD` (ex.: `1.2.0+3`). A tag usa só `vMAJOR.MINOR.PATCH` (ex.: `v1.2.0`).
 - **Backend/API:** versão pode ser refletida em assembly ou em documentação; o CD publica a imagem Docker com tag `$sha` e `latest`.
 
@@ -16,7 +16,7 @@ Como fazer release de versão, atualizar versão e publicar artefatos.
 
 ### 1. Atualizar versão do app
 
-Edite `frontend/araponga.app/pubspec.yaml`:
+Edite `frontend/Arah.app/pubspec.yaml`:
 
 ```yaml
 version: 1.0.0+1   # 1.0.0 = versão do release; +1 = build number (incrementar a cada build de store)
@@ -27,7 +27,7 @@ version: 1.0.0+1   # 1.0.0 = versão do release; +1 = build number (incrementar 
 ### 2. Commit e push
 
 ```bash
-git add frontend/araponga.app/pubspec.yaml
+git add frontend/Arah.app/pubspec.yaml
 git commit -m "chore: bump app version to 1.0.0"
 git push origin main
 ```
@@ -66,7 +66,7 @@ git push origin v1.0.0
 
 | Etapa | O quê |
 |-------|--------|
-| 1 | Ajustar `version` em `frontend/araponga.app/pubspec.yaml` (e changelog se usar). |
+| 1 | Ajustar `version` em `frontend/Arah.app/pubspec.yaml` (e changelog se usar). |
 | 2 | Commit + push em `main`. |
 | 3 | `git tag vX.Y.Z` e `git push origin vX.Y.Z`. |
 | 4 | CD gera artefatos; Release (se ativo) publica a release com os anexos. |

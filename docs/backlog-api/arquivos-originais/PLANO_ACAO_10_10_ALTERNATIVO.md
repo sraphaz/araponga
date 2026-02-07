@@ -1,4 +1,4 @@
-# Plano de Ação: Tornar Aplicação Araponga 10/10
+# Plano de Ação: Tornar Aplicação Arah 10/10
 
 **Data de Criação**: 2025-01-XX  
 **Objetivo**: Elevar a aplicação de 8.0/10 para 10/10 em todas as categorias  
@@ -78,8 +78,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
-- `backend/Araponga.Api/HealthChecks/` (novo diretório)
+- `backend/Arah.Api/Program.cs`
+- `backend/Arah.Api/HealthChecks/` (novo diretório)
 
 ---
 
@@ -101,8 +101,8 @@
 - ✅ Métricas de conexões funcionando
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/appsettings.json`
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Api/appsettings.json`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
 
 ---
 
@@ -127,7 +127,7 @@
 - ✅ Migration testada em staging
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Postgres/Migrations/` (nova migration)
+- `backend/Arah.Infrastructure/Postgres/Migrations/` (nova migration)
 
 ---
 
@@ -157,15 +157,15 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Exceptions/DomainException.cs`
-- `backend/Araponga.Application/Exceptions/ValidationException.cs`
-- `backend/Araponga.Application/Exceptions/NotFoundException.cs`
-- `backend/Araponga.Application/Exceptions/UnauthorizedException.cs`
-- `backend/Araponga.Application/Exceptions/ConflictException.cs`
-- `backend/Araponga.Application/Exceptions/ForbiddenException.cs`
+- `backend/Arah.Application/Exceptions/DomainException.cs`
+- `backend/Arah.Application/Exceptions/ValidationException.cs`
+- `backend/Arah.Application/Exceptions/NotFoundException.cs`
+- `backend/Arah.Application/Exceptions/UnauthorizedException.cs`
+- `backend/Arah.Application/Exceptions/ConflictException.cs`
+- `backend/Arah.Application/Exceptions/ForbiddenException.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (exception handler)
+- `backend/Arah.Api/Program.cs` (exception handler)
 - Todos os services (migração gradual)
 
 ---
@@ -200,7 +200,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Validators/` (novo diretório com todos os validators)
+- `backend/Arah.Api/Validators/` (novo diretório com todos os validators)
 
 ---
 
@@ -264,7 +264,7 @@
 - ✅ Testes de cenários de erro implementados
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Tests/` (adicionar testes)
+- `backend/Arah.Tests/` (adicionar testes)
 
 ---
 
@@ -289,7 +289,7 @@
 - ✅ Gargalos identificados e documentados
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Performance/` (novo diretório)
+- `backend/Arah.Tests/Performance/` (novo diretório)
 
 ---
 
@@ -313,7 +313,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Security/` (novo diretório)
+- `backend/Arah.Tests/Security/` (novo diretório)
 
 ---
 
@@ -338,7 +338,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/CacheInvalidationService.cs`
+- `backend/Arah.Application/Services/CacheInvalidationService.cs`
 
 **Arquivos a Modificar**:
 - Todos os cache services
@@ -391,8 +391,8 @@
 - ✅ Código mais limpo e manutenível
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Common/ValidationHelpers.cs`
-- `backend/Araponga.Application/Common/Constants.cs`
+- `backend/Arah.Application/Common/ValidationHelpers.cs`
+- `backend/Arah.Application/Common/Constants.cs`
 
 ---
 
@@ -426,7 +426,7 @@
 
 **Arquivos a Modificar**:
 - Entidades de domínio
-- `backend/Araponga.Infrastructure/Postgres/ArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/ArapongaDbContext.cs`
 - Services que fazem updates
 
 ---
@@ -473,10 +473,10 @@
 - ✅ Latência de requests reduzida
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Events/BackgroundEventProcessor.cs`
+- `backend/Arah.Infrastructure/Events/BackgroundEventProcessor.cs`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Infrastructure/Events/InMemoryEventBus.cs`
+- `backend/Arah.Infrastructure/Events/InMemoryEventBus.cs`
 
 ---
 
@@ -503,11 +503,11 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Cache/RedisCacheService.cs`
+- `backend/Arah.Infrastructure/Cache/RedisCacheService.cs`
 
 **Arquivos a Modificar**:
 - Todos os cache services
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -530,7 +530,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Infrastructure/Postgres/ReadOnlyArapongaDbContext.cs`
+- `backend/Arah.Infrastructure/Postgres/ReadOnlyArapongaDbContext.cs`
 
 ---
 
@@ -585,7 +585,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs` (Serilog configuration)
+- `backend/Arah.Api/Program.cs` (Serilog configuration)
 
 ---
 
@@ -611,11 +611,11 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Metrics/` (novo diretório)
+- `backend/Arah.Api/Metrics/` (novo diretório)
 - `docs/METRICS.md`
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -643,10 +643,10 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Tracing/` (novo diretório)
+- `backend/Arah.Api/Tracing/` (novo diretório)
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -728,8 +728,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/TwoFactorService.cs`
-- `backend/Araponga.Api/Controllers/TwoFactorController.cs`
+- `backend/Arah.Application/Services/TwoFactorService.cs`
+- `backend/Arah.Api/Controllers/TwoFactorController.cs`
 
 ---
 
@@ -753,7 +753,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/InputSanitizationService.cs`
+- `backend/Arah.Application/Services/InputSanitizationService.cs`
 
 ---
 
@@ -774,7 +774,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -800,7 +800,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Api/Program.cs`
+- `backend/Arah.Api/Program.cs`
 
 ---
 
@@ -823,7 +823,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Middleware/SecurityHeadersMiddleware.cs`
+- `backend/Arah.Api/Middleware/SecurityHeadersMiddleware.cs`
 
 ---
 
@@ -846,8 +846,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/AuditLogger.cs`
-- `backend/Araponga.Api/Controllers/AuditController.cs`
+- `backend/Arah.Application/Services/AuditLogger.cs`
+- `backend/Arah.Api/Controllers/AuditController.cs`
 
 ---
 
@@ -900,8 +900,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PaymentService.cs`
-- `backend/Araponga.Infrastructure/Payments/` (novo diretório)
+- `backend/Arah.Application/Services/PaymentService.cs`
+- `backend/Arah.Infrastructure/Payments/` (novo diretório)
 
 ---
 
@@ -925,8 +925,8 @@
 - ✅ Documentação de conformidade
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/DataExportService.cs`
-- `backend/Araponga.Api/Controllers/DataExportController.cs`
+- `backend/Arah.Application/Services/DataExportService.cs`
+- `backend/Arah.Api/Controllers/DataExportController.cs`
 
 ---
 
@@ -952,8 +952,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/AnalyticsService.cs`
-- `backend/Araponga.Api/Controllers/AnalyticsController.cs`
+- `backend/Arah.Application/Services/AnalyticsService.cs`
+- `backend/Arah.Api/Controllers/AnalyticsController.cs`
 
 ---
 
@@ -976,7 +976,7 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Api/Controllers/CuratorDashboardController.cs`
+- `backend/Arah.Api/Controllers/CuratorDashboardController.cs`
 - Frontend (se aplicável)
 
 ---
@@ -1000,8 +1000,8 @@
 - ✅ Documentação completa
 
 **Arquivos a Criar**:
-- `backend/Araponga.Application/Services/PushNotificationService.cs`
-- `backend/Araponga.Infrastructure/Notifications/` (novo diretório)
+- `backend/Arah.Application/Services/PushNotificationService.cs`
+- `backend/Arah.Infrastructure/Notifications/` (novo diretório)
 
 ---
 
@@ -1192,7 +1192,7 @@
 
 ## 🎯 Conclusão
 
-Este plano de ação detalha todas as melhorias necessárias para elevar a aplicação Araponga de **8.0/10 para 10/10**.
+Este plano de ação detalha todas as melhorias necessárias para elevar a aplicação Arah de **8.0/10 para 10/10**.
 
 ### Resumo
 

@@ -8,7 +8,7 @@
 
 ## 🎯 Visão Geral
 
-As **Fases 25-28** expandem a plataforma Araponga para incluir:
+As **Fases 25-28** expandem a plataforma Arah para incluir:
 - **Fase 25**: Infraestrutura base para serviços digitais integrados
 - **Fase 26**: Chat com IA e consumo consciente
 - **Fase 27**: Negociação territorial e assinatura coletiva de serviços

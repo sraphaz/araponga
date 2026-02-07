@@ -1,5 +1,5 @@
 # ============================================
-# Araponga - Stack local integrado (API + BFF)
+# Arah - Stack local integrado (API + BFF)
 # ============================================
 # Sobe a API (Docker) e o BFF (dotnet run) para você testar e debugar
 # o app Flutter apontando para o BFF local, que por sua vez aponta para a API.
@@ -19,7 +19,7 @@
 #   .\scripts\run-local-stack.ps1 -ResetDatabase # Recria o banco (apaga volume Postgres) e sobe tudo; aplica a migração única do zero
 #
 # Depois, em outro terminal:
-#   cd frontend\araponga.app
+#   cd frontend\arah.app
 #   .\scripts\run-app-local.ps1
 #   # ou: flutter run --dart-define=BFF_BASE_URL=http://localhost:5001
 #
@@ -38,7 +38,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = (Get-Item $PSScriptRoot).Parent.FullName
-$BffProject = Join-Path $RepoRoot "backend\Araponga.Api.Bff\Araponga.Api.Bff.csproj"
+$BffProject = Join-Path $RepoRoot "backend\Arah.Api.Bff\Arah.Api.Bff.csproj"
 $ComposeFile = Join-Path $RepoRoot "docker-compose.dev.yml"
 
 function Write-Info { param([string]$Message) Write-Host $Message -ForegroundColor Cyan }
@@ -122,14 +122,14 @@ function Open-StackInBrowser {
         Write-Warn "Não foi possível abrir o navegador: $_"
     }
     if ($StartApp) {
-        $appDir = Join-Path $RepoRoot "frontend\araponga.app"
+        $appDir = Join-Path $RepoRoot "frontend\arah.app"
         $appScript = Join-Path $appDir "scripts\run-app-local.ps1"
         if ((Test-Path -LiteralPath $appScript)) {
             try {
                 Start-Process powershell -ArgumentList "-NoExit -File `"$appScript`"" -WorkingDirectory $appDir
                 Write-Ok "App Flutter iniciado em nova janela."
             } catch {
-                Write-Warn "Não foi possível iniciar o app em nova janela. Rode manualmente: cd frontend\araponga.app; .\scripts\run-app-local.ps1"
+                Write-Warn "Não foi possível iniciar o app em nova janela. Rode manualmente: cd frontend\arah.app; .\scripts\run-app-local.ps1"
             }
         }
     }
@@ -160,7 +160,7 @@ function Show-StackSummary {
             Write-Host "    API:      http://localhost:8080          (home; Swagger: /swagger)" -ForegroundColor White
         }
         Write-Host "    BFF:      http://localhost:5001          (sobe neste terminal; use no app Flutter)" -ForegroundColor White
-        Write-Host "    Postgres: localhost:5432 (user araponga)  |  Seed: scripts\seed\run-seed-camburi.ps1" -ForegroundColor DarkGray
+        Write-Host "    Postgres: localhost:5432 (user arah)  |  Seed: scripts\seed\run-seed-camburi.ps1" -ForegroundColor DarkGray
         Write-Host "    Redis:    localhost:6379  |  MinIO: localhost:9000 (console: 9001)" -ForegroundColor DarkGray
     } else {
         Write-Err "  DOCKER: falhou ao subir os containers."
@@ -172,7 +172,7 @@ function Show-StackSummary {
 
 function Show-Help {
     Write-Host ""
-    Write-Info "=== Araponga - Stack local (App -> BFF -> API) ==="
+    Write-Info "=== Arah - Stack local (App -> BFF -> API) ==="
     Write-Host ""
     Write-Host "  Sobe a API em Docker (postgres, redis, minio, api) e o BFF com dotnet run."
     Write-Host "  Na primeira subida a API aplica migrações no Postgres; em seguida roda o seed Camburi (scripts/seed)."
@@ -187,7 +187,7 @@ function Show-Help {
     Write-Host "  .\scripts\run-local-stack.ps1 -Help         Esta ajuda"
     Write-Host ""
     Write-Host "Depois, em outro terminal, rode o app:"
-    Write-Host "  cd frontend\araponga.app"
+    Write-Host "  cd frontend\arah.app"
     Write-Host "  .\scripts\run-app-local.ps1"
     Write-Host "  (ou: flutter run --dart-define=BFF_BASE_URL=http://localhost:5001)"
     Write-Host ""
@@ -211,7 +211,7 @@ try {
     if (Test-Path $BackendRoot) {
         Write-Info "Limpando binários antigos do backend..."
         Get-ChildItem -Path $BackendRoot -Include "bin", "obj" -Recurse -Directory -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-        & dotnet clean (Join-Path $BackendRoot "Araponga.Api.Bff\Araponga.Api.Bff.csproj") --nologo -v q 2>$null
+        & dotnet clean (Join-Path $BackendRoot "Arah.Api.Bff\Arah.Api.Bff.csproj") --nologo -v q 2>$null
         if ($LASTEXITCODE -eq 0) { Write-Ok "Backend/BFF: bin e obj limpos." } else { Write-Warn "dotnet clean BFF falhou (não bloqueante)." }
     }
 
@@ -234,7 +234,7 @@ try {
             Write-Err "Docker está instalado mas o daemon não está rodando. Abra o Docker Desktop e execute o script novamente."
             exit 1
         }
-        $env:COMPOSE_PROJECT_NAME = "araponga"
+        $env:COMPOSE_PROJECT_NAME = "arah"
 
         if ($ResetDatabase) {
             Write-Warn "ResetDatabase: parando containers e removendo volume do Postgres (todos os dados do banco serão apagados)."
@@ -297,21 +297,21 @@ try {
                 }
             }
         }
-        $PgUser = if ($env:POSTGRES_USER) { $env:POSTGRES_USER } else { "araponga" }
-        $PgDb   = if ($env:POSTGRES_DB)   { $env:POSTGRES_DB }   else { "araponga" }
+        $PgUser = if ($env:POSTGRES_USER) { $env:POSTGRES_USER } else { "arah" }
+        $PgDb   = if ($env:POSTGRES_DB)   { $env:POSTGRES_DB }   else { "arah" }
         foreach ($seedName in @('camburi', 'boicucanga')) {
             $SqlFile = Join-Path $RepoRoot "scripts\seed\seed-$seedName.sql"
             if (Test-Path -LiteralPath $SqlFile) {
                 try {
                     Write-Info "Executando seed $seedName no container Postgres (UTF-8)..."
                     $SeedPathInContainer = "/tmp/seed-$seedName.sql"
-                    docker cp $SqlFile araponga-postgres:${SeedPathInContainer}
+                    docker cp $SqlFile arah-postgres:${SeedPathInContainer}
                     if ($LASTEXITCODE -ne 0) {
                         Write-Warn "Falha ao copiar seed $seedName para o container."
                     } else {
-                        docker exec -e PGCLIENTENCODING=UTF8 araponga-postgres psql -U $PgUser -d $PgDb -f $SeedPathInContainer -v ON_ERROR_STOP=1
+                        docker exec -e PGCLIENTENCODING=UTF8 arah-postgres psql -U $PgUser -d $PgDb -f $SeedPathInContainer -v ON_ERROR_STOP=1
                         $runExit = $LASTEXITCODE
-                        docker exec araponga-postgres rm -f $SeedPathInContainer 2>$null
+                        docker exec arah-postgres rm -f $SeedPathInContainer 2>$null
                         if ($runExit -eq 0) {
                             Write-Ok "Seed $seedName aplicado."
                         } else {
@@ -367,7 +367,7 @@ try {
         if (-not $NoStartApp) { Open-StackInBrowser -RepoRoot $RepoRoot -StartApp:$true }
         Write-Host ""
         if ($NoStartApp) {
-            Write-Info "Para rodar o app: cd frontend\araponga.app; .\scripts\run-app-local.ps1"
+            Write-Info "Para rodar o app: cd frontend\arah.app; .\scripts\run-app-local.ps1"
         }
         Write-Host "  API: http://localhost:8080  |  BFF: http://localhost:5001" -ForegroundColor DarkGray
         Write-Host ""
@@ -377,7 +377,7 @@ try {
         Write-Host ""
         Write-Host "  O BFF estará disponível quando aparecer 'Application started' abaixo (atualize a aba do BFF se precisar)." -ForegroundColor Cyan
         if ($NoStartApp) {
-            Write-Host "  Para rodar o app em outro terminal: cd frontend\araponga.app; .\scripts\run-app-local.ps1" -ForegroundColor Yellow
+            Write-Host "  Para rodar o app em outro terminal: cd frontend\arah.app; .\scripts\run-app-local.ps1" -ForegroundColor Yellow
         }
         Write-Host ""
         & dotnet run --project $BffProject --urls "http://localhost:5001"

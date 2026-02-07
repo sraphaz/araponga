@@ -9,7 +9,7 @@
 
 ## 📋 Resumo Executivo
 
-Este PR consolida um **replanejamento completo** do roadmap estratégico do Araponga, incluindo:
+Este PR consolida um **replanejamento completo** do roadmap estratégico do Arah, incluindo:
 
 1. ✅ **Reavaliação de Prioridades**: Blockchain reposicionado de P0 para P1 (contexto brasileiro)
 2. ✅ **Nova Funcionalidade**: Sistema de Hospedagem Territorial (Fase 30) - já documentado

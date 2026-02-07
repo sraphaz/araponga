@@ -183,7 +183,7 @@ sidebarLinks.forEach(link => {
 
 **Seções**:
 - `visao-geral`: Visão geral da API e plataforma
-- `como-funciona`: Como o Araponga funciona (do visitante ao morador)
+- `como-funciona`: Como o Arah funciona (do visitante ao morador)
 - `territorios`: Conceito de território
 - `conceitos`: Conceitos de produto
 - `modelo-dominio`: Modelo de domínio

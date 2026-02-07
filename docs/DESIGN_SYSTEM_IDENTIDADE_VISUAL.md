@@ -1,15 +1,15 @@
-# Araponga — Manual de Identidade Visual e Marca
+# Arah — Manual de Identidade Visual e Marca
 
 **Versão**: 1.0  
 **Data**: 2025-01-20  
 **Status**: Documento Fundacional  
-**Aplicação**: Todas as interfaces, comunicações e materiais do projeto Araponga
+**Aplicação**: Todas as interfaces, comunicações e materiais do projeto Arah
 
 ---
 
 ## Sumário Executivo
 
-Este documento define a identidade visual, a marca e os princípios de design do **Araponga** — uma plataforma digital comunitária orientada ao território. Ele serve como referência única para todas as decisões de design, comunicação e experiência do usuário, garantindo consistência e alinhamento com os valores fundamentais do projeto.
+Este documento define a identidade visual, a marca e os princípios de design do **Arah** — uma plataforma digital comunitária orientada ao território. Ele serve como referência única para todas as decisões de design, comunicação e experiência do usuário, garantindo consistência e alinhamento com os valores fundamentais do projeto.
 
 **Escopo**: Identidade visual, sistema de cores, tipografia, linguagem, tom de voz, personalidade de marca, princípios de design e diretrizes de aplicação.
 
@@ -19,8 +19,8 @@ Este documento define a identidade visual, a marca e os princípios de design do
 
 ### 1.1 Propósito e Posicionamento
 
-**O que é Araponga**
-Araponga é uma infraestrutura digital comunitária onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar.
+**O que é Arah**
+Arah é uma infraestrutura digital comunitária onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar.
 
 **Posicionamento**
 - **Territorial**: Localização geográfica como princípio organizador primário
@@ -30,7 +30,7 @@ Araponga é uma infraestrutura digital comunitária onde o território vem prime
 - **Valorizador de inteligência**: Conhecimento reconhecido e honrado, não extraído
 
 **Diferencial competitivo**
-Diferente de plataformas que operam a portas fechadas, todas as decisões, contribuições e processos no Araponga são visíveis e participativos. Comunidades veem como a plataforma evolui, quem contribui e por que decisões são tomadas.
+Diferente de plataformas que operam a portas fechadas, todas as decisões, contribuições e processos no Arah são visíveis e participativos. Comunidades veem como a plataforma evolui, quem contribui e por que decisões são tomadas.
 
 ### 1.2 Valores Centrais
 
@@ -61,7 +61,7 @@ Diferente de plataformas que operam a portas fechadas, todas as decisões, contr
 
 ### 1.3 Nível de Consciência da Marca
 
-Araponga opera em um **nível elevado de consciência social e tecnológica**:
+Arah opera em um **nível elevado de consciência social e tecnológica**:
 
 - **Consciência Territorial**: Reconhecimento profundo do vínculo entre pessoas e lugar
 - **Consciência Comunitária**: Respeito pela autonomia e governança local
@@ -123,10 +123,10 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 **Exemplos de Tom**
 
 ✅ **Bom**:
-> "Araponga é uma infraestrutura digital onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar."
+> "Arah é uma infraestrutura digital onde o território vem primeiro. Construímos tecnologia que fortalece comunidades locais, respeita autonomia e serve à continuidade da vida no lugar."
 
 ❌ **Evite**:
-> "Bem-vindo ao Araponga! Somos a melhor plataforma comunitária do mundo que vai transformar sua vida e sua comunidade de forma revolucionária!"
+> "Bem-vindo ao Arah! Somos a melhor plataforma comunitária do mundo que vai transformar sua vida e sua comunidade de forma revolucionária!"
 
 ---
 
@@ -191,7 +191,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 --text-subtle: #8a97a4;  /* Texto sutil */
 ```
 
-**Cores de Acento (Revisadas - Alinhadas com Valores da Araponga)**
+**Cores de Acento (Revisadas - Alinhadas com Valores da Arah)**
 
 ```css
 /* Primary - Verde (Natureza, Território, Crescimento) */
@@ -219,7 +219,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 --success: var(--color-success);
 ```
 
-**Nota:** A paleta foi revisada para refletir melhor os valores da Araponga: verde representa natureza/território, azul representa transparência/clareza. Cores são suaves e não saturadas demais, mantendo sobriedade elevada.
+**Nota:** A paleta foi revisada para refletir melhor os valores da Arah: verde representa natureza/território, azul representa transparência/clareza. Cores são suaves e não saturadas demais, mantendo sobriedade elevada.
 
 **Uso de Cores**
 
@@ -632,7 +632,7 @@ Araponga opera em um **nível elevado de consciência social e tecnológica**:
 
 ### 8.1 Princípios de Vocabulário
 
-O vocabulário do Araponga reflete seus valores fundamentais: **território como referência**, **autonomia local**, **transparência radical** e **valorização da inteligência**. Cada termo escolhido carrega significado intencional e alinha comunicação com propósito do projeto.
+O vocabulário do Arah reflete seus valores fundamentais: **território como referência**, **autonomia local**, **transparência radical** e **valorização da inteligência**. Cada termo escolhido carrega significado intencional e alinha comunicação com propósito do projeto.
 
 ### 8.2 Terminologia Obrigatória
 
@@ -711,7 +711,7 @@ O vocabulário do Araponga reflete seus valores fundamentais: **território como
 #### Apresentação e Introdução
 
 ✅ **Preferir**:
-- "Araponga é uma infraestrutura digital onde o território vem primeiro."
+- "Arah é uma infraestrutura digital onde o território vem primeiro."
 - "Construímos tecnologia que fortalece comunidades locais."
 - "Território como referência, autonomia como valor."
 
@@ -841,7 +841,7 @@ O vocabulário do Araponga reflete seus valores fundamentais: **território como
 
 ## 10. Versionamento e Evolução
 
-**Este documento é vivo** e deve evoluir conforme o projeto Araponga cresce. Mudanças significativas devem ser:
+**Este documento é vivo** e deve evoluir conforme o projeto Arah cresce. Mudanças significativas devem ser:
 
 1. **Documentadas**: O que mudou e por quê
 2. **Comunicadas**: Time e comunidade informados
@@ -873,4 +873,4 @@ O vocabulário do Araponga reflete seus valores fundamentais: **território como
 
 ---
 
-**Este documento é a referência única para todas as decisões de identidade visual e marca do Araponga. Use-o como guia em todas as comunicações, interfaces e materiais do projeto.**
+**Este documento é a referência única para todas as decisões de identidade visual e marca do Arah. Use-o como guia em todas as comunicações, interfaces e materiais do projeto.**

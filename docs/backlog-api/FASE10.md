@@ -95,10 +95,10 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [ ] Testes de integração
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Api/Controllers/FeedController.cs`
-- `backend/Araponga.Api/Contracts/Feed/CreatePostRequest.cs`
-- `backend/Araponga.Api/Contracts/Feed/PostResponse.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Api/Controllers/FeedController.cs`
+- `backend/Arah.Api/Contracts/Feed/CreatePostRequest.cs`
+- `backend/Arah.Api/Contracts/Feed/PostResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Posts podem ter múltiplas imagens
@@ -123,8 +123,8 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [ ] Testes de performance
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/FeedService.cs`
-- `backend/Araponga.Application/Services/PostFilterService.cs`
+- `backend/Arah.Application/Services/FeedService.cs`
+- `backend/Arah.Application/Services/PostFilterService.cs`
 
 **Critérios de Sucesso**:
 - ✅ Mídias exibidas em posts
@@ -156,10 +156,10 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Api/Controllers/EventsController.cs`
-- `backend/Araponga.Api/Contracts/Events/CreateEventRequest.cs`
-- `backend/Araponga.Api/Contracts/Events/EventResponse.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Api/Controllers/EventsController.cs`
+- `backend/Arah.Api/Contracts/Events/CreateEventRequest.cs`
+- `backend/Arah.Api/Contracts/Events/EventResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Eventos podem ter imagem de capa
@@ -190,10 +190,10 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Api/Controllers/ItemsController.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/CreateItemRequest.cs`
-- `backend/Araponga.Api/Contracts/Marketplace/StoreItemResponse.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Api/Controllers/ItemsController.cs`
+- `backend/Arah.Api/Contracts/Marketplace/CreateItemRequest.cs`
+- `backend/Arah.Api/Contracts/Marketplace/StoreItemResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Itens podem ter múltiplas imagens
@@ -224,10 +224,10 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [ ] Testes
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Application/Services/ChatService.cs`
-- `backend/Araponga.Api/Controllers/ChatController.cs`
-- `backend/Araponga.Api/Contracts/Chat/SendMessageRequest.cs`
-- `backend/Araponga.Api/Contracts/Chat/ChatMessageResponse.cs`
+- `backend/Arah.Application/Services/ChatService.cs`
+- `backend/Arah.Api/Controllers/ChatController.cs`
+- `backend/Arah.Api/Contracts/Chat/SendMessageRequest.cs`
+- `backend/Arah.Api/Contracts/Chat/ChatMessageResponse.cs`
 
 **Critérios de Sucesso**:
 - ✅ Mensagens podem ter imagens
@@ -253,8 +253,8 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [x] Testes de segurança (validação de ownership)
 
 **Arquivos Criados**:
-- ✅ `backend/Araponga.Tests/Api/MediaInContentIntegrationTests.cs` - **40 testes passando**
-- ✅ `backend/Araponga.Tests/Performance/FeedWithMediaPerformanceTests.cs` - **testes de performance adicionados**
+- ✅ `backend/Arah.Tests/Api/MediaInContentIntegrationTests.cs` - **40 testes passando**
+- ✅ `backend/Arah.Tests/Performance/FeedWithMediaPerformanceTests.cs` - **testes de performance adicionados**
 
 **Critérios de Sucesso**:
 - ✅ Testes de integração passando
@@ -280,10 +280,10 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [x] Validação de performance - **testes de performance adicionados**
 
 **Arquivos Modificados**:
-- ✅ `backend/Araponga.Infrastructure/Media/CachedMediaStorageService.cs` - **cache implementado**
-- ✅ `backend/Araponga.Infrastructure/Media/MediaStorageFactory.cs` - **cache integrado**
-- ✅ `backend/Araponga.Api/Controllers/FeedController.cs` - **queries em batch implementadas**
-- ✅ `backend/Araponga.Tests/Performance/FeedWithMediaPerformanceTests.cs` - **testes de performance adicionados**
+- ✅ `backend/Arah.Infrastructure/Media/CachedMediaStorageService.cs` - **cache implementado**
+- ✅ `backend/Arah.Infrastructure/Media/MediaStorageFactory.cs` - **cache integrado**
+- ✅ `backend/Arah.Api/Controllers/FeedController.cs` - **queries em batch implementadas**
+- ✅ `backend/Arah.Tests/Performance/FeedWithMediaPerformanceTests.cs` - **testes de performance adicionados**
 
 **Critérios de Sucesso**:
 - ✅ Queries otimizadas
@@ -348,17 +348,17 @@ Integrar mídias (imagens, vídeos e áudios) em todas as funcionalidades de con
 - [x] Documentação
 
 **Arquivos a Modificar**:
-- `backend/Araponga.Domain/Media/TerritoryMediaConfig.cs`
-- `backend/Araponga.Application/Services/Media/TerritoryMediaConfigService.cs`
-- `backend/Araponga.Api/Controllers/MediaConfigController.cs`
-- `backend/Araponga.Application/Services/PostCreationService.cs`
-- `backend/Araponga.Application/Services/EventsService.cs`
-- `backend/Araponga.Application/Services/StoreItemService.cs`
-- `backend/Araponga.Application/Services/ChatService.cs`
-- `backend/Araponga.Api/wwwroot/devportal/index.html`
+- `backend/Arah.Domain/Media/TerritoryMediaConfig.cs`
+- `backend/Arah.Application/Services/Media/TerritoryMediaConfigService.cs`
+- `backend/Arah.Api/Controllers/MediaConfigController.cs`
+- `backend/Arah.Application/Services/PostCreationService.cs`
+- `backend/Arah.Application/Services/EventsService.cs`
+- `backend/Arah.Application/Services/StoreItemService.cs`
+- `backend/Arah.Application/Services/ChatService.cs`
+- `backend/Arah.Api/wwwroot/devportal/index.html`
 
 **Arquivos a Criar**:
-- `backend/Araponga.Tests/Api/MediaLimitsConfigIntegrationTests.cs`
+- `backend/Arah.Tests/Api/MediaLimitsConfigIntegrationTests.cs`
 
 **Critérios de Sucesso**:
 - ✅ Limites configuráveis por território
@@ -417,7 +417,7 @@ Para cada funcionalidade implementada nesta fase:
 
 **Estrutura de arquivo**:
 ```
-backend/Araponga.Tests/
+backend/Arah.Tests/
 ├── Api/BDD/
 │   ├── MediaUpload.feature
 │   ├── MediaInPosts.feature

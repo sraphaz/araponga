@@ -2,17 +2,17 @@
 
 ## Problema
 
-O DevPortal em `devportal.araponga.app` está retornando 404, mesmo com o workflow de deploy executando com sucesso.
+O DevPortal em `devportal.Arah.app` está retornando 404, mesmo com o workflow de deploy executando com sucesso.
 
 ## Causa Provável
 
-O arquivo `CNAME` na raiz do repositório (`araponga.eco.br`) pode estar conflitando com o CNAME criado pelo workflow no `dist/` (`devportal.araponga.app`).
+O arquivo `CNAME` na raiz do repositório (`Arah.eco.br`) pode estar conflitando com o CNAME criado pelo workflow no `dist/` (`devportal.Arah.app`).
 
 ## Configuração Atual
 
-- **GitHub Pages CNAME**: `devportal.araponga.app` (configurado via API, confirmado)
-- **CNAME na raiz do repo**: `araponga.eco.br` (pode estar conflitando)
-- **CNAME criado no dist/**: `devportal.araponga.app` (correto, criado pelo workflow)
+- **GitHub Pages CNAME**: `devportal.Arah.app` (configurado via API, confirmado)
+- **CNAME na raiz do repo**: `Arah.eco.br` (pode estar conflitando)
+- **CNAME criado no dist/**: `devportal.Arah.app` (correto, criado pelo workflow)
 
 ## Soluções Possíveis
 
@@ -22,15 +22,15 @@ Se o `CNAME` na raiz não é mais necessário:
 
 ```bash
 git rm CNAME
-git commit -m "fix: Remove CNAME da raiz que conflita com devportal.araponga.app"
+git commit -m "fix: Remove CNAME da raiz que conflita com devportal.Arah.app"
 git push
 ```
 
-**Nota**: Verifique se `araponga.eco.br` ainda está em uso antes de remover.
+**Nota**: Verifique se `Arah.eco.br` ainda está em uso antes de remover.
 
 ### Solução 2: Mover CNAME para Outra Localização
 
-Se o `CNAME` `araponga.eco.br` ainda é necessário para outro propósito, mova para uma pasta específica:
+Se o `CNAME` `Arah.eco.br` ainda é necessário para outro propósito, mova para uma pasta específica:
 
 ```bash
 mkdir -p docs/legacy-dns
@@ -56,22 +56,22 @@ Após aplicar a solução:
 
 2. Aguarde 1-2 minutos para propagação do GitHub Pages
 
-3. Acesse: `https://devportal.araponga.app/`
+3. Acesse: `https://devportal.Arah.app/`
 
 4. Verifique o status do GitHub Pages:
    ```bash
-   gh api repos/sraphaz/araponga/pages --jq '.cname, .status'
+   gh api repos/sraphaz/Arah/pages --jq '.cname, .status'
    ```
 
 ## Status do Deploy
 
 - ✅ Build: Sucesso
 - ✅ Deploy: Sucesso  
-- ✅ CNAME configurado: `devportal.araponga.app`
+- ✅ CNAME configurado: `devportal.Arah.app`
 - ❌ Acesso: 404 (possível conflito com CNAME na raiz)
 
 ## Referências
 
 - Workflow: `.github/workflows/devportal-pages.yml`
-- Configuração GitHub Pages: Linha 66 cria `dist/CNAME` com `devportal.araponga.app`
-- Arquivo CNAME na raiz: `CNAME` (conteúdo: `araponga.eco.br`)
+- Configuração GitHub Pages: Linha 66 cria `dist/CNAME` com `devportal.Arah.app`
+- Arquivo CNAME na raiz: `CNAME` (conteúdo: `Arah.eco.br`)

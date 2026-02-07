@@ -1,6 +1,6 @@
-# Visão Geral - API Araponga
+# Visão Geral - API Arah
 
-**Parte de**: [API Araponga - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
+**Parte de**: [API Arah - Lógica de Negócio e Usabilidade](./60_API_LÓGICA_NEGÓCIO_INDEX.md)  
 **Versão**: 2.0  
 **Data**: 2025-01-20
 
@@ -8,7 +8,7 @@
 
 ## 🌐 Visão Geral
 
-O Araponga é uma plataforma **território-first** e **comunidade-first** para organização comunitária local. Todas as operações são orientadas ao território, com diferenciação clara entre **visitantes (VISITOR)** e **moradores (RESIDENT)**.
+O Arah é uma plataforma **território-first** e **comunidade-first** para organização comunitária local. Todas as operações são orientadas ao território, com diferenciação clara entre **visitantes (VISITOR)** e **moradores (RESIDENT)**.
 
 ### Princípios Fundamentais
 

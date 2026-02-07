@@ -148,7 +148,7 @@ O processo de auto-aprendizado é acionado após:
 **Estrutura do Documento**:
 
 ```markdown
-# Lições Aprendidas - Araponga
+# Lições Aprendidas - Arah
 
 **Última Atualização**: [data]  
 **Total de Lições**: [número]
@@ -486,4 +486,4 @@ grep -rE ":\s*#[0-9a-fA-F]{6}" frontend/wiki/app/globals.css && echo "❌ Valore
 
 ---
 
-**Este processo garante que cada revisão contribua para o aprimoramento contínuo das diretrizes e práticas do projeto Araponga.**
+**Este processo garante que cada revisão contribua para o aprimoramento contínuo das diretrizes e práticas do projeto Arah.**
