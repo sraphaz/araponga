@@ -54,7 +54,7 @@ class _ShimmerBoxState extends State<ShimmerBox>
           decoration: BoxDecoration(
             borderRadius: widget.borderRadius ??
                 BorderRadius.circular(AppConstants.radiusSm),
-            color: baseColor.withOpacity(0.5 + _animation.value * 0.35),
+            color: baseColor.withValues(alpha: 0.5 + _animation.value * 0.35),
           ),
         );
       },

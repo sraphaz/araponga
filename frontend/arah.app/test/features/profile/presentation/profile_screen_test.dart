@@ -1,10 +1,10 @@
-import 'package:araponga_app/features/auth/data/models/auth_models.dart';
-import 'package:araponga_app/features/auth/data/repositories/auth_repository.dart';
-import 'package:araponga_app/features/auth/presentation/providers/auth_state_provider.dart';
-import 'package:araponga_app/features/profile/data/models/me_profile.dart';
-import 'package:araponga_app/features/profile/presentation/providers/me_profile_provider.dart';
-import 'package:araponga_app/features/profile/presentation/screens/profile_screen.dart';
-import 'package:araponga_app/l10n/app_localizations.dart';
+import 'package:arah_app/features/auth/data/models/auth_models.dart';
+import 'package:arah_app/features/auth/data/repositories/auth_repository.dart';
+import 'package:arah_app/features/auth/presentation/providers/auth_state_provider.dart';
+import 'package:arah_app/features/profile/data/models/me_profile.dart';
+import 'package:arah_app/features/profile/presentation/providers/me_profile_provider.dart';
+import 'package:arah_app/features/profile/presentation/screens/profile_screen.dart';
+import 'package:arah_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

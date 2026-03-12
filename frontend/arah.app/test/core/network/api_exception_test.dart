@@ -1,4 +1,4 @@
-import 'package:araponga_app/core/network/api_exception.dart';
+import 'package:arah_app/core/network/api_exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

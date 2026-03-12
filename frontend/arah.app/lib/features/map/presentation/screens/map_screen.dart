@@ -74,7 +74,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                     Icon(
                       Icons.map_outlined,
                       size: AppConstants.iconSizeLg,
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
                     ),
                     const SizedBox(height: AppConstants.spacingMd),
                     Text(
@@ -107,7 +107,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                         point: LatLng(geo.latitude, geo.longitude),
                         width: 40,
                         height: 40,
-                        child: Icon(
+                        child: const Icon(
                           Icons.person_pin_circle,
                           color: Colors.orange,
                           size: 40,
@@ -132,7 +132,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                   loading: () => const SizedBox.shrink(),
                   error: (_, __) => const SizedBox.shrink(),
                 ),
-                SimpleAttributionWidget(
+                const SimpleAttributionWidget(
                   source: Text('OpenStreetMap contributors'),
                 ),
               ],
@@ -159,7 +159,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
         polygons: [
           Polygon(
             points: points,
-            color: color.withOpacity(0.2),
+            color: color.withValues(alpha: 0.2),
             borderStrokeWidth: 2.5,
             borderColor: color,
           ),
@@ -173,7 +173,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
             point: LatLng(detail.latitude, detail.longitude),
             radius: detail.radiusKm! * 1000,
             useRadiusInMeter: true,
-            color: color.withOpacity(0.2),
+            color: color.withValues(alpha: 0.2),
             borderStrokeWidth: 2.5,
             borderColor: color,
           ),

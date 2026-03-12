@@ -133,7 +133,7 @@ class ProfileScreen extends ConsumerWidget {
   void _showSettingsSheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppConstants.radiusLg)),
       ),
       builder: (ctx) => SafeArea(
@@ -149,7 +149,7 @@ class ProfileScreen extends ConsumerWidget {
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(AppConstants.radiusLg)),
                   ),
                   builder: (_) => const InterestsSheet(),
@@ -165,7 +165,7 @@ class ProfileScreen extends ConsumerWidget {
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(top: Radius.circular(AppConstants.radiusLg)),
                   ),
                   builder: (_) => const PreferencesSheet(),
@@ -186,7 +186,7 @@ class ProfileScreen extends ConsumerWidget {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(AppConstants.radiusLg)),
       ),
       builder: (ctx) => Padding(
@@ -206,7 +206,7 @@ class ProfileScreen extends ConsumerWidget {
                 height: AppConstants.spacingXs,
                 margin: const EdgeInsets.only(bottom: AppConstants.spacingMd),
                 decoration: BoxDecoration(
-                  color: Theme.of(ctx).colorScheme.onSurfaceVariant.withOpacity(0.4),
+                  color: Theme.of(ctx).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),

@@ -80,9 +80,9 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: AppConstants.spacingMd),
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        border: const OutlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+        contentPadding: EdgeInsets.symmetric(
           horizontal: AppConstants.spacingMd,
           vertical: AppConstants.spacingSm,
         ),

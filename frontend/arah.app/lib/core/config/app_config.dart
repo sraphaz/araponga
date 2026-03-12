@@ -15,7 +15,7 @@ class AppConfig {
 
   /// URL base das jornadas BFF: [bffBaseUrl]/api/v2/journeys
   String get bffJourneysBaseUrl =>
-      bffBaseUrl.replaceAll(RegExp(r'/$'), '') + '/api/v2/journeys';
+      '${bffBaseUrl.replaceAll(RegExp(r'/$'), '')}/api/v2/journeys';
 }
 
 final appConfigProvider = Provider<AppConfig>((ref) {

@@ -1,4 +1,4 @@
-import 'package:araponga_app/features/territories/presentation/providers/territories_list_provider.dart';
+import 'package:arah_app/features/territories/presentation/providers/territories_list_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

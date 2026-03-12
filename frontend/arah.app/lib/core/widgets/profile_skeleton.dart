@@ -18,7 +18,7 @@ class ProfileSkeleton extends StatelessWidget {
             child: ShimmerBox(
               width: 96,
               height: 96,
-              borderRadius: BorderRadius.all(Radius.circular(48)),
+              borderRadius: const BorderRadius.all(Radius.circular(48)),
             ),
           ),
           const SizedBox(height: AppConstants.spacingMd),

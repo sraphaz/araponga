@@ -33,9 +33,20 @@ Se você não tem certeza de qual documento atualizar:
 2. Atualize TODOS os documentos que mencionam a funcionalidade
 3. Quando em dúvida, atualize mais do que menos
 
+### Antes do commit
+
+**Não faça commit sem rodar todos os testes.** Na raiz do repositório:
+
+```powershell
+./scripts/run-all-tests.ps1
+```
+
+A suíte inclui: **backend** (.NET, ~2.400 testes), **wiki** (Jest), **devportal** (Jest) e **app** (Flutter). Requer .NET 8, Node/npm e Flutter no PATH. Só prossiga com o commit se todos passarem.
+
 ### Checklist Rápido
 
 Antes de criar PR, verifique:
+- [ ] Testes passando (`./scripts/run-all-tests.ps1`)
 - [ ] Documentação técnica atualizada
 - [ ] Exemplos de código atualizados
 - [ ] Changelog atualizado (se mudança significativa)
