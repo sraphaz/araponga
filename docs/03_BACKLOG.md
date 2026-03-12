@@ -1,8 +1,8 @@
 # Backlog
 
-**Versão**: 2.0  
+**Versão**: 2.1  
 **Data**: 2025-01-20  
-**Última Atualização**: 2025-01-20  
+**Última Atualização**: 2026-02-06  
 **Status**: ✅ MVP Completo + Fases 1-8 Implementadas
 
 ---
@@ -171,3 +171,43 @@
   - Critérios de aceite:
     - Reports duplicados são ignorados por janela de tempo.
     - Threshold considera apenas reports únicos.
+
+## Epic 10 — Serviços Territoriais
+### Feature: Busca de Babás (Babysitters)
+- [POST-MVP] **Busca de babás no território**
+  - Critérios de aceite:
+    - Usuário pode buscar babás disponíveis no território atual.
+    - Busca permite filtrar por: disponibilidade (horários/dias), experiência (anos, faixas etárias atendidas), localização (raio), avaliações mínimas, preço/hora.
+    - Resultados mostram perfil resumido: foto, nome, avaliação média, preço/hora, disponibilidade próxima, distância.
+    - Busca considera apenas babás ativas e verificadas no território.
+- [POST-MVP] **Cadastro de babá**
+  - Critérios de aceite:
+    - Usuário pode se cadastrar como babá no território.
+    - Formulário inclui: experiência (anos, número de crianças já cuidadas, faixas etárias atendidas), certificações (primeiros socorros, curso de babá, etc.), disponibilidade (horários semanais, dias da semana, disponibilidade imediata), preço/hora, área de atuação (raio em km), descrição pessoal, fotos, referências (opcional).
+    - Babá pode definir múltiplos territórios onde atua.
+    - Perfil de babá requer verificação de identidade (mesmo sistema de verificação de resident).
+    - Status do perfil: pendente, ativo, inativo, suspenso (por moderação).
+- [POST-MVP] **Perfil detalhado de babá**
+  - Critérios de aceite:
+    - Perfil mostra: informações completas, galeria de fotos, avaliações e comentários de contratantes anteriores, disponibilidade em calendário, histórico de serviços (quantidade, tipos de serviços), badges/verificações (identidade verificada, certificações, membro do território há X tempo).
+    - Contratante pode ver avaliações detalhadas e contatar babá via chat interno ou telefone (se babá permitir).
+- [POST-MVP] **Sistema de avaliações e recomendações**
+  - Critérios de aceite:
+    - Contratantes podem avaliar babá após serviço concluído (1-5 estrelas, comentário opcional).
+    - Avaliações são públicas e vinculadas ao perfil da babá.
+    - Sistema calcula média de avaliações e número total.
+    - Babá pode responder avaliações.
+    - Sistema de recomendações: babás bem avaliadas aparecem primeiro nos resultados.
+- [POST-MVP] **Solicitação e contratação de serviço**
+  - Critérios de aceite:
+    - Contratante pode solicitar serviço diretamente do perfil da babá.
+    - Solicitação inclui: data/hora, duração estimada, número e idades das crianças, necessidades especiais, localização.
+    - Babá recebe notificação e pode aceitar, recusar ou fazer contraproposta.
+    - Chat integrado para negociar detalhes antes da confirmação.
+    - Após aceite, serviço fica confirmado e aparece no calendário de ambos.
+- [POST-MVP] **Integração com sistema de pagamentos**
+  - Critérios de aceite:
+    - Contratante pode pagar via plataforma (integração com Marketplace/pagamentos existente).
+    - Pagamento pode ser antecipado ou após serviço (conforme acordo).
+    - Sistema registra transação e libera pagamento após confirmação de conclusão.
+    - Taxa de plataforma aplicável (configurável por território).
