@@ -1,6 +1,6 @@
 # Backlog
 
-**Versão**: 2.1  
+**Versão**: 2.2  
 **Data**: 2025-01-20  
 **Última Atualização**: 2026-02-06  
 **Status**: ✅ MVP Completo + Fases 1-8 Implementadas
@@ -211,3 +211,44 @@
     - Pagamento pode ser antecipado ou após serviço (conforme acordo).
     - Sistema registra transação e libera pagamento após confirmação de conclusão.
     - Taxa de plataforma aplicável (configurável por território).
+
+### Feature: Espaços e Prestadores de Wellness
+- [POST-MVP] **Cadastro de espaços de wellness**
+  - Critérios de aceite:
+    - Espaços físicos (yoga centers, espaços holísticos, spas, centros de bem-estar) podem se cadastrar no território.
+    - Formulário inclui: nome, descrição, endereço, fotos, tipos de serviços oferecidos (yoga, massagem, terapia sonora, etc.), capacidade, equipamentos disponíveis, políticas de uso.
+    - Espaço pode compartilhar agenda (horários disponíveis para profissionais marcarem).
+    - Agenda compartilhada mostra: dias da semana, horários livres/ocupados, duração de slots, regras de reserva (antecipação mínima, cancelamento).
+    - Status do espaço: pendente, ativo, inativo, suspenso.
+- [POST-MVP] **Cadastro de prestadores de serviços de wellness**
+  - Critérios de aceite:
+    - Profissionais (professores de yoga, massagistas, terapeutas de som, etc.) podem criar perfil de prestador.
+    - Formulário inclui: especialidades, certificações, experiência, descrição, fotos, preços, área de atuação.
+    - Prestador pode ter agenda pessoal (horários disponíveis para atender clientes).
+    - Verificação de identidade obrigatória.
+- [POST-MVP] **Busca de espaços e prestadores**
+  - Critérios de aceite:
+    - Busca permite encontrar espaços e prestadores separadamente ou combinados.
+    - Filtros para espaços: tipo de serviço, localização, capacidade, equipamentos, disponibilidade de agenda compartilhada.
+    - Filtros para prestadores: especialidade, certificações, localização, preço, avaliações.
+    - Resultados mostram: perfil resumido, disponibilidade, distância, avaliações.
+- [POST-MVP] **Reserva de horários em espaços compartilhados**
+  - Critérios de aceite:
+    - Prestador pode visualizar agenda compartilhada de um espaço.
+    - Prestador pode solicitar reserva de horário específico na agenda do espaço.
+    - Solicitação inclui: data/hora, duração, tipo de serviço, número de participantes esperados.
+    - Espaço recebe notificação e pode aprovar, rejeitar ou fazer contraproposta.
+    - Após aprovação, horário fica reservado e aparece como ocupado na agenda do espaço.
+    - Prestador pode cancelar reserva (conforme políticas do espaço).
+- [POST-MVP] **Gestão de agenda compartilhada**
+  - Critérios de aceite:
+    - Espaço pode definir horários disponíveis para reserva (slots recorrentes ou pontuais).
+    - Espaço pode bloquear horários (manutenção, eventos privados).
+    - Espaço pode ver todas as reservas pendentes e confirmadas.
+    - Espaço pode definir regras: antecipação mínima, duração mínima/máxima, cancelamento.
+- [POST-MVP] **Integração com clientes**
+  - Critérios de aceite:
+    - Clientes podem buscar prestadores e ver em quais espaços eles atendem.
+    - Cliente pode agendar sessão diretamente com prestador (usa agenda pessoal do prestador ou espaço reservado).
+    - Sistema mostra disponibilidade do prestador considerando reservas em espaços e agenda pessoal.
+    - Integração com pagamentos para sessões agendadas.
